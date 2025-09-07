@@ -22,7 +22,7 @@
     "security:audit": "npm audit --omit=dev",
     "security:full": "npm audit",
     "size:check": "node scripts/size-check.mjs",
-    "check:prod": "node scripts/prod-check.mjs",
+    "check:prod": "node scripts/prod-check.mjs && node scripts/verify-production.mjs",
     "ci": "npm run lint && npm run typecheck && npm run test && npm run build && npm run size:check",
     "polish:all": "npm run format && npm run ci && npm run check:prod",
     "release:tag": "node scripts/release-tag.mjs"

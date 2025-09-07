@@ -9,7 +9,7 @@ const pinoHttp = require('pino-http');
 const crypto = require('crypto');
 // Modular services
 const complianceService = require('./services/compliance.cjs');
-const lmsService = require('./services/lms.cjs');
+const lmsService = require('./services/lms-enhanced.cjs');
 
 // Single consolidated simple server used by tests & legacy deployment
 const app = express();
@@ -113,26 +113,40 @@ const PROGRAMS = [
 app.get('/api/programs', (req, res) => res.json(PROGRAMS));
 
 // --------------- LMS Endpoints ---------------
-app.get('/api/lms/courses', (req, res) => {
-  res.json({ courses: lmsService.listCourses() });
+app.get('/api/lms/courses', async (req, res, next) => {
+  try {
+    const courses = await lmsService.listCourses();
+    res.json({ courses });
+  } catch (e) {
+    next(e);
+  }
 });
 
-app.get('/api/lms/courses/:id', (req, res, next) => {
-  const course = lmsService.getCourse(req.params.id);
-  if (!course) return next(Object.assign(new Error('Course not found'), { statusCode: 404, type: 'not_found' }));
-  res.json(course);
+app.get('/api/lms/courses/:id', async (req, res, next) => {
+  try {
+    const course = await lmsService.getCourse(req.params.id);
+    if (!course) return next(Object.assign(new Error('Course not found'), { statusCode: 404, type: 'not_found' }));
+    res.json(course);
+  } catch (e) {
+    next(e);
+  }
 });
 
-app.get('/api/lms/courses/:id/lessons', (req, res, next) => {
-  const course = lmsService.getCourse(req.params.id);
-  if (!course) return next(Object.assign(new Error('Course not found'), { statusCode: 404, type: 'not_found' }));
-  res.json({ lessons: lmsService.listLessons(course.id) });
+app.get('/api/lms/courses/:id/lessons', async (req, res, next) => {
+  try {
+    const course = await lmsService.getCourse(req.params.id);
+    if (!course) return next(Object.assign(new Error('Course not found'), { statusCode: 404, type: 'not_found' }));
+    const lessons = await lmsService.listLessons(course.id);
+    res.json({ lessons });
+  } catch (e) {
+    next(e);
+  }
 });
 
-app.post('/api/lms/progress', (req, res, next) => {
+app.post('/api/lms/progress', async (req, res, next) => {
   try {
     const { lessonId, userId } = req.body || {};
-    const summary = lmsService.recordProgress({ lessonId, userId });
+    const summary = await lmsService.recordProgress({ lessonId, userId });
     res.json(summary);
   } catch (e) {
     next(e);
@@ -217,10 +231,14 @@ app.get('/api/integration-guide', (req, res) => {
 });
 
 // --------------- Health Aggregator ---------------
-app.get('/api/healthz', (req, res) => {
+app.get('/api/healthz', async (req, res) => {
   const uptimeSeconds = Math.round(process.uptime());
   const summary = complianceService.getSummary();
   const validations = complianceService.getValidations();
+  
+  // Check database connectivity
+  const dbStatus = lmsService.isUsingDatabase() ? 'connected' : 'fallback';
+  
   res.json({
     status: 'ok',
     timestamp: new Date().toISOString(),
@@ -228,9 +246,14 @@ app.get('/api/healthz', (req, res) => {
     services: {
       api: 'ok',
       compliance: summary.status,
-      lms: 'ok'
+      lms: 'ok',
+      database: dbStatus
     },
-    checks: Object.keys(validations.validations)
+    checks: Object.keys(validations.validations),
+    environment: {
+      nodeEnv: process.env.NODE_ENV || 'development',
+      hasDatabase: lmsService.isUsingDatabase()
+    }
   });
 });
 
@@ -259,8 +282,27 @@ app.use((err, req, res, _next) => {
 
 // ------------- Export / Start Logic -------------
 if (require.main === module) {
-  app.listen(PORT, '0.0.0.0', () => {
+  const server = app.listen(PORT, '0.0.0.0', () => {
     logger.info({ port: PORT }, 'EFH server started');
+  });
+  
+  // Graceful shutdown
+  process.on('SIGINT', async () => {
+    logger.info('Shutting down gracefully...');
+    server.close(() => {
+      lmsService.disconnect().finally(() => {
+        process.exit(0);
+      });
+    });
+  });
+  
+  process.on('SIGTERM', async () => {
+    logger.info('Shutting down gracefully...');
+    server.close(() => {
+      lmsService.disconnect().finally(() => {
+        process.exit(0);
+      });
+    });
   });
 }
 

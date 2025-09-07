@@ -12,6 +12,10 @@ const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 const pino = require('pino');
 const pinoHttp = require('pino-http');
+const crypto = require('crypto');
+// Modular services
+const complianceService = require('./services/compliance');
+const lmsService = require('./services/lms');
 
 // Single consolidated simple server used by tests & legacy deployment
 const app = express();
@@ -21,7 +25,17 @@ const PORT = process.env.PORT || 5000;
 const logger = pino({ level: process.env.LOG_LEVEL || 'info' });
 
 // Basic middleware / security
-app.use(pinoHttp({ logger }));
+// Request ID + logging
+app.use((req, res, next) => {
+  req.id = req.headers['x-request-id'] || crypto.randomUUID();
+  res.setHeader('X-Request-ID', req.id);
+  next();
+});
+app.use(pinoHttp({ logger, customLogLevel: (res, err) => {
+  if (err || res.statusCode >= 500) return 'error';
+  if (res.statusCode >= 400) return 'warn';
+  return 'info';
+}, serializers: { req(req) { return { id: req.id, method: req.method, url: req.url }; } } }));
 app.use(helmet());
 app.use(compression());
 app.use(express.json({ limit: '1mb' }));
@@ -57,39 +71,12 @@ sites.forEach(site => {
 
 // Compliance portal summary
 app.get('/api/compliance', (req, res) => {
-  const now = new Date();
-  const next = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
-  res.json({
-    title: 'Federal Workforce Compliance Portal',
-    status: 'FULLY_COMPLIANT',
-    lastAudit: now.toISOString(),
-    nextAudit: next.toISOString(),
-    complianceAreas: {
-      doe: { status: 'CERTIFIED', certificationNumber: 'DOE-WIOA-2025-FL-001' },
-      dwd: { status: 'ACTIVE_COMPLIANCE', contractNumber: 'DWD-FL-2025-001' },
-      dol: { status: 'CURRENT_REPORTING' }
-    }
-  });
+  res.json(complianceService.getSummary());
 });
 
 // Compliance validation details
 app.get('/api/compliance/validate', (req, res) => {
-  const make = (requirement) => ({ requirement, status: 'PASS', checkedAt: new Date().toISOString() });
-  res.json({
-    overallStatus: 'COMPLIANT',
-    validations: {
-      wioa_eligibility: make('WIOA Title I Adult Program Eligibility'),
-      iep_compliance: make('Individual Employment Plan (IEP) Compliance'),
-      pirl_reporting: make('PIRL Data Quality and Timeliness'),
-      financial_compliance: make('Federal Cost Principles (2 CFR 200)'),
-      equal_opportunity: make('Equal Opportunity & Non-Discrimination'),
-      data_security: make('Data Security & Privacy Standards')
-    },
-    certifications: [
-      { type: 'WIOA_PROVIDER', status: 'ACTIVE', renewedAt: new Date().toISOString() },
-      { type: 'DATA_SECURITY_AUDIT', status: 'PASS', year: new Date().getFullYear() }
-    ]
-  });
+  res.json(complianceService.getValidations());
 });
 
 // Sister sites map
@@ -130,6 +117,33 @@ const PROGRAMS = [
   { id: 'advanced-ai-specialization', name: 'Advanced AI Specialization', price: 7495 }
 ];
 app.get('/api/programs', (req, res) => res.json(PROGRAMS));
+
+// --------------- LMS Endpoints ---------------
+app.get('/api/lms/courses', (req, res) => {
+  res.json({ courses: lmsService.listCourses() });
+});
+
+app.get('/api/lms/courses/:id', (req, res, next) => {
+  const course = lmsService.getCourse(req.params.id);
+  if (!course) return next(Object.assign(new Error('Course not found'), { statusCode: 404, type: 'not_found' }));
+  res.json(course);
+});
+
+app.get('/api/lms/courses/:id/lessons', (req, res, next) => {
+  const course = lmsService.getCourse(req.params.id);
+  if (!course) return next(Object.assign(new Error('Course not found'), { statusCode: 404, type: 'not_found' }));
+  res.json({ lessons: lmsService.listLessons(course.id) });
+});
+
+app.post('/api/lms/progress', (req, res, next) => {
+  try {
+    const { lessonId, userId } = req.body || {};
+    const summary = lmsService.recordProgress({ lessonId, userId });
+    res.json(summary);
+  } catch (e) {
+    next(e);
+  }
+});
 
 // Stripe config stub
 app.get('/api/stripe/config', (req, res) => {
@@ -205,6 +219,47 @@ app.get('/api/integration-guide', (req, res) => {
       ] },
       step3: { title: 'Navigation Integration' }
     }
+  });
+});
+
+// --------------- Health Aggregator ---------------
+app.get('/api/healthz', (req, res) => {
+  const uptimeSeconds = Math.round(process.uptime());
+  const summary = complianceService.getSummary();
+  const validations = complianceService.getValidations();
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    uptimeSeconds,
+    services: {
+      api: 'ok',
+      compliance: summary.status,
+      lms: 'ok'
+    },
+    checks: Object.keys(validations.validations)
+  });
+});
+
+// --------------- Error Handling ---------------
+// 404 handler
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
+  err.statusCode = 404;
+  err.type = 'not_found';
+  next(err);
+});
+
+// Central error middleware
+app.use((err, req, res, _next) => {
+  const status = err.statusCode || 500;
+  const type = err.type || (status === 404 ? 'not_found' : 'internal');
+  if (status >= 500) {
+    req.log.error({ err, requestId: req.id }, 'Unhandled error');
+  }
+  res.status(status).json({
+    error: { type, message: err.message },
+    requestId: req.id,
+    timestamp: new Date().toISOString()
   });
 });
 

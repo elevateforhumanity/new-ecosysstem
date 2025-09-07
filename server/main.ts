@@ -100,7 +100,7 @@ app.use(pinoHttp({ logger }));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Rate limiting
+// Rate limiting with proper trust proxy handling
 const generalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
@@ -111,6 +111,7 @@ const generalLimiter = rateLimit({
   },
   standardHeaders: true,
   legacyHeaders: false,
+  trustProxy: env.NODE_ENV === 'production' ? 1 : false, // Only trust in production
 });
 
 const apiLimiter = rateLimit({
@@ -121,6 +122,7 @@ const apiLimiter = rateLimit({
     type: 'RATE_LIMIT_ERROR',
     correlationId: '',
   },
+  trustProxy: env.NODE_ENV === 'production' ? 1 : false, // Only trust in production
 });
 
 app.use(generalLimiter);
@@ -186,8 +188,8 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
   res.status(status).json(errorResponse);
 });
 
-// 404 handler for unmatched routes
-app.use('*', (req: express.Request, res: express.Response) => {
+// 404 handler for unmatched routes - express standard approach
+app.use((req: express.Request, res: express.Response) => {
   const correlationId = req.headers['x-request-id'] as string;
   res.status(404).json({
     error: 'Route not found',

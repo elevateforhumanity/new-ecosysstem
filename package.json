@@ -25,6 +25,8 @@
     "env:check": "node scripts/check-env.mjs",
     "security:audit": "npm audit --omit=dev",
     "security:full": "npm audit",
+    "security:check": "node scripts/simple-security-check.mjs",
+    "production:validate": "node scripts/production-readiness.mjs",
     "size:check": "node scripts/size-check.mjs",
     "check:prod": "node scripts/prod-check.mjs",
     "ci": "npm run lint && npm run typecheck && npm run test && npm run build && npm run size:check",

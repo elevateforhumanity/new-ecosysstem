@@ -1,4 +1,7 @@
 
+console.warn('⚠️  DEPRECATED: ultra-fast-server.cjs is deprecated. Use simple-server.cjs instead.');
+console.warn('   This file will be removed in a future version.');
+
 const express = require('express');
 const path = require('path');
 

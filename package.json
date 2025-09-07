@@ -18,7 +18,7 @@
     "test": "vitest run --coverage",
     "test:watch": "vitest",
     "analyze": "vite build && npx rollup-plugin-visualizer dist/stats.html",
-    "env:check": "ts-node --swc src/env.ts --check",
+    "env:check": "node scripts/env-check.cjs",
     "security:audit": "npm audit --omit=dev",
     "security:full": "npm audit",
     "size:check": "node scripts/size-check.mjs",

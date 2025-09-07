@@ -24,4 +24,10 @@ describe('LMS Endpoints', () => {
     expect(res.status).toBe(200);
     expect(res.body.completedCount).toBeGreaterThanOrEqual(1);
   });
+
+  test('Record progress with invalid lessonId should return 400', async () => {
+    const res = await request(app).post('/api/lms/progress').send({ lessonId: 'invalid_lesson_id' });
+    expect(res.status).toBe(400);
+    expect(res.body.error).toBeTruthy();
+  });
 });

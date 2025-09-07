@@ -10,6 +10,7 @@ const crypto = require('crypto');
 // Modular services
 const complianceService = require('./services/compliance.cjs');
 const lmsService = require('./services/lms-enhanced.cjs');
+const paymentsService = require('./services/payments.cjs');
 
 // Single consolidated simple server used by tests & legacy deployment
 const app = express();
@@ -153,25 +154,38 @@ app.post('/api/lms/progress', async (req, res, next) => {
   }
 });
 
-// Stripe config stub
+// Stripe/Payments endpoints
 app.get('/api/stripe/config', (req, res) => {
+  const config = paymentsService.getConfig();
   res.json({
     programs: PROGRAMS,
     fundingOptions: {
       wioa: { enabled: true },
       wrg: { enabled: true },
       scholarship: { enabled: true }
-    }
+    },
+    paymentConfig: config
   });
 });
 
-// Create payment intent stub
-app.post('/api/stripe/create-payment-intent', (req, res) => {
-  if (!process.env.STRIPE_SECRET_KEY) {
-    return res.status(500).json({ error: 'Stripe not configured (missing STRIPE_SECRET_KEY)' });
+// Create payment intent with real Stripe integration or simulation
+app.post('/api/stripe/create-payment-intent', async (req, res, next) => {
+  try {
+    const body = req.body || {};
+    // Support both programId/userId and program_id/user_id for backward compatibility
+    const amount = body.amount;
+    const programId = body.programId || body.program_id;
+    const userId = body.userId || body.user_id;
+    
+    const paymentIntent = await paymentsService.createPaymentIntent(amount, programId, userId);
+    res.json({ 
+      clientSecret: paymentIntent.client_secret,
+      paymentIntentId: paymentIntent.id,
+      simulated: paymentIntent.simulated
+    });
+  } catch (e) {
+    next(e);
   }
-  // Fake response for tests
-  res.json({ clientSecret: 'pi_test_secret', paymentIntentId: 'pi_test_123' });
 });
 
 // Widgets: hero content
@@ -236,18 +250,19 @@ app.get('/api/healthz', async (req, res) => {
   const summary = complianceService.getSummary();
   const validations = complianceService.getValidations();
   
-  // Check database connectivity
-  const dbStatus = lmsService.isUsingDatabase() ? 'connected' : 'fallback';
+  // Check database connectivity - 'ok' when connected, 'degraded' when fallback
+  const dbStatus = lmsService.isUsingDatabase() ? 'ok' : 'degraded';
   
   res.json({
     status: 'ok',
     timestamp: new Date().toISOString(),
+    version: process.env.BUILD_SHA || 'dev',
     uptimeSeconds,
     services: {
       api: 'ok',
       compliance: summary.status,
       lms: 'ok',
-      database: dbStatus
+      db: dbStatus
     },
     checks: Object.keys(validations.validations),
     environment: {

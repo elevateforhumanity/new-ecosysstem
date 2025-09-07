@@ -28,4 +28,4 @@ async function createPaymentIntent({ amount, programId, userId, requestId }) {
   };
 }
 
-module.exports = { createPaymentIntent };
+export { createPaymentIntent };

@@ -1,8 +1,9 @@
 let prisma = null;
-async function getPrisma() {
+
+export async function getPrisma() {
   if (prisma) return prisma;
   try {
-    const { PrismaClient } = require('@prisma/client');
+    const { PrismaClient } = await import('@prisma/client');
     prisma = new PrismaClient();
     await prisma.$connect();
     return prisma;
@@ -10,4 +11,3 @@ async function getPrisma() {
     return null; // fallback to in-memory if unavailable
   }
 }
-module.exports = { getPrisma };

@@ -1,5 +1,7 @@
 import request from 'supertest';
-import app from '../simple-server.cjs';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const app = require('../simple-server.cjs');
 
 describe('Health Aggregator', () => {
   test('GET /api/healthz returns status ok and services', async () => {

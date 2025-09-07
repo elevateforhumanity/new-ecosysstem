@@ -20,7 +20,9 @@
 // DOE/DWD/DOL Compliance Testing for Federal Workforce Development Standards
 
 import request from 'supertest';
-import app from '../simple-server.cjs';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const app = require('../simple-server.cjs');
 
 describe('EFH Brain Service - Federal Compliance Testing', () => {
 

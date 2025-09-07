@@ -4,24 +4,10 @@
   See LICENSE file for details.
 */
 
-/*
-  Copyright (c) 2025 Elevate for Humanity
-  Commercial License. No resale, sublicensing, or redistribution allowed.
-  See LICENSE file for details.
-*/
-
-/*
-  Copyright (c) 2025 Elevate for Humanity
-  Commercial License. No resale, sublicensing, or redistribution allowed.
-  See LICENSE file for details.
-*/
-
 // Comprehensive Node.js API Testing Suite
 // DOE/DWD/DOL Compliance Testing for Federal Workforce Development Standards
 
-import request from 'supertest';
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
+const request = require('supertest');
 const app = require('../simple-server.cjs');
 
 describe('EFH Brain Service - Federal Compliance Testing', () => {

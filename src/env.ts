@@ -9,7 +9,9 @@ export const EnvSchema = z.object({
   SUPABASE_URL: z.string().url().optional(),
   SUPABASE_ANON_KEY: z.string().optional(),
   SUPABASE_SERVICE_KEY: z.string().optional(),
-  LOG_LEVEL: z.string().optional()
+  LOG_LEVEL: z.string().optional(),
+  VITE_API_BASE_URL: z.string().url().optional(),
+  VITE_ANALYTICS_ID: z.string().optional()
 });
 
 export type AppEnv = z.infer<typeof EnvSchema>;
@@ -31,7 +33,7 @@ export function loadEnv(): AppEnv {
 }
 
 // Allow running standalone via: npm run env:check
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   loadEnv();
   // eslint-disable-next-line no-console
   console.log('✅ Environment variables validated');

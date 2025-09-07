@@ -4,6 +4,23 @@
   See LICENSE file for details.
 */
 
+// ⚠️  LEGACY SERVER - MAINTAINED FOR BACKWARD COMPATIBILITY
+// 
+// This is the legacy CommonJS server maintained for existing test infrastructure
+// and backward compatibility. For new development, use the unified TypeScript
+// server at server/main.ts which provides:
+//
+// - Full TypeScript support and type safety
+// - Modular router architecture (12 specialized routers)
+// - Service-oriented business logic layer
+// - Comprehensive error handling with correlation IDs
+// - Enhanced security middleware stack
+// - Production-ready logging and monitoring
+//
+// To migrate: Replace simple-server.cjs usage with server/main.js
+//
+// This file logs a deprecation warning when loaded.
+
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -19,6 +36,14 @@ const PORT = process.env.PORT || 5000;
 
 // Logger (single instance)
 const logger = pino({ level: process.env.LOG_LEVEL || 'info' });
+
+// Log deprecation warning
+logger.warn({
+  message: 'Using legacy simple-server.cjs - consider migrating to server/main.js',
+  recommendation: 'Use the unified TypeScript server for enhanced features and production readiness',
+  legacyFile: 'simple-server.cjs',
+  modernFile: 'server/main.js'
+});
 
 // Basic middleware / security
 app.use(pinoHttp({ logger }));

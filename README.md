@@ -40,14 +40,267 @@ npm run build
 npm start
 ```
 
-## 📋 Production Hardening Checklist
+# Production-Ready Elevate for Humanity Ecosystem
 
-### ✅ Security Requirements
+A complete multi-site ecosystem with unified architecture, comprehensive LMS, federal compliance endpoints, and production-ready deployment foundation.
 
-- [x] **Helmet Security Headers**: CSP, HSTS, X-Frame-Options configured
-- [x] **Rate Limiting**: API and general endpoints protected (100/15min, 200/15min API)
-- [x] **CORS Whitelist**: Sister sites and development origins configured
-- [x] **Request ID Middleware**: Correlation tracking for all requests  
+## 🚀 Quick Start
+
+### Development Setup
+
+```bash
+# Clone and install dependencies
+git clone <repository>
+cd new-ecosysstem
+npm install
+
+# Configure environment (copy and edit)
+cp .env.example .env
+
+# Start development server (frontend)
+npm run dev
+
+# Or run the unified production server
+NODE_ENV=test JWT_SECRET=dev_secret_key_minimum_16_chars node server/main.js
+```
+
+### Production Deployment
+
+```bash
+# Install dependencies  
+npm ci --omit=dev
+
+# Set production environment variables
+export NODE_ENV=production
+export JWT_SECRET="your_very_secure_jwt_secret_minimum_64_characters_for_production"
+export DATABASE_URL="postgresql://user:pass@host:5432/db"  # optional, falls back to SQLite
+
+# Build application
+npm run build
+
+# Run production readiness checks
+npm run check:prod
+
+# Start production server
+node server/main.js
+```
+
+## 🌐 Environment Variables
+
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `NODE_ENV` | Yes | development | Environment mode (development, test, production) |
+| `JWT_SECRET` | Yes | - | JWT signing secret (min 16 chars, 64+ for production) |
+| `DATABASE_URL` | No | - | PostgreSQL connection string (auto-falls back to SQLite) |
+| `STRIPE_SECRET_KEY` | No | - | Stripe secret key (stub mode if not provided) |
+| `STRIPE_PUBLIC_KEY` | No | - | Stripe publishable key |
+| `STRIPE_WEBHOOK_SECRET` | No | - | Stripe webhook endpoint secret |
+| `SUPABASE_URL` | No | - | Supabase project URL |
+| `SUPABASE_ANON_KEY` | No | - | Supabase anonymous key |
+| `SUPABASE_SERVICE_KEY` | No | - | Supabase service role key |
+| `LOG_LEVEL` | No | info | Logging level (debug, info, warn, error) |
+| `PORT` | No | 5000 | Server port |
+
+## 🏥 Health Endpoint Specification
+
+### GET /api/healthz
+
+Returns aggregated system health with service-level checks:
+
+```json
+{
+  "status": "healthy",
+  "timestamp": "2025-01-07T12:00:00.000Z",
+  "version": "1.0.0",
+  "commit": "7a6ac82",
+  "uptimeSeconds": 3600,
+  "correlationId": "req-123",
+  "responseTime": 15,
+  "checks": {
+    "app": {
+      "status": "healthy",
+      "uptime": 3600.5,
+      "memory": { "rss": 45670400, "heapUsed": 23456789 },
+      "pid": 12345
+    },
+    "database": {
+      "status": "disabled|connected|error",
+      "message": "Database status description"
+    },
+    "environment": {
+      "status": "valid",
+      "nodeEnv": "production",
+      "hasJwtSecret": true,
+      "hasDatabase": false,
+      "hasStripe": true
+    }
+  },
+  "services": {
+    "api": { "status": "healthy", "timestamp": "2025-01-07T12:00:00.000Z" },
+    "db": { "status": "disabled", "message": "Using in-memory stub" },
+    "compliance": { 
+      "status": "healthy", 
+      "checks": ["DOE", "DWD", "DOL"],
+      "description": "Federal compliance monitoring active" 
+    },
+    "lms": { 
+      "status": "healthy", 
+      "features": ["courses", "progress", "assessments"],
+      "description": "Learning management system operational" 
+    }
+  }
+}
+```
+
+## 📚 LMS API Specification
+
+Complete Learning Management System with course catalog, progress tracking, and federal compliance integration.
+
+### Core Endpoints
+
+```bash
+# Course Management
+GET /api/lms/courses              # Get all published courses
+GET /api/lms/courses/:id          # Get course by ID or slug
+GET /api/lms/courses/:id/lessons  # Get lessons for specific course
+
+# Progress Tracking (requires authentication)
+POST /api/lms/progress           # Update lesson/course progress
+```
+
+### Data Models
+
+**Course**
+- `id` (string): Unique course identifier  
+- `title` (string): Course display name
+- `slug` (string): URL-friendly identifier
+- `description` (string): Course description
+- `price` (number): Price in cents
+- `published` (boolean): Visibility status
+
+**Lesson**
+- `id` (string): Unique lesson identifier
+- `courseId` (string): Parent course ID
+- `title` (string): Lesson name
+- `type` (enum): TEXT, VIDEO, QUIZ
+- `content` (string): Lesson content
+- `duration` (number): Duration in seconds
+- `order` (number): Display order
+
+**Progress**
+- `userId` (string): User identifier
+- `courseId` (string): Course identifier  
+- `lessonId` (string): Lesson identifier
+- `progress` (number): Completion percentage (0-100)
+- `completed` (boolean): Completion status
+
+### Database Integration
+
+The LMS automatically switches between:
+- **Production**: Prisma + PostgreSQL for full persistence
+- **Development**: Prisma + SQLite for local development  
+- **Fallback**: In-memory stub data when no database configured
+
+## 📋 Compliance Check Glossary
+
+Federal workforce development compliance monitoring with dynamic status tracking.
+
+### Compliance Areas
+
+| Area | Description | Status Types | Regulations |
+|------|-------------|--------------|-------------|
+| **DOE** | Department of Education | CERTIFIED, PENDING, EXPIRED | WIOA Title I, Adult Education |
+| **DWD** | Department of Workforce Development | ACTIVE_COMPLIANCE, REVIEW_REQUIRED | State workforce programs |
+| **DOL** | Department of Labor | CURRENT_REPORTING, PAST_DUE | Federal labor standards |
+
+### Compliance Checks Registry
+
+| Check ID | Name | Requirement | Criticality |
+|----------|------|-------------|-------------|
+| `wioa_eligibility` | WIOA Title I Adult Program Eligibility | WIOA Title I Adult Program Eligibility Standards | HIGH |
+| `iep_compliance` | Individual Employment Plan Management | IEP Documentation and Progress Tracking | HIGH |
+| `pirl_reporting` | PIRL Data Quality and Timeliness | PIRL Data Quality and Timeliness Standards | HIGH |
+| `financial_compliance` | Federal Cost Principles Compliance | Federal Cost Principles (2 CFR 200) | HIGH |
+| `equal_opportunity` | Equal Opportunity and Nondiscrimination | Equal Opportunity Provisions | HIGH |
+| `data_security` | Data Security and Privacy Protection | PII Protection and Data Security Standards | HIGH |
+
+### Status Meanings
+
+- **PASS**: Check meets all requirements
+- **FAIL**: Check does not meet requirements - immediate attention required
+- **WARNING**: Check has minor issues - review recommended  
+- **PENDING**: Check is being evaluated - status unknown
+
+## 🚀 Deployment Checklist
+
+### Pre-Deployment
+
+- [ ] **Environment Variables**: All required variables set with production values
+- [ ] **JWT Secret**: Minimum 64 characters, cryptographically secure
+- [ ] **Database**: PostgreSQL configured (or SQLite fallback confirmed)
+- [ ] **SSL/TLS**: HTTPS enabled with valid certificates
+- [ ] **Domain**: DNS configured for all sister sites
+
+### Security
+
+- [ ] **Helmet Headers**: CSP, HSTS, X-Frame-Options configured
+- [ ] **Rate Limiting**: API and general endpoints protected  
+- [ ] **CORS**: Whitelist configured for sister sites
+- [ ] **Input Validation**: All user inputs validated and sanitized
+- [ ] **Error Handling**: No sensitive data in error responses
+
+### Monitoring
+
+- [ ] **Health Checks**: /api/healthz endpoint monitored
+- [ ] **Logging**: Structured logging configured with appropriate levels
+- [ ] **Correlation IDs**: Request tracking implemented
+- [ ] **Performance**: Response times monitored (<500ms target)
+
+### Compliance
+
+- [ ] **Federal Standards**: DOE/DWD/DOL compliance endpoints active
+- [ ] **Data Protection**: PII handling procedures implemented  
+- [ ] **Audit Trail**: All compliance actions logged
+- [ ] **Reporting**: Automated compliance reporting configured
+
+### Testing
+
+- [ ] **Unit Tests**: >70% code coverage maintained
+- [ ] **Integration Tests**: All API endpoints tested
+- [ ] **Load Tests**: Performance validated under expected traffic
+- [ ] **Smoke Tests**: Critical paths verified in production
+
+## 🏗️ Architecture Overview
+
+```
+├── server/main.ts              # Production server entry point
+├── server/routes/              # Modular API routes
+│   ├── auth.ts                 # Authentication endpoints  
+│   ├── users.ts                # User management
+│   ├── lms.ts                  # Learning management system
+│   ├── compliance.ts           # Federal compliance
+│   ├── payments.ts             # Stripe payment processing
+│   ├── branding.ts             # Brand configuration
+│   ├── widgets.ts              # Embeddable widgets
+│   └── health.ts               # System health checks
+├── server/services/            # Business logic layer
+│   ├── database.ts             # Prisma + stub fallback
+│   ├── compliance.ts           # Compliance registry
+│   ├── payment.ts              # Payment service wrapper
+│   ├── branding.ts             # Brand configuration
+│   └── widgets.ts              # Widget generation
+├── server/middleware/          # Express middleware
+│   └── auth.ts                 # JWT authentication
+├── src/                        # Frontend application
+├── prisma/                     # Database schema
+└── .github/workflows/          # CI/CD pipelines
+```
+
+## 📖 Additional Documentation
+
+- [MIGRATIONS.md](./MIGRATIONS.md) - Prisma database migration guide
+- [COMPLIANCE.md](./COMPLIANCE.md) - Federal compliance detailed documentation
+- [CHANGELOG.md](./CHANGELOG.md) - Version history and changes  
 - [x] **JWT Secret Validation**: Minimum 16 characters enforced in env validation
 - [ ] **HTTPS Proxy**: Configure reverse proxy with SSL termination
 - [x] **Input Validation**: Request body size limits (10MB) and JSON parsing

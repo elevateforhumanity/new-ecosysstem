@@ -4,7 +4,37 @@
 
 This system implements comprehensive federal compliance monitoring for workforce development programs, meeting requirements from the Department of Education (DOE), Department of Workforce Development (DWD), and Department of Labor (DOL).
 
-## Compliance Endpoints
+The compliance system features:
+- **Dynamic Status Registry**: Real-time compliance check evaluation
+- **Federal Standards Mapping**: Complete coverage of WIOA, PIRL, and DOL requirements  
+- **Automated Monitoring**: Continuous compliance status tracking
+- **Audit Trail**: Complete logging of all compliance activities
+
+## Compliance Architecture
+
+### Service-Based Design
+
+The compliance system is built on a service-oriented architecture:
+
+```
+server/services/compliance.ts    # Core compliance service
+├── ComplianceRegistry           # Dynamic check management
+├── ComplianceCheck             # Individual check definition
+├── getComplianceSummary()      # High-level status
+├── getDetailedValidation()     # Detailed check results
+└── getComplianceAreas()        # Federal area status
+```
+
+### Compliance Registry
+
+The `ComplianceRegistry` class manages all compliance checks dynamically:
+
+- **Check Registration**: Add/update compliance requirements
+- **Status Tracking**: Real-time status evaluation
+- **Categorization**: Organize by federal area and criticality
+- **Historical Tracking**: Maintain audit trails
+
+## API Endpoints
 
 ### Summary Endpoint
 
@@ -18,254 +48,299 @@ Returns high-level compliance status across all federal requirements.
 {
   "title": "Federal Workforce Compliance Portal",
   "status": "FULLY_COMPLIANT",
-  "lastAudit": "2025-08-15T00:00:00.000Z",
-  "nextAudit": "2025-11-15T00:00:00.000Z",
-  "version": "v1",
-  "timestamp": "2025-09-07T20:35:00.000Z",
-  "correlationId": "abc123",
+  "overallStatus": "COMPLIANT",
+  "lastAudit": "2025-01-15T10:00:00.000Z",
+  "nextAudit": "2025-07-15T10:00:00.000Z",
+  "complianceScore": 100,
+  "timestamp": "2025-01-07T12:00:00.000Z",
+  "correlationId": "req-123",
+  
+  "summary": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "pending": 0,
+    "warnings": 0
+  },
   
   "complianceAreas": {
     "doe": {
       "status": "CERTIFIED",
       "certificationNumber": "DOE-WIOA-2025-FL-1234",
-      "lastUpdated": "2025-08-15T00:00:00.000Z",
-      "nextReview": "2025-11-15T00:00:00.000Z"
+      "provider": "Department of Education",
+      "certificationDate": "2025-01-15",
+      "expirationDate": "2026-01-15",
+      "programs": ["Adult Education", "Workforce Development"]
     },
     "dwd": {
-      "status": "ACTIVE_COMPLIANCE",
+      "status": "ACTIVE_COMPLIANCE", 
       "contractNumber": "DWD-FL-2025-456",
-      "lastUpdated": "2025-08-15T00:00:00.000Z",
-      "nextReview": "2025-11-15T00:00:00.000Z"
+      "provider": "Department of Workforce Development",
+      "contractStart": "2025-01-01",
+      "contractEnd": "2025-12-31",
+      "programs": ["WIOA Title I", "Trade Adjustment Assistance"]
     },
     "dol": {
       "status": "CURRENT_REPORTING",
-      "lastReport": "2025-08-15T00:00:00.000Z",
-      "nextReport": "2025-10-07T00:00:00.000Z"
+      "provider": "Department of Labor", 
+      "reportingPeriod": "Q1 2025",
+      "nextReportDue": "2025-04-15",
+      "programs": ["Employment Services", "Labor Market Information"]
     }
   }
 }
 ```
 
-#### Status Values
-
-**Overall Status:**
-- `FULLY_COMPLIANT`: All requirements met
-- `PARTIAL_COMPLIANCE`: Some areas need attention
-- `NON_COMPLIANT`: Critical compliance issues
-
-**Area-Specific Status:**
-- DOE: `CERTIFIED` | `PENDING_REVIEW` | `EXPIRED`
-- DWD: `ACTIVE_COMPLIANCE` | `UNDER_REVIEW` | `SUSPENDED`
-- DOL: `CURRENT_REPORTING` | `OVERDUE` | `DELINQUENT`
-
-### Detailed Validation Endpoint
+### Validation Endpoint
 
 **GET** `/api/compliance/validate`
 
-Returns comprehensive validation checks for all compliance requirements.
+Returns detailed validation results for all compliance checks.
 
 #### Response Structure
 
 ```json
 {
   "overallStatus": "COMPLIANT",
-  "timestamp": "2025-09-07T20:35:00.000Z",
-  "correlationId": "def456",
-  "version": "v1",
+  "timestamp": "2025-01-07T12:00:00.000Z",
+  "correlationId": "req-456",
   
   "validations": {
     "wioa_eligibility": {
       "status": "PASS",
-      "requirement": "WIOA Title I Adult Program Eligibility Requirements",
-      "lastChecked": "2025-09-07T20:35:00.000Z",
-      "details": "All eligibility criteria validated against current WIOA standards"
+      "requirement": "WIOA Title I Adult Program Eligibility Standards",
+      "name": "WIOA Title I Adult Program Eligibility", 
+      "description": "Workforce Innovation and Opportunity Act compliance for adult education programs",
+      "regulation": "29 CFR Part 680",
+      "criticality": "HIGH",
+      "updatedAt": "2025-01-07T12:00:00.000Z"
     },
-    // ... more validation checks
+    "iep_compliance": {
+      "status": "PASS",
+      "requirement": "IEP Documentation and Progress Tracking",
+      "name": "Individual Employment Plan (IEP) Management",
+      "description": "Individual Employment Plan creation and tracking compliance",
+      "regulation": "20 CFR 680.180", 
+      "criticality": "HIGH",
+      "updatedAt": "2025-01-07T12:00:00.000Z"
+    },
+    "pirl_reporting": {
+      "status": "PASS",
+      "requirement": "PIRL Data Quality and Timeliness Standards",
+      "name": "PIRL Data Quality and Timeliness",
+      "description": "Participant Individual Record Layout reporting compliance",
+      "regulation": "TEGL 19-16",
+      "criticality": "HIGH",
+      "updatedAt": "2025-01-07T12:00:00.000Z"
+    },
+    "financial_compliance": {
+      "status": "PASS", 
+      "requirement": "Federal Cost Principles (2 CFR 200)",
+      "name": "Federal Cost Principles Compliance",
+      "description": "Federal grant financial management and reporting",
+      "regulation": "2 CFR 200.403-411",
+      "criticality": "HIGH",
+      "updatedAt": "2025-01-07T12:00:00.000Z"
+    },
+    "equal_opportunity": {
+      "status": "PASS",
+      "requirement": "Equal Opportunity Provisions",
+      "name": "Equal Opportunity and Nondiscrimination",
+      "description": "Non-discrimination in employment and training programs", 
+      "regulation": "29 CFR Part 38",
+      "criticality": "HIGH",
+      "updatedAt": "2025-01-07T12:00:00.000Z"
+    },
+    "data_security": {
+      "status": "PASS",
+      "requirement": "PII Protection and Data Security Standards",
+      "name": "Data Security and Privacy Protection",
+      "description": "Protection of personally identifiable information",
+      "regulation": "NIST SP 800-171",
+      "criticality": "HIGH", 
+      "updatedAt": "2025-01-07T12:00:00.000Z"
+    }
   },
   
   "certifications": [
     {
       "type": "WIOA_PROVIDER",
+      "number": "WIOA-FL-2025-001",
       "status": "ACTIVE",
-      "issuedDate": "2024-01-01T00:00:00.000Z",
-      "expiryDate": "2026-12-31T00:00:00.000Z",
-      "certifyingBody": "Florida Department of Economic Opportunity"
+      "issuedDate": "2025-01-15",
+      "expirationDate": "2026-01-15"
+    },
+    {
+      "type": "DOE_APPROVED",
+      "number": "DOE-AE-2025-FL-789", 
+      "status": "ACTIVE",
+      "issuedDate": "2025-01-10",
+      "expirationDate": "2025-12-31"
     }
   ]
 }
 ```
 
-## Compliance Areas
+### Checks Registry Endpoint
 
-### Department of Education (DOE)
+**GET** `/api/compliance/checks`
 
-**Requirements Covered:**
-- WIOA Title I Adult Program certification
-- Eligible Training Provider status
-- Performance accountability measures
-- Educational program standards
+Returns all compliance checks in the registry with current status.
 
-**Key Validations:**
-- `wioa_eligibility`: WIOA program eligibility verification
-- `training_provider_status`: Current provider certification
-- `educational_standards`: Program quality and accreditation
+## Compliance Checks
 
-**Certification Numbers:**
-- Format: `DOE-WIOA-YYYY-STATE-NNNN`
-- Example: `DOE-WIOA-2025-FL-1234`
+### Federal Requirements
 
-### Department of Workforce Development (DWD)
+#### 1. WIOA Title I Adult Program Eligibility (`wioa_eligibility`)
 
-**Requirements Covered:**
-- State workforce development alignment
-- Local Workforce Development Board coordination  
-- Performance metrics reporting
-- Career pathway integration
+**Regulation**: 29 CFR Part 680
+**Criticality**: HIGH
+**Description**: Ensures eligibility determination processes meet WIOA standards for adult education and workforce development programs.
 
-**Key Validations:**
-- `workforce_alignment`: State workforce plan compliance
-- `lwdb_coordination`: Local board partnership requirements
-- `career_pathways`: Industry-recognized credential alignment
+**Requirements**:
+- Proper eligibility documentation procedures
+- Income verification processes
+- Priority of service implementation
+- Supportive services coordination
 
-**Contract Numbers:**
-- Format: `DWD-STATE-YYYY-NNN`
-- Example: `DWD-FL-2025-456`
+#### 2. Individual Employment Plan (IEP) Management (`iep_compliance`) 
 
-### Department of Labor (DOL)
+**Regulation**: 20 CFR 680.180
+**Criticality**: HIGH
+**Description**: Validates Individual Employment Plan creation, maintenance, and tracking processes.
 
-**Requirements Covered:**
-- Equal Opportunity and Nondiscrimination
-- Federal cost principles (2 CFR 200)
-- Participant Individual Record Layout (PIRL)
-- Data security and privacy (FISMA)
+**Requirements**:
+- IEP development within required timeframes
+- Participant goal setting and career pathway planning
+- Regular progress reviews and updates
+- Integration with supportive services
 
-**Key Validations:**
-- `equal_opportunity`: EO policies and procedures
-- `financial_compliance`: Federal cost principle adherence
-- `pirl_reporting`: Data quality and timeliness standards
-- `data_security`: Cybersecurity framework compliance
+#### 3. PIRL Data Quality and Timeliness (`pirl_reporting`)
 
-## Validation Check Details
+**Regulation**: TEGL 19-16
+**Criticality**: HIGH  
+**Description**: Ensures Participant Individual Record Layout (PIRL) data meets federal reporting standards.
 
-### Individual Validation Fields
+**Requirements**:
+- Data quality standards compliance
+- Timely data submission (quarterly)
+- Complete participant records
+- Follow-up data collection
 
-Each validation check includes:
+#### 4. Federal Cost Principles Compliance (`financial_compliance`)
 
-```json
-{
-  "status": "PASS | FAIL | WARNING",
-  "requirement": "Human-readable requirement description",
-  "lastChecked": "ISO 8601 timestamp",
-  "details": "Specific details about compliance status",
-  "nextReview": "When this check needs to be performed again (optional)",
-  "remediation": "Steps to address non-compliance (if status is FAIL)"
-}
-```
+**Regulation**: 2 CFR 200.403-411
+**Criticality**: HIGH
+**Description**: Validates adherence to federal cost principles for grant management.
 
-### Status Meanings
+**Requirements**:
+- Allowable cost documentation
+- Cost allocation procedures
+- Financial reporting accuracy
+- Audit trail maintenance
 
-- **PASS**: Requirement fully met
-- **FAIL**: Critical non-compliance requiring immediate attention
-- **WARNING**: Minor issues that should be addressed
+#### 5. Equal Opportunity and Nondiscrimination (`equal_opportunity`)
 
-### Current Validation Checks
+**Regulation**: 29 CFR Part 38
+**Criticality**: HIGH
+**Description**: Ensures equal opportunity and nondiscrimination in all workforce programs.
 
-1. **wioa_eligibility**: WIOA Title I Adult Program Requirements
-2. **iep_compliance**: Individual Employment Plan Documentation
-3. **pirl_reporting**: PIRL Data Quality and Timeliness
-4. **financial_compliance**: Federal Cost Principles (2 CFR 200)
-5. **equal_opportunity**: EO and Nondiscrimination Requirements
-6. **data_security**: FISMA Compliance
+**Requirements**:
+- Equal opportunity policy implementation
+- Nondiscrimination procedures
+- Accessibility compliance (ADA)
+- Complaint handling processes
 
-## Certification Management
+#### 6. Data Security and Privacy Protection (`data_security`)
 
-### Certification Types
+**Regulation**: NIST SP 800-171
+**Criticality**: HIGH
+**Description**: Validates protection of personally identifiable information (PII) and sensitive data.
 
-- **WIOA_PROVIDER**: Workforce Innovation and Opportunity Act Provider
-- **ELIGIBLE_TRAINING_PROVIDER**: State Eligible Training Provider List
-- **APPRENTICESHIP_SPONSOR**: DOL Registered Apprenticeship Sponsor
-- **CREDENTIAL_PROVIDER**: Industry-Recognized Credential Provider
+**Requirements**:
+- PII handling procedures
+- Data encryption standards
+- Access control implementation
+- Incident response planning
 
-### Certification Status
+## Status Definitions
 
-- **ACTIVE**: Current and valid
-- **PENDING**: Application submitted, awaiting approval
-- **EXPIRED**: Needs renewal
-- **SUSPENDED**: Temporarily revoked
-- **REVOKED**: Permanently removed
+### Check Status Values
 
-## Audit Trail and Reporting
+| Status | Description | Action Required |
+|--------|-------------|-----------------|
+| `PASS` | Check meets all requirements | Continue monitoring |
+| `FAIL` | Check does not meet requirements | Immediate remediation required |
+| `WARNING` | Check has minor issues | Review and address |
+| `PENDING` | Check evaluation in progress | Wait for completion |
 
-### Audit Timestamps
+### Overall Status Values
 
-All compliance data includes:
-- `lastAudit`: Last comprehensive compliance review
-- `nextAudit`: Next scheduled review date  
-- `lastUpdated`: Most recent data update
-- `lastChecked`: Last validation run
+| Status | Description | Meaning |
+|--------|-------------|---------|
+| `COMPLIANT` | All checks passing | Full compliance achieved |
+| `PARTIALLY_COMPLIANT` | Some warnings or pending | Minor issues to address |
+| `NON_COMPLIANT` | One or more checks failing | Immediate action required |
 
-### Dynamic Timestamp Generation
+### Area Status Values
 
-Timestamps are dynamically generated based on:
-- Current date/time
-- Compliance review cycles (typically quarterly)
-- Regulatory reporting deadlines
-- Certification renewal dates
+| Status | Description | Validity Period |
+|--------|-------------|-----------------|
+| `CERTIFIED` | Active certification | Per certification terms |
+| `ACTIVE_COMPLIANCE` | Ongoing compliance monitoring | Contract period |
+| `CURRENT_REPORTING` | Up-to-date reporting | Quarterly/annual |
+| `REVIEW_REQUIRED` | Needs attention | Immediate |
+| `EXPIRED` | Certification expired | Renewal required |
 
-### Report Generation
+## Future Roadmap
 
-The system supports automated compliance reporting for:
-- Monthly performance reports
-- Quarterly compliance summaries  
-- Annual certification renewals
-- Ad-hoc audit requests
+### Planned Enhancements
 
-## Integration with Main Application
+- **Real-time Data Integration**: Connect to federal reporting systems
+- **Automated Auditing**: Scheduled compliance check execution
+- **Risk Assessment**: Predictive compliance risk scoring
+- **Notification System**: Automated alerts for compliance issues
+- **Document Management**: Centralized compliance documentation
+- **Reporting Dashboard**: Visual compliance status monitoring
 
-### Health Check Integration
+### Integration Opportunities
 
-Compliance status is included in the main health check endpoint:
+- **WIOA Management Systems**: Direct integration with state WIOA systems
+- **PIRL Reporting**: Automated PIRL data submission
+- **Grant Management**: Integration with federal grant tracking systems
+- **LMS Integration**: Compliance tracking within learning management
 
-```bash
-curl http://localhost:5000/api/healthz
-```
+## Support and Maintenance
 
-### Error Handling
+### Monitoring
 
-All compliance endpoints include:
-- Correlation IDs for request tracing
-- Structured error responses
-- Appropriate HTTP status codes
-- Detailed error messages
+- Compliance checks run automatically on system startup
+- Status updates logged with correlation IDs
+- Regular health checks include compliance status
+- API endpoints provide real-time status
 
-### Security Considerations
+### Updates
 
-- No sensitive data in public endpoints
-- All requests logged with correlation IDs
-- Rate limiting applied to prevent abuse
-- CORS restrictions for cross-origin requests
+- Compliance requirements updated as regulations change
+- New checks added through the registry system
+- Version tracking for all compliance changes
+- Audit trails maintained for all modifications
 
-## Customization and Extension
+### Troubleshooting
 
-### Adding New Compliance Checks
+Common issues and resolutions:
 
-1. Add validation function to compliance router
-2. Update validation schema in response
-3. Include appropriate documentation
-4. Test with various scenarios
+1. **Check Status Stuck in PENDING**
+   - Review check implementation
+   - Verify required data availability
+   - Check system logs for errors
 
-### Updating Compliance Data
+2. **Overall Status NON_COMPLIANT**
+   - Review individual check failures
+   - Prioritize HIGH criticality checks
+   - Implement remediation plan
 
-The system supports:
-- Manual data updates via API
-- Automated data refresh from external sources
-- Integration with compliance management systems
-- Real-time status monitoring
-
-### Future Enhancements
-
-Phase 2 will include:
-- Real-time external data source integration
-- Advanced analytics and trending
-- Automated alert systems
-- Multi-tenant compliance management
+3. **Certification Status Issues**
+   - Verify certification dates
+   - Check renewal requirements
+   - Update certification information

@@ -27,32 +27,51 @@ jobs:
     - name: Install dependencies
       run: npm ci
       
+    - name: Environment validation check
+      run: npm run env:check
+      env:
+        NODE_ENV: test
+        JWT_SECRET: test_secret_key_for_ci_minimum_32_characters
+        
     - name: Run linter
       run: npm run lint
-      continue-on-error: true  # Don't fail CI on linting warnings initially
+      continue-on-error: false  # Fail CI on linting errors
       
     - name: Run type checker  
       run: npm run typecheck
       
-    - name: Run tests
+    - name: Run tests with coverage
       run: npm run test
       env:
         NODE_ENV: test
         JWT_SECRET: test_secret_key_for_ci_minimum_32_characters
         
+    - name: Coverage threshold check
+      run: |
+        # Extract coverage percentage from test output
+        COVERAGE=$(npm run test 2>&1 | grep -o 'All files.*[0-9]*\.[0-9]*%' | grep -o '[0-9]*\.[0-9]*' | head -1 || echo "0")
+        echo "Coverage: ${COVERAGE}%"
+        
+        # Check if coverage meets 70% threshold
+        if (( $(echo "$COVERAGE < 70" | bc -l) )); then
+          echo "❌ Coverage ${COVERAGE}% is below 70% threshold"
+          exit 1
+        else
+          echo "✅ Coverage ${COVERAGE}% meets 70% threshold"
+        fi
+        
     - name: Build application
       run: npm run build
       
-    - name: Environment validation check
-      run: npm run env:check
-      env:
-        NODE_ENV: production
-        JWT_SECRET: production_ready_jwt_secret_key_minimum_32_characters
-        
-    - name: Security audit (production only)
-      if: matrix.node-version == '20.x' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/feat/production-hardening'))
+    - name: Security audit (production dependencies)
+      if: matrix.node-version == '20.x'
       run: npm run security:audit
-      continue-on-error: true  # Don't fail on audit warnings initially
+      continue-on-error: false  # Fail on high/critical vulnerabilities
+      
+    - name: Full security audit (all dependencies)  
+      if: matrix.node-version == '20.x' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/feat/production-hardening'))
+      run: npm run security:full
+      continue-on-error: true  # Don't fail on dev dependency issues initially
       
     - name: Size check
       if: matrix.node-version == '20.x'
@@ -62,18 +81,94 @@ jobs:
     - name: Production readiness check
       if: matrix.node-version == '20.x'
       run: npm run check:prod
-      continue-on-error: true
+      env:
+        NODE_ENV: production
+        JWT_SECRET: production_ready_jwt_secret_key_minimum_32_characters
+      continue-on-error: false
       
     - name: Upload build artifacts
-      if: matrix.node-version == '20.x' && github.ref == 'refs/heads/main'
+      if: matrix.node-version == '20.x' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/copilot/'))
       uses: actions/upload-artifact@v4
       with:
-        name: build-artifacts
+        name: build-artifacts-node-${{ matrix.node-version }}
         path: |
           dist/
           server/
+          package.json
+          package-lock.json
           !**/node_modules/
         retention-days: 30
+        
+    - name: Upload coverage reports
+      if: matrix.node-version == '20.x'
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-reports
+        path: coverage/
+        retention-days: 7
+
+  smoke-test:
+    runs-on: ubuntu-latest
+    needs: ci
+    if: matrix.node-version == '20.x'
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run smoke tests
+      run: |
+        # Start unified server in background
+        timeout 60s node server/main.js &
+        SERVER_PID=$!
+        sleep 5
+        
+        echo "🔍 Running smoke tests..."
+        
+        # Health check
+        echo "Testing /api/healthz..."
+        curl -f http://localhost:5000/api/healthz || exit 1
+        
+        # LMS endpoints
+        echo "Testing /api/lms/courses..."
+        curl -f http://localhost:5000/api/lms/courses || exit 1
+        
+        # Compliance endpoints  
+        echo "Testing /api/compliance..."
+        curl -f http://localhost:5000/api/compliance || exit 1
+        
+        echo "Testing /api/compliance/validate..."
+        curl -f http://localhost:5000/api/compliance/validate || exit 1
+        
+        # Payment configuration
+        echo "Testing /api/payments/config..."
+        curl -f http://localhost:5000/api/payments/config || exit 1
+        
+        # Widget integration
+        echo "Testing /api/widgets/integration.js..."
+        curl -f http://localhost:5000/api/widgets/integration.js || exit 1
+        
+        # Branding configuration
+        echo "Testing /api/branding..."
+        curl -f http://localhost:5000/api/branding || exit 1
+        
+        echo "✅ All smoke tests passed!"
+        
+        # Clean up
+        kill $SERVER_PID 2>/dev/null || true
+      timeout-minutes: 3
+      env:
+        NODE_ENV: test
+        JWT_SECRET: test_secret_key_for_ci_minimum_32_characters
 
   load-test:
     runs-on: ubuntu-latest
@@ -104,28 +199,49 @@ jobs:
     - name: Run basic load test
       run: |
         # Start server in background
-        timeout 60s node simple-server.cjs &
+        timeout 120s node server/main.js &
         SERVER_PID=$!
         sleep 5
         
-        # Simple k6 load test script
+        # Enhanced k6 load test script
         cat << 'EOF' > load-test.js
         import http from 'k6/http';
-        import { check } from 'k6';
+        import { check, sleep } from 'k6';
         
         export const options = {
           stages: [
-            { duration: '30s', target: 10 },
-            { duration: '30s', target: 0 },
+            { duration: '30s', target: 20 },  // Ramp up to 20 concurrent users
+            { duration: '30s', target: 20 },  // Stay at 20 users
+            { duration: '30s', target: 0 },   // Ramp down to 0 users
           ],
+          thresholds: {
+            http_req_duration: ['p(95)<1000'], // 95% of requests under 1s
+            http_req_failed: ['rate<0.05'],    // Less than 5% errors
+          },
         };
         
+        const baseUrl = 'http://localhost:5000';
+        
         export default function () {
-          const response = http.get('http://localhost:5000/health');
+          // Test different endpoints with realistic load patterns
+          const endpoints = [
+            '/api/healthz',
+            '/api/lms/courses', 
+            '/api/compliance',
+            '/api/payments/config',
+            '/api/branding',
+          ];
+          
+          const endpoint = endpoints[Math.floor(Math.random() * endpoints.length)];
+          const response = http.get(`${baseUrl}${endpoint}`);
+          
           check(response, {
             'status is 200': (r) => r.status === 200,
-            'response time < 500ms': (r) => r.timings.duration < 500,
+            'response time < 1000ms': (r) => r.timings.duration < 1000,
+            'response has correlation ID': (r) => r.headers['x-request-id'] !== undefined,
           });
+          
+          sleep(1); // Wait 1 second between requests per user
         }
         EOF
         
@@ -135,4 +251,7 @@ jobs:
         # Clean up
         kill $SERVER_PID 2>/dev/null || true
       timeout-minutes: 5
+      env:
+        NODE_ENV: test
+        JWT_SECRET: test_secret_key_for_ci_minimum_32_characters
       continue-on-error: true  # Don't fail CI on load test issues initially

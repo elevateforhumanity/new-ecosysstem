@@ -34,5 +34,8 @@ efh-*
 *.zip
 *.tar.gz
 
+# Deprecated server files
+*.deprecated
+
 coverage
 stats.html

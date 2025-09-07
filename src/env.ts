@@ -1,28 +1,52 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-const schema = z.object({
-  VITE_API_BASE_URL: z.string().url().optional()
+// Central environment validation. Fails fast if required vars missing.
+export const EnvSchema = z.object({
+  NODE_ENV: z.string().default('development'),
+  DATABASE_URL: z.string().url().optional(),
+  JWT_SECRET: z.string().min(16, 'JWT_SECRET must be at least 16 characters'),
+  STRIPE_SECRET_KEY: z.string().optional(),
+  SUPABASE_URL: z.string().url().optional(),
+  SUPABASE_ANON_KEY: z.string().optional(),
+  SUPABASE_SERVICE_KEY: z.string().optional(),
+  LOG_LEVEL: z.string().optional(),
+  VITE_API_BASE_URL: z.string().url().optional(),
+  VITE_ANALYTICS_ID: z.string().optional()
 });
 
-export type AppEnv = z.infer<typeof schema>;
+export type AppEnv = z.infer<typeof EnvSchema>;
+
+let cached: AppEnv | null = null;
 
 export function loadEnv(): AppEnv {
-  const raw: Record<string, string | undefined> = {
-    VITE_API_BASE_URL: process.env.VITE_API_BASE_URL
-  };
-  const parsed = schema.safeParse(raw);
-  if (!parsed.success) {
-    // Throw aggregated error for CI visibility
-    throw new Error(
-      "Environment validation failed:\n" +
-        parsed.error.errors.map(e => `- ${e.path.join(".")}: ${e.message}`).join("\n")
-    );
+  if (cached) return cached;
+  
+  // In test mode, provide sensible defaults if not set
+  const envVars = { ...process.env };
+  if (process.env.NODE_ENV === 'test' && !envVars.JWT_SECRET) {
+    envVars.JWT_SECRET = 'test_secret_key_for_testing_minimum_16_chars';
   }
-  return parsed.data;
+  
+  const parsed = EnvSchema.safeParse(envVars);
+  if (!parsed.success) {
+    // Aggregate errors
+    const issues = parsed.error.issues.map(i => `${i.path.join('.')}: ${i.message}`).join('\n');
+    // eslint-disable-next-line no-console
+    console.error('\nEnvironment validation failed:\n' + issues + '\n');
+    
+    // Don't exit in test mode, throw error instead
+    if (process.env.NODE_ENV === 'test') {
+      throw new Error('Environment validation failed');
+    }
+    process.exit(1);
+  }
+  cached = parsed.data;
+  return cached;
 }
 
-// Allow manual check via: npm run env:check
-if (process.argv.includes("--check")) {
+// Allow running standalone via: npm run env:check
+if (import.meta.url === `file://${process.argv[1]}`) {
   loadEnv();
-  console.log("Env OK");
+  // eslint-disable-next-line no-console
+  console.log('✅ Environment variables validated');
 }

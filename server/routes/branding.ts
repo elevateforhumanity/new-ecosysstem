@@ -6,6 +6,7 @@
 
 import express from 'express';
 import { logger } from '../../src/logger.js';
+import { brandingService } from '../services/branding.js';
 
 const router = express.Router();
 
@@ -13,61 +14,72 @@ const router = express.Router();
 router.get('/', (req: express.Request, res: express.Response) => {
   const correlationId = req.headers['x-request-id'] as string;
 
-  const brandingResponse = {
-    timestamp: new Date().toISOString(),
-    correlationId,
-    version: '1.0',
-    lastUpdated: new Date().toISOString(),
-    
-    logo: {
-      favicon: '/api/images/favicon.ico',
-      header: '/api/images/logo-header.svg',
-      footer: '/api/images/logo-footer.svg',
-      requirements: {
-        format: 'SVG preferred, PNG backup',
-        type: 'LOGO_REQUIRED',
-        maxSize: '500KB',
-        dimensions: 'flexible',
-      },
-    },
-    
-    footerBackground: {
-      image: '/api/images/footer-education-bg.jpg',
-      alt: 'Education and workforce development background',
-      requirements: {
-        theme: 'education/workforce development',
-        type: 'EDUCATION_BACKGROUND_REQUIRED',
-        format: 'JPEG/PNG',
-        maxSize: '2MB',
-        dimensions: '1920x400 recommended',
-      },
-    },
-    
-    colors: {
-      primary: '#1e40af',
-      secondary: '#7c3aed',
-      accent: '#059669',
-      neutral: '#6b7280',
-      background: '#f8fafc',
-      text: '#1f2937',
-    },
-    
-    typography: {
-      primary: 'Inter, system-ui, sans-serif',
-      secondary: 'Georgia, serif',
-      mono: 'Menlo, Monaco, monospace',
-    },
-    
-    social: {
-      facebook: 'https://facebook.com/elevateforhumanity',
-      twitter: 'https://twitter.com/elevateforhumans',
-      linkedin: 'https://linkedin.com/company/elevate-for-humanity',
-      youtube: 'https://youtube.com/@elevateforhumanity',
-    },
-  };
+  try {
+    const config = brandingService.getConfig();
 
-  logger.info({ correlationId }, 'Branding configuration requested');
-  res.json(brandingResponse);
+    logger.info({ correlationId }, 'Branding configuration requested');
+
+    res.json({
+      ...config,
+      timestamp: new Date().toISOString(),
+      correlationId,
+    });
+  } catch (error: any) {
+    logger.error({ err: error, correlationId }, 'Branding configuration error');
+    res.status(500).json({
+      error: 'Failed to get branding configuration',
+      type: 'INTERNAL_ERROR',
+      correlationId,
+      timestamp: new Date().toISOString(),
+    });
+  }
+});
+
+// GET /api/branding/css - CSS variables for branding
+router.get('/css', (req: express.Request, res: express.Response) => {
+  const correlationId = req.headers['x-request-id'] as string;
+
+  try {
+    const css = brandingService.generateCSS();
+
+    logger.info({ correlationId }, 'Branding CSS requested');
+
+    res.set('Content-Type', 'text/css');
+    res.send(css);
+  } catch (error: any) {
+    logger.error({ err: error, correlationId }, 'Branding CSS generation error');
+    res.status(500).json({
+      error: 'Failed to generate branding CSS',
+      type: 'INTERNAL_ERROR',
+      correlationId,
+      timestamp: new Date().toISOString(),
+    });
+  }
+});
+
+// GET /api/branding/variables - CSS variables as JSON
+router.get('/variables', (req: express.Request, res: express.Response) => {
+  const correlationId = req.headers['x-request-id'] as string;
+
+  try {
+    const variables = brandingService.getCSSVariables();
+
+    logger.info({ correlationId }, 'Branding variables requested');
+
+    res.json({
+      variables,
+      timestamp: new Date().toISOString(),
+      correlationId,
+    });
+  } catch (error: any) {
+    logger.error({ err: error, correlationId }, 'Branding variables error');
+    res.status(500).json({
+      error: 'Failed to get branding variables',
+      type: 'INTERNAL_ERROR',
+      correlationId,
+      timestamp: new Date().toISOString(),
+    });
+  }
 });
 
 export default router;

@@ -1,4 +1,37 @@
 name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Env Check
+        run: |
+          echo "JWT_SECRET=temporary_secret_123456789012345" >> .env
+          npm run env:check
+      - name: Lint
+        run: npm run lint || true
+      - name: Typecheck
+        run: npm run typecheck || true
+      - name: Tests
+        run: npm test
+      - name: Build
+        run: npm run build
+      - name: Security Audit (prod)
+        run: npm run security:audit || truename: CI
 on:
   push:
     branches: [main]

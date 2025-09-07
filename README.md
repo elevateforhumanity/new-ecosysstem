@@ -108,6 +108,53 @@ All sites share user data through Supabase:
 
 The system ensures seamless experience as users move between different parts of the ecosystem.
 
+## 🔍 Health & Monitoring
+- Basic liveness: `/health`
+- Aggregated: `/api/healthz` returns service statuses (api, lms, compliance, db) + uptime
+- Request IDs returned in `X-Request-ID` header and error payloads
+
+## 🧪 Testing & Quality Gates
+- Vitest with coverage thresholds (lines >=70%)
+- Run: `npm test`
+- Env validation: `npm run env:check`
+
+## 🔐 Security (Phase 1)
+- Helmet, rate limiting, compression
+- JWT secret required (placeholder currently) – replace in production
+- No user auth flow yet (future phase) – LMS progress uses demo user fallback
+
+## 📘 Compliance
+See `COMPLIANCE.md` for current (stub) check catalog.
+
+## 🗄️ Database
+- Prisma + SQLite fallback (dev)
+- Postgres upgrade path documented in `MIGRATIONS.md`
+
+## 🛰️ Payments
+- `/api/stripe/create-payment-intent` simulated unless `STRIPE_SECRET_KEY` set
+
+## 🧭 LMS Endpoints
+- `GET /api/lms/courses`
+- `GET /api/lms/courses/:id`
+- `GET /api/lms/courses/:id/lessons`
+- `POST /api/lms/progress` (body: `{ lessonId, userId? }`)
+
+## ✅ Production Readiness Checklist (Phase 1)
+- [ ] Set real `JWT_SECRET`
+- [ ] Provide `DATABASE_URL` (switch to Postgres)
+- [ ] Run migrations (`npx prisma migrate deploy`)
+- [ ] Configure Stripe secret (optional)
+- [ ] Add proper auth layer & replace demo user
+- [ ] Enable logging aggregation (e.g., Cloud provider)
+- [ ] Review rate limit thresholds
+
+## 🗺️ Roadmap (Phase 2+)
+- Real compliance evidence linkage
+- Auth sessions + refresh flow
+- Metrics & tracing (OpenTelemetry)
+- Frontend unification (SPA)
+- Robust enrollment/payment domain logic
+
 # Workspace (Plain Vite + TypeScript)
 
 ## Features

@@ -10,6 +10,7 @@ const crypto = require('crypto');
 // Modular services
 const complianceService = require('./services/compliance');
 const lmsService = require('./services/lms');
+const paymentsService = require('./services/payments');
 
 // Single consolidated simple server used by tests & legacy deployment
 const app = express();
@@ -113,30 +114,33 @@ const PROGRAMS = [
 app.get('/api/programs', (req, res) => res.json(PROGRAMS));
 
 // --------------- LMS Endpoints ---------------
-app.get('/api/lms/courses', (req, res) => {
-  res.json({ courses: lmsService.listCourses() });
+app.get('/api/lms/courses', async (req, res, next) => {
+  try { res.json({ courses: await lmsService.listCourses() }); } catch (e) { next(e); }
 });
 
-app.get('/api/lms/courses/:id', (req, res, next) => {
-  const course = lmsService.getCourse(req.params.id);
-  if (!course) return next(Object.assign(new Error('Course not found'), { statusCode: 404, type: 'not_found' }));
-  res.json(course);
+app.get('/api/lms/courses/:id', async (req, res, next) => {
+  try {
+    const course = await lmsService.getCourse(req.params.id);
+    if (!course) return next(Object.assign(new Error('Course not found'), { statusCode: 404, type: 'not_found' }));
+    res.json(course);
+  } catch (e) { next(e); }
 });
 
-app.get('/api/lms/courses/:id/lessons', (req, res, next) => {
-  const course = lmsService.getCourse(req.params.id);
-  if (!course) return next(Object.assign(new Error('Course not found'), { statusCode: 404, type: 'not_found' }));
-  res.json({ lessons: lmsService.listLessons(course.id) });
+app.get('/api/lms/courses/:id/lessons', async (req, res, next) => {
+  try {
+    const course = await lmsService.getCourse(req.params.id);
+    if (!course) return next(Object.assign(new Error('Course not found'), { statusCode: 404, type: 'not_found' }));
+    const lessons = await lmsService.listLessons(course.id);
+    res.json({ lessons });
+  } catch (e) { next(e); }
 });
 
-app.post('/api/lms/progress', (req, res, next) => {
+app.post('/api/lms/progress', async (req, res, next) => {
   try {
     const { lessonId, userId } = req.body || {};
-    const summary = lmsService.recordProgress({ lessonId, userId });
+    const summary = await lmsService.recordProgress({ lessonId, userId });
     res.json(summary);
-  } catch (e) {
-    next(e);
-  }
+  } catch (e) { next(e); }
 });
 
 // Stripe config stub
@@ -152,12 +156,17 @@ app.get('/api/stripe/config', (req, res) => {
 });
 
 // Create payment intent stub
-app.post('/api/stripe/create-payment-intent', (req, res) => {
-  if (!process.env.STRIPE_SECRET_KEY) {
-    return res.status(500).json({ error: 'Stripe not configured (missing STRIPE_SECRET_KEY)' });
-  }
-  // Fake response for tests
-  res.json({ clientSecret: 'pi_test_secret', paymentIntentId: 'pi_test_123' });
+app.post('/api/stripe/create-payment-intent', async (req, res, next) => {
+  try {
+    const { amount = 1000, program_id: programId, user_id: userId } = req.body || {};
+    if (!amount || !programId) {
+      const err = new Error('Missing amount or program_id');
+      err.statusCode = 400; err.type = 'validation';
+      throw err;
+    }
+    const result = await paymentsService.createPaymentIntent({ amount, programId, userId, requestId: req.id });
+    res.json(result);
+  } catch (e) { next(e); }
 });
 
 // Widgets: hero content
@@ -221,6 +230,7 @@ app.get('/api/healthz', (req, res) => {
   const uptimeSeconds = Math.round(process.uptime());
   const summary = complianceService.getSummary();
   const validations = complianceService.getValidations();
+  const dbStatus = 'degraded'; // placeholder until prisma integration hook
   res.json({
     status: 'ok',
     timestamp: new Date().toISOString(),
@@ -228,7 +238,8 @@ app.get('/api/healthz', (req, res) => {
     services: {
       api: 'ok',
       compliance: summary.status,
-      lms: 'ok'
+      lms: 'ok',
+      db: dbStatus
     },
     checks: Object.keys(validations.validations)
   });

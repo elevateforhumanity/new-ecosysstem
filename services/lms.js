@@ -1,5 +1,5 @@
-// Simple in-memory LMS service (fallback when no database present)
-// Can be upgraded later to use Prisma / real DB.
+// LMS service with in-memory fallback if database unavailable
+const { getPrisma } = require('./prisma');
 
 const courses = [
   {
@@ -30,16 +30,42 @@ const lessons = [
 // Basic in-memory progress map: userId -> Set(lessonId)
 const progressMap = new Map();
 
-function listCourses() { return courses; }
-function getCourse(id) { return courses.find(c => c.id === id || c.slug === id); }
-function listLessons(courseId) { return lessons.filter(l => l.courseId === courseId).sort((a,b)=>a.order-b.order); }
+async function listCourses() {
+  const prisma = await getPrisma();
+  if (prisma) {
+    const dbCourses = await prisma.lmsCourse.findMany({ select: { id: true, slug: true, title: true, price: true, published: true } });
+    if (dbCourses.length) return dbCourses;
+  }
+  return courses;
+}
+async function getCourse(id) {
+  const prisma = await getPrisma();
+  if (prisma) {
+    const c = await prisma.lmsCourse.findFirst({ where: { OR: [{ id }, { slug: id }] } });
+    if (c) return c;
+  }
+  return courses.find(c => c.id === id || c.slug === id);
+}
+async function listLessons(courseId) {
+  const prisma = await getPrisma();
+  if (prisma) {
+    const dbLessons = await prisma.lmsLesson.findMany({ where: { courseId }, select: { id: true, title: true, order: true, type: true }, orderBy: { order: 'asc' } });
+    if (dbLessons.length) return dbLessons;
+  }
+  return lessons.filter(l => l.courseId === courseId).sort((a,b)=>a.order-b.order);
+}
 
-function recordProgress({ userId = 'demo-user', lessonId }) {
+async function recordProgress({ userId = 'demo-user', lessonId }) {
   if (!lessonId || !lessons.find(l => l.id === lessonId)) {
     const err = new Error('Invalid lessonId');
     err.statusCode = 400;
     err.type = 'validation';
     throw err;
+  }
+  const prisma = await getPrisma();
+  if (prisma) {
+    // naive progress update: count completed lessons
+    await prisma.$executeRawUnsafe('-- progress placeholder');
   }
   if (!progressMap.has(userId)) progressMap.set(userId, new Set());
   progressMap.get(userId).add(lessonId);
@@ -58,10 +84,4 @@ function getProgressSummary(userId = 'demo-user') {
   };
 }
 
-module.exports = {
-  listCourses,
-  getCourse,
-  listLessons,
-  recordProgress,
-  getProgressSummary
-};
+module.exports = { listCourses, getCourse, listLessons, recordProgress, getProgressSummary };

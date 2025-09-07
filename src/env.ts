@@ -1,28 +1,38 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-const schema = z.object({
-  VITE_API_BASE_URL: z.string().url().optional()
+// Central environment validation. Fails fast if required vars missing.
+export const EnvSchema = z.object({
+  NODE_ENV: z.string().default('development'),
+  DATABASE_URL: z.string().url().optional(),
+  JWT_SECRET: z.string().min(16, 'JWT_SECRET must be at least 16 characters'),
+  STRIPE_SECRET_KEY: z.string().optional(),
+  SUPABASE_URL: z.string().url().optional(),
+  SUPABASE_ANON_KEY: z.string().optional(),
+  SUPABASE_SERVICE_KEY: z.string().optional(),
+  LOG_LEVEL: z.string().optional()
 });
 
-export type AppEnv = z.infer<typeof schema>;
+export type AppEnv = z.infer<typeof EnvSchema>;
+
+let cached: AppEnv | null = null;
 
 export function loadEnv(): AppEnv {
-  const raw: Record<string, string | undefined> = {
-    VITE_API_BASE_URL: process.env.VITE_API_BASE_URL
-  };
-  const parsed = schema.safeParse(raw);
+  if (cached) return cached;
+  const parsed = EnvSchema.safeParse(process.env);
   if (!parsed.success) {
-    // Throw aggregated error for CI visibility
-    throw new Error(
-      "Environment validation failed:\n" +
-        parsed.error.errors.map(e => `- ${e.path.join(".")}: ${e.message}`).join("\n")
-    );
+    // Aggregate errors
+    const issues = parsed.error.issues.map(i => `${i.path.join('.')}: ${i.message}`).join('\n');
+    // eslint-disable-next-line no-console
+    console.error('\nEnvironment validation failed:\n' + issues + '\n');
+    process.exit(1);
   }
-  return parsed.data;
+  cached = parsed.data;
+  return cached;
 }
 
-// Allow manual check via: npm run env:check
-if (process.argv.includes("--check")) {
+// Allow running standalone via: npm run env:check
+if (require.main === module) {
   loadEnv();
-  console.log("Env OK");
+  // eslint-disable-next-line no-console
+  console.log('✅ Environment variables validated');
 }

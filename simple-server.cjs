@@ -8,8 +8,8 @@ const pino = require('pino');
 const pinoHttp = require('pino-http');
 const crypto = require('crypto');
 // Modular services
-const complianceService = require('./services/compliance');
-const lmsService = require('./services/lms');
+const complianceService = require('./services/compliance.cjs');
+const lmsService = require('./services/lms.cjs');
 
 // Single consolidated simple server used by tests & legacy deployment
 const app = express();

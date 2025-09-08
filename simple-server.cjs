@@ -152,13 +152,16 @@ app.post('/api/lms/progress', ensureServices, async (req, res, next) => {
 
 // Stripe config stub
 app.get('/api/stripe/config', (req, res) => {
+  const { listStripeConfiguredPrices } = require('./services/payments');
   res.json({
     programs: PROGRAMS,
     fundingOptions: {
       wioa: { enabled: true },
       wrg: { enabled: true },
       scholarship: { enabled: true }
-    }
+    },
+    pricing: marketing.getPricingPlans(),
+    stripePrices: listStripeConfiguredPrices()
   });
 });
 
@@ -253,6 +256,48 @@ app.post('/api/marketing/lead', (req, res) => {
   const entry = { id: crypto.randomUUID(), email, name: name || null, intent: intent || 'general', ts: new Date().toISOString() };
   leadsStore.push(entry);
   res.json({ stored: true, entry, disclaimer: 'Placeholder storage only - configure real CRM integration.' });
+});
+
+// Pricing plans
+app.get('/api/pricing', (req, res) => {
+  res.json({ plans: marketing.getPricingPlans() });
+});
+
+// --------------- Metrics (lightweight, no secrets) ---------------
+app.get('/api/metrics', (req, res) => {
+  const uptimeSeconds = Math.round(process.uptime());
+  const mem = process.memoryUsage();
+  let configuredPrices = [];
+  try {
+    const { listStripeConfiguredPrices } = require('./services/payments');
+    configuredPrices = listStripeConfiguredPrices();
+  } catch { /* ignore */ }
+  const pricingPlans = marketing.getPricingPlans();
+  const banners = marketing.getBanners();
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    uptimeSeconds,
+    process: {
+      pid: process.pid,
+      memory: {
+        rssMB: +(mem.rss / 1024 / 1024).toFixed(2),
+        heapUsedMB: +(mem.heapUsed / 1024 / 1024).toFixed(2)
+      },
+      node: process.version
+    },
+    counts: {
+      programs: PROGRAMS.length,
+      pricingPlans: pricingPlans.length,
+      banners: banners.length,
+      leads: leadsStore.length
+    },
+    payments: {
+      stripeConfigured: !!process.env.STRIPE_SECRET_KEY,
+      configuredPriceEnvVars: configuredPrices,
+      simulatedMode: !process.env.STRIPE_SECRET_KEY
+    }
+  });
 });
 
 // --------------- Health Aggregator ---------------

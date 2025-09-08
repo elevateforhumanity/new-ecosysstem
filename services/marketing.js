@@ -24,5 +24,17 @@ function getContent() {
 
 function getBanners() { return getContent().banners; }
 function getPage(key) { return getContent().pages[key]; }
+function getPricingPlans() {
+  const pages = getContent().pages;
+  const pricing = pages.pricing;
+  if (!pricing || !Array.isArray(pricing.plans)) return [];
+  return pricing.plans.map(p => ({
+    ...p,
+    stripe: {
+      monthly: p.stripePriceMonthlyEnv ? process.env[p.stripePriceMonthlyEnv] || null : null,
+      annual: p.stripePriceAnnualEnv ? process.env[p.stripePriceAnnualEnv] || null : null
+    }
+  }));
+}
 
-module.exports = { getBanners, getPage };
+module.exports = { getBanners, getPage, getPricingPlans };

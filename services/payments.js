@@ -28,4 +28,10 @@ async function createPaymentIntent({ amount, programId, userId, requestId }) {
   };
 }
 
-export { createPaymentIntent };
+function listStripeConfiguredPrices() {
+  return Object.keys(process.env)
+    .filter(k => k.startsWith('STRIPE_PRICE_'))
+    .reduce((acc, k) => { acc[k] = process.env[k]; return acc; }, {});
+}
+
+export { createPaymentIntent, listStripeConfiguredPrices };

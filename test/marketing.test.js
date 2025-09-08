@@ -18,4 +18,10 @@ describe('Marketing Content', () => {
     expect(res.status).toBe(200);
     expect(res.body.stored).toBe(true);
   });
+  test('Pricing plans available', async () => {
+    const res = await request(app).get('/api/pricing');
+    expect(res.status).toBe(200);
+    expect(Array.isArray(res.body.plans)).toBe(true);
+    expect(res.body.plans.length).toBeGreaterThan(0);
+  });
 });

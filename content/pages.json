@@ -1,0 +1,57 @@
+{
+  "landing": {
+    "hero": {
+      "title": "Rise Forward Foundation",
+      "tagline": "Accessible, compliant, future-ready workforce learning.",
+      "mission": "We accelerate economic mobility through AI, data, and digital skills education wrapped in compliant workforce pathways.",
+      "highlights": [
+        "AI & Data Integrated Curriculum",
+        "WIOA / PIRL Scaffolded",
+        "Funding Pathways & Employer Alignment",
+        "Licensable Full Stack Ecosystem"
+      ]
+    },
+    "sections": [
+      {
+        "id": "why",
+        "title": "Why This Platform",
+        "bullets": [
+          "Single stack: LMS + Compliance + Payments + Partner Gateway",
+          "Faster intake: funding eligibility scaffolds and reporting hooks",
+          "Licensable architecture simplifies replication & scale"
+        ]
+      },
+      {
+        "id": "programs",
+        "title": "Programs",
+        "programRef": true,
+        "footerNote": "Additional tracks launching quarterly."
+      },
+      {
+        "id": "licensing",
+        "title": "Licensing & Deployment",
+        "tiers": [
+          {"name":"Codebase License","summary":"One-off deployment rights","ideal":"Internal innovation teams"},
+          {"name":"Annual SaaS","summary":"Hosted multi-tenant access","ideal":"Training & workforce agencies"},
+          {"name":"Whitelabel","summary":"Custom branding + domain mapping","ideal":"Enterprise / state initiatives"},
+          {"name":"Enterprise Source + Support","summary":"Priority roadmap + SLAs","ideal":"Large scale workforce systems"}
+        ]
+      }
+    ]
+  },
+  "compliance": {
+    "title": "Workforce Compliance & Funding Enablement",
+    "intro": "Structured to support WIOA, PIRL, and state-level reporting readiness with progressive enhancement phases.",
+    "pillars": [
+      {"name":"Eligibility & Intake","detail":"Structured data capture aligned to funding pathways"},
+      {"name":"Evidence & Audit Trail","detail":"Planned evidence item registry & export packs"},
+      {"name":"Reporting Hooks","detail":"PIRL schema mapping stubs with roadmap to automation"}
+    ]
+  },
+  "licensing": {
+    "title": "Licensing & Ecosystem Access",
+    "narrative": "Choose the model that aligns with your deployment, compliance oversight, and customization needs.",
+    "tiersRef": true,
+    "contactCta": "Request Licensing Package"
+  }
+}

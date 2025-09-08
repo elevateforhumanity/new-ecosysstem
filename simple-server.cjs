@@ -8,52 +8,16 @@ const pino = require('pino');
 const pinoHttp = require('pino-http');
 const crypto = require('crypto');
 
-// Services will be loaded dynamically due to ES module compatibility
-let complianceService, lmsService, paymentsService;
-let servicesInitialized = false;
+// Modular services (direct require approach)
+const complianceService = require('./services/compliance');
+const lmsService = require('./services/lms');
+const paymentsService = require('./services/payments');
+const { getVersionInfo } = require('./services/version');
+const marketing = require('./services/marketing');
+const leadsStore = [];
 
-async function initServices() {
-  if (servicesInitialized) return true;
-  try {
-    complianceService = await import('./services/compliance.js');
-    lmsService = await import('./services/lms.js');
-    paymentsService = await import('./services/payments.js');
-    servicesInitialized = true;
-    return true;
-  } catch (error) {
-    console.error('Failed to load services:', error);
-    return false;
-  }
-}
-
-// Initialize services immediately
-const servicesPromise = initServices();
-
-// Helper to ensure services are available
-async function ensureServices(req, res, next) {
-  try {
-    await servicesPromise; // Wait for services to be loaded
-    if (!complianceService || !lmsService || !paymentsService) {
-      return res.status(503).json({
-        error: { type: 'service_unavailable', message: 'Services not initialized' },
-        requestId: req.id,
-        timestamp: new Date().toISOString()
-      });
-    }
-    next();
-  } catch (error) {
-    return res.status(503).json({
-      error: { type: 'service_unavailable', message: 'Service initialization failed' },
-      requestId: req.id,
-      timestamp: new Date().toISOString()
-    });
-  }
-}
-
-// Modular services
-// const complianceService = require('./services/compliance');
-// const lmsService = require('./services/lms');
-// const paymentsService = require('./services/payments');
+// Simple pass-through middleware retained for future lazy init extension
+function ensureServices(_req, _res, next) { return next(); }
 
 // Single consolidated simple server used by tests & legacy deployment
 const app = express();
@@ -208,6 +172,10 @@ app.post('/api/stripe/create-payment-intent', ensureServices, async (req, res, n
       throw err;
     }
     const result = await paymentsService.createPaymentIntent({ amount, programId, userId, requestId: req.id });
+    if (result.simulated && !process.env.STRIPE_SECRET_KEY) {
+      // Provide explicit hint for production readiness
+      result.notice = 'Stripe not configured - running in simulated mode';
+    }
     res.json(result);
   } catch (e) { next(e); }
 });
@@ -268,24 +236,75 @@ app.get('/api/integration-guide', (req, res) => {
   });
 });
 
+// --------------- Marketing & Licensing Content ---------------
+app.get('/api/marketing/banners', (req, res) => {
+  res.json({ banners: marketing.getBanners() });
+});
+
+app.get('/api/marketing/page/:key', (req, res, next) => {
+  const page = marketing.getPage(req.params.key);
+  if (!page) return next(Object.assign(new Error('Page not found'), { statusCode: 404, type: 'not_found' }));
+  res.json(page);
+});
+
+app.post('/api/marketing/lead', (req, res) => {
+  const { email, name, intent } = req.body || {};
+  if (!email) return res.status(400).json({ error: { type: 'validation', message: 'email required' } });
+  const entry = { id: crypto.randomUUID(), email, name: name || null, intent: intent || 'general', ts: new Date().toISOString() };
+  leadsStore.push(entry);
+  res.json({ stored: true, entry, disclaimer: 'Placeholder storage only - configure real CRM integration.' });
+});
+
 // --------------- Health Aggregator ---------------
-app.get('/api/healthz', ensureServices, (req, res) => {
+app.get('/api/healthz', async (req, res) => {
+  const started = Date.now();
   const uptimeSeconds = Math.round(process.uptime());
   const summary = complianceService.getSummary();
   const validations = complianceService.getValidations();
-  const dbStatus = 'degraded'; // placeholder until prisma integration hook
+  let dbStatus = 'offline';
+  let courseCount = 0;
+  let lessonCount = 0;
+  let dbLatencyMs = null;
+  try {
+    const prismaMaybe = require('./services/prisma');
+    if (prismaMaybe && prismaMaybe.getPrisma) {
+      const prisma = await prismaMaybe.getPrisma();
+      if (prisma) {
+        const dbStart = Date.now();
+        try {
+          courseCount = await prisma.lmsCourse.count();
+          lessonCount = await prisma.lmsLesson.count();
+          dbLatencyMs = Date.now() - dbStart;
+          dbStatus = 'ok';
+        } catch (e) {
+          dbStatus = 'degraded';
+        }
+      }
+    }
+  } catch { /* ignore */ }
+  const latencyMs = Date.now() - started;
+  const ver = getVersionInfo();
   res.json({
     status: 'ok',
     timestamp: new Date().toISOString(),
     uptimeSeconds,
+    latencyMs,
+    version: ver.version,
+    gitSha: ver.gitSha,
     services: {
       api: 'ok',
       compliance: summary.status,
       lms: 'ok',
       db: dbStatus
     },
+    db: { courseCount, lessonCount, latencyMs: dbLatencyMs },
     checks: Object.keys(validations.validations)
   });
+});
+
+// Explicit version endpoint (lightweight, cacheable)
+app.get('/api/version', (req, res) => {
+  res.json(getVersionInfo());
 });
 
 // --------------- Error Handling ---------------
@@ -312,20 +331,10 @@ app.use((err, req, res, _next) => {
 });
 
 // ------------- Export / Start Logic -------------
-async function startServer() {
-  // Services are already being initialized
-  await servicesPromise;
-  
-  if (require.main === module) {
-    app.listen(PORT, '0.0.0.0', () => {
-      logger.info({ port: PORT }, 'EFH server started');
-    });
-  }
-}
-
-// Start server if this is the main module
 if (require.main === module) {
-  startServer();
+  app.listen(PORT, '0.0.0.0', () => {
+    logger.info({ port: PORT }, 'EFH server started');
+  });
 }
 
 module.exports = app;

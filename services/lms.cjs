@@ -1,5 +1,5 @@
 // LMS service with in-memory fallback if database unavailable
-import { getPrisma } from './prisma.js';
+const { getPrisma } = require('./prisma.cjs');
 
 const courses = [
   {
@@ -110,4 +110,4 @@ function getProgressSummary(userId = 'demo-user') {
   };
 }
 
-export { listCourses, getCourse, listLessons, recordProgress, getProgressSummary };
+module.exports = { listCourses, getCourse, listLessons, recordProgress, getProgressSummary };

@@ -83,4 +83,4 @@ function getValidations() {
   };
 }
 
-export { getSummary, getValidations, checksRegistry };
+module.exports = { getSummary, getValidations, checksRegistry };

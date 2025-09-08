@@ -34,4 +34,4 @@ function listStripeConfiguredPrices() {
     .reduce((acc, k) => { acc[k] = process.env[k]; return acc; }, {});
 }
 
-export { createPaymentIntent, listStripeConfiguredPrices };
+module.exports = { createPaymentIntent, listStripeConfiguredPrices };

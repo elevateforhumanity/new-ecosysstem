@@ -1,6 +1,6 @@
 let prisma = null;
 
-export async function getPrisma() {
+async function getPrisma() {
   if (prisma) return prisma;
   try {
     const { PrismaClient } = await import('@prisma/client');
@@ -11,3 +11,5 @@ export async function getPrisma() {
     return null; // fallback to in-memory if unavailable
   }
 }
+
+module.exports = { getPrisma };

@@ -8,9 +8,9 @@ const pino = require('pino');
 const pinoHttp = require('pino-http');
 const crypto = require('crypto');
 // Modular services
-const complianceService = require('./services/compliance');
-const lmsService = require('./services/lms');
-const paymentsService = require('./services/payments');
+const complianceService = require('./services/compliance.cjs');
+const lmsService = require('./services/lms.cjs');
+const paymentsService = require('./services/payments.cjs');
 
 // Single consolidated simple server used by tests & legacy deployment
 const app = express();
@@ -159,14 +159,21 @@ app.get('/api/stripe/config', (req, res) => {
 app.post('/api/stripe/create-payment-intent', async (req, res, next) => {
   try {
     const { amount = 1000, program_id: programId, user_id: userId } = req.body || {};
-    if (!amount || !programId) {
-      const err = new Error('Missing amount or program_id');
-      err.statusCode = 400; err.type = 'validation';
-      throw err;
-    }
-    const result = await paymentsService.createPaymentIntent({ amount, programId, userId, requestId: req.id });
+    const result = await paymentsService.createPaymentIntent({ 
+      amount, 
+      programId, 
+      userId, 
+      requestId: req.id 
+    });
     res.json(result);
-  } catch (e) { next(e); }
+  } catch (e) { 
+    next(e); 
+  }
+});
+
+// Payment service status
+app.get('/api/stripe/status', (req, res) => {
+  res.json(paymentsService.getPaymentStatus());
 });
 
 // Widgets: hero content
@@ -231,42 +238,79 @@ app.get('/api/healthz', async (req, res) => {
   const uptimeSeconds = Math.round(process.uptime());
   const summary = complianceService.getSummary();
   const validations = complianceService.getValidations();
+  
   let dbStatus = 'offline';
   let courseCount = 0;
   let lessonCount = 0;
   let dbLatencyMs = null;
+  let dbError = null;
+  
   try {
-    const prismaMaybe = require('./services/prisma');
+    const prismaMaybe = require('./services/prisma.cjs');
     if (prismaMaybe && prismaMaybe.getPrisma) {
       const prisma = await prismaMaybe.getPrisma();
       if (prisma) {
         const dbStart = Date.now();
-        // lightweight metadata queries with timeout safeguard
         try {
+          // Test database connection with lightweight queries
           courseCount = await prisma.lmsCourse.count();
           lessonCount = await prisma.lmsLesson.count();
           dbLatencyMs = Date.now() - dbStart;
-          dbStatus = 'ok';
+          dbStatus = dbLatencyMs < 1000 ? 'ok' : 'slow';
         } catch (e) {
           dbStatus = 'degraded';
+          dbError = e.message.substring(0, 100);
         }
       }
     }
-  } catch { /* ignore */ }
+  } catch (e) {
+    dbStatus = 'unavailable';
+    dbError = 'Prisma not configured';
+  }
+  
   const latencyMs = Date.now() - started;
+  
+  // Determine overall status based on service health
+  let overallStatus = 'ok';
+  if (dbStatus === 'offline' || dbStatus === 'degraded') {
+    overallStatus = 'degraded';
+  }
+  if (summary.status !== 'compliant') {
+    overallStatus = 'warning';
+  }
+  
   res.json({
-    status: 'ok',
+    status: overallStatus,
     timestamp: new Date().toISOString(),
     uptimeSeconds,
     latencyMs,
+    version: process.env.npm_package_version || '1.0.0',
+    environment: process.env.NODE_ENV || 'development',
     services: {
       api: 'ok',
       compliance: summary.status,
       lms: 'ok',
+      payments: paymentsService ? 'ok' : 'degraded',
       db: dbStatus
     },
-    db: { courseCount, lessonCount, latencyMs: dbLatencyMs },
-    checks: Object.keys(validations.validations)
+    database: { 
+      status: dbStatus,
+      courseCount, 
+      lessonCount, 
+      latencyMs: dbLatencyMs,
+      error: dbError
+    },
+    compliance: {
+      status: summary.status,
+      checkedItems: summary.totalChecks || 0,
+      passedItems: summary.passedChecks || 0
+    },
+    checks: Object.keys(validations.validations),
+    memory: {
+      used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
+      total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024),
+      external: Math.round(process.memoryUsage().external / 1024 / 1024)
+    }
   });
 });
 

@@ -1,5 +1,5 @@
 // LMS service with in-memory fallback if database unavailable
-const { getPrisma } = require('./prisma');
+const { getPrisma } = require('./prisma.cjs');
 
 const courses = [
   {

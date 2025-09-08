@@ -1,5 +1,6 @@
-const request = require('supertest');
-const app = require('../simple-server.cjs');
+import request from 'supertest';
+import app from '../simple-server.cjs';
+import { describe, test, expect } from 'vitest';
 
 describe('Metrics Endpoint', () => {
   test('GET /api/metrics returns expected structure', async () => {

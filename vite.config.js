@@ -25,5 +25,7 @@ export default defineConfig({
     react(),
     // run with: npm run analyze (generates stats.html)
     visualizer({ filename: "dist/stats.html", gzipSize: true, brotliSize: true, template: "treemap" })
-  ]
+  ],
+  base: '/',
+  build: { outDir: 'dist' }
 });

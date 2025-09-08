@@ -6,4 +6,8 @@ describe("ApiError", () => {
     const e = new ApiError(404, "Not found");
     expect(e.status).toBe(404);
   });
+
+  it("throws on invalid status", () => {
+    expect(() => new ApiError(-1, "bad")).toThrow();
+  });
 });

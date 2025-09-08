@@ -61,6 +61,10 @@ function Navbar() {
             <Link to="/lms" className="hover:text-indigo-600">LMS</Link>
             <Link to="/connect" className="hover:text-indigo-600">Connect</Link>
             <Link to="/pay" className="hover:text-indigo-600">Pay</Link>
+            <Link to="/pricing" className="hover:text-indigo-600">Pricing</Link>
+            <Link to="/catalog" className="hover:text-indigo-600">Catalog</Link>
+            <Link to="/affiliate" className="hover:text-indigo-600">Affiliate</Link>
+            <Link to="/directory" className="hover:text-indigo-600">Directory</Link>
             <Link to="/compliance" className="hover:text-indigo-600">Compliance</Link>
             <Link to="/debug" className="text-slate-500 hover:text-indigo-600">Debug</Link>
           </nav>
@@ -74,12 +78,53 @@ function Navbar() {
   );
 }
 
+// Reusable copy-to-clipboard button
+function CopyLink({ value, label }: { value: string; label?: string }) {
+  const [copied, setCopied] = useState(false);
+  function copy() {
+    if (!value) return;
+    navigator.clipboard.writeText(value).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    }).catch(()=>{});
+  }
+  return (
+    <button onClick={copy} title="Copy" className="ml-2 inline-flex items-center gap-1 text-xs px-2 py-1 rounded border border-slate-300 hover:bg-slate-50">
+      {copied ? 'Copied' : (label || 'Copy')}
+    </button>
+  );
+}
+
 function Shell({ children }: { children: React.ReactNode }) {
+  const [flash, setFlash] = useState<any[]>([]);
+  useEffect(()=>{ fetch('/api/offers/flash').then(r=>r.json()).then(d=> setFlash(d.offers||[])).catch(()=>{}); },[]);
   return (
     <div className="min-h-screen bg-white text-slate-900 flex flex-col">
       <div className="w-full bg-indigo-50 text-indigo-700 text-sm py-2 px-4 text-center">
         Elevate for Humanity · Workforce Development & Training Institute
       </div>
+      {flash.length > 0 && (
+        <div className="w-full bg-amber-50 border-b border-amber-200 text-amber-800 text-xs py-2 px-4 flex flex-col gap-1">
+          {flash.map(o => {
+            const pct = o.original && o.price ? Math.round(100 - (o.price / o.original * 100)) : null;
+            function claim() {
+              fetch(`/api/offers/flash/${o.id}/claim`, { method: 'POST'}).then(r=>r.json()).then(d=>{
+                setFlash(flash.map(f=> f.id===o.id ? { ...f, remaining: d.offer?.remaining ?? f.remaining } : f));
+              }).catch(()=>{});
+            }
+            return (
+              <div key={o.id} className="flex flex-wrap items-center gap-2">
+                <span className="font-semibold">{o.title}</span>
+                {pct !== null && <span className="text-amber-600">({pct}% off)</span>}
+                <span className="text-amber-700">${o.price.toLocaleString()}{o.original && o.original>o.price && <span className="line-through ml-1 opacity-60">${o.original.toLocaleString()}</span>}</span>
+                {o.remaining != null && <span className="text-amber-600">{o.remaining} left</span>}
+                {o.remaining > 0 && <button onClick={claim} className="text-xs px-2 py-0.5 rounded bg-amber-600 text-white hover:bg-amber-700">Claim</button>}
+                <CopyLink value={`${window.location.origin}/pricing#${o.id}`} label="Share" />
+              </div>
+            );
+          })}
+        </div>
+      )}
       <Navbar />
       <main className="flex-grow">{children}</main>
       <footer className="border-t border-slate-200 py-10 mt-10">
@@ -96,6 +141,7 @@ function Shell({ children }: { children: React.ReactNode }) {
             <ul className="mt-2 space-y-2">
               <li><Link to="/apply" className="hover:text-indigo-600">Apply</Link></li>
               <li><Link to="/programs" className="hover:text-indigo-600">Programs</Link></li>
+              <li><Link to="/pricing" className="hover:text-indigo-600">Pricing</Link></li>
               <li><Link to="/lms" className="hover:text-indigo-600">LMS</Link></li>
               <li><Link to="/connect" className="hover:text-indigo-600">Contact</Link></li>
               <li><Link to="/debug" className="text-slate-500 hover:text-indigo-600">Debug</Link></li>
@@ -305,6 +351,270 @@ const Connect = () => <Page title="Connect">Reach out through our contact form, 
 const Pay = () => <Page title="Pay">Secure payment links (Stripe) and invoices for tuition and services.</Page>;
 const Compliance = () => <Page title="Compliance">Access policies, DOL/DWD documentation, and reporting portals.</Page>;
 const Apply = () => <Page title="Apply">Submit your student application, upload documents, and choose funding options.</Page>;
+// Catalog page
+function Catalog() {
+  const [items, setItems] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState<string|null>(null);
+  const [lastLink, setLastLink] = useState<any|null>(null);
+  useEffect(() => {
+    fetch('/api/catalog').then(r=>r.json()).then(d=>{ setItems(d.items||[]); setLoading(false); }).catch(e=>{ setErr(String(e)); setLoading(false); });
+  }, []);
+  function buy(sku: string) {
+    fetch(`/api/checkout/paylink/${encodeURIComponent(sku)}`).then(r=>r.json()).then(setLastLink).catch(()=>{});
+  }
+  return (
+    <Page title="Catalog">
+      <p className="text-slate-600">Sellable codebase licenses, SaaS tiers, whitelabel services, and directory/affiliate products.</p>
+      {loading && <p className="mt-4 text-sm text-slate-500">Loading…</p>}
+      {err && <p className="mt-4 text-sm text-red-600">{err}</p>}
+      <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {items.map(it => {
+          const priceParts: string[] = [];
+          const bill = it.billing || {};
+          if (bill.model === 'one_time' && bill.price) priceParts.push(`$${bill.price.toLocaleString()} one-time`);
+          if (bill.model === 'subscription' && bill.price && bill.interval) priceParts.push(`$${bill.price.toLocaleString()}/${bill.interval}`);
+          const shareLink = `${window.location.origin}/catalog#${it.sku}`;
+          return (
+          <div key={it.sku} className="rounded-xl border border-slate-200 p-5 flex flex-col">
+            <div className="flex items-start justify-between gap-2">
+              <h3 className="text-lg font-semibold leading-snug">{it.name}</h3>
+              <CopyLink value={shareLink} label="Link" />
+            </div>
+            <p className="mt-2 text-sm text-slate-600 flex-grow">{it.description}</p>
+            <div className="mt-3 text-xs text-slate-500">Category: {it.category}</div>
+            {priceParts.length > 0 && <div className="mt-2 text-sm font-medium space-y-1">{priceParts.map(p=> <div key={p}>{p}</div>)}</div>}
+            <div className="mt-4 flex gap-2">
+              <button onClick={()=>buy(it.sku)} className="inline-flex flex-1 items-center justify-center rounded-lg bg-indigo-600 text-white px-4 py-2 text-sm hover:bg-indigo-700">Buy Now</button>
+              <button className="inline-flex items-center justify-center rounded-lg border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50">Details</button>
+            </div>
+            <div className="mt-2 text-[10px] tracking-wide text-slate-400 select-all">SKU: {it.sku} <CopyLink value={it.sku} label="SKU" /></div>
+          </div>
+        );})}
+      </div>
+      {lastLink && (
+        <div className="mt-10 rounded-2xl border border-slate-200 p-6 bg-slate-50">
+          <h3 className="font-semibold text-sm">Checkout Link</h3>
+          <p className="mt-2 text-xs text-slate-600">{lastLink.name}: {lastLink.description}</p>
+          <div className="mt-2 text-xs font-mono break-all">{lastLink.checkoutUrl}</div>
+          <div className="mt-2 text-[10px] text-slate-500">Mode: {lastLink.mode} · Simulated: {String(lastLink.simulated)} · Stripe Price Var: {lastLink.stripe.priceIdEnv}</div>
+          <CopyLink value={lastLink.checkoutUrl} label="Copy" />
+        </div>
+      )}
+    </Page>
+  );
+}
+
+// Affiliate page
+function Affiliate() {
+  const [program, setProgram] = useState<any>(null);
+  const [code, setCode] = useState<string>('');
+  const [stats, setStats] = useState<any|null>(null);
+  const [form, setForm] = useState({ email: '', name: '', website: '' });
+  const [submitted, setSubmitted] = useState<any|null>(null);
+  useEffect(()=>{ fetch('/api/affiliate/program').then(r=>r.json()).then(setProgram).catch(()=>{}); },[]);
+  function apply(e: React.FormEvent) {
+    e.preventDefault();
+    fetch('/api/affiliate/apply',{ method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(form)})
+      .then(r=>r.json()).then(d=>{ setSubmitted(d.affiliate); setCode(d.affiliate.code); }).catch(()=>{});
+  }
+  function loadStats() {
+    if (!code) return;
+    fetch(`/api/affiliate/stats/${code}`).then(r=>r.json()).then(setStats).catch(()=>{});
+  }
+  return (
+    <Page title="Affiliate Program">
+      <p className="text-slate-600">Earn commission promoting EFH products and services.</p>
+      {program && (
+        <div className="mt-4 rounded-lg border border-slate-200 p-4 text-sm">
+          <div className="font-semibold">{program.program.name}</div>
+          <div className="mt-1 text-slate-600">Commission: {program.program.commission}</div>
+          <div className="mt-1 text-slate-600">Payout: {program.program.payoutSchedule} · Minimum ${program.program.payoutMinimum}</div>
+          <div className="mt-1 text-slate-500 text-xs">Tracking: {program.program.tracking}</div>
+        </div>
+      )}
+      <form onSubmit={apply} className="mt-6 grid gap-4 max-w-md">
+        <input required placeholder="Email" type="email" className="border rounded-lg px-3 py-2 text-sm" value={form.email} onChange={e=>setForm(f=>({...f,email:e.target.value}))} />
+        <input placeholder="Name" className="border rounded-lg px-3 py-2 text-sm" value={form.name} onChange={e=>setForm(f=>({...f,name:e.target.value}))} />
+        <input placeholder="Website" className="border rounded-lg px-3 py-2 text-sm" value={form.website} onChange={e=>setForm(f=>({...f,website:e.target.value}))} />
+        <button className="inline-flex items-center justify-center rounded-lg bg-indigo-600 text-white px-4 py-2 text-sm hover:bg-indigo-700">Apply</button>
+      </form>
+      {submitted && (
+        <div className="mt-6 text-sm rounded-lg border border-green-200 bg-green-50 p-4">
+          <div className="font-semibold">Application Received</div>
+          <div className="mt-1 flex items-center gap-2">Your code: <code className="font-mono">{submitted.code}</code> <CopyLink value={submitted.code} label="Code" /></div>
+          <div className="mt-1 flex items-center gap-2 text-xs text-slate-600">Share: {window.location.origin}/a/{submitted.code} <CopyLink value={`${window.location.origin}/a/${submitted.code}`} label="Link" /></div>
+        </div>
+      )}
+      <div className="mt-8 max-w-md">
+        <h3 className="font-semibold text-sm">Check Stats</h3>
+        <div className="mt-2 flex gap-2">
+          <input placeholder="Affiliate Code" className="flex-grow border rounded-lg px-3 py-2 text-sm" value={code} onChange={e=>setCode(e.target.value)} />
+          <button type="button" onClick={loadStats} className="inline-flex items-center rounded-lg bg-slate-800 text-white px-4 py-2 text-sm hover:bg-slate-900">Load</button>
+        </div>
+        {stats && (
+          <ul className="mt-3 text-xs space-y-1">
+            <li>Clicks: {stats.clicks}</li>
+            <li>Referrals: {stats.referrals}</li>
+            <li>Earnings: ${stats.earnings.toFixed(2)}</li>
+          </ul>
+        )}
+      </div>
+    </Page>
+  );
+}
+
+// Directory page
+function Directory() {
+  const [listings, setListings] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(()=>{ fetch('/api/directory/listings').then(r=>r.json()).then(d=>{ setListings(d.listings||[]); setLoading(false); }).catch(()=>setLoading(false)); },[]);
+  return (
+    <Page title="Directory">
+      <p className="text-slate-600">Approved partner & provider listings.</p>
+      {loading && <p className="mt-4 text-sm text-slate-500">Loading…</p>}
+      <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {listings.map(l => {
+          const link = `${window.location.origin}/api/directory/listing/${l.id}`;
+          return (
+          <div key={l.id} className="rounded-xl border border-slate-200 p-5">
+            <div className="flex items-start justify-between gap-2">
+              <h3 className="font-semibold">{l.name}</h3>
+              <CopyLink value={link} label="API" />
+            </div>
+            <p className="mt-1 text-sm text-slate-600">{l.description || 'No description'}</p>
+            <div className="mt-2 text-xs text-slate-500">Category: {l.category} · Plan: {l.plan}</div>
+            {l.url && <a href={l.url} className="mt-3 inline-block text-xs text-indigo-600 hover:underline" target="_blank" rel="noreferrer">Visit Site →</a>}
+          </div>
+        );})}
+        {!loading && listings.length === 0 && <p className="text-sm text-slate-500">No approved listings yet.</p>}
+      </div>
+    </Page>
+  );
+}
+
+// Legal documents
+function Legal() {
+  const [docs, setDocs] = useState<any[]>([]);
+  const [content, setContent] = useState<string>('');
+  useEffect(()=>{ fetch('/api/legal').then(r=>r.json()).then(d=> setDocs(d.documents||[])); },[]);
+  function load(name: string) {
+    fetch(`/api/legal/doc/${name}`).then(r=>r.text()).then(setContent).catch(()=>setContent('Error loading document'));
+  }
+  return (
+    <Page title="Legal & Licensing">
+      <div className="grid md:grid-cols-3 gap-8">
+        <div>
+          <h3 className="font-semibold text-sm mb-2">Documents</h3>
+          <ul className="space-y-2 text-sm">
+            {docs.map(d => {
+              const docLink = `${window.location.origin}${d.path}`;
+              return (
+                <li key={d.name} className="flex items-center gap-2">
+                  <button onClick={()=>load(d.name)} className="text-indigo-600 hover:underline text-left flex-grow">{d.name}</button>
+                  <CopyLink value={docLink} label="Link" />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div className="md:col-span-2">
+          {content ? <pre className="whitespace-pre-wrap text-xs bg-slate-50 p-4 rounded-xl border border-slate-200 max-h-[60vh] overflow-auto">{content}</pre> : <p className="text-sm text-slate-500">Select a document to view its contents.</p>}
+        </div>
+      </div>
+    </Page>
+  );
+}
+
+// Workbooks list
+function Workbooks() {
+  const [list, setList] = useState<any[]>([]);
+  useEffect(()=>{ fetch('/api/workbooks').then(r=>r.json()).then(d=> setList(d.workbooks||[])); },[]);
+  return (
+    <Page title="Workbooks">
+      <p className="text-slate-600">Download training and implementation workbooks (Markdown & future PDF).</p>
+      <ul className="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {list.map(w => {
+          const mdLink = `${window.location.origin}${w.markdownPath}`;
+          const pdfLink = `${window.location.origin}${w.pdfPath}`;
+          return (
+          <li key={w.id} className="rounded-xl border border-slate-200 p-5 flex flex-col">
+            <div className="flex items-start justify-between gap-2">
+              <h3 className="font-semibold">{w.name}</h3>
+              <CopyLink value={mdLink} label="MD" />
+            </div>
+            <div className="mt-2 flex gap-4 text-xs">
+              <a href={w.markdownPath} className="text-indigo-600 hover:underline">Markdown</a>
+              <a href={w.pdfPath} className="text-indigo-600 hover:underline">PDF (stub)</a>
+              <CopyLink value={pdfLink} label="PDF" />
+            </div>
+          </li>
+        );})}
+        {list.length===0 && <p className="text-sm text-slate-500">No workbooks available.</p>}
+      </ul>
+    </Page>
+  );
+}
+interface PricingPlan {
+  code: string;
+  name: string;
+  description?: string;
+  oneTime?: number | null;
+  priceMonthly?: number | null;
+  priceAnnual?: number | null;
+  recommended?: boolean;
+  stripe?: { monthly?: string | null; annual?: string | null };
+}
+function Pricing() {
+  const [plans, setPlans] = React.useState<PricingPlan[]>([]);
+  const [loading, setLoading] = React.useState(true);
+  const [err, setErr] = React.useState<string | null>(null);
+  React.useEffect(() => {
+    fetch('/api/pricing')
+      .then(r => r.json())
+      .then(d => { setPlans(d.plans || []); setLoading(false); })
+      .catch(e => { setErr(String(e)); setLoading(false); });
+  }, []);
+  return (
+    <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+      <h1 className="text-3xl font-bold tracking-tight">Pricing</h1>
+      <p className="mt-4 text-lg text-slate-600 max-w-3xl">Transparent tiers for codebase licensing, hosted delivery, and enterprise support.</p>
+      {loading && <p className="mt-6 text-sm text-slate-500">Loading plans…</p>}
+      {err && <p className="mt-6 text-sm text-red-600">{err}</p>}
+      <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {plans.map((p: PricingPlan) => (
+          <div key={p.code} className="relative rounded-xl border border-slate-200 p-6 flex flex-col">
+            {p.recommended && <span className="absolute -top-3 left-4 inline-flex items-center px-2 py-1 rounded-full bg-indigo-600 text-white text-[10px] font-medium shadow">RECOMMENDED</span>}
+            <h3 className="text-xl font-semibold">{p.name}</h3>
+            <p className="mt-2 text-sm text-slate-600 flex-grow">{p.description}</p>
+            <div className="mt-4 space-y-2 text-sm">
+              {p.oneTime ? (
+                <div><span className="text-slate-500">One-time:</span> <span className="font-medium">${p.oneTime.toLocaleString()}</span></div>
+              ) : null}
+              {p.priceMonthly ? (
+                <div><span className="text-slate-500">Monthly:</span> <span className="font-medium">${p.priceMonthly.toLocaleString()}</span></div>
+              ) : null}
+              {p.priceAnnual ? (
+                <div><span className="text-slate-500">Annual:</span> <span className="font-medium">${p.priceAnnual.toLocaleString()}</span></div>
+              ) : null}
+            </div>
+            <button className="mt-5 inline-flex items-center justify-center rounded-lg bg-indigo-600 text-white px-4 py-2 text-sm font-medium hover:bg-indigo-700">
+              {p.oneTime ? 'License Now' : 'Get Started'}
+            </button>
+            {(p.stripe?.monthly || p.stripe?.annual) && (
+              <p className="mt-3 text-[10px] uppercase tracking-wide text-slate-400">Stripe IDs: {p.stripe.monthly || '—'} {p.stripe.annual ? ' / ' + p.stripe.annual : ''}</p>
+            )}
+          </div>
+        ))}
+      </div>
+      <div className="mt-12 rounded-2xl bg-slate-50 p-8">
+        <h2 className="text-xl font-semibold">Need a custom deployment?</h2>
+        <p className="mt-2 text-sm text-slate-600 max-w-2xl">Enterprise rollouts with compliance advisory, roadmap prioritization, and multi-region scaling are available under bespoke agreements.</p>
+        <Link to="/connect" className="mt-4 inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700">Request Enterprise Package</Link>
+      </div>
+    </section>
+  );
+}
 function Partners() {
   return (
     <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
@@ -477,7 +787,7 @@ const NotFound = () => (
 export default function App() {
   return (
     <BrowserRouter>
-      <Shell>
+  <Shell>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/hub" element={<Hub />} />
@@ -486,6 +796,12 @@ export default function App() {
           <Route path="/connect" element={<Connect />} />
           <Route path="/pay" element={<Pay />} />
           <Route path="/compliance" element={<Compliance />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/catalog" element={<Catalog />} />
+          <Route path="/affiliate" element={<Affiliate />} />
+          <Route path="/directory" element={<Directory />} />
+          <Route path="/legal" element={<Legal />} />
+          <Route path="/workbooks" element={<Workbooks />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/partners" element={<Partners />} />
           <Route path="/debug" element={<Debug />} />
@@ -496,3 +812,6 @@ export default function App() {
     </BrowserRouter>
   );
 }
+
+// Floating Quick Buy widget (appended outside export if needed later)
+// Could be integrated with portal/root; left here for future mount.

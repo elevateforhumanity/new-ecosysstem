@@ -9,7 +9,9 @@ export const EnvSchema = z.object({
   SUPABASE_URL: z.string().url().optional(),
   SUPABASE_ANON_KEY: z.string().optional(),
   SUPABASE_SERVICE_KEY: z.string().optional(),
-  LOG_LEVEL: z.string().optional()
+  LOG_LEVEL: z.string().optional(),
+  // Frontend API base (optional; can be relative or absolute). Kept loose intentionally.
+  VITE_API_BASE_URL: z.string().optional()
 });
 
 export type AppEnv = z.infer<typeof EnvSchema>;

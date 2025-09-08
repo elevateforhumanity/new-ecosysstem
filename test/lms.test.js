@@ -1,7 +1,11 @@
+
 import request from 'supertest';
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-const app = require('../simple-server.cjs');
+import { describe, test, expect, beforeAll } from 'vitest';
+let app;
+beforeAll(async () => {
+  process.env.API_KEYS = 'test-key';
+  app = (await import('../simple-server.cjs')).default || (await import('../simple-server.cjs'));
+});
 
 describe('LMS Endpoints', () => {
   test('List courses', async () => {

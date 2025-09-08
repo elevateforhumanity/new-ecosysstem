@@ -1,40 +1,29 @@
 const fs = require('fs');
 const path = require('path');
-
-function loadJson(file) {
+// ...existing code...
+let pagesCache = null;
+function loadPages() {
+  if (pagesCache) return pagesCache;
+  const file = path.join(process.cwd(), 'content', 'pages.json');
   try {
-    const p = path.join(process.cwd(), 'content', file);
-    if (!fs.existsSync(p)) return null;
-    return JSON.parse(fs.readFileSync(p, 'utf8'));
-  } catch { return null; }
+    if (fs.existsSync(file)) {
+      pagesCache = JSON.parse(fs.readFileSync(file, 'utf8'));
+    } else pagesCache = { banners: [], pricing: [] };
+  } catch { pagesCache = { banners: [], pricing: [] }; }
+  return pagesCache;
 }
-
-let cache = { banners: null, pages: null, ts: 0 };
-function getContent() {
-  const now = Date.now();
-  if (!cache.banners || (now - cache.ts) > 60_000) {
-    cache = {
-      banners: loadJson('banners.json') || [],
-      pages: loadJson('pages.json') || {},
-      ts: now
-    };
-  }
-  return cache;
-}
-
-function getBanners() { return getContent().banners; }
-function getPage(key) { return getContent().pages[key]; }
+function getBanners() { return loadPages().banners || []; }
+function getPage(key) { const p = loadPages(); return (p.pages && p.pages[key]) || null; }
 function getPricingPlans() {
-  const pages = getContent().pages;
-  const pricing = pages.pricing;
-  if (!pricing || !Array.isArray(pricing.plans)) return [];
-  return pricing.plans.map(p => ({
-    ...p,
-    stripe: {
-      monthly: p.stripePriceMonthlyEnv ? process.env[p.stripePriceMonthlyEnv] || null : null,
-      annual: p.stripePriceAnnualEnv ? process.env[p.stripePriceAnnualEnv] || null : null
-    }
-  }));
+  const p = loadPages();
+  const pricing = Array.isArray(p.pricing) ? p.pricing : [];
+  // Defensive: if pricing is an object (legacy format), attempt to extract values
+  if (!Array.isArray(p.pricing) && p.pricing && typeof p.pricing === 'object') {
+    try {
+      const vals = Object.values(p.pricing);
+      if (Array.isArray(vals)) return vals.map(plan => ({ ...plan }));
+    } catch { /* ignore */ }
+  }
+  return pricing.map(plan => ({ ...plan }));
 }
-
 module.exports = { getBanners, getPage, getPricingPlans };

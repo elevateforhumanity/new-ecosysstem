@@ -6,4 +6,8 @@ describe("logger", () => {
     setLogLevel("error");
     expect(true).toBe(true);
   });
+
+  it("ignores unknown log level", () => {
+    expect(() => setLogLevel("unknown")).not.toThrow();
+  });
 });

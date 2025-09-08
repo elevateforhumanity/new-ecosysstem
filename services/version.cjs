@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-
+// ...existing code...
 let cached = null;
 function getVersionInfo() {
   if (cached) return cached;
@@ -28,5 +28,5 @@ function getVersionInfo() {
   cached = { version: version || '0.0.0', gitSha: gitSha || 'unknown' };
   return cached;
 }
-
+// ...existing code...
 module.exports = { getVersionInfo };

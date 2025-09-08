@@ -1,3 +1,35 @@
+# Deployment
+
+## Docker
+Build image:
+```
+docker build -t efh-app .
+```
+Run container:
+```
+docker run -p 5000:5000 --name efh efh-app
+```
+Health checks:
+- http://localhost:5000/api/healthz
+- http://localhost:5000/api/readiness
+
+Metrics: http://localhost:5000/api/metrics
+
+Autopilot status: http://localhost:5000/api/autopilot/status
+
+Set environment variables as needed (examples):
+```
+PORT=5000
+JWT_SECRET=replace_me
+ADMIN_SECRET=admin_secret_here
+AUTOPILOT_MAX_TASKS=800
+```
+
+## Production Notes
+- Run behind reverse proxy (Nginx / Caddy) for TLS.
+- Persist `autopilot-tasks.json` only if you need history between restarts (mount a volume).
+- For Prisma with SQLite dev -> mount `prisma/dev.db` or migrate to Postgres for concurrency.
+
 # Multi-Site Ecosystem Implementation
 
 This project implements a complete multi-site ecosystem for Elevate for Humanity using Supabase for shared user memory.

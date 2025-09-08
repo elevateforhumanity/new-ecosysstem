@@ -1,0 +1,4099 @@
+[
+  {
+    "type": "metrics_snapshot",
+    "id": "9ef81dbd-369d-4940-9aed-4557ab05c275",
+    "status": "done",
+    "createdAt": "2025-09-08T15:58:28.410Z",
+    "startedAt": "2025-09-08T15:58:29.390Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T15:58:29.399Z",
+      "uptimeSeconds": 3,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 74.41,
+          "heapUsedMB": 12.59
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T15:58:29.401Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "id": "88069b1b-471a-4041-a032-8a3c4df97355",
+    "status": "done",
+    "createdAt": "2025-09-08T15:58:28.410Z",
+    "startedAt": "2025-09-08T15:58:29.602Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T15:58:29.627Z"
+    },
+    "completedAt": "2025-09-08T15:58:29.631Z"
+  },
+  {
+    "type": "run_tests",
+    "id": "a78bb60d-edc6-4a6b-82f0-0eea607ca4db",
+    "status": "done",
+    "createdAt": "2025-09-08T15:58:28.411Z",
+    "startedAt": "2025-09-08T15:58:29.832Z",
+    "log": [
+      "Simulated test run"
+    ],
+    "result": {
+      "simulated": true
+    },
+    "completedAt": "2025-09-08T15:58:29.832Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "id": "261c2f73-1b51-4f54-b694-5166959ff806",
+    "status": "done",
+    "createdAt": "2025-09-08T16:00:38.453Z",
+    "startedAt": "2025-09-08T18:30:38.999Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T18:30:39.007Z",
+      "uptimeSeconds": 9133,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 83.77,
+          "heapUsedMB": 12.22
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T18:30:39.010Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "id": "71b4505d-5cd6-4e88-b1d1-5e4eb1964d7e",
+    "status": "done",
+    "createdAt": "2025-09-08T16:00:44.878Z",
+    "startedAt": "2025-09-08T18:30:39.210Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T18:30:39.213Z",
+      "uptimeSeconds": 9133,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 83.77,
+          "heapUsedMB": 12.37
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T18:30:39.214Z"
+  },
+  {
+    "type": "run_tests",
+    "reason": "user ask trigger",
+    "id": "73c31b25-ac37-45c5-83f1-3676a88cca7c",
+    "status": "done",
+    "createdAt": "2025-09-08T16:04:20.581Z",
+    "startedAt": "2025-09-08T18:30:39.415Z",
+    "log": [
+      "Run exitCode=0",
+      "OK",
+      "      Tests  1 passed (1)\n   Start at  18:30:39\n   Duration  796ms (transform 18ms, setup 9ms, collect 205ms, tests 55ms, environment 0ms, prepare 153ms)\n\n"
+    ],
+    "result": {
+      "exitCode": 0,
+      "success": true
+    },
+    "completedAt": "2025-09-08T18:30:40.614Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "id": "ee0adc0d-d152-467b-981b-70d90b17b9c0",
+    "status": "done",
+    "createdAt": "2025-09-08T17:45:32.767Z",
+    "startedAt": "2025-09-08T18:30:40.814Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T18:30:40.817Z",
+      "uptimeSeconds": 9134,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 83.77,
+          "heapUsedMB": 12.54
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T18:30:40.818Z"
+  },
+  {
+    "type": "run_tests",
+    "reason": "user ask trigger",
+    "id": "9a58750c-bd93-4356-aaed-0116e4b9a270",
+    "status": "done",
+    "createdAt": "2025-09-08T17:45:34.434Z",
+    "startedAt": "2025-09-08T18:30:41.018Z",
+    "log": [
+      "Run exitCode=0",
+      "OK",
+      "      Tests  1 passed (1)\n   Start at  18:30:41\n   Duration  967ms (transform 28ms, setup 14ms, collect 297ms, tests 66ms, environment 0ms, prepare 216ms)\n\n"
+    ],
+    "result": {
+      "exitCode": 0,
+      "success": true
+    },
+    "completedAt": "2025-09-08T18:30:42.378Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "id": "4d45aa99-671a-4f0b-aa33-833feda90a76",
+    "status": "done",
+    "createdAt": "2025-09-08T18:04:33.863Z",
+    "startedAt": "2025-09-08T18:30:42.379Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T18:30:42.382Z",
+      "uptimeSeconds": 9136,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 83.89,
+          "heapUsedMB": 12.68
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T18:30:42.383Z"
+  },
+  {
+    "type": "run_tests",
+    "reason": "user ask trigger",
+    "id": "26c2ab31-7176-4300-81e7-9872dd69e2ef",
+    "status": "done",
+    "createdAt": "2025-09-08T18:04:35.071Z",
+    "startedAt": "2025-09-08T18:30:42.578Z",
+    "log": [
+      "Run exitCode=0",
+      "OK",
+      "      Tests  1 passed (1)\n   Start at  18:30:42\n   Duration  871ms (transform 22ms, setup 12ms, collect 220ms, tests 62ms, environment 0ms, prepare 166ms)\n\n"
+    ],
+    "result": {
+      "exitCode": 0,
+      "success": true
+    },
+    "completedAt": "2025-09-08T18:30:43.877Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "id": "1b5a27fd-5480-44bd-aec3-197e5b8c8993",
+    "status": "done",
+    "createdAt": "2025-09-08T18:26:15.825Z",
+    "startedAt": "2025-09-08T18:30:43.879Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T18:30:43.881Z",
+      "uptimeSeconds": 9137,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 84.02,
+          "heapUsedMB": 12.44
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T18:30:43.882Z"
+  },
+  {
+    "type": "run_tests",
+    "reason": "user ask trigger",
+    "id": "37dd2776-5790-433e-90f3-8be21bf0062e",
+    "status": "done",
+    "createdAt": "2025-09-08T18:26:17.727Z",
+    "startedAt": "2025-09-08T18:30:44.078Z",
+    "log": [
+      "Run exitCode=0",
+      "OK",
+      "      Tests  1 passed (1)\n   Start at  18:30:44\n   Duration  841ms (transform 23ms, setup 10ms, collect 207ms, tests 66ms, environment 0ms, prepare 166ms)\n\n"
+    ],
+    "result": {
+      "exitCode": 0,
+      "success": true
+    },
+    "completedAt": "2025-09-08T18:30:45.422Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "id": "d17147ca-9f59-482b-b4ba-3fa9e8e342a0",
+    "status": "done",
+    "createdAt": "2025-09-08T18:28:08.470Z",
+    "startedAt": "2025-09-08T18:30:45.424Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T18:30:45.429Z",
+      "uptimeSeconds": 9139,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 84.02,
+          "heapUsedMB": 12.57
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T18:30:45.430Z"
+  },
+  {
+    "type": "run_tests",
+    "reason": "user ask trigger",
+    "id": "869c8da5-a25f-432e-a48a-a153c2755bb1",
+    "status": "done",
+    "createdAt": "2025-09-08T18:28:10.341Z",
+    "startedAt": "2025-09-08T18:30:45.622Z",
+    "log": [
+      "Run exitCode=0",
+      "OK",
+      "      Tests  1 passed (1)\n   Start at  18:30:46\n   Duration  837ms (transform 30ms, setup 10ms, collect 208ms, tests 67ms, environment 0ms, prepare 202ms)\n\n"
+    ],
+    "result": {
+      "exitCode": 0,
+      "success": true
+    },
+    "completedAt": "2025-09-08T18:30:46.928Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "id": "a7e93197-5099-403a-8d98-f9964be9295b",
+    "status": "done",
+    "createdAt": "2025-09-08T18:29:22.169Z",
+    "startedAt": "2025-09-08T18:30:46.933Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T18:30:46.937Z",
+      "uptimeSeconds": 9141,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 84.02,
+          "heapUsedMB": 12.7
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T18:30:46.938Z"
+  },
+  {
+    "type": "run_tests",
+    "reason": "user ask trigger",
+    "id": "ea0a871b-8014-4d74-8350-e060cdcd5ca4",
+    "status": "done",
+    "createdAt": "2025-09-08T18:29:24.101Z",
+    "startedAt": "2025-09-08T18:30:47.129Z",
+    "log": [
+      "Run exitCode=0",
+      "OK",
+      "      Tests  1 passed (1)\n   Start at  18:30:47\n   Duration  871ms (transform 18ms, setup 10ms, collect 215ms, tests 59ms, environment 0ms, prepare 207ms)\n\n"
+    ],
+    "result": {
+      "exitCode": 0,
+      "success": true
+    },
+    "completedAt": "2025-09-08T18:30:48.418Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "2554c8da-d50a-45c6-aae2-7e98d0ad5577",
+    "status": "done",
+    "createdAt": "2025-09-08T18:31:36.499Z",
+    "startedAt": "2025-09-08T18:31:38.468Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T18:31:38.471Z"
+    },
+    "completedAt": "2025-09-08T18:31:38.472Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "8b6632f4-fae9-49b8-85c5-43f8f34ba310",
+    "status": "done",
+    "createdAt": "2025-09-08T18:36:36.501Z",
+    "startedAt": "2025-09-08T18:36:38.755Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T18:36:38.758Z",
+      "uptimeSeconds": 9492,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 84.27,
+          "heapUsedMB": 12.69
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T18:36:38.760Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "f02dc534-7761-4537-a347-433893dfc519",
+    "status": "done",
+    "createdAt": "2025-09-08T18:42:36.501Z",
+    "startedAt": "2025-09-08T18:42:36.607Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T18:42:36.611Z",
+      "uptimeSeconds": 9850,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 84.39,
+          "heapUsedMB": 12.92
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T18:42:36.611Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "8b5824ba-f7f6-4033-bb02-9f9b86a012e1",
+    "status": "done",
+    "createdAt": "2025-09-08T18:42:36.502Z",
+    "startedAt": "2025-09-08T18:42:36.811Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T18:42:36.813Z"
+    },
+    "completedAt": "2025-09-08T18:42:36.814Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "f29ea196-f0f5-4e36-9566-0dfd55b7e183",
+    "status": "done",
+    "createdAt": "2025-09-08T18:48:36.501Z",
+    "startedAt": "2025-09-08T18:48:36.936Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T18:48:36.938Z",
+      "uptimeSeconds": 10211,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 84.39,
+          "heapUsedMB": 13.25
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T18:48:36.939Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "c82950cb-6afa-43f0-a8bf-d3d4c351725c",
+    "status": "done",
+    "createdAt": "2025-09-08T18:53:36.502Z",
+    "startedAt": "2025-09-08T18:53:37.204Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T18:53:37.207Z"
+    },
+    "completedAt": "2025-09-08T18:53:37.208Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "eca40dee-eb2f-42cc-bedc-f2e00d2e1db5",
+    "status": "done",
+    "createdAt": "2025-09-08T18:54:36.502Z",
+    "startedAt": "2025-09-08T18:54:37.261Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T18:54:37.264Z",
+      "uptimeSeconds": 10571,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 84.64,
+          "heapUsedMB": 13.03
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T18:54:37.265Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "44e58aa2-101b-456a-90b9-db7634eb6b2d",
+    "status": "done",
+    "createdAt": "2025-09-08T19:00:36.502Z",
+    "startedAt": "2025-09-08T19:00:37.606Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T19:00:37.611Z",
+      "uptimeSeconds": 10931,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 84.64,
+          "heapUsedMB": 13.24
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T19:00:37.612Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "ece62ca3-69b3-419e-a36c-7bf4e0ef5f7e",
+    "status": "done",
+    "createdAt": "2025-09-08T19:04:36.501Z",
+    "startedAt": "2025-09-08T19:04:37.844Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T19:04:37.847Z"
+    },
+    "completedAt": "2025-09-08T19:04:37.848Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "9ea9d02f-76c3-416b-a11b-b8cf362f4d27",
+    "status": "done",
+    "createdAt": "2025-09-08T19:06:36.501Z",
+    "startedAt": "2025-09-08T19:06:37.948Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T19:06:37.954Z",
+      "uptimeSeconds": 11292,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 84.89,
+          "heapUsedMB": 13.01
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T19:06:37.955Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "ed998e20-eb29-4628-87e9-f594d5c6d850",
+    "status": "done",
+    "createdAt": "2025-09-08T19:12:36.505Z",
+    "startedAt": "2025-09-08T19:12:38.277Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T19:12:38.281Z",
+      "uptimeSeconds": 11652,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 84.89,
+          "heapUsedMB": 13.22
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T19:12:38.281Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "b5405d9f-a4da-4113-9b23-9b0fca878093",
+    "status": "done",
+    "createdAt": "2025-09-08T19:15:36.505Z",
+    "startedAt": "2025-09-08T19:15:38.445Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T19:15:38.447Z"
+    },
+    "completedAt": "2025-09-08T19:15:38.448Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "964e66ae-b3e9-400a-a0df-858289579b0f",
+    "status": "done",
+    "createdAt": "2025-09-08T19:18:36.506Z",
+    "startedAt": "2025-09-08T19:18:38.616Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T19:18:38.619Z",
+      "uptimeSeconds": 12012,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 84.89,
+          "heapUsedMB": 13.56
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T19:18:38.619Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "5cf6e519-e820-4765-b5e5-e39e01a0d94f",
+    "status": "done",
+    "createdAt": "2025-09-08T19:24:36.507Z",
+    "startedAt": "2025-09-08T19:24:38.975Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T19:24:38.978Z",
+      "uptimeSeconds": 12373,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 85.02,
+          "heapUsedMB": 13.23
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T19:24:38.978Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "147920fd-03bf-4245-a7a7-321b441bb199",
+    "status": "done",
+    "createdAt": "2025-09-08T19:26:36.512Z",
+    "startedAt": "2025-09-08T19:26:36.581Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T19:26:36.583Z"
+    },
+    "completedAt": "2025-09-08T19:26:36.584Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "79246c1a-6a97-476b-86a3-f487b9aad805",
+    "status": "done",
+    "createdAt": "2025-09-08T19:30:36.519Z",
+    "startedAt": "2025-09-08T19:30:36.799Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T19:30:36.802Z",
+      "uptimeSeconds": 12730,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 85.02,
+          "heapUsedMB": 13.57
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T19:30:36.803Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "8d12df8c-9ee2-461f-8485-84a19c164665",
+    "status": "done",
+    "createdAt": "2025-09-08T19:36:36.531Z",
+    "startedAt": "2025-09-08T19:36:37.127Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T19:36:37.130Z",
+      "uptimeSeconds": 13091,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 85.02,
+          "heapUsedMB": 13.78
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T19:36:37.130Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "f784e384-9864-4c17-b709-ec3deb4979ee",
+    "status": "done",
+    "createdAt": "2025-09-08T19:37:36.534Z",
+    "startedAt": "2025-09-08T19:37:37.179Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T19:37:37.181Z"
+    },
+    "completedAt": "2025-09-08T19:37:37.182Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "123cede9-03a4-4c69-95eb-ffe1abbccfeb",
+    "status": "done",
+    "createdAt": "2025-09-08T19:42:36.540Z",
+    "startedAt": "2025-09-08T19:42:37.461Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T19:42:37.464Z",
+      "uptimeSeconds": 13451,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 85.14,
+          "heapUsedMB": 13.55
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T19:42:37.464Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "d420af0e-7239-4ab8-b4cf-4b7973dbfef9",
+    "status": "done",
+    "createdAt": "2025-09-08T19:48:36.549Z",
+    "startedAt": "2025-09-08T19:48:37.815Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T19:48:37.817Z",
+      "uptimeSeconds": 13811,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 85.14,
+          "heapUsedMB": 13.75
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T19:48:37.818Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "e8faea9d-4db3-430a-b985-c25545638572",
+    "status": "done",
+    "createdAt": "2025-09-08T19:48:36.550Z",
+    "startedAt": "2025-09-08T19:48:38.018Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T19:48:38.020Z"
+    },
+    "completedAt": "2025-09-08T19:48:38.021Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "6cd852af-c980-482b-82ba-fe848eebf36e",
+    "status": "done",
+    "createdAt": "2025-09-08T19:54:36.554Z",
+    "startedAt": "2025-09-08T19:54:38.153Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T19:54:38.156Z",
+      "uptimeSeconds": 14172,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 85.27,
+          "heapUsedMB": 13.58
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T19:54:38.156Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "015afd11-78ca-4505-a0a0-24192ab5285c",
+    "status": "done",
+    "createdAt": "2025-09-08T19:59:36.558Z",
+    "startedAt": "2025-09-08T19:59:38.433Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T19:59:38.436Z"
+    },
+    "completedAt": "2025-09-08T19:59:38.437Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "2683603a-74ec-4b69-b5cd-d171530fa7af",
+    "status": "done",
+    "createdAt": "2025-09-08T20:00:36.558Z",
+    "startedAt": "2025-09-08T20:00:38.488Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T20:00:38.491Z",
+      "uptimeSeconds": 14532,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 85.77,
+          "heapUsedMB": 14.13
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 3,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T20:00:38.492Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "a0d3bf38-8410-4bb7-9f58-8da46686f967",
+    "status": "done",
+    "createdAt": "2025-09-08T20:06:36.559Z",
+    "startedAt": "2025-09-08T20:06:38.827Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T20:06:38.830Z",
+      "uptimeSeconds": 14892,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 85.89,
+          "heapUsedMB": 13.77
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 3,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T20:06:38.831Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "8cae58ba-f7d1-4494-a8b7-d81d3f4d6ea6",
+    "status": "done",
+    "createdAt": "2025-09-08T20:10:36.560Z",
+    "startedAt": "2025-09-08T20:10:39.060Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T20:10:39.063Z"
+    },
+    "completedAt": "2025-09-08T20:10:39.064Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "file change",
+    "id": "34da44c6-49c9-4ac9-ad18-c38d25770c13",
+    "status": "done",
+    "createdAt": "2025-09-08T20:12:31.393Z",
+    "startedAt": "2025-09-08T20:12:31.660Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T20:12:31.663Z",
+      "uptimeSeconds": 15245,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 85.89,
+          "heapUsedMB": 14.1
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 3,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T20:12:31.663Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "file change",
+    "id": "adf5ca28-a2e6-4e36-881f-99f011583d08",
+    "status": "done",
+    "createdAt": "2025-09-08T20:12:31.394Z",
+    "startedAt": "2025-09-08T20:12:31.864Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T20:12:31.867Z"
+    },
+    "completedAt": "2025-09-08T20:12:31.869Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "file change",
+    "id": "971a605c-f282-4d5e-bef9-8faa83be39c7",
+    "status": "done",
+    "createdAt": "2025-09-08T20:12:51.390Z",
+    "startedAt": "2025-09-08T20:12:51.676Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T20:12:51.678Z",
+      "uptimeSeconds": 15265,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 85.89,
+          "heapUsedMB": 14.34
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 3,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T20:12:51.679Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "file change",
+    "id": "c9ed233b-1fa3-461c-a5b0-68d94d123cc9",
+    "status": "done",
+    "createdAt": "2025-09-08T20:12:51.391Z",
+    "startedAt": "2025-09-08T20:12:51.880Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T20:12:51.882Z"
+    },
+    "completedAt": "2025-09-08T20:12:51.883Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "file change",
+    "id": "d3fbca95-23af-4c84-a872-aee30250f882",
+    "status": "done",
+    "createdAt": "2025-09-08T20:14:53.220Z",
+    "startedAt": "2025-09-08T20:14:54.284Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T20:14:54.287Z",
+      "uptimeSeconds": 15388,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 86.02,
+          "heapUsedMB": 14.05
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 3,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T20:14:54.288Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "file change",
+    "id": "35da05ab-a745-47eb-b7df-e13fe03a5b24",
+    "status": "done",
+    "createdAt": "2025-09-08T20:14:53.221Z",
+    "startedAt": "2025-09-08T20:14:54.489Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T20:14:54.491Z"
+    },
+    "completedAt": "2025-09-08T20:14:54.492Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "a11c7da4-d8d9-4347-ab02-9cb1d8a482a1",
+    "status": "done",
+    "createdAt": "2025-09-08T20:20:36.579Z",
+    "startedAt": "2025-09-08T20:20:37.106Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T20:20:37.109Z",
+      "uptimeSeconds": 15731,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 86.14,
+          "heapUsedMB": 14.37
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 3,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T20:20:37.110Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "4d0f7691-b717-490c-8c6d-1c738b48f4a4",
+    "status": "done",
+    "createdAt": "2025-09-08T20:25:36.588Z",
+    "startedAt": "2025-09-08T20:25:37.390Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T20:25:37.393Z"
+    },
+    "completedAt": "2025-09-08T20:25:37.393Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "f999e3fe-e3f8-4091-bf1d-e06980612c1e",
+    "status": "done",
+    "createdAt": "2025-09-08T20:26:36.590Z",
+    "startedAt": "2025-09-08T20:26:37.446Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T20:26:37.449Z",
+      "uptimeSeconds": 16091,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 86.27,
+          "heapUsedMB": 14.23
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 3,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T20:26:37.450Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "3151ed5a-29c0-4ba1-a556-35cf437d7c63",
+    "status": "done",
+    "createdAt": "2025-09-08T20:32:36.598Z",
+    "startedAt": "2025-09-08T20:32:37.783Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T20:32:37.786Z",
+      "uptimeSeconds": 16451,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 86.27,
+          "heapUsedMB": 14.44
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 3,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T20:32:37.786Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "4057d4ed-9106-46ff-8334-0dc879898bfc",
+    "status": "done",
+    "createdAt": "2025-09-08T20:36:36.602Z",
+    "startedAt": "2025-09-08T20:36:38.003Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T20:36:38.007Z"
+    },
+    "completedAt": "2025-09-08T20:36:38.007Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "a35c30e0-9238-451c-b6c7-93a339aea6d7",
+    "status": "done",
+    "createdAt": "2025-09-08T20:38:36.604Z",
+    "startedAt": "2025-09-08T20:38:38.117Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T20:38:38.120Z",
+      "uptimeSeconds": 16812,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 86.39,
+          "heapUsedMB": 14.25
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 3,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T20:38:38.121Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "42ce872f-e545-463c-8577-8c8e191d5211",
+    "status": "done",
+    "createdAt": "2025-09-08T20:44:36.609Z",
+    "startedAt": "2025-09-08T20:44:38.452Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T20:44:38.456Z",
+      "uptimeSeconds": 17172,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 86.39,
+          "heapUsedMB": 14.46
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 3,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T20:44:38.456Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "ba74914a-b836-42a6-a1ca-f9f949f5638d",
+    "status": "done",
+    "createdAt": "2025-09-08T20:47:36.612Z",
+    "startedAt": "2025-09-08T20:47:38.619Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T20:47:38.622Z"
+    },
+    "completedAt": "2025-09-08T20:47:38.622Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "5ffb336d-a79c-4ee6-96c2-afb1037dfec6",
+    "status": "done",
+    "createdAt": "2025-09-08T20:50:36.614Z",
+    "startedAt": "2025-09-08T20:50:38.791Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T20:50:38.794Z",
+      "uptimeSeconds": 17532,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 86.39,
+          "heapUsedMB": 14.79
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 3,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T20:50:38.794Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "1045c9c8-0a42-449d-bbec-81f48be9f586",
+    "status": "done",
+    "createdAt": "2025-09-08T20:56:36.617Z",
+    "startedAt": "2025-09-08T20:56:36.642Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T20:56:36.645Z",
+      "uptimeSeconds": 17890,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 86.52,
+          "heapUsedMB": 14.44
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 3,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T20:56:36.646Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "4d3da621-bcb3-489f-98d2-f22e7d298290",
+    "status": "done",
+    "createdAt": "2025-09-08T20:58:36.621Z",
+    "startedAt": "2025-09-08T20:58:36.754Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T20:58:36.756Z"
+    },
+    "completedAt": "2025-09-08T20:58:36.757Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "2fbf4988-5b1a-4800-883c-f2c043d449db",
+    "status": "done",
+    "createdAt": "2025-09-08T21:02:36.630Z",
+    "startedAt": "2025-09-08T21:02:36.977Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T21:02:36.980Z",
+      "uptimeSeconds": 18251,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 86.52,
+          "heapUsedMB": 14.76
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 3,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T21:02:36.980Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "0537ba81-a5b0-487d-9d50-d14afbcea1b5",
+    "status": "done",
+    "createdAt": "2025-09-08T21:08:36.642Z",
+    "startedAt": "2025-09-08T21:08:37.307Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T21:08:37.310Z",
+      "uptimeSeconds": 18611,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 86.52,
+          "heapUsedMB": 14.98
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 3,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T21:08:37.310Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "fb7066bc-5080-4f86-b4ba-e2a1a6fa9a3c",
+    "status": "done",
+    "createdAt": "2025-09-08T21:09:36.644Z",
+    "startedAt": "2025-09-08T21:09:37.362Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T21:09:37.366Z"
+    },
+    "completedAt": "2025-09-08T21:09:37.367Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "e4e88255-645d-4a6f-9920-539c905a07db",
+    "status": "done",
+    "createdAt": "2025-09-08T21:14:36.652Z",
+    "startedAt": "2025-09-08T21:14:37.642Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T21:14:37.646Z",
+      "uptimeSeconds": 18971,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 86.64,
+          "heapUsedMB": 14.74
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 3,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T21:14:37.646Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "efa16ec0-0ec6-4cfc-bc24-f6379da9865b",
+    "status": "done",
+    "createdAt": "2025-09-08T21:20:36.658Z",
+    "startedAt": "2025-09-08T21:20:37.966Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T21:20:37.969Z",
+      "uptimeSeconds": 19332,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 86.64,
+          "heapUsedMB": 14.95
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 3,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T21:20:37.970Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "77d3c5df-84e9-45fe-8512-e1766bc31b58",
+    "status": "done",
+    "createdAt": "2025-09-08T21:20:36.659Z",
+    "startedAt": "2025-09-08T21:20:38.171Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T21:20:38.173Z"
+    },
+    "completedAt": "2025-09-08T21:20:38.174Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "dc8e8555-ac65-4bfe-a1df-2e7ad8587a69",
+    "status": "done",
+    "createdAt": "2025-09-08T21:26:36.664Z",
+    "startedAt": "2025-09-08T21:26:38.299Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T21:26:38.302Z",
+      "uptimeSeconds": 19692,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 86.77,
+          "heapUsedMB": 14.78
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 3,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T21:26:38.302Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "4187fe21-0898-4409-9571-63a099b170b4",
+    "status": "done",
+    "createdAt": "2025-09-08T21:31:36.667Z",
+    "startedAt": "2025-09-08T21:31:38.574Z",
+    "result": {
+      "overall": 66,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 50,
+          "detail": "In-memory users, no password reset"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "3 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        }
+      ],
+      "generatedAt": "2025-09-08T21:31:38.577Z"
+    },
+    "completedAt": "2025-09-08T21:31:38.577Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "0c6aa4ca-8496-4158-9e0d-7c7809fd92f3",
+    "status": "done",
+    "createdAt": "2025-09-08T21:32:36.667Z",
+    "startedAt": "2025-09-08T21:32:38.634Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T21:32:38.637Z",
+      "uptimeSeconds": 20052,
+      "process": {
+        "pid": 174853,
+        "memory": {
+          "rssMB": 86.89,
+          "heapUsedMB": 15.1
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "leads": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 3,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      }
+    },
+    "completedAt": "2025-09-08T21:32:38.638Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "2c2ba00c-f83d-4cf6-a4e2-66c976c61b3b",
+    "status": "done",
+    "createdAt": "2025-09-08T22:13:34.530Z",
+    "startedAt": "2025-09-08T22:13:34.578Z",
+    "result": {
+      "status": "ok",
+      "timestamp": "2025-09-08T22:13:34.587Z",
+      "uptimeSeconds": 62,
+      "process": {
+        "pid": 18943,
+        "memory": {
+          "rssMB": 84.27,
+          "heapUsedMB": 15.47
+        },
+        "node": "v22.17.0"
+      },
+      "counts": {
+        "programs": 3,
+        "pricingPlans": 3,
+        "banners": 0,
+        "affiliates": 0,
+        "directoryApproved": 0,
+        "directoryPending": 0,
+        "socialPostsRecorded": 0,
+        "flashOffersActive": 2,
+        "workbookPdfCache": 0
+      },
+      "autopilot": {
+        "total": 70,
+        "queued": 1,
+        "running": 1,
+        "done": 68,
+        "failed": 0
+      },
+      "payments": {
+        "stripeConfigured": false,
+        "configuredPriceEnvVars": {},
+        "simulatedMode": true
+      },
+      "readiness": {
+        "draining": false
+      },
+      "observability": {
+        "latency": {
+          "count": 2,
+          "p50": 5,
+          "p90": 5,
+          "p99": 5,
+          "max": 5
+        },
+        "errors": {
+          "4xx": 0,
+          "5xx": 0
+        },
+        "auditLogSize": 0
+      },
+      "security": {
+        "apiKeysConfigured": 0,
+        "adminSecretConfigured": false
+      }
+    },
+    "completedAt": "2025-09-08T22:13:34.591Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "964b73c1-8a73-4c02-a3c6-d2aeab5eb4ac",
+    "status": "done",
+    "createdAt": "2025-09-08T22:13:34.531Z",
+    "startedAt": "2025-09-08T22:13:34.792Z",
+    "result": {
+      "overall": 57,
+      "draining": false,
+      "checks": [
+        {
+          "name": "health_endpoint",
+          "score": 100,
+          "detail": "/health present"
+        },
+        {
+          "name": "metrics_endpoint",
+          "score": 100,
+          "detail": "/api/metrics present"
+        },
+        {
+          "name": "version_endpoint",
+          "score": 100,
+          "detail": "/api/version present"
+        },
+        {
+          "name": "pricing_plans",
+          "score": 90,
+          "detail": "3 plans"
+        },
+        {
+          "name": "catalog",
+          "score": 60,
+          "detail": "Catalog loaded in-memory"
+        },
+        {
+          "name": "flash_offers",
+          "score": 70,
+          "detail": "Flash offers JSON"
+        },
+        {
+          "name": "persistence_db",
+          "score": 75,
+          "detail": "Prisma client active"
+        },
+        {
+          "name": "helmet",
+          "score": 100,
+          "detail": "Helmet middleware set"
+        },
+        {
+          "name": "rate_limiting",
+          "score": 80,
+          "detail": "Basic global /api rate limit"
+        },
+        {
+          "name": "auth_mvp",
+          "score": 80,
+          "detail": "DB users, password reset supported"
+        },
+        {
+          "name": "workbooks_pdf",
+          "score": 60,
+          "detail": "On-demand PDF generation"
+        },
+        {
+          "name": "social_scheduler",
+          "score": 55,
+          "detail": "Suggestions + history tracking"
+        },
+        {
+          "name": "affiliate_program",
+          "score": 65,
+          "detail": "Conversion + clicks tracking"
+        },
+        {
+          "name": "directory_listings",
+          "score": 60,
+          "detail": "Approval workflow"
+        },
+        {
+          "name": "qa_endpoint",
+          "score": 40,
+          "detail": "/api/ask basic FAQ"
+        },
+        {
+          "name": "autopilot_tasks",
+          "score": 30,
+          "detail": "70 tasks queued"
+        },
+        {
+          "name": "affiliate_conversions",
+          "score": 5,
+          "detail": "0 conversions"
+        },
+        {
+          "name": "automated_tests",
+          "score": 50,
+          "detail": "Core monetization & persistence tests present"
+        },
+        {
+          "name": "stripe_api",
+          "score": 10,
+          "detail": "Simulated"
+        },
+        {
+          "name": "stripe_webhook",
+          "score": 5,
+          "detail": "Not configured"
+        },
+        {
+          "name": "latency_metrics",
+          "score": 50,
+          "detail": "3 samples"
+        },
+        {
+          "name": "api_keys",
+          "score": 5,
+          "detail": "none configured"
+        },
+        {
+          "name": "audit_log",
+          "score": 10,
+          "detail": "0 events captured"
+        }
+      ],
+      "autopilot": {
+        "enabled": false,
+        "lastTasks": [
+          {
+            "id": "0c6aa4ca-8496-4158-9e0d-7c7809fd92f3",
+            "type": "metrics_snapshot",
+            "status": "done",
+            "completedAt": "2025-09-08T21:32:38.638Z"
+          },
+          {
+            "id": "2c2ba00c-f83d-4cf6-a4e2-66c976c61b3b",
+            "type": "metrics_snapshot",
+            "status": "done",
+            "completedAt": "2025-09-08T22:13:34.591Z"
+          },
+          {
+            "id": "964b73c1-8a73-4c02-a3c6-d2aeab5eb4ac",
+            "type": "readiness_snapshot",
+            "status": "running"
+          }
+        ]
+      },
+      "generatedAt": "2025-09-08T22:13:34.796Z"
+    },
+    "completedAt": "2025-09-08T22:13:34.799Z"
+  }
+]

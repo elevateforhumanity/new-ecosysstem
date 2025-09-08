@@ -31,6 +31,7 @@ const StudentDashboard = lazy(() => import("./pages/StudentDashboard"));
 const Quiz = lazy(() => import("./pages/Quiz"));
 const MentorDirectory = lazy(() => import("./pages/sisters/MentorDirectory"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const AskWidget = lazy(() => import('./components/AskWidget'));
 
 export default function App() {
   return (
@@ -44,6 +45,7 @@ export default function App() {
               <Route path="/mentors" element={<MentorDirectory />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <AskWidget />
           </Suspense>
         </ErrorBoundary>
       </BrowserRouter>

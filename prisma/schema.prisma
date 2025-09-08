@@ -164,3 +164,45 @@ model LmsPage {
 
   @@map("lms_pages")
 }
+
+// Monetization & Growth Models (new)
+model Affiliate {
+  code       String  @id
+  email      String
+  name       String?
+  website    String?
+  clicks     Int     @default(0)
+  referrals  Int     @default(0)
+  earnings   Float   @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([email])
+  @@map("affiliates")
+}
+
+model DirectoryListing {
+  id          String  @id @default(cuid())
+  name        String
+  category    String
+  url         String?
+  description String?
+  plan        String  @default("standard")
+  status      String  @default("pending") // pending|approved|rejected
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([status])
+  @@map("directory_listings")
+}
+
+model SocialPostHistory {
+  id        String  @id @default(cuid())
+  templateId String
+  template  String
+  postedAt  DateTime @default(now())
+  channel   String? // future: twitter|linkedin etc
+
+  @@index([templateId])
+  @@map("social_post_history")
+}

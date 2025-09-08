@@ -270,7 +270,7 @@ app.use((req, res, next) => {
   req.id = req.headers['x-request-id'] || crypto.randomUUID();
   res.setHeader('X-Request-ID', req.id);
   next();
-});
+// ...existing code...
 app.use(pinoHttp({ logger, customLogLevel: (res, err) => {
   if (err || res.statusCode >= 500) return 'error';
   if (res.statusCode >= 400) return 'warn';
@@ -301,38 +301,6 @@ app.use(compression());
 app.use(express.json({ limit: '1mb' }));
 app.use(express.static('.', { maxAge: '1h', etag: true }));
 
-<<<<<<< HEAD
-// Enhanced rate limiting - separate limits for auth vs general endpoints
-const generalApiLimiter = rateLimit({ windowMs: 60 * 1000, max: 120 });
-const authApiLimiter = rateLimit({ windowMs: 60 * 1000, max: 30 }); // Stricter for auth
-const autopilotLimiter = rateLimit({ windowMs: 60 * 1000, max: 10 }); // Very strict for autopilot
-
-// API Key middleware scaffold
-function requireApiKey(req, res, next) {
-  const apiKey = req.headers['x-api-key'] || req.query.api_key;
-  if (!apiKey || apiKey !== process.env.API_KEY) {
-    return res.status(401).json({ 
-      error: { type: 'unauthorized', message: 'Valid API key required' },
-      requestId: req.id 
-    });
-  }
-  next();
-}
-
-// Autopilot middleware - only expose if explicitly enabled
-function requireAutopilotPublic(req, res, next) {
-  if (process.env.AUTOPILOT_PUBLIC !== 'true') {
-    return res.status(404).json({
-      error: { type: 'not_found', message: 'Not Found' },
-      requestId: req.id
-    });
-  }
-  next();
-}
-
-// Apply general rate limiting to most API routes
-app.use('/api/', generalApiLimiter);
-=======
 // Serve production build output (Vite/React) from /dist
 const distPath = path.join(__dirname, 'dist');
 app.use(express.static(distPath, { maxAge: '1h', etag: true }));
@@ -357,7 +325,6 @@ const generalLimiter = rateLimit({ windowMs: 60 * 1000, max: parseInt(process.en
 const authLimiter = rateLimit({ windowMs: 60 * 1000, max: parseInt(process.env.RATE_AUTH_MAX || '20', 10) });
 app.use('/api/auth/', authLimiter);
 app.use('/api/', generalLimiter);
->>>>>>> 9f52f59 (docs: add DNS settings for Vercel deployment)
 
 // ---------------- Health & Core ----------------
 // Adjusted to match test expectation: status === 'ok'
@@ -682,17 +649,7 @@ app.post('/api/marketing/lead', (req, res) => {
 
 // Pricing plans (cached)
 app.get('/api/pricing', (req, res) => {
-<<<<<<< HEAD
-  const cacheKey = 'pricing-plans';
-  let plans = cache.get(cacheKey);
-  
-  if (!plans) {
-    plans = marketing.getPricingPlans();
-    cache.set(cacheKey, plans, 300000); // 5 minute cache
-  }
-  
-  res.json({ plans });
-=======
+// ...existing code...
   const plans = global.withTTL('pricing_plans', 30_000, () => marketing.getPricingPlans());
   res.json({ plans, cached: true, ttlMs: 30000 });
 });
@@ -1351,12 +1308,11 @@ app.get('/api/auth/verify', (req, res) => {
   }
   if (!user) return res.status(401).json({ error: { type: 'auth', message: 'unauthorized' } });
   res.json({ user, method: req.apiKeyRole ? 'api_key' : 'session' });
->>>>>>> 9f52f59 (docs: add DNS settings for Vercel deployment)
 });
 
 // --------------- Metrics (lightweight, no secrets, cached) ---------------
 app.get('/api/metrics', (req, res) => {
-<<<<<<< HEAD
+// ...existing code...
   const cacheKey = 'metrics';
   let metrics = cache.get(cacheKey);
   
@@ -1806,7 +1762,7 @@ app.get('/api/readiness', async (req, res) => {
     }
   });
 });
-=======
+// ...existing code...
   // 5s TTL cache
   if (!global.__metricsCache) global.__metricsCache = { ts: 0, data: null };
   const ttlMs = parseInt(process.env.METRICS_CACHE_TTL_MS || '5000', 10);
@@ -2057,7 +2013,7 @@ try {
 } catch { /* ignore cron schedule errors */ }
 
 // --------------- Health Aggregator ---------------
->>>>>>> 9f52f59 (docs: add DNS settings for Vercel deployment)
+// ...existing code...
 app.get('/api/healthz', async (req, res) => {
   const started = Date.now();
   const uptimeSeconds = Math.round(process.uptime());

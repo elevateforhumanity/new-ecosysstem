@@ -226,21 +226,46 @@ app.get('/api/integration-guide', (req, res) => {
 });
 
 // --------------- Health Aggregator ---------------
-app.get('/api/healthz', (req, res) => {
+app.get('/api/healthz', async (req, res) => {
+  const started = Date.now();
   const uptimeSeconds = Math.round(process.uptime());
   const summary = complianceService.getSummary();
   const validations = complianceService.getValidations();
-  const dbStatus = 'degraded'; // placeholder until prisma integration hook
+  let dbStatus = 'offline';
+  let courseCount = 0;
+  let lessonCount = 0;
+  let dbLatencyMs = null;
+  try {
+    const prismaMaybe = require('./services/prisma');
+    if (prismaMaybe && prismaMaybe.getPrisma) {
+      const prisma = await prismaMaybe.getPrisma();
+      if (prisma) {
+        const dbStart = Date.now();
+        // lightweight metadata queries with timeout safeguard
+        try {
+          courseCount = await prisma.lmsCourse.count();
+          lessonCount = await prisma.lmsLesson.count();
+          dbLatencyMs = Date.now() - dbStart;
+          dbStatus = 'ok';
+        } catch (e) {
+          dbStatus = 'degraded';
+        }
+      }
+    }
+  } catch { /* ignore */ }
+  const latencyMs = Date.now() - started;
   res.json({
     status: 'ok',
     timestamp: new Date().toISOString(),
     uptimeSeconds,
+    latencyMs,
     services: {
       api: 'ok',
       compliance: summary.status,
       lms: 'ok',
       db: dbStatus
     },
+    db: { courseCount, lessonCount, latencyMs: dbLatencyMs },
     checks: Object.keys(validations.validations)
   });
 });

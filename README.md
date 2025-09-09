@@ -157,6 +157,30 @@ The system ensures seamless experience as users move between different parts of 
 - Aggregated: `/api/healthz` returns service statuses (api, lms, compliance, db) + uptime
 - Request IDs returned in `X-Request-ID` header and error payloads
 
+## 🛠️ Observability & Operations
+| Aspect | Implementation | Usage |
+|--------|----------------|-------|
+| Logs | Pino JSON + daily file rotation (`logs/`) | `npm run logs:tail`, ship to central store |
+| Log Retention | Compress/prune via `npm run logs:rotate` | Set `LOG_RETENTION_DAYS` (default 7) |
+| Metrics | Prometheus text at `/metrics` | Add scrape job; view counters & memory |
+| Errors | Optional Sentry (`SENTRY_DSN`) | Provide Sentry secrets + CI release step |
+| Tracing | Optional OpenTelemetry (`ENABLE_OTEL=1`) | Set OTLP endpoint `OTEL_EXPORTER_OTLP_ENDPOINT` |
+| Perf Budgets | Lighthouse + `budgets.json` enforced in CI | Tune thresholds as app scales |
+| Bundle Size | `npm run size:check` (total + per-file) | Adjust `BUNDLE_BUDGET_KB`, `BUNDLE_SINGLE_MAX_KB` |
+| Heartbeat | 30s structured log with mem + request delta | Search for `"msg":"heartbeat"` |
+
+### Key Env Vars
+```
+SENTRY_DSN=
+SENTRY_TRACES=0.1
+ENABLE_OTEL=1
+OTEL_EXPORTER_OTLP_ENDPOINT=https://otel-collector.example/v1/traces
+OTEL_SERVICE_NAME=efh-app
+LOG_RETENTION_DAYS=14
+BUNDLE_BUDGET_KB=800
+BUNDLE_SINGLE_MAX_KB=260
+```
+
 ## 🧪 Testing & Quality Gates
 - Vitest with coverage thresholds (lines >=70%)
 - Run: `npm test`

@@ -3,7 +3,8 @@
     "collect": {
       "staticDistDir": "client/dist",
       "url": ["/"],
-      "numberOfRuns": 1
+      "numberOfRuns": 1,
+      "budgetsFile": "budgets.json"
     },
     "assert": {
       "assertions": {

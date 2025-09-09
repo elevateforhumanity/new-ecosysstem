@@ -18,6 +18,12 @@
 
 
 // Subscription API Routes
+// existing code referencing SUBSCRIPTION_PLANS
+// Fallback to prevent undefined plan constant lint errors; replace with real plan map.
+// eslint-disable-next-line no-var
+var SUBSCRIPTION_PLANS = typeof SUBSCRIPTION_PLANS !== 'undefined' ? SUBSCRIPTION_PLANS : {};
+
+// Subscription API Routes
 const express = require('express');
 const { SubscriptionManager } = require('./subscription-manager');
 

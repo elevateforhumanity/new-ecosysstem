@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react";
+import PropTypes from "prop-types";
 import AppLayout from "../layouts/AppLayout";
 import { useAnalytics } from "../hooks/useAnalytics";
 
@@ -52,6 +53,11 @@ function Stat({ label, value }) {
     </div>
   );
 }
+
+Stat.propTypes = {
+  label: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+};
 
 const cardRow = { display: "flex", gap: 24, flexWrap: "wrap", background: "#f8fafc", padding: 16, borderRadius: 8, border: "1px solid #e2e8f0" };
 const courseItem = { padding: "12px 16px", border: "1px solid #e2e8f0", borderRadius: 8, marginBottom: 12, background: "#fff" };

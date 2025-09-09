@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
@@ -30,3 +31,8 @@ const linkStyle = ({ isActive }) => ({
   textDecoration: "none",
   fontWeight: 500
 });
+
+AppLayout.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.node
+};

@@ -4,22 +4,8 @@
   See LICENSE file for details.
 */
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import CourseBuilder from "./pages/CourseBuilder";
 
-export default function App() {
-  return (
-    <Router>
-      <div>
-        <Routes>
-          <Route path="/course-builder" element={<CourseBuilder />} />
-        </Routes>
-      </div>
-    </Router>
-  );
-}
-
-export function CourseBuilder() {
+export default function CourseBuilder() {
   const [modules, setModules] = useState([
     { title: "Module 1", lessons: ["Lesson 1"] }
   ]);

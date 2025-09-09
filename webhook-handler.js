@@ -39,34 +39,26 @@ app.post('/webhook', express.raw({type: 'application/json'}), async (request, re
 
   // Handle the event
   switch (event.type) {
-    case 'checkout.session.completed':
+    case 'checkout.session.completed': {
       const session = event.data.object;
       console.log(`✅ Checkout completed: ${session.id}`);
-      
-      // Get the payment intent
       const paymentIntent = await stripe.paymentIntents.retrieve(session.payment_intent);
-      
-      // Process the successful payment with splits and notifications
       await paymentProcessor.handleSuccessfulPayment(paymentIntent);
-      break;
-      
-    case 'payment_intent.succeeded':
+      break; }
+    case 'payment_intent.succeeded': {
       const payment = event.data.object;
       console.log(`💰 Payment succeeded: ${payment.id} - $${payment.amount/100}`);
-      
-      // If this wasn't already handled by checkout.session.completed
       if (!payment.metadata.processed) {
         await paymentProcessor.handleSuccessfulPayment(payment);
       }
-      break;
-      
-    case 'transfer.created':
+      break; }
+    case 'transfer.created': {
       const transfer = event.data.object;
       console.log(`📤 Transfer created: $${transfer.amount/100} to ${transfer.destination}`);
-      break;
-      
-    default:
+      break; }
+    default: {
       console.log(`🔔 Unhandled event type ${event.type}`);
+    }
   }
 
   response.json({received: true});

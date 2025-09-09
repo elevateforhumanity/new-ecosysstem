@@ -27,6 +27,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { HelmetProvider } from "react-helmet-async";
 
+const Home = lazy(() => import("./pages/Home"));
+const Programs = lazy(() => import("./pages/Programs"));
 const StudentDashboard = lazy(() => import("./pages/StudentDashboard"));
 const Quiz = lazy(() => import("./pages/Quiz"));
 const MentorDirectory = lazy(() => import("./pages/sisters/MentorDirectory"));
@@ -40,7 +42,13 @@ export default function App() {
         <ErrorBoundary>
           <Suspense fallback={<div style={{ padding: 40 }}>Loading...</div>}>
             <Routes>
-              <Route path="/" element={<StudentDashboard />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/apprenticeships" element={<Programs />} />
+              <Route path="/programs/*" element={<Programs />} />
+              <Route path="/programs/etpl-course-directory" element={<Programs />} />
+              <Route path="/academic-calendar" element={<StudentDashboard />} />
+              <Route path="/blog" element={<Home />} />
+              <Route path="/apply" element={<StudentDashboard />} />
               <Route path="/quiz" element={<Quiz />} />
               <Route path="/mentors" element={<MentorDirectory />} />
               <Route path="*" element={<NotFound />} />

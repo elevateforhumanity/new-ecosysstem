@@ -1,0 +1,36 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Elevate for Humanity",
+  "url": "https://www.elevateforhumanity.org/",
+  "logo": "https://www.elevateforhumanity.org/images/logo.png",
+  "description": "Indiana workforce training organization that partners with employers to provide state-funded training programs including WEX, OJT, JRI, ETPL, and apprenticeships.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Indianapolis",
+    "addressRegion": "IN",
+    "addressCountry": "US"
+  },
+  "telephone": "+13177607908",
+  "email": "info@elevateforhumanity.org",
+  "sameAs": [
+    "https://www.elevateconnectsdirectory.org",
+    "https://www.selfishinc.org",
+    "https://www.riseforwardfoundation.org"
+  ],
+  "founder": {
+    "@type": "Organization",
+    "name": "Elevate for Humanity"
+  },
+  "areaServed": {
+    "@type": "State",
+    "name": "Indiana"
+  },
+  "serviceType": [
+    "Workforce Development",
+    "Job Training",
+    "Apprenticeships",
+    "WIOA Programs",
+    "ETPL Courses"
+  ]
+}

@@ -10,6 +10,7 @@ import http from "http";
 import compression from "compression";
 import helmet from "helmet";
 import morgan from "morgan";
+import rateLimit from "express-rate-limit";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,6 +18,23 @@ const __dirname = path.dirname(__filename);
 const app = express();
 app.set("trust proxy", true);
 app.disable("x-powered-by");
+
+// -------- Rate Limiting (basic) --------
+// General limiter: broad protection for all requests (light throttle)
+const generalLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: parseInt(process.env.RATE_GENERAL_MAX || '300', 10),
+  standardHeaders: true,
+  legacyHeaders: false
+});
+// Admin limiter: stricter for sensitive control endpoints
+const adminLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: parseInt(process.env.RATE_ADMIN_MAX || '10', 10),
+  standardHeaders: true,
+  legacyHeaders: false
+});
+app.use(generalLimiter);
 
 // -------- Build mode & cache version --------
 const BUILD_MODE = (() => {
@@ -68,14 +86,14 @@ function checkAdmin(req) {
   return ADMIN_TOKEN && provided === ADMIN_TOKEN;
 }
 
-app.post("/_restart", jsonParser, (req, res) => {
+app.post("/_restart", adminLimiter, jsonParser, (req, res) => {
   if (!ADMIN_TOKEN) return res.status(500).json({ ok: false, error: "ADMIN_TOKEN not set" });
   if (!checkAdmin(req)) return res.status(403).json({ ok: false, error: "Forbidden" });
   res.json({ ok: true, restarting: true, at: new Date().toISOString() });
   setTimeout(() => process.exit(0), 150);
 });
 
-app.post("/_purge", jsonParser, (req, res) => {
+app.post("/_purge", adminLimiter, jsonParser, (req, res) => {
   if (!ADMIN_TOKEN) return res.status(500).json({ ok: false, error: "ADMIN_TOKEN not set" });
   if (!checkAdmin(req)) return res.status(403).json({ ok: false, error: "Forbidden" });
   CACHE_VERSION = Date.now();

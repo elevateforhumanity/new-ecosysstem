@@ -76,6 +76,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.17.0
+          cache: npm
+      - name: Install Dependencies
+        run: npm ci --prefer-offline --no-audit
       - name: Deploy Placeholder
         if: ${{ secrets.DEPLOY_PROVIDER_TOKEN != '' }}
         env:
@@ -85,3 +92,10 @@ jobs:
             && echo "Domain: ${CANONICAL_DOMAIN:-unset}" \
             && echo "Deploy SHA: ${GITHUB_SHA}" \
             && echo "Deployment complete." 
+      - name: Ping Sitemaps (Google/Bing)
+        if: ${{ secrets.CANONICAL_DOMAIN != '' }}
+        env:
+          CANONICAL_DOMAIN: ${{ secrets.CANONICAL_DOMAIN }}
+        run: |
+          echo "Pinging sitemap index..." 
+          node scripts/ping-sitemaps.js || echo "Non-fatal sitemap ping issue"

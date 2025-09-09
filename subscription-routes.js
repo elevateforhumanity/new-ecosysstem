@@ -18,10 +18,41 @@
 
 
 // Subscription API Routes
-// existing code referencing SUBSCRIPTION_PLANS
-// Fallback to prevent undefined plan constant lint errors; replace with real plan map.
-// eslint-disable-next-line no-var
-var SUBSCRIPTION_PLANS = typeof SUBSCRIPTION_PLANS !== 'undefined' ? SUBSCRIPTION_PLANS : {};
+// Defined subscription plans (replace pricing with live values as needed)
+const SUBSCRIPTION_PLANS = {
+  starter: {
+    name: 'Starter',
+    price_monthly: 9900, // $99.00
+    price_yearly: 99000, // $990.00 (2 months free)
+    features: [
+      'Access to core courses',
+      'Basic progress tracking',
+      'Email support'
+    ]
+  },
+  professional: {
+    name: 'Professional',
+    price_monthly: 19900,
+    price_yearly: 199000,
+    features: [
+      'All Starter features',
+      'Advanced analytics',
+      'Certificate generation',
+      'Priority support'
+    ]
+  },
+  enterprise: {
+    name: 'Enterprise',
+    price_monthly: 49900,
+    price_yearly: 499000,
+    features: [
+      'All Professional features',
+      'Custom integrations',
+      'Dedicated success manager',
+      'SLA & compliance reporting'
+    ]
+  }
+};
 
 // Subscription API Routes
 const express = require('express');

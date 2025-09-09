@@ -19,18 +19,21 @@
 // Pay Backend Integration with Supabase Memory Service
 // Add this to your existing Pay service (pay.elevateforhumanity.org)
 
-import { createClient } from '@supabase/supabase-js';
+const { createClient } = require('@supabase/supabase-js');
 
 // Provide fallbacks to prevent no-undef during lint where integration host not loaded
 // (These stubs are harmless and can be removed when real server wiring is in place)
 // eslint-disable-next-line no-var
-var app = typeof app !== 'undefined' ? app : undefined;
-// eslint-disable-next-line no-var
-var express = typeof express !== 'undefined' ? express : undefined;
-// eslint-disable-next-line no-var
-var stripe = typeof stripe !== 'undefined' ? stripe : undefined;
-// eslint-disable-next-line no-var
-var endpointSecret = typeof endpointSecret !== 'undefined' ? endpointSecret : process.env.STRIPE_WEBHOOK_SECRET;
+let appRef = global.__EFH_PAY_APP__;
+if (!appRef) {
+  const express = require('express');
+  appRef = express();
+  global.__EFH_PAY_APP__ = appRef;
+}
+const stripeLib = (() => {
+  try { return require('stripe')(process.env.STRIPE_SECRET_KEY || ''); } catch { return null; }
+})();
+const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
 
 // Environment variables to add to your Pay backend .env
 // SUPABASE_URL=https://YOUR-PROJECT.supabase.co
@@ -121,15 +124,16 @@ async function markPaidInSupabase({ email, program_slug, stripe_customer_id, ses
  * Example integration with your existing Stripe webhook handler
  * Add this to your checkout.session.completed event handler
  */
-export function integrateWithStripeWebhook() {
+function integrateWithStripeWebhook() {
   // In your existing webhook handler, after verifying the Stripe event:
   
-  app.post('/webhook', express.raw({type: 'application/json'}), async (request, response) => {
+  if (!stripeLib) return;
+  appRef.post('/webhook', require('express').raw({type: 'application/json'}), async (request, response) => {
     const sig = request.headers['stripe-signature'];
     let event;
 
     try {
-      event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
+  event = stripeLib.webhooks.constructEvent(request.body, sig, endpointSecret);
     } catch (err) {
       console.log(`Webhook signature verification failed.`, err.message);
       return response.status(400).send(`Webhook Error: ${err.message}`);
@@ -149,7 +153,7 @@ export function integrateWithStripeWebhook() {
       // Your existing logic here...
       
       // NEW: Mark enrollment as paid in Supabase with funding info
-      await markPaidInSupabase({
+  await markPaidInSupabase({
         email: session.customer_details?.email,
         program_slug: session.metadata?.program_slug,
         stripe_customer_id: session.customer || null,
@@ -162,4 +166,4 @@ export function integrateWithStripeWebhook() {
   });
 }
 
-export { markPaidInSupabase };
+module.exports = { markPaidInSupabase, integrateWithStripeWebhook };

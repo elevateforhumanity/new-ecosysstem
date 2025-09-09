@@ -52,13 +52,8 @@ export default function LMS() {
   }, [courseDetails]);
 
   // Memoize filtered courses to prevent unnecessary re-renders
-  const enrolledCourses = useMemo(() => 
-    courses.filter(course => course.enrolled), [courses]
-  );
-
-  const availableCourses = useMemo(() => 
-    courses.filter(course => !course.enrolled), [courses]
-  );
+  const enrolledCourses = useMemo(() => courses.filter(c => c.enrolled), [courses]);
+  const availableCourses = useMemo(() => courses.filter(c => !c.enrolled), [courses]);
 
   if (loading) {
     return (

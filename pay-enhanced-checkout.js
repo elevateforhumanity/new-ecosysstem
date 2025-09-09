@@ -169,12 +169,14 @@ enhancedCheckout.post('/api/checkout', async (req, res, next) => {
  * Enhanced webhook handler that tracks coupon usage
  * Add this to your existing webhook after successful payment
  */
-// Placeholder coupon helper fallbacks if not defined elsewhere
-// (Ensures lint doesn't flag undefined; replace with real implementations in UI bundle)
-// eslint-disable-next-line no-var
-var efhPreviewCoupon = typeof efhPreviewCoupon !== 'undefined' ? efhPreviewCoupon : () => {};
-// eslint-disable-next-line no-var
-var efhApplyCoupon = typeof efhApplyCoupon !== 'undefined' ? efhApplyCoupon : () => {};
+// Basic coupon helper implementations (can be overridden in frontend bundle)
+function efhPreviewCoupon(code) {
+  if (!code) return { valid: false };
+  return { valid: true, code: code.toUpperCase() };
+}
+function efhApplyCoupon(code) {
+  return efhPreviewCoupon(code);
+}
 
 export async function handleSuccessfulPayment(session) {
   const { metadata } = session;

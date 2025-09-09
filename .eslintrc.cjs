@@ -21,7 +21,13 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": [
       "warn",
       { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }
-    ]
+  ],
+  // Allow CommonJS require in JS backend scripts
+  "@typescript-eslint/no-var-requires": "off",
+  // Soften strict typing while refactoring massive any usage incrementally
+  "@typescript-eslint/no-explicit-any": "off",
+  // Unescaped entities rule too noisy for current HTML-in-JSX content
+  "react/no-unescaped-entities": "off"
   },
   ignorePatterns: [
     "dist/",

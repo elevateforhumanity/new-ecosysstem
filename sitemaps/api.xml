@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://example.com/api/readiness</loc><lastmod>2025-09-09</lastmod><changefreq>hourly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://example.com/api/metrics</loc><lastmod>2025-09-09</lastmod><changefreq>hourly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://example.com/api/health</loc><lastmod>2025-09-09</lastmod><changefreq>hourly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://example.com/api/version</loc><lastmod>2025-09-09</lastmod><changefreq>hourly</changefreq><priority>0.3</priority></url>
-</urlset>

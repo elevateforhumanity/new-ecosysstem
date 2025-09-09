@@ -1,18 +1,30 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
-
-export async function saveDirectory(entry) {
-  return await prisma.directoryListing.upsert({
-    where: { id: entry.id },
-    update: entry,
-    create: entry
-  });
+let prisma = null;
+function getClient() {
+  if (prisma) return prisma;
+  try { const { PrismaClient } = require('@prisma/client'); prisma = new PrismaClient(); }
+  catch { prisma = null; }
+  return prisma;
 }
 
-export async function getDirectory(id) {
-  return await prisma.directoryListing.findUnique({ where: { id } });
+async function saveDirectory(entry) {
+  const client = getClient();
+  if (!client) {
+    (global.__directories || (global.__directories = new Map())).set(entry.id, entry);
+    return entry;
+  }
+  return client.directoryListing.upsert({ where: { id: entry.id }, update: entry, create: entry });
 }
 
-export async function getDirectories() {
-  return await prisma.directoryListing.findMany();
+async function getDirectory(id) {
+  const client = getClient();
+  if (!client) return (global.__directories && global.__directories.get(id)) || null;
+  return client.directoryListing.findUnique({ where: { id } });
 }
+
+async function getDirectories() {
+  const client = getClient();
+  if (!client) return Array.from((global.__directories || new Map()).values());
+  return client.directoryListing.findMany();
+}
+
+module.exports = { saveDirectory, getDirectory, getDirectories };

@@ -65,7 +65,11 @@ const apiKeys = new Map();
 const complianceService = require('./services/compliance');
 const lmsService = require('./services/lms');
 const paymentsService = require('./services/payments');
-const { getVersionInfo } = require('./services/version.cjs');
+// Avoid potential duplicate identifier issues with test bundlers by not destructuring getVersionInfo directly
+const versionInfo = () => {
+  try { return require('./services/version.cjs').getVersionInfo(); }
+  catch { return { version: process.env.APP_VERSION || '0.0.0', gitSha: process.env.GIT_SHA || 'unknown' }; }
+};
 const marketing = require('./services/marketing.cjs');
 // TTL helper (idempotent definition if already patched earlier attempts)
 if (!global.__ttlHelperDefined) {
@@ -193,13 +197,15 @@ function authMiddleware(req, _res, next) {
 }
 app.use(authMiddleware);
 
-// Simple version info inline to avoid module type conflicts
-function getVersionInfo() {
-  return { 
-    version: process.env.APP_VERSION || '1.0.0', 
-    gitSha: process.env.GIT_SHA || 'development' 
-  };
+// Admin guard (defined early so later routes can reference it safely even if file re-ordered)
+function requireAdmin(req, res, next) {
+  const secret = process.env.ADMIN_SECRET;
+  if (!secret) return res.status(501).json({ error: { type: 'config', message: 'ADMIN_SECRET not configured' } });
+  if (req.headers['x-admin-secret'] !== secret) return res.status(403).json({ error: { type: 'forbidden', message: 'admin secret invalid' } });
+  next();
 }
+
+// getVersionInfo is imported from ./services/version.cjs above; removed duplicate inline definition to avoid redeclaration errors in tests
 
 // Simple pass-through middleware retained for future lazy init extension
 function ensureServices(_req, _res, next) { return next(); }
@@ -1209,13 +1215,7 @@ app.get('/a/:code', (req, res) => {
   res.redirect(target);
 });
 
-// --------------- Directory Listings (MVP) ---------------
-function requireAdmin(req, res, next) {
-  const secret = process.env.ADMIN_SECRET;
-  if (!secret) return res.status(501).json({ error: { type: 'config', message: 'ADMIN_SECRET not configured' } });
-  if (req.headers['x-admin-secret'] !== secret) return res.status(403).json({ error: { type: 'forbidden', message: 'admin secret invalid' } });
-  next();
-}
+// --------------- Directory Listings (MVP) --------------- (requireAdmin defined earlier)
 
 app.post('/api/directory/listing', async (req, res) => {
   const { name, category, url, description, plan } = req.body || {};
@@ -2041,7 +2041,7 @@ app.get('/api/healthz', async (req, res) => {
     }
   } catch { /* ignore */ }
   const latencyMs = Date.now() - started;
-  const ver = getVersionInfo();
+  const ver = versionInfo();
   res.json({
     status: 'ok',
     timestamp: new Date().toISOString(),
@@ -2062,7 +2062,7 @@ app.get('/api/healthz', async (req, res) => {
 
 // Explicit version endpoint (lightweight, cacheable)
 app.get('/api/version', (req, res) => {
-  res.json(getVersionInfo());
+  res.json(versionInfo());
 });
 
 // --------------- In-App Copilot (Assistant Stub) ---------------

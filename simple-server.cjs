@@ -317,6 +317,8 @@ app.use((req, res, next) => {
 // General API rate limit (excluding auth which gets its own tighter limit)
 const generalLimiter = rateLimit({ windowMs: 60 * 1000, max: parseInt(process.env.RATE_GENERAL_MAX || '120', 10) });
 const authLimiter = rateLimit({ windowMs: 60 * 1000, max: parseInt(process.env.RATE_AUTH_MAX || '20', 10) });
+const autopilotLimiter = rateLimit({ windowMs: 60 * 1000, max: parseInt(process.env.RATE_AUTOPILOT_MAX || '30', 10) });
+const authApiLimiter = rateLimit({ windowMs: 60 * 1000, max: parseInt(process.env.RATE_AUTH_API_MAX || '10', 10) });
 app.use('/api/auth/', authLimiter);
 app.use('/api/', generalLimiter);
 
@@ -1283,6 +1285,12 @@ function requireAdmin(req, res, next) {
   next();
 }
 
+function requireAutopilotPublic(req, res, next) {
+  const publicEnabled = process.env.AUTOPILOT_PUBLIC === 'true';
+  if (!publicEnabled) return res.status(403).json({ error: { type: 'forbidden', message: 'autopilot public endpoints disabled' } });
+  next();
+}
+
 app.post('/api/directory/listing', async (req, res) => {
   const { name, category, url, description, plan } = req.body || {};
   if (!name || !category) return res.status(400).json({ error: { type: 'validation', message: 'name and category required' } });
@@ -1909,9 +1917,14 @@ app.get('/api/readiness', async (req, res) => {
       adminSecretConfigured: !!process.env.ADMIN_SECRET
     }
   };
-  global.__metricsCache = { ts: Date.now(), data: payload };
-  res.json(payload);
-// stray closure removed
+  // NOTE: The block below previously attempted to send a response (res.json) outside
+  // of any Express handler, causing a ReferenceError at startup. This code was a
+  // duplicate metrics payload assembly from an earlier refactor and is now removed.
+  // Metrics responses are handled exclusively in the /api/metrics route above.
+  // (Left here intentionally for historical context.)
+  // global.__metricsCache = { ts: Date.now(), data: payload };
+  // res.json(payload);
+// stray closure removed (cleaned)
 
 // Admin pending listings (guarded)
 app.get('/api/admin/directory/pending', requireAdmin, async (req, res) => {

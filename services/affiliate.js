@@ -1,7 +1,7 @@
-import { PrismaClient } from '@prisma/client';
+const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-export async function saveAffiliate(entry) {
+async function saveAffiliate(entry) {
   return await prisma.affiliate.upsert({
     where: { code: entry.code },
     update: entry,
@@ -9,10 +9,16 @@ export async function saveAffiliate(entry) {
   });
 }
 
-export async function getAffiliate(code) {
+async function getAffiliate(code) {
   return await prisma.affiliate.findUnique({ where: { code } });
 }
 
-export async function getAffiliates() {
+async function getAffiliates() {
   return await prisma.affiliate.findMany();
 }
+
+module.exports = {
+  saveAffiliate,
+  getAffiliate,
+  getAffiliates
+};

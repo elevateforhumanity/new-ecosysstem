@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Master sitemap index. DOMAIN placeholder replaced during deploy if CANONICAL_DOMAIN is set. -->
+  <sitemap>
+    <loc>https://DOMAIN_PLACEHOLDER/sitemap.xml</loc>
+    <lastmod>2025-09-09</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://DOMAIN_PLACEHOLDER/public-sitemap.xml</loc>
+    <lastmod>2025-09-09</lastmod>
+  </sitemap>
+  <!-- Additional logical shards you may generate later (examples): -->
+  <!-- <sitemap><loc>https://DOMAIN_PLACEHOLDER/sitemaps/static-pages.xml</loc></sitemap> -->
+  <!-- <sitemap><loc>https://DOMAIN_PLACEHOLDER/sitemaps/blog.xml</loc></sitemap> -->
+</sitemapindex>

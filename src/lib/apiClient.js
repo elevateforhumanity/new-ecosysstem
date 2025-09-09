@@ -34,6 +34,9 @@ async function safeText(res) {
 
 export class ApiError extends Error {
   constructor(status, message) {
+    if (typeof status !== 'number' || status < 100 || status > 599) {
+      throw new Error('Invalid HTTP status');
+    }
     super(message);
     this.status = status;
   }

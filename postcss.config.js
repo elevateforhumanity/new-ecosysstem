@@ -16,9 +16,9 @@
   See LICENSE file for details.
 */
 
-export default {
+module.exports = {
   plugins: {
     tailwindcss: {},
     autoprefixer: {},
   },
-}
+};

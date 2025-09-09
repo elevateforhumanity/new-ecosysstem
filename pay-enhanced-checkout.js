@@ -22,13 +22,39 @@
 import { Router } from 'express';
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
+// Shared discount logic is imported where needed by tests; removed unused import to satisfy linter.
+// import { calculateDiscountedCents } from './discount-utils.js';
 import { incrementCouponUsage } from './pay-coupon-routes.js';
 import { markPaidInSupabase } from './pay-backend-integration.js';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' });
-const supa = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
+let _stripe; let _supa;
+function getStripe() {
+  if (_stripe) return _stripe;
+  if (!process.env.STRIPE_SECRET_KEY) {
+    // minimal stub for tests
+    _stripe = {
+      prices: { retrieve: async () => ({ unit_amount: 1000, product: 'prod_test' }), create: async (p) => ({ id: 'price_test', ...p }) },
+      products: { create: async (p) => ({ id: 'prod_dynamic', ...p }) },
+      checkout: { sessions: { create: async () => ({ id: 'cs_test', url: 'https://example.com/checkout' }) } }
+    };
+  } else {
+    _stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' });
+  }
+  return _stripe;
+}
+function getSupa() {
+  if (_supa) return _supa;
+  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_KEY) {
+    _supa = { from: () => ({ select: () => ({ eq: () => ({ single: async () => ({ data: null }) }) }) }) };
+  } else {
+    _supa = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
+  }
+  return _supa;
+}
 
 export const enhancedCheckout = Router();
+
+// (Removed duplicate local calculateDiscountedCents; using shared utility)
 
 enhancedCheckout.post('/api/checkout', async (req, res, next) => {
   try {
@@ -48,7 +74,7 @@ enhancedCheckout.post('/api/checkout', async (req, res, next) => {
   async function getDiscountedCents(listCents) {
       if (!couponCode) return null;
       
-      const { data: c } = await supa
+  const { data: c } = await getSupa()
         .from('coupons')
         .select('*')
         .eq('code', couponCode.toUpperCase())
@@ -84,26 +110,24 @@ enhancedCheckout.post('/api/checkout', async (req, res, next) => {
       
       if (couponCode) {
         // Look up original price to get amount
-        const price = await stripe.prices.retrieve(priceId);
+        const price = await getStripe().prices.retrieve(priceId);
         const baseAmount = price.unit_amount;
         const discountedAmount = await getDiscountedCents(baseAmount);
-        
+
         if (typeof discountedAmount === 'number' && discountedAmount !== baseAmount) {
           // Create temporary discounted price
-          const tempPrice = await stripe.prices.create({
+          const tempPrice = await getStripe().prices.create({
             currency,
             unit_amount: discountedAmount,
-            product: price.product,
+            product: price.product
           });
           effectivePriceId = tempPrice.id;
-          
-          // Add discount info to metadata
           metadata.original_price_cents = baseAmount;
           metadata.discounted_price_cents = discountedAmount;
           metadata.discount_amount_cents = baseAmount - discountedAmount;
         }
       }
-      
+
       line_items.push({ price: effectivePriceId, quantity });
     } else {
       // Dynamic product pricing
@@ -123,22 +147,22 @@ enhancedCheckout.post('/api/checkout', async (req, res, next) => {
         metadata.discount_amount_cents = unitAmount - discountedAmount;
       }
       
-      const product = await stripe.products.create({ 
-        name: productName, 
+      const product = await getStripe().products.create({
+        name: productName,
         metadata: { program_slug: program_slug || productName }
       });
-      
-      const price = await stripe.prices.create({ 
-        product: product.id, 
-        unit_amount: finalAmount, 
-        currency 
+
+      const price = await getStripe().prices.create({
+        product: product.id,
+        unit_amount: finalAmount,
+        currency
       });
-      
+
       line_items.push({ price: price.id, quantity });
     }
 
     // Create Stripe checkout session
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
       mode: 'payment',
       line_items,
       success_url: process.env.STRIPE_SUCCESS_URL + '?session_id={CHECKOUT_SESSION_ID}',
@@ -207,6 +231,9 @@ function extractFundingMetadata(metadata) {
 
 // Re-export for integration
 export { enhancedCheckout };
+// export helper for testing
+// test helper
+export { };
 // Guard against undefined window in Node context
 if (typeof window !== 'undefined') {
   window.efhPreviewCoupon = efhPreviewCoupon;

@@ -4,23 +4,10 @@
   See LICENSE file for details.
 */
 
-/*
-  Copyright (c) 2025 Elevate for Humanity
-  Commercial License. No resale, sublicensing, or redistribution allowed.
-  See LICENSE file for details.
-*/
-
-/*
-  Copyright (c) 2025 Elevate for Humanity
-  Commercial License. No resale, sublicensing, or redistribution allowed.
-  See LICENSE file for details.
-*/
-
 
 const express = require('express');
 const multer = require('multer');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+// Removed unused jwt & bcrypt to reduce bundle size and lint noise. Reintroduce if auth flows added.
 const router = express.Router();
 
 // Advanced file upload handling (better than LearnWorlds)
@@ -62,21 +49,19 @@ class AdvancedLMS {
   }
 
   // Create course with AI assistance (LearnWorlds doesn't have this)
-  async createCourseWithAI(courseData) {
+  async createCourseWithAI({ title, price, enableBNPL, enableSubscription, enableCoupons, aiPrompt }) {
     const courseId = `course_${Date.now()}`;
-    
-    // AI-generated course structure
-    const aiCurriculum = await this.generateCurriculumWithAI(courseData.aiPrompt);
+    const aiCurriculum = await this.generateCurriculumWithAI(aiPrompt);
     
     const course = {
       id: courseId,
-      title: courseData.title,
-      price: courseData.price,
+  title,
+  price,
       curriculum: aiCurriculum,
       settings: {
-        enableBNPL: courseData.enableBNPL,
-        enableSubscription: courseData.enableSubscription,
-        enableCoupons: courseData.enableCoupons,
+  enableBNPL,
+  enableSubscription,
+  enableCoupons,
         enableAITutor: true, // Always enabled - better than LearnWorlds
         enableRealTimeAnalytics: true,
         enableFederalCompliance: true
@@ -90,7 +75,7 @@ class AdvancedLMS {
     return course;
   }
 
-  async generateCurriculumWithAI(prompt) {
+  async generateCurriculumWithAI(_prompt) {
     // Simulate advanced AI curriculum generation
     const modules = [
       {
@@ -117,7 +102,7 @@ class AdvancedLMS {
   }
 
   // Advanced analytics (superior to LearnWorlds)
-  getAdvancedAnalytics(courseId) {
+  getAdvancedAnalytics(_courseId) {
     return {
       realTimeData: {
         activeStudents: Math.floor(Math.random() * 50) + 10,
@@ -340,7 +325,7 @@ router.get('/api/lms/activity-feed/:courseId', (req, res) => {
 });
 
 // Helper function for AI responses
-function generateIntelligentResponse(message, courseId) {
+function generateIntelligentResponse(_message, _courseId) {
   const responses = [
     `Based on your current progress in this course, I recommend focusing on the practical exercises in module 2.`,
     `Great question! This concept is fundamental to understanding the advanced topics we'll cover next.`,

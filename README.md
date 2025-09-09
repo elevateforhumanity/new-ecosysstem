@@ -1,3 +1,15 @@
+## Environment Variables
+
+Validated at build via `scripts/validate-env.js` (runs in `prebuild`). Required:
+
+STRIPE_SECRET_KEY
+STRIPE_SUCCESS_URL
+STRIPE_CANCEL_URL
+SUPABASE_URL
+SUPABASE_SERVICE_KEY
+
+Add them to your Vercel project settings or a local `.env` file (do not commit secrets).
+
 # Deployment
 
 ## Docker

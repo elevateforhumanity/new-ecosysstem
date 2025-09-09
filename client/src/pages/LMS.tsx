@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { BookOpen, Play, CheckCircle, Clock, Award, Download, User, Loader2 } from "lucide-react";
-import { Link, useRoute } from "wouter";
+import { Link } from "wouter";
 
 export default function LMS() {
-  const [match, params] = useRoute("/lms/:module?");
+  // Route params not currently used; simplifying to static view for now.
+  const params: { module?: string } = {};
   // const [selectedCourse, setSelectedCourse] = useState(null); // reserved for future detail view
   interface CourseLite { id: string; enrolled?: boolean; [k: string]: any }
   const [courses, setCourses] = useState<CourseLite[]>([]);

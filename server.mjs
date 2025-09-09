@@ -299,3 +299,6 @@ const shutdown = (sig) => () => {
 };
 process.on("SIGTERM", shutdown("SIGTERM"));
 process.on("SIGINT", shutdown("SIGINT"));
+
+// Exports for testing
+export { app, server };

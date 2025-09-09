@@ -13,7 +13,7 @@
     "build:sitemaps": "node scripts/generate-sitemaps.js",
     "dev": "vite",
     "prebuild": "node scripts/validate-env.js",
-    "build": "vite build",
+  "build": "vite build && npm run seo:polish",
     "preview": "vite preview --host",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
@@ -25,7 +25,8 @@
     "ci:lh": "lhci autorun --config=./lighthouserc.json",
     "logs:tail": "tail -f logs/app-$(date +%F).log || true",
     "logs:rotate": "node scripts/log-rotate.js",
-    "sentry:release": "bash scripts/sentry-release.sh"
+  "sentry:release": "bash scripts/sentry-release.sh",
+  "seo:polish": "node scripts/fix-site.mjs"
   },
   "prisma": {
     "seed": "node prisma/seed.cjs"
@@ -76,6 +77,9 @@
     "react-helmet-async": "2.0.5",
     "react-router-dom": "6.23.1",
     "stripe": "14.0.0"
+  ,"fast-glob": "3.3.2",
+  "cheerio": "1.0.0",
+  "xmlbuilder2": "3.1.1"
   },
   "keywords": [],
   "packageManager": "npm@10.0.0"

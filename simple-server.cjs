@@ -193,14 +193,7 @@ function authMiddleware(req, _res, next) {
 }
 app.use(authMiddleware);
 
-// Simple version info inline to avoid module type conflicts
-function getVersionInfo() {
-  return { 
-    version: process.env.APP_VERSION || '1.0.0', 
-    gitSha: process.env.GIT_SHA || 'development' 
-  };
-}
-
+// getVersionInfo provided by services/version.cjs
 // Simple pass-through middleware retained for future lazy init extension
 function ensureServices(_req, _res, next) { return next(); }
 
@@ -270,6 +263,7 @@ app.use((req, res, next) => {
   req.id = req.headers['x-request-id'] || crypto.randomUUID();
   res.setHeader('X-Request-ID', req.id);
   next();
+});
 // ...existing code...
 app.use(pinoHttp({ logger, customLogLevel: (res, err) => {
   if (err || res.statusCode >= 500) return 'error';
@@ -339,6 +333,26 @@ app.get('/', (req, res) => {
   res.status(200).send('<h1>EFH Platform</h1>');
 });
 
+// Strong health endpoint (aggregated quick check) separate from /health basic
+app.get('/api/health', (req, res) => {
+  try {
+    const ver = getVersionInfo();
+    const uptimeSeconds = Math.round(process.uptime());
+    const mem = process.memoryUsage();
+    res.json({
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+      version: ver.version,
+      gitSha: ver.gitSha,
+      uptimeSeconds,
+      process: { pid: process.pid, rssMB: +(mem.rss/1024/1024).toFixed(2) },
+      routes: (app._router && app._router.stack ? app._router.stack.filter(r=>r.route).length : null)
+    });
+  } catch (e) {
+    res.status(500).json({ status: 'error', error: e.message });
+  }
+});
+
 // ----------- SEO: Dynamic sitemap & robots fallback -----------
 app.get('/sitemap.xml', (req, res) => {
   // Load static template then substitute domain placeholder
@@ -369,6 +383,32 @@ sites.forEach(site => {
     if (fs.existsSync(file)) return res.sendFile(path.join(__dirname, file));
     res.redirect('/');
   });
+});
+
+// Individual program routes - serve the main programs page with program-specific query param
+app.get('/programs/:programSlug', (req, res) => {
+  const programSlug = req.params.programSlug;
+  
+  // Load program data to verify the program exists
+  try {
+    const allPrograms = JSON.parse(fs.readFileSync(path.join(__dirname, 'config/all-programs.json'), 'utf8'));
+    const healthPrograms = JSON.parse(fs.readFileSync(path.join(__dirname, 'config/health-programs.json'), 'utf8'));
+    
+    const program = allPrograms.find(p => p.slug === programSlug) || 
+                   healthPrograms.find(p => p.slug === programSlug);
+    
+    if (program) {
+      // Serve the programs page with a focus parameter
+      if (fs.existsSync('programs.html')) {
+        return res.sendFile(path.join(__dirname, 'programs.html'));
+      }
+    }
+  } catch (e) {
+    console.error('Error loading program data:', e);
+  }
+  
+  // If program not found or error, redirect to main programs page
+  res.redirect('/programs');
 });
 
 // ---------------- API STUBS to satisfy existing test contract ----------------
@@ -421,6 +461,32 @@ const PROGRAMS = [
   { id: 'advanced-ai-specialization', name: 'Advanced AI Specialization', price: 7495 }
 ];
 app.get('/api/programs', (req, res) => res.json(PROGRAMS));
+
+// Individual program endpoint
+app.get('/api/programs/:slug', (req, res) => {
+  const programSlug = req.params.slug;
+  
+  try {
+    // Load all programs from config files
+    const allPrograms = JSON.parse(fs.readFileSync(path.join(__dirname, 'config/all-programs.json'), 'utf8'));
+    const healthPrograms = JSON.parse(fs.readFileSync(path.join(__dirname, 'config/health-programs.json'), 'utf8'));
+    
+    // Find the program in either file
+    let program = allPrograms.find(p => p.slug === programSlug);
+    if (!program) {
+      program = healthPrograms.find(p => p.slug === programSlug);
+    }
+    
+    if (program) {
+      res.json(program);
+    } else {
+      res.status(404).json({ error: 'Program not found' });
+    }
+  } catch (e) {
+    console.error('Error loading program data:', e);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 // --------------- LMS Endpoints ---------------
 app.get('/api/lms/courses', ensureServices, async (req, res, next) => {
@@ -1343,7 +1409,8 @@ app.get('/api/metrics', (req, res) => {
         programs: PROGRAMS.length,
         pricingPlans: pricingPlans.length,
         banners: banners.length,
-        leads: leadsStore.length
+  // leads removed: in-memory lead store not defined in refactored version
+  leads: undefined
       },
       payments: {
         stripeConfigured: !!process.env.STRIPE_SECRET_KEY,
@@ -1811,7 +1878,6 @@ app.get('/api/readiness', async (req, res) => {
       programs: PROGRAMS.length,
       pricingPlans: pricingPlans.length,
       banners: banners.length,
-  // leads: leadsStore.length,
   leads: undefined, // migrated to DB
   affiliates: affiliateCount,
   directoryApproved,
@@ -1845,7 +1911,7 @@ app.get('/api/readiness', async (req, res) => {
   };
   global.__metricsCache = { ts: Date.now(), data: payload };
   res.json(payload);
-});
+// stray closure removed
 
 // Admin pending listings (guarded)
 app.get('/api/admin/directory/pending', requireAdmin, async (req, res) => {
@@ -2123,3 +2189,4 @@ if (require.main === module) {
 }
 
 module.exports = app;
+module.exports.default = app;

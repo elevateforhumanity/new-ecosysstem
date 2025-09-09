@@ -502,8 +502,31 @@
     "revenue_split": { "platform": 50, "partner": 50 },
     "certification": true,
     "hours": 10
-  }
-},
+  },
+  {
+    "slug": "medical-assistant",
+    "name": "Medical Assistant Program (WIOA/WRG Eligible)",
+    "partner": "indiana-health-association",
+    "category": "healthcare",
+    "track": "state-funded",
+    "base_price": 8000,
+    "retail_price": 8000,
+    "markup_percent": 0,
+    "stripe_price_id": "price_medical_assistant_8000",
+    "partner_connect_acc": "acct_iha_partner",
+    "revenue_split": { "platform": 50, "partner": 50 },
+    "certification": true,
+    "hours": 750,
+    "funding": ["WIOA", "WRG", "JRI"],
+    "cip": "51.0801",
+    "onet": "31-9092.00",
+    "nextStartDate": "2025-10-15",
+    "priority": 0.8,
+    "changefreq": "weekly",
+    "description": "Train for high-demand medical assistant roles. Evening & weekend cohorts. Tuition covered for eligible students.",
+    "state_funded": true,
+    "wioa_eligible": true
+  },
   {
     "slug": "google-data-analytics-cert",
     "name": "Google Data Analytics Professional Certificate",

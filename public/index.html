@@ -7,39 +7,31 @@
     <meta name="description" content="Indiana workforce training that pays for itself with WEX, OJT, WRG/ETPL, JRI and apprenticeship pathways." />
     <link rel="canonical" href="https://www.elevateforhumanity.org/" />
     <meta name="robots" content="index,follow" />
-    <!-- Inline JSON-LD improves reliability (external src on script tags is ignored for structured data) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          "@id": "https://www.elevateforhumanity.org/#org",
-          "name": "Elevate for Humanity",
-          "url": "https://www.elevateforhumanity.org/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.elevateforhumanity.org/branding/icons/workforce-icons.png"
-          },
-          "sameAs": [
-            "https://www.elevateconnectsdirectory.org/",
-            "https://www.selfishinc.org/",
-            "https://www.riseforwardfoundation.org/"
-          ]
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://www.elevateforhumanity.org/#website",
-          "url": "https://www.elevateforhumanity.org/",
-          "name": "Elevate for Humanity Workforce Platform",
-          "publisher": { "@id": "https://www.elevateforhumanity.org/#org" },
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://www.elevateforhumanity.org/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
-        }
+      "@type": "Organization",
+      "name": "Elevate for Humanity",
+      "url": "https://www.elevateforhumanity.org/",
+      "logo": "https://www.elevateforhumanity.org/branding/icons/workforce-icons.png",
+      "sameAs": [
+        "https://www.elevateconnectsdirectory.org/",
+        "https://www.selfishinc.org/",
+        "https://www.riseforwardfoundation.org/"
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://www.elevateforhumanity.org/",
+      "name": "Elevate for Humanity",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.elevateforhumanity.org/search?q={query}",
+        "query-input": "required name=query"
+      }
     }
     </script>
   <style>
@@ -99,6 +91,13 @@
         <li>Launch candidate pipeline or incumbent upskilling track.</li>
       </ol>
 
+      <footer>
+        &copy; <span id="y"></span> Elevate for Humanity. All rights reserved. | <a href="/about">About</a> | <a href="/programs">Programs</a>
+      </footer>
+    </div>
+    <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+  </body>
+</html>
       <footer>
         &copy; <span id="y"></span> Elevate for Humanity. All rights reserved. | <a href="/about">About</a> | <a href="/programs">Programs</a>
       </footer>

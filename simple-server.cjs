@@ -194,7 +194,6 @@ function authMiddleware(req, _res, next) {
 app.use(authMiddleware);
 
 // getVersionInfo provided by services/version.cjs
-
 // Simple pass-through middleware retained for future lazy init extension
 function ensureServices(_req, _res, next) { return next(); }
 
@@ -386,6 +385,32 @@ sites.forEach(site => {
   });
 });
 
+// Individual program routes - serve the main programs page with program-specific query param
+app.get('/programs/:programSlug', (req, res) => {
+  const programSlug = req.params.programSlug;
+  
+  // Load program data to verify the program exists
+  try {
+    const allPrograms = JSON.parse(fs.readFileSync(path.join(__dirname, 'config/all-programs.json'), 'utf8'));
+    const healthPrograms = JSON.parse(fs.readFileSync(path.join(__dirname, 'config/health-programs.json'), 'utf8'));
+    
+    const program = allPrograms.find(p => p.slug === programSlug) || 
+                   healthPrograms.find(p => p.slug === programSlug);
+    
+    if (program) {
+      // Serve the programs page with a focus parameter
+      if (fs.existsSync('programs.html')) {
+        return res.sendFile(path.join(__dirname, 'programs.html'));
+      }
+    }
+  } catch (e) {
+    console.error('Error loading program data:', e);
+  }
+  
+  // If program not found or error, redirect to main programs page
+  res.redirect('/programs');
+});
+
 // ---------------- API STUBS to satisfy existing test contract ----------------
 
 // Compliance portal summary
@@ -436,6 +461,32 @@ const PROGRAMS = [
   { id: 'advanced-ai-specialization', name: 'Advanced AI Specialization', price: 7495 }
 ];
 app.get('/api/programs', (req, res) => res.json(PROGRAMS));
+
+// Individual program endpoint
+app.get('/api/programs/:slug', (req, res) => {
+  const programSlug = req.params.slug;
+  
+  try {
+    // Load all programs from config files
+    const allPrograms = JSON.parse(fs.readFileSync(path.join(__dirname, 'config/all-programs.json'), 'utf8'));
+    const healthPrograms = JSON.parse(fs.readFileSync(path.join(__dirname, 'config/health-programs.json'), 'utf8'));
+    
+    // Find the program in either file
+    let program = allPrograms.find(p => p.slug === programSlug);
+    if (!program) {
+      program = healthPrograms.find(p => p.slug === programSlug);
+    }
+    
+    if (program) {
+      res.json(program);
+    } else {
+      res.status(404).json({ error: 'Program not found' });
+    }
+  } catch (e) {
+    console.error('Error loading program data:', e);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 // --------------- LMS Endpoints ---------------
 app.get('/api/lms/courses', ensureServices, async (req, res, next) => {

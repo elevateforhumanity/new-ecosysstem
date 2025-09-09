@@ -57,6 +57,12 @@ jobs:
           test -f sitemap.xml || (echo "sitemap.xml missing" && exit 1)
           test -f robots.txt || (echo "robots.txt missing" && exit 1)
           grep -q "Sitemap:" robots.txt || (echo "robots.txt missing Sitemap reference" && exit 1)
+          test -f sitemap-index.xml || (echo "sitemap-index.xml missing" && exit 1)
+          # Ensure excluded slugs are not present
+          if grep -q "/programs/cpr" sitemap-index.xml sitemaps/*.xml; then
+            echo "ERROR: Excluded slug /programs/cpr found in sitemaps" && exit 1
+          fi
+          echo "SEO asset validation passed (index + exclusion)"
       - name: Summary
         run: |
           echo "## CI Summary" >> $GITHUB_STEP_SUMMARY

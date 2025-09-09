@@ -7,6 +7,8 @@
     "node": "20.17.0"
   },
   "scripts": {
+  "sitemaps:generate": "node scripts/generate-sitemaps.js",
+  "build:sitemaps": "node scripts/generate-sitemaps.js",
     "dev": "vite",
     "prebuild": "node scripts/validate-env.js",
     "build": "vite build",

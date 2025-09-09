@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://example.com/</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://example.com/programs</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://example.com/hub</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://example.com/lms</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://example.com/connect</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://example.com/compliance</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://example.com/pay</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://example.com/partners</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://example.com/account</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://example.com/employer-dashboard</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://elevateforhumanity.org/</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://elevateforhumanity.org/programs</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://elevateforhumanity.org/hub</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://elevateforhumanity.org/lms</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://elevateforhumanity.org/connect</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://elevateforhumanity.org/compliance</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://elevateforhumanity.org/pay</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://elevateforhumanity.org/partners</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://elevateforhumanity.org/account</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://elevateforhumanity.org/employer-dashboard</loc><lastmod>2025-09-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
 </urlset>

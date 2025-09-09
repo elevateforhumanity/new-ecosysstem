@@ -1,7 +1,12 @@
 {
   "redirects": [
     { "source": "http://elevateforhumanity.org/:path*", "destination": "https://www.elevateforhumanity.org/:path*", "permanent": true },
-    { "source": "https://elevateforhumanity.org/:path*", "destination": "https://www.elevateforhumanity.org/:path*", "permanent": true }
+    { "source": "https://elevateforhumanity.org/:path*", "destination": "https://www.elevateforhumanity.org/:path*", "permanent": true },
+    { "source": "/medical-assistant", "destination": "/programs", "permanent": true },
+    { "source": "/programs/medical-assistant", "destination": "/programs", "permanent": true },
+    { "source": "/cpr", "destination": "/programs", "permanent": true },
+    { "source": "/old-broken-page", "destination": "/", "permanent": true },
+    { "source": "/enrollment", "destination": "/apply", "permanent": true }
   ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }

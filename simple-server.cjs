@@ -2158,6 +2158,15 @@ app.post('/api/copilot/ask', (req, res) => {
   res.json({ answer, ts: new Date().toISOString() });
 });
 
+// --------------- Approval System Integration ---------------
+// Register case manager approval routes
+try {
+  const { registerApprovalRoutes } = require('./approval-integration');
+  registerApprovalRoutes(app);
+} catch (e) {
+  logger.warn({ err: e.message }, 'Approval system integration failed - continuing without approval routes');
+}
+
 // --------------- Error Handling ---------------
 // 404 handler
 app.use((req, res, next) => {

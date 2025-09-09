@@ -68,6 +68,57 @@ function Navbar() {
   );
 }
 
+// Reusable category buttons bar
+interface CategoryButtonsProps {
+  variant?: 'top' | 'mid' | 'bottom';
+  className?: string;
+  subtle?: boolean;
+  dense?: boolean;
+}
+function CategoryButtons({ variant='mid', className='', subtle=false, dense=false }: CategoryButtonsProps) {
+  const base = 'inline-flex items-center justify-center font-medium rounded-full transition focus:outline-none focus:ring-2 focus:ring-offset-2';
+  const size = dense ? 'text-xs px-3 py-1.5' : 'text-sm px-4 py-2';
+  const schemes = subtle ? {
+    primary: 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100',
+    secondary: 'bg-slate-50 text-slate-700 hover:bg-slate-100',
+    accent: 'bg-amber-50 text-amber-700 hover:bg-amber-100',
+    outline: 'border border-slate-200 text-slate-600 hover:bg-white/50'
+  } : {
+    primary: 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm',
+    secondary: 'bg-slate-800 text-white hover:bg-slate-900 shadow-sm',
+    accent: 'bg-amber-500 text-white hover:bg-amber-600 shadow-sm',
+    outline: 'border border-slate-300 text-slate-700 hover:bg-slate-50'
+  };
+  const groups: Record<string, { label: string; to: string; theme: keyof typeof schemes }[]> = {
+    top: [
+      { label: 'Programs', to: '/programs', theme: 'primary' },
+      { label: 'Funding', to: '/apply', theme: 'accent' },
+      { label: 'Partners', to: '/partners', theme: 'secondary' },
+      { label: 'Compliance', to: '/compliance', theme: 'outline' }
+    ],
+    mid: [
+      { label: 'Catalog', to: '/catalog', theme: 'primary' },
+      { label: 'Pricing', to: '/pricing', theme: 'secondary' },
+      { label: 'Affiliate', to: '/affiliate', theme: 'accent' },
+      { label: 'Directory', to: '/directory', theme: 'outline' }
+    ],
+    bottom: [
+      { label: 'Legal', to: '/legal', theme: 'outline' },
+      { label: 'Workbooks', to: '/workbooks', theme: 'secondary' },
+      { label: 'LMS', to: '/lms', theme: 'primary' },
+      { label: 'Connect', to: '/connect', theme: 'accent' }
+    ]
+  };
+  const chosen = groups[variant] || groups.mid;
+  return (
+    <div className={`flex flex-wrap gap-2 ${className}`} aria-label="category navigation">
+      {chosen.map(btn => (
+        <Link key={btn.to} to={btn.to} className={`${base} ${size} ${schemes[btn.theme]}`}>{btn.label}</Link>
+      ))}
+    </div>
+  );
+}
+
 // Reusable copy-to-clipboard button
 function CopyLink({ value, label }: { value: string; label?: string }) {
   const [copied, setCopied] = useState(false);
@@ -177,6 +228,8 @@ function Home() {
             <Link to="/partners" className="inline-flex items-center rounded-2xl border border-slate-300 px-5 py-3 font-medium hover:bg-slate-50">Partner With Us</Link>
             <Link to="/pay" className="inline-flex items-center rounded-2xl border border-slate-300 px-5 py-3 font-medium hover:bg-slate-50">Pay Tuition</Link>
           </div>
+          {/* Top category buttons (strong CTAs) */}
+          <CategoryButtons variant="top" className="mt-8" />
           <dl className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-2xl">
             <div className="rounded-2xl border border-slate-200 p-4">
               <dt className="text-xs text-slate-500">Federal Contracting</dt>
@@ -195,6 +248,8 @@ function Home() {
               <dd className="mt-1 text-lg font-semibold">$25K - $10M+ available</dd>
             </div>
           </dl>
+          {/* Mid category buttons */}
+          <CategoryButtons variant="mid" className="mt-10" subtle />
         </div>
         <div className="relative">
           <div className="rounded-3xl border border-slate-200 shadow-sm p-6 bg-white">
@@ -209,6 +264,10 @@ function Home() {
             <p className="mt-3 text-xs text-slate-500">Questions? <Link className="underline" to="/connect">Contact our team</Link>.</p>
           </div>
         </div>
+      </div>
+      {/* Bottom category buttons */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-12">
+        <CategoryButtons variant="bottom" className="mt-4" dense subtle />
       </div>
     </section>
   );

@@ -8,6 +8,8 @@
   },
   "scripts": {
   "sitemaps:generate": "node scripts/generate-sitemaps.js",
+  "sitemaps:ping": "node scripts/ping-sitemaps.js",
+  "sitemaps:submit": "npm run sitemaps:generate && npm run sitemaps:ping",
   "build:sitemaps": "node scripts/generate-sitemaps.js",
     "dev": "vite",
     "prebuild": "node scripts/validate-env.js",

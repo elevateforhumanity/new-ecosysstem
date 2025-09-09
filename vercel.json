@@ -2,9 +2,13 @@
   "version": 2,
   "redirects": [
     {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "www.elevateforhumanity.org" }],
-      "destination": "https://elevateforhumanity.org/:1",
+      "source": "http://elevateforhumanity.org/(.*)",
+      "destination": "https://www.elevateforhumanity.org/$1",
+      "permanent": true
+    },
+    {
+      "source": "https://elevateforhumanity.org/(.*)",
+      "destination": "https://www.elevateforhumanity.org/$1",
       "permanent": true
     }
   ],

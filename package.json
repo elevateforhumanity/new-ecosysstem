@@ -1,37 +1,12 @@
 {
-  "name": "workspace",
+  "name": "elevateforhumanity",
   "version": "1.0.0",
   "private": true,
-  "description": "Production-ready plain Vite + TypeScript skeleton",
-  "license": "MIT",
-  "type": "module",
-  "engines": {
-    "node": ">=20.0.0"
-  },
+  "engines": { "node": "20.x" },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "start": "node simple-server.cjs",
-    "server": "node simple-server.cjs",
-    "server:dev": "node simple-server.cjs",
-    "validate": "node validate-production.mjs",
-    "lint": "eslint . --ext .ts --max-warnings=0",
-    "format": "prettier -w .",
-    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p client/tsconfig.json",
-    "test": "vitest run --coverage",
-    "test:watch": "vitest",
-    "analyze": "vite build && npx rollup-plugin-visualizer dist/stats.html",
-    "env:check": "ts-node --swc src/env.ts --check",
-    "security:audit": "npm audit --omit=dev",
-    "security:full": "npm audit",
-    "size:check": "node scripts/size-check.mjs",
-    "check:prod": "node scripts/prod-check.mjs",
-    "ci": "npm run lint && npm run typecheck && npm run test && npm run build && npm run size:check",
-    "polish:all": "npm run format && npm run ci && npm run check:prod",
-  "release:tag": "node scripts/release-tag.mjs",
-  "readiness:smoke": "node -e \"const http=require('http');http.get('http://localhost:5000/api/readiness',r=>{let d='';r.on('data',c=>d+=c);r.on('end',()=>{console.log(d);});});\"",
-  "readiness:report": "node scripts/readiness-report.cjs"
+    "preview": "vite preview --host"
   },
   "prisma": {
     "seed": "node prisma/seed.cjs"
@@ -79,17 +54,6 @@
     "react-router-dom": "^6.23.1",
     "stripe": "^14.0.0"
   },
-  "optionalDependencies": {},
-  "overrides": {},
-  "resolutions": {},
-  "dependenciesExtra": {},
-  "_note": "Added chokidar for autopilot file watching.",
-  "legal": {
-    "notice": "Commercial licensing terms included in COMMERCIAL_LICENSE.md; NDA template provided."
-    },
   "keywords": [],
-  "homepage": ".",
-  "bugs": {},
-  "repository": {},
   "packageManager": "npm@10.0.0"
 }

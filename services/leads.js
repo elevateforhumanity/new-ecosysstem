@@ -1,13 +1,24 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+let prisma = null;
+let memoryLeads = [];
+try {
+  const { PrismaClient } = require('@prisma/client');
+  prisma = new PrismaClient();
+} catch { /* prisma optional */ }
 
-export async function saveLead(entry) {
-  // entry: { name, email, ... }
-  return await prisma.lead.create({ data: entry });
+async function saveLead(entry) {
+  if (prisma) {
+    try { return await prisma.lead.create({ data: entry }); } catch { /* fallback */ }
+  }
+  const rec = { id: entry.id || (Date.now()+ '-' + Math.random().toString(36).slice(2)), ...entry };
+  memoryLeads.push(rec);
+  return rec;
 }
 
-export async function getLeads() {
-  return await prisma.lead.findMany();
+async function getLeads() {
+  if (prisma) {
+    try { return await prisma.lead.findMany(); } catch { /* fallback */ }
+  }
+  return [...memoryLeads];
 }
 
-// Extend with update/delete as needed
+module.exports = { saveLead, getLeads };

@@ -25,7 +25,7 @@ let app;
 beforeAll(async () => {
   // Ensure env setup before import
   process.env.API_KEYS = 'test-key';
-  app = (await import('../simple-server.cjs')).default || (await import('../simple-server.cjs'));
+  app = (await import('../simple-server.js')).default || (await import('../simple-server.js'));
 });
 
 describe('EFH Brain Service - Federal Compliance Testing', () => {

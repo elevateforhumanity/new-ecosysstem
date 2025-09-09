@@ -193,13 +193,7 @@ function authMiddleware(req, _res, next) {
 }
 app.use(authMiddleware);
 
-// Simple version info inline to avoid module type conflicts
-function getVersionInfo() {
-  return { 
-    version: process.env.APP_VERSION || '1.0.0', 
-    gitSha: process.env.GIT_SHA || 'development' 
-  };
-}
+// getVersionInfo provided by services/version.cjs
 
 // Simple pass-through middleware retained for future lazy init extension
 function ensureServices(_req, _res, next) { return next(); }
@@ -270,6 +264,7 @@ app.use((req, res, next) => {
   req.id = req.headers['x-request-id'] || crypto.randomUUID();
   res.setHeader('X-Request-ID', req.id);
   next();
+});
 // ...existing code...
 app.use(pinoHttp({ logger, customLogLevel: (res, err) => {
   if (err || res.statusCode >= 500) return 'error';
@@ -337,6 +332,26 @@ app.get('/', (req, res) => {
   const idx = path.join(__dirname, 'index.html');
   if (fs.existsSync(idx)) return res.sendFile(idx);
   res.status(200).send('<h1>EFH Platform</h1>');
+});
+
+// Strong health endpoint (aggregated quick check) separate from /health basic
+app.get('/api/health', (req, res) => {
+  try {
+    const ver = getVersionInfo();
+    const uptimeSeconds = Math.round(process.uptime());
+    const mem = process.memoryUsage();
+    res.json({
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+      version: ver.version,
+      gitSha: ver.gitSha,
+      uptimeSeconds,
+      process: { pid: process.pid, rssMB: +(mem.rss/1024/1024).toFixed(2) },
+      routes: (app._router && app._router.stack ? app._router.stack.filter(r=>r.route).length : null)
+    });
+  } catch (e) {
+    res.status(500).json({ status: 'error', error: e.message });
+  }
 });
 
 // ----------- SEO: Dynamic sitemap & robots fallback -----------
@@ -1343,7 +1358,8 @@ app.get('/api/metrics', (req, res) => {
         programs: PROGRAMS.length,
         pricingPlans: pricingPlans.length,
         banners: banners.length,
-        leads: leadsStore.length
+  // leads removed: in-memory lead store not defined in refactored version
+  leads: undefined
       },
       payments: {
         stripeConfigured: !!process.env.STRIPE_SECRET_KEY,
@@ -1811,7 +1827,6 @@ app.get('/api/readiness', async (req, res) => {
       programs: PROGRAMS.length,
       pricingPlans: pricingPlans.length,
       banners: banners.length,
-  // leads: leadsStore.length,
   leads: undefined, // migrated to DB
   affiliates: affiliateCount,
   directoryApproved,
@@ -1845,7 +1860,7 @@ app.get('/api/readiness', async (req, res) => {
   };
   global.__metricsCache = { ts: Date.now(), data: payload };
   res.json(payload);
-});
+// stray closure removed
 
 // Admin pending listings (guarded)
 app.get('/api/admin/directory/pending', requireAdmin, async (req, res) => {
@@ -2123,3 +2138,4 @@ if (require.main === module) {
 }
 
 module.exports = app;
+module.exports.default = app;

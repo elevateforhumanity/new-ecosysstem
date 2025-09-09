@@ -18,6 +18,7 @@ const EXCLUDED_ROUTES = new Set([
 const STABLE_ROUTES = new Set([
   '/',
   '/programs',
+  '/programs/medical-assistant',
   '/hub',
   '/lms',
   '/connect',
@@ -34,7 +35,7 @@ const GROUPS = {
   partners: ['/partners'],
   account: ['/account'],
   learning: ['/lms'],
-  marketing: ['/programs', '/hub', '/connect']
+  marketing: ['/programs', '/programs/medical-assistant', '/hub', '/connect']
 };
 
 // Employer related (if stable page exists)

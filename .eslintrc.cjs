@@ -18,10 +18,8 @@ module.exports = {
   rules: {
     "react/react-in-jsx-scope": "off",
     "react/jsx-uses-react": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "warn",
-      { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }
-  ],
+  // Suppress unused var warnings (prototype & placeholder heavy codebase). Re-enable selectively later.
+  "@typescript-eslint/no-unused-vars": "off",
   // Allow CommonJS require in JS backend scripts
   "@typescript-eslint/no-var-requires": "off",
   // Soften strict typing while refactoring massive any usage incrementally

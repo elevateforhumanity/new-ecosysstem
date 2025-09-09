@@ -17,6 +17,17 @@ export default defineConfig({
   base: '/',
   build: {
     outDir: 'dist',
-    sourcemap: true
+    sourcemap: true,
+    rollupOptions: {
+      input: {
+        main: 'index.html'
+      }
+    }
+  },
+  assetsInclude: ['**/*.json'],
+  resolve: {
+    alias: {
+      '@': '/src'
+    }
   }
 });

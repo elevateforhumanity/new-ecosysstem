@@ -391,7 +391,7 @@ pkg.scripts = pkg.scripts || {};
 pkg.scripts.dev = pkg.scripts.dev || "vite";
 pkg.scripts['dev:api'] = pkg.scripts['dev:api'] || "node server.js";
 pkg.scripts['dev:all'] = "concurrently -k -n WEB,API \"npm:dev\" \"npm:dev:api\"";
-pkg.scripts.build = pkg.scripts.build || "vite build";
+pkg.scripts.build = pkg.scripts.build || "NO_COLOR=1 vite build";
 pkg.scripts.preview = pkg.scripts.preview || "vite preview --port 4173";
 fs.writeFileSync('package.json',JSON.stringify(pkg,null,2));
 JS

@@ -22,8 +22,8 @@
   "redirects": [
     {
       "source": "/(.*)",
-      "has": [{ "type": "host", "value": "www.elevateforhumanity.org" }],
-      "destination": "https://elevateforhumanity.org/:1",
+      "has": [{ "type": "host", "value": "elevateforhumanity.org" }],
+      "destination": "https://www.elevateforhumanity.org/:1",
       "permanent": true
     }
   ],

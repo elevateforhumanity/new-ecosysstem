@@ -26,8 +26,7 @@ Disallow: /.replit
 Disallow: /package.json
 
 # Sitemap location (relative so it works across environments)
-Sitemap: /sitemap-index.xml
-Sitemap: /sitemap.xml
+Sitemap: https://www.elevateforhumanity.org/sitemap_index.xml
 
 # Cache control
 Allow: /?v=*

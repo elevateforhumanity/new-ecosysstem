@@ -34,35 +34,8 @@
     <meta name="googlebot" content="index, follow">
     <meta name="bingbot" content="index, follow">
 
-    <!-- Structured Data for Workforce Development -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "EducationalOrganization",
-      "name": "Elevate for Humanity - Workforce Development Hub",
-      "description": "DOL-approved workforce development programs with job placement assistance and career transformation services",
-      "url": "/",
-      "logo": "/branding/partners/efh-logo.png",
-      "sameAs": ["https://linkedin.com/company/elevate-for-humanity"],
-      "offers": [
-        {
-          "@type": "Course",
-          "name": "WIOA Workforce Training Programs",
-          "description": "Federally-funded workforce development training with job placement assistance",
-          "provider": {
-            "@type": "EducationalOrganization",
-            "name": "Elevate for Humanity"
-          },
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD",
-            "description": "Federally funded - no cost to participants"
-          }
-        }
-      ]
-    }
-    </script>
+    <!-- Organization Schema -->
+    <script type="application/ld+json" src="/schema/organization.jsonld"></script>
 
     <!-- EFH Sanity Check - Debug loading issues -->
     <script>

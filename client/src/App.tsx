@@ -48,31 +48,21 @@ function TailwindCheck() {
 
 function Navbar() {
   return (
-    <header className="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white font-bold">EFH</span>
-            <span className="font-semibold tracking-tight">Elevate for Humanity</span>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6 text-sm">
-            <Link to="/hub" className="hover:text-indigo-600">Hub</Link>
-            <Link to="/programs" className="hover:text-indigo-600">Programs</Link>
-            <Link to="/lms" className="hover:text-indigo-600">LMS</Link>
-            <Link to="/connect" className="hover:text-indigo-600">Connect</Link>
-            <Link to="/pay" className="hover:text-indigo-600">Pay</Link>
-            <Link to="/pricing" className="hover:text-indigo-600">Pricing</Link>
-            <Link to="/catalog" className="hover:text-indigo-600">Catalog</Link>
-            <Link to="/affiliate" className="hover:text-indigo-600">Affiliate</Link>
-            <Link to="/directory" className="hover:text-indigo-600">Directory</Link>
-            <Link to="/compliance" className="hover:text-indigo-600">Compliance</Link>
-            <Link to="/debug" className="text-slate-500 hover:text-indigo-600">Debug</Link>
-          </nav>
-          <div className="hidden md:flex items-center gap-3">
-            <Link to="/apply" className="inline-flex items-center rounded-xl border border-slate-300 px-3 py-2 text-sm font-medium hover:bg-slate-50">Apply</Link>
-            <Link to="/partners" className="inline-flex items-center rounded-xl bg-indigo-600 text-white px-3 py-2 text-sm font-medium hover:bg-indigo-700">Partner</Link>
-          </div>
-        </div>
+    <header className="iw-header">
+      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 2rem' }}>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '1rem', textDecoration: 'none' }}>
+          <img src="/assets/iw-logo.svg" alt="IWU Logo" style={{ height: '48px', width: 'auto', marginRight: '0.5rem' }} />
+          <span style={{ fontFamily: 'Merriweather, Georgia, serif', fontWeight: 700, fontSize: '1.5rem', color: '#fff', letterSpacing: '0.02em' }}>Indiana Wesleyan University</span>
+        </Link>
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+          <Link to="/discover" className="iw-nav-link">Discover</Link>
+          <Link to="/academics" className="iw-nav-link">Academics</Link>
+          <Link to="/admissions" className="iw-nav-link">Admissions</Link>
+          <Link to="/campus-life" className="iw-nav-link">Campus Life</Link>
+          <Link to="/faith" className="iw-nav-link">Faith</Link>
+          <Link to="/about" className="iw-nav-link">About</Link>
+          <Link to="/apply" className="iw-nav-link" style={{ background: '#ffd700', color: '#990000', borderRadius: '6px', padding: '0.5rem 1rem', fontWeight: 700 }}>Apply</Link>
+        </nav>
       </div>
     </header>
   );

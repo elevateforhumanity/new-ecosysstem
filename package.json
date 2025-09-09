@@ -86,8 +86,7 @@
   "_note": "Added chokidar for autopilot file watching.",
   "legal": {
     "notice": "Commercial licensing terms included in COMMERCIAL_LICENSE.md; NDA template provided."
-  },
-  },
+    },
   "keywords": [],
   "homepage": ".",
   "bugs": {},

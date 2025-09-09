@@ -83,6 +83,7 @@ if (!global.__ttlHelperDefined) {
 // In-memory data stores (MVP)
 const leadsService = require('./services/leads');
 const userService = require('./services/user');
+const EcosystemStatusChecker = require('./ecosystem-status-checker');
 let catalogCache = null;
 // Affiliate & Directory in-memory stores (MVP)
 const affiliateStore = new Map(); // code -> { code, email, name, website, createdAt, clicks, referrals, earnings }
@@ -441,6 +442,27 @@ app.get('/api/sister-sites', (req, res) => {
       branding: '/api/branding'
     }
   });
+});
+
+// Ecosystem Status API - "Where are we at now"
+app.get('/api/ecosystem/status', async (req, res) => {
+  try {
+    const statusChecker = new EcosystemStatusChecker();
+    const status = await statusChecker.runAllChecks();
+    
+    res.json({
+      success: true,
+      ...status,
+      message: "Real-time ecosystem health assessment"
+    });
+  } catch (error) {
+    logger.error('Ecosystem status check failed:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to perform ecosystem status check',
+      message: error.message
+    });
+  }
 });
 
 // Navigation

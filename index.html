@@ -1,49 +1,64 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <title>Rise Forward Foundation | Workforce AI & Data Skills Platform</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="Rise Forward Foundation delivers compliant workforce AI & data skills programs with an integrated LMS, compliance scaffolding, and funding pathways." />
-    <meta name="keywords" content="workforce development, WIOA, PIRL, AI training, data science bootcamp, compliance LMS, funding pathways" />
-    <link rel="canonical" href="https://www.example.com/" />
-    <meta name="robots" content="index,follow" />
-    <!-- Open Graph -->
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/images/Elevate_for_Humanity_logo_81bf0fab.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/Elevate_for_Humanity_logo_81bf0fab.png">
+    <link rel="shortcut icon" href="/images/Elevate_for_Humanity_logo_81bf0fab.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Elevate for Humanity · Workforce Development & Training Institute</title>
+
+    <!-- SEO & Social Meta -->
+    <meta name="description" content="Indianapolis premier workforce development institute. ETPL approved, DOL apprenticeship sponsor, Certiport testing center. WIOA, JRI, WRG funding accepted. Government contractor providing career training and certifications." />
+    <meta property="og:title" content="Elevate for Humanity · Workforce Development & Training Institute" />
+    <meta property="og:description" content="Career pathways, apprenticeships, and industry credentials aligned to state & federal funding streams." />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Rise Forward Foundation" />
-    <meta property="og:title" content="Rise Forward Foundation - Workforce AI & Data Skills" />
-    <meta property="og:description" content="Compliance-aligned AI & data upskilling platform with funding enablement." />
-    <meta property="og:url" content="https://www.example.com/" />
-    <meta property="og:image" content="https://www.example.com/images/social-share.png" />
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Rise Forward Foundation - Workforce AI & Data Skills" />
-    <meta name="twitter:description" content="Compliance-aligned AI & data upskilling platform with funding enablement." />
-    <meta name="twitter:image" content="https://www.example.com/images/social-share.png" />
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Rise Forward Foundation",
-      "url": "https://www.example.com/",
-      "description": "Nonprofit workforce development platform delivering AI & data skills with compliance scaffolding.",
-      "sameAs": [
-        "https://www.linkedin.com/",
-        "https://twitter.com/"
-      ]
-    }
-    </script>
+    <meta property="og:url" content="https://www.elevateforhumanity.org/" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://www.elevateforhumanity.org/" />
+    <!-- (Optional) Social image -->
+    <meta property="og:image" content="/images/Elevate_for_Humanity_logo_81bf0fab.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Elevate for Humanity · Workforce Development & Training Institute" />
+    <meta name="twitter:description" content="Career pathways, apprenticeships, and industry credentials aligned to state & federal funding streams." />
+    <meta name="twitter:image" content="/images/Elevate_for_Humanity_logo_81bf0fab.png" />
+    <!-- Canonical domain declaration (advisory) -->
+    <meta name="efh:canonical-domain" content="www.elevateforhumanity.org" />
     <noscript><style>#root-noscript{padding:2rem;font-family:system-ui,Arial,sans-serif;max-width:780px;margin:0 auto;line-height:1.5}</style></noscript>
   </head>
   <body>
+    <!-- Global Access Navigation (static so sister sites are reachable even if React fails) -->
+    <nav id="global-access-nav" style="font-family:system-ui,Arial,sans-serif;background:#041b2f;color:#fff;padding:.75rem 1.25rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;">
+      <strong style="font-size:1.05rem;letter-spacing:.5px;">Elevate for Humanity</strong>
+      <a href="/" style="color:#fff;text-decoration:none;">Home</a>
+      <a href="/programs" style="color:#fff;text-decoration:none;">Programs</a>
+      <a href="/lms" style="color:#fff;text-decoration:none;">LMS</a>
+      <a href="/connect" style="color:#fff;text-decoration:none;">Connect</a>
+      <a href="/compliance" style="color:#fff;text-decoration:none;">Compliance</a>
+      <a href="/hub" style="color:#fff;text-decoration:none;">Hub</a>
+      <a href="/sale" style="color:#fff;text-decoration:none;">Early Access Offer</a>
+      <a href="/partners" style="color:#fff;text-decoration:none;">Partners</a>
+      <a href="/account" style="color:#fff;text-decoration:none;">Account</a>
+    </nav>
+    <!-- React app mounts here -->
     <div id="root"></div>
     <noscript>
       <div id="root-noscript">
-        <h1>Rise Forward Foundation</h1>
-        <p>This platform delivers AI & data skill pathways, integrated compliance readiness (WIOA / PIRL), and funding-aligned program delivery. Enable JavaScript for the full interactive experience.</p>
+        <h1>Elevate for Humanity</h1>
+        <p>Enable JavaScript to experience the full platform.</p>
       </div>
     </noscript>
+    <script>
+      // Hide static nav if React renders its own (React can set data-react-nav-present on body)
+      const observer = new MutationObserver(() => {
+        if (document.body.dataset.reactNavPresent === 'true') {
+          const nav = document.getElementById('global-access-nav');
+          if (nav) nav.style.display = 'none';
+          observer.disconnect();
+        }
+      });
+      observer.observe(document.body, { attributes:true, attributeFilter:['data-react-nav-present'] });
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

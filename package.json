@@ -13,7 +13,7 @@
     "build:sitemaps": "node scripts/generate-sitemaps.js",
     "dev": "vite",
     "prebuild": "node scripts/validate-env.js",
-    "build": "vite build",
+  "build": "vite build && npm run seo:polish",
     "preview": "vite preview --host",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
@@ -26,7 +26,7 @@
     "logs:tail": "tail -f logs/app-$(date +%F).log || true",
     "logs:rotate": "node scripts/log-rotate.js",
   "sentry:release": "bash scripts/sentry-release.sh",
-  "seo:polish": "node scripts/fix-site.mjs --base https://elevateforhumanity.org --out client/dist"
+  "seo:polish": "node scripts/fix-site.mjs"
   },
   "prisma": {
     "seed": "node prisma/seed.cjs"

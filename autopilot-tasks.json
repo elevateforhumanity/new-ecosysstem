@@ -4751,5 +4751,554 @@
     "createdAt": "2025-09-09T17:40:08.505Z",
     "startedAt": "2025-09-09T17:40:10.208Z",
     "completedAt": "2025-09-09T17:40:10.212Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "3af4ba33-c1b7-407c-8e45-ab8fb3a2f3f0",
+    "status": "done",
+    "createdAt": "2025-09-09T17:44:08.508Z",
+    "startedAt": "2025-09-09T17:44:10.451Z",
+    "completedAt": "2025-09-09T17:44:10.453Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "cb14bfa1-55e4-41db-98a9-363f3ce8966f",
+    "status": "done",
+    "createdAt": "2025-09-09T17:46:08.508Z",
+    "startedAt": "2025-09-09T17:46:10.573Z",
+    "completedAt": "2025-09-09T17:46:10.576Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "c99f7afc-9856-425a-a32a-05d399092c5b",
+    "status": "done",
+    "createdAt": "2025-09-09T17:52:08.510Z",
+    "startedAt": "2025-09-09T17:52:10.938Z",
+    "completedAt": "2025-09-09T17:52:10.941Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "7e15b78e-0b21-4537-ad12-ed5e187676ef",
+    "status": "done",
+    "createdAt": "2025-09-09T17:55:08.516Z",
+    "startedAt": "2025-09-09T17:55:08.615Z",
+    "completedAt": "2025-09-09T17:55:08.618Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "5f450624-1be7-4cce-849a-9ee30c134f87",
+    "status": "done",
+    "createdAt": "2025-09-09T17:58:08.525Z",
+    "startedAt": "2025-09-09T17:58:08.790Z",
+    "completedAt": "2025-09-09T17:58:08.793Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "eb2fe40b-f2c7-4eee-bc5e-32d942d9fadd",
+    "status": "done",
+    "createdAt": "2025-09-09T18:04:08.537Z",
+    "startedAt": "2025-09-09T18:04:09.145Z",
+    "completedAt": "2025-09-09T18:04:09.148Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "3c1e3b25-de66-4a9a-8d73-a661caba1ec1",
+    "status": "done",
+    "createdAt": "2025-09-09T18:06:08.541Z",
+    "startedAt": "2025-09-09T18:06:09.261Z",
+    "completedAt": "2025-09-09T18:06:09.264Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "4c1b59b0-31ae-4f1c-9630-c6a6a41bf3f7",
+    "status": "done",
+    "createdAt": "2025-09-09T18:10:08.548Z",
+    "startedAt": "2025-09-09T18:10:09.494Z",
+    "completedAt": "2025-09-09T18:10:09.497Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "baf3e59d-9ec5-4fea-91f3-c59d18446a7a",
+    "status": "done",
+    "createdAt": "2025-09-09T18:16:08.554Z",
+    "startedAt": "2025-09-09T18:16:09.852Z",
+    "completedAt": "2025-09-09T18:16:09.855Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "a335bcea-0fee-44d1-b546-5447607e72c6",
+    "status": "done",
+    "createdAt": "2025-09-09T18:17:08.556Z",
+    "startedAt": "2025-09-09T18:17:09.914Z",
+    "completedAt": "2025-09-09T18:17:09.917Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "aadb21f4-f939-43c2-900b-e8e784b91910",
+    "status": "done",
+    "createdAt": "2025-09-09T18:22:08.561Z",
+    "startedAt": "2025-09-09T18:22:10.213Z",
+    "completedAt": "2025-09-09T18:22:10.217Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "03e6e28c-5a4f-4cd7-9e31-5cffc7edef30",
+    "status": "done",
+    "createdAt": "2025-09-09T18:28:08.565Z",
+    "startedAt": "2025-09-09T18:28:10.568Z",
+    "completedAt": "2025-09-09T18:28:10.570Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "17619eb1-a7e1-4997-ba82-8b2f9bda97e4",
+    "status": "done",
+    "createdAt": "2025-09-09T18:28:08.567Z",
+    "startedAt": "2025-09-09T18:28:10.772Z",
+    "completedAt": "2025-09-09T18:28:10.774Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "a5c61fc9-656f-41f7-bae9-8ddef7f82501",
+    "status": "done",
+    "createdAt": "2025-09-09T18:34:08.568Z",
+    "startedAt": "2025-09-09T18:34:10.936Z",
+    "completedAt": "2025-09-09T18:34:10.938Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "1c873112-9bdc-40fc-97a0-27b2cb3903e8",
+    "status": "done",
+    "createdAt": "2025-09-09T18:39:08.574Z",
+    "startedAt": "2025-09-09T18:39:08.727Z",
+    "completedAt": "2025-09-09T18:39:08.730Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "5bb34571-ebed-4db0-8cf4-abeba610f530",
+    "status": "done",
+    "createdAt": "2025-09-09T18:40:08.577Z",
+    "startedAt": "2025-09-09T18:40:08.788Z",
+    "completedAt": "2025-09-09T18:40:08.791Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "30c3cbf0-e432-41e4-90a3-dc6e50baf29e",
+    "status": "done",
+    "createdAt": "2025-09-09T18:46:08.588Z",
+    "startedAt": "2025-09-09T18:46:09.140Z",
+    "completedAt": "2025-09-09T18:46:09.143Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "77fcfae2-863f-45ae-aab3-281ff9a4e7f4",
+    "status": "done",
+    "createdAt": "2025-09-09T18:50:08.597Z",
+    "startedAt": "2025-09-09T18:50:09.378Z",
+    "completedAt": "2025-09-09T18:50:09.381Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "72705fcd-6dfe-4691-a286-ff14ceb111f7",
+    "status": "done",
+    "createdAt": "2025-09-09T18:52:08.600Z",
+    "startedAt": "2025-09-09T18:52:09.492Z",
+    "completedAt": "2025-09-09T18:52:09.494Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "dacb9303-2cdd-4c4c-a252-f9f1e4dce706",
+    "status": "done",
+    "createdAt": "2025-09-09T18:58:08.609Z",
+    "startedAt": "2025-09-09T18:58:09.847Z",
+    "completedAt": "2025-09-09T18:58:09.850Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "d881d139-793f-457e-b9d7-8005751562e3",
+    "status": "done",
+    "createdAt": "2025-09-09T19:01:08.612Z",
+    "startedAt": "2025-09-09T19:01:10.025Z",
+    "completedAt": "2025-09-09T19:01:10.028Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "c5c16428-5877-41a1-925b-dbd30d2946b6",
+    "status": "done",
+    "createdAt": "2025-09-09T19:04:08.617Z",
+    "startedAt": "2025-09-09T19:04:10.197Z",
+    "completedAt": "2025-09-09T19:04:10.200Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "b8599e95-268d-4751-ad1a-237caa977606",
+    "status": "done",
+    "createdAt": "2025-09-09T19:10:08.622Z",
+    "startedAt": "2025-09-09T19:10:10.568Z",
+    "completedAt": "2025-09-09T19:10:10.571Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "b255e0e0-df98-440a-8f7c-8f40918e558c",
+    "status": "done",
+    "createdAt": "2025-09-09T19:12:08.622Z",
+    "startedAt": "2025-09-09T19:12:10.686Z",
+    "completedAt": "2025-09-09T19:12:10.689Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "4ff56d98-4140-4cb8-969e-bc2b1c002712",
+    "status": "done",
+    "createdAt": "2025-09-09T19:16:08.623Z",
+    "startedAt": "2025-09-09T19:16:10.925Z",
+    "completedAt": "2025-09-09T19:16:10.928Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "c9efb8f8-6c51-410b-9a9c-498bd10fba07",
+    "status": "done",
+    "createdAt": "2025-09-09T19:22:08.632Z",
+    "startedAt": "2025-09-09T19:22:08.777Z",
+    "completedAt": "2025-09-09T19:22:08.780Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "e8102464-b4c1-45c9-952c-a6567a92b956",
+    "status": "done",
+    "createdAt": "2025-09-09T19:23:08.634Z",
+    "startedAt": "2025-09-09T19:23:08.834Z",
+    "completedAt": "2025-09-09T19:23:08.838Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "a13c6d04-330e-4232-a72b-6b3d6ab101f3",
+    "status": "done",
+    "createdAt": "2025-09-09T19:28:08.645Z",
+    "startedAt": "2025-09-09T19:28:09.134Z",
+    "completedAt": "2025-09-09T19:28:09.138Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "2c35899b-ad03-4a43-add2-e202910b6412",
+    "status": "done",
+    "createdAt": "2025-09-09T19:34:08.656Z",
+    "startedAt": "2025-09-09T19:34:09.486Z",
+    "completedAt": "2025-09-09T19:34:09.489Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "e03650e5-1181-4559-a4a6-3c192e310264",
+    "status": "done",
+    "createdAt": "2025-09-09T19:34:08.658Z",
+    "startedAt": "2025-09-09T19:34:09.691Z",
+    "completedAt": "2025-09-09T19:34:09.694Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "bdd1adce-6a60-408a-a5b0-944b768f4348",
+    "status": "done",
+    "createdAt": "2025-09-09T19:40:08.663Z",
+    "startedAt": "2025-09-09T19:40:09.853Z",
+    "completedAt": "2025-09-09T19:40:09.856Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "86c16c4f-cb61-4106-9a79-71cdd51ebc7e",
+    "status": "done",
+    "createdAt": "2025-09-09T19:45:08.667Z",
+    "startedAt": "2025-09-09T19:45:10.145Z",
+    "completedAt": "2025-09-09T19:45:10.148Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "ac5702dc-c63b-4a71-805b-f8a73700f533",
+    "status": "done",
+    "createdAt": "2025-09-09T19:46:08.668Z",
+    "startedAt": "2025-09-09T19:46:10.207Z",
+    "completedAt": "2025-09-09T19:46:10.211Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "0421fe78-d8b5-4e11-8015-dfec185cc19b",
+    "status": "done",
+    "createdAt": "2025-09-09T19:52:08.671Z",
+    "startedAt": "2025-09-09T19:52:10.563Z",
+    "completedAt": "2025-09-09T19:52:10.566Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "8b586a8b-f2a8-40b9-b609-6dc2c7834ea4",
+    "status": "done",
+    "createdAt": "2025-09-09T19:56:08.674Z",
+    "startedAt": "2025-09-09T19:56:10.806Z",
+    "completedAt": "2025-09-09T19:56:10.810Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "49c1a226-5c47-4bd3-b94b-d523d1219cd5",
+    "status": "done",
+    "createdAt": "2025-09-09T19:58:08.675Z",
+    "startedAt": "2025-09-09T19:58:10.924Z",
+    "completedAt": "2025-09-09T19:58:10.927Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "a1b32923-e3a4-4105-b521-6b04baf1bfe3",
+    "status": "done",
+    "createdAt": "2025-09-09T20:04:08.684Z",
+    "startedAt": "2025-09-09T20:04:08.780Z",
+    "completedAt": "2025-09-09T20:04:08.783Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "8f8d06b0-9bc1-41a2-b43d-1e1759c5c7d1",
+    "status": "done",
+    "createdAt": "2025-09-09T20:07:08.691Z",
+    "startedAt": "2025-09-09T20:07:08.955Z",
+    "completedAt": "2025-09-09T20:07:08.959Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "45693f7d-c6cb-40b4-9b02-12f4b3e9f5e5",
+    "status": "done",
+    "createdAt": "2025-09-09T20:10:08.697Z",
+    "startedAt": "2025-09-09T20:10:09.126Z",
+    "completedAt": "2025-09-09T20:10:09.129Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "8fcb0e72-cf47-4b6a-b702-b47a003e9703",
+    "status": "done",
+    "createdAt": "2025-09-09T20:16:08.709Z",
+    "startedAt": "2025-09-09T20:16:09.471Z",
+    "completedAt": "2025-09-09T20:16:09.474Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "5afd1422-0d63-4fd6-9c87-176a59a76416",
+    "status": "done",
+    "createdAt": "2025-09-09T20:18:08.712Z",
+    "startedAt": "2025-09-09T20:18:09.587Z",
+    "completedAt": "2025-09-09T20:18:09.590Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "7656f47d-06de-41f6-b7e4-954cc673e157",
+    "status": "done",
+    "createdAt": "2025-09-09T20:22:08.716Z",
+    "startedAt": "2025-09-09T20:22:09.817Z",
+    "completedAt": "2025-09-09T20:22:09.821Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "1c91c21c-8e6e-4b9c-999c-1e46ca76232d",
+    "status": "done",
+    "createdAt": "2025-09-09T20:28:08.725Z",
+    "startedAt": "2025-09-09T20:28:10.161Z",
+    "completedAt": "2025-09-09T20:28:10.165Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "86d30b9f-8b7b-47f7-af39-1df5bf88a6a8",
+    "status": "done",
+    "createdAt": "2025-09-09T20:29:08.725Z",
+    "startedAt": "2025-09-09T20:29:10.222Z",
+    "completedAt": "2025-09-09T20:29:10.225Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "e7d6d80a-e524-415f-95ff-005f9164d056",
+    "status": "done",
+    "createdAt": "2025-09-09T20:34:08.730Z",
+    "startedAt": "2025-09-09T20:34:10.528Z",
+    "completedAt": "2025-09-09T20:34:10.531Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "17f3ddaf-d5ac-4ad9-b478-4091959fc0cb",
+    "status": "done",
+    "createdAt": "2025-09-09T20:40:08.736Z",
+    "startedAt": "2025-09-09T20:40:10.877Z",
+    "completedAt": "2025-09-09T20:40:10.880Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "8c27bdb6-1708-41e7-9e2f-b3b5c441bd8c",
+    "status": "done",
+    "createdAt": "2025-09-09T20:40:08.738Z",
+    "startedAt": "2025-09-09T20:40:11.082Z",
+    "completedAt": "2025-09-09T20:40:11.084Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "9e43cc5a-d706-41cc-98af-0dfdaa10f283",
+    "status": "done",
+    "createdAt": "2025-09-09T20:46:08.737Z",
+    "startedAt": "2025-09-09T20:46:11.237Z",
+    "completedAt": "2025-09-09T20:46:11.240Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "e62743a6-8731-4bc0-8ce7-787370f41a80",
+    "status": "done",
+    "createdAt": "2025-09-09T20:51:08.746Z",
+    "startedAt": "2025-09-09T20:51:09.009Z",
+    "completedAt": "2025-09-09T20:51:09.012Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "30d13431-b6d0-476b-bfe6-7ef967e473df",
+    "status": "done",
+    "createdAt": "2025-09-09T20:52:08.748Z",
+    "startedAt": "2025-09-09T20:52:09.066Z",
+    "completedAt": "2025-09-09T20:52:09.069Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "78fdcc66-4413-4fae-bbfc-ffe5e1642b79",
+    "status": "done",
+    "createdAt": "2025-09-09T20:58:08.761Z",
+    "startedAt": "2025-09-09T20:58:09.412Z",
+    "completedAt": "2025-09-09T20:58:09.415Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "cc4f757b-50b2-4ac9-9fba-b129cbb09c16",
+    "status": "done",
+    "createdAt": "2025-09-09T21:02:08.767Z",
+    "startedAt": "2025-09-09T21:02:09.643Z",
+    "completedAt": "2025-09-09T21:02:09.646Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "4cd0cd26-db03-4bc8-b447-558520b8f331",
+    "status": "done",
+    "createdAt": "2025-09-09T21:04:08.771Z",
+    "startedAt": "2025-09-09T21:04:09.760Z",
+    "completedAt": "2025-09-09T21:04:09.763Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "32c93551-5ca9-45e6-8a0c-1f56480b4ac7",
+    "status": "done",
+    "createdAt": "2025-09-09T21:10:08.778Z",
+    "startedAt": "2025-09-09T21:10:10.113Z",
+    "completedAt": "2025-09-09T21:10:10.116Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "13b508dd-8ba1-42d2-9311-d0043790a8bd",
+    "status": "done",
+    "createdAt": "2025-09-09T21:13:08.782Z",
+    "startedAt": "2025-09-09T21:13:10.296Z",
+    "completedAt": "2025-09-09T21:13:10.299Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "50697d3a-6f4a-4fe3-9b77-c213b11042ba",
+    "status": "done",
+    "createdAt": "2025-09-09T21:16:08.785Z",
+    "startedAt": "2025-09-09T21:16:10.481Z",
+    "completedAt": "2025-09-09T21:16:10.484Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "29954c24-4421-4944-9899-4172772cdb2a",
+    "status": "done",
+    "createdAt": "2025-09-09T21:22:08.790Z",
+    "startedAt": "2025-09-09T21:22:10.842Z",
+    "completedAt": "2025-09-09T21:22:10.845Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "25afedee-f9f1-4577-a8b2-1e08f9036919",
+    "status": "done",
+    "createdAt": "2025-09-09T21:24:08.791Z",
+    "startedAt": "2025-09-09T21:24:10.962Z",
+    "completedAt": "2025-09-09T21:24:10.965Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "77e87426-462e-45c8-b014-b9612d61cac1",
+    "status": "done",
+    "createdAt": "2025-09-09T21:28:08.792Z",
+    "startedAt": "2025-09-09T21:28:11.198Z",
+    "completedAt": "2025-09-09T21:28:11.202Z"
+  },
+  {
+    "type": "metrics_snapshot",
+    "reason": "recurring",
+    "id": "b323b0e0-dc1d-4e81-9f66-f73a613afea9",
+    "status": "done",
+    "createdAt": "2025-09-09T21:34:08.804Z",
+    "startedAt": "2025-09-09T21:34:09.044Z",
+    "completedAt": "2025-09-09T21:34:09.048Z"
+  },
+  {
+    "type": "readiness_snapshot",
+    "reason": "recurring",
+    "id": "326f947c-5a0d-455b-b4fc-c0fef834e24a",
+    "status": "done",
+    "createdAt": "2025-09-09T21:35:08.807Z",
+    "startedAt": "2025-09-09T21:35:09.103Z",
+    "completedAt": "2025-09-09T21:35:09.106Z"
   }
 ]

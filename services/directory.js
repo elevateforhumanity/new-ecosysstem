@@ -1,7 +1,7 @@
-import { PrismaClient } from '@prisma/client';
+const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-export async function saveDirectory(entry) {
+async function saveDirectory(entry) {
   return await prisma.directoryListing.upsert({
     where: { id: entry.id },
     update: entry,
@@ -9,10 +9,16 @@ export async function saveDirectory(entry) {
   });
 }
 
-export async function getDirectory(id) {
+async function getDirectory(id) {
   return await prisma.directoryListing.findUnique({ where: { id } });
 }
 
-export async function getDirectories() {
+async function getDirectories() {
   return await prisma.directoryListing.findMany();
 }
+
+module.exports = {
+  saveDirectory,
+  getDirectory,
+  getDirectories
+};

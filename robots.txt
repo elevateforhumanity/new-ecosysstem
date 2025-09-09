@@ -26,6 +26,7 @@ Disallow: /.replit
 Disallow: /package.json
 
 # Sitemap location (relative so it works across environments)
+Sitemap: /sitemap-index.xml
 Sitemap: /sitemap.xml
 
 # Cache control

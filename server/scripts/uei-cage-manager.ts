@@ -82,7 +82,6 @@ class UEICageManager {
           "SAM.gov Federal Contractor",
           "Indiana State Bidder (IDOA)",
           "Certiport Authorized Testing Center",
-          "ACT WorkKeys Testing Center",
           "Milady RISE Certified Provider",
           "VITA Volunteer Tax Assistance Provider",
           "NCCER Training Partner",

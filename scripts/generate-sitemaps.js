@@ -32,6 +32,21 @@ const GROUPS = {
   marketing: ['/programs', '/hub', '/connect']
 };
 
+// Employer related (if stable page exists)
+if (fs.existsSync(path.join(ROOT, 'employer-dashboard.html'))) {
+  STABLE_ROUTES.add('/employer-dashboard');
+  GROUPS.employer = ['/employer-dashboard'];
+}
+
+// Enrollment / intake (placeholder if later added as static pages)
+['/enrollment', '/intake'].forEach(r => {
+  const file = r.replace(/\//,'') + '.html';
+  if (fs.existsSync(path.join(ROOT, file))) {
+    STABLE_ROUTES.add(r);
+    GROUPS.intake = (GROUPS.intake||[]).concat([r]);
+  }
+});
+
 // Collect root html files (exclude templates & verification pages if needed)
 function getRootHtmlFiles() {
   return fs.readdirSync(ROOT)

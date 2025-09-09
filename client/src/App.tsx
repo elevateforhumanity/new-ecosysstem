@@ -251,15 +251,7 @@ function Programs() {
           <p className="mt-3 text-sm text-slate-500">Duration: 1-4 days • Funding: Up to $800</p>
         </div>
         
-        <div className="rounded-xl border border-slate-200 p-6">
-          <h3 className="text-xl font-semibold">WorkKeys Assessment</h3>
-          <p className="mt-2 text-slate-600">ACT WorkKeys testing for National Career Readiness Certificate (NCRC).</p>
-          <div className="mt-4 flex items-center gap-2">
-            <span className="inline-flex px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded">WIOA Eligible</span>
-            <span className="inline-flex px-2 py-1 bg-orange-100 text-orange-800 text-xs font-medium rounded">Testing Center</span>
-          </div>
-          <p className="mt-3 text-sm text-slate-500">Duration: 3 hours • Cost: $40 per assessment</p>
-        </div>
+  {/* Career readiness assessment removed (previously branded). */}
         
         <div className="rounded-xl border border-slate-200 p-6">
           <h3 className="text-xl font-semibold">Microsoft Certifications</h3>
@@ -675,15 +667,7 @@ function Partners() {
                 <p className="text-sm text-slate-600">Authorized testing center for Microsoft, Adobe, and technology certifications.</p>
               </div>
             </div>
-            <div className="flex items-start gap-4">
-              <div className="rounded-lg bg-yellow-100 p-2">
-                <div className="h-6 w-6 bg-yellow-600 rounded"></div>
-              </div>
-              <div>
-                <h3 className="font-semibold">ACT WorkKeys</h3>
-                <p className="text-sm text-slate-600">Official testing center for workplace skills assessments and NCRC credentials.</p>
-              </div>
-            </div>
+            {/* Removed former career readiness assessment partner block per content policy update. */}
             <div className="flex items-start gap-4">
               <div className="rounded-lg bg-pink-100 p-2">
                 <div className="h-6 w-6 bg-pink-600 rounded"></div>

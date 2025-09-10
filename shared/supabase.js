@@ -19,8 +19,10 @@
 // Shared Supabase client for all sister sites
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// Support both Vite (import.meta.env) and plain static HTML (window.*)
+const VITE_ENV = typeof import.meta !== 'undefined' ? import.meta.env : undefined;
+const SUPABASE_URL = (VITE_ENV && VITE_ENV.VITE_SUPABASE_URL) || (typeof window !== 'undefined' && window.SUPABASE_URL) || '';
+const SUPABASE_ANON_KEY = (VITE_ENV && VITE_ENV.VITE_SUPABASE_ANON_KEY) || (typeof window !== 'undefined' && window.SUPABASE_ANON_KEY) || '';
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: { persistSession: true, storage: localStorage }

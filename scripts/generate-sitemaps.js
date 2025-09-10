@@ -7,7 +7,14 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = process.cwd();
-const CANONICAL = process.env.CANONICAL_DOMAIN || 'https://example.com';
+let CANONICAL = process.env.CANONICAL_DOMAIN || 'https://example.com';
+// Try to read baseUrl from elevate.config.json as fallback
+try {
+  const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts', 'elevate.config.json'), 'utf8'));
+  if (!process.env.CANONICAL_DOMAIN && cfg.baseUrl) {
+    CANONICAL = cfg.baseUrl;
+  }
+} catch (_) {}
 
 // Explicitly excluded slugs (requested removal from sitemap only, content may still exist internally)
 const EXCLUDED_ROUTES = new Set([
@@ -94,6 +101,8 @@ function generateStableSitemap(){
   const urls = filtered.map((r,i)=> makeUrlEntry(`${CANONICAL}${r}`,'weekly', i===0 ? '1.0':'0.7', today));
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>`;
   writeFile('sitemaps/stable.xml', xml);
+  // Also publish a root sitemap.xml for legacy consumers
+  writeFile('sitemap.xml', xml);
 }
 
 function generateGroupSitemaps(){

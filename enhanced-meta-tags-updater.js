@@ -19,14 +19,18 @@
 
 const fs = require('fs');
 
+// Environment-driven settings (fallback to placeholders)
+const GA_ID = process.env.GOOGLE_ANALYTICS_ID || process.env.NEXT_PUBLIC_GA_ID || 'GA_MEASUREMENT_ID';
+const GOOGLE_VERIFY = process.env.GOOGLE_SITE_VERIFICATION || 'EFH-workforce-development-2025';
+
 // Enhanced Meta Tags for All Pages
 const siteConfig = {
     domain: 'https://stripe-integrate-curvaturebodysc.replit.app',
     siteName: 'Elevate for Humanity',
     defaultImage: '/images/Social_media_open_graph_2ded65c5.png',
-    googleVerification: 'EFH-workforce-development-2025',
+    googleVerification: GOOGLE_VERIFY,
     bingVerification: 'YOUR_BING_VERIFICATION_CODE',
-    gaId: 'GA_MEASUREMENT_ID'
+    gaId: GA_ID
 };
 
 const pageConfigs = {

@@ -2,6 +2,7 @@
   "installCommand": "PRISMA_SKIP_POSTINSTALL=1 npm ci --legacy-peer-deps",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "ignoreCommand": "bash -lc 'if [[ \"$VERCEL_GIT_COMMIT_REF\" =~ ^dependabot\/ ]]; then echo Skipping Dependabot branch $VERCEL_GIT_COMMIT_REF; exit 0; else exit 1; fi'",
   "redirects": [
     {
       "source": "/:path*",

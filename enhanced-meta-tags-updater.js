@@ -21,7 +21,7 @@ const fs = require('fs');
 
 // Enhanced Meta Tags for All Pages
 const siteConfig = {
-    domain: process.env.CANONICAL_DOMAIN || 'https://stripe-integrate-curvaturebodysc.replit.app',
+    domain: process.env.CANONICAL_DOMAIN || 'https://www.elevateforhumanity.org',
     siteName: 'Elevate for Humanity',
     defaultImage: '/images/Social_media_open_graph_2ded65c5.png',
     googleVerification: process.env.GOOGLE_SITE_VERIFICATION || 'EFH-workforce-development-2025',

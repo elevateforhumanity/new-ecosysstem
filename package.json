@@ -7,6 +7,8 @@
     "node": "20.17.0"
   },
   "scripts": {
+  "sisters:gen": "python wire_in_sisters/generate_sitemaps.py",
+  "sisters:validate": "python wire_in_sisters/validate_sites.py || true",
     "sitemaps:generate": "node scripts/generate-sitemaps.js",
     "sitemaps:ping": "node scripts/ping-sitemaps.js",
     "sitemaps:submit": "npm run sitemaps:generate && npm run sitemaps:ping",
@@ -34,7 +36,9 @@
   "engagement:inject": "node scripts/inject-engagement.js",
   "brand:scrub": "node scripts/scrub-brand-mentions.js",
   "site:enhance": "npm run seo:meta:all && npm run stripe:inject:pk && npm run engagement:inject && npm run brand:scrub",
-  "seo:setup": "bash scripts/setup-seo-domain.sh"
+  "seo:setup": "bash scripts/setup-seo-domain.sh",
+  "seo:canonical": "node scripts/update-canonical-urls.js",
+  "seo:sitemap": "node scripts/generate-comprehensive-sitemap.js"
   ,"stripe:setup": "bash scripts/setup-stripe.sh"
   },
   "prisma": {

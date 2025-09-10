@@ -154,6 +154,7 @@ The system ensures seamless experience as users move between different parts of 
 
 ## 🔍 Health & Monitoring
 - Basic liveness: `/health`
+- **User-friendly status: `/howwedoing`, `/status`, `/how-we-doing`, `/howaredoing`** 🆕
 - Aggregated: `/api/healthz` returns service statuses (api, lms, compliance, db) + uptime
 - Request IDs returned in `X-Request-ID` header and error payloads
 

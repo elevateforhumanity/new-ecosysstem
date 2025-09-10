@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = process.cwd();
-const CANONICAL = process.env.CANONICAL_DOMAIN || 'https://example.com';
+const CANONICAL = process.env.CANONICAL_DOMAIN || 'https://www.elevateforhumanity.org';
 
 // Explicitly excluded slugs (requested removal from sitemap only, content may still exist internally)
 const EXCLUDED_ROUTES = new Set([
@@ -25,7 +25,18 @@ const STABLE_ROUTES = new Set([
   '/compliance',
   '/pay',
   '/partners',
-  '/account'
+  '/account',
+  '/public/employers',
+  '/public/apply',
+  '/public/academic-calendar',
+  '/public/federal-apprenticeships',
+  '/blog',
+  '/eligibility-verification',
+  '/employer-dashboard',
+  '/skills-assessment',
+  '/student-dashboard',
+  '/performance-tracking',
+  '/cost-tracking'
 ]);
 
 // Logical groupings for smaller shard sitemaps (can expand as ecosystem grows)

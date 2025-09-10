@@ -21,54 +21,64 @@ const fs = require('fs');
 
 // Enhanced Meta Tags for All Pages
 const siteConfig = {
-    domain: 'https://stripe-integrate-curvaturebodysc.replit.app',
+    domain: 'https://www.elevateforhumanity.org',
     siteName: 'Elevate for Humanity',
-    defaultImage: '/images/Social_media_open_graph_2ded65c5.png',
-    googleVerification: 'EFH-workforce-development-2025',
-    bingVerification: 'YOUR_BING_VERIFICATION_CODE',
-    gaId: 'GA_MEASUREMENT_ID'
+    defaultImage: '/branding/icons/workforce-icons.png',
+    googleVerification: process.env.GOOGLE_VERIFICATION_CODE || 'EFH-workforce-development-2025',
+    bingVerification: process.env.BING_VERIFICATION_CODE || 'YOUR_BING_VERIFICATION_CODE',
+    gaId: process.env.GA_MEASUREMENT_ID || 'GA_MEASUREMENT_ID'
 };
 
 const pageConfigs = {
     'index.html': {
-        title: 'Launch Your AI & Data Science Career | Elevate for Humanity',
-        description: 'Transform your career with federally-funded AI and Data Science training. WIOA-approved programs, 89% job placement rate, and employer partnerships. Start your tech career today.',
-        keywords: 'AI training, data science bootcamp, workforce development, WIOA funding, career training, federal grants, job placement, python programming, machine learning certification',
+        title: 'Elevate for Humanity | Indiana Workforce Training That Pays for Itself',
+        description: 'Transform your career with federally-funded workforce training in Indiana. Get paid while you learn with WEX, OJT, WRG/ETPL, JRI programs and registered apprenticeships. 89% job placement rate with full employer support.',
+        keywords: 'Indiana workforce training, WEX programs, OJT training, WRG ETPL, JRI programs, registered apprenticeships, federal funding, paid training, career development, job placement, employer partnerships, workforce development',
         structuredData: {
             "@context": "https://schema.org",
             "@type": "EducationalOrganization",
             "name": "Elevate for Humanity",
-            "description": "Federally-funded AI and Data Science training programs with 89% job placement rate"
+            "description": "Federally-funded Indiana workforce training programs with 89% job placement rate"
         }
     },
     'programs.html': {
-        title: 'AI Courses & Data Science Programs | Best Online Bootcamp 2024',
-        description: 'Explore top-rated AI courses and data science programs. Python programming, machine learning certification, data analysis training with job guarantee.',
-        keywords: 'AI courses, data science programs, python programming course, machine learning certification, data analysis training, online bootcamp, coding courses, programming bootcamp',
+        title: 'Training Programs & Certifications | Elevate for Humanity',
+        description: 'Explore federally-funded training programs including WEX, OJT, WRG/ETPL, JRI and registered apprenticeships. High-demand skills training with guaranteed job placement support.',
+        keywords: 'training programs, workforce certifications, WEX programs, OJT training, apprenticeships, skills training, federal funding, career programs',
         structuredData: {
             "@context": "https://schema.org",
             "@type": "Course",
-            "name": "AI & Data Science Training Programs"
+            "name": "Workforce Development Training Programs"
         }
     },
     'hub.html': {
-        title: 'Workforce Development Hub | Federal Training Programs',
-        description: 'Access federal workforce development resources, WIOA funding information, and career advancement tools. Connect with employers and training partners.',
-        keywords: 'workforce development, federal training programs, WIOA resources, career advancement, employer partnerships, job training hub',
+        title: 'Workforce Development Hub | Federal Training Resources',
+        description: 'Access comprehensive workforce development resources, federal funding information, and career advancement tools. Connect with employers and training partners across Indiana.',
+        keywords: 'workforce development, federal training programs, career resources, employer partnerships, job training hub, workforce funding',
         structuredData: {
             "@context": "https://schema.org",
             "@type": "WebSite",
             "name": "Workforce Development Hub"
         }
     },
-    'pay.html': {
-        title: 'Enroll Now | Federally-Funded Training Programs',
-        description: 'Start your AI or Data Science career today. Check funding eligibility, apply for WIOA grants, and enroll in certification programs with job placement guarantee.',
-        keywords: 'enroll AI training, data science enrollment, WIOA application, federal funding eligibility, career training enrollment, job placement program',
+    'public/employers.html': {
+        title: 'Employer Solutions | Reduce Training Costs with Federal Funding',
+        description: 'Cut training and wage costs with federal workforce programs. WEX covers 100% wages, OJT provides 50-75% reimbursement. Partner with Elevate for Humanity today.',
+        keywords: 'employer solutions, training cost reduction, WEX employer benefits, OJT reimbursement, federal workforce funding, talent acquisition',
         structuredData: {
             "@context": "https://schema.org",
             "@type": "Service",
-            "name": "Career Training Enrollment"
+            "name": "Employer Workforce Solutions"
+        }
+    },
+    'public/apply.html': {
+        title: 'Apply for Training Programs | Start Your Career Today',
+        description: 'Apply for federally-funded training programs. Check eligibility, submit applications, and start your career transformation with guaranteed job placement support.',
+        keywords: 'apply training programs, workforce application, federal funding application, career training enrollment, job placement program',
+        structuredData: {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Training Program Application"
         }
     }
 };

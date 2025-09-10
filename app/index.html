@@ -16,7 +16,21 @@
     <meta property="og:url" content="https://www.elevateforhumanity.org" />
     <script type="module" crossorigin src="/app/assets/index-D8-_n6B7.js"></script>
     <link rel="stylesheet" crossorigin href="/app/assets/index-erZGo4Ol.css">
-  </head>
+      <meta name="google-site-verification" content="GOOGLE_VERIFICATION_CODE_HERE" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID', {
+            page_title: document.title,
+            page_location: window.location.href,
+            send_page_view: true
+        });
+    </script>
+</head>
   <body>
     <!-- React app mounts here -->
     <div id="root">

@@ -110,7 +110,21 @@
       .sisters-grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); }
       .badge { display:inline-block; background:#1d4ed8; color:#fff; padding:4px 8px; font-size:.7rem; letter-spacing:.5px; border-radius:6px; font-weight:600; margin-left:6px; vertical-align:middle; }
     </style>
-  </head>
+      <meta name="google-site-verification" content="GOOGLE_VERIFICATION_CODE_HERE" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID', {
+            page_title: document.title,
+            page_location: window.location.href,
+            send_page_view: true
+        });
+    </script>
+</head>
   <body>
     <div class="wrap">
       <header class="notice">Indiana Employers: Cut training & wage costs with WEX • OJT • WRG/ETPL • JRI • Apprenticeships</header>

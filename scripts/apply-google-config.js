@@ -11,7 +11,12 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 // Load environment variables
-require('dotenv').config();
+try {
+    require('dotenv').config();
+} catch (e) {
+    // dotenv not available, use process.env directly
+    console.log('📝 Note: dotenv not available, using system environment variables');
+}
 
 const GA_MEASUREMENT_ID = process.env.GA_MEASUREMENT_ID || 'GA_MEASUREMENT_ID';
 const GOOGLE_VERIFICATION_CODE = process.env.GOOGLE_VERIFICATION_CODE || 'GOOGLE_VERIFICATION_CODE_HERE';

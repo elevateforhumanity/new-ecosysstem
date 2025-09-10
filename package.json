@@ -7,6 +7,8 @@
     "node": "20.17.0"
   },
   "scripts": {
+  "sisters:gen": "python wire_in_sisters/generate_sitemaps.py",
+  "sisters:validate": "python wire_in_sisters/validate_sites.py || true",
     "sitemaps:generate": "node scripts/generate-sitemaps.js",
     "sitemaps:ping": "node scripts/ping-sitemaps.js",
     "sitemaps:submit": "npm run sitemaps:generate && npm run sitemaps:ping",

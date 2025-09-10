@@ -3,8 +3,12 @@
   "buildCommand": "npm run build",
   "ignoreCommand": "sh -c 'case \"$VERCEL_GIT_COMMIT_REF\" in dependabot*) exit 0 ;; *) exit 1 ;; esac'",
   "redirects": [
-    { "source": "http://elevateforhumanity.org/:path*", "destination": "https://www.elevateforhumanity.org/:path*", "permanent": true },
-    { "source": "https://elevateforhumanity.org/:path*", "destination": "https://www.elevateforhumanity.org/:path*", "permanent": true },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "elevateforhumanity.org" }],
+      "destination": "https://www.elevateforhumanity.org/:path*",
+      "permanent": true
+    },
     { "source": "/medical-assistant", "destination": "/programs", "permanent": true },
     { "source": "/programs/medical-assistant", "destination": "/programs", "permanent": true },
     { "source": "/cpr", "destination": "/programs", "permanent": true },

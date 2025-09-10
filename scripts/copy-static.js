@@ -67,6 +67,10 @@ async function walkAndCopy() {
       if (ent.isDirectory()) {
         await walk(abs);
       } else if (match(includeGlobs, rel)) {
+        // Skip root index.html as it's built by Vite
+        if (rel === 'index.html') {
+          continue;
+        }
         const dest = path.join(DIST, rel);
         await copyFile(abs, dest);
         copied++;

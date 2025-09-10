@@ -11,6 +11,7 @@
     "sitemaps:ping": "node scripts/ping-sitemaps.js",
     "sitemaps:submit": "npm run sitemaps:generate && npm run sitemaps:ping",
     "build:sitemaps": "node scripts/generate-sitemaps.js",
+    "google:apply": "node scripts/apply-google-config.js",
     "dev": "vite",
     "prebuild": "node scripts/validate-env.js",
   "build": "vite build && npm run seo:polish",

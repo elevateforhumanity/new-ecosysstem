@@ -21,12 +21,12 @@ const fs = require('fs');
 
 // Enhanced Meta Tags for All Pages
 const siteConfig = {
-    domain: 'https://stripe-integrate-curvaturebodysc.replit.app',
+    domain: process.env.CANONICAL_DOMAIN || 'https://stripe-integrate-curvaturebodysc.replit.app',
     siteName: 'Elevate for Humanity',
     defaultImage: '/images/Social_media_open_graph_2ded65c5.png',
-    googleVerification: 'EFH-workforce-development-2025',
-    bingVerification: 'YOUR_BING_VERIFICATION_CODE',
-    gaId: 'GA_MEASUREMENT_ID'
+    googleVerification: process.env.GOOGLE_SITE_VERIFICATION || 'EFH-workforce-development-2025',
+    bingVerification: process.env.BING_SITE_VERIFICATION || 'YOUR_BING_VERIFICATION_CODE',
+    gaId: process.env.GOOGLE_ANALYTICS_ID || process.env.VITE_ANALYTICS_ID || 'GA_MEASUREMENT_ID'
 };
 
 const pageConfigs = {

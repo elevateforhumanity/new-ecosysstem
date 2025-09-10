@@ -6,20 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Analytics 4 Setup - Elevate for Humanity</title>
     
-    <!-- Google tag (gtag.js) - Replace GA_MEASUREMENT_ID with your actual ID -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <!-- Google tag (gtag.js) - Replace G-TEST123456 with your actual ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TEST123456"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID', {
+        gtag('config', 'G-TEST123456', {
             page_title: 'EFH Analytics Setup',
             page_location: window.location.href,
             send_page_view: true
         });
         
         // Enhanced ecommerce tracking for course enrollments
-        gtag('config', 'GA_MEASUREMENT_ID', {
+        gtag('config', 'G-TEST123456', {
             custom_map: {
                 'custom_parameter_1': 'course_type',
                 'custom_parameter_2': 'funding_source'
@@ -87,7 +87,7 @@
                 <ol class="text-yellow-700 space-y-3 list-decimal list-inside">
                     <li>Create Google Analytics 4 property at <a href="https://analytics.google.com" class="underline text-blue-600">analytics.google.com</a></li>
                     <li>Copy your Measurement ID (format: G-XXXXXXXXXX)</li>
-                    <li>Replace "GA_MEASUREMENT_ID" in all HTML files with your actual ID</li>
+                    <li>Replace "G-TEST123456" in all HTML files with your actual ID</li>
                     <li>Set up conversion goals in GA4 dashboard</li>
                     <li>Connect to Google Search Console for SEO data</li>
                 </ol>

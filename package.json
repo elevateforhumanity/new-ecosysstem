@@ -35,6 +35,7 @@
   "brand:scrub": "node scripts/scrub-brand-mentions.js",
   "site:enhance": "npm run seo:meta:all && npm run stripe:inject:pk && npm run engagement:inject && npm run brand:scrub",
   "seo:setup": "bash scripts/setup-seo-domain.sh"
+  ,"stripe:setup": "bash scripts/setup-stripe.sh"
   },
   "prisma": {
     "seed": "node prisma/seed.cjs"

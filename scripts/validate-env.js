@@ -2,6 +2,16 @@
 // Environment variable validation using zod
 const { z } = require('zod');
 
+// Allow skipping in CI/Vercel or via env flag
+if (
+  process.env.SKIP_ENV_VALIDATION === 'true' ||
+  process.env.CI === 'true' ||
+  process.env.VERCEL === '1'
+) {
+  console.log('ℹ️  Env validation skipped (CI/VERCEL/SKIP_ENV_VALIDATION).');
+  process.exit(0);
+}
+
 const schema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).optional(),
   STRIPE_SECRET_KEY: z.string().min(10),

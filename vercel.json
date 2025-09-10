@@ -1,4 +1,6 @@
 {
+  "installCommand": "npm ci --legacy-peer-deps",
+  "buildCommand": "npm run build",
   "redirects": [
     { "source": "http://elevateforhumanity.org/:path*", "destination": "https://www.elevateforhumanity.org/:path*", "permanent": true },
     { "source": "https://elevateforhumanity.org/:path*", "destination": "https://www.elevateforhumanity.org/:path*", "permanent": true },

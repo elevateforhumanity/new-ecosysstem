@@ -6,4 +6,5 @@
   <url><loc>https://example.com/lms</loc><lastmod>2025-09-10</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://example.com/connect</loc><lastmod>2025-09-10</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://example.com/pay</loc><lastmod>2025-09-10</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://example.com/sitemap</loc><lastmod>2025-09-10</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
 </urlset>

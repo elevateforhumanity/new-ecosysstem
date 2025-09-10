@@ -25,17 +25,32 @@ const STABLE_ROUTES = new Set([
   '/compliance',
   '/pay',
   '/partners',
-  '/account'
+  '/account',
+  '/sitemap',
+  '/about',
+  '/courses',
+  '/student',
+  '/instructor',
+  '/analytics',
+  '/ecosystem',
+  '/privacy-policy',
+  '/refund-policy',
+  '/terms-of-service',
+  '/accessibility',
+  '/student-handbook',
+  '/quiz',
+  '/mentors'
 ]);
 
 // Logical groupings for smaller shard sitemaps (can expand as ecosystem grows)
 const GROUPS = {
-  high: ['/', '/programs', '/hub', '/lms', '/connect', '/pay'],
-  compliance: ['/compliance'],
+  high: ['/', '/programs', '/hub', '/lms', '/connect', '/pay', '/sitemap'],
+  compliance: ['/compliance', '/privacy-policy', '/terms-of-service', '/refund-policy', '/accessibility'],
   partners: ['/partners'],
   account: ['/account'],
-  learning: ['/lms'],
-  marketing: ['/programs', '/programs/medical-assistant', '/hub', '/connect']
+  learning: ['/lms', '/courses', '/student', '/instructor', '/analytics', '/quiz', '/mentors'],
+  marketing: ['/programs', '/programs/medical-assistant', '/hub', '/connect', '/about', '/ecosystem'],
+  navigation: ['/sitemap', '/student-handbook']
 };
 
 // Employer related (if stable page exists)

@@ -7,5 +7,6 @@
   <sitemap><loc>https://example.com/sitemaps/account.xml</loc><lastmod>2025-09-10</lastmod></sitemap>
   <sitemap><loc>https://example.com/sitemaps/learning.xml</loc><lastmod>2025-09-10</lastmod></sitemap>
   <sitemap><loc>https://example.com/sitemaps/marketing.xml</loc><lastmod>2025-09-10</lastmod></sitemap>
+  <sitemap><loc>https://example.com/sitemaps/navigation.xml</loc><lastmod>2025-09-10</lastmod></sitemap>
   <sitemap><loc>https://example.com/sitemaps/employer.xml</loc><lastmod>2025-09-10</lastmod></sitemap>
 </sitemapindex>

@@ -30,6 +30,7 @@ import { HelmetProvider } from "react-helmet-async";
 const StudentDashboard = lazy(() => import("./pages/StudentDashboard"));
 const Quiz = lazy(() => import("./pages/Quiz"));
 const MentorDirectory = lazy(() => import("./pages/sisters/MentorDirectory"));
+const Sitemap = lazy(() => import("./pages/Sitemap"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const AskWidget = lazy(() => import('./components/AskWidget'));
 
@@ -43,6 +44,7 @@ export default function App() {
               <Route path="/" element={<StudentDashboard />} />
               <Route path="/quiz" element={<Quiz />} />
               <Route path="/mentors" element={<MentorDirectory />} />
+              <Route path="/sitemap" element={<Sitemap />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <AskWidget />

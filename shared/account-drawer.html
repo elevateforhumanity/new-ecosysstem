@@ -1,5 +1,4 @@
-<!-- EFH ACCOUNT DRAWER (drop-in) -->
-<style>
+<!-- EFH ACCOUNT DRAWER (drop-in) --><html><head><meta charset="UTF-8"><style>
   :root { --efh-r: 14px; --efh-ink:#111; --efh-muted:#666; --efh-line:#ececec; }
   .efh-ac-btn{position:fixed;right:16px;bottom:16px;z-index:9999;padding:10px 14px;border:1px solid var(--efh-ink);border-radius:999px;background:#fff;cursor:pointer}
   .efh-ac-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.28);backdrop-filter:saturate(90%) blur(1px);opacity:0;pointer-events:none;transition:.2s ease;z-index:9998}
@@ -21,28 +20,36 @@
   .efh-ac-open .efh-ac-wrap{transform:translateX(0)}
 </style>
 
-<button class="efh-ac-btn" id="efhAcOpen" aria-haspopup="dialog" aria-controls="efhAcWrap">Account</button>
-<div class="efh-ac-backdrop" id="efhAcBackdrop" hidden></div>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>account drawer</title><meta name="title" content="account drawer"><meta name="description" content="Get a one-time magic link via email."><meta name="keywords" content="workforce development, training, ETPL, WEX, OJT, JRI, DOL"><meta name="author" content="Elevate for Humanity"><meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1"><meta name="googlebot" content="index, follow"><link rel="canonical" href="https://stripe-integrate-curvaturebodysc.replit.app/shared/account-drawer.html"><meta property="og:type" content="website"><meta property="og:url" content="https://stripe-integrate-curvaturebodysc.replit.app/shared/account-drawer.html"><meta property="og:title" content="account drawer"><meta property="og:description" content="Get a one-time magic link via email."><meta property="og:image" content="https://stripe-integrate-curvaturebodysc.replit.app/images/Social_media_open_graph_2ded65c5.png"><meta property="og:site_name" content="Elevate for Humanity"><meta property="og:locale" content="en_US"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:url" content="https://stripe-integrate-curvaturebodysc.replit.app/shared/account-drawer.html"><meta name="twitter:title" content="account drawer"><meta name="twitter:description" content="Get a one-time magic link via email."><meta name="twitter:image" content="https://stripe-integrate-curvaturebodysc.replit.app/images/Social_media_open_graph_2ded65c5.png"><meta name="google-site-verification" content="EFH-workforce-development-2025"><meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE"><link rel="icon" href="/images/Elevate_for_Humanity_logo_81bf0fab.png"><link rel="apple-touch-icon" href="/images/Elevate_for_Humanity_logo_81bf0fab.png"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="X-Content-Type-Options" content="nosniff"><meta name="referrer" content="strict-origin-when-cross-origin"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"account drawer","description":"Get a one-time magic link via email."}</script></head><body>
+  <nav id="efh-nav-primary" role="navigation" aria-label="Primary" style="position:sticky;top:0;z-index:50;background:#0f172a;color:white;border-bottom:1px solid #1f2937">
+    <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:10px 16px;">
+      <a href="index.html" style="font-weight:700;color:#fff;text-decoration:none">Elevate for Humanity</a>
+      <div style="display:flex;gap:12px;margin-left:auto;flex-wrap:wrap">
+        <a href="index.html" style="color:#cbd5e1;text-decoration:none">Home</a><a href="hub.html" style="color:#cbd5e1;text-decoration:none">Hub</a><a href="programs.html" style="color:#cbd5e1;text-decoration:none">Programs</a><a href="pay.html" style="color:#cbd5e1;text-decoration:none">Enroll</a><a href="connect.html" style="color:#cbd5e1;text-decoration:none">Contact</a>
+      </div>
+    </div>
+  </nav><button class="efh-ac-btn" id="efhAcOpen" aria-haspopup="dialog" aria-controls="efhAcWrap">Account</button>
+<div class="efh-ac-backdrop" id="efhAcBackdrop" hidden=""></div>
 
-<aside class="efh-ac-wrap" id="efhAcWrap" role="dialog" aria-modal="true" aria-labelledby="efhAcTitle" hidden>
+<aside class="efh-ac-wrap" id="efhAcWrap" role="dialog" aria-modal="true" aria-labelledby="efhAcTitle" hidden="">
   <div class="efh-ac-head">
     <div class="efh-ac-title" id="efhAcTitle">My Account</div>
     <button class="efh-ac-close" id="efhAcClose" aria-label="Close">✕</button>
   </div>
   <div class="efh-ac-body">
     <!-- Auth panel -->
-    <section id="efhAuth" class="efh-card" hidden>
+    <section id="efhAuth" class="efh-card" hidden="">
       <h3>Sign in</h3>
       <p class="efh-muted">Get a one-time magic link via email.</p>
       <div class="efh-row efh-row-2">
-        <input id="efhEmail" class="efh-input" type="email" placeholder="you@example.com" autocomplete="email"/>
+        <input id="efhEmail" class="efh-input" type="email" placeholder="you@example.com" autocomplete="email">
         <button id="efhSend" class="efh-btn">Send Link</button>
       </div>
       <p id="efhAuthMsg" class="efh-hint"></p>
     </section>
 
     <!-- Account panel -->
-    <section id="efhAcct" hidden>
+    <section id="efhAcct" hidden="">
       <!-- Whoami -->
       <div class="efh-card">
         <div id="efhWho" class="efh-muted">Loading…</div>
@@ -52,18 +59,18 @@
       <div class="efh-card">
         <h3>Profile</h3>
         <div class="efh-row efh-row-2">
-          <input id="efhFirst" class="efh-input" placeholder="First name"/>
-          <input id="efhLast" class="efh-input" placeholder="Last name"/>
+          <input id="efhFirst" class="efh-input" placeholder="First name">
+          <input id="efhLast" class="efh-input" placeholder="Last name">
         </div>
         <div class="efh-row efh-row-2" style="margin-top:8px">
-          <input id="efhPhone" class="efh-input" placeholder="(###) ###-####"/>
+          <input id="efhPhone" class="efh-input" placeholder="(###) ###-####">
           <select id="efhLocale" class="efh-select">
             <option value="en-US">English (US)</option>
             <option value="en-GB">English (UK)</option>
             <option value="es-ES">Español</option>
           </select>
         </div>
-        <textarea id="efhAddr" class="efh-textarea" rows="3" placeholder='{"street":"...","city":"...","state":"IN","zip":"..."}' style="margin-top:8px"></textarea>
+        <textarea id="efhAddr" class="efh-textarea" rows="3" placeholder="{&quot;street&quot;:&quot;...&quot;,&quot;city&quot;:&quot;...&quot;,&quot;state&quot;:&quot;IN&quot;,&quot;zip&quot;:&quot;...&quot;}" style="margin-top:8px"></textarea>
         <div class="efh-row" style="margin-top:8px">
           <button id="efhSaveProfile" class="efh-btn">Save Profile</button>
           <span id="efhProfileMsg" class="efh-hint"></span>
@@ -73,8 +80,8 @@
       <!-- Preferences -->
       <div class="efh-card">
         <h3>Preferences</h3>
-        <label><input type="checkbox" id="efhOptIn" checked/> Email updates and reminders</label>
-        <textarea id="efhA11y" class="efh-textarea" rows="3" placeholder='{"fontScale":1,"highContrast":false}' style="margin-top:8px"></textarea>
+        <label><input type="checkbox" id="efhOptIn" checked=""> Email updates and reminders</label>
+        <textarea id="efhA11y" class="efh-textarea" rows="3" placeholder="{&quot;fontScale&quot;:1,&quot;highContrast&quot;:false}" style="margin-top:8px"></textarea>
         <div class="efh-row" style="margin-top:8px">
           <button id="efhSavePrefs" class="efh-btn">Save Preferences</button>
           <span id="efhPrefsMsg" class="efh-hint"></span>
@@ -83,21 +90,21 @@
 
       <!-- Funding & Vouchers -->
       <div class="efh-card">
-        <h3>Funding & Vouchers</h3>
+        <h3>Funding &amp; Vouchers</h3>
         <div class="efh-row efh-row-2">
-          <input id="efhVoucherId" class="efh-input" placeholder="Voucher ID (e.g., WorkOne #)"/>
-          <input id="efhCaseMgr" class="efh-input" placeholder="Case Manager Email"/>
+          <input id="efhVoucherId" class="efh-input" placeholder="Voucher ID (e.g., workforce center #)">
+          <input id="efhCaseMgr" class="efh-input" placeholder="Case Manager Email">
         </div>
         <div class="efh-row efh-row-2" style="margin-top:8px">
           <select id="efhFundingSrc" class="efh-select">
             <option value="">Funding Source (optional)</option>
-            <option value="WIOA">WIOA / WorkOne</option>
+            <option value="WIOA">WIOA / workforce center</option>
             <option value="ETPL">INTraining / ETPL</option>
             <option value="WRG">Workforce Ready Grant</option>
             <option value="Self-Pay">Self-Pay</option>
             <option value="Other">Other</option>
           </select>
-          <input id="efhCoupon" class="efh-input" placeholder="Coupon / Promo Code (optional)"/>
+          <input id="efhCoupon" class="efh-input" placeholder="Coupon / Promo Code (optional)">
         </div>
         <div class="efh-row" style="margin-top:8px">
           <button id="efhSaveFunding" class="efh-btn">Save Funding Info</button>
@@ -434,3 +441,24 @@
   await refreshUI();
 </script>
 <!-- /EFH ACCOUNT DRAWER -->
+  <section id="efh-cta-section" style="margin:40px auto;max-width:1100px;border:1px solid #e2e8f0;border-radius:12px;padding:24px;background:#f8fafc">
+    <h2 style="margin:0 0 8px 0;font-size:22px;color:#0f172a">Get funded, career-aligned training</h2>
+    <p style="margin:0 0 16px 0;color:#334155">WIOA-aligned programs with employer connections. Explore ETPL providers, DOL-aligned curricula, and placement pathways via JRI, WEX, and OJT.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a href="public/apply.html" style="background:#4f46e5;color:white;padding:10px 14px;border-radius:8px;text-decoration:none">Apply now</a>
+      <a href="connect.html#contact" style="background:#0f172a;color:white;padding:10px 14px;border-radius:8px;text-decoration:none">Talk to a coach</a>
+      <a href="mailto:contact@elevateforhumanity.org" style="color:#0f172a;padding:10px 14px;text-decoration:underline">Email us</a>
+    </div>
+  </section>
+  <aside id="efh-impact-box" aria-label="Equity &amp; Impact" style="max-width:1100px;margin:0 auto 32px auto;background:#ecfeff;border:1px solid #06b6d4;border-radius:12px;padding:16px">
+    <strong style="color:#0e7490">Equity &amp; Impact:</strong>
+    <ul style="margin:8px 0 0 18px;color:#0f172a">
+      <li>Priority access for underrepresented learners</li>
+      <li>ETPL-listed partners and DOL-aligned certifications</li>
+      <li>Support for JRI participants and WEX/OJT placements</li>
+    </ul>
+  </aside>
+  <section id="efh-info-box" style="max-width:1100px;margin:0 auto 32px auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:16px">
+    <h3 style="margin:0 0 8px 0;color:#0f172a">Funding &amp; Programs</h3>
+    <p style="margin:0;color:#334155">Eligible pathways include: <strong>ETPL</strong>, <strong>DOL</strong> credentials, <strong>JRI</strong> support, <strong>WEX</strong> experiences, and <strong>OJT</strong> placements.</p>
+  </section></body></html>

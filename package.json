@@ -27,7 +27,12 @@
     "logs:tail": "tail -f logs/app-$(date +%F).log || true",
     "logs:rotate": "node scripts/log-rotate.js",
   "sentry:release": "bash scripts/sentry-release.sh",
-  "seo:polish": "node scripts/fix-site.mjs"
+  "seo:polish": "node scripts/fix-site.mjs",
+  "seo:meta": "node enhanced-meta-tags-updater.js",
+  "seo:meta:all": "SEO_ALL=true node enhanced-meta-tags-updater.js",
+  "engagement:inject": "node scripts/inject-engagement.js",
+  "brand:scrub": "node scripts/scrub-brand-mentions.js",
+  "site:enhance": "npm run seo:meta:all && npm run engagement:inject && npm run brand:scrub"
   },
   "prisma": {
     "seed": "node prisma/seed.cjs"

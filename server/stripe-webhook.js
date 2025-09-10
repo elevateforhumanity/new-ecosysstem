@@ -8,8 +8,8 @@ const bodyParser = require("body-parser");
 const Stripe = require("stripe");
 const twilio = require("twilio");
 
-const stripe = Stripe("sk_test_your_stripe_secret_key"); // Use your real Stripe secret key
-const twilioClient = twilio("TWILIO_ACCOUNT_SID", "TWILIO_AUTH_TOKEN"); // Use your Twilio credentials
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY || "");
+const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID || "", process.env.TWILIO_AUTH_TOKEN || "");
 
 const app = express();
 app.use(bodyParser.raw({ type: "application/json" }));
@@ -22,7 +22,7 @@ app.post("/webhook", (req, res) => {
     event = stripe.webhooks.constructEvent(
       req.body,
       sig,
-      "your_stripe_webhook_secret"
+      process.env.STRIPE_WEBHOOK_SECRET
     );
   } catch (err) {
     return res.status(400).send(`Webhook Error: ${err.message}`);
@@ -30,14 +30,18 @@ app.post("/webhook", (req, res) => {
 
   if (event.type === "checkout.session.completed") {
     // Send SMS via Twilio
-    twilioClient.messages
+    if (!process.env.TWILIO_FROM_NUMBER || !process.env.TWILIO_ALERT_TO) {
+      console.warn("Twilio numbers not configured; skipping SMS notification.");
+    } else {
+      twilioClient.messages
       .create({
         body: "A new payment was received on Elevate for Humanity!",
-        from: "+1234567890", // Your Twilio number
-        to: "+1987654321",   // Your personal phone number
+        from: process.env.TWILIO_FROM_NUMBER, // Your Twilio number
+        to: process.env.TWILIO_ALERT_TO,   // Your personal phone number
       })
       .then(message => console.log("SMS sent:", message.sid))
       .catch(err => console.error("Twilio error:", err));
+    }
   }
 
   res.json({ received: true });

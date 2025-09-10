@@ -207,9 +207,14 @@
         </div>
     </div>
 
-    <script>
-        // Initialize Stripe
-        const stripe = Stripe('pk_live_51QKf1pLnR5uCr7QFPRO67YbLsefbX0z9pJCjR0g3QH3WGbqxNIgNNDnHfTGhEZSY9gCrR9KbKxGqKxVn8FtJd1x00XYpMBqCf'); // Replace with your publishable key
+        <script>
+                // Initialize Stripe using a meta-injected publishable key (set via env)
+                const pkMeta = document.querySelector('meta[name="stripe-publishable-key"]');
+                const pk = pkMeta && pkMeta.content ? pkMeta.content : '';
+                const stripe = pk ? Stripe(pk) : null;
+                if (!stripe) {
+                    console.warn('Stripe publishable key missing. Set VITE_STRIPE_PUBLIC_KEY or STRIPE_PUBLISHABLE_KEY env and re-run seo:meta.');
+                }
         
         // Countdown timer
         function startCountdown() {

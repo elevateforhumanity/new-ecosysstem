@@ -14,7 +14,7 @@
     "google:apply": "node scripts/apply-google-config.js",
     "dev": "vite",
     "prebuild": "node scripts/validate-env.js",
-  "build": "vite build && npm run seo:polish",
+  "build": "vite build && node scripts/copy-static.js && npm run seo:polish",
     "preview": "vite preview --host",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
@@ -30,9 +30,10 @@
   "seo:polish": "node scripts/fix-site.mjs",
   "seo:meta": "node enhanced-meta-tags-updater.js",
   "seo:meta:all": "SEO_ALL=true node enhanced-meta-tags-updater.js",
+  "stripe:inject:pk": "node scripts/inject-stripe-publishable-meta.js",
   "engagement:inject": "node scripts/inject-engagement.js",
   "brand:scrub": "node scripts/scrub-brand-mentions.js",
-  "site:enhance": "npm run seo:meta:all && npm run engagement:inject && npm run brand:scrub",
+  "site:enhance": "npm run seo:meta:all && npm run stripe:inject:pk && npm run engagement:inject && npm run brand:scrub",
   "seo:setup": "bash scripts/setup-seo-domain.sh"
   },
   "prisma": {

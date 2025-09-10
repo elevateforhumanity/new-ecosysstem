@@ -120,9 +120,14 @@
         </div>
     </div>
 
-    <script>
-        // Initialize Stripe
-        const stripe = Stripe('pk_test_dummy'); // Replace with your publishable key
+        <script>
+                // Initialize Stripe from env-injected meta tag
+                const pkMeta = document.querySelector('meta[name="stripe-publishable-key"]');
+                const pk = pkMeta && pkMeta.content ? pkMeta.content : '';
+                const stripe = pk ? Stripe(pk) : null;
+                if (!stripe) {
+                    console.warn('Stripe publishable key missing. Set VITE_STRIPE_PUBLIC_KEY or STRIPE_PUBLISHABLE_KEY env and re-run seo:meta.');
+                }
 
         // Countdown Timer
         function updateCountdown() {

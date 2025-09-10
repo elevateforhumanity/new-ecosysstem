@@ -26,7 +26,9 @@ const siteConfig = {
     defaultImage: '/images/Social_media_open_graph_2ded65c5.png',
     googleVerification: process.env.GOOGLE_SITE_VERIFICATION || 'EFH-workforce-development-2025',
     bingVerification: process.env.BING_SITE_VERIFICATION || 'YOUR_BING_VERIFICATION_CODE',
-    gaId: process.env.GOOGLE_ANALYTICS_ID || process.env.VITE_ANALYTICS_ID || 'GA_MEASUREMENT_ID'
+    gaId: process.env.GOOGLE_ANALYTICS_ID || process.env.VITE_ANALYTICS_ID || 'GA_MEASUREMENT_ID',
+    // Prefer Vite-style public key, fallback to generic env var name
+    stripePublicKey: process.env.VITE_STRIPE_PUBLIC_KEY || process.env.STRIPE_PUBLISHABLE_KEY || ''
 };
 
 const pageConfigs = {
@@ -111,6 +113,7 @@ function generateMetaTags(config, pageConfig) {
     <!-- Verification Tags -->
     <meta name="google-site-verification" content="${config.googleVerification}">
     <meta name="msvalidate.01" content="${config.bingVerification}">
+    ${config.stripePublicKey ? `<meta name="stripe-publishable-key" content="${config.stripePublicKey}">` : ''}
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/images/Elevate_for_Humanity_logo_81bf0fab.png">

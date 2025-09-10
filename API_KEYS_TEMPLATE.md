@@ -5,7 +5,9 @@
 
 ### Payment Processing
 ```
-STRIPE_PUBLISHABLE_KEY=pk_test_your_stripe_publishable_key_here
+# Frontend publishable key (preferred)
+VITE_STRIPE_PUBLIC_KEY=pk_test_your_stripe_publishable_key_here
+# Backend secret key
 STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key_here
 STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret_here
 ```

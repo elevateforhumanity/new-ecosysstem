@@ -67,6 +67,8 @@ async function walkAndCopy() {
       if (ent.isDirectory()) {
         await walk(abs);
       } else if (match(includeGlobs, rel)) {
+        // Don't overwrite the Vite-processed SPA entrypoint
+        if (rel === 'index.html') continue;
         const dest = path.join(DIST, rel);
         await copyFile(abs, dest);
         copied++;

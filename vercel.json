@@ -34,5 +34,8 @@
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
       ]
     }
-  ]
+  ],
+  "functions": {
+    "runtime": "nodejs20.x"
+  }
 }

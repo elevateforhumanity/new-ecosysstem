@@ -12,6 +12,9 @@ const DIST = path.join(ROOT, 'dist');
 const includeGlobs = [
   // HTML pages across the repo (exclude node_modules, dist)
   '**/*.html',
+  // SEO files
+  'sitemap*.xml',
+  'robots.txt',
   // Key asset directories
   'images/**',
   'public/**',

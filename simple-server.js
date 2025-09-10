@@ -1,6 +1,4 @@
-#!/usr/bin/env node
-// Main entry point for EFH production server (CJS)
-// Also provides a default export for ESM test environments.
+// ESM/CJS bridge for tests importing ../simple-server.js
 const app = require('./simple-server.cjs');
 module.exports = app;
 module.exports.default = app;

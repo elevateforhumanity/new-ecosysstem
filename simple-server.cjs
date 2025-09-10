@@ -304,6 +304,7 @@ app.use((req, res, next) => {
   if (
     req.method === 'GET' &&
     !req.path.startsWith('/api') &&
+    req.path !== '/health' &&
     !req.path.startsWith('/assets') &&
     !req.path.includes('.')
   ) {
@@ -543,6 +544,10 @@ app.post('/api/stripe/create-payment-intent', ensureServices, async (req, res, n
       const err = new Error('Missing amount or program_id');
       err.statusCode = 400; err.type = 'validation';
       throw err;
+    }
+    const stripeReady = process.env.STRIPE_SECRET_KEY && paymentsService && typeof paymentsService.createPaymentIntent === 'function';
+    if (!stripeReady) {
+      return res.status(500).json({ error: 'Stripe not configured' });
     }
     const result = await paymentsService.createPaymentIntent({ amount, programId, userId, requestId: req.id });
     if (result.simulated && !process.env.STRIPE_SECRET_KEY) {

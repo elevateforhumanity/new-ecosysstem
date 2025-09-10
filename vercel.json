@@ -9,7 +9,14 @@
     { "source": "/enrollment", "destination": "/apply", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+  { "source": "/app/(.*)", "destination": "/app/index.html" },
+  { "source": "/employers", "destination": "/employers.html" },
+  { "source": "/apply", "destination": "/apply.html" },
+  { "source": "/academic-calendar", "destination": "/academic-calendar.html" },
+  { "source": "/programs", "destination": "/programs.html" },
+  { "source": "/federal-apprenticeships", "destination": "/federal-apprenticeships.html" },
+  { "source": "/pay", "destination": "/pay.html" },
+  { "source": "/search", "destination": "/search.html" }
   ],
   "headers": [
     {

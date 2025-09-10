@@ -32,7 +32,8 @@
   "seo:meta:all": "SEO_ALL=true node enhanced-meta-tags-updater.js",
   "engagement:inject": "node scripts/inject-engagement.js",
   "brand:scrub": "node scripts/scrub-brand-mentions.js",
-  "site:enhance": "npm run seo:meta:all && npm run engagement:inject && npm run brand:scrub"
+  "site:enhance": "npm run seo:meta:all && npm run engagement:inject && npm run brand:scrub",
+  "seo:setup": "bash scripts/setup-seo-domain.sh"
   },
   "prisma": {
     "seed": "node prisma/seed.cjs"

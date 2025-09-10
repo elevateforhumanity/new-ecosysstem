@@ -23,7 +23,7 @@
 */
 
 import React, { Suspense, lazy } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { HelmetProvider } from "react-helmet-async";
 
@@ -36,7 +36,7 @@ const AskWidget = lazy(() => import('./components/AskWidget'));
 export default function App() {
   return (
     <HelmetProvider>
-      <BrowserRouter>
+  <HashRouter>
         <ErrorBoundary>
           <Suspense fallback={<div style={{ padding: 40 }}>Loading...</div>}>
             <Routes>
@@ -48,7 +48,7 @@ export default function App() {
             <AskWidget />
           </Suspense>
         </ErrorBoundary>
-      </BrowserRouter>
+  </HashRouter>
     </HelmetProvider>
   );
 }

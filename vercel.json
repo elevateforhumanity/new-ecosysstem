@@ -23,7 +23,8 @@
   { "source": "/programs", "destination": "/programs.html" },
   { "source": "/federal-apprenticeships", "destination": "/federal-apprenticeships.html" },
   { "source": "/pay", "destination": "/pay.html" },
-  { "source": "/search", "destination": "/search.html" }
+  { "source": "/search", "destination": "/search.html" },
+  { "source": "/(.*)", "destination": "/" }
   ],
   "headers": [
     {

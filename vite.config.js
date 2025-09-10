@@ -14,7 +14,7 @@ export default defineConfig({
     // Generates dist/stats.html on build (treemap visualization)
     visualizer({ filename: "dist/stats.html", gzipSize: true, brotliSize: true, template: "treemap" })
   ],
-  base: '/',
+  base: './', // ensure built asset paths resolve on Vercel
   build: {
     outDir: 'dist',
     sourcemap: true

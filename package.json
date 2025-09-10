@@ -15,6 +15,7 @@
     "prebuild": "node scripts/validate-env.js",
   "build": "vite build && npm run seo:polish",
   "google:apply": "node scripts/apply-google-config.js",
+    "supabase:setup": "bash scripts/setup-supabase-codespaces.sh",
     "preview": "vite preview --host",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",

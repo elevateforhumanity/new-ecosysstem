@@ -174,13 +174,148 @@ app.get("/health", (_req, res) => {
   });
 });
 
+// -------- User-friendly status endpoints --------
+// Casual status check - responds to "how we doing" type queries
+app.get(["/howwedoing", "/how-we-doing", "/howaredoing", "/status"], (_req, res) => {
+  const mem = process.memoryUsage();
+  const uptime = Math.round(process.uptime());
+  const uptimeMinutes = Math.floor(uptime / 60);
+  const uptimeHours = Math.floor(uptimeMinutes / 60);
+  
+  // Determine system health status
+  const memUsagePercent = Math.round((mem.heapUsed / mem.heapTotal) * 100);
+  let healthStatus = "Great! 🚀";
+  let healthDescription = "All systems are running smoothly";
+  
+  if (memUsagePercent > 90) {
+    healthStatus = "Under heavy load ⚠️";
+    healthDescription = "System is working hard but operational";
+  } else if (memUsagePercent > 70) {
+    healthStatus = "Busy but good 💪";
+    healthDescription = "System is handling requests well";
+  } else if (uptime < 60) {
+    healthStatus = "Just started up 🌱";
+    healthDescription = "System recently restarted and warming up";
+  }
+
+  const uptimeDisplay = uptimeHours > 0 
+    ? `${uptimeHours}h ${uptimeMinutes % 60}m`
+    : uptimeMinutes > 0 
+      ? `${uptimeMinutes}m`
+      : `${uptime}s`;
+
+  // Return user-friendly HTML page
+  res.status(200).type("html").send(`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>How We Doing? - EFH Status</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { 
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; 
+      margin: 0; padding: 2rem; 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .container { 
+      background: rgba(255,255,255,0.1); 
+      backdrop-filter: blur(10px);
+      border-radius: 20px; 
+      padding: 3rem; 
+      text-align: center; 
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      max-width: 600px;
+    }
+    .status { font-size: 3rem; margin-bottom: 1rem; }
+    .description { font-size: 1.5rem; margin-bottom: 2rem; opacity: 0.9; }
+    .details { 
+      background: rgba(255,255,255,0.1); 
+      padding: 1.5rem; 
+      border-radius: 12px; 
+      margin: 2rem 0;
+      text-align: left;
+    }
+    .detail-row { 
+      display: flex; 
+      justify-content: space-between; 
+      margin: 0.5rem 0; 
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .detail-row:last-child { border-bottom: none; }
+    .links { margin-top: 2rem; }
+    .links a { 
+      color: #fff; 
+      text-decoration: none; 
+      margin: 0 1rem; 
+      padding: 0.5rem 1rem;
+      background: rgba(255,255,255,0.2);
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+    .links a:hover { background: rgba(255,255,255,0.3); }
+    .refresh { 
+      margin-top: 1rem; 
+      font-size: 0.9rem; 
+      opacity: 0.7; 
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="status">${healthStatus}</div>
+    <div class="description">${healthDescription}</div>
+    
+    <div class="details">
+      <div class="detail-row">
+        <span>Uptime:</span>
+        <span>${uptimeDisplay}</span>
+      </div>
+      <div class="detail-row">
+        <span>Memory Usage:</span>
+        <span>${memUsagePercent}%</span>
+      </div>
+      <div class="detail-row">
+        <span>Build Mode:</span>
+        <span>${BUILD_MODE}</span>
+      </div>
+      <div class="detail-row">
+        <span>Cache Version:</span>
+        <span>${CACHE_VERSION}</span>
+      </div>
+      <div class="detail-row">
+        <span>Tailwind Status:</span>
+        <span>${lastClientTelemetry.tailwindOk ? '✅ Working' : '⚠️ Unknown'}</span>
+      </div>
+    </div>
+
+    <div class="links">
+      <a href="/health">Technical Details</a>
+      <a href="/metrics">Metrics</a>
+      <a href="/">Home</a>
+    </div>
+    
+    <div class="refresh">
+      <small>Last updated: ${new Date().toLocaleString()}</small><br>
+      <small><a href="javascript:location.reload()" style="color: #fff; opacity: 0.7;">🔄 Refresh</a></small>
+    </div>
+  </div>
+</body>
+</html>
+  `);
+});
+
 // -------- Static assets & SPA fallback --------
 if (!fs.existsSync(distPath)) {
   console.warn("[WARN] dist folder missing at:", distPath);
 }
 app.use(express.static(distPath, { etag: false, lastModified: false, maxAge: 0 }));
 // Serve SPA if present, else a safe fallback (prevents 'blank' hard failures)
-app.get("*", (_req, res) => {
+app.use((_req, res) => {
   const indexFile = path.join(distPath, "index.html");
   if (fs.existsSync(indexFile)) {
     return res.sendFile(indexFile);

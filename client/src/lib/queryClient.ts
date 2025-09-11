@@ -29,7 +29,7 @@ export const queryClient = new QueryClient({
 });
 
 // API request helper
-export async function apiRequest(method: string, url: string, data?: any) {
+export async function apiRequest(method: string, url: string, data?: unknown) {
   const response = await fetch(url, {
     method,
     headers: {

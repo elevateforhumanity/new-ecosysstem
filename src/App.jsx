@@ -89,6 +89,9 @@ export default function App() {
 }
 
 VITE_SUPABASE_KEY=your_supabase_anon_key
+VITE_GA_MEASUREMENT_ID=your-google-analytics-id
+VITE_GOOGLE_VERIFICATION_CODE=your-google-verification-code
+VITE_BING_VERIFICATION_CODE=your-bing-verification-code
 
 "devDependencies": {
   "eslint": "^8.56.0",

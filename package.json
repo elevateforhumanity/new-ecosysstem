@@ -5,7 +5,9 @@
   "description": "Production-ready plain Vite + TypeScript skeleton",
   "license": "MIT",
   "type": "module",
-  "engines": { "node": "18.x" },
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -26,6 +28,9 @@
     "release:tag": "node scripts/release-tag.mjs"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react": "^4.2.1",
@@ -33,15 +38,17 @@
     "autoprefixer": "^10.4.16",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "jsdom": "^23.0.1",
     "postcss": "^8.4.32",
     "prettier": "^3.2.0",
     "rollup-plugin-visualizer": "^5.12.0",
     "tailwindcss": "^3.4.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.0",
     "vite": "^5.0.0",
     "vitest": "^1.6.0",
-    "ts-node": "^10.9.2",
     "zod": "^3.23.8"
   },
   "dependencies": {
@@ -54,6 +61,5 @@
   "homepage": ".",
   "bugs": {},
   "repository": {},
-  "optionalDependencies": {},
   "packageManager": "npm"
 }

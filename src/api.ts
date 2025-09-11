@@ -16,11 +16,11 @@ export class ApiError extends Error {
 
 export const api = {
   // Placeholder for API functionality
-  get: async (url: string) => {
+  get: async (_url: string) => {
     throw new ApiError(500, "API not implemented");
   },
   
-  post: async (url: string, data: any) => {
+  post: async (_url: string, _data: unknown) => {
     throw new ApiError(500, "API not implemented");
   },
 };

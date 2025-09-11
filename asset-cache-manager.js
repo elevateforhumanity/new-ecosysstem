@@ -17,9 +17,13 @@
 */
 
 
-const fs = require('fs');
-const path = require('path');
-const crypto = require('crypto');
+import fs from 'fs';
+import path from 'path';
+import crypto from 'crypto';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 class AssetCacheManager {
   constructor() {
@@ -223,4 +227,4 @@ console.log(`   • Assets cached: ${results.cached}`);
 console.log(`   • Space saved: ~${Math.round(results.spaceSaved / 1024 / 1024)}MB`);
 console.log(`   • Cache directory: cached-assets/`);
 
-module.exports = AssetCacheManager;
+export default AssetCacheManager;

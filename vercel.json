@@ -1,47 +1,8 @@
 {
-  "installCommand": "PRISMA_SKIP_POSTINSTALL=1 npm ci --legacy-peer-deps",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "ignoreCommand": "bash -lc 'if [[ \"$VERCEL_GIT_COMMIT_REF\" =~ ^dependabot\/ ]]; then echo Skipping Dependabot branch $VERCEL_GIT_COMMIT_REF; exit 0; else exit 1; fi'",
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "elevateforhumanity.org" }],
-      "destination": "https://www.elevateforhumanity.org/:path*",
-      "permanent": true
-    },
-    { "source": "/medical-assistant", "destination": "/programs", "permanent": true },
-    { "source": "/programs/medical-assistant", "destination": "/programs", "permanent": true },
-    { "source": "/cpr", "destination": "/programs", "permanent": true },
-    { "source": "/old-broken-page", "destination": "/", "permanent": true },
-    { "source": "/enrollment", "destination": "/apply", "permanent": true }
-  ],
+  "framework": null,
   "rewrites": [
-    { "source": "/app/:path*", "destination": "/app/index.html" },
-    { "source": "/employers", "destination": "/employers.html" },
-    { "source": "/apply", "destination": "/apply.html" },
-    { "source": "/academic-calendar", "destination": "/academic-calendar.html" },
-    { "source": "/programs", "destination": "/programs.html" },
-    { "source": "/federal-apprenticeships", "destination": "/federal-apprenticeships.html" },
-    { "source": "/pay", "destination": "/pay.html" },
-    { "source": "/search", "destination": "/search.html" },
-    { "source": "/(.*)", "destination": "/", "missing": [{ "type": "filesystem" }] }
-  ],
-  "version": 2,
-  "name": "elevate-for-humanity-removed",
-  "builds": [
-    { "src": "410.html", "use": "@vercel/static" }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/410.html",
-      "status": 410,
-      "headers": {
-        "X-Robots-Tag": "noindex, nofollow, noarchive, nosnippet",
-        "Cache-Control": "no-cache, no-store, must-revalidate"
-      }
-    }
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
     {
@@ -54,13 +15,6 @@
       "source": "/cdn-cgi/(.*)",
       "headers": [
         { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet, noimageindex" },
-        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
       ]
     }
   ]

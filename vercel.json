@@ -24,9 +24,10 @@
     { "source": "/academic-calendar", "destination": "/academic-calendar.html" },
     { "source": "/programs", "destination": "/programs.html" },
     { "source": "/federal-apprenticeships", "destination": "/federal-apprenticeships.html" },
-    { "source": "/pay", "destination": "/pay.html" },
-    { "source": "/search", "destination": "/search.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+  { "source": "/pay", "destination": "/pay.html" },
+  { "source": "/search", "destination": "/search.html" },
+  { "source": "/donate", "destination": "/donate.html" },
+  { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
     {

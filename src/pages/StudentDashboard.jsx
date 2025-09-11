@@ -16,8 +16,9 @@ export default function StudentDashboard() {
 
   return (
     <AppLayout title="Dashboard">
-      <div style={{ padding: 32, maxWidth: 960, margin: "0 auto" }}>
+      <div className="p-4" style={{ padding: 32, maxWidth: 960, margin: "0 auto" }}>
         <h1 style={{ marginTop: 0 }}>Student Dashboard</h1>
+        <p>Welcome to your dashboard.</p>
         <section style={{ marginBottom: 32 }}>
           <h2 style={{ fontSize: 18 }}>Overview</h2>
           <div style={cardRow}>

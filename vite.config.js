@@ -19,7 +19,7 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       input: {
-        main: '/home/runner/work/new-ecosysstem/new-ecosysstem/index.html'
+        main: 'index.html'
       }
     }
   },
@@ -31,3 +31,6 @@ export default defineConfig({
     exclude: ['**/*.html']
   }
 });
+
+// npm install -D tailwindcss postcss autoprefixer
+// npx tailwindcss init -p

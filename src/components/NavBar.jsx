@@ -53,13 +53,18 @@ export default function NavBar() {
   const [open, setOpen] = useState(null);
 
   return (
-    <nav style={{ display: "flex", gap: 24, padding: 16, background: "#f5f5f5" }}>
-      <Link to="/">Home</Link>
-      <Link to="/ecosystem">Ecosystem</Link>
-      <Link to="/student">Student</Link>
-      <Link to="/instructor">Instructor</Link>
-      <Link to="/analytics">Analytics</Link>
-      <Link to="/course/demo-course">Course</Link>
+    <nav className="bg-blue-800 text-white px-4 py-2 flex flex-wrap items-center justify-between">
+      <div className="font-bold text-lg">Elevate for Humanity</div>
+      <div className="flex gap-4 flex-wrap">
+        <Link to="/" className="hover:underline">Home</Link>
+        <Link to="/programs" className="hover:underline">Programs</Link>
+        <Link to="/hub" className="hover:underline">Hub</Link>
+        <Link to="/lms" className="hover:underline">LMS</Link>
+        <Link to="/connect" className="hover:underline">Connect</Link>
+        <Link to="/donate" className="hover:underline">Donate</Link>
+        <Link to="/partners" className="hover:underline">Partners</Link>
+        <Link to="/account" className="hover:underline">Account</Link>
+      </div>
       <div style={{ position: "relative" }}>
         <span
           style={{ cursor: "pointer" }}

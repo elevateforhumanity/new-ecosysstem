@@ -11,8 +11,9 @@ export default function MentorDirectory() {
   ];
   return (
     <AppLayout title="Mentors">
-      <div style={{ padding: 32, maxWidth: 900, margin: "0 auto" }}>
+      <div className="p-4">
         <h1>Mentor Directory</h1>
+        <p>Find mentors here.</p>
         <ul>
           {mentors.map(m => (
             <li key={m.name}>{m.name} – {m.area}</li>

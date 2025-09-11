@@ -17,8 +17,8 @@
 */
 
 // tools/ecosystem-validator.js - Simple ecosystem validation
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 console.log('🎯 EFH Ecosystem Validation Starting...\n');
 

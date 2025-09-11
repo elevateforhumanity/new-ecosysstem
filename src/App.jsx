@@ -25,10 +25,11 @@
 import React, { Suspense, lazy, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { HelmetProvider } from "react-helmet-async";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 import { supabase } from "./supabaseClient";
 import NavBar from "./components/NavBar.jsx";
 import Footer from "./components/Footer.jsx";
+import AppRouter from "./router.jsx";
 
 const StudentDashboard = lazy(() => import("./pages/StudentDashboard"));
 const Quiz = lazy(() => import("./pages/Quiz"));
@@ -53,13 +54,32 @@ export default function App() {
       <BrowserRouter>
         <ErrorBoundary>
           <Suspense fallback={<div style={{ padding: 40 }}>Loading...</div>}>
+            <Helmet>
+              <meta
+                name="google-site-verification"
+                content={import.meta.env.VITE_GOOGLE_VERIFICATION_CODE}
+              />
+              <meta
+                name="msvalidate.01"
+                content={import.meta.env.VITE_BING_VERIFICATION_CODE}
+              />
+              <script
+                async
+                src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_GA_MEASUREMENT_ID}`}
+              ></script>
+              <script>
+                {`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${import.meta.env.VITE_GA_MEASUREMENT_ID}');
+                  `}
+              </script>
+            </Helmet>
             <NavBar />
-            <Routes>
-              <Route path="/" element={<StudentDashboard />} />
-              <Route path="/quiz" element={<Quiz />} />
-              <Route path="/mentors" element={<MentorDirectory />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <main>
+              <AppRouter />
+            </main>
             <Footer />
           </Suspense>
         </ErrorBoundary>

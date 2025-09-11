@@ -23,7 +23,7 @@
 */
 
 import React, { Suspense, lazy, useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { supabase } from "./supabaseClient";
@@ -31,6 +31,7 @@ import NavBar from "./components/NavBar.jsx";
 import Footer from "./components/Footer.jsx";
 import AppRouter from "./router.jsx";
 
+// Lazy-loaded pages (make sure these files exist)
 const StudentDashboard = lazy(() => import("./pages/StudentDashboard"));
 const Quiz = lazy(() => import("./pages/Quiz"));
 const MentorDirectory = lazy(() => import("./pages/sisters/MentorDirectory"));
@@ -42,7 +43,8 @@ export default function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const { data, error } = await supabase.from("your_table").select("*");
+      // FIX: Replace "your_table" with your actual Supabase table name
+      const { data, error } = await supabase.from("students").select("*");
       if (error) setError(error.message);
       setData(data || []);
     }
@@ -55,6 +57,7 @@ export default function App() {
         <ErrorBoundary>
           <Suspense fallback={<div style={{ padding: 40 }}>Loading...</div>}>
             <Helmet>
+              {/* SEO & Verification Meta Tags */}
               <meta
                 name="google-site-verification"
                 content={import.meta.env.VITE_GOOGLE_VERIFICATION_CODE}
@@ -63,22 +66,36 @@ export default function App() {
                 name="msvalidate.01"
                 content={import.meta.env.VITE_BING_VERIFICATION_CODE}
               />
+              {/* Google Analytics */}
               <script
                 async
                 src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_GA_MEASUREMENT_ID}`}
               ></script>
               <script>
                 {`
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', '${import.meta.env.VITE_GA_MEASUREMENT_ID}');
-                  `}
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${import.meta.env.VITE_GA_MEASUREMENT_ID}');
+                `}
               </script>
             </Helmet>
             <NavBar />
             <main>
               <AppRouter />
+              {/* Example: Show error if Supabase fails */}
+              {error && (
+                <div style={{ color: "red", margin: "20px 0" }}>
+                  Error loading data: {error}
+                </div>
+              )}
+              {/* Example: Show data if present */}
+              {data.length > 0 && (
+                <div style={{ margin: "20px 0" }}>
+                  <h2>Student Data</h2>
+                  <pre>{JSON.stringify(data, null, 2)}</pre>
+                </div>
+              )}
             </main>
             <Footer />
           </Suspense>
@@ -94,7 +111,9 @@ VITE_GOOGLE_VERIFICATION_CODE=your-google-verification-code
 VITE_BING_VERIFICATION_CODE=your-bing-verification-code
 
 "devDependencies": {
-  "eslint": "^8.56.0",
-  "@typescript-eslint/parser": "^7.0.0",
-  "@typescript-eslint/eslint-plugin": "^7.0.0"
+  "eslint": "^9.0.0",
+  "@typescript-eslint/parser": "^8.7.0",
+  "@typescript-eslint/eslint-plugin": "^8.7.0"
 }
+
+npm install --legacy-peer-deps

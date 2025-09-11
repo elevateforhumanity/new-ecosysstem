@@ -61,6 +61,81 @@ app.get('/api/health', async (req, res) => {
   });
 });
 
+// Quick status endpoint - "How is everything going?"
+app.get('/api/status', async (req, res) => {
+  const fs = require('fs');
+  
+  // Quick system checks
+  const criticalFiles = ['simple-server.cjs', 'backend-api.js', 'monitor-dashboard.html', 'package.json'];
+  const criticalSites = ['index.html', 'hub.html', 'programs.html', 'lms.html'];
+  
+  let statusScore = 0;
+  let totalChecks = 0;
+  const issues = [];
+  
+  // Check critical files
+  criticalFiles.forEach(file => {
+    totalChecks++;
+    if (fs.existsSync(file)) {
+      statusScore++;
+    } else {
+      issues.push(`Missing critical file: ${file}`);
+    }
+  });
+  
+  // Check critical sites
+  criticalSites.forEach(site => {
+    totalChecks++;
+    if (fs.existsSync(site)) {
+      statusScore++;
+    } else {
+      issues.push(`Missing critical site: ${site}`);
+    }
+  });
+  
+  // Check dependencies
+  totalChecks++;
+  if (fs.existsSync('node_modules') && fs.existsSync('package-lock.json')) {
+    statusScore++;
+  } else {
+    issues.push('Dependencies missing - run npm install');
+  }
+  
+  const healthPercentage = Math.round((statusScore / totalChecks) * 100);
+  
+  let overallStatus;
+  let message;
+  
+  if (healthPercentage >= 90) {
+    overallStatus = 'excellent';
+    message = 'Everything is going great! All systems operational.';
+  } else if (healthPercentage >= 75) {
+    overallStatus = 'good';
+    message = 'Minor issues detected, but core systems working.';
+  } else if (healthPercentage >= 50) {
+    overallStatus = 'needs_attention';
+    message = 'Multiple issues detected - requires fixes.';
+  } else {
+    overallStatus = 'critical';
+    message = 'Major system issues - urgent intervention needed.';
+  }
+  
+  const dbHealth = await db.healthCheck();
+  
+  res.json({
+    status: overallStatus,
+    message,
+    timestamp: new Date().toISOString(),
+    healthScore: healthPercentage,
+    checksPass: statusScore,
+    totalChecks,
+    issues,
+    database: dbHealth,
+    api: 'ready',
+    uptime: process.uptime()
+  });
+});
+
 // Authentication endpoints
 app.post('/api/auth/login', async (req, res) => {
   try {

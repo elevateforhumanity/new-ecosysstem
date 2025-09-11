@@ -13,9 +13,22 @@
   },
   "devDependencies": {
     "vite": "^5.0.0",
-    "@vitejs/plugin-react": "^4.2.0"
+    "@vitejs/plugin-react": "^4.2.0",
+    "fast-glob": "3.3.2",
+    "helmet": "7.1.0",
+    "node-cron": "4.2.1",
+    "pdfkit": "0.15.0",
+    "pino": "9.0.0",
+    "pino-http": "10.0.0",
+    "prisma": "5.22.0",
+    "react-helmet-async": "2.0.5",
+    "react-router-dom": "6.23.1",
+    "stripe": "14.0.0",
+    "xmlbuilder2": "3.1.1"
   },
   "engines": {
     "node": "18.x"
-  }
+  },
+  "keywords": [],
+  "packageManager": "npm@10.0.0"
 }

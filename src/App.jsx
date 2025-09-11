@@ -4,24 +4,6 @@
   See LICENSE file for details.
 */
 
-/*
-  Copyright (c) 2025 Elevate for Humanity
-  Commercial License. No resale, sublicensing, or redistribution allowed.
-  See LICENSE file for details.
-*/
-
-/*
-  Copyright (c) 2025 Elevate for Humanity
-  Commercial License. No resale, sublicensing, or redistribution allowed.
-  See LICENSE file for details.
-*/
-
-/*
-  Copyright (c) 2025 Elevate for Humanity
-  Commercial License. No resale, sublicensing, or redistribution allowed.
-  See LICENSE file for details.
-*/
-
 import React, { Suspense, lazy, useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -31,7 +13,7 @@ import NavBar from "./components/NavBar.jsx";
 import Footer from "./components/Footer.jsx";
 import AppRouter from "./router.jsx";
 
-// Lazy-loaded pages (make sure these files exist)
+// Lazy-loaded pages (ensure these files exist)
 const StudentDashboard = lazy(() => import("./pages/StudentDashboard"));
 const Quiz = lazy(() => import("./pages/Quiz"));
 const MentorDirectory = lazy(() => import("./pages/sisters/MentorDirectory"));
@@ -43,7 +25,7 @@ export default function App() {
 
   useEffect(() => {
     async function fetchData() {
-      // FIX: Replace "your_table" with your actual Supabase table name
+      // Use your actual Supabase table name here
       const { data, error } = await supabase.from("students").select("*");
       if (error) setError(error.message);
       setData(data || []);
@@ -83,13 +65,13 @@ export default function App() {
             <NavBar />
             <main>
               <AppRouter />
-              {/* Example: Show error if Supabase fails */}
+              {/* Show error if Supabase fails */}
               {error && (
                 <div style={{ color: "red", margin: "20px 0" }}>
                   Error loading data: {error}
                 </div>
               )}
-              {/* Example: Show data if present */}
+              {/* Show data if present */}
               {data.length > 0 && (
                 <div style={{ margin: "20px 0" }}>
                   <h2>Student Data</h2>
@@ -104,16 +86,3 @@ export default function App() {
     </HelmetProvider>
   );
 }
-
-VITE_SUPABASE_KEY=your_supabase_anon_key
-VITE_GA_MEASUREMENT_ID=your-google-analytics-id
-VITE_GOOGLE_VERIFICATION_CODE=your-google-verification-code
-VITE_BING_VERIFICATION_CODE=your-bing-verification-code
-
-"devDependencies": {
-  "eslint": "^9.0.0",
-  "@typescript-eslint/parser": "^8.7.0",
-  "@typescript-eslint/eslint-plugin": "^8.7.0"
-}
-
-npm install --legacy-peer-deps

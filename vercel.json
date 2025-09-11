@@ -17,67 +17,51 @@
     { "source": "/enrollment", "destination": "/apply", "permanent": true }
   ],
   "rewrites": [
-  { "source": "/app/:path*", "destination": "/app/index.html" },
-  { "source": "/employers", "destination": "/employers.html" },
-  { "source": "/apply", "destination": "/apply.html" },
-  { "source": "/academic-calendar", "destination": "/academic-calendar.html" },
-  { "source": "/programs", "destination": "/programs.html" },
-  { "source": "/federal-apprenticeships", "destination": "/federal-apprenticeships.html" },
-  { "source": "/pay", "destination": "/pay.html" },
-  { "source": "/search", "destination": "/search.html" },
-  { "source": "/(.*)", "destination": "/", "missing": [{ "type": "filesystem" }] }
+    { "source": "/app/:path*", "destination": "/app/index.html" },
+    { "source": "/employers", "destination": "/employers.html" },
+    { "source": "/apply", "destination": "/apply.html" },
+    { "source": "/academic-calendar", "destination": "/academic-calendar.html" },
+    { "source": "/programs", "destination": "/programs.html" },
+    { "source": "/federal-apprenticeships", "destination": "/federal-apprenticeships.html" },
+    { "source": "/pay", "destination": "/pay.html" },
+    { "source": "/search", "destination": "/search.html" },
+    { "source": "/(.*)", "destination": "/", "missing": [{ "type": "filesystem" }] }
   ],
-  {
-    "version": 2,
-    "name": "elevate-for-humanity-removed",
-    "builds": [
-      {
-        "src": "410.html",
-        "use": "@vercel/static"
+  "version": 2,
+  "name": "elevate-for-humanity-removed",
+  "builds": [
+    { "src": "410.html", "use": "@vercel/static" }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/410.html",
+      "status": 410,
+      "headers": {
+        "X-Robots-Tag": "noindex, nofollow, noarchive, nosnippet",
+        "Cache-Control": "no-cache, no-store, must-revalidate"
       }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/410.html",
-        "status": 410,
-        "headers": {
-          "X-Robots-Tag": "noindex, nofollow, noarchive, nosnippet",
-          "Cache-Control": "no-cache, no-store, must-revalidate"
-        }
-      }
-    ],
-    "headers": [
-      {
-        "source": "/api/(.*)",
-        "headers": [
-          {
-            "key": "X-Robots-Tag",
-            "value": "noindex, nofollow, noarchive"
-          }
-        ]
-      },
-      {
-        "source": "/cdn-cgi/(.*)",
-        "headers": [
-          {
-            "key": "X-Robots-Tag",
-            "value": "noindex, nofollow, noarchive"
-          }
-        ]
-      },
-      {
-        "source": "/(.*)",
-        "headers": [
-          {
-            "key": "X-Robots-Tag",
-            "value": "noindex, nofollow, noarchive, nosnippet, noimageindex"
-          },
-          {
-            "key": "Cache-Control", 
-            "value": "no-cache, no-store, must-revalidate"
-          }
-        ]
-      }
-    ]
-  }
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }
+      ]
+    },
+    {
+      "source": "/cdn-cgi/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet, noimageindex" },
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+      ]
+    }
+  ]
+}

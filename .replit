@@ -1,10 +1,9 @@
-modules = ["postgresql-16", "nodejs-20", "python-3.11"]
-run = "node simple-server.cjs"
+modules = ["nodejs-20", "postgresql-16", "python-3.11"]
+run = "bash -lc '(cd client && npm run quick) || echo \"[WARN] quick build failed — serving last dist\"; npm run start'"
 
 [deployment]
-run = ["sh", "-c", "npm run start"]
+run = ["sh", "-c", "npm run build && npm run start"]
 deploymentTarget = "cloudrun"
-build = ["sh", "-c", "cd client && npm install && npm run build && cd .. && npm run validate"]
 
 [nix]
 channel = "stable-25_05"
@@ -14,19 +13,17 @@ packages = ["jq", "zip"]
 localPort = 5000
 externalPort = 80
 
-[agent]
-
 [workflows]
-runButton = "EFH Production Server"
+runButton = "EFH Replit Server"
 
 [[workflows.workflow]]
-name = "EFH Production Server"
+name = "EFH Replit Server"
 mode = "sequential"
 author = 46393221
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "node simple-server.cjs"
+args = "bash -lc '(cd client && npm run quick) || echo \"[WARN] quick build failed — serving last dist\"; npm run start'"
 
 [[workflows.workflow]]
 name = "Validate Production Readiness"

@@ -27,3 +27,12 @@ export default defineConfig({
     visualizer({ filename: "dist/stats.html", gzipSize: true, brotliSize: true, template: "treemap" })
   ]
 });
+  build: {
+    outDir: 'dist',
+    sourcemap: true
+  },
+  server: {
+    port: 3000,
+    open: true
+  }
+});

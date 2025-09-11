@@ -14,7 +14,7 @@ Allow: /compliance.html
 # Static assets
 Allow: /images/
 Allow: /client/
-Allow: /api/
+Disallow: /api/
 
 # Block admin and development files
 Disallow: /tools/
@@ -26,8 +26,15 @@ Disallow: /.replit
 Disallow: /package.json
 
 # Sitemap location (relative so it works across environments)
-Sitemap: /sitemap-index.xml
-Sitemap: /sitemap.xml
+Disallow: /cdn-cgi/
+Disallow: /_next/
+Disallow: /assets/admin/
+
+# Allow JS/CSS needed to render pages
+Allow: /assets/
+Allow: /static/
+
+Sitemap: https://www.elevateforhumanity.org/sitemap.xml
 
 # Cache control
 Allow: /?v=*

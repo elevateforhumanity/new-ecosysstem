@@ -155,25 +155,46 @@ export default function CourseLibrary() {
         <p>
           Help us provide access to education for all. Your donation supports scholarships for students in need.
         </p>
-        <a
-          href="https://buy.stripe.com/test_donation_link"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: "inline-block",
-            background: "#388e3c",
-            color: "#fff",
-            padding: "16px 32px",
-            borderRadius: 8,
-            fontWeight: "bold",
-            textDecoration: "none",
-            fontSize: 20,
-            marginTop: 12,
-          }}
-        >
-          Donate Now & Support Scholarships
-        </a>
+        {/* Donation form POST to Stripe or your API */}
+        <form action="https://buy.stripe.com/test_donation_link" method="GET" target="_blank" style={{ display: "inline-block", marginTop: 12 }}>
+          <input type="hidden" name="amount" value="150" />
+          <input type="hidden" name="purpose" value="scholarship" />
+          <button
+            type="submit"
+            style={{
+              background: "#388e3c",
+              color: "#fff",
+              padding: "16px 32px",
+              borderRadius: 8,
+              fontWeight: "bold",
+              textDecoration: "none",
+              fontSize: 20,
+              cursor: "pointer",
+            }}
+          >
+            Donate Now & Support Scholarships
+          </button>
+        </form>
+        {/* Fallback anchor with rel="nofollow" */}
+        <div style={{ marginTop: 8 }}>
+          <a
+            href="https://buy.stripe.com/test_donation_link"
+            target="_blank"
+            rel="nofollow noopener noreferrer"
+            style={{
+              color: "#388e3c",
+              fontWeight: "bold",
+              textDecoration: "underline",
+              fontSize: 16,
+            }}
+            aria-label="Donate $150 (fallback)"
+          >
+            Donate $150 (fallback)
+          </a>
+        </div>
       </section>
+  <link rel="canonical" href="https://www.elevateforhumanity.org/courses" />
+  <meta name="robots" content="index, follow" />
       <footer style={{ marginTop: 48, textAlign: "center", color: "#888" }}>
         <div>
           <a href="https://linkedin.com/company/yourcompany" target="_blank" rel="noopener noreferrer">LinkedIn</a> |{" "}

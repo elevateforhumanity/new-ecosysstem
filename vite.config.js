@@ -16,10 +16,18 @@ export default defineConfig({
   ],
   build: {
     outDir: 'dist',
-    sourcemap: true
+    sourcemap: true,
+    rollupOptions: {
+      input: {
+        main: '/home/runner/work/new-ecosysstem/new-ecosysstem/index.html'
+      }
+    }
   },
   server: {
     port: 3000,
     open: true
+  },
+  optimizeDeps: {
+    exclude: ['**/*.html']
   }
 });

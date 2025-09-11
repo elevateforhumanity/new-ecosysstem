@@ -89,3 +89,9 @@ export default function App() {
 }
 
 VITE_SUPABASE_KEY=your_supabase_anon_key
+
+"devDependencies": {
+  "eslint": "^8.56.0",
+  "@typescript-eslint/parser": "^7.0.0",
+  "@typescript-eslint/eslint-plugin": "^7.0.0"
+}

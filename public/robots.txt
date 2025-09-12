@@ -1,8 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /api/
-Disallow: /cdn-cgi/
-Disallow: /_next/
-Allow: /assets/
-Allow: /static/
-Sitemap: https://www.elevateforhumanity.org/sitemap.xml
+Sitemap: /sitemap.xml

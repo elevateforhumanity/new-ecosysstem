@@ -2,19 +2,12 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "NodeNext",
+    "jsx": "react-jsx",
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "isolatedModules": true,
-    "types": ["node"],
-    "resolveJsonModule": true
+    "types": ["node", "vite/client"]
   },
-  "include": ["src", "scripts"],
-  "exclude": ["dist", "node_modules"]
+  "include": ["src"]
 }

@@ -2,14 +2,6 @@
 	"name": "workspace",
 	"version": "1.0.0",
 	"description": "Complete multi-site ecosystem for Elevate for Humanity using Supabase.",
-	"author": "Elevate for Humanity",
-	"license": "UNLICENSED",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/your-org/your-repo.git"
-	},
-	"homepage": "https://www.elevateforhumanity.org",
-	"main": "enhanced-checkout-with-coupons.js",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",

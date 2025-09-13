@@ -13,7 +13,7 @@ jobs:
   build-test-deploy:
     runs-on: ubuntu-latest
     env:
-      SITE_URL: https://yourdomain.com  # TODO: replace with your live domain
+      SITE_URL: https://YOUR_REAL_DOMAIN  # replace with your live domain
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -26,9 +26,7 @@ jobs:
       - run: npm run typecheck --if-present
       - run: npm run test --if-present
 
-      - run: npm run build
-      # do not run sitemap separately; postbuild already handled it
-      # - run: npm run sitemap
+      - run: npm run build  # postbuild generates sitemap
 
       - name: Verify sitemap files exist
         run: |

@@ -1,7 +1,33 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
+  - package-ecosystem: npm
     directory: "/"
     schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 5
+      interval: daily
+      time: "03:00"
+      timezone: America/Indiana/Indianapolis
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    labels:
+      - deps
+    allow:
+      - dependency-type: direct
+      - dependency-type: indirect
+    ignore:
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]  # keep majors manual
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: sunday
+      time: "04:00"
+      timezone: America/Indiana/Indianapolis
+    labels:
+      - deps
+      - actions
+git add .github/dependabot.yml
+git commit -m "chore: add dependabot config" --no-gpg-sign
+git push

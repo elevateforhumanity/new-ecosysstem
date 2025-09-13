@@ -135,3 +135,14 @@ npm run release:tag
 ## Environment
 Copy .env.example to .env (optional). Validate via:
 npm run env:check
+## Deploy
+- Build: `npm run build`
+- Preview: `npm run preview`
+- CI builds on push; prod deploy triggers via Vercel Deploy Hook after CI passes.
+
+## Environment Variables
+- See `.env.example`. Set in Vercel Project → Settings → Environment Variables.
+
+## Troubleshooting
+- Clear lockfile + reinstall if install conflicts.
+- Use "Redeploy with cache disabled" in Vercel for a fresh build.

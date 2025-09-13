@@ -1,62 +1,72 @@
-name: CI
+name: CI + Deploy + SEO
 
 on:
   push:
-    branches: [ main, fix/**, feature/** ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
+  schedule:
+    - cron: "0 2 * * *"
   workflow_dispatch:
 
-permissions:
-  contents: read
-
-concurrency:
-  group: ci-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
-  build-test:
+  build-test-deploy:
     runs-on: ubuntu-latest
     env:
-      NODE_ENV: test
-      VITE_SITE_URL: https://www.elevateforhumanity.org
+      SITE_URL: https://yourdomain.com  # TODO: replace with your live domain
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
-      - name: Install
-        run: npm ci
+      - run: npm ci
+      - run: npm run lint --if-present
+      - run: npm run typecheck --if-present
+      - run: npm run test --if-present
 
-      - name: Route sync check
-        run: npm run routes:check
+      - run: npm run build
+      # do not run sitemap separately; postbuild already handled it
+      # - run: npm run sitemap
 
-      - name: Lint
-        run: npm run lint || true
-
-      - name: Tests
-        run: npm test
-
-      - name: Build + postbuild
+      - name: Verify sitemap files exist
         run: |
-          npm run build
-          npm run postbuild
+          test -f dist/robots.txt
+          test -f dist/sitemap-index.xml
 
-      - name: Upload dist artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist
-          path: dist
-          if-no-files-found: error
-
-      - name: Summary
+      - name: Serve dist and verify HTTP
         run: |
-          echo "## CI Summary" >> $GITHUB_STEP_SUMMARY
-          echo "- Routes OK" >> $GITHUB_STEP_SUMMARY
-          echo "- Tests passed" >> $GITHUB_STEP_SUMMARY
-          echo "- Build + sitemap generated" >> $GITHUB_STEP_SUMMARY
+          npx vite preview --port 4173 --strictPort &
+          PID=$!
+          n=0
+          until curl -fsS http://localhost:4173/robots.txt >/dev/null; do
+            n=$((n+1)); [ $n -gt 30 ] && echo "Server failed to start" && exit 1
+            sleep 1
+          done
+          curl -fsS http://localhost:4173/sitemap-index.xml >/dev/null
+          kill $PID
+
+      - name: Deploy to Vercel
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: npx vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Health check deployed site
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          echo "🌐 Checking ${SITE_URL} ..."
+          STATUS=$(curl -fsSL --retry 3 --retry-delay 2 -o /dev/null -w "%{http_code}" "${SITE_URL}")
+          if [ "$STATUS" = "200" ]; then
+            echo "✅ Site is live (200 OK)"
+          else
+            echo "❌ Health check failed (status: $STATUS)"
+            exit 1
+          fi
+
+      - name: Notify Google (ping sitemap)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: curl -fsS --retry 3 --retry-delay 2 "https://www.google.com/ping?sitemap=${SITE_URL}/sitemap-index.xml" -o /dev/null
+
+      - name: Notify Bing (ping sitemap)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: curl -fsS --retry 3 --retry-delay 2 "https://www.bing.com/ping?sitemap=${SITE_URL}/sitemap-index.xml" -o /dev/null

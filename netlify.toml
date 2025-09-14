@@ -3,7 +3,8 @@
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "18.20.4"          # pin Node 18 LTS
+  NPM_FLAGS = "--legacy-peer-deps"  # relax peer deps on Netlify
 
 [[redirects]]
   from = "/*"

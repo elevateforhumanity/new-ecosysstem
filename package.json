@@ -24,5 +24,10 @@
   },
   "dependencies": {
     "dotenv": "17.2.2"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "7.18.0",
+    "@typescript-eslint/parser": "7.18.0",
+    "eslint": "8.57.0"
   }
 }

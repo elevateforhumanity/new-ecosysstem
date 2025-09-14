@@ -8,13 +8,6 @@ createRoot(document.getElementById("root")).render(<App />);
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    port: 5173,
-    strictPort: true,
-    watch: {
-      usePolling: false,
-      ignored: ["**/node_modules/**", "**/.git/**", "**/dist/**"],
-    },
-  },
+  server: { port: 5173, strictPort: true },
   preview: { port: 3000, strictPort: true },
 });

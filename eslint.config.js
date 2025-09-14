@@ -1,17 +1,36 @@
 import js from "@eslint/js";
-import tseslint from "typescript-eslint";
+import tsParser from "@typescript-eslint/parser";
+import tsPlugin from "@typescript-eslint/eslint-plugin";
+import react from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
 
-export default tseslint.config(
+/** @type {import('eslint').Linter.FlatConfig[]} */
+export default [
+  { ignores: ["dist/**", "node_modules/**"] },
   js.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
   {
+    files: ["**/*.{ts,tsx,js,jsx}"],
     languageOptions: {
-      parser: tseslint.parser,
-      parserOptions: { project: true }
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
+        ecmaFeatures: { jsx: true }
+      }
     },
-    ignores: ["dist/", "node_modules/"],
+    plugins: {
+      "@typescript-eslint": tsPlugin,
+      react,
+      "react-hooks": reactHooks
+    },
+    settings: {
+      react: { version: "detect" }
+    },
     rules: {
-      // custom rules here
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-uses-react": "off",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
     }
   }
-);
+];

@@ -18,6 +18,16 @@ export function assertEnv() {
   }
 }
 
+export function checkEnv(requiredKeys: string[] = []): string[] {
+  const env = import.meta.env ?? {};
+  const missing: string[] = [];
+  for (const key of requiredKeys) {
+    const val = (env as any)[key] ?? (typeof process !== "undefined" ? (process.env as any)?.[key] : undefined);
+    if (val === undefined || val === null || String(val).length === 0) missing.push(key);
+  }
+  return missing;
+}
+
 {
   "terminal.integrated.profiles.linux": {
     "bash (clean)": { "path": "/bin/bash", "args": ["--noprofile","--norc","-l"] }

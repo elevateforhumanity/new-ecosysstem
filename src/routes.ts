@@ -1,1 +1,5 @@
-export const routes: Array<string | { path: string }> = ["/", "/about", "/contact"];
+export const routes = [
+  { path: "/" },
+  { path: "/about" },
+  { path: "/contact" }
+];

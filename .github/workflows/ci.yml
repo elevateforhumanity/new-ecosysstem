@@ -1,4 +1,4 @@
-name: CI + Deploy + SEO
+name: CI (Build + Lint + Test)
 
 on:
   push:
@@ -8,10 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-test-deploy:
+  build:
     runs-on: ubuntu-latest
-    env:
-      SITE_URL: ${{ secrets.SITE_URL }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -23,66 +21,9 @@ jobs:
       - run: npm run lint --if-present
       - run: npm run typecheck --if-present
       - run: npm run test --if-present
+      - run: npm run build  # postbuild generates sitemap/robots
 
-      - run: npm run build  # postbuild generates sitemap
-
-      - name: Verify sitemap files exist
+      - name: Verify sitemap outputs
         run: |
           test -f dist/robots.txt
           test -f dist/sitemap-index.xml
-
-      - name: Serve dist and verify HTTP
-        run: |
-          npx vite preview --port 4173 --strictPort &
-          PID=$!
-          n=0
-          until curl -fsS http://localhost:4173/robots.txt >/dev/null; do
-            n=$((n+1)); [ $n -gt 30 ] && echo "Server failed to start" && exit 1
-            sleep 1
-          done
-          curl -fsS http://localhost:4173/sitemap-index.xml >/dev/null
-          kill $PID
-
-      - name: Deploy to Vercel
-        id: vercel
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: |
-          ORG="${{ secrets.VERCEL_ORG_ID }}"
-          PROJ="${{ secrets.VERCEL_PROJECT_ID }}"
-          ARGS=""
-          [ -n "$ORG" ] && ARGS="$ARGS --scope $ORG"
-          [ -n "$PROJ" ] && ARGS="$ARGS --project $PROJ"
-          DEPLOY_URL=$(npx vercel --prod --yes $ARGS --token=${{ secrets.VERCEL_TOKEN }} | grep -Eo 'https?://[^ ]+' | tail -n1)
-          echo "url=$DEPLOY_URL" >> $GITHUB_OUTPUT
-          echo "Deployed: $DEPLOY_URL"
-
-      - name: Health check deployed site
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        env:
-          SITE_URL: ${{ secrets.SITE_URL }}
-        run: |
-          URL="${{ steps.vercel.outputs.url }}"; [ -z "$URL" ] && URL="${SITE_URL}"
-          echo "🌐 Checking ${URL} ..."
-          STATUS=$(curl -fsSL --retry 5 --retry-delay 2 -o /dev/null -w "%{http_code}" "$URL")
-          if [ "$STATUS" = "200" ]; then
-            echo "✅ Site is live (200 OK)"
-          else
-            echo "❌ Health check failed (status: $STATUS)"
-            exit 1
-          fi
-
-      - name: Notify Google (ping sitemap)
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        env:
-          SITE_URL: ${{ secrets.SITE_URL }}
-        run: |
-          URL="${{ steps.vercel.outputs.url }}"; [ -z "$URL" ] && URL="${SITE_URL}"
-          curl -fsS --retry 3 --retry-delay 2 "https://www.google.com/ping?sitemap=${URL}/sitemap-index.xml" -o /dev/null
-
-      - name: Notify Bing (ping sitemap)
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        env:
-          SITE_URL: ${{ secrets.SITE_URL }}
-        run: |
-          URL="${{ steps.vercel.outputs.url }}"; [ -z "$URL" ] && URL="${SITE_URL}"
-          curl -fsS --retry 3 --retry-delay 2 "https://www.bing.com/ping?sitemap=${URL}/sitemap-index.xml" -o /dev/null

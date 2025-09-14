@@ -20,7 +20,8 @@
     "e2e": "playwright test",
     "prepare": "husky install",
     "setup": "node -e \"JSON.parse(require('fs').readFileSync('package.json','utf8')); console.log('ok')\" && sh -c \"[ -f package-lock.json ] && npm ci || npm install\" && bash setup-and-healthcheck.sh",
-    "health:local": "bash scripts/healthcheck-local.sh"
+    "health:local": "bash scripts/healthcheck-local.sh",
+    "autopush": "bash scripts/autopush.sh"
   },
   "dependencies": {
     "dotenv": "^16.4.5",

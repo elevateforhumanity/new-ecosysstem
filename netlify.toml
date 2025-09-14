@@ -4,4 +4,10 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  SITE_URL = "https://your-site.netlify.app" # override in Netlify UI for prod
+  SITE_URL = "https://your-site.netlify.app" # override in Netlify UI
+
+# React Router / SPA fallback
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

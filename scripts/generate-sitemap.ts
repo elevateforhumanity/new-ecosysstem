@@ -3,7 +3,7 @@ import { resolve } from "path";
 import { SitemapStream, streamToPromise } from "sitemap";
 import dotenv from "dotenv";
 
-// Load .env locally (no effect on Netlify unless present)
+// Load .env locally (Netlify uses its own env UI)
 dotenv.config();
 
 const DOMAIN = process.env.SITE_URL || "http://localhost:3000";

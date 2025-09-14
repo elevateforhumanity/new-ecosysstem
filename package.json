@@ -7,36 +7,17 @@
   "packageManager": "npm@10",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "postbuild": "tsx scripts/generate-sitemap.ts",
-    "preview": "vite preview --port 3000",
-    "typecheck": "tsc --noEmit",
-    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
-    "format": "prettier --write .",
-    "sitemap": "tsx scripts/generate-sitemap.ts",
-    "test": "vitest run",
-    "e2e": "playwright test",
-    "support:bundle": "bash .github/scripts/collect-snippets.sh"
+    "build": "vite build && tsx scripts/generate-sitemap.ts",
+    "preview": "vite preview --port 3000"
   },
   "dependencies": {
-    "dotenv": "16.4.5",
     "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "react-router-dom": "6.26.2",
-    "sitemap": "7.1.1",
-    "web-vitals": "4.2.4"
+    "react-dom": "18.3.1"
   },
   "devDependencies": {
-    "@types/react": "18.3.12",
-    "@types/react-dom": "18.3.1",
-    "@typescript-eslint/eslint-plugin": "7.18.0",
-    "@typescript-eslint/parser": "7.18.0",
     "@vitejs/plugin-react": "4.3.1",
-    "eslint": "8.57.0",
-    "prettier": "3.3.3",
     "tsx": "4.19.1",
-    "typescript": "5.5.4",
     "vite": "5.4.8",
-    "vitest": "2.1.1"
+    "typescript": "5.5.4"
   }
 }

@@ -5,7 +5,9 @@
 [build.environment]
   NODE_VERSION = "18.20.4"
   NPM_FLAGS = "--legacy-peer-deps"
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1"
 
+# SPA routing
 [[redirects]]
   from = "/*"
   to = "/index.html"

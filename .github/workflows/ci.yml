@@ -47,7 +47,12 @@ jobs:
         id: vercel
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          DEPLOY_URL=$(npx vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }} | grep -Eo 'https?://[^ ]+' | tail -n1)
+          ORG="${{ secrets.VERCEL_ORG_ID }}"
+          PROJ="${{ secrets.VERCEL_PROJECT_ID }}"
+          ARGS=""
+          [ -n "$ORG" ] && ARGS="$ARGS --scope $ORG"
+          [ -n "$PROJ" ] && ARGS="$ARGS --project $PROJ"
+          DEPLOY_URL=$(npx vercel --prod --yes $ARGS --token=${{ secrets.VERCEL_TOKEN }} | grep -Eo 'https?://[^ ]+' | tail -n1)
           echo "url=$DEPLOY_URL" >> $GITHUB_OUTPUT
           echo "Deployed: $DEPLOY_URL"
 

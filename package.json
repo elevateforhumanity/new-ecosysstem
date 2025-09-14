@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "packageManager": "npm@10",
   "scripts": {
     "dev": "vite",
@@ -19,5 +21,8 @@
     "prepare": "husky install",
     "setup": "node -e \"JSON.parse(require('fs').readFileSync('package.json','utf8')); console.log('ok')\" && sh -c \"[ -f package-lock.json ] && npm ci || npm install\" && bash setup-and-healthcheck.sh",
     "health:local": "bash scripts/healthcheck-local.sh"
+  },
+  "dependencies": {
+    "dotenv": "17.2.2"
   }
 }

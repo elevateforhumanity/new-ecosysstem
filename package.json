@@ -8,16 +8,19 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && tsx scripts/generate-sitemap.ts",
-    "preview": "vite preview --port 3000"
+    "preview": "vite preview --port 3000",
+    "health:local": "bash scripts/healthcheck-local.sh"
   },
   "dependencies": {
     "dotenv": "16.4.5",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "sitemap": "7.1.1"
+    "sitemap": "7.1.1",
+    "stripe": "16.6.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "4.3.1",
+    "eslint": "8.57.0",
     "tsx": "4.19.1",
     "typescript": "5.5.4",
     "vite": "5.4.8"

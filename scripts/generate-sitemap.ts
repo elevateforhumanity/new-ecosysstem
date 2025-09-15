@@ -2,7 +2,6 @@ import { writeFileSync, mkdirSync, existsSync } from "fs";
 import { resolve } from "path";
 import { SitemapStream, streamToPromise } from "sitemap";
 import dotenv from "dotenv";
-
 dotenv.config();
 
 const DOMAIN = process.env.SITE_URL || "http://localhost:3000";

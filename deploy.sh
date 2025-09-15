@@ -2,9 +2,9 @@
 set -euo pipefail
 
 ### === CONFIG: EDIT THESE 3 LINES ===
-AWS_S3_BUCKET="your-bucket-name-here"        # e.g., efh-site-prod
-CLOUDFRONT_DISTRIBUTION_ID="DXXXXXXXXXXXXX"  # from your CloudFront console
-SITE_URL="https://www.example.com"           # public URL used in sitemap
+AWS_S3_BUCKET="${AWS_S3_BUCKET:-your-bucket-name-here}"        # e.g., efh-site-prod
+CLOUDFRONT_DISTRIBUTION_ID="${CLOUDFRONT_DISTRIBUTION_ID:-DXXXXXXXXXXXXX}"  # from your CloudFront console
+SITE_URL="${SITE_URL:-https://www.example.com}"           # public URL used in sitemap
 
 ### Optional: HLS video upload (set ENABLE_HLS_UPLOAD=true to activate)
 ENABLE_HLS_UPLOAD="${ENABLE_HLS_UPLOAD:-false}"

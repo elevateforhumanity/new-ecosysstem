@@ -4,8 +4,12 @@ import path from 'node:path'
 import { setTimeout as delay } from 'node:timers/promises'
 
 const SITE_URL = process.env.SITE_URL || 'http://localhost:3000'
-if (!/^https?:\/\//i.test(SITE_URL) || /your-domain|example\.com/.test(SITE_URL)) {
-  console.error('Invalid SITE_URL. Please set SITE_URL to your deployed domain, e.g., https://www.your-domain.com')
+if (!/^https?:\/\//i.test(SITE_URL)) {
+  console.error('Invalid SITE_URL. Must start with http:// or https://')
+  process.exit(254)
+}
+if (/^https?:\/\/\s*$/i.test(SITE_URL) || /https?:\/\/\(your|www)\.[^\s]+/i.test(SITE_URL) || /https?:\/\/www\.example\.com/i.test(SITE_URL)) {
+  console.error('Invalid SITE_URL. Replace placeholder with your real domain (e.g., https://your-domain.com).')
   process.exit(254)
 }
 const CONCURRENCY = Number(process.env.VERIFY_CONCURRENCY || 8)

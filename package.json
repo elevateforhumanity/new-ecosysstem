@@ -10,7 +10,8 @@
     "preview": "vite preview --host 0.0.0.0 --port 3000",
     "lint": "eslint .",
     "test": "vitest run --environment=jsdom",
-    "deploy": "bash ./deploy.sh"
+    "deploy": "bash ./deploy.sh",
+    "verify:deploy": "node ./scripts/verify-deploy.mjs"
   },
   "dependencies": {
     "dotenv": "16.4.5",

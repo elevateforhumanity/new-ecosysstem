@@ -167,6 +167,18 @@ fi
 ### 6) Done
 echo "🎉 Deploy complete: ${SITE_URL}"
 
+# Optional: verify public URLs after deploy
+if [[ "${VERIFY_AFTER_DEPLOY:-false}" == "true" ]]; then
+  if command -v node >/dev/null && [[ -f scripts/verify-deploy.mjs ]]; then
+    echo "🔎 Verifying public URLs…"
+    SITE_URL="${SITE_URL}" node scripts/verify-deploy.mjs || {
+      echo "❌ Verification failed"; exit 3;
+    }
+  else
+    echo "ℹ️  VERIFY_AFTER_DEPLOY=true but verifier missing; skipping."
+  fi
+fi
+
 # --- Optional reference: CloudFront OAC + signed URLs for HLS ---
 # To restrict direct S3 access and serve via CloudFront only, attach this
 # bucket policy to the HLS bucket (replace placeholders):

@@ -6,6 +6,13 @@ AWS_S3_BUCKET="your-bucket-name-here"        # e.g., efh-site-prod
 CLOUDFRONT_DISTRIBUTION_ID="DXXXXXXXXXXXXX"  # from your CloudFront console
 SITE_URL="https://www.example.com"           # public URL used in sitemap
 
+### Optional: HLS video upload (set ENABLE_HLS_UPLOAD=true to activate)
+ENABLE_HLS_UPLOAD="${ENABLE_HLS_UPLOAD:-false}"
+HLS_LOCAL_DIR="${HLS_LOCAL_DIR:-dist/hls}"      # local folder containing .m3u8/.ts (typically copied into dist)
+HLS_S3_BUCKET="${HLS_S3_BUCKET:-$AWS_S3_BUCKET}" # default to same bucket as site unless overridden
+HLS_PREFIX="${HLS_PREFIX:-hls}"                  # destination prefix in the bucket (e.g., hls/)
+HLS_INVALIDATION_PATHS="${HLS_INVALIDATION_PATHS:-/hls/*}"
+
 ### Optional: Node version guard (keeps builds consistent)
 REQUIRED_NODE_MAJOR=18
 NODE_MAJOR=$(node -v | sed -E 's/^v([0-9]+).*/\1/')
@@ -81,6 +88,40 @@ aws s3 sync dist "s3://${AWS_S3_BUCKET}" \
   --exclude "*.html" --exclude "robots.txt" --exclude "sitemap.xml" \
   --cache-control "public, max-age=31536000, immutable"
 
+### 4b) Optional: Upload HLS assets (playlists no-cache, segments long cache)
+if [[ "${ENABLE_HLS_UPLOAD}" == "true" ]]; then
+  if [[ -d "${HLS_LOCAL_DIR}" ]]; then
+    echo "🎬 Uploading HLS from '${HLS_LOCAL_DIR}' to s3://${HLS_S3_BUCKET}/${HLS_PREFIX}…"
+
+    # Ensure destination bucket exists
+    aws s3api head-bucket --bucket "${HLS_S3_BUCKET}" 2>/dev/null || \
+      aws s3 mb "s3://${HLS_S3_BUCKET}"
+
+    # 1) Playlists (*.m3u8) — short/no cache, correct content-type
+    aws s3 sync "${HLS_LOCAL_DIR}" "s3://${HLS_S3_BUCKET}/${HLS_PREFIX}" \
+      --delete \
+      --exclude "*" --include "*.m3u8" \
+      --cache-control "no-cache, no-store, must-revalidate" \
+      --content-type "application/vnd.apple.mpegurl"
+
+    # 2) Segments (*.ts, *.m4s, *.mp4, *.webm) — long cache
+    aws s3 sync "${HLS_LOCAL_DIR}" "s3://${HLS_S3_BUCKET}/${HLS_PREFIX}" \
+      --delete \
+      --exclude "*.m3u8" \
+      --cache-control "public, max-age=31536000, immutable"
+
+    # Optional CloudFront invalidation scoped to HLS prefix (site-wide invalidation still runs below)
+    if [[ -n "${CLOUDFRONT_DISTRIBUTION_ID}" && -n "${HLS_INVALIDATION_PATHS}" ]]; then
+      echo "🧼 Invalidate CloudFront HLS paths (${HLS_INVALIDATION_PATHS})…"
+      aws cloudfront create-invalidation \
+        --distribution-id "${CLOUDFRONT_DISTRIBUTION_ID}" \
+        --paths "${HLS_INVALIDATION_PATHS}" > /dev/null || true
+    fi
+  else
+    echo "ℹ️  ENABLE_HLS_UPLOAD=true but directory '${HLS_LOCAL_DIR}' not found; skipping HLS upload."
+  fi
+fi
+
 ### 5) CloudFront cache bust
 if [[ -n "${CLOUDFRONT_DISTRIBUTION_ID}" ]]; then
   echo "🧹 Creating CloudFront invalidation…"
@@ -94,3 +135,26 @@ fi
 
 ### 6) Done
 echo "🎉 Deploy complete: ${SITE_URL}"
+
+# --- Optional reference: CloudFront OAC + signed URLs for HLS ---
+# To restrict direct S3 access and serve via CloudFront only, attach this
+# bucket policy to the HLS bucket (replace placeholders):
+#
+# {
+#   "Version": "2012-10-17",
+#   "Statement": [
+#     {
+#       "Sid": "AllowOAC",
+#       "Effect": "Allow",
+#       "Principal": { "AWS": "arn:aws:iam::CLOUDFRONT_ACCOUNT_ID:root" },
+#       "Action": "s3:GetObject",
+#       "Resource": "arn:aws:s3:::YOUR_HLS_BUCKET/YOUR_PREFIX/*",
+#       "Condition": {
+#         "StringEquals": { "AWS:SourceArn": "arn:aws:cloudfront::YOUR_AWS_ACCOUNT_ID:distribution/YOUR_DISTRIBUTION_ID" }
+#       }
+#     }
+#   ]
+# }
+#
+# Then configure CloudFront to require signed URLs or cookies for the HLS paths.
+# Signed URL generation can be done server-side (Node) using AWS SDK CloudFrontSigner.

@@ -50,12 +50,10 @@ const hashFile = (fullPath, size) => {
 };
 
 const duBytes = (p) => {
-  // Fast path for Linux GNU du
   try {
     const out = execSync(`du -sb "${p}" 2>/dev/null | awk '{print $1}'`, { shell: "/bin/bash" }).toString().trim();
     if (out) return Number(out);
   } catch {}
-  // Portable fallback
   const st = statSafe(p); if (!st) return 0;
   if (st.isFile()) return st.size;
   let total = 0;
@@ -184,53 +182,44 @@ function validate(bundle) {
   const err  = (msg) => findings.push({ level: "error", msg });
   const ok   = (msg) => findings.push({ level: "ok", msg });
 
-  // Node version
   const nodeOk = /^v18\./.test(bundle.host.node);
   if (!nodeOk) warn(`Node ${bundle.host.node} detected; recommend 18.x (e.g., 18.20.4).`);
 
-  // Package manager drift
   const locks = (bundle.packageJson.lockFiles || []).map(l => l.name);
   if (locks.length > 1) warn(`Multiple lockfiles present: ${locks.join(", ")}. Prefer a single package manager.`);
   if (locks.length === 0) warn(`No lockfile found. Install to generate one (npm or pnpm).`);
 
-  // Vite presence
   const devDeps = Object.assign({}, bundle.packageJson.parsed?.devDependencies || {});
   const deps = Object.assign({}, bundle.packageJson.parsed?.dependencies || {});
   const hasVite = Boolean(devDeps.vite || deps.vite);
   if (!hasVite) warn(`'vite' not found in dependencies. If you build with Vite, add it to devDependencies.`);
 
-  // Host conflicts
   if (bundle.configs.netlifyTomlRaw && bundle.configs.vercelJsonRaw) {
     warn("Both Netlify and Vercel configs detected. Use one host to reduce build friction.");
   }
 
-  // Stripe webhook
   if (!bundle.configs.stripeWebhookRaw) {
-    warn("Stripe webhook handler not found (netlify/functions/... or api/stripe/webhook...). Add one to enable upgrades.");
+    warn("Stripe webhook handler not found (netlify/functions/... or api/stripe/webhook...).");
   }
 
-  // Supabase multitenancy basics
   const schema = (bundle.supabase.schemaRaw || "").toLowerCase();
   if (!schema.includes("organizations") || !schema.includes("memberships")) {
     warn("Supabase schema may be missing multitenancy tables (organizations/memberships).");
   }
   if (!schema.includes("enable row level security") && !schema.includes("row level security")) {
-    warn("Supabase RLS not detected in schema.sql (ensure RLS is enabled for org-scoped tables).");
+    warn("Supabase RLS not detected in schema.sql.");
   }
 
-  // Secrets risk
   if (exists(path.join(ROOT, ".env")) || exists(path.join(ROOT, ".env.local"))) {
-    warn("Found .env in repo root. Ensure it's .gitignored and not committed; rotate any leaked keys.");
+    warn("Found .env in repo root. Ensure it's .gitignored and not committed.");
   }
 
-  // Sitemap/robots
-  if (!bundle.configs.robotsTxtRaw) warn("robots.txt not found in /public. Add one that points to sitemap index.");
-  if (!bundle.configs.sitemapIndexRaw) warn("sitemap.xml index not found in /public. Generate index + child sitemaps.");
+  if (!bundle.configs.robotsTxtRaw) warn("robots.txt not found in /public.");
+  if (!bundle.configs.sitemapIndexRaw) warn("sitemap.xml not found in /public.");
 
-  // Pages coverage
   if (bundle.pages.truncated) warn(`Pages listing truncated at ${MAX_FILES}. Increase maxFiles= if needed.`);
 
-  ok("Bundle created. Proceed to deploy & wire subscriptions.");
+  ok("Bundle created.");
   return findings;
 }
 
@@ -245,7 +234,6 @@ if (GZIP) {
   await new Promise((res, rej) => source.pipe(zlib.createGzip()).pipe(gzOut).on("finish", res).on("error", rej));
 }
 
-// Pretty console report
 const pad = (s, n=7) => s.padEnd(n);
 console.log(`\n✅ Wrote ${rel(OUT_FILE)}  (${bundle.pages.fileCount} files, truncated=${bundle.pages.truncated})`);
 console.log(`   Sizes: workspace=${bundle.sizes.human.workspace}, node_modules=${bundle.sizes.human.node_modules}, dist=${bundle.sizes.human.dist}`);

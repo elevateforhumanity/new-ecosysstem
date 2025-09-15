@@ -1,0 +1,49 @@
+# Ignore node_modules and build artifacts
+node_modules/
+dist/
+build/
+.cache/
+.next/
+.output/
+.turbo/
+coverage/
+cypress/
+.parcel-cache/
+
+# Ignore environment files
+.env
+.env.local
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+
+# Ignore documentation files
+/docs/BUYER_PACK.md
+/docs/SECURITY.md
+/docs/RUNBOOK.md
+/docs/SLA.md
+/docs/ARCHITECTURE.md
+
+# Ignore GitHub workflows
+/.github/workflows/ci.yml
+/.github/workflows/codeql.yml
+
+# Ignore other unnecessary files
+*.zip
+*.tar
+*.gz
+*.tgz
+*.bak
+*.swp
+*.swo
+*.DS_Store
+Thumbs.db

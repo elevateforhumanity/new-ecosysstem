@@ -6,8 +6,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: '18.x', cache: 'npm' }
-      - run: npm ci || npm i --legacy-peer-deps
+        with:
+          node-version: '18.x'
+          cache: 'npm'
+      - run: npm ci || npm install --legacy-peer-deps
       - run: npm run lint --if-present
       - run: npm test --if-present
       - run: npm run build

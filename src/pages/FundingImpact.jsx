@@ -16,6 +16,7 @@ import crypto from "node:crypto";
 import os from "node:os";
 import { execSync } from "node:child_process";
 import zlib from "node:zlib";
+import React from "react";
 
 // -------- CLI / ENV --------
 const args = new URLSearchParams(process.argv.slice(2).join("&"));
@@ -257,4 +258,13 @@ for (const f of findings) {
 if (PRINT) {
   console.log("\n--- bundle JSON ---\n");
   console.log(JSON.stringify(bundle, null, 2));
+}
+
+export default function FundingImpact() {
+  return (
+    <main style={{ maxWidth: 900, margin: "2rem auto", padding: "0 1rem" }}>
+      <h1>Funding & Impact</h1>
+      <p>Elevate for Humanity + Selfish Inc. align workforce training with public and philanthropic funding.</p>
+    </main>
+  );
 }

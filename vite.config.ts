@@ -8,6 +8,6 @@ createRoot(document.getElementById("root")).render(<App />);
 
 export default defineConfig({
   plugins: [react()],
-  server: { port: 5173, strictPort: true },
-  preview: { port: 3000, strictPort: true }
+  server: { host: true, port: 5173, strictPort: true },
+  preview: { host: true, port: 3000, strictPort: true }
 });

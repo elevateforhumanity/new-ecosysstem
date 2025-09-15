@@ -12,6 +12,7 @@ HLS_LOCAL_DIR="${HLS_LOCAL_DIR:-dist/hls}"      # local folder containing .m3u8/
 HLS_S3_BUCKET="${HLS_S3_BUCKET:-$AWS_S3_BUCKET}" # default to same bucket as site unless overridden
 HLS_PREFIX="${HLS_PREFIX:-hls}"                  # destination prefix in the bucket (e.g., hls/)
 HLS_INVALIDATION_PATHS="${HLS_INVALIDATION_PATHS:-/hls/*}"
+HLS_SOURCE_DIR="${HLS_SOURCE_DIR:-public/hls}"   # source folder to copy into dist/hls prior to upload
 
 ### Optional: Node version guard (keeps builds consistent)
 REQUIRED_NODE_MAJOR=18
@@ -29,6 +30,13 @@ command -v npm >/dev/null || { echo "❌ npm not found"; exit 1; }
 echo "🏗️  Building app…"
 npm ci || npm i --legacy-peer-deps
 npm run build
+
+### 1b) If HLS source exists, copy into dist (so upload step has files)
+if [[ -d "${HLS_SOURCE_DIR}" ]]; then
+  echo "📦 Copying HLS from '${HLS_SOURCE_DIR}' -> '${HLS_LOCAL_DIR}'…"
+  mkdir -p "${HLS_LOCAL_DIR}"
+  rsync -a --delete "${HLS_SOURCE_DIR}/" "${HLS_LOCAL_DIR}/"
+fi
 
 ### 2) Ensure robots.txt + sitemap.xml exist inside dist/
 mkdir -p dist
@@ -78,14 +86,37 @@ aws s3api head-bucket --bucket "${AWS_S3_BUCKET}" 2>/dev/null || \
 echo "⬆️  Uploading HTML with no-cache…"
 aws s3 sync dist "s3://${AWS_S3_BUCKET}" \
   --delete \
-  --exclude "*" --include "*.html" --include "robots.txt" --include "sitemap.xml" \
+  --exclude "*" --include "*.html" \
   --cache-control "no-cache, no-store, must-revalidate" \
   --content-type "text/html; charset=utf-8"
 
+# Ensure correct content-type for robots.txt and sitemap.xml
+if [[ -f dist/robots.txt ]]; then
+  aws s3 cp dist/robots.txt "s3://${AWS_S3_BUCKET}/robots.txt" \
+    --cache-control "no-cache, no-store, must-revalidate" \
+    --content-type "text/plain; charset=utf-8"
+fi
+if [[ -f dist/sitemap.xml ]]; then
+  aws s3 cp dist/sitemap.xml "s3://${AWS_S3_BUCKET}/sitemap.xml" \
+    --cache-control "no-cache, no-store, must-revalidate" \
+    --content-type "application/xml; charset=utf-8"
+fi
+
 echo "⬆️  Uploading assets with long cache…"
+# Exclude HLS from general asset sync when HLS upload is enabled to avoid overriding cache/content-type
+ASSET_SYNC_EXCLUDES=("--exclude" "*.html" "--exclude" "robots.txt" "--exclude" "sitemap.xml")
+if [[ "${ENABLE_HLS_UPLOAD}" == "true" ]]; then
+  # If HLS_LOCAL_DIR is within dist/, add a relative exclude
+  case "${HLS_LOCAL_DIR}" in
+    dist/*)
+      HLS_REL="${HLS_LOCAL_DIR#dist/}"
+      ASSET_SYNC_EXCLUDES+=("--exclude" "${HLS_REL}/*")
+      ;;
+  esac
+fi
 aws s3 sync dist "s3://${AWS_S3_BUCKET}" \
   --delete \
-  --exclude "*.html" --exclude "robots.txt" --exclude "sitemap.xml" \
+  "${ASSET_SYNC_EXCLUDES[@]}" \
   --cache-control "public, max-age=31536000, immutable"
 
 ### 4b) Optional: Upload HLS assets (playlists no-cache, segments long cache)

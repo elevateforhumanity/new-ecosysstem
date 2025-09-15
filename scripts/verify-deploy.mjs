@@ -4,6 +4,10 @@ import path from 'node:path'
 import { setTimeout as delay } from 'node:timers/promises'
 
 const SITE_URL = process.env.SITE_URL || 'http://localhost:3000'
+if (!/^https?:\/\//i.test(SITE_URL) || /your-domain|example\.com/.test(SITE_URL)) {
+  console.error('Invalid SITE_URL. Please set SITE_URL to your deployed domain, e.g., https://www.your-domain.com')
+  process.exit(254)
+}
 const CONCURRENCY = Number(process.env.VERIFY_CONCURRENCY || 8)
 const TIMEOUT_MS = Number(process.env.VERIFY_TIMEOUT_MS || 8000)
 const RETRIES = Number(process.env.VERIFY_RETRIES || 1)
@@ -80,7 +84,7 @@ async function main() {
   const distDir = path.resolve('dist')
   const paths = await collectPaths(distDir)
   if (paths.length === 0) {
-    console.error('No paths found in dist; did you build?')
+    console.error('No paths found in dist; did you run a production build (npm run build)?')
     process.exit(1)
   }
   const urls = paths.map(p => new URL(p, SITE_URL).toString())

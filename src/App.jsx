@@ -31,6 +31,8 @@ const StudentDashboard = lazy(() => import("./pages/StudentDashboard"));
 const Quiz = lazy(() => import("./pages/Quiz"));
 const MentorDirectory = lazy(() => import("./pages/sisters/MentorDirectory"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+import React from "react";
+import FundingImpact from "./pages/FundingImpact.jsx";
 
 function Home() {
   return (

@@ -48,6 +48,26 @@
             padding: 0 20px;
         }
 
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            background: #f0f8ff;
+            color: #003366;
+        }
+
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
@@ -401,12 +421,46 @@
             background: #1a1a1a;
             color: white;
             padding: 40px 20px;
-            text-align: center;
         }
 
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ffd700;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #ccc;
         }
 
         /* Mobile Responsive */
@@ -454,6 +508,14 @@
     <header class="header">
         <div class="header-container">
             <div class="logo">Elevate for Humanity</div>
+            <nav class="nav-menu">
+                <a href="/">Home</a>
+                <a href="/programs">Programs</a>
+                <a href="/about">About</a>
+                <a href="/students">Students</a>
+                <a href="/contracts">Contracts</a>
+                <a href="/contact">Contact</a>
+            </nav>
             <div class="header-actions">
                 <a href="tel:317-555-0123" class="phone-number">(317) 555-0123</a>
                 <a href="#info-form" class="request-info-btn">Request Info</a>
@@ -687,6 +749,47 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
+            <div class="footer-section">
+                <h3>Training Programs</h3>
+                <ul>
+                    <li><a href="/programs/cybersecurity">Cybersecurity</a></li>
+                    <li><a href="/programs/cloud-computing">Cloud Computing</a></li>
+                    <li><a href="/programs/healthcare-cna">Healthcare (CNA)</a></li>
+                    <li><a href="/programs/electrical-trades">Electrical Trades</a></li>
+                    <li><a href="/programs/construction">Construction</a></li>
+                    <li><a href="/programs/beauty-wellness">Cosmetology</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="/students">Student Portal</a></li>
+                    <li><a href="/contracts">Government Contracts</a></li>
+                    <li><a href="/partners">Partners</a></li>
+                    <li><a href="/lms">Learning Management</a></li>
+                    <li><a href="/revenue-tracking-dashboard.html">Enterprise Dashboard</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/ecosystem-status.html">System Status</a></li>
+                    <li><a href="/serverless-test.html">Architecture Test</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><a href="tel:317-555-0123">(317) 555-0123</a></li>
+                    <li><a href="mailto:info@elevateforhumanity.org">info@elevateforhumanity.org</a></li>
+                    <li>Indianapolis, IN</li>
+                    <li>WIOA Approved Provider</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
             <p>&copy; 2024 Elevate for Humanity. All rights reserved.</p>
             <p>WIOA Approved Training Provider • Financial Aid Available</p>
         </div>

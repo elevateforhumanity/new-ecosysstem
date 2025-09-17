@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.elevateforhumanity.org/programs/</loc><lastmod>2025-09-17T12:26:23.749Z</lastmod></url>
-  <url><loc>https://www.elevateforhumanity.org/programs/cybersecurity/</loc><lastmod>2025-09-17T12:26:23.749Z</lastmod></url>
-  <url><loc>https://www.elevateforhumanity.org/programs/cloud-computing/</loc><lastmod>2025-09-17T12:26:23.749Z</lastmod></url>
-  <url><loc>https://www.elevateforhumanity.org/programs/healthcare-cna/</loc><lastmod>2025-09-17T12:26:23.749Z</lastmod></url>
-  <url><loc>https://www.elevateforhumanity.org/programs/electrical-trades/</loc><lastmod>2025-09-17T12:26:23.749Z</lastmod></url>
-  <url><loc>https://www.elevateforhumanity.org/programs/construction/</loc><lastmod>2025-09-17T12:26:23.749Z</lastmod></url>
-  <url><loc>https://www.elevateforhumanity.org/programs/beauty-wellness/</loc><lastmod>2025-09-17T12:26:23.749Z</lastmod></url>
+  <url>
+    <loc>https://www.elevateforhumanity.org/programs/</loc>
+    <lastmod>2025-09-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.elevateforhumanity.org/programs/cybersecurity/</loc>
+    <lastmod>2025-09-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.elevateforhumanity.org/programs/healthcare-cna/</loc>
+    <lastmod>2025-09-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.elevateforhumanity.org/programs/electrical-trades/</loc>
+    <lastmod>2025-09-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.elevateforhumanity.org/programs/construction/</loc>
+    <lastmod>2025-09-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.elevateforhumanity.org/programs/beauty-wellness/</loc>
+    <lastmod>2025-09-17</lastmod>
+  </url>
 </urlset>

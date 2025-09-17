@@ -1,12 +1,23 @@
 [build]
   command = "./build-deploy.sh"
   publish = "deploy"
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "20"
   SECRETS_SCAN_SMART_DETECTION_ENABLED = "false"
 
-# Domain redirects handled in _redirects file to avoid conflicts
+# Serverless Architecture - On-Demand Builders for 150k+ pages
+[[redirects]]
+  from = "/page/*"
+  to = "/.netlify/functions/page-odb"
+  status = 200
+
+# R2 assets proxy for bulk storage
+[[redirects]]
+  from = "/r2-assets/*"
+  to = "/.netlify/functions/r2-proxy"
+  status = 200
 
 # Pass through built assets
 [[redirects]]
@@ -116,3 +127,14 @@
   for = "*.js"
   [headers.values]
     Cache-Control = "public, max-age=31536000"
+
+# R2 asset caching
+[[headers]]
+  for = "/r2-assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Nightly sitemap generation (03:00 UTC)
+[[scheduled.functions]]
+  name = "sitemap-cron"
+  cron = "0 3 * * *"

@@ -470,7 +470,7 @@
         if (this.cartItems.length === 0) return;
 
         // Initialize Stripe
-        const stripe = Stripe('pk_test_your_stripe_publishable_key'); // Replace with your key
+        const stripe = Stripe(window.STRIPE_PUBLISHABLE_KEY || 'pk_test_REPLACE_WITH_ACTUAL_KEY'); // Use environment variable
         
         try {
           // Create checkout session

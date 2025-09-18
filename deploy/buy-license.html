@@ -382,7 +382,7 @@
       errorMessage: '',
       successMessage: '',
       
-      stripe: Stripe('pk_test_51234567890abcdef'), // Replace with your actual Stripe publishable key
+      stripe: Stripe(window.STRIPE_PUBLISHABLE_KEY || 'pk_test_REPLACE_WITH_ACTUAL_KEY'), // Use environment variable
       
       selectProduct(priceId, price, name) {
         this.selectedProduct = priceId;

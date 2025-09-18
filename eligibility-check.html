@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="eligibility check, WIOA funding, workforce development, career training, Indiana">
     <title>Check Your Eligibility | Free Training Programs | Elevate for Humanity</title>
     <meta name="description" content="Find out if you qualify for free job training in Indiana. WIOA funding, Workforce Ready Grants, and employer sponsorship available.">
     
@@ -241,6 +242,17 @@
             color: #64748b;
         }
     </style>
+
+    <style>
+        @media (max-width: 768px) {
+            .container { padding: 10px !important; }
+            .grid { grid-template-columns: 1fr !important; }
+            .nav-list { flex-direction: column; }
+            .btn { width: 100%; margin: 5px 0; }
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.3rem; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -250,7 +262,7 @@
         </div>
 
         <div class="funding-info">
-            <h3>💰 Available Funding Options</h3>
+            <h3>💰 <h2>Available Funding Options</h2></h3>
             <p>Multiple funding sources available to cover your training costs:</p>
             <div class="funding-options">
                 <div class="funding-option">
@@ -263,7 +275,7 @@
                 </div>
                 <div class="funding-option">
                     <h4>Employer Sponsorship</h4>
-                    <p>Partner employers sponsor training for guaranteed job placement</p>
+                    <p>Partner employers sponsor training for job placement assistance</p>
                 </div>
                 <div class="funding-option">
                     <h4>Apprenticeship Programs</h4>
@@ -274,7 +286,7 @@
 
         <form class="eligibility-form" id="eligibility-form">
             <div class="form-section">
-                <h3>📍 Residency Requirements</h3>
+                <h3>📍 <h2>Residency Requirements</h2></h3>
                 <div class="checkbox-group">
                     <div class="checkbox-item">
                         <input type="checkbox" id="indiana-resident" name="residency">

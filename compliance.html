@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="DOL compliance, WIOA compliance, workforce development, federal regulations">
     <title>DOL/DWD Compliance Portal - Elevate for Humanity</title>
     <meta name="description" content="Federal workforce development compliance portal for DOL/DWD reporting, PIRL data, and state contract management">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,6 +13,17 @@
         .compliance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
         .status-indicator { animation: pulse 2s infinite; }
         .federal-badge { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); }
+    </style>
+
+    <style>
+        @media (max-width: 768px) {
+            .container { padding: 10px !important; }
+            .grid { grid-template-columns: 1fr !important; }
+            .nav-list { flex-direction: column; }
+            .btn { width: 100%; margin: 5px 0; }
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.3rem; }
+        }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">

@@ -87,6 +87,17 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
+
+    <style>
+        @media (max-width: 768px) {
+            .container { padding: 10px !important; }
+            .grid { grid-template-columns: 1fr !important; }
+            .nav-list { flex-direction: column; }
+            .btn { width: 100%; margin: 5px 0; }
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.3rem; }
+        }
+    </style>
 </head>
 <body class="bg-gray-50 min-h-screen" x-data="lmsApp()">
     <!-- Shared Navigation Component -->
@@ -399,5 +410,16 @@
             }
         }
     </script>
+
+        <div class="eo-notice" style="background: #f8f9fa; border-top: 2px solid #0066cc; padding: 1rem; margin-top: 2rem; font-size: 0.9rem;">
+            <p><strong><a href="/policies/eo.html">Equal Opportunity Is the Law</a></strong> - 
+            It is against the law for this recipient of Federal financial assistance to discriminate. 
+            <a href="/policies/grievance.html">File a complaint</a> | 
+            <a href="/policies/veterans.html">Veterans' Priority of Service</a> | 
+            <a href="/policies/accessibility.html">Accessibility</a></p>
+            <p style="margin: 0.5rem 0 0 0; font-size: 0.8rem;">
+            Auxiliary aids and services are available upon request to individuals with disabilities. 
+            TTY via Relay 711. Language assistance services are available free of charge.</p>
+        </div>
 </body>
 </html>

@@ -18,7 +18,7 @@ const COMPLETE_CREDENTIALS = {
   SUPABASE_DB_PASSWORD: 'your_supabase_password',
   SUPABASE_ACCESS_TOKEN: 'sbp_v0_049f7f593a8093380bff6ae29f1afb41e4e71637',
   SUPABASE_ANON_KEY: 'your_jwt_token_from_supabase_dashboard',
-  SUPABASE_SERVICE_ROLE_KEY: 'your_jwt_token_from_supabase_dashboard'
+  SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY || 'REPLACE_WITH_ACTUAL_KEY'
 };
 
 console.log('✅ COMPLETE CREDENTIAL SET RECEIVED!');

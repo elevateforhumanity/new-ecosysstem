@@ -89,6 +89,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        @media (max-width: 768px) {
+            .container { padding: 10px !important; }
+            .grid { grid-template-columns: 1fr !important; }
+            .nav-list { flex-direction: column; }
+            .btn { width: 100%; margin: 5px 0; }
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.3rem; }
+        }
+    </style>
 </head>
 <body class="bg-gray-50 min-h-screen" x-data="connectApp()">
     <!-- Shared Navigation Component -->
@@ -179,7 +190,7 @@
 
                             <div>
                                 <label class="block text-gray-700 font-semibold mb-2">Phone Number *</label>
-                                <input type="tel" name="entry.1065046570" required class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="(555) 123-4567">
+                                <input type="tel" name="entry.1065046570" required class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="(317) 555-WORK">
                             </div>
 
                             <div>
@@ -238,7 +249,7 @@
 
                     <div class="mt-6 text-center text-gray-600">
                         <p>📋 After submission, you'll receive a confirmation email with next steps</p>
-                        <p>📞 Questions? Call our intake hotline: (317) 555-WORK (9675)</p>
+                        <p>📞 Questions? Call our intake hotline: (317) WORK (9675)</p>
                     </div>
                 </div>
 
@@ -609,5 +620,16 @@
             }
         }
     </script>
+
+        <div class="eo-notice" style="background: #f8f9fa; border-top: 2px solid #0066cc; padding: 1rem; margin-top: 2rem; font-size: 0.9rem;">
+            <p><strong><a href="/policies/eo.html">Equal Opportunity Is the Law</a></strong> - 
+            It is against the law for this recipient of Federal financial assistance to discriminate. 
+            <a href="/policies/grievance.html">File a complaint</a> | 
+            <a href="/policies/veterans.html">Veterans' Priority of Service</a> | 
+            <a href="/policies/accessibility.html">Accessibility</a></p>
+            <p style="margin: 0.5rem 0 0 0; font-size: 0.8rem;">
+            Auxiliary aids and services are available upon request to individuals with disabilities. 
+            TTY via Relay 711. Language assistance services are available free of charge.</p>
+        </div>
 </body>
 </html>

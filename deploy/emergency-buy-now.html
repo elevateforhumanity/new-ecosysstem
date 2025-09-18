@@ -123,7 +123,7 @@
 
     <script>
         // Initialize Stripe
-        const stripe = Stripe('pk_test_dummy'); // Replace with your publishable key
+        const stripe = Stripe(window.STRIPE_PUBLISHABLE_KEY || 'pk_test_REPLACE_WITH_ACTUAL_KEY'); // Use environment variable
 
         // Countdown Timer
         function updateCountdown() {

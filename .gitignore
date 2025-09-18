@@ -18,6 +18,7 @@ out/
 .vercel/
 .vscode/
 .idea/
+cached-assets/
 
 # Log files
 *.log
@@ -31,6 +32,7 @@ Thumbs.db
 
 # Deployment files
 efh-*
+!scripts/efh-universal.v2.*.js
 *.zip
 *.tar.gz
 
@@ -60,3 +62,4 @@ images/raw/
 
 coverage
 stats.html
+asset-manifest.json

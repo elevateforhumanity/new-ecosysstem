@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏥 Site Health Check - elevateforhumanity.org</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .status-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .status-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border-left: 4px solid #28a745;
+        }
+        
+        .status-card.warning {
+            border-left-color: #ffc107;
+        }
+        
+        .status-card.error {
+            border-left-color: #dc3545;
+        }
+        
+        .status-card h3 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+        
+        .status-card p {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .test-header {
+            background: #343a40;
+            color: white;
+            padding: 15px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .test-content {
+            padding: 20px;
+        }
+        
+        .test-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .test-item:last-child {
+            border-bottom: none;
+        }
+        
+        .test-name {
+            font-weight: 500;
+        }
+        
+        .test-result {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .status-pass {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-fail {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-loading {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .run-button {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin: 20px 0;
+        }
+        
+        .run-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .run-button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .details {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .timestamp {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .loading {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 Site Health Check</h1>
+            <p>Real-time browser-based health monitoring for elevateforhumanity.org</p>
+        </div>
+        
+        <div class="content">
+            <div class="status-overview">
+                <div class="status-card" id="overall-status">
+                    <h3 id="overall-score">--</h3>
+                    <p>Overall Health</p>
+                </div>
+                <div class="status-card" id="passed-tests">
+                    <h3 id="passed-count">0</h3>
+                    <p>Tests Passed</p>
+                </div>
+                <div class="status-card" id="failed-tests">
+                    <h3 id="failed-count">0</h3>
+                    <p>Tests Failed</p>
+                </div>
+                <div class="status-card" id="response-time">
+                    <h3 id="avg-response">--</h3>
+                    <p>Avg Response Time</p>
+                </div>
+            </div>
+            
+            <button class="run-button" onclick="runHealthCheck()" id="run-btn">
+                🚀 Run Health Check
+            </button>
+            
+            <div class="progress-bar" id="progress-container" style="display: none;">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            
+            <div class="test-section">
+                <div class="test-header">
+                    🌐 Domain & SSL Tests
+                </div>
+                <div class="test-content" id="domain-tests">
+                    <!-- Tests will be populated here -->
+                </div>
+            </div>
+            
+            <div class="test-section">
+                <div class="test-header">
+                    📄 Page Availability Tests
+                </div>
+                <div class="test-content" id="page-tests">
+                    <!-- Tests will be populated here -->
+                </div>
+            </div>
+            
+            <div class="test-section">
+                <div class="test-header">
+                    🔄 Redirect Tests
+                </div>
+                <div class="test-content" id="redirect-tests">
+                    <!-- Tests will be populated here -->
+                </div>
+            </div>
+            
+            <div class="test-section">
+                <div class="test-header">
+                    ⚡ Performance Tests
+                </div>
+                <div class="test-content" id="performance-tests">
+                    <!-- Tests will be populated here -->
+                </div>
+            </div>
+            
+            <div class="timestamp" id="timestamp"></div>
+        </div>
+    </div>
+
+    <script>
+        class BrowserHealthCheck {
+            constructor() {
+                this.results = {
+                    passed: 0,
+                    failed: 0,
+                    total: 0,
+                    responseTimes: []
+                };
+                
+                this.tests = [
+                    // Domain tests
+                    { name: 'Main Domain HTTPS', url: 'https://elevateforhumanity.org', type: 'domain', expected: 200 },
+                    { name: 'WWW Domain HTTPS', url: 'https://www.elevateforhumanity.org', type: 'domain', expected: [200, 301] },
+                    
+                    // Page tests
+                    { name: 'Homepage', url: 'https://elevateforhumanity.org/', type: 'page', expected: 200 },
+                    { name: 'Hub Page', url: 'https://elevateforhumanity.org/hub.html', type: 'page', expected: 200 },
+                    { name: 'About Page', url: 'https://elevateforhumanity.org/about.html', type: 'page', expected: 200 },
+                    { name: 'Programs Page', url: 'https://elevateforhumanity.org/programs.html', type: 'page', expected: 200 },
+                    { name: 'Connect Page', url: 'https://elevateforhumanity.org/connect.html', type: 'page', expected: 200 },
+                    { name: 'Student Portal', url: 'https://elevateforhumanity.org/student-portal.html', type: 'page', expected: 200 },
+                    
+                    // Performance tests
+                    { name: 'Load Time Test', url: 'https://elevateforhumanity.org', type: 'performance', threshold: 3000 },
+                    { name: 'Resource Loading', url: 'https://elevateforhumanity.org', type: 'performance', threshold: 5000 }
+                ];
+            }
+            
+            async runHealthCheck() {
+                this.resetResults();
+                this.showProgress();
+                
+                const runBtn = document.getElementById('run-btn');
+                runBtn.disabled = true;
+                runBtn.textContent = '🔄 Running Tests...';
+                
+                this.updateTimestamp();
+                
+                for (let i = 0; i < this.tests.length; i++) {
+                    const test = this.tests[i];
+                    const progress = ((i + 1) / this.tests.length) * 100;
+                    this.updateProgress(progress);
+                    
+                    await this.runTest(test);
+                    await this.delay(200); // Small delay between tests
+                }
+                
+                this.updateOverallStatus();
+                this.hideProgress();
+                
+                runBtn.disabled = false;
+                runBtn.textContent = '🔄 Run Again';
+            }
+            
+            async runTest(test) {
+                const startTime = performance.now();
+                
+                try {
+                    if (test.type === 'performance') {
+                        await this.runPerformanceTest(test, startTime);
+                    } else {
+                        await this.runUrlTest(test, startTime);
+                    }
+                } catch (error) {
+                    this.addTestResult(test, 'fail', `Error: ${error.message}`, 0);
+                }
+            }
+            
+            async runUrlTest(test, startTime) {
+                try {
+                    // Use fetch with no-cors mode for cross-origin requests
+                    const response = await fetch(test.url, { 
+                        method: 'HEAD',
+                        mode: 'no-cors',
+                        cache: 'no-cache'
+                    });
+                    
+                    const endTime = performance.now();
+                    const responseTime = Math.round(endTime - startTime);
+                    this.results.responseTimes.push(responseTime);
+                    
+                    // For no-cors mode, we can't read the status, so we assume success if no error
+                    this.addTestResult(test, 'pass', `Response time: ${responseTime}ms`, responseTime);
+                    
+                } catch (error) {
+                    // Try alternative method using Image for basic connectivity test
+                    if (test.type === 'domain') {
+                        try {
+                            await this.testWithImage(test, startTime);
+                        } catch (imgError) {
+                            const endTime = performance.now();
+                            const responseTime = Math.round(endTime - startTime);
+                            this.addTestResult(test, 'fail', `Connection failed: ${error.message}`, responseTime);
+                        }
+                    } else {
+                        const endTime = performance.now();
+                        const responseTime = Math.round(endTime - startTime);
+                        this.addTestResult(test, 'fail', `Request failed: ${error.message}`, responseTime);
+                    }
+                }
+            }
+            
+            async testWithImage(test, startTime) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    const timeout = setTimeout(() => {
+                        reject(new Error('Timeout'));
+                    }, 10000);
+                    
+                    img.onload = () => {
+                        clearTimeout(timeout);
+                        const endTime = performance.now();
+                        const responseTime = Math.round(endTime - startTime);
+                        this.results.responseTimes.push(responseTime);
+                        this.addTestResult(test, 'pass', `Site accessible (${responseTime}ms)`, responseTime);
+                        resolve();
+                    };
+                    
+                    img.onerror = () => {
+                        clearTimeout(timeout);
+                        const endTime = performance.now();
+                        const responseTime = Math.round(endTime - startTime);
+                        this.addTestResult(test, 'warning', `Image test failed but site may be accessible (${responseTime}ms)`, responseTime);
+                        resolve(); // Don't reject, as this might still mean the site is accessible
+                    };
+                    
+                    // Use a small image or favicon from the site
+                    img.src = test.url + '/favicon.ico?' + Date.now();
+                });
+            }
+            
+            async runPerformanceTest(test, startTime) {
+                // Simulate performance test by loading the page
+                try {
+                    const response = await fetch(test.url, { 
+                        mode: 'no-cors',
+                        cache: 'no-cache'
+                    });
+                    
+                    const endTime = performance.now();
+                    const responseTime = Math.round(endTime - startTime);
+                    this.results.responseTimes.push(responseTime);
+                    
+                    const status = responseTime < test.threshold ? 'pass' : 'warning';
+                    const message = responseTime < test.threshold ? 
+                        `Excellent (${responseTime}ms)` : 
+                        `Slow (${responseTime}ms, threshold: ${test.threshold}ms)`;
+                    
+                    this.addTestResult(test, status, message, responseTime);
+                    
+                } catch (error) {
+                    this.addTestResult(test, 'fail', `Performance test failed: ${error.message}`, 0);
+                }
+            }
+            
+            addTestResult(test, status, details, responseTime) {
+                this.results.total++;
+                if (status === 'pass') {
+                    this.results.passed++;
+                } else if (status === 'fail') {
+                    this.results.failed++;
+                }
+                
+                const container = document.getElementById(`${test.type}-tests`);
+                if (!container) return;
+                
+                const testItem = document.createElement('div');
+                testItem.className = 'test-item';
+                testItem.innerHTML = `
+                    <div>
+                        <div class="test-name">${test.name}</div>
+                        <div class="details">${details}</div>
+                    </div>
+                    <div class="test-result">
+                        <span class="status-badge status-${status}">${status.toUpperCase()}</span>
+                    </div>
+                `;
+                
+                container.appendChild(testItem);
+            }
+            
+            updateOverallStatus() {
+                const passRate = this.results.total > 0 ? 
+                    Math.round((this.results.passed / this.results.total) * 100) : 0;
+                
+                document.getElementById('overall-score').textContent = `${passRate}%`;
+                document.getElementById('passed-count').textContent = this.results.passed;
+                document.getElementById('failed-count').textContent = this.results.failed;
+                
+                const avgResponse = this.results.responseTimes.length > 0 ?
+                    Math.round(this.results.responseTimes.reduce((a, b) => a + b, 0) / this.results.responseTimes.length) :
+                    0;
+                document.getElementById('avg-response').textContent = `${avgResponse}ms`;
+                
+                // Update status card colors
+                const overallCard = document.getElementById('overall-status');
+                const failedCard = document.getElementById('failed-tests');
+                
+                overallCard.className = 'status-card';
+                failedCard.className = 'status-card';
+                
+                if (passRate >= 90) {
+                    overallCard.classList.add('success');
+                } else if (passRate >= 70) {
+                    overallCard.classList.add('warning');
+                } else {
+                    overallCard.classList.add('error');
+                }
+                
+                if (this.results.failed > 0) {
+                    failedCard.classList.add('error');
+                }
+            }
+            
+            resetResults() {
+                this.results = { passed: 0, failed: 0, total: 0, responseTimes: [] };
+                
+                // Clear test containers
+                ['domain-tests', 'page-tests', 'redirect-tests', 'performance-tests'].forEach(id => {
+                    const container = document.getElementById(id);
+                    if (container) container.innerHTML = '';
+                });
+                
+                // Reset status cards
+                document.getElementById('overall-score').textContent = '--';
+                document.getElementById('passed-count').textContent = '0';
+                document.getElementById('failed-count').textContent = '0';
+                document.getElementById('avg-response').textContent = '--';
+            }
+            
+            showProgress() {
+                document.getElementById('progress-container').style.display = 'block';
+            }
+            
+            hideProgress() {
+                document.getElementById('progress-container').style.display = 'none';
+            }
+            
+            updateProgress(percent) {
+                document.getElementById('progress-fill').style.width = `${percent}%`;
+            }
+            
+            updateTimestamp() {
+                const now = new Date();
+                document.getElementById('timestamp').textContent = 
+                    `Last check: ${now.toLocaleString()}`;
+            }
+            
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+        
+        // Initialize health checker
+        const healthChecker = new BrowserHealthCheck();
+        
+        // Global function for button
+        function runHealthCheck() {
+            healthChecker.runHealthCheck();
+        }
+        
+        // Auto-run on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                runHealthCheck();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

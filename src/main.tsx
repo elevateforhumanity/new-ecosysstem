@@ -1,11 +1,11 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import { App } from './App'
-import { assertEnv } from './envCheck'
-import { startMonitoring } from './monitoring'
+import App from './App'
+// import { assertEnv } from './envCheck'
+// import { startMonitoring } from './monitoring'
 
-assertEnv()
-startMonitoring()
+// assertEnv()
+// startMonitoring()
 
 declare const __APP_VERSION__: string
 

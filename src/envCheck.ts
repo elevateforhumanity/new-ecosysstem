@@ -27,10 +27,3 @@ export function checkEnv(requiredKeys: string[] = []): string[] {
   }
   return missing;
 }
-
-{
-  "terminal.integrated.profiles.linux": {
-    "bash (clean)": { "path": "/bin/bash", "args": ["--noprofile","--norc","-l"] }
-  },
-  "terminal.integrated.defaultProfile.linux": "bash (clean)"
-}

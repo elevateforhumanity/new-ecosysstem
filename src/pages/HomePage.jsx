@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { SEO } from "../lib/seo/SEO";
+import { testSupabaseConnection } from "../supabaseClient";
 
 export default function HomePage() {
+  const [supabaseStatus, setSupabaseStatus] = useState('checking');
+
+  useEffect(() => {
+    const checkConnection = async () => {
+      const isConnected = await testSupabaseConnection();
+      setSupabaseStatus(isConnected ? 'active' : 'error');
+    };
+    
+    checkConnection();
+  }, []);
+
   return (
     <>
       <SEO
@@ -18,6 +30,21 @@ export default function HomePage() {
           <p style={{ fontSize: '1.5rem', color: '#6b7280' }}>
             Transforming potential through mentorship, education, and community impact.
           </p>
+          
+          {/* Supabase Status Indicator */}
+          <div style={{ 
+            marginTop: '1rem', 
+            padding: '0.5rem 1rem', 
+            borderRadius: '6px',
+            display: 'inline-block',
+            backgroundColor: supabaseStatus === 'active' ? '#10b981' : supabaseStatus === 'error' ? '#ef4444' : '#6b7280',
+            color: 'white',
+            fontSize: '0.875rem'
+          }}>
+            {supabaseStatus === 'active' && '✅ Supabase Integration Active!'}
+            {supabaseStatus === 'error' && '❌ Supabase Integration Error'}
+            {supabaseStatus === 'checking' && '🔄 Checking Supabase Connection...'}
+          </div>
         </header>
 
         <section style={{ marginBottom: '3rem' }}>

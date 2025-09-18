@@ -1,6 +1,6 @@
 [build]
   publish = "deploy"
-  command = "echo 'Using pre-built files' && ls -la deploy/ | head -10"
+  command = "echo 'Deploying pre-built EFH platform' && ls -la deploy/ | head -5"
 
 [build.environment]
   NODE_VERSION = "20"
@@ -13,6 +13,7 @@
     X-Content-Type-Options = "nosniff"
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://kkzbqkyuunahdxcfdfzv.supabase.co"
 
 [[headers]]
   for = "/assets/*"

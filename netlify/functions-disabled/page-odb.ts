@@ -1,6 +1,6 @@
 import { builder, Handler } from '@netlify/functions'
 
-const handler: Handler = async (event) => {
+const pageHandler: Handler = async (event) => {
   const path = (event.path || '/').replace(/^\/page\//, '') || 'index'
   
   try {
@@ -93,4 +93,4 @@ function generateFallbackPage(path: string): string {
 }
 
 // Persist result on first request → next requests are instant from Netlify CDN
-export const handler = builder(handler)
+export const handler = builder(pageHandler)

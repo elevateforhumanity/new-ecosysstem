@@ -1,8 +1,2 @@
 # SPA routing for React app
 /*    /index.html   200
-
-# API routes to Netlify functions
-/api/*  /.netlify/functions/:splat  200
-
-# Supabase Edge Functions proxy
-/functions/*  https://kkzbqkyuunahdxcfdfzv.supabase.co/functions/v1/:splat  200

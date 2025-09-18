@@ -16,10 +16,10 @@
 
 ### 1. **Supabase Integration Setup** ⚡
 - ✅ Project configured: `kkzbqkyuunahdxcfdfzv.supabase.co`
-- ✅ Database password confirmed: `sbp_fd02fa11ad396509b973dc9206791e7861ee0bef`
+- ✅ Database password confirmed: `your_supabase_password`
 - ✅ Access token configured: `sbp_v0_049f7f593a8093380bff6ae29f1afb41e4e71637`
-- ✅ Anon key integrated: `eyJhbGciOiJIUzI1NiIs...LCFU`
-- ✅ Service role key activated: `eyJhbGciOiJIUzI1NiIs...hfs`
+- ✅ Anon key integrated: `your_jwt_token_from_supabase_dashboard`
+- ✅ Service role key activated: `your_jwt_token_from_supabase_dashboard`
 
 ### 2. **Vite React Application** ⚛️
 - ✅ Built with real Supabase credentials

@@ -147,8 +147,8 @@ SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_ANON_KEY=your-anon-key
 
 # Stripe Payment Processing
-STRIPE_PUBLISHABLE_KEY=pk_live_or_test_key
-STRIPE_SECRET_KEY=sk_live_or_test_key
+STRIPE_PUBLISHABLE_KEY=your_stripe_public_key_test_key
+STRIPE_SECRET_KEY=your_stripe_secret_key_test_key
 
 # SendGrid Email Service
 SENDGRID_API_KEY=SG.your-api-key

@@ -18,7 +18,7 @@ JWT_SECRET=your-strong-jwt-secret-minimum-16-characters
 ### Optional
 ```bash
 DATABASE_URL=postgresql://username:password@host:port/database
-STRIPE_SECRET_KEY=sk_live_your_stripe_key
+STRIPE_SECRET_KEY=your_stripe_secret_key_stripe_key
 SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_ANON_KEY=your-anon-key
 SUPABASE_SERVICE_KEY=your-service-key

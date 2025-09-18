@@ -9,7 +9,7 @@ console.log('🔍 Final Integration Verification');
 console.log('================================');
 
 // Database password confirmed
-const DB_PASSWORD = 'sbp_fd02fa11ad396509b973dc9206791e7861ee0bef';
+const DB_PASSWORD = 'your_supabase_password';
 const PROJECT_REF = 'kkzbqkyuunahdxcfdfzv';
 const SUPABASE_URL = 'https://kkzbqkyuunahdxcfdfzv.supabase.co';
 
@@ -35,7 +35,7 @@ function checkConfigurationFiles() {
     if (fs.existsSync(file)) {
       const content = fs.readFileSync(file, 'utf8');
       
-      if (content.includes('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtremJxa3l1dW5haGR4Y2ZkZnp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NzI1NzQsImV4cCI6MjA1MDU0ODU3NH0.Ey8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8')) {
+      if (content.includes('your_jwt_token_from_supabase_dashboard')) {
         console.log(`⚠️  ${file}: Still using placeholder API key`);
         needsUpdate = true;
       } else if (content.includes(PROJECT_REF)) {

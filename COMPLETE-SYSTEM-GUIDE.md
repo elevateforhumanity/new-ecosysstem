@@ -51,7 +51,7 @@ npm start
 ### 1. **Edit `.env` file:**
 ```env
 # Required: Add your actual keys
-STRIPE_SECRET_KEY=sk_live_your_actual_key
+STRIPE_SECRET_KEY=your_stripe_secret_key_actual_key
 STRIPE_WEBHOOK_SECRET=whsec_your_actual_secret
 EMAIL_USER=your-email@gmail.com
 EMAIL_PASS=your-gmail-app-password

@@ -10,8 +10,8 @@ console.log('🔧 Generating Netlify environment configuration...');
 // Your actual Supabase credentials
 const SUPABASE_CONFIG = {
   SUPABASE_URL: 'https://kkzbqkyuunahdxcfdfzv.supabase.co',
-  SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtremJxa3l1dW5haGR4Y2ZkZnp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NzI1NzQsImV4cCI6MjA1MDU0ODU3NH0.Ey8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8',
-  SUPABASE_SERVICE_ROLE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtremJxa3l1dW5haGR4Y2ZkZnp2Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNDk3MjU3NCwiZXhwIjoyMDUwNTQ4NTc0fQ.Ey8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8',
+  SUPABASE_ANON_KEY: 'your_jwt_token_from_supabase_dashboard',
+  SUPABASE_SERVICE_ROLE_KEY: 'your_jwt_token_from_supabase_dashboard',
   SUPABASE_PROJECT_REF: 'kkzbqkyuunahdxcfdfzv'
 };
 

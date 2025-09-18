@@ -42,8 +42,8 @@ Create a `.env` file in your project root with these values:
 
 # === SUPABASE CONFIGURATION (REQUIRED) ===
 SUPABASE_URL=https://YOUR_PROJECT_ID.supabase.co
-SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-SUPABASE_SERVICE_ROLE=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+SUPABASE_ANON_KEY=your_jwt_token_from_supabase_dashboard
+SUPABASE_SERVICE_ROLE=your_jwt_token_from_supabase_dashboard
 
 # Database URL (replace YOUR_PROJECT_ID and YOUR_DB_PASSWORD)
 DATABASE_URL=postgresql://postgres:YOUR_DB_PASSWORD@db.YOUR_PROJECT_ID.supabase.co:5432/postgres

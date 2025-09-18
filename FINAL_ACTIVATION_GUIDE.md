@@ -17,7 +17,7 @@ Your EFH platform deployment is **95% ready**! Here's what's been completed and 
 ### ✅ Your Supabase Project
 - **Project URL:** https://kkzbqkyuunahdxcfdfzv.supabase.co
 - **Project Reference:** kkzbqkyuunahdxcfdfzv
-- **Database Password:** sbp_fd02fa11ad396509b973dc9206791e7861ee0bef ✅
+- **Database Password:** your_supabase_password ✅
 
 ## 🔧 Final Steps (5 minutes)
 
@@ -31,8 +31,8 @@ Your EFH platform deployment is **95% ready**! Here's what's been completed and 
 3. **Copy these two keys:**
    ```
    Project URL: https://kkzbqkyuunahdxcfdfzv.supabase.co ✅ (already have)
-   anon public key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... (copy this)
-   service_role key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... (copy this)
+   anon public key: your_jwt_token_from_supabase_dashboard (copy this)
+   service_role key: your_jwt_token_from_supabase_dashboard (copy this)
    ```
 
 ### Step 2: Create Database Tables (1 minute)

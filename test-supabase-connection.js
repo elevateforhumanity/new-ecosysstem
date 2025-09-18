@@ -8,7 +8,7 @@ import { createClient } from '@supabase/supabase-js';
 
 // Your actual Supabase credentials
 const SUPABASE_URL = 'https://kkzbqkyuunahdxcfdfzv.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtremJxa3l1dW5haGR4Y2ZkZnp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NzI1NzQsImV4cCI6MjA1MDU0ODU3NH0.Ey8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8';
+const SUPABASE_ANON_KEY = 'your_jwt_token_from_supabase_dashboard';
 
 console.log('🔗 Testing Supabase connection...');
 console.log('URL:', SUPABASE_URL);

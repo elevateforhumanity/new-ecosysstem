@@ -84,7 +84,7 @@ elevate-store/
 Create `.env` file:
 ```bash
 # Required
-STRIPE_SECRET_KEY=sk_live_your_key
+STRIPE_SECRET_KEY=your_stripe_secret_key_key
 STRIPE_WEBHOOK_SECRET=whsec_your_secret
 EMAIL_USER=your-email@gmail.com
 EMAIL_PASS=your-app-password

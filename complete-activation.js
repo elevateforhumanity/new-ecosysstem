@@ -15,10 +15,10 @@ console.log('===================================');
 const COMPLETE_CREDENTIALS = {
   SUPABASE_URL: 'https://kkzbqkyuunahdxcfdfzv.supabase.co',
   SUPABASE_PROJECT_REF: 'kkzbqkyuunahdxcfdfzv',
-  SUPABASE_DB_PASSWORD: 'sbp_fd02fa11ad396509b973dc9206791e7861ee0bef',
+  SUPABASE_DB_PASSWORD: 'your_supabase_password',
   SUPABASE_ACCESS_TOKEN: 'sbp_v0_049f7f593a8093380bff6ae29f1afb41e4e71637',
-  SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtremJxa3l1dW5haGR4Y2ZkZnp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY2ODQ3MzQsImV4cCI6MjA3MjI2MDczNH0.fZvYJMuC7v7y69PzpYQMe6isLA1Dui3EunF2aC2LCFU',
-  SUPABASE_SERVICE_ROLE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtremJxa3l1dW5haGR4Y2ZkZnp2Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NjY4NDczNCwiZXhwIjoyMDcyMjYwNzM0fQ.f1ZzQCmvj7BGPRdv2gmB_dvdjYv0fh4vAmyu-kRIhfs'
+  SUPABASE_ANON_KEY: 'your_jwt_token_from_supabase_dashboard',
+  SUPABASE_SERVICE_ROLE_KEY: 'your_jwt_token_from_supabase_dashboard'
 };
 
 console.log('✅ COMPLETE CREDENTIAL SET RECEIVED!');

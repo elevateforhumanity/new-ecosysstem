@@ -12,7 +12,7 @@ console.log('🧪 Testing Complete Deployment...');
 
 // Test configuration
 const SUPABASE_URL = 'https://kkzbqkyuunahdxcfdfzv.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtremJxa3l1dW5haGR4Y2ZkZnp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NzI1NzQsImV4cCI6MjA1MDU0ODU3NH0.Ey8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8';
+const SUPABASE_ANON_KEY = 'your_jwt_token_from_supabase_dashboard';
 
 const testResults = {
   timestamp: new Date().toISOString(),

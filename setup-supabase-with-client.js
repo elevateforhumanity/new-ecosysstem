@@ -9,7 +9,7 @@ import { createClient } from '@supabase/supabase-js';
 
 // Your actual Supabase credentials
 const SUPABASE_URL = 'https://kkzbqkyuunahdxcfdfzv.supabase.co';
-const SUPABASE_SERVICE_ROLE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtremJxa3l1dW5haGR4Y2ZkZnp2Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNDk3MjU3NCwiZXhwIjoyMDUwNTQ4NTc0fQ.Ey8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8';
+const SUPABASE_SERVICE_ROLE_KEY = 'your_jwt_token_from_supabase_dashboard';
 
 console.log('🚀 Setting up Supabase database with client...');
 

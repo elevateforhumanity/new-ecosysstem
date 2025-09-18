@@ -12,7 +12,7 @@ console.log('🔧 Updating Supabase credentials...');
 const CREDENTIALS = {
   SUPABASE_URL: 'https://kkzbqkyuunahdxcfdfzv.supabase.co',
   SUPABASE_PROJECT_REF: 'kkzbqkyuunahdxcfdfzv',
-  SUPABASE_DB_PASSWORD: 'sbp_fd02fa11ad396509b973dc9206791e7861ee0bef',
+  SUPABASE_DB_PASSWORD: 'your_supabase_password',
   SUPABASE_ACCESS_TOKEN: 'sbp_v0_049f7f593a8093380bff6ae29f1afb41e4e71637'
 };
 

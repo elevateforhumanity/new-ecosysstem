@@ -8,7 +8,7 @@ Add these variables:
 
 ### Required for Supabase Integration:
 VITE_SUPABASE_URL=https://kkzbqkyuunahdxcfdfzv.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtremJxa3l1dW5haGR4Y2ZkZnp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY2ODQ3MzQsImV4cCI6MjA3MjI2MDczNH0.fZvYJMuC7v7y69PzpYQMe6isLA1Dui3EunF2aC2LCFU
+VITE_SUPABASE_ANON_KEY=your_anon_key_from_supabase_dashboard
 
 ### Optional:
 VITE_APP_TITLE=Elevate for Humanity

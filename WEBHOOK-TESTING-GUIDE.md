@@ -190,7 +190,7 @@ echo "$(date -Iseconds),TEST-123,test@example.com,Test Product,99" >> licenses/m
 # Production environment variables
 NODE_ENV=production
 PORT=443
-STRIPE_SECRET_KEY=sk_live_your_live_key
+STRIPE_SECRET_KEY=your_stripe_secret_key_live_key
 STRIPE_WEBHOOK_SECRET=whsec_your_live_secret
 ```
 

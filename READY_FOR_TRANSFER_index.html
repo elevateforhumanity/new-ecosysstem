@@ -1,93 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https:; frame-ancestors 'none';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Launch Your AI & Data Science Career | Elevate for Humanity</title>
     <meta name="description" content="Transform your career with federally-funded AI and Data Science training. WIOA-approved programs, 89% job placement rate, and employer partnerships. Start your tech career today.">
     <meta name="keywords" content="AI training, data science bootcamp, workforce development, WIOA funding, career training, federal grants, job placement">
     
-    <!-- SEO Meta Tags -->
-    <meta property="og:title" content="Launch Your AI & Data Science Career | Elevate for Humanity">
-    <meta property="og:description" content="Federally-funded AI and Data Science training with 89% job placement rate. Transform your career today.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.elevateforhumanity.org">
-    <meta property="og:image" content="/api/images/hero-professionals.jpg">
     
-    <!-- Favicon (Logo requirement) -->
-    <link rel="icon" type="image/x-icon" href="/images/Elevate_for_Humanity_logo_81bf0fab.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/Elevate_for_Humanity_logo_81bf0fab.png">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1e40af',
-                        secondary: '#7c3aed',
-                        accent: '#059669'
-                    }
-                }
-            }
-        }
-    </script>
-</head>
-<body class="bg-white text-gray-900">
-    <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <img src="/images/Elevate_for_Humanity_logo_81bf0fab.png" alt="Elevate for Humanity" class="h-10 w-auto">
-                    <span class="ml-3 text-xl font-bold text-gray-900">Elevate for Humanity</span>
-                </div>
-                
-                <!-- Navigation -->
-                <nav class="hidden md:flex space-x-8">
-                    <div class="relative group">
-                        <button class="text-gray-700 hover:text-primary font-medium flex items-center">
-                            Programs
-                            <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="absolute left-0 mt-2 w-56 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                            <a href="/programs#ai" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">AI Fundamentals</a>
-                            <a href="/programs#data" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Data Science Bootcamp</a>
-                            <a href="/programs#cyber" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Cybersecurity Training</a>
-                        </div>
-                    </div>
-                    <a href="/hub" class="text-gray-700 hover:text-primary font-medium">Workforce Hub</a>
-                    <a href="/lms" class="text-gray-700 hover:text-primary font-medium">Learning Center</a>
-                    <a href="/connect" class="text-gray-700 hover:text-primary font-medium">Community</a>
-                    <a href="/compliance" class="text-gray-700 hover:text-primary font-medium">Compliance</a>
-                </nav>
-                
-                <div class="flex items-center space-x-4">
-                    <span class="hidden sm:inline text-sm text-green-600 font-medium">🟢 DOE/DWD/DOL Certified</span>
-                    <a href="/pay" class="bg-primary text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-                        Enroll Now
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-primary to-secondary py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
-                        Launch Your AI & Data Science Career
-                    </h1>
-                    <p class="text-xl text-blue-100 mb-8">
-                        Transform your future with federally-funded training programs. 
-                        <strong>89% job placement rate.</strong> WIOA-approved. Employer partnerships.
-                    </p>
-                    
-                    <!-- Stats -->
                     <div class="grid grid-cols-3 gap-6 mb-8">
                         <div class="text-center">
                             <div class="text-3xl font-bold text-white">89%</div>
@@ -382,7 +310,7 @@
                     <h3 class="text-lg font-semibold mb-4">Resources</h3>
                     <ul class="space-y-2 text-gray-300">
                         <li><a href="/hub" class="hover:text-white">Workforce Hub</a></li>
-                        <li><a href="/lms" class="hover:text-white">Learning Center</a></li>
+                        <li><a href="/student-portal.html" class="hover:text-white">Learning Center</a></li>
                         <li><a href="/connect" class="hover:text-white">Community</a></li>
                         <li><a href="/compliance" class="hover:text-white">Compliance Portal</a></li>
                     </ul>

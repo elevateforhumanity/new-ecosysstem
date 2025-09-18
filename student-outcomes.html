@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https:; frame-ancestors 'none';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Outcomes & Performance Data | Elevate for Humanity</title>
@@ -29,15 +37,7 @@
 </head>
 <body>
     <nav>
-        <div class="container">
-            <a href="/">Home</a>
-            <a href="/programs/">Programs</a>
-            <a href="/funding-options.html">Funding Options</a>
-            <a href="/student-outcomes.html">Student Outcomes</a>
-            <a href="/employer-partners.html">Employer Partners</a>
-            <a href="/meet-our-instructors.html">Instructors</a>
-            <a href="/contact/">Contact</a>
-        </div>
+        
     </nav>
 
     <div class="container">
@@ -48,251 +48,7 @@
             <strong>WIOA Compliance:</strong> All data below meets federal reporting requirements for Eligible Training Provider List (ETPL) programs. Performance metrics are calculated according to WIOA standards and verified through state wage records.
         </div>
 
-        <!-- Overall Summary -->
-        <section id="overall-summary">
-            <h2>Overall Performance Summary</h2>
-            <div class="summary-grid">
-                <div class="metric-card">
-                    <div class="metric-value">89%</div>
-                    <div class="metric-label">Overall Job Placement Rate</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">$52,000</div>
-                    <div class="metric-label">Average Starting Salary</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">87%</div>
-                    <div class="metric-label">Program Completion Rate</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">92%</div>
-                    <div class="metric-label">Credential Attainment Rate</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Detailed Program Performance Table -->
-        <section id="program-performance">
-            <h2>Program-Level Performance Metrics</h2>
-            <p>The following table shows detailed performance data for each program as required by WIOA Section 116 and Indiana ETPL policies.</p>
-            
-            <div style="overflow-x: auto;">
-                <table class="performance-table">
-                    <thead>
-                        <tr>
-                            <th>Program Name</th>
-                            <th>ETPL Status</th>
-                            <th>Students Served</th>
-                            <th>Completion Rate</th>
-                            <th>Credential Attainment</th>
-                            <th>Employed Q2 After Exit</th>
-                            <th>Employed Q4 After Exit</th>
-                            <th>Median Earnings Q2</th>
-                            <th>Median Earnings Q4</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>AI & Data Science Bootcamp</strong></td>
-                            <td><span class="etpl-status">ETPL Listed</span></td>
-                            <td>124</td>
-                            <td>89%</td>
-                            <td>94%</td>
-                            <td>87%</td>
-                            <td>91%</td>
-                            <td>$22,500</td>
-                            <td>$28,750</td>
-                        </tr>
-                        <tr>
-                            <td><strong>CompTIA Cybersecurity</strong></td>
-                            <td><span class="etpl-status">ETPL Listed</span></td>
-                            <td>89</td>
-                            <td>92%</td>
-                            <td>96%</td>
-                            <td>85%</td>
-                            <td>88%</td>
-                            <td>$21,000</td>
-                            <td>$26,250</td>
-                        </tr>
-                        <tr>
-                            <td><strong>IBEW Electrical Apprenticeship</strong></td>
-                            <td><span class="etpl-status">Auto-Eligible</span></td>
-                            <td>45</td>
-                            <td>96%</td>
-                            <td>98%</td>
-                            <td>98%</td>
-                            <td>98%</td>
-                            <td>$18,500</td>
-                            <td>$22,000</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Healthcare Assistant Certification</strong></td>
-                            <td><span class="etpl-status">ETPL Listed</span></td>
-                            <td>156</td>
-                            <td>88%</td>
-                            <td>91%</td>
-                            <td>82%</td>
-                            <td>85%</td>
-                            <td>$14,500</td>
-                            <td>$16,800</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Advanced Manufacturing Technology</strong></td>
-                            <td><span class="etpl-status">ETPL Listed</span></td>
-                            <td>67</td>
-                            <td>85%</td>
-                            <td>89%</td>
-                            <td>91%</td>
-                            <td>93%</td>
-                            <td>$19,200</td>
-                            <td>$23,100</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Cloud Computing Specialist</strong></td>
-                            <td><span class="new-program">Initial Eligibility</span></td>
-                            <td>23</td>
-                            <td>91%</td>
-                            <td>95%</td>
-                            <td>*</td>
-                            <td>*</td>
-                            <td>*</td>
-                            <td>*</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="data-note">
-                <strong>Data Notes:</strong>
-                <ul>
-                    <li>* New programs in initial eligibility period - employment and earnings data will be available after first cohort completion</li>
-                    <li>Employment rates based on Indiana wage records and supplemental data collection</li>
-                    <li>Median earnings shown as quarterly amounts (multiply by 4 for annual estimates)</li>
-                    <li>Credential attainment includes industry certifications and program certificates</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Individual Program Details -->
-        <section id="program-details">
-            <h2>Detailed Program Outcomes</h2>
-
-            <div class="program-section">
-                <h3>AI & Data Science Bootcamp</h3>
-                <div class="summary-grid">
-                    <div class="metric-card">
-                        <div class="metric-value">124</div>
-                        <div class="metric-label">Total Students Served (2023-2024)</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">110</div>
-                        <div class="metric-label">Program Completers</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">103</div>
-                        <div class="metric-label">Credentials Earned</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">96</div>
-                        <div class="metric-label">Employed Q2 After Exit</div>
-                    </div>
-                </div>
-                
-                <h4>Employment Outcomes</h4>
-                <ul>
-                    <li><strong>Top Job Titles:</strong> Data Analyst, Junior Data Scientist, Business Intelligence Analyst, Python Developer</li>
-                    <li><strong>Major Employers:</strong> Salesforce, IU Health, Anthem, Cummins, Local Tech Startups</li>
-                    <li><strong>Average Time to Employment:</strong> 2.8 months</li>
-                    <li><strong>Retention Rate (1 year):</strong> 84%</li>
-                </ul>
-
-                <h4>Credentials Awarded</h4>
-                <ul>
-                    <li>Google Cloud Professional Data Engineer (Preparation)</li>
-                    <li>Microsoft Azure Data Scientist Associate (Preparation)</li>
-                    <li>Elevate for Humanity Data Science Certificate</li>
-                    <li>Python Programming Certification</li>
-                </ul>
-            </div>
-
-            <div class="program-section">
-                <h3>CompTIA Cybersecurity</h3>
-                <div class="summary-grid">
-                    <div class="metric-card">
-                        <div class="metric-value">89</div>
-                        <div class="metric-label">Total Students Served (2023-2024)</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">82</div>
-                        <div class="metric-label">Program Completers</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">79</div>
-                        <div class="metric-label">CompTIA Security+ Certified</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">70</div>
-                        <div class="metric-label">Employed Q2 After Exit</div>
-                    </div>
-                </div>
-                
-                <h4>Employment Outcomes</h4>
-                <ul>
-                    <li><strong>Top Job Titles:</strong> Cybersecurity Analyst, IT Security Specialist, SOC Analyst, Network Security Technician</li>
-                    <li><strong>Major Employers:</strong> AT&T, Anthem, Indiana University, Roche Diagnostics</li>
-                    <li><strong>Average Time to Employment:</strong> 2.1 months</li>
-                    <li><strong>Retention Rate (1 year):</strong> 88%</li>
-                </ul>
-
-                <h4>Credentials Awarded</h4>
-                <ul>
-                    <li>CompTIA Security+ Certification</li>
-                    <li>CompTIA Network+ (Optional)</li>
-                    <li>Elevate for Humanity Cybersecurity Certificate</li>
-                    <li>Ethical Hacking Fundamentals Certificate</li>
-                </ul>
-            </div>
-
-            <div class="program-section">
-                <h3>IBEW Electrical Apprenticeship</h3>
-                <div class="summary-grid">
-                    <div class="metric-card">
-                        <div class="metric-value">45</div>
-                        <div class="metric-label">Apprentices Served (2023-2024)</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">43</div>
-                        <div class="metric-label">Program Completers</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">42</div>
-                        <div class="metric-label">Journeyman Certified</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">44</div>
-                        <div class="metric-label">Employed (Immediate)</div>
-                    </div>
-                </div>
-                
-                <h4>Employment Outcomes</h4>
-                <ul>
-                    <li><strong>Job Titles:</strong> Journeyman Electrician, Electrical Technician, Maintenance Electrician</li>
-                    <li><strong>Employers:</strong> IBEW Local 481 Contractors, Duke Energy, Schneider Electric, Industrial Partners</li>
-                    <li><strong>Starting Wage:</strong> $28.50/hour (Union Scale)</li>
-                    <li><strong>Career Progression:</strong> Foreman, Supervisor, Electrical Contractor opportunities</li>
-                </ul>
-
-                <h4>Credentials Awarded</h4>
-                <ul>
-                    <li>IBEW Journeyman Electrician Certificate</li>
-                    <li>OSHA 30-Hour Construction Safety</li>
-                    <li>National Electrical Code (NEC) Certification</li>
-                    <li>State of Indiana Electrical License (Eligible)</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Performance Standards -->
+        
         <section id="performance-standards">
             <h2>WIOA Performance Standards</h2>
             <p>Indiana has established minimum performance standards for ETPL programs. Below shows how Elevate for Humanity programs compare to state benchmarks:</p>

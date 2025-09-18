@@ -2,10 +2,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https:; frame-ancestors 'none';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced LMS Platform | Better Than LearnWorlds | EFH</title>
-    <meta name="description" content="Enterprise-grade learning management system with AI tutoring, advanced analytics, white-label branding, and federal compliance. Superior to LearnWorlds with lower costs.">
+    <title>Advanced Student Portal Platform | Better Than LearnWorlds | EFH</title>
+    <meta name="description" content="Enterprise-grade Student Portal with AI tutoring, advanced analytics, white-label branding, and federal compliance. Superior to LearnWorlds with lower costs.">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/images/Elevate_for_Humanity_logo_81bf0fab.png">
@@ -54,14 +62,14 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen" x-data="advancedLmsApp()">
+<body class="bg-gray-50 min-h-screen" x-data="advancedStudent PortalApp()">
     <!-- Navigation Header -->
     <nav class="bg-white shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center space-x-4">
                     <img src="/images/Elevate_for_Humanity_logo_81bf0fab.png" alt="EFH Logo" class="h-10 w-10">
-                    <h1 class="text-xl font-bold text-gray-900">Advanced LMS Pro</h1>
+                    <h1 class="text-xl font-bold text-gray-900">Advanced Student Portal Pro</h1>
                     <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Better than LearnWorlds</span>
                 </div>
                 
@@ -411,9 +419,9 @@
         </div>
     </div>
 
-    <!-- Advanced LMS JavaScript -->
+    <!-- Advanced Student Portal JavaScript -->
     <script>
-        function advancedLmsApp() {
+        function advancedStudent PortalApp() {
             return {
                 user: { name: 'Admin User', email: 'admin@example.com' },
                 currentView: 'create-course',

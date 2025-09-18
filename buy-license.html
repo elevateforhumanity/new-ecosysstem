@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https:; frame-ancestors 'none';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Buy Elevate License | Secure Checkout</title>
@@ -216,53 +224,7 @@
 </head>
 <body x-data="licenseStore()">
 
-<div class="container">
-  <div class="form-box">
-    <h2>🎯 Purchase Elevate License</h2>
-    <p style="text-align: center; color: #666; margin-bottom: 2rem;">
-      Secure checkout powered by Stripe. Instant license delivery via email.
-    </p>
 
-    <div class="security-badges">
-      <div class="security-badge">🔒 SSL Encrypted</div>
-      <div class="security-badge">💳 Stripe Secure</div>
-      <div class="security-badge">📧 Instant Delivery</div>
-      <div class="security-badge">🛡️ Licensed Use</div>
-    </div>
-
-    <div class="error-message" x-show="errorMessage" x-text="errorMessage"></div>
-    <div class="success-message" x-show="successMessage" x-text="successMessage"></div>
-
-    <div class="form-section">
-      <label for="email"><strong>Your Email Address</strong></label>
-      <input 
-        type="email" 
-        id="email" 
-        x-model="customerEmail"
-        placeholder="you@company.com" 
-        required
-        :disabled="isProcessing"
-      >
-      <small style="color: #666;">License keys and download links will be sent to this email</small>
-    </div>
-
-    <div class="form-section">
-      <label><strong>Choose Your License Package</strong></label>
-      <div class="product-grid">
-        
-        <div class="product-card" 
-             :class="{ selected: selectedProduct === 'price_1DemoTemplate' }"
-             @click="selectProduct('price_1DemoTemplate', 39, 'Landing Page Demo Template')">
-          <div class="badge">Quick Start</div>
-          <h3>Landing Page Demo</h3>
-          <div class="price">$39</div>
-          <ul class="features">
-            <li>Complete HTML template</li>
-            <li>Sister sites navigation</li>
-            <li>Setup documentation</li>
-            <li>Single use license</li>
-          </ul>
-        </div>
 
         <div class="product-card" 
              :class="{ selected: selectedProduct === 'price_1Workbooks' }"

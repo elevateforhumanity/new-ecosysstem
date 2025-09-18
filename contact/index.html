@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https:; frame-ancestors 'none';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | Elevate for Humanity</title>
@@ -59,83 +67,11 @@
         <a href="/contact/">Contact</a>
     </nav>
 
-    <div class="container">
-        <h1>Contact Elevate for Humanity</h1>
-        <p>Ready to transform your career or partner with us? We're here to help you take the next step toward success.</p>
-
-        <div class="contact-grid">
-            <div class="contact-card">
-                <h2>Get In Touch</h2>
-                <form action="/api/contact" method="post">
-                    <div class="form-group">
-                        <label for="name">Full Name *</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
+    
                     
-                    <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
                     
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone">
-                    </div>
                     
-                    <div class="form-group">
-                        <label for="inquiry-type">Inquiry Type *</label>
-                        <select id="inquiry-type" name="inquiry-type" required>
-                            <option value="">Select an option</option>
-                            <option value="program-enrollment">Program Enrollment</option>
-                            <option value="government-contracting">Government Contracting</option>
-                            <option value="employer-partnership">Employer Partnership</option>
-                            <option value="student-support">Student Support</option>
-                            <option value="general-information">General Information</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
                     
-                    <div class="form-group">
-                        <label for="message">Message *</label>
-                        <textarea id="message" name="message" placeholder="Tell us how we can help you..." required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn">Send Message</button>
-                </form>
-            </div>
-
-            <div class="contact-card">
-                <h2>Contact Information</h2>
-                
-                <div class="contact-method">
-                    <h4>📞 Phone</h4>
-                    <p><a href="tel:+13175559675">(317) 555-WORK</a></p>
-                    <p><small>Monday - Friday, 8:00 AM - 6:00 PM EST</small></p>
-                </div>
-
-                <div class="contact-method">
-                    <h4>📧 Email</h4>
-                    <p><a href="mailto:info@elevateforhumanity.org">info@elevateforhumanity.org</a></p>
-                    <p><small>We respond within 24 hours</small></p>
-                </div>
-
-                <div class="contact-method">
-                    <h4>📍 Address</h4>
-                    <p>7009 East 56th Street<br>
-                    Indianapolis, IN 46226</p>
-                </div>
-
-                <div class="contact-method">
-                    <h4>🎓 Student Support</h4>
-                    <p><a href="mailto:support@elevateforhumanity.org">support@elevateforhumanity.org</a></p>
-                    <p><small>For current students needing assistance</small></p>
-                </div>
-
-                <div class="contact-method">
-                    <h4>🏛️ Government Contracting</h4>
-                    <p><a href="mailto:contracts@elevateforhumanity.org">contracts@elevateforhumanity.org</a></p>
-                    <p><small>For government partnership opportunities</small></p>
-                </div>
             </div>
         </div>
 

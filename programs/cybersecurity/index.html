@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https:; frame-ancestors 'none';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cybersecurity Training Program | Elevate for Humanity</title>
@@ -8,142 +16,7 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Calendar Integration -->
-    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-</head>
-<body>
-    <div id="site-header"></div>
-
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-900 to-purple-900 text-white py-20">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto text-center">
-                <div class="text-6xl mb-6">🔒</div>
-                <h1 class="text-5xl font-bold mb-6">Cybersecurity Training Program</h1>
-                <p class="text-xl mb-8">Protect digital assets and launch your career in cybersecurity with our comprehensive WIOA approved program</p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onclick="Calendly.initPopupWidget({url: 'https://calendly.com/elevate-for-humanity/consultation'});" class="bg-yellow-500 text-black px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-400 transition-colors">Schedule Consultation</button>
-                    <a href="#apply" class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-blue-900 transition-colors">Apply Now</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Program Overview -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-4xl font-bold text-gray-800 mb-6">Program Overview</h2>
-                    <p class="text-lg text-gray-600 mb-6">Our cybersecurity program prepares you for high-demand careers in information security. You'll learn to identify vulnerabilities, implement security measures, and respond to cyber threats.</p>
-                    
-                    <div class="grid grid-cols-2 gap-6 mb-8">
-                        <div class="text-center p-4 bg-blue-50 rounded-lg">
-                            <div class="text-3xl font-bold text-blue-600">12-16</div>
-                            <div class="text-gray-600">Weeks</div>
-                        </div>
-                        <div class="text-center p-4 bg-green-50 rounded-lg">
-                            <div class="text-3xl font-bold text-green-600">$65K+</div>
-                            <div class="text-gray-600">Avg Salary</div>
-                        </div>
-                        <div class="text-center p-4 bg-purple-50 rounded-lg">
-                            <div class="text-3xl font-bold text-purple-600">95%</div>
-                            <div class="text-gray-600">Job Placement</div>
-                        </div>
-                        <div class="text-center p-4 bg-yellow-50 rounded-lg">
-                            <div class="text-3xl font-bold text-yellow-600">24/7</div>
-                            <div class="text-gray-600">Lab Access</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-gray-50 p-8 rounded-xl">
-                    <h3 class="text-2xl font-bold mb-6">What You'll Learn</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center">
-                            <span class="text-green-500 mr-3">✓</span>
-                            Network Security Fundamentals
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-green-500 mr-3">✓</span>
-                            Ethical Hacking & Penetration Testing
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-green-500 mr-3">✓</span>
-                            Incident Response & Forensics
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-green-500 mr-3">✓</span>
-                            Risk Assessment & Management
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-green-500 mr-3">✓</span>
-                            Security Compliance & Governance
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-green-500 mr-3">✓</span>
-                            Cloud Security (AWS, Azure)
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Curriculum -->
-    <section class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Curriculum</h2>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <div class="text-blue-600 text-2xl font-bold mb-3">Week 1-4</div>
-                    <h3 class="text-xl font-bold mb-3">Foundations</h3>
-                    <ul class="text-gray-600 space-y-2">
-                        <li>• Security Principles</li>
-                        <li>• Network Basics</li>
-                        <li>• Operating Systems</li>
-                        <li>• Cryptography</li>
-                    </ul>
-                </div>
-                
-                <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <div class="text-green-600 text-2xl font-bold mb-3">Week 5-8</div>
-                    <h3 class="text-xl font-bold mb-3">Defense</h3>
-                    <ul class="text-gray-600 space-y-2">
-                        <li>• Firewalls & IDS</li>
-                        <li>• Vulnerability Assessment</li>
-                        <li>• Security Monitoring</li>
-                        <li>• Access Control</li>
-                    </ul>
-                </div>
-                
-                <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <div class="text-purple-600 text-2xl font-bold mb-3">Week 9-12</div>
-                    <h3 class="text-xl font-bold mb-3">Offense</h3>
-                    <ul class="text-gray-600 space-y-2">
-                        <li>• Ethical Hacking</li>
-                        <li>• Penetration Testing</li>
-                        <li>• Social Engineering</li>
-                        <li>• Malware Analysis</li>
-                    </ul>
-                </div>
-                
-                <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <div class="text-red-600 text-2xl font-bold mb-3">Week 13-16</div>
-                    <h3 class="text-xl font-bold mb-3">Response</h3>
-                    <ul class="text-gray-600 space-y-2">
-                        <li>• Incident Response</li>
-                        <li>• Digital Forensics</li>
-                        <li>• Business Continuity</li>
-                        <li>• Capstone Project</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certifications -->
+    
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Industry Certifications</h2>

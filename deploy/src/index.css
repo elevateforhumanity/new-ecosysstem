@@ -1,8 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-npm install
-npm install @supabase/supabase-js
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p

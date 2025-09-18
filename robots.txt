@@ -1,23 +1,22 @@
-
 User-agent: *
 Allow: /
 
 # Main content pages
 Allow: /
 Allow: /programs/
-Allow: /contracts/
-Allow: /students/
 Allow: /about/
-Allow: /contact/
-Allow: /grants/
+Allow: /connect/
 Allow: /veterans/
 Allow: /policies/
-Allow: /accessibility/
+Allow: /impact/
+Allow: /calendar/
+Allow: /eligibility-check/
 
 # Static assets
 Allow: /images/
 Allow: /assets/
-Allow: /client/
+Allow: /css/
+Allow: /js/
 
 # Block admin and sensitive areas
 Disallow: /admin/
@@ -33,12 +32,42 @@ Disallow: /lib/
 Disallow: /scripts/
 Disallow: /.replit
 Disallow: /package.json
+Disallow: /*.json$
+Disallow: /*.log$
+Disallow: /*.bak$
+Disallow: /*.backup$
+Disallow: /*.old$
+Disallow: /*.config.js$
+Disallow: /security-*.json
+Disallow: /health-*.json
+Disallow: /audit-*.json
+Disallow: /.git/
+Disallow: /backup/
+Disallow: /temp/
+Disallow: /_headers
 
-# Sitemap location
-Sitemap: https://www.elevateforhumanity.org/sitemap.xml
+# Block duplicate pages
+Disallow: /index-authentic.html
+Disallow: /index-ecosystem.html
+Disallow: /index-professional.html
+Disallow: /live-professional.html
+Disallow: /merged-site.html
+Disallow: /professional-site.html
+Disallow: /working-demo.html
+Disallow: /clean-professional.html
+Disallow: /fullsail-style-landing.html
+
+# Allow specific public files
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /security.txt
+Allow: /.well-known/
 
 # Crawl delay for politeness
 Crawl-delay: 1
 
+# Sitemap location
+Sitemap: https://elevateforhumanity.org/sitemap.xml
+
 # Last updated
-# Generated: 2024-09-16
+# Generated: 2025-09-18

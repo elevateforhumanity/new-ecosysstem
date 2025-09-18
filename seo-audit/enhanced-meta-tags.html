@@ -2,6 +2,14 @@
 
 <!-- Homepage Meta Tags -->
 <head>
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https:; frame-ancestors 'none';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -47,113 +55,10 @@
     <link rel="alternate" hreflang="x-default" href="https://elevateforhumanity.org/">
     
     <!-- Schema.org Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
-        "name": "Elevate for Humanity",
-        "alternateName": "Elevate for Humanity Workforce Development",
-        "url": "https://elevateforhumanity.org",
-        "logo": "https://elevateforhumanity.org/assets/images/logo.png",
-        "description": "Workforce development and career training organization providing free job training programs in Indiana through WIOA and Workforce Ready Grants.",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "123 Main Street",
-            "addressLocality": "Indianapolis",
-            "addressRegion": "IN",
-            "postalCode": "46204",
-            "addressCountry": "US"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "39.7684",
-            "longitude": "-86.1581"
-        },
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+1-317-999-9999",
-            "contactType": "customer service",
-            "availableLanguage": "English",
-            "areaServed": "Indiana"
-        },
-        "sameAs": [
-            "https://www.facebook.com/elevateforhumanity",
-            "https://www.linkedin.com/company/elevateforhumanity",
-            "https://www.instagram.com/elevateforhumanity"
-        ],
-        "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Career Training Programs",
-            "itemListElement": [
-                {
-                    "@type": "Course",
-                    "name": "Home Health Aide Training",
-                    "description": "4-week certification program for home health aide careers",
-                    "provider": {
-                        "@type": "EducationalOrganization",
-                        "name": "Elevate for Humanity"
-                    }
-                },
-                {
-                    "@type": "Course",
-                    "name": "IT Support & Help Desk Training",
-                    "description": "6-week Google-certified IT support training program",
-                    "provider": {
-                        "@type": "EducationalOrganization",
-                        "name": "Elevate for Humanity"
-                    }
-                }
-            ]
-        }
-    }
-    </script>
+    
     
     <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX', {
-            page_title: 'Homepage - Free Job Training Indiana',
-            page_location: window.location.href,
-            content_group1: 'Workforce Development',
-            content_group2: 'Homepage',
-            custom_map: {
-                'custom_parameter_1': 'program_interest',
-                'custom_parameter_2': 'funding_eligibility'
-            }
-        });
-    </script>
     
-    <!-- Bing UET Tag -->
-    <script>
-        (function(w,d,t,r,u){
-            var f,n,i;
-            w[u]=w[u]||[],f=function(){
-                var o={ti:"BING_UET_TAG_ID", enableAutoSpaTracking: true};
-                o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")
-            },
-            n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){
-                var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)
-            },
-            i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)
-        })(window,document,"script","//bat.bing.com/bat.js","uetq");
-    </script>
-    
-    <!-- Facebook Pixel -->
-    <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', 'YOUR_PIXEL_ID');
-        fbq('track', 'PageView');
-    </script>
     
     <!-- Additional SEO Meta Tags -->
     <meta name="author" content="Elevate for Humanity">
@@ -213,103 +118,5 @@
     <link rel="canonical" href="https://elevateforhumanity.org/programs/{{PROGRAM_SLUG}}/">
     
     <!-- Schema.org for Course -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Course",
-        "name": "{{PROGRAM_NAME}} Training",
-        "description": "{{PROGRAM_DESCRIPTION}}",
-        "provider": {
-            "@type": "EducationalOrganization",
-            "name": "Elevate for Humanity",
-            "url": "https://elevateforhumanity.org"
-        },
-        "educationalCredentialAwarded": "{{CREDENTIAL}}",
-        "timeRequired": "{{DURATION}}",
-        "courseMode": "{{MODALITY}}",
-        "locationCreated": {
-            "@type": "Place",
-            "name": "Indianapolis, Indiana"
-        },
-        "offers": {
-            "@type": "Offer",
-            "category": "Educational Course",
-            "eligibleRegion": {
-                "@type": "Place",
-                "name": "Indiana, United States"
-            },
-            "price": "0",
-            "priceCurrency": "USD",
-            "description": "Free for eligible students through WIOA and Workforce Ready Grants"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "reviewCount": "{{REVIEW_COUNT}}",
-            "bestRating": "5",
-            "worstRating": "1"
-        }
-    }
-    </script>
-</head>
-
-<!-- Blog Post Meta Tags Template -->
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Primary Meta Tags -->
-    <title>{{BLOG_TITLE}} | Elevate for Humanity Blog</title>
-    <meta name="description" content="{{BLOG_EXCERPT}}">
-    <meta name="keywords" content="{{BLOG_KEYWORDS}}">
-    
-    <!-- Open Graph -->
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://elevateforhumanity.org/blog/{{BLOG_SLUG}}/">
-    <meta property="og:title" content="{{BLOG_TITLE}}">
-    <meta property="og:description" content="{{BLOG_EXCERPT}}">
-    <meta property="og:image" content="{{BLOG_FEATURED_IMAGE}}">
-    <meta property="article:published_time" content="{{BLOG_DATE_ISO}}">
-    <meta property="article:author" content="Elevate for Humanity">
-    <meta property="article:section" content="Workforce Development">
-    <meta property="article:tag" content="{{BLOG_TAGS}}">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="{{BLOG_TITLE}}">
-    <meta property="twitter:description" content="{{BLOG_EXCERPT}}">
-    <meta property="twitter:image" content="{{BLOG_FEATURED_IMAGE}}">
-    
-    <!-- Canonical -->
-    <link rel="canonical" href="https://elevateforhumanity.org/blog/{{BLOG_SLUG}}/">
-    
-    <!-- Schema.org for Article -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": "{{BLOG_TITLE}}",
-        "description": "{{BLOG_EXCERPT}}",
-        "image": "{{BLOG_FEATURED_IMAGE}}",
-        "author": {
-            "@type": "Organization",
-            "name": "Elevate for Humanity"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "Elevate for Humanity",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://elevateforhumanity.org/assets/images/logo.png"
-            }
-        },
-        "datePublished": "{{BLOG_DATE_ISO}}",
-        "dateModified": "{{BLOG_MODIFIED_ISO}}",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://elevateforhumanity.org/blog/{{BLOG_SLUG}}/"
-        },
-        "keywords": "{{BLOG_KEYWORDS}}"
-    }
-    </script>
 </head>

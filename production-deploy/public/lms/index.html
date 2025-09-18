@@ -1,8 +1,16 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https:; frame-ancestors 'none';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
   <meta charset="utf-8" />
-  <title>Learning Management System – Elevate for Humanity</title>
+  <title>Student Portal – Elevate for Humanity</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
@@ -16,7 +24,7 @@
       </a>
       <ul class="nav-list">
         <li><a href="/portal/">Dashboard</a></li>
-        <li><a href="/lms/" aria-current="page">Learning</a></li>
+        <li><a href="/student-portal.html" aria-current="page">Learning</a></li>
         <li><a href="/enroll/">Enrollment</a></li>
         <li><a href="/">Public Site</a></li>
       </ul>
@@ -25,11 +33,11 @@
   </header>
 
   <main class="section" id="main">
-    <h1>Learning Management System</h1>
+    <h1>Student Portal</h1>
     
     <div style="background: #d4edda; border: 1px solid #c3e6cb; border-radius: 0.5rem; padding: 1rem; margin: 2rem 0;">
-      <h2>🔒 Protected LMS Area</h2>
-      <p>This Learning Management System is protected by authentication. Only signed-in students can access course materials and assignments.</p>
+      <h2>🔒 Protected Student Portal Area</h2>
+      <p>This Student Portal is protected by authentication. Only signed-in students can access course materials and assignments.</p>
     </div>
 
     <section>
@@ -41,7 +49,7 @@
             <p><strong>Progress:</strong> 75% Complete</p>
             <p><strong>Next Assignment:</strong> Network Security Lab</p>
             <p><strong>Due Date:</strong> Friday, September 22</p>
-            <a class="btn btn-primary" href="/lms/cybersecurity/">Continue Course</a>
+            <a class="btn btn-primary" href="/student-portal.html">Continue Course</a>
           </div>
         </div>
         
@@ -51,7 +59,7 @@
             <p><strong>Progress:</strong> 45% Complete</p>
             <p><strong>Next Assignment:</strong> AWS EC2 Setup</p>
             <p><strong>Due Date:</strong> Monday, September 25</p>
-            <a class="btn btn-primary" href="/lms/cloud/">Continue Course</a>
+            <a class="btn btn-primary" href="/student-portal.html">Continue Course</a>
           </div>
         </div>
         
@@ -61,7 +69,7 @@
             <p><strong>Progress:</strong> 90% Complete</p>
             <p><strong>Next Assignment:</strong> Final Exam</p>
             <p><strong>Due Date:</strong> Wednesday, September 27</p>
-            <a class="btn btn-primary" href="/lms/healthcare/">Continue Course</a>
+            <a class="btn btn-primary" href="/student-portal.html">Continue Course</a>
           </div>
         </div>
       </div>
@@ -125,7 +133,7 @@
       <div>
         <h3>Technical Support</h3>
         <p>
-          <strong>LMS Help:</strong> <a href="mailto:lms@elevateforhumanity.org">lms@elevateforhumanity.org</a><br>
+          <strong>Student Portal Help:</strong> <a href="/student-portal.html">Student Portal@elevateforhumanity.org</a><br>
           <strong>Hours:</strong> Mon-Fri 8AM-6PM EST
         </p>
       </div>

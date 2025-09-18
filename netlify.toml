@@ -57,3 +57,167 @@
   from = "/*"
   to = "/404.html"
   status = 404
+# Directory access restrictions
+[[redirects]]
+  from = "/admin/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/api/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/config/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/logs/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/backup/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/temp/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/*.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/*.log"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/*.bak"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/*.backup"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/*.old"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.env*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/package.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/package-lock.json"
+  to = "/404.html"
+  status = 404
+  force = true
+# Duplicate content redirects
+[[redirects]]
+  from = "/index-authentic.html"
+  to = "/hub.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/index-ecosystem.html"
+  to = "/hub.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/index-professional.html"
+  to = "/hub.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/live-professional.html"
+  to = "/hub.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/merged-site.html"
+  to = "/hub.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/professional-site.html"
+  to = "/hub.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/working-demo.html"
+  to = "/hub.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/humanized-program-template.html"
+  to = "/programs.html"
+  status = 301
+  force = true
+
+# WWW to non-WWW redirect
+[[redirects]]
+  from = "https://www.elevateforhumanity.org/*"
+  to = "https://elevateforhumanity.org/:splat"
+  status = 301
+  force = true
+
+# Directory index redirects
+[[redirects]]
+  from = "/about/index.html"
+  to = "/about.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact/index.html"
+  to = "/connect.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/programs/index.html"
+  to = "/programs.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/students/index.html"
+  to = "/student-portal.html"
+  status = 301
+  force = true

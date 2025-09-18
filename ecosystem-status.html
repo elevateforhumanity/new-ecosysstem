@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https:; frame-ancestors 'none';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecosystem Status - Where Are We At Now | Elevate for Humanity</title>
@@ -195,100 +203,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🚀 Ecosystem Status Dashboard</h1>
-            <p class="subtitle">Real-time assessment of "Where Are We At Now"</p>
-        </div>
-        
-        <div class="status-grid" id="statusGrid">
-            <!-- Status cards will be populated by JavaScript -->
-        </div>
-        
-        <div class="summary-section">
-            <h2>Overall System Health</h2>
-            <div class="progress-bar">
-                <div class="progress-fill" id="overallProgress" style="width: 0%"></div>
-            </div>
-            <p id="healthSummary">Analyzing system status...</p>
-            <button class="refresh-btn" onclick="runStatusCheck()">🔄 Refresh Status</button>
-            <div class="last-updated" id="lastUpdated"></div>
-        </div>
-    </div>
-
-    <script>
-        const statusChecks = [
-            {
-                name: "Core Infrastructure",
-                icon: "🏗️",
-                checks: [
-                    { name: "Package Dependencies", test: () => checkDependencies() },
-                    { name: "Environment Variables", test: () => checkEnvironment() },
-                    { name: "Database Connection", test: () => checkDatabase() },
-                    { name: "Build System", test: () => checkBuildSystem() },
-                    { name: "Static Assets", test: () => checkAssets() }
-                ]
-            },
-            {
-                name: "Sister Sites",
-                icon: "🌐",
-                checks: [
-                    { name: "Hub Site (index.html)", test: () => checkFile('/index.html') },
-                    { name: "Programs Site", test: () => checkFile('/programs.html') },
-                    { name: "LMS Site", test: () => checkFile('/lms.html') },
-                    { name: "Connect Site", test: () => checkFile('/connect.html') },
-                    { name: "Account Management", test: () => checkFile('/account.html') }
-                ]
-            },
-            {
-                name: "Payment System",
-                icon: "💳",
-                checks: [
-                    { name: "Stripe Integration", test: () => checkStripeConfig() },
-                    { name: "Payment Routes", test: () => checkFile('/pay-enhanced-checkout.js') },
-                    { name: "Webhook Handler", test: () => checkFile('/webhook-handler.js') },
-                    { name: "Revenue Splits", test: () => checkRevenueSplits() },
-                    { name: "Product Configuration", test: () => checkStripeProducts() }
-                ]
-            },
-            {
-                name: "Learning Management",
-                icon: "📚",
-                checks: [
-                    { name: "LMS Backend", test: () => checkFile('/lms-api-advanced.js') },
-                    { name: "Course Content", test: () => checkDirectory('/curriculum') },
-                    { name: "Assessment System", test: () => checkFile('/skills-assessment.html') },
-                    { name: "Progress Tracking", test: () => checkLMSProgress() },
-                    { name: "Digital Binders", test: () => checkFile('/digital-binder.html') }
-                ]
-            },
-            {
-                name: "Testing & Quality",
-                icon: "🧪",
-                checks: [
-                    { name: "Test Suite", test: () => checkTestSuite() },
-                    { name: "Code Coverage", test: () => checkCoverage() },
-                    { name: "Linting", test: () => checkLinting() },
-                    { name: "Build Validation", test: () => checkBuildValidation() },
-                    { name: "Environment Validation", test: () => checkEnvValidation() }
-                ]
-            },
-            {
-                name: "Deployment Readiness",
-                icon: "🚀",
-                checks: [
-                    { name: "Docker Configuration", test: () => checkFile('/Dockerfile') },
-                    { name: "Vercel Configuration", test: () => checkFile('/vercel.json') },
-                    { name: "CI/CD Pipeline", test: () => checkDirectory('/.github') },
-                    { name: "Security Headers", test: () => checkSecurityHeaders() },
-                    { name: "SEO Optimization", test: () => checkSEO() }
-                ]
-            }
-        ];
-
-        async function runStatusCheck() {
-            const statusGrid = document.getElementById('statusGrid');
-            statusGrid.innerHTML = '<div style="text-align: center; padding: 40px; color: #666;">Loading ecosystem status...</div>';
+    ';
             
             try {
                 // First try to get comprehensive status from API
@@ -367,50 +282,7 @@
             
             let summaryText = '';
             if (summary.readyForProduction) {
-                summaryText = '<div style="margin-top: 15px; padding: 10px; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 5px; color: #155724;"><strong>✅ Ready for Production</strong></div>';
-            } else {
-                summaryText = '<div style="margin-top: 15px; padding: 10px; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 5px; color: #721c24;"><strong>❌ Not Ready for Production</strong></div>';
-            }
-            
-            if (summary.majorIssues.length > 0) {
-                summaryText += '<div style="margin-top: 10px;"><strong>Major Issues:</strong><ul>';
-                summary.majorIssues.forEach(issue => {
-                    summaryText += `<li>${issue}</li>`;
-                });
-                summaryText += '</ul></div>';
-            }
-            
-            if (summary.nextSteps.length > 0) {
-                summaryText += '<div style="margin-top: 10px;"><strong>Next Steps:</strong><ul>';
-                summary.nextSteps.forEach(step => {
-                    summaryText += `<li>${step}</li>`;
-                });
-                summaryText += '</ul></div>';
-            }
-            
-            healthSummary.innerHTML = existingText + summaryText;
-            
-            document.getElementById('lastUpdated').textContent = `Last updated: ${new Date(data.timestamp).toLocaleString()}`;
-        }
-        
-        function getSectionIcon(sectionName) {
-            const icons = {
-                'Core Infrastructure': '🏗️',
-                'Sister Sites': '🌐',
-                'Payment System': '💳',
-                'Learning Management': '📚',
-                'Testing & Quality': '🧪',
-                'Deployment Readiness': '🚀'
-            };
-            return icons[sectionName] || '📊';
-        }
-        
-        function createStatusCard(section) {
-            const card = document.createElement('div');
-            card.className = 'status-card';
-            card.innerHTML = `
-                <div class="card-header">
-                    <div class="status-icon status-unknown">${section.icon}</div>
+                summaryText = '
                     <div class="card-title">${section.name}</div>
                 </div>
                 <ul class="status-details" id="details-${section.name.replace(/\s+/g, '-').toLowerCase()}">
@@ -636,16 +508,16 @@
             }
         }
         
-        async function checkLMSProgress() {
+        async function checkStudent PortalProgress() {
             try {
-                const response = await fetch('/api/lms/courses');
+                const response = await fetch('/api/Student Portal/courses');
                 if (response.ok) {
-                    return { status: 'working', message: 'LMS API functional' };
+                    return { status: 'working', message: 'Student Portal API functional' };
                 } else {
-                    return { status: 'warning', message: 'LMS API needs verification' };
+                    return { status: 'warning', message: 'Student Portal API needs verification' };
                 }
             } catch (error) {
-                return { status: 'warning', message: 'LMS API unavailable' };
+                return { status: 'warning', message: 'Student Portal API unavailable' };
             }
         }
         

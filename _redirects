@@ -1,0 +1,38 @@
+# Redirect duplicate pages to canonical versions
+/index-authentic.html /hub.html 301
+/index-ecosystem.html /hub.html 301
+/index-professional.html /hub.html 301
+/live-professional.html /hub.html 301
+/live-site.html /hub.html 301
+/merged-site.html /hub.html 301
+/professional-site.html /hub.html 301
+/protected-site.html /hub.html 301
+/redesigned-homepage.html /hub.html 301
+/working-demo.html /hub.html 301
+/clean-professional.html /hub.html 301
+/fullsail-style-landing.html /hub.html 301
+/acc-style-landing.html /hub.html 301
+/humanized-program-template.html /programs.html 301
+
+# Redirect www to non-www
+https://www.elevateforhumanity.org/* https://elevateforhumanity.org/:splat 301!
+
+# Redirect HTTP to HTTPS
+http://elevateforhumanity.org/* https://elevateforhumanity.org/:splat 301!
+http://www.elevateforhumanity.org/* https://elevateforhumanity.org/:splat 301!
+
+# Redirect old paths
+/about/index.html /about.html 301
+/contact/index.html /connect.html 301
+/programs/index.html /programs.html 301
+/students/index.html /student-portal.html 301
+/employers/index.html /connect.html 301
+
+# Block access to sensitive files
+/admin/* /404.html 404
+/api/* /404.html 404
+/*.json /404.html 404
+/*.log /404.html 404
+/*.bak /404.html 404
+/*.backup /404.html 404
+/*.old /404.html 404

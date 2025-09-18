@@ -2,110 +2,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https:; frame-ancestors 'none';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Your Learning Plan | EFH</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 py-12">
-        <div class="text-center mb-12">
-            <h1 class="text-4xl font-bold text-gray-900 mb-4">Choose Your Learning Plan</h1>
-            <p class="text-xl text-gray-600">Access our complete library of workforce development programs</p>
-        </div>
-
-        <!-- Billing Toggle -->
-        <div class="flex justify-center mb-8">
-            <div class="bg-white p-1 rounded-lg border">
-                <button id="monthly-btn" class="px-4 py-2 rounded-md text-sm font-medium bg-blue-600 text-white">
-                    Monthly
-                </button>
-                <button id="yearly-btn" class="px-4 py-2 rounded-md text-sm font-medium text-gray-500">
-                    Yearly (Save 17%)
-                </button>
-            </div>
-        </div>
-
-        <!-- Subscription Plans -->
-        <div id="plans-container" class="grid md:grid-cols-3 gap-8">
-            <!-- Plans will be loaded here -->
-        </div>
-
-        <!-- Features Comparison -->
-        <div class="mt-16 bg-white rounded-lg shadow p-8">
-            <h2 class="text-2xl font-bold text-center mb-8">What's Included</h2>
-            <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead>
-                        <tr class="border-b">
-                            <th class="text-left py-3">Features</th>
-                            <th class="text-center py-3">Basic</th>
-                            <th class="text-center py-3">Professional</th>
-                            <th class="text-center py-3">Enterprise</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-sm">
-                        <tr class="border-b">
-                            <td class="py-3">Course Access</td>
-                            <td class="text-center">5 courses</td>
-                            <td class="text-center">All 33 programs</td>
-                            <td class="text-center">All 33 programs</td>
-                        </tr>
-                        <tr class="border-b">
-                            <td class="py-3">Progress Tracking</td>
-                            <td class="text-center">✓</td>
-                            <td class="text-center">✓</td>
-                            <td class="text-center">✓</td>
-                        </tr>
-                        <tr class="border-b">
-                            <td class="py-3">Certificates</td>
-                            <td class="text-center">-</td>
-                            <td class="text-center">✓</td>
-                            <td class="text-center">✓</td>
-                        </tr>
-                        <tr class="border-b">
-                            <td class="py-3">Federal Compliance</td>
-                            <td class="text-center">-</td>
-                            <td class="text-center">-</td>
-                            <td class="text-center">✓</td>
-                        </tr>
-                        <tr class="border-b">
-                            <td class="py-3">Support</td>
-                            <td class="text-center">Email</td>
-                            <td class="text-center">Priority</td>
-                            <td class="text-center">Dedicated</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let currentBilling = 'monthly';
-        let plans = [];
-
-        async function loadPlans() {
-            try {
-                const response = await fetch('/api/subscription/plans');
-                const data = await response.json();
-                plans = data.plans;
-                renderPlans();
-            } catch (error) {
-                console.error('Failed to load plans:', error);
-            }
-        }
-
-        function renderPlans() {
-            const container = document.getElementById('plans-container');
-            container.innerHTML = plans.map(plan => {
-                const price = currentBilling === 'monthly' ? plan.price_monthly : plan.price_yearly;
-                const period = currentBilling === 'monthly' ? 'month' : 'year';
-                const savings = currentBilling === 'yearly' ? plan.savings_yearly : 0;
-                
-                return `
-                    <div class="bg-white rounded-lg shadow-lg p-8 ${plan.id === 'professional' ? 'ring-2 ring-blue-500' : ''}">
-                        ${plan.id === 'professional' ? '<div class="bg-blue-500 text-white text-sm font-medium px-3 py-1 rounded-full inline-block mb-4">Most Popular</div>' : ''}
+    ' : ''}
                         <h3 class="text-2xl font-bold mb-2">${plan.name}</h3>
                         <div class="mb-6">
                             <span class="text-4xl font-bold">$${Math.floor(price / 100)}</span>

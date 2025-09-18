@@ -1,55 +1,32 @@
 /*
-  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  X-Content-Type-Options: nosniff
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https:; frame-ancestors 'none';
   X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://assets.calendly.com https://js.stripe.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https: https://*.supabase.co https://api.stripe.com
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
-# Cache control for static assets
-/assets/*
-  Cache-Control: public, max-age=31536000, immutable
-
-# Cache control for CSS and JS
-/*.css
-  Cache-Control: public, max-age=31536000, immutable
-
-/*.js
-  Cache-Control: public, max-age=31536000, immutable
-
-# Cache control for images
-/*.jpg
-  Cache-Control: public, max-age=31536000, immutable
-
-/*.jpeg
-  Cache-Control: public, max-age=31536000, immutable
-
-/*.png
-  Cache-Control: public, max-age=31536000, immutable
-
-/*.webp
-  Cache-Control: public, max-age=31536000, immutable
-
-/*.svg
-  Cache-Control: public, max-age=31536000, immutable
-
-# Short cache for HTML pages
-/*.html
-  Cache-Control: public, max-age=3600
+/admin/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache, no-store, must-revalidate
 
 /api/*
-  Access-Control-Allow-Origin: https://www.elevateforhumanity.org
-  Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
-  Access-Control-Allow-Headers: Content-Type, Authorization
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache, no-store, must-revalidate
 
-/sitemap*.xml
-  Content-Type: application/xml
-  Cache-Control: public, max-age=86400
+/*.json
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache, no-store, must-revalidate
 
-/robots.txt
-  Content-Type: text/plain
-  Cache-Control: public, max-age=86400
+/*.bak
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache, no-store, must-revalidate
 
-/manifest.json
-  Content-Type: application/json
-  Cache-Control: public, max-age=86400
+/*.backup
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/*.old
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache, no-store, must-revalidate

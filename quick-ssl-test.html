@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick SSL Test - Elevate for Humanity</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px; 
+            background: #f0f8ff; 
+        }
+        .container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
+        }
+        .status { 
+            padding: 15px; 
+            margin: 15px 0; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            text-align: center;
+        }
+        .success { 
+            background: #d4edda; 
+            color: #155724; 
+            border: 2px solid #c3e6cb; 
+        }
+        .error { 
+            background: #f8d7da; 
+            color: #721c24; 
+            border: 2px solid #f5c6cb; 
+        }
+        .info { 
+            background: #d1ecf1; 
+            color: #0c5460; 
+            border: 2px solid #bee5eb; 
+        }
+        .test-button {
+            background: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        .test-button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 SSL Connection Test</h1>
+        <p>This page tests if your SSL is working correctly.</p>
+        
+        <div id="auto-status" class="status info">
+            🔍 Checking SSL status automatically...
+        </div>
+        
+        <h2>Manual Tests</h2>
+        <button class="test-button" onclick="testMainDomain()">Test elevateforhumanity.org</button>
+        <button class="test-button" onclick="testWWWDomain()">Test www.elevateforhumanity.org</button>
+        <button class="test-button" onclick="testCurrentPage()">Test Current Page</button>
+        
+        <div id="test-results"></div>
+        
+        <h2>Current Connection Info</h2>
+        <div class="result">
+            <strong>Current URL:</strong> <span id="current-url"></span><br>
+            <strong>Protocol:</strong> <span id="protocol"></span><br>
+            <strong>Is Secure:</strong> <span id="is-secure"></span><br>
+            <strong>User Agent:</strong> <span id="user-agent"></span>
+        </div>
+        
+        <h2>What This Means</h2>
+        <div class="result">
+            <p><strong>✅ If you see this page with HTTPS:</strong> SSL is working!</p>
+            <p><strong>❌ If you see certificate errors:</strong> SSL needs to be fixed in Cloudflare</p>
+            <p><strong>🔄 If www redirects to non-www:</strong> Perfect! That's the recommended setup</p>
+        </div>
+        
+        <h2>Quick Cloudflare Fix</h2>
+        <div class="result">
+            <ol>
+                <li>Login to Cloudflare Dashboard</li>
+                <li>Go to SSL/TLS → Overview</li>
+                <li>Set encryption mode to <strong>"Full"</strong></li>
+                <li>Enable <strong>"Always Use HTTPS"</strong></li>
+                <li>Wait 5-10 minutes for changes to take effect</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        // Auto-check SSL status when page loads
+        function checkSSLStatus() {
+            const isHTTPS = location.protocol === 'https:';
+            const statusDiv = document.getElementById('auto-status');
+            
+            if (isHTTPS) {
+                statusDiv.className = 'status success';
+                statusDiv.innerHTML = '✅ SSL is working! You are on a secure HTTPS connection.';
+            } else {
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = '❌ Not secure! You are on HTTP, not HTTPS.';
+            }
+            
+            // Update connection info
+            document.getElementById('current-url').textContent = location.href;
+            document.getElementById('protocol').textContent = location.protocol;
+            document.getElementById('is-secure').textContent = isHTTPS ? 'Yes' : 'No';
+            document.getElementById('user-agent').textContent = navigator.userAgent.substring(0, 100) + '...';
+        }
+        
+        function addResult(message, isSuccess = true) {
+            const resultsDiv = document.getElementById('test-results');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = isSuccess ? 'status success' : 'status error';
+            resultDiv.innerHTML = message;
+            resultsDiv.appendChild(resultDiv);
+        }
+        
+        function testMainDomain() {
+            addResult('🔍 Testing elevateforhumanity.org...', true);
+            
+            const testUrl = 'https://elevateforhumanity.org/quick-ssl-test.html';
+            
+            fetch(testUrl, { method: 'HEAD', mode: 'no-cors' })
+                .then(() => {
+                    addResult('✅ elevateforhumanity.org SSL test successful!', true);
+                })
+                .catch(error => {
+                    addResult(`❌ elevateforhumanity.org SSL test failed: ${error.message}`, false);
+                });
+        }
+        
+        function testWWWDomain() {
+            addResult('🔍 Testing www.elevateforhumanity.org...', true);
+            
+            const testUrl = 'https://www.elevateforhumanity.org/quick-ssl-test.html';
+            
+            fetch(testUrl, { method: 'HEAD', mode: 'no-cors' })
+                .then(() => {
+                    addResult('✅ www.elevateforhumanity.org SSL test successful!', true);
+                })
+                .catch(error => {
+                    addResult(`❌ www.elevateforhumanity.org SSL test failed: ${error.message}`, false);
+                });
+        }
+        
+        function testCurrentPage() {
+            const isHTTPS = location.protocol === 'https:';
+            const domain = location.hostname;
+            
+            if (isHTTPS) {
+                addResult(`✅ Current page (${domain}) is using HTTPS successfully!`, true);
+            } else {
+                addResult(`❌ Current page (${domain}) is NOT using HTTPS!`, false);
+            }
+        }
+        
+        // Run auto-check when page loads
+        document.addEventListener('DOMContentLoaded', checkSSLStatus);
+    </script>
+</body>
+</html>

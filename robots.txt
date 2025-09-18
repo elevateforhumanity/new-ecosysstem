@@ -62,6 +62,8 @@ Allow: /sitemap.xml
 Allow: /robots.txt
 Allow: /security.txt
 Allow: /.well-known/
+Allow: /browser-health-check.html
+Allow: /sitemap.html
 
 # Crawl delay for politeness
 Crawl-delay: 1

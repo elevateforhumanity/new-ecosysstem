@@ -1,0 +1,126 @@
+{
+  "timestamp": "2025-09-18T04:30:46.475Z",
+  "totalChecks": 10,
+  "passedChecks": 10,
+  "failedChecks": 0,
+  "criticalFailures": 0,
+  "details": [
+    {
+      "name": "Homepage Redirect",
+      "url": "/",
+      "critical": true,
+      "success": true,
+      "statusCode": 200,
+      "issues": [
+        "Missing security header: x-xss-protection",
+        "Missing security header: referrer-policy",
+        "Missing security header: content-security-policy"
+      ]
+    },
+    {
+      "name": "Main Hub Page",
+      "url": "/hub.html",
+      "critical": true,
+      "success": true,
+      "statusCode": 200,
+      "issues": [
+        "Missing security header: x-xss-protection",
+        "Missing security header: referrer-policy",
+        "Missing security header: content-security-policy"
+      ]
+    },
+    {
+      "name": "Programs Page",
+      "url": "/programs.html",
+      "critical": true,
+      "success": true,
+      "statusCode": 200,
+      "issues": [
+        "Missing security header: x-xss-protection",
+        "Missing security header: referrer-policy",
+        "Missing security header: content-security-policy"
+      ]
+    },
+    {
+      "name": "Equal Opportunity Compliance",
+      "url": "/policies/eo.html",
+      "critical": true,
+      "success": true,
+      "statusCode": 200,
+      "issues": [
+        "Missing security header: x-xss-protection",
+        "Missing security header: referrer-policy",
+        "Missing security header: content-security-policy"
+      ]
+    },
+    {
+      "name": "WIOA Grievance Procedures",
+      "url": "/policies/grievance.html",
+      "critical": true,
+      "success": true,
+      "statusCode": 200,
+      "issues": [
+        "Missing security header: x-xss-protection",
+        "Missing security header: referrer-policy",
+        "Missing security header: content-security-policy"
+      ]
+    },
+    {
+      "name": "Veterans Priority Service",
+      "url": "/policies/veterans.html",
+      "critical": true,
+      "success": true,
+      "statusCode": 200,
+      "issues": [
+        "Missing security header: x-xss-protection",
+        "Missing security header: referrer-policy",
+        "Missing security header: content-security-policy"
+      ]
+    },
+    {
+      "name": "Accessibility Statement",
+      "url": "/policies/accessibility.html",
+      "critical": true,
+      "success": true,
+      "statusCode": 200,
+      "issues": [
+        "Missing security header: x-xss-protection",
+        "Missing security header: referrer-policy",
+        "Missing security header: content-security-policy"
+      ]
+    },
+    {
+      "name": "Admin Dashboard",
+      "url": "/admin-dashboard.html",
+      "critical": false,
+      "success": true,
+      "statusCode": 200,
+      "issues": []
+    },
+    {
+      "name": "Student Portal",
+      "url": "/student-portal.html",
+      "critical": false,
+      "success": true,
+      "statusCode": 200,
+      "issues": []
+    },
+    {
+      "name": "Connect/Contact Page",
+      "url": "/connect.html",
+      "critical": false,
+      "success": true,
+      "statusCode": 200,
+      "issues": []
+    }
+  ],
+  "securityHeaders": {
+    "x-frame-options": "SAMEORIGIN",
+    "x-content-type-options": "nosniff",
+    "strict-transport-security": "max-age=31536000; includeSubDomains"
+  },
+  "githubStatus": {
+    "success": false,
+    "error": "HTTP 403"
+  }
+}

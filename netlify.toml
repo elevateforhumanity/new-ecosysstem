@@ -1,10 +1,18 @@
 [build]
   publish = "deploy"
-  command = "cd vite-react-supabase-app && npm run build && cp -r dist/* ../deploy/"
+  command = "echo 'Using pre-built files' && ls -la deploy/ | head -10"
 
 [build.environment]
   NODE_VERSION = "20"
-  NPM_FLAGS = "--production"
+
+# Security Headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
 
 [[headers]]
   for = "/assets/*"
@@ -26,6 +34,7 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
+# SPA Routing
 [[redirects]]
   from = "/*"
   to = "/index.html"

@@ -9,6 +9,7 @@ import { createClient } from '@supabase/supabase-js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { ConfigManager } from './config-manager.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -39,18 +40,30 @@ async function main() {
   log('🚀 Elevate for Humanity - Supabase Connection Script', 'bold');
   log('=' .repeat(60), 'blue');
   
+  // Step 0: Run secure configuration check
+  log('\n🔐 Step 0: Secure Configuration Check...', 'blue');
+  const configManager = new ConfigManager();
+  const validation = configManager.validateSecrets();
+  
+  if (!validation.valid) {
+    log('\n⚠️ Configuration issues detected. Running detailed analysis...', 'yellow');
+    configManager.displayConfigSummary();
+  }
+  
   // Step 1: Validate environment
   log('\n📋 Step 1: Validating Environment...', 'blue');
   
   if (!config.supabaseUrl) {
     log('❌ SUPABASE_URL not found in environment variables', 'red');
     log('💡 Please set SUPABASE_URL or VITE_SUPABASE_URL', 'yellow');
+    log('💡 Use the ConfigManager template above for guidance', 'yellow');
     process.exit(1);
   }
   
   if (!config.supabaseKey) {
     log('❌ Supabase key not found in environment variables', 'red');
     log('💡 Please set SUPABASE_SERVICE_ROLE, SUPABASE_ANON_KEY, or VITE_SUPABASE_ANON_KEY', 'yellow');
+    log('💡 Use the ConfigManager template above for guidance', 'yellow');
     process.exit(1);
   }
   

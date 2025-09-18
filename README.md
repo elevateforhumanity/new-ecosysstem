@@ -1,252 +1,182 @@
-## Environment Variables
+# Supabase CLI (v1)
 
-Validated at build via `scripts/validate-env.js` (runs in `prebuild`). Required:
+[![Coverage Status](https://coveralls.io/repos/github/supabase/cli/badge.svg?branch=main)](https://coveralls.io/github/supabase/cli?branch=main)
 
-STRIPE_SECRET_KEY
-STRIPE_SUCCESS_URL
-STRIPE_CANCEL_URL
-SUPABASE_URL
-SUPABASE_SERVICE_KEY
+[Supabase](https://supabase.io) is an open source Firebase alternative. We're building the features of Firebase using enterprise-grade open source tools.
 
-Add them to your Vercel project settings or a local `.env` file (do not commit secrets).
+This repository contains all the functionality for Supabase CLI.
 
-# Deployment
+- [x] Running Supabase locally
+- [x] Managing database migrations
+- [x] Creating and deploying Supabase Functions
+- [x] Generating types directly from your database schema
+- [x] Making authenticated HTTP requests to [Management API](https://supabase.com/docs/reference/api/introduction)
 
-## Docker
-Build image:
-```
-docker build -t efh-app .
-```
-Run container:
-```
-docker run -p 5000:5000 --name efh efh-app
-```
-Health checks:
-- http://localhost:5000/api/healthz
-- http://localhost:5000/api/readiness
+## Getting started
 
-Metrics: http://localhost:5000/api/metrics
+### Install the CLI
 
-Autopilot status: http://localhost:5000/api/autopilot/status
+Available via [NPM](https://www.npmjs.com) as dev dependency. To install:
 
-Set environment variables as needed (examples):
-```
-PORT=5000
-JWT_SECRET=replace_me
-ADMIN_SECRET=admin_secret_here
-AUTOPILOT_MAX_TASKS=800
+```bash
+npm i supabase --save-dev
 ```
 
-## Production Notes
-- Run behind reverse proxy (Nginx / Caddy) for TLS.
-- Persist `autopilot-tasks.json` only if you need history between restarts (mount a volume).
-- For Prisma with SQLite dev -> mount `prisma/dev.db` or migrate to Postgres for concurrency.
+To install the beta release channel:
 
-# Multi-Site Ecosystem Implementation
-
-This project implements a complete multi-site ecosystem for Elevate for Humanity using Supabase for shared user memory.
-
-## 🏗️ System Architecture
-
-### Sister Sites
-- **Hub (www)**: Main landing page with navigation and SEO
-- **Programs (programs.)**: Program catalog, funding info, and application intake  
-- **LMS (lms.)**: Learning content delivery and course management
-- **Connect (connect.)**: Community features, events, and resources
-- **Pay (pay.)**: Centralized payment processing using Node.js and Stripe
-- **Memory Service**: Powered by Supabase (no custom server needed)
-
-### Data Sharing
-All sites share user data through Supabase:
-- User authentication (magic links, OAuth)
-- Profile information (name, phone, address)
-- User preferences (email settings, locale, accessibility)
-- Course enrollments with status tracking
-- Payment history and Stripe integration
-
-## 📂 File Structure
-
-```
-├── account.html                    # Full account management page
-├── demo-site.html                  # Example sister site implementation
-├── pay-backend-integration.js      # Stripe → Supabase integration
-├── setup-guide.md                 # Step-by-step setup instructions
-└── shared/
-    ├── account-drawer.html         # Embeddable account widget
-    ├── supabase.js                # Shared Supabase client
-    └── enrollment.js              # Enrollment helper functions
+```bash
+npm i supabase@beta --save-dev
 ```
 
-## 🚀 Implementation Status
+When installing with yarn 4, you need to disable experimental fetch with the following nodejs config.
 
-### ✅ Completed Components
-- Database schema design with security policies
-- Account management page (full-page version)
-- Account drawer widget (embeddable version)
-- Shared authentication and user session management
-- Enrollment tracking and display functions
-- Payment integration template for existing Pay service
-- Demo site showing complete integration
-
-### ⏳ Manual Setup Required
-- Create Supabase project and apply database schema
-- Configure Supabase Auth for all sister site domains
-- Update credential placeholders with real Supabase values
-- Integrate Supabase code into existing Pay backend
-- Test cross-site authentication and enrollment flow
-
-## 🔧 Key Features
-
-### Account Drawer Widget
-- Floating "Account" button on any page
-- Slide-out drawer with sign-in and profile management
-- Shows live enrollment status across all sites
-- Mobile responsive with proper accessibility
-- **NEW**: Funding & voucher collection for checkout metadata
-
-### Enrollment System
-- Reuses existing Pay backend with minimal changes
-- Adds `program_slug` metadata to Stripe checkout
-- Automatic enrollment activation after payment
-- Status tracking: pending → active → completed
-- **NEW**: Automatic funding metadata injection (voucher ID, case manager, funding source, coupons)
-
-### Funding & Voucher Support
-- Local storage persistence for guest users
-- Supabase sync for authenticated users
-- Automatic injection into all enrollment checkouts
-- Case manager and voucher ID tracking
-- Support for WIOA, ETPL, WRG, and other funding sources
-- Funding details recorded in payment metadata and notes
-
-#### How It Works
-1. User fills out funding info in Account Drawer (voucher ID, case manager, funding source, coupon)
-2. System saves locally and syncs to Supabase if signed in
-3. When `efhEnroll()` is called, funding data is automatically attached to Stripe metadata
-4. Payment backend receives funding info in webhook and stores in database notes
-5. Funding details appear in Stripe dashboard for billing/authorization support
-
-### Shared Authentication
-- Magic link email authentication
-- Session persistence across sister sites
-- Automatic user record creation and syncing
-- Secure access with Row Level Security
-
-## 🎯 Business Benefits
-
-- **Unified User Experience**: Users see consistent data across all sites
-- **Simplified Management**: One source of truth for all user data
-- **Scalable Architecture**: Supabase handles infrastructure and security
-- **Easy Integration**: Drop-in widgets require minimal code changes
-- **Cost Effective**: Uses existing Pay service with hosted Supabase
-
-## 📱 User Journey
-
-1. **Discovery**: User visits any sister site
-2. **Sign In**: Magic link authentication (works across all sites)
-3. **Browse**: View programs, courses, community content
-4. **Enroll**: Click enrollment button → Stripe checkout
-5. **Payment**: Complete payment through existing Pay service
-6. **Activation**: Enrollment automatically activated across all sites
-7. **Learning**: Access content based on enrollment status
-
-The system ensures seamless experience as users move between different parts of the ecosystem.
-
-## 🔍 Health & Monitoring
-- Basic liveness: `/health`
-- Aggregated: `/api/healthz` returns service statuses (api, lms, compliance, db) + uptime
-- Request IDs returned in `X-Request-ID` header and error payloads
-
-## 🛠️ Observability & Operations
-| Aspect | Implementation | Usage |
-|--------|----------------|-------|
-| Logs | Pino JSON + daily file rotation (`logs/`) | `npm run logs:tail`, ship to central store |
-| Log Retention | Compress/prune via `npm run logs:rotate` | Set `LOG_RETENTION_DAYS` (default 7) |
-| Metrics | Prometheus text at `/metrics` | Add scrape job; view counters & memory |
-| Errors | Optional Sentry (`SENTRY_DSN`) | Provide Sentry secrets + CI release step |
-| Tracing | Optional OpenTelemetry (`ENABLE_OTEL=1`) | Set OTLP endpoint `OTEL_EXPORTER_OTLP_ENDPOINT` |
-| Perf Budgets | Lighthouse + `budgets.json` enforced in CI | Tune thresholds as app scales |
-| Bundle Size | `npm run size:check` (total + per-file) | Adjust `BUNDLE_BUDGET_KB`, `BUNDLE_SINGLE_MAX_KB` |
-| Heartbeat | 30s structured log with mem + request delta | Search for `"msg":"heartbeat"` |
-
-### Key Env Vars
 ```
-SENTRY_DSN=
-SENTRY_TRACES=0.1
-ENABLE_OTEL=1
-OTEL_EXPORTER_OTLP_ENDPOINT=https://otel-collector.example/v1/traces
-OTEL_SERVICE_NAME=efh-app
-LOG_RETENTION_DAYS=14
-BUNDLE_BUDGET_KB=800
-BUNDLE_SINGLE_MAX_KB=260
+NODE_OPTIONS=--no-experimental-fetch yarn add supabase
 ```
 
-## 🧪 Testing & Quality Gates
-- Vitest with coverage thresholds (lines >=70%)
-- Run: `npm test`
-- Env validation: `npm run env:check`
+> **Note**
+For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency](https://bun.sh/guides/install/trusted) before running `bun add -D supabase`.
 
-## 🔐 Security (Phase 1)
-- Helmet, rate limiting, compression
-- JWT secret required (placeholder currently) – replace in production
-- No user auth flow yet (future phase) – LMS progress uses demo user fallback
+<details>
+  <summary><b>macOS</b></summary>
 
-## 📘 Compliance
-See `COMPLIANCE.md` for current (stub) check catalog.
+  Available via [Homebrew](https://brew.sh). To install:
 
-## 🗄️ Database
-- Prisma + SQLite fallback (dev)
-- Postgres upgrade path documented in `MIGRATIONS.md`
+  ```sh
+  brew install supabase/tap/supabase
+  ```
 
-## 🛰️ Payments
-- `/api/stripe/create-payment-intent` simulated unless `STRIPE_SECRET_KEY` set
+  To install the beta release channel:
+  
+  ```sh
+  brew install supabase/tap/supabase-beta
+  brew link --overwrite supabase-beta
+  ```
+  
+  To upgrade:
 
-## 🧭 LMS Endpoints
-- `GET /api/lms/courses`
-- `GET /api/lms/courses/:id`
-- `GET /api/lms/courses/:id/lessons`
-- `POST /api/lms/progress` (body: `{ lessonId, userId? }`)
+  ```sh
+  brew upgrade supabase
+  ```
+</details>
 
-## ✅ Production Readiness Checklist (Phase 1)
-- [ ] Set real `JWT_SECRET`
-- [ ] Provide `DATABASE_URL` (switch to Postgres)
-- [ ] Run migrations (`npx prisma migrate deploy`)
-- [ ] Configure Stripe secret (optional)
-- [ ] Add proper auth layer & replace demo user
-- [ ] Enable logging aggregation (e.g., Cloud provider)
-- [ ] Review rate limit thresholds
+<details>
+  <summary><b>Windows</b></summary>
 
-## 🗺️ Roadmap (Phase 2+)
-- Real compliance evidence linkage
-- Auth sessions + refresh flow
-- Metrics & tracing (OpenTelemetry)
-- Frontend unification (SPA)
-- Robust enrollment/payment domain logic
+  Available via [Scoop](https://scoop.sh). To install:
 
-# Workspace (Plain Vite + TypeScript)
+  ```powershell
+  scoop bucket add supabase https://github.com/supabase/scoop-bucket.git
+  scoop install supabase
+  ```
 
-## Features
-- Strict TypeScript
-- ESLint + Prettier
-- Vitest + coverage
-- Environment validation (zod)
-- API helper (fetch + timeout + error)
-- Logging utility
-- Size & production checks
-- CI workflow + Dependabot
+  To upgrade:
 
-## Commands
-npm run dev
-npm run lint
-npm run typecheck
-npm run test
-npm run build
-npm run check:prod
+  ```powershell
+  scoop update supabase
+  ```
+</details>
 
-## Release
-Increment version in package.json then:
-npm run release:tag
+<details>
+  <summary><b>Linux</b></summary>
 
-## Environment
-Copy .env.example to .env (optional). Validate via:
-npm run env:check
+  Available via [Homebrew](https://brew.sh) and Linux packages.
+
+  #### via Homebrew
+
+  To install:
+
+  ```sh
+  brew install supabase/tap/supabase
+  ```
+
+  To upgrade:
+
+  ```sh
+  brew upgrade supabase
+  ```
+
+  #### via Linux packages
+
+  Linux packages are provided in [Releases](https://github.com/supabase/cli/releases). To install, download the `.apk`/`.deb`/`.rpm`/`.pkg.tar.zst` file depending on your package manager and run the respective commands.
+
+  ```sh
+  sudo apk add --allow-untrusted <...>.apk
+  ```
+
+  ```sh
+  sudo dpkg -i <...>.deb
+  ```
+
+  ```sh
+  sudo rpm -i <...>.rpm
+  ```
+
+  ```sh
+  sudo pacman -U <...>.pkg.tar.zst
+  ```
+</details>
+
+<details>
+  <summary><b>Other Platforms</b></summary>
+
+  You can also install the CLI via [go modules](https://go.dev/ref/mod#go-install) without the help of package managers.
+
+  ```sh
+  go install github.com/supabase/cli@latest
+  ```
+
+  Add a symlink to the binary in `$PATH` for easier access:
+
+  ```sh
+  ln -s "$(go env GOPATH)/cli" /usr/bin/supabase
+  ```
+
+  This works on other non-standard Linux distros.
+</details>
+
+<details>
+  <summary><b>Community Maintained Packages</b></summary>
+
+  Available via [pkgx](https://pkgx.sh/). Package script [here](https://github.com/pkgxdev/pantry/blob/main/projects/supabase.com/cli/package.yml).
+  To install in your working directory:
+
+  ```bash
+  pkgx install supabase
+  ```
+
+  Available via [Nixpkgs](https://nixos.org/). Package script [here](https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/tools/supabase-cli/default.nix).
+</details>
+
+### Run the CLI
+
+```bash
+supabase bootstrap
+```
+
+Or using npx:
+
+```bash
+npx supabase bootstrap
+```
+
+The bootstrap command will guide you through the process of setting up a Supabase project using one of the [starter](https://github.com/supabase-community/supabase-samples/blob/main/samples.json) templates.
+
+## Docs
+
+Command & config reference can be found [here](https://supabase.com/docs/reference/cli/about).
+
+## Breaking changes
+
+We follow semantic versioning for changes that directly impact CLI commands, flags, and configurations.
+
+However, due to dependencies on other service images, we cannot guarantee that schema migrations, seed.sql, and generated types will always work for the same CLI major version. If you need such guarantees, we encourage you to pin a specific version of CLI in package.json.
+
+## Developing
+
+To run from source:
+
+```sh
+# Go >= 1.22
+go run . help
+```

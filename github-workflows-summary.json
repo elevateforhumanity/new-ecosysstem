@@ -1,0 +1,451 @@
+{
+  "total_workflows": 22,
+  "validated_workflows": [
+    "auto-deploy.yml",
+    "auto-merge-deps.yml",
+    "build-check.yml",
+    "ci.yml",
+    "cloudflare.yml",
+    "codeql.yml",
+    "data-sync.yml",
+    "dependency-audit.yml",
+    "deploy-license-checker.yml",
+    "deploy-production.yml",
+    "deploy.yml",
+    "enterprise-deploy.yml",
+    "health-check.yml",
+    "multitenant-deploy.yml",
+    "netlify-deploy.yml",
+    "netlify.yml",
+    "pages.yml",
+    "route-drift.yml",
+    "seo-deploy.yml",
+    "sister-sites.yml",
+    "site-ci.yml",
+    "sitemap-generation.yml"
+  ],
+  "workflow_details": {
+    "auto-deploy.yml": {
+      "name": "Auto Deploy to Netlify",
+      "triggers": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "auto-deploy"
+      ],
+      "secrets": [
+        "GITHUB_TOKEN",
+        "NETLIFY_AUTH_TOKEN",
+        "NETLIFY_SITE_ID"
+      ],
+      "env_vars": []
+    },
+    "auto-merge-deps.yml": {
+      "name": "Auto-merge dependency updates",
+      "triggers": [
+        "pull_request",
+        "check_suite"
+      ],
+      "jobs": [
+        "automerge"
+      ],
+      "secrets": [
+        "GITHUB_TOKEN"
+      ],
+      "env_vars": []
+    },
+    "build-check.yml": {
+      "name": "Build Check",
+      "triggers": [
+        "pull_request",
+        "push"
+      ],
+      "jobs": [
+        "build"
+      ],
+      "secrets": [],
+      "env_vars": []
+    },
+    "ci.yml": {
+      "name": "CI",
+      "triggers": [
+        "push",
+        "pull_request"
+      ],
+      "jobs": [
+        "build-test",
+        "deploy"
+      ],
+      "secrets": [
+        "CANONICAL_DOMAIN",
+        "DATABASE_URL",
+        "CANONICAL_DOMAIN"
+      ],
+      "env_vars": []
+    },
+    "cloudflare.yml": {
+      "name": "Deploy to CloudFlare Pages",
+      "triggers": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "deploy"
+      ],
+      "secrets": [
+        "GITHUB_TOKEN"
+      ],
+      "env_vars": []
+    },
+    "codeql.yml": {
+      "name": "CodeQL",
+      "triggers": [
+        "0",
+        "1"
+      ],
+      "jobs": [
+        "analyze"
+      ],
+      "secrets": [],
+      "env_vars": []
+    },
+    "data-sync.yml": {
+      "name": "Data Synchronization",
+      "triggers": [
+        "schedule",
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "sync-data",
+        "notify-on-failure"
+      ],
+      "secrets": [
+        "SUPABASE_URL",
+        "SUPABASE_SERVICE_ROLE_KEY",
+        "NETLIFY_BUILD_HOOK",
+        "NETLIFY_BUILD_HOOK"
+      ],
+      "env_vars": [
+        "NODE_VERSION"
+      ]
+    },
+    "dependency-audit.yml": {
+      "name": "Dependency Audit",
+      "triggers": [
+        "schedule",
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "audit"
+      ],
+      "secrets": [],
+      "env_vars": []
+    },
+    "deploy-license-checker.yml": {
+      "name": "Deploy Elevate Platform License System",
+      "triggers": [
+        "push",
+        "pull_request"
+      ],
+      "jobs": [
+        "security-scan",
+        "build-and-test",
+        "deploy-license-server",
+        "monitor-violations",
+        "performance-test",
+        "backup-and-archive",
+        "notify-completion"
+      ],
+      "secrets": [
+        "CLOUDFLARE_ACCOUNT_ID",
+        "CLOUDFLARE_API_TOKEN",
+        "SUPABASE_URL",
+        "SUPABASE_ANON_KEY",
+        "SUPABASE_PROJECT_REF",
+        "SLACK_WEBHOOK_URL",
+        "LICENSE_API_KEY",
+        "LICENSE_SERVER_URL",
+        "LICENSE_API_KEY",
+        "LICENSE_SERVER_URL",
+        "DATABASE_URL",
+        "CLOUDFLARE_ACCOUNT_ID",
+        "CLOUDFLARE_ACCOUNT_ID",
+        "CLOUDFLARE_ACCOUNT_ID",
+        "DISCORD_WEBHOOK_URL",
+        "DISCORD_WEBHOOK_URL"
+      ],
+      "env_vars": [
+        "NODE_VERSION",
+        "NODE_VERSION"
+      ]
+    },
+    "deploy-production.yml": {
+      "name": "Deploy to Production",
+      "triggers": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "test",
+        "build",
+        "deploy",
+        "notify-on-failure"
+      ],
+      "secrets": [
+        "NETLIFY_SITE_ID",
+        "NETLIFY_AUTH_TOKEN",
+        "NETLIFY_STAGING_SITE_ID",
+        "NETLIFY_AUTH_TOKEN",
+        "NETLIFY_SITE_ID",
+        "NETLIFY_AUTH_TOKEN",
+        "SUPABASE_ACCESS_TOKEN",
+        "SUPABASE_PROJECT_REF",
+        "SUPABASE_ACCESS_TOKEN"
+      ],
+      "env_vars": [
+        "NODE_VERSION",
+        "NODE_VERSION"
+      ]
+    },
+    "deploy.yml": {
+      "name": "Incremental Deploy",
+      "triggers": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "deploy"
+      ],
+      "secrets": [
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY",
+        "AWS_REGION",
+        "CLOUDFRONT_DISTRIBUTION_ID"
+      ],
+      "env_vars": []
+    },
+    "enterprise-deploy.yml": {
+      "name": "Enterprise Revenue Engine Deploy",
+      "triggers": [
+        "push",
+        "schedule",
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "enterprise-deploy"
+      ],
+      "secrets": [
+        "INDEXNOW_KEY",
+        "NETLIFY_AUTH_TOKEN",
+        "NETLIFY_SITE_ID_MARKETING",
+        "INDEXNOW_KEY"
+      ],
+      "env_vars": []
+    },
+    "health-check.yml": {
+      "name": "Health Check & Monitoring",
+      "triggers": [
+        "schedule",
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "health-check",
+        "notify-on-failure"
+      ],
+      "secrets": [
+        "SUPABASE_URL",
+        "SUPABASE_ANON_KEY",
+        "SUPABASE_URL",
+        "SUPABASE_ANON_KEY"
+      ],
+      "env_vars": []
+    },
+    "multitenant-deploy.yml": {
+      "name": "Multi-tenant Enterprise SEO Deploy",
+      "triggers": [
+        "push",
+        "schedule",
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "multitenant-build-deploy"
+      ],
+      "secrets": [
+        "INDEXNOW_KEY",
+        "NETLIFY_AUTH_TOKEN",
+        "NETLIFY_SITE_ID_MARKETING",
+        "NETLIFY_SITE_ID_PROGRAMS"
+      ],
+      "env_vars": []
+    },
+    "netlify-deploy.yml": {
+      "name": "Deploy to Netlify",
+      "triggers": [
+        "push",
+        "pull_request"
+      ],
+      "jobs": [
+        "deploy"
+      ],
+      "secrets": [
+        "GITHUB_TOKEN",
+        "NETLIFY_AUTH_TOKEN",
+        "NETLIFY_SITE_ID"
+      ],
+      "env_vars": []
+    },
+    "netlify.yml": {
+      "name": "Netlify Deploy Trigger",
+      "triggers": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "trigger"
+      ],
+      "secrets": [
+        "NETLIFY_DEPLOY_HOOK_URL"
+      ],
+      "env_vars": []
+    },
+    "pages.yml": {
+      "name": "Deploy to GitHub Pages",
+      "triggers": [
+        "push",
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "deploy"
+      ],
+      "secrets": [],
+      "env_vars": []
+    },
+    "route-drift.yml": {
+      "name": "Route Drift Check",
+      "triggers": [
+        "schedule",
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "drift"
+      ],
+      "secrets": [],
+      "env_vars": []
+    },
+    "seo-deploy.yml": {
+      "name": "Ultra-Tiny Chunk SEO Deploy",
+      "triggers": [
+        "push",
+        "schedule",
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "crawl-build-deploy"
+      ],
+      "secrets": [
+        "INDEXNOW_KEY",
+        "GITHUB_TOKEN",
+        "NETLIFY_AUTH_TOKEN",
+        "NETLIFY_SITE_ID_MARKETING"
+      ],
+      "env_vars": []
+    },
+    "sister-sites.yml": {
+      "name": "Sister Sites – Unified Sitemaps",
+      "triggers": [
+        "push",
+        "schedule"
+      ],
+      "jobs": [
+        "build"
+      ],
+      "secrets": [],
+      "env_vars": []
+    },
+    "site-ci.yml": {
+      "name": "EFH Site CI/CD",
+      "triggers": [
+        "workflow_dispatch",
+        "push",
+        "pull_request",
+        "schedule"
+      ],
+      "jobs": [
+        "verify-redirects",
+        "build-and-test",
+        "generate-sitemaps",
+        "lighthouse-audit",
+        "security-scan",
+        "deploy-preview",
+        "notify-completion"
+      ],
+      "secrets": [
+        "GITHUB_TOKEN",
+        "GITHUB_TOKEN",
+        "GITHUB_TOKEN",
+        "GITHUB_TOKEN",
+        "NETLIFY_AUTH_TOKEN",
+        "NETLIFY_MARKETING_SITE_ID"
+      ],
+      "env_vars": []
+    },
+    "sitemap-generation.yml": {
+      "name": "Automated Sitemap Generation",
+      "triggers": [
+        "schedule",
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "generate-sitemap",
+        "notify-on-failure"
+      ],
+      "secrets": [
+        "NETLIFY_AUTH_TOKEN",
+        "NETLIFY_SITE_ID",
+        "INDEXNOW_KEY"
+      ],
+      "env_vars": [
+        "NODE_VERSION",
+        "BASE_URL",
+        "OUTPUT_DIR",
+        "OUTPUT_DIR"
+      ]
+    }
+  },
+  "secrets_required": [
+    "GITHUB_TOKEN",
+    "NETLIFY_AUTH_TOKEN",
+    "NETLIFY_SITE_ID",
+    "CANONICAL_DOMAIN",
+    "DATABASE_URL",
+    "SUPABASE_URL",
+    "SUPABASE_SERVICE_ROLE_KEY",
+    "NETLIFY_BUILD_HOOK",
+    "CLOUDFLARE_ACCOUNT_ID",
+    "CLOUDFLARE_API_TOKEN",
+    "SUPABASE_ANON_KEY",
+    "SUPABASE_PROJECT_REF",
+    "SLACK_WEBHOOK_URL",
+    "LICENSE_API_KEY",
+    "LICENSE_SERVER_URL",
+    "DISCORD_WEBHOOK_URL",
+    "NETLIFY_STAGING_SITE_ID",
+    "SUPABASE_ACCESS_TOKEN",
+    "AWS_ACCESS_KEY_ID",
+    "AWS_SECRET_ACCESS_KEY",
+    "AWS_REGION",
+    "CLOUDFRONT_DISTRIBUTION_ID",
+    "INDEXNOW_KEY",
+    "NETLIFY_SITE_ID_MARKETING",
+    "NETLIFY_SITE_ID_PROGRAMS",
+    "NETLIFY_DEPLOY_HOOK_URL",
+    "NETLIFY_MARKETING_SITE_ID"
+  ],
+  "environment_variables": [
+    "NODE_VERSION",
+    "BASE_URL",
+    "OUTPUT_DIR"
+  ],
+  "activation_timestamp": "2025-09-18T00:39:49.978Z"
+}

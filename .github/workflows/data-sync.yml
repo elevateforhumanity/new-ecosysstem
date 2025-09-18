@@ -1,0 +1,323 @@
+name: Data Synchronization
+
+on:
+  schedule:
+    # Run every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      sync_type:
+        description: 'Type of sync to perform'
+        required: true
+        default: 'full'
+        type: choice
+        options:
+        - full
+        - programs
+        - analytics
+        - cleanup
+      force_rebuild:
+        description: 'Force rebuild after sync'
+        required: false
+        default: false
+        type: boolean
+
+env:
+  NODE_VERSION: '20'
+  SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+  SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
+jobs:
+  sync-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: |
+        npm ci
+        npm install -g @supabase/supabase-js
+
+    - name: Validate environment
+      run: |
+        echo "🔍 Validating environment..."
+        
+        if [ -z "$SUPABASE_URL" ]; then
+          echo "❌ SUPABASE_URL not configured"
+          exit 1
+        fi
+        
+        if [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+          echo "❌ SUPABASE_SERVICE_ROLE_KEY not configured"
+          exit 1
+        fi
+        
+        echo "✅ Environment validated"
+
+    - name: Sync program data
+      if: github.event.inputs.sync_type == 'programs' || github.event.inputs.sync_type == 'full' || github.event_name == 'schedule'
+      run: |
+        echo "📊 Syncing program data..."
+        
+        node -e "
+          const { createClient } = require('@supabase/supabase-js');
+          const fs = require('fs');
+          
+          async function syncPrograms() {
+            try {
+              const supabase = createClient(
+                process.env.SUPABASE_URL,
+                process.env.SUPABASE_SERVICE_ROLE_KEY
+              );
+              
+              // Load program data
+              const programData = JSON.parse(fs.readFileSync('data/seeds/all-programs.json', 'utf8'));
+              const programs = Array.isArray(programData) ? programData : programData.programs || [];
+              
+              console.log(\`📈 Processing \${programs.length} programs...\`);
+              
+              // Process in batches of 100
+              const batchSize = 100;
+              let totalProcessed = 0;
+              
+              for (let i = 0; i < programs.length; i += batchSize) {
+                const batch = programs.slice(i, i + batchSize);
+                
+                // Transform data for database
+                const transformedBatch = batch.map((program, index) => ({
+                  external_id: program.id || \`prog_\${i + index}\`,
+                  title: program.title || program.name || 'Untitled Program',
+                  description: program.description || '',
+                  provider: program.provider || program.organization || '',
+                  category: program.category || 'General',
+                  subcategory: program.subcategory || '',
+                  delivery_method: program.delivery_method || program.format || 'Online',
+                  duration: program.duration || '',
+                  cost: program.cost || program.price || '',
+                  location: program.location || '',
+                  keywords: program.keywords || [],
+                  status: 'published',
+                  updated_at: new Date().toISOString()
+                }));
+                
+                const { data, error } = await supabase
+                  .from('programs')
+                  .upsert(transformedBatch, { 
+                    onConflict: 'external_id',
+                    ignoreDuplicates: false 
+                  });
+                
+                if (error) {
+                  console.error(\`❌ Batch \${Math.floor(i/batchSize) + 1} failed:\`, error.message);
+                } else {
+                  totalProcessed += batch.length;
+                  console.log(\`✅ Batch \${Math.floor(i/batchSize) + 1} processed (\${totalProcessed}/\${programs.length})\`);
+                }
+              }
+              
+              console.log(\`🎉 Sync completed: \${totalProcessed} programs processed\`);
+              
+            } catch (error) {
+              console.error('❌ Sync failed:', error.message);
+              process.exit(1);
+            }
+          }
+          
+          syncPrograms();
+        "
+
+    - name: Update search indexes
+      if: github.event.inputs.sync_type == 'full' || github.event_name == 'schedule'
+      run: |
+        echo "🔍 Updating search indexes..."
+        
+        node -e "
+          const { createClient } = require('@supabase/supabase-js');
+          
+          async function updateSearchIndex() {
+            try {
+              const supabase = createClient(
+                process.env.SUPABASE_URL,
+                process.env.SUPABASE_SERVICE_ROLE_KEY
+              );
+              
+              // Call stored procedure to refresh search index
+              const { data, error } = await supabase.rpc('refresh_search_index');
+              
+              if (error) {
+                console.error('❌ Search index update failed:', error.message);
+                process.exit(1);
+              }
+              
+              console.log('✅ Search indexes updated successfully');
+              
+            } catch (error) {
+              console.error('❌ Search index update failed:', error.message);
+              process.exit(1);
+            }
+          }
+          
+          updateSearchIndex();
+        "
+
+    - name: Generate analytics
+      if: github.event.inputs.sync_type == 'analytics' || github.event.inputs.sync_type == 'full' || github.event_name == 'schedule'
+      run: |
+        echo "📈 Generating analytics..."
+        
+        node -e "
+          const { createClient } = require('@supabase/supabase-js');
+          
+          async function generateAnalytics() {
+            try {
+              const supabase = createClient(
+                process.env.SUPABASE_URL,
+                process.env.SUPABASE_SERVICE_ROLE_KEY
+              );
+              
+              // Get program statistics
+              const { data: stats, error: statsError } = await supabase
+                .from('programs')
+                .select('category, provider, delivery_method')
+                .eq('status', 'published');
+              
+              if (statsError) throw statsError;
+              
+              // Calculate statistics
+              const categoryStats = {};
+              const providerStats = {};
+              const deliveryStats = {};
+              
+              stats.forEach(program => {
+                categoryStats[program.category] = (categoryStats[program.category] || 0) + 1;
+                providerStats[program.provider] = (providerStats[program.provider] || 0) + 1;
+                deliveryStats[program.delivery_method] = (deliveryStats[program.delivery_method] || 0) + 1;
+              });
+              
+              console.log('📊 Analytics Summary:');
+              console.log('Categories:', Object.keys(categoryStats).length);
+              console.log('Providers:', Object.keys(providerStats).length);
+              console.log('Delivery Methods:', Object.keys(deliveryStats).length);
+              console.log('Total Programs:', stats.length);
+              
+              // Store analytics (if analytics table exists)
+              const analyticsData = {
+                generated_at: new Date().toISOString(),
+                total_programs: stats.length,
+                category_breakdown: categoryStats,
+                provider_breakdown: providerStats,
+                delivery_breakdown: deliveryStats
+              };
+              
+              console.log('✅ Analytics generated successfully');
+              
+            } catch (error) {
+              console.error('❌ Analytics generation failed:', error.message);
+              process.exit(1);
+            }
+          }
+          
+          generateAnalytics();
+        "
+
+    - name: Cleanup old data
+      if: github.event.inputs.sync_type == 'cleanup' || github.event.inputs.sync_type == 'full'
+      run: |
+        echo "🧹 Cleaning up old data..."
+        
+        node -e "
+          const { createClient } = require('@supabase/supabase-js');
+          
+          async function cleanupOldData() {
+            try {
+              const supabase = createClient(
+                process.env.SUPABASE_URL,
+                process.env.SUPABASE_SERVICE_ROLE_KEY
+              );
+              
+              // Delete draft programs older than 30 days
+              const cutoffDate = new Date();
+              cutoffDate.setDate(cutoffDate.getDate() - 30);
+              
+              const { data, error } = await supabase
+                .from('programs')
+                .delete()
+                .lt('updated_at', cutoffDate.toISOString())
+                .eq('status', 'draft');
+              
+              if (error) {
+                console.error('❌ Cleanup failed:', error.message);
+                process.exit(1);
+              }
+              
+              console.log(\`🗑️ Cleaned up \${data?.length || 0} old draft programs\`);
+              console.log('✅ Cleanup completed successfully');
+              
+            } catch (error) {
+              console.error('❌ Cleanup failed:', error.message);
+              process.exit(1);
+            }
+          }
+          
+          cleanupOldData();
+        "
+
+    - name: Trigger rebuild
+      if: github.event.inputs.force_rebuild == 'true' || (github.event_name == 'schedule' && github.event.inputs.sync_type == 'full')
+      run: |
+        echo "🔄 Triggering site rebuild..."
+        
+        # Trigger Netlify build hook if configured
+        if [ -n "${{ secrets.NETLIFY_BUILD_HOOK }}" ]; then
+          curl -X POST "${{ secrets.NETLIFY_BUILD_HOOK }}" \
+            && echo "✅ Netlify rebuild triggered" \
+            || echo "⚠️ Netlify rebuild failed"
+        else
+          echo "⚠️ No Netlify build hook configured"
+        fi
+
+    - name: Create sync summary
+      run: |
+        echo "## 📊 Data Sync Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Sync Type:** ${{ github.event.inputs.sync_type || 'full' }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Triggered by:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Completed at:** $(date -u)" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Operations performed:**" >> $GITHUB_STEP_SUMMARY
+        
+        if [ "${{ github.event.inputs.sync_type }}" = "programs" ] || [ "${{ github.event.inputs.sync_type }}" = "full" ] || [ "${{ github.event_name }}" = "schedule" ]; then
+          echo "- ✅ Program data synchronized" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        if [ "${{ github.event.inputs.sync_type }}" = "full" ] || [ "${{ github.event_name }}" = "schedule" ]; then
+          echo "- ✅ Search indexes updated" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        if [ "${{ github.event.inputs.sync_type }}" = "analytics" ] || [ "${{ github.event.inputs.sync_type }}" = "full" ] || [ "${{ github.event_name }}" = "schedule" ]; then
+          echo "- ✅ Analytics generated" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        if [ "${{ github.event.inputs.sync_type }}" = "cleanup" ] || [ "${{ github.event.inputs.sync_type }}" = "full" ]; then
+          echo "- ✅ Old data cleaned up" >> $GITHUB_STEP_SUMMARY
+        fi
+
+  notify-on-failure:
+    runs-on: ubuntu-latest
+    needs: sync-data
+    if: failure()
+    
+    steps:
+    - name: Notify on failure
+      run: |
+        echo "❌ Data synchronization failed"
+        echo "Check the workflow logs for details"
+        # Add notification logic here (Slack, email, etc.)

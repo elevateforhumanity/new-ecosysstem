@@ -1,0 +1,514 @@
+<!-- HTML BLOCK 4: TESTIMONIALS SECTION -->
+<!-- Copy this entire block into Wix HTML Component -->
+
+<div id="testimonials" style="
+    background: linear-gradient(135deg, #1e40af 0%, #3730a3 50%, #581c87 100%);
+    color: white;
+    padding: 80px 20px;
+    position: relative;
+    overflow: hidden;
+">
+    <!-- Background Elements -->
+    <div style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 2px, transparent 2px),
+                          radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 2px, transparent 2px);
+        background-size: 60px 60px, 80px 80px;
+        opacity: 0.3;
+    "></div>
+    
+    <!-- Floating Shapes -->
+    <div style="
+        position: absolute;
+        top: 10%;
+        left: 5%;
+        width: 100px;
+        height: 100px;
+        background: rgba(251, 191, 36, 0.2);
+        border-radius: 50%;
+        animation: float 8s ease-in-out infinite;
+    "></div>
+    
+    <div style="
+        position: absolute;
+        bottom: 20%;
+        right: 10%;
+        width: 60px;
+        height: 60px;
+        background: rgba(16, 185, 129, 0.2);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite reverse;
+    "></div>
+    
+    <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 2;">
+        
+        <!-- Section Header -->
+        <div style="text-align: center; margin-bottom: 60px;">
+            <div style="
+                display: inline-block;
+                background: rgba(255,255,255,0.1);
+                color: #fbbf24;
+                padding: 8px 20px;
+                border-radius: 25px;
+                font-size: 14px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 20px;
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255,255,255,0.2);
+            ">Success Stories</div>
+            
+            <h2 style="
+                font-size: clamp(2rem, 4vw, 3rem);
+                font-weight: 900;
+                margin-bottom: 20px;
+                line-height: 1.2;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            ">Real People, <span style="color: #fbbf24;">Real Results</span></h2>
+            
+            <p style="
+                font-size: 1.2rem;
+                opacity: 0.9;
+                max-width: 600px;
+                margin: 0 auto;
+                line-height: 1.6;
+            ">See how our graduates transformed their careers and achieved financial freedom</p>
+        </div>
+        
+        <!-- Testimonials Grid -->
+        <div style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        ">
+            
+            <!-- Testimonial 1 -->
+            <div class="testimonial-card" style="
+                background: rgba(255,255,255,0.1);
+                backdrop-filter: blur(15px);
+                border: 1px solid rgba(255,255,255,0.2);
+                border-radius: 20px;
+                padding: 35px;
+                transition: all 0.4s ease;
+                position: relative;
+                overflow: hidden;
+            " onmouseover="this.style.transform='translateY(-10px)'; this.style.background='rgba(255,255,255,0.15)'" 
+               onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.1)'">
+                
+                <!-- Quote Icon -->
+                <div style="
+                    position: absolute;
+                    top: -10px;
+                    right: 20px;
+                    font-size: 4rem;
+                    color: rgba(251, 191, 36, 0.3);
+                    line-height: 1;
+                ">"</div>
+                
+                <!-- Rating Stars -->
+                <div style="margin-bottom: 20px;">
+                    <span style="color: #fbbf24; font-size: 1.2rem;">★★★★★</span>
+                </div>
+                
+                <!-- Testimonial Text -->
+                <p style="
+                    font-size: 1.1rem;
+                    line-height: 1.7;
+                    margin-bottom: 25px;
+                    font-style: italic;
+                    position: relative;
+                    z-index: 2;
+                ">"I went from unemployed to a <strong style="color: #fbbf24;">$85K software developer role</strong> in just 3 months. This program changed my life! The mentorship was incredible and the job placement support was exactly what I needed."</p>
+                
+                <!-- Author Info -->
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="
+                        width: 60px;
+                        height: 60px;
+                        background: linear-gradient(135deg, #fbbf24, #f59e0b);
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                        color: white;
+                    ">SJ</div>
+                    <div>
+                        <div style="font-weight: bold; color: #fbbf24; font-size: 1.1rem;">Sarah Johnson</div>
+                        <div style="opacity: 0.8; font-size: 0.9rem;">Software Developer at Google</div>
+                        <div style="opacity: 0.7; font-size: 0.8rem;">Tech Bootcamp Graduate</div>
+                    </div>
+                </div>
+                
+                <!-- Result Badge -->
+                <div style="
+                    position: absolute;
+                    bottom: 15px;
+                    right: 15px;
+                    background: #10b981;
+                    color: white;
+                    padding: 5px 12px;
+                    border-radius: 15px;
+                    font-size: 0.8rem;
+                    font-weight: 600;
+                ">+$35K Salary</div>
+            </div>
+            
+            <!-- Testimonial 2 -->
+            <div class="testimonial-card" style="
+                background: rgba(255,255,255,0.1);
+                backdrop-filter: blur(15px);
+                border: 1px solid rgba(255,255,255,0.2);
+                border-radius: 20px;
+                padding: 35px;
+                transition: all 0.4s ease;
+                position: relative;
+                overflow: hidden;
+            " onmouseover="this.style.transform='translateY(-10px)'; this.style.background='rgba(255,255,255,0.15)'" 
+               onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.1)'">
+                
+                <!-- Quote Icon -->
+                <div style="
+                    position: absolute;
+                    top: -10px;
+                    right: 20px;
+                    font-size: 4rem;
+                    color: rgba(251, 191, 36, 0.3);
+                    line-height: 1;
+                ">"</div>
+                
+                <!-- Rating Stars -->
+                <div style="margin-bottom: 20px;">
+                    <span style="color: #fbbf24; font-size: 1.2rem;">★★★★★</span>
+                </div>
+                
+                <!-- Testimonial Text -->
+                <p style="
+                    font-size: 1.1rem;
+                    line-height: 1.7;
+                    margin-bottom: 25px;
+                    font-style: italic;
+                    position: relative;
+                    z-index: 2;
+                ">"The career coaching was incredible. I negotiated a <strong style="color: #fbbf24;">60% salary increase</strong> and got promoted to team lead within 6 months. The networking opportunities alone were worth the investment."</p>
+                
+                <!-- Author Info -->
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="
+                        width: 60px;
+                        height: 60px;
+                        background: linear-gradient(135deg, #3b82f6, #1e40af);
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                        color: white;
+                    ">MC</div>
+                    <div>
+                        <div style="font-weight: bold; color: #fbbf24; font-size: 1.1rem;">Michael Chen</div>
+                        <div style="opacity: 0.8; font-size: 0.9rem;">Team Lead at Microsoft</div>
+                        <div style="opacity: 0.7; font-size: 0.8rem;">Career Accelerator Graduate</div>
+                    </div>
+                </div>
+                
+                <!-- Result Badge -->
+                <div style="
+                    position: absolute;
+                    bottom: 15px;
+                    right: 15px;
+                    background: #dc2626;
+                    color: white;
+                    padding: 5px 12px;
+                    border-radius: 15px;
+                    font-size: 0.8rem;
+                    font-weight: 600;
+                ">+60% Salary</div>
+            </div>
+            
+            <!-- Testimonial 3 -->
+            <div class="testimonial-card" style="
+                background: rgba(255,255,255,0.1);
+                backdrop-filter: blur(15px);
+                border: 1px solid rgba(255,255,255,0.2);
+                border-radius: 20px;
+                padding: 35px;
+                transition: all 0.4s ease;
+                position: relative;
+                overflow: hidden;
+            " onmouseover="this.style.transform='translateY(-10px)'; this.style.background='rgba(255,255,255,0.15)'" 
+               onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.1)'">
+                
+                <!-- Quote Icon -->
+                <div style="
+                    position: absolute;
+                    top: -10px;
+                    right: 20px;
+                    font-size: 4rem;
+                    color: rgba(251, 191, 36, 0.3);
+                    line-height: 1;
+                ">"</div>
+                
+                <!-- Rating Stars -->
+                <div style="margin-bottom: 20px;">
+                    <span style="color: #fbbf24; font-size: 1.2rem;">★★★★★</span>
+                </div>
+                
+                <!-- Testimonial Text -->
+                <p style="
+                    font-size: 1.1rem;
+                    line-height: 1.7;
+                    margin-bottom: 25px;
+                    font-style: italic;
+                    position: relative;
+                    z-index: 2;
+                ">"Best investment I ever made. The networking alone was worth the entire program cost. I launched my own consulting firm and <strong style="color: #fbbf24;">tripled my income</strong> in the first year."</p>
+                
+                <!-- Author Info -->
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="
+                        width: 60px;
+                        height: 60px;
+                        background: linear-gradient(135deg, #10b981, #059669);
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                        color: white;
+                    ">JR</div>
+                    <div>
+                        <div style="font-weight: bold; color: #fbbf24; font-size: 1.1rem;">Jessica Rodriguez</div>
+                        <div style="opacity: 0.8; font-size: 0.9rem;">Marketing Director & Consultant</div>
+                        <div style="opacity: 0.7; font-size: 0.8rem;">Business Skills Graduate</div>
+                    </div>
+                </div>
+                
+                <!-- Result Badge -->
+                <div style="
+                    position: absolute;
+                    bottom: 15px;
+                    right: 15px;
+                    background: #7c3aed;
+                    color: white;
+                    padding: 5px 12px;
+                    border-radius: 15px;
+                    font-size: 0.8rem;
+                    font-weight: 600;
+                ">3x Income</div>
+            </div>
+        </div>
+        
+        <!-- Video Testimonials Section -->
+        <div style="text-align: center; margin-bottom: 50px;">
+            <h3 style="
+                font-size: 1.8rem;
+                font-weight: 700;
+                margin-bottom: 30px;
+                color: #fbbf24;
+            ">Watch Their Success Stories</h3>
+            
+            <div style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 20px;
+                max-width: 900px;
+                margin: 0 auto;
+            ">
+                <!-- Video Placeholder 1 -->
+                <div style="
+                    background: rgba(0,0,0,0.5);
+                    border-radius: 15px;
+                    padding: 60px 20px;
+                    position: relative;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    border: 2px solid rgba(255,255,255,0.1);
+                " onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='rgba(251, 191, 36, 0.5)'" 
+                   onmouseout="this.style.transform='scale(1)'; this.style.borderColor='rgba(255,255,255,0.1)'">
+                    
+                    <div style="
+                        width: 60px;
+                        height: 60px;
+                        background: #dc2626;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 0 auto 15px;
+                        font-size: 1.5rem;
+                        color: white;
+                    ">▶</div>
+                    
+                    <div style="font-weight: 600; margin-bottom: 5px;">Sarah's Journey</div>
+                    <div style="font-size: 0.9rem; opacity: 0.8;">From Unemployed to $85K</div>
+                    <div style="font-size: 0.8rem; opacity: 0.6; margin-top: 5px;">3:45</div>
+                </div>
+                
+                <!-- Video Placeholder 2 -->
+                <div style="
+                    background: rgba(0,0,0,0.5);
+                    border-radius: 15px;
+                    padding: 60px 20px;
+                    position: relative;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    border: 2px solid rgba(255,255,255,0.1);
+                " onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='rgba(251, 191, 36, 0.5)'" 
+                   onmouseout="this.style.transform='scale(1)'; this.style.borderColor='rgba(255,255,255,0.1)'">
+                    
+                    <div style="
+                        width: 60px;
+                        height: 60px;
+                        background: #dc2626;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 0 auto 15px;
+                        font-size: 1.5rem;
+                        color: white;
+                    ">▶</div>
+                    
+                    <div style="font-weight: 600; margin-bottom: 5px;">Michael's Success</div>
+                    <div style="font-size: 0.9rem; opacity: 0.8;">60% Salary Increase</div>
+                    <div style="font-size: 0.8rem; opacity: 0.6; margin-top: 5px;">2:30</div>
+                </div>
+                
+                <!-- Video Placeholder 3 -->
+                <div style="
+                    background: rgba(0,0,0,0.5);
+                    border-radius: 15px;
+                    padding: 60px 20px;
+                    position: relative;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    border: 2px solid rgba(255,255,255,0.1);
+                " onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='rgba(251, 191, 36, 0.5)'" 
+                   onmouseout="this.style.transform='scale(1)'; this.style.borderColor='rgba(255,255,255,0.1)'">
+                    
+                    <div style="
+                        width: 60px;
+                        height: 60px;
+                        background: #dc2626;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 0 auto 15px;
+                        font-size: 1.5rem;
+                        color: white;
+                    ">▶</div>
+                    
+                    <div style="font-weight: 600; margin-bottom: 5px;">Jessica's Business</div>
+                    <div style="font-size: 0.9rem; opacity: 0.8;">Tripled Her Income</div>
+                    <div style="font-size: 0.8rem; opacity: 0.6; margin-top: 5px;">4:15</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom CTA -->
+        <div style="text-align: center;">
+            <div style="
+                background: rgba(255,255,255,0.1);
+                backdrop-filter: blur(15px);
+                border: 2px solid rgba(251, 191, 36, 0.3);
+                border-radius: 20px;
+                padding: 40px;
+                max-width: 600px;
+                margin: 0 auto;
+            ">
+                <h3 style="
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                    margin-bottom: 15px;
+                    color: #fbbf24;
+                ">Ready to Write Your Success Story?</h3>
+                
+                <p style="margin-bottom: 25px; opacity: 0.9;">Join thousands of professionals who transformed their careers with Elevate for Humanity</p>
+                
+                <a href="#programs" style="
+                    background: #fbbf24;
+                    color: #1e293b;
+                    padding: 15px 30px;
+                    border-radius: 50px;
+                    text-decoration: none;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    transition: all 0.3s ease;
+                    display: inline-block;
+                    box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+                " onmouseover="this.style.background='#f59e0b'; this.style.transform='scale(1.05)'" 
+                   onmouseout="this.style.background='#fbbf24'; this.style.transform='scale(1)'">
+                    Start Your Journey
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+@media (max-width: 768px) {
+    .testimonial-card {
+        padding: 25px !important;
+    }
+}
+</style>
+
+<script>
+// Video testimonial click handlers
+document.querySelectorAll('[style*="cursor: pointer"]').forEach((video, index) => {
+    if (video.textContent.includes('Journey') || video.textContent.includes('Success') || video.textContent.includes('Business')) {
+        video.addEventListener('click', function() {
+            const videoTitle = this.querySelector('div[style*="font-weight: 600"]').textContent;
+            console.log('Video testimonial clicked:', videoTitle);
+            
+            // Add your video modal or redirect logic here
+            // Example: openVideoModal(videoTitle);
+            // Example: gtag('event', 'click', { event_category: 'video_testimonial', event_label: videoTitle });
+            
+            alert(`Video: ${videoTitle}\n\nIn a real implementation, this would open a video player or modal.`);
+        });
+    }
+});
+
+// Testimonial card interaction tracking
+document.querySelectorAll('.testimonial-card').forEach((card, index) => {
+    card.addEventListener('click', function() {
+        const authorName = this.querySelector('[style*="color: #fbbf24"]').textContent;
+        console.log('Testimonial card clicked:', authorName);
+        // Add your tracking code here
+        // Example: gtag('event', 'click', { event_category: 'testimonial_card', event_label: authorName });
+    });
+});
+
+// CTA button tracking
+document.querySelector('a[href="#programs"]').addEventListener('click', function(e) {
+    e.preventDefault();
+    console.log('Testimonials CTA clicked: Start Your Journey');
+    
+    // Scroll to programs section
+    const programsSection = document.querySelector('#programs');
+    if (programsSection) {
+        programsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Add your tracking code here
+    // Example: gtag('event', 'click', { event_category: 'testimonials_cta', event_label: 'start_journey' });
+});
+</script>

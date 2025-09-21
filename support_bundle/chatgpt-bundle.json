@@ -1,0 +1,642 @@
+{
+  "generatedAt": "2025-09-21T13:47:12.170Z",
+  "host": {
+    "os": "linux 6.14.10-gitpod",
+    "arch": "x64",
+    "node": "v18.20.8",
+    "npm": "10.8.2",
+    "container": false
+  },
+  "repo": {
+    "remote": "https://github.com/elevateforhumanity/new-ecosysstem.git",
+    "branch": "fix/app-import-export-mismatch",
+    "commit": "09f629e"
+  },
+  "packageJson": {
+    "parsed": {
+      "name": "efh-autopilot",
+      "type": "module",
+      "version": "2.0.0",
+      "dependencies": {
+        "@supabase/supabase-js": "^2.45.4",
+        "node-fetch": "^3.3.2",
+        "slugify": "^1.6.6",
+        "jsdom": "^23.0.0"
+      },
+      "scripts": {
+        "build": "node scripts/dev-build.js",
+        "autopilot": "bash scripts/autopilot-loop.sh",
+        "autopilot:dry": "bash scripts/autopilot-loop.sh --dry-run",
+        "ecosystem": "node master-ecosystem-autopilot.js",
+        "wix:generate": "node scripts/wix-code-generator.js",
+        "wix:test": "node scripts/wix-test-connection.js",
+        "wix:upsert": "node scripts/wix-upsert-programs.js",
+        "wix:setup": "node setup-wix-autopilot.js"
+      }
+    },
+    "raw": "{\n  \"name\": \"efh-autopilot\",\n  \"type\": \"module\",\n  \"version\": \"2.0.0\",\n  \"dependencies\": {\n    \"@supabase/supabase-js\": \"^2.45.4\",\n    \"node-fetch\": \"^3.3.2\",\n    \"slugify\": \"^1.6.6\",\n    \"jsdom\": \"^23.0.0\"\n  },\n  \"scripts\": {\n    \"build\": \"node scripts/dev-build.js\",\n    \"autopilot\": \"bash scripts/autopilot-loop.sh\",\n    \"autopilot:dry\": \"bash scripts/autopilot-loop.sh --dry-run\",\n    \"ecosystem\": \"node master-ecosystem-autopilot.js\",\n    \"wix:generate\": \"node scripts/wix-code-generator.js\",\n    \"wix:test\": \"node scripts/wix-test-connection.js\",\n    \"wix:upsert\": \"node scripts/wix-upsert-programs.js\",\n    \"wix:setup\": \"node setup-wix-autopilot.js\"\n  }\n}\n",
+    "lockFiles": [
+      {
+        "name": "package-lock.json",
+        "sha256": "c6916a29d4d9280ba1548675b321580632fe0c559c8cfc384809d76aa13a0f41"
+      }
+    ]
+  },
+  "configs": {
+    "netlifyTomlRaw": "[build]\n  publish = \".\"\n  command = \"echo 'All 350+ todos deployed - site is live'\"\n\n[build.environment]\n  NODE_VERSION = \"18\"\n  SECRETS_SCAN_SMART_DETECTION_ENABLED = \"false\"\n\n# Auto-deploy configuration\n[build.processing]\n  skip_processing = false\n\n# Enhanced Security Headers for Production\n[[headers]]\n  for = \"/*\"\n  [headers.values]\n    X-Frame-Options = \"DENY\"\n    X-Content-Type-Options = \"nosniff\"\n    X-XSS-Protection = \"1; mode=block\"\n    Referrer-Policy = \"strict-origin-when-cross-origin\"\n    Strict-Transport-Security = \"max-age=31536000; includeSubDomains\"\n    Content-Security-Policy = \"default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://cdn.supabase.co https://esm.sh https://client.crisp.chat https://widget.intercom.io https://js.intercomcdn.com https://embed.tawk.to https://www.googletagmanager.com; connect-src 'self' https://*.supabase.co https://api.stripe.com https://client.crisp.chat https://widget.intercom.io https://nexus-websocket-a.intercom.io https://nexus-long-polling.intercom.io https://embed.tawk.to https://*.tawk.to https://www.google-analytics.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https:; frame-src https://js.stripe.com https://client.crisp.chat https://intercom-sheets.com https://js.intercomcdn.com https://widget.intercom.io https://embed.tawk.to https://*.tawk.to https://www.youtube.com https://player.vimeo.com;\"\n\n[[headers]]\n  for = \"/assets/*\"\n  [headers.values]\n    Cache-Control = \"public, max-age=31536000, immutable\"\n\n[[headers]]\n  for = \"/*.js\"\n  [headers.values]\n    Cache-Control = \"public, max-age=31536000, immutable\"\n\n[[headers]]\n  for = \"/*.css\"\n  [headers.values]\n    Cache-Control = \"public, max-age=31536000, immutable\"\n\n[[headers]]\n  for = \"/index.html\"\n  [headers.values]\n    Cache-Control = \"public, max-age=0, must-revalidate\"\n\n# Homepage - serve the main conversion landing page\n# No redirects needed - index.html will serve as the main page\n\n# 404 handling\n[[redirects]]\n  from = \"/*\"\n  to = \"/404.html\"\n  status = 404\n# Directory access restrictions\n[[redirects]]\n  from = \"/admin/*\"\n  to = \"/404.html\"\n  status = 404\n  force = true\n\n[[redirects]]\n  from = \"/api/*\"\n  to = \"/404.html\"\n  status = 404\n  force = true\n\n[[redirects]]\n  from = \"/config/*\"\n  to = \"/404.html\"\n  status = 404\n  force = true\n\n[[redirects]]\n  from = \"/logs/*\"\n  to = \"/404.html\"\n  status = 404\n  force = true\n\n[[redirects]]\n  from = \"/backup/*\"\n  to = \"/404.html\"\n  status = 404\n  force = true\n\n[[redirects]]\n  from = \"/temp/*\"\n  to = \"/404.html\"\n  status = 404\n  force = true\n\n[[redirects]]\n  from = \"/*.json\"\n  to = \"/404.html\"\n  status = 404\n  force = true\n\n[[redirects]]\n  from = \"/*.log\"\n  to = \"/404.html\"\n  status = 404\n  force = true\n\n[[redirects]]\n  from = \"/*.bak\"\n  to = \"/404.html\"\n  status = 404\n  force = true\n\n[[redirects]]\n  from = \"/*.backup\"\n  to = \"/404.html\"\n  status = 404\n  force = true\n\n[[redirects]]\n  from = \"/*.old\"\n  to = \"/404.html\"\n  status = 404\n  force = true\n\n[[redirects]]\n  from = \"/.env*\"\n  to = \"/404.html\"\n  status = 404\n  force = true\n\n[[redirects]]\n  from = \"/package.json\"\n  to = \"/404.html\"\n  status = 404\n  force = true\n\n[[redirects]]\n  from = \"/package-lock.json\"\n  to = \"/404.html\"\n  status = 404\n  force = true\n# Duplicate content redirects\n[[redirects]]\n  from = \"/index-authentic.html\"\n  to = \"/hub.html\"\n  status = 301\n  force = true\n\n[[redirects]]\n  from = \"/index-ecosystem.html\"\n  to = \"/hub.html\"\n  status = 301\n  force = true\n\n[[redirects]]\n  from = \"/index-professional.html\"\n  to = \"/hub.html\"\n  status = 301\n  force = true\n\n[[redirects]]\n  from = \"/live-professional.html\"\n  to = \"/hub.html\"\n  status = 301\n  force = true\n\n[[redirects]]\n  from = \"/merged-site.html\"\n  to = \"/hub.html\"\n  status = 301\n  force = true\n\n[[redirects]]\n  from = \"/professional-site.html\"\n  to = \"/hub.html\"\n  status = 301\n  force = true\n\n[[redirects]]\n  from = \"/working-demo.html\"\n  to = \"/hub.html\"\n  status = 301\n  force = true\n\n[[redirects]]\n  from = \"/humanized-program-template.html\"\n  to = \"/programs.html\"\n  status = 301\n  force = true\n\n# WWW to non-WWW redirect\n[[redirects]]\n  from = \"https://www.elevateforhumanity.org/*\"\n  to = \"https://elevateforhumanity.org/:splat\"\n  status = 301\n  force = true\n\n# Directory index redirects\n[[redirects]]\n  from = \"/about/index.html\"\n  to = \"/about.html\"\n  status = 301\n  force = true\n\n[[redirects]]\n  from = \"/contact/index.html\"\n  to = \"/connect.html\"\n  status = 301\n  force = true\n\n[[redirects]]\n  from = \"/programs/index.html\"\n  to = \"/programs.html\"\n  status = 301\n  force = true\n\n[[redirects]]\n  from = \"/students/index.html\"\n  to = \"/student-portal.html\"\n  status = 301\n  force = true\n\n# Wix Logging Functions\n[functions]\n  directory = \"netlify/functions\"\n\n",
+    "vercelJsonRaw": "{\n  \"headers\": [\n    {\n      \"source\": \"/admin/(.*)\",\n      \"headers\": [\n        {\n          \"key\": \"X-Robots-Tag\",\n          \"value\": \"noindex, nofollow\"\n        }\n      ]\n    },\n    {\n      \"source\": \"/api/(.*)\",\n      \"headers\": [\n        {\n          \"key\": \"X-Robots-Tag\",\n          \"value\": \"noindex, nofollow\"\n        }\n      ]\n    },\n    {\n      \"source\": \"/(.*\\\\.(json|log|bak|backup|old|env))\",\n      \"headers\": [\n        {\n          \"key\": \"X-Robots-Tag\",\n          \"value\": \"noindex, nofollow\"\n        }\n      ]\n    }\n  ],\n  \"rewrites\": [\n    {\n      \"source\": \"/admin/(.*)\",\n      \"destination\": \"/404.html\"\n    },\n    {\n      \"source\": \"/api/(.*)\",\n      \"destination\": \"/404.html\"\n    },\n    {\n      \"source\": \"/config/(.*)\",\n      \"destination\": \"/404.html\"\n    },\n    {\n      \"source\": \"/logs/(.*)\",\n      \"destination\": \"/404.html\"\n    },\n    {\n      \"source\": \"/(.*\\\\.(json|log|bak|backup|old))\",\n      \"destination\": \"/404.html\"\n    },\n    {\n      \"source\": \"/\\\\.env.*\",\n      \"destination\": \"/404.html\"\n    },\n    {\n      \"source\": \"/package(-lock)?\\\\.json\",\n      \"destination\": \"/404.html\"\n    }\n  ]\n}",
+    "wranglerTomlRaw": null,
+    "viteConfigRaw": "import { defineConfig } from \"vite\";\nimport react from '@vitejs/plugin-react';\n\nexport default defineConfig({\n  plugins: [react()],\n  base: '/',\n  build: { \n    outDir: 'dist', \n    sourcemap: false, \n    emptyOutDir: true,\n    rollupOptions: {\n      output: {\n        manualChunks: undefined\n      }\n    }\n  },\n  server: {\n    port: 3000,\n    host: true\n  }\n  // No CSS config - let Vite handle CSS natively without PostCSS\n});\n",
+    "devcontainerRaw": "{\n  \"name\": \"elevate-for-humanity\",\n  \"image\": \"mcr.microsoft.com/devcontainers/javascript-node:18\",\n  \"hostRequirements\": { \"cpus\": 4, \"memory\": \"8gb\", \"storage\": \"32gb\" },\n  \"forwardPorts\": [8080, 3000, 5173],\n  \"portsAttributes\": {\n    \"8080\": {\n      \"label\": \"Main Site\",\n      \"onAutoForward\": \"openPreview\"\n    },\n    \"3000\": {\n      \"label\": \"Development Server\",\n      \"onAutoForward\": \"openPreview\"\n    }\n  },\n  \"postCreateCommand\": \"npm install -g http-server && echo 'Dev container ready'\",\n  \"customizations\": {\n    \"vscode\": {\n      \"settings\": {\n        \"terminal.integrated.defaultProfile.linux\": \"bash\",\n        \"terminal.integrated.profiles.linux\": {\n          \"bash\": { \"path\": \"/bin/bash\", \"args\": [\"-l\"] }\n        },\n        \"files.watcherExclude\": {\n          \"**/node_modules/**\": true,\n          \"**/.git/**\": true,\n          \"**/dist/**\": true\n        }\n      },\n      \"extensions\": [\n        \"esbenp.prettier-vscode\",\n        \"ms-vscode.vscode-json\",\n        \"bradlc.vscode-tailwindcss\"\n      ]\n    }\n  },\n  \"features\": {\n    \"ghcr.io/devcontainers/features/git:1\": {},\n    \"ghcr.io/devcontainers/features/github-cli:1\": {}\n  }\n}\n",
+    "nvmrcRaw": "20.18.1\n",
+    "npmrcRaw": "legacy-peer-deps=true\naudit=false\nfund=false\n",
+    "envExampleRaw": "# API base (optional). Example:\n# VITE_API_BASE_URL=https://api.example.com\n# Optional analytics ID\nVITE_ANALYTICS_ID=GA-XXXXXXX\n\n# --- Server Runtime ---\nNODE_ENV=development\nLOG_LEVEL=info\nJWT_SECRET=change_me_to_a_secure_random_value\n\n# --- Database (optional for now) ---\n# DATABASE_URL=postgresql://user:password@host:5432/dbname\n\n# --- Stripe (optional; enables real payment intent creation) ---\n# STRIPE_SECRET_KEY=sk_live_xxx\n\n# --- Supabase (optional) ---\n# SUPABASE_URL=https://your-project.supabase.co\n# SUPABASE_ANON_KEY=public-anon-key\n# SUPABASE_SERVICE_KEY=service-role-key\n",
+    "indexHtmlRaw": "<!DOCTYPE html>\n<html>\n<head>\n    <meta name=\"robots\" content=\"noindex, nofollow\">\n    <!-- Security Headers -->\n    <meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https:; frame-ancestors 'none';\">\n    <meta http-equiv=\"X-Frame-Options\" content=\"DENY\">\n    <meta http-equiv=\"X-Content-Type-Options\" content=\"nosniff\">\n    <meta http-equiv=\"Referrer-Policy\" content=\"strict-origin-when-cross-origin\">\n    <meta http-equiv=\"Permissions-Policy\" content=\"geolocation=(), microphone=(), camera=()\">\n    <meta http-equiv=\"Strict-Transport-Security\" content=\"max-age=31536000; includeSubDomains; preload\">\n    <meta http-equiv=\"X-XSS-Protection\" content=\"1; mode=block\">\n    <title>Elevate for Humanity - LIVE NOW</title>\n    <style>\n        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f0f8ff; }\n        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }\n        h1 { color: #1e40af; text-align: center; font-size: 2.5em; margin-bottom: 30px; }\n        .section { margin: 30px 0; padding: 20px; border-left: 4px solid #1e40af; background: #f8fafc; }\n        .section h2 { color: #1e40af; margin-top: 0; }\n        .stats { display: flex; justify-content: space-around; flex-wrap: wrap; margin: 20px 0; }\n        .stat { text-align: center; margin: 10px; }\n        .stat-number { font-size: 2em; font-weight: bold; color: #059669; }\n        .contact { background: #1e40af; color: white; padding: 20px; border-radius: 8px; text-align: center; margin-top: 30px; }\n        ul { list-style-type: none; padding: 0; }\n        li { padding: 5px 0; }\n        li:before { content: \"✓ \"; color: #059669; font-weight: bold; }\n    </style>\n</head>\n<body>\n    \n\n        \n            </div>\n        </div>\n\n        \n    </div>\n\n    <script>\n        // Simple analytics\n        console.log('Elevate for Humanity - Government Contracting & Philanthropy Platform Loaded');\n        \n        // Accessibility enhancement\n        document.addEventListener('keydown', function(e) {\n            if (e.key === 'Tab') {\n                document.body.classList.add('keyboard-nav');\n            }\n        });\n    </script>\n</body>\n</html>",
+    "robotsTxtRaw": "User-agent: *\nAllow: /\nSitemap: https://www.elevateforhumanity.org/sitemap.xml\n",
+    "sitemapIndexRaw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n  <url><loc>https://www.elevateforhumanity.org/</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/hub</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/lms</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/pay</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/about</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/donate</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/account</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/connect</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/contact</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/courses</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/profile</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/support</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/branding</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/partners</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/programs</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/settings</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/wellness</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/community</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/ecommerce</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/volunteer</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/compliance</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/government</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/mentorship</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/mobile-app</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/donate.html</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/certificates</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/integrations</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/philanthropy</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/accessibility</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/notifications</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/curriculum-upload</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/mentorship/signup</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/volunteer/stories</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/wellness/resources</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/mentorship/directory</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/wellness/peersupport</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/accessibility-settings</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/bing-site-verification</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/google-analytics-setup</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/volunteer/opportunities</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n  <url><loc>https://www.elevateforhumanity.org/google-site-verification</loc><lastmod>2025-09-16T10:42:10.841Z</lastmod></url>\n</urlset>\n",
+    "stripeWebhookRaw": null
+  },
+  "supabase": {
+    "schemaRaw": "-- Elevate for Humanity LMS Database Schema\n-- Superior to LearnWorlds with advanced AI features\n-- Copyright (c) 2024 Elevate for Humanity\n\n-- Enable necessary extensions\nCREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";\nCREATE EXTENSION IF NOT EXISTS \"pgcrypto\";\n\n-- Users table (extends Supabase auth.users)\nCREATE TABLE public.profiles (\n    id UUID REFERENCES auth.users(id) PRIMARY KEY,\n    email TEXT UNIQUE NOT NULL,\n    full_name TEXT,\n    avatar_url TEXT,\n    role TEXT DEFAULT 'student' CHECK (role IN ('student', 'instructor', 'admin')),\n    subscription_tier TEXT DEFAULT 'basic' CHECK (subscription_tier IN ('basic', 'copilot', 'autopilot')),\n    license_key TEXT,\n    domain TEXT,\n    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()\n);\n\n-- Courses table\nCREATE TABLE public.courses (\n    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,\n    title TEXT NOT NULL,\n    description TEXT,\n    cover_url TEXT,\n    objectives TEXT[],\n    prerequisites TEXT[],\n    target_audience TEXT,\n    difficulty TEXT CHECK (difficulty IN ('beginner', 'intermediate', 'advanced')),\n    estimated_hours INTEGER,\n    price DECIMAL(10,2) DEFAULT 0,\n    currency TEXT DEFAULT 'USD',\n    status TEXT DEFAULT 'draft' CHECK (status IN ('draft', 'published', 'archived')),\n    created_by UUID REFERENCES public.profiles(id),\n    keywords TEXT[],\n    meta_description TEXT,\n    seo_optimized BOOLEAN DEFAULT FALSE,\n    ai_generated BOOLEAN DEFAULT FALSE,\n    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()\n);\n\n-- Modules table\nCREATE TABLE public.modules (\n    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,\n    course_id UUID REFERENCES public.courses(id) ON DELETE CASCADE,\n    title TEXT NOT NULL,\n    description TEXT,\n    order_index INTEGER NOT NULL,\n    estimated_hours INTEGER,\n    assessment_id UUID,\n    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()\n);\n\n-- Lessons table\nCREATE TABLE public.lessons (\n    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,\n    module_id UUID REFERENCES public.modules(id) ON DELETE CASCADE,\n    title TEXT NOT NULL,\n    description TEXT,\n    type TEXT CHECK (type IN ('video', 'text', 'interactive', 'quiz', 'assignment')),\n    order_index INTEGER NOT NULL,\n    estimated_minutes INTEGER,\n    content JSONB,\n    video_url TEXT,\n    video_thumbnail TEXT,\n    video_duration INTEGER,\n    key_points TEXT[],\n    practical_exercise TEXT,\n    ai_generated BOOLEAN DEFAULT FALSE,\n    script TEXT,\n    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()\n);\n\n-- Assessments table\nCREATE TABLE public.assessments (\n    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,\n    module_id UUID REFERENCES public.modules(id) ON DELETE CASCADE,\n    title TEXT NOT NULL,\n    description TEXT,\n    type TEXT DEFAULT 'quiz' CHECK (type IN ('quiz', 'assignment', 'project')),\n    time_limit INTEGER, -- in minutes\n    total_points INTEGER DEFAULT 100,\n    passing_score INTEGER DEFAULT 80,\n    questions JSONB,\n    practical_exercise JSONB,\n    ai_generated BOOLEAN DEFAULT FALSE,\n    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()\n);\n\n-- Add foreign key for modules.assessment_id\nALTER TABLE public.modules \nADD CONSTRAINT fk_modules_assessment \nFOREIGN KEY (assessment_id) REFERENCES public.assessments(id);\n\n-- Enrollments table\nCREATE TABLE public.enrollments (\n    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,\n    user_id UUID REFERENCES public.profiles(id),\n    course_id UUID REFERENCES public.courses(id),\n    enrolled_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    completed_at TIMESTAMP WITH TIME ZONE,\n    progress DECIMAL(5,2) DEFAULT 0 CHECK (progress >= 0 AND progress <= 100),\n    status TEXT DEFAULT 'active' CHECK (status IN ('active', 'completed', 'dropped', 'suspended')),\n    payment_status TEXT DEFAULT 'pending' CHECK (payment_status IN ('pending', 'paid', 'refunded')),\n    payment_method TEXT,\n    amount_paid DECIMAL(10,2),\n    UNIQUE(user_id, course_id)\n);\n\n-- Progress tracking table\nCREATE TABLE public.progress (\n    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,\n    user_id UUID REFERENCES public.profiles(id),\n    lesson_id UUID REFERENCES public.lessons(id),\n    course_id UUID REFERENCES public.courses(id),\n    completed BOOLEAN DEFAULT FALSE,\n    completion_percentage DECIMAL(5,2) DEFAULT 0,\n    time_spent INTEGER DEFAULT 0, -- in seconds\n    last_accessed TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    notes TEXT,\n    UNIQUE(user_id, lesson_id)\n);\n\n-- Assessment attempts table\nCREATE TABLE public.assessment_attempts (\n    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,\n    user_id UUID REFERENCES public.profiles(id),\n    assessment_id UUID REFERENCES public.assessments(id),\n    attempt_number INTEGER DEFAULT 1,\n    answers JSONB,\n    score DECIMAL(5,2),\n    passed BOOLEAN,\n    started_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    completed_at TIMESTAMP WITH TIME ZONE,\n    time_taken INTEGER -- in seconds\n);\n\n-- Drip content schedule table\nCREATE TABLE public.drip_schedule (\n    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,\n    course_id UUID REFERENCES public.courses(id) ON DELETE CASCADE,\n    module_id UUID REFERENCES public.modules(id) ON DELETE CASCADE,\n    release_date TIMESTAMP WITH TIME ZONE NOT NULL,\n    is_available BOOLEAN DEFAULT FALSE,\n    prerequisites UUID[], -- array of module IDs\n    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()\n);\n\n-- AI Copilot/Autopilot settings\nCREATE TABLE public.autopilot_settings (\n    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,\n    course_id UUID REFERENCES public.courses(id) ON DELETE CASCADE,\n    user_id UUID REFERENCES public.profiles(id),\n    enabled BOOLEAN DEFAULT FALSE,\n    settings JSONB DEFAULT '{}',\n    last_updated TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    UNIQUE(course_id)\n);\n\n-- Autopilot action logs\nCREATE TABLE public.autopilot_logs (\n    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,\n    course_id UUID REFERENCES public.courses(id) ON DELETE CASCADE,\n    action TEXT NOT NULL,\n    details JSONB,\n    status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'completed', 'failed')),\n    timestamp TIMESTAMP WITH TIME ZONE DEFAULT NOW()\n);\n\n-- Subscriptions table\nCREATE TABLE public.subscriptions (\n    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,\n    user_id UUID REFERENCES public.profiles(id),\n    tier TEXT NOT NULL CHECK (tier IN ('basic', 'copilot', 'autopilot')),\n    price DECIMAL(10,2) NOT NULL,\n    features TEXT[],\n    status TEXT DEFAULT 'active' CHECK (status IN ('active', 'cancelled', 'expired')),\n    billing_cycle TEXT DEFAULT 'monthly' CHECK (billing_cycle IN ('monthly', 'yearly')),\n    next_billing_date TIMESTAMP WITH TIME ZONE,\n    stripe_subscription_id TEXT,\n    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    UNIQUE(user_id)\n);\n\n-- License management table\nCREATE TABLE public.licenses (\n    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,\n    license_key TEXT UNIQUE NOT NULL,\n    domain TEXT NOT NULL,\n    licensee TEXT NOT NULL,\n    tier TEXT NOT NULL CHECK (tier IN ('basic', 'sister', 'enterprise')),\n    features TEXT[],\n    status TEXT DEFAULT 'active' CHECK (status IN ('active', 'suspended', 'revoked')),\n    issued_date TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    expiry_date TIMESTAMP WITH TIME ZONE NOT NULL,\n    usage_count INTEGER DEFAULT 0,\n    last_used TIMESTAMP WITH TIME ZONE,\n    created_by UUID REFERENCES public.profiles(id)\n);\n\n-- License usage tracking\nCREATE TABLE public.license_usage (\n    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,\n    license_key TEXT REFERENCES public.licenses(license_key),\n    domain TEXT NOT NULL,\n    ip_address INET,\n    user_agent TEXT,\n    path TEXT,\n    timestamp TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    session_id TEXT,\n    metadata JSONB\n);\n\n-- License violations\nCREATE TABLE public.license_violations (\n    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,\n    domain TEXT NOT NULL,\n    violation_type TEXT NOT NULL,\n    details JSONB,\n    ip_address INET,\n    user_agent TEXT,\n    timestamp TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'investigated', 'resolved')),\n    action_taken TEXT\n);\n\n-- Course analytics\nCREATE TABLE public.course_analytics (\n    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,\n    course_id UUID REFERENCES public.courses(id) ON DELETE CASCADE,\n    metric_name TEXT NOT NULL,\n    metric_value DECIMAL,\n    metadata JSONB,\n    recorded_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()\n);\n\n-- AI-generated content tracking\nCREATE TABLE public.ai_content_generation (\n    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,\n    content_type TEXT NOT NULL CHECK (content_type IN ('course', 'module', 'lesson', 'assessment', 'video', 'cover')),\n    content_id UUID NOT NULL,\n    prompt TEXT,\n    model_used TEXT,\n    generation_time INTEGER, -- in milliseconds\n    cost DECIMAL(10,4),\n    quality_score DECIMAL(3,2),\n    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()\n);\n\n-- Notifications table\nCREATE TABLE public.notifications (\n    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,\n    user_id UUID REFERENCES public.profiles(id),\n    title TEXT NOT NULL,\n    message TEXT NOT NULL,\n    type TEXT DEFAULT 'info' CHECK (type IN ('info', 'success', 'warning', 'error')),\n    read BOOLEAN DEFAULT FALSE,\n    action_url TEXT,\n    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()\n);\n\n-- Create indexes for better performance\nCREATE INDEX idx_courses_created_by ON public.courses(created_by);\nCREATE INDEX idx_courses_status ON public.courses(status);\nCREATE INDEX idx_modules_course_id ON public.modules(course_id);\nCREATE INDEX idx_lessons_module_id ON public.lessons(module_id);\nCREATE INDEX idx_enrollments_user_id ON public.enrollments(user_id);\nCREATE INDEX idx_enrollments_course_id ON public.enrollments(course_id);\nCREATE INDEX idx_progress_user_id ON public.progress(user_id);\nCREATE INDEX idx_progress_course_id ON public.progress(course_id);\nCREATE INDEX idx_license_usage_license_key ON public.license_usage(license_key);\nCREATE INDEX idx_license_usage_timestamp ON public.license_usage(timestamp);\nCREATE INDEX idx_course_analytics_course_id ON public.course_analytics(course_id);\nCREATE INDEX idx_notifications_user_id ON public.notifications(user_id);\n\n-- Row Level Security (RLS) policies\nALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;\nALTER TABLE public.courses ENABLE ROW LEVEL SECURITY;\nALTER TABLE public.modules ENABLE ROW LEVEL SECURITY;\nALTER TABLE public.lessons ENABLE ROW LEVEL SECURITY;\nALTER TABLE public.enrollments ENABLE ROW LEVEL SECURITY;\nALTER TABLE public.progress ENABLE ROW LEVEL SECURITY;\nALTER TABLE public.subscriptions ENABLE ROW LEVEL SECURITY;\nALTER TABLE public.notifications ENABLE ROW LEVEL SECURITY;\n\n-- Profiles policies\nCREATE POLICY \"Users can view own profile\" ON public.profiles\n    FOR SELECT USING (auth.uid() = id);\n\nCREATE POLICY \"Users can update own profile\" ON public.profiles\n    FOR UPDATE USING (auth.uid() = id);\n\n-- Courses policies\nCREATE POLICY \"Anyone can view published courses\" ON public.courses\n    FOR SELECT USING (status = 'published');\n\nCREATE POLICY \"Instructors can manage own courses\" ON public.courses\n    FOR ALL USING (auth.uid() = created_by);\n\n-- Enrollments policies\nCREATE POLICY \"Users can view own enrollments\" ON public.enrollments\n    FOR SELECT USING (auth.uid() = user_id);\n\nCREATE POLICY \"Users can enroll in courses\" ON public.enrollments\n    FOR INSERT WITH CHECK (auth.uid() = user_id);\n\n-- Progress policies\nCREATE POLICY \"Users can view own progress\" ON public.progress\n    FOR SELECT USING (auth.uid() = user_id);\n\nCREATE POLICY \"Users can update own progress\" ON public.progress\n    FOR ALL USING (auth.uid() = user_id);\n\n-- Subscriptions policies\nCREATE POLICY \"Users can view own subscription\" ON public.subscriptions\n    FOR SELECT USING (auth.uid() = user_id);\n\n-- Notifications policies\nCREATE POLICY \"Users can view own notifications\" ON public.notifications\n    FOR SELECT USING (auth.uid() = user_id);\n\nCREATE POLICY \"Users can update own notifications\" ON public.notifications\n    FOR UPDATE USING (auth.uid() = user_id);\n\n-- Functions for automatic updates\nCREATE OR REPLACE FUNCTION update_updated_at_column()\nRETURNS TRIGGER AS $$\nBEGIN\n    NEW.updated_at = NOW();\n    RETURN NEW;\nEND;\n$$ language 'plpgsql';\n\n-- Triggers for updated_at\nCREATE TRIGGER update_profiles_updated_at BEFORE UPDATE ON public.profiles\n    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();\n\nCREATE TRIGGER update_courses_updated_at BEFORE UPDATE ON public.courses\n    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();\n\nCREATE TRIGGER update_modules_updated_at BEFORE UPDATE ON public.modules\n    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();\n\nCREATE TRIGGER update_lessons_updated_at BEFORE UPDATE ON public.lessons\n    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();\n\nCREATE TRIGGER update_subscriptions_updated_at BEFORE UPDATE ON public.subscriptions\n    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();\n\n-- Function to calculate course progress\nCREATE OR REPLACE FUNCTION calculate_course_progress(user_uuid UUID, course_uuid UUID)\nRETURNS DECIMAL AS $$\nDECLARE\n    total_lessons INTEGER;\n    completed_lessons INTEGER;\n    progress_percentage DECIMAL;\nBEGIN\n    -- Get total lessons in course\n    SELECT COUNT(l.id) INTO total_lessons\n    FROM public.lessons l\n    JOIN public.modules m ON l.module_id = m.id\n    WHERE m.course_id = course_uuid;\n    \n    -- Get completed lessons for user\n    SELECT COUNT(p.id) INTO completed_lessons\n    FROM public.progress p\n    JOIN public.lessons l ON p.lesson_id = l.id\n    JOIN public.modules m ON l.module_id = m.id\n    WHERE p.user_id = user_uuid \n    AND m.course_id = course_uuid \n    AND p.completed = TRUE;\n    \n    -- Calculate percentage\n    IF total_lessons > 0 THEN\n        progress_percentage := (completed_lessons::DECIMAL / total_lessons::DECIMAL) * 100;\n    ELSE\n        progress_percentage := 0;\n    END IF;\n    \n    RETURN ROUND(progress_percentage, 2);\nEND;\n$$ LANGUAGE plpgsql;\n\n-- Function to update enrollment progress\nCREATE OR REPLACE FUNCTION update_enrollment_progress()\nRETURNS TRIGGER AS $$\nDECLARE\n    course_uuid UUID;\n    new_progress DECIMAL;\nBEGIN\n    -- Get course ID from lesson\n    SELECT m.course_id INTO course_uuid\n    FROM public.lessons l\n    JOIN public.modules m ON l.module_id = m.id\n    WHERE l.id = NEW.lesson_id;\n    \n    -- Calculate new progress\n    new_progress := calculate_course_progress(NEW.user_id, course_uuid);\n    \n    -- Update enrollment progress\n    UPDATE public.enrollments\n    SET progress = new_progress,\n        completed_at = CASE WHEN new_progress >= 100 THEN NOW() ELSE NULL END,\n        status = CASE WHEN new_progress >= 100 THEN 'completed' ELSE status END\n    WHERE user_id = NEW.user_id AND course_id = course_uuid;\n    \n    RETURN NEW;\nEND;\n$$ LANGUAGE plpgsql;\n\n-- Trigger to update enrollment progress when lesson progress changes\nCREATE TRIGGER update_enrollment_progress_trigger\n    AFTER INSERT OR UPDATE ON public.progress\n    FOR EACH ROW\n    WHEN (NEW.completed = TRUE)\n    EXECUTE FUNCTION update_enrollment_progress();\n\n-- Insert default data\nINSERT INTO public.profiles (id, email, full_name, role, subscription_tier) VALUES\n    ('00000000-0000-0000-0000-000000000001', 'admin@elevateforhumanity.com', 'Elevate Admin', 'admin', 'autopilot');\n\n-- Insert sample license\nINSERT INTO public.licenses (license_key, domain, licensee, tier, features, expiry_date) VALUES\n    ('EFH-RISE-2024-PROD-XYZ789', 'elevateforhumanity.com', 'Elevate for Humanity', 'enterprise', \n     ARRAY['lms', 'sister-sites', 'ai-tutor', 'analytics', 'compliance', 'admin'], \n     '2025-12-31 23:59:59+00');",
+    "migrations": []
+  },
+  "sizes": {
+    "workspaceBytes": 395054607,
+    "nodeModulesBytes": 0,
+    "distBytes": 9795,
+    "srcBytes": 652438,
+    "human": {
+      "workspace": "376.75 MB",
+      "node_modules": "0.00 B",
+      "dist": "9.57 KB",
+      "src": "637.15 KB"
+    }
+  },
+  "pages": {
+    "roots": [
+      "src/pages",
+      "app",
+      "public"
+    ],
+    "fileCount": 111,
+    "truncated": false,
+    "note": "Increase maxFiles= to capture more.",
+    "files": [
+      {
+        "path": "src/pages/About.jsx",
+        "size": 1659,
+        "sha256": "4b5a42924ca71d90c9393713314f2e2b442920ddb402a12ba5f5deb82008ebcf"
+      },
+      {
+        "path": "src/pages/Accessibility.jsx",
+        "size": 10325,
+        "sha256": "8b1d989514fadef4fe97d7e03183d65071fa69bc42be23eafe89bdc8615cffd0"
+      },
+      {
+        "path": "src/pages/AccessibilitySettings.jsx",
+        "size": 503,
+        "sha256": "93f96daadd9b939130b3888116c2e62731b933561a092e2598926c79c261dcf1"
+      },
+      {
+        "path": "src/pages/Account.jsx",
+        "size": 175,
+        "sha256": "0a6c0a2b655356454e33bbe1f7e0da872a05256a45762458588447925f5cc4cf"
+      },
+      {
+        "path": "src/pages/AdminDashboard.jsx",
+        "size": 665,
+        "sha256": "f85a7914f0fa0d1968ac1a5b664cbacb661e3089ca05847a03c6692a904e32ce"
+      },
+      {
+        "path": "src/pages/Analytics.jsx",
+        "size": 650,
+        "sha256": "664ca37990ea7e330326b84bfb5a348f8e0b9ec61996583ff1624495287f9497"
+      },
+      {
+        "path": "src/pages/AnalyticsDashboard.jsx",
+        "size": 2018,
+        "sha256": "794251967e855719f5f509485b13e7738798adf07d1147baf2f11f6bdfe22fe2"
+      },
+      {
+        "path": "src/pages/Assignment.jsx",
+        "size": 1391,
+        "sha256": "74a2354c3ae2f60a3865ab119e143147eabd3f7eba279b80cf4893e534935834"
+      },
+      {
+        "path": "src/pages/BingSiteVerification.jsx",
+        "size": 340,
+        "sha256": "a8bfa8aad2ad246d5755d539d899c6a4d583ae0e90361567acc88256d8faa30a"
+      },
+      {
+        "path": "src/pages/Branding.jsx",
+        "size": 484,
+        "sha256": "8faed8756915440b118e930fcab7dd30b9131568b7a8ff5af8515c7071bd2cf4"
+      },
+      {
+        "path": "src/pages/Certificates.jsx",
+        "size": 639,
+        "sha256": "61e310913ad5a0109dd53b5779d659be11cc73ba1cb9d613e5826b7efd6aea9d"
+      },
+      {
+        "path": "src/pages/CloneLanding.jsx",
+        "size": 647,
+        "sha256": "1557082cd8e6e5e39f667c638b6998069713d78c9f753f185d60950dc868ed93"
+      },
+      {
+        "path": "src/pages/Community.jsx",
+        "size": 795,
+        "sha256": "36f1341bbb084a61eb3b39bfe6670ae63ae26002b7584fc0c4bb452e54ddf733"
+      },
+      {
+        "path": "src/pages/Compliance.jsx",
+        "size": 11993,
+        "sha256": "f2243a3d308af0ebd56f50d91d8c2f892ae81a7d6f1e8702618750990c80ed0d"
+      },
+      {
+        "path": "src/pages/Connect.jsx",
+        "size": 174,
+        "sha256": "a86e13339dd11394345fc4aebe639743e1c7b3ff1085bf836f706f8139e32a19"
+      },
+      {
+        "path": "src/pages/Course.jsx",
+        "size": 651,
+        "sha256": "dcdeb271fcce9a0b35b27df7476caee84b62ab8731ec7ae4240d1831d7f7fdd2"
+      },
+      {
+        "path": "src/pages/CourseBuilder.jsx",
+        "size": 2650,
+        "sha256": "faddd8fbd4b5d4c122f5812cc9552235dd2797046b19dd7af7fa7e212d0afb89"
+      },
+      {
+        "path": "src/pages/CourseCatalog.jsx",
+        "size": 3784,
+        "sha256": "c5efe993601221eb88b2618be59dc0aa061349bf0507de9007d00ca5d45769ac"
+      },
+      {
+        "path": "src/pages/CourseDetail.jsx",
+        "size": 4247,
+        "sha256": "7a64235453b9a18240a51034d19b8d46108d90730e4aeec4dcf4cc765144c09a"
+      },
+      {
+        "path": "src/pages/CourseLibrary.jsx",
+        "size": 7908,
+        "sha256": "a09e369378e10c6338f10d1fc980c7e2e9ec94b7c207bd70f6c97f37cdab7081"
+      },
+      {
+        "path": "src/pages/CurriculumUpload.jsx",
+        "size": 2320,
+        "sha256": "217d22327249bd097d352985e8eec7394240c11966665038572dda6e455ccf16"
+      },
+      {
+        "path": "src/pages/Donate.jsx",
+        "size": 175,
+        "sha256": "54c3d1a57be4d48eb6ecb6d50ec7b9b68853135e9d266db60fff7b20f3ee1e48"
+      },
+      {
+        "path": "src/pages/DonatePage.jsx",
+        "size": 410,
+        "sha256": "632be051c29ceca1ffe410dc4875f9214ed54d38b47f8272c0cb40c8c2348783"
+      },
+      {
+        "path": "src/pages/DonatePage.tsx",
+        "size": 337,
+        "sha256": "3918bd5796302db1d742cffc260317d24e7040534b2d52eb8e4dba3f678e6ef9"
+      },
+      {
+        "path": "src/pages/Ecommerce.jsx",
+        "size": 571,
+        "sha256": "baf7f4a5faa75bc16586f5495ad2f625f40e97374b53b9f759e2658837b385aa"
+      },
+      {
+        "path": "src/pages/Ecosystem.jsx",
+        "size": 5618,
+        "sha256": "977a07cc20e7f1a62dd98feccd56b49a53008c4fbc4dd3ac7e39a7d7e53f82c1"
+      },
+      {
+        "path": "src/pages/FundingImpact.jsx",
+        "size": 10929,
+        "sha256": "de5181be986063316af9a666396e7156c4bb8f0bb5eae1bbd09409eeec667508"
+      },
+      {
+        "path": "src/pages/GoogleAnalyticsSetup.jsx",
+        "size": 211,
+        "sha256": "06fc1bfa8d3f8c75474ad33dfc1fe8f4722d81374f0f382bcf3c2ef306afd391"
+      },
+      {
+        "path": "src/pages/GoogleSiteVerification.jsx",
+        "size": 219,
+        "sha256": "957a0d6fa14cb71a3a4ccfff44647638275c1d50396b4ff7eb62580c72fd1208"
+      },
+      {
+        "path": "src/pages/Government.jsx",
+        "size": 9300,
+        "sha256": "5a26f0ace4ddf2b6386895d7b36e3fc36292bb0f853cc87576b0f9f49ba3f885"
+      },
+      {
+        "path": "src/pages/Home.jsx",
+        "size": 7424,
+        "sha256": "30d467214d9a2d548308d15a5be875daeb5f19b542587bc52e67d306a0399e9f"
+      },
+      {
+        "path": "src/pages/HomePage.jsx",
+        "size": 8032,
+        "sha256": "3e31a870976fc109fc206aa3f7032d278dbff3380cb61b215aceadc04bd1625b"
+      },
+      {
+        "path": "src/pages/Hub.jsx",
+        "size": 165,
+        "sha256": "6ead76d4b88ba4ee4bf64da645c02ca0a8f7e8431d4a47f2196405fabebe10a3"
+      },
+      {
+        "path": "src/pages/Instructor.jsx",
+        "size": 568,
+        "sha256": "42eb31e97f47aa736fe5684aeb2d092e6a70023a931303fe987ba6f6f59560c2"
+      },
+      {
+        "path": "src/pages/InstructorEdit.jsx",
+        "size": 670,
+        "sha256": "06ffa05cbc13e13c772133f5f16fac47ea6a150b86cdd8420e026b5f951dbed8"
+      },
+      {
+        "path": "src/pages/InstructorNew.jsx",
+        "size": 675,
+        "sha256": "2693fa6863259248adc56c0711df493558b20ed724632b07b57e1d6b5390a32e"
+      },
+      {
+        "path": "src/pages/Integrations.jsx",
+        "size": 595,
+        "sha256": "1572df212ceee0845cc4c8059f5bbfb3bc7bc1d266634106540b7d9f0acd19be"
+      },
+      {
+        "path": "src/pages/LMS.jsx",
+        "size": 173,
+        "sha256": "099a40195786fd0d6e67b30301782e5b5872dda0613a4de6785cb5cc33e5e398"
+      },
+      {
+        "path": "src/pages/Login.jsx",
+        "size": 1369,
+        "sha256": "15e21b2cd6168c6ae42d739c5dbdc41e5bfbbf4ae390c3c57c140e29b2ab394c"
+      },
+      {
+        "path": "src/pages/MobileApp.jsx",
+        "size": 489,
+        "sha256": "57e6e82e485d8e03593d1eb3d0c61d540bb5877f1e5a4eea8e7e20422887e3a5"
+      },
+      {
+        "path": "src/pages/NotFound.jsx",
+        "size": 414,
+        "sha256": "4457c3c57e894a257f8e1482a0dbddf15e86467c1a3989b46d7dd4d18783ba14"
+      },
+      {
+        "path": "src/pages/Notifications.jsx",
+        "size": 557,
+        "sha256": "337130320241419286d387a57bceb0721a9d640f5f8cffeba57db2de3c0e925a"
+      },
+      {
+        "path": "src/pages/Partners.jsx",
+        "size": 169,
+        "sha256": "853726184f976a41a12c2e15b0ec68e1dc8534ef8f1f8ba06257512564211f3a"
+      },
+      {
+        "path": "src/pages/Pay.jsx",
+        "size": 174,
+        "sha256": "7a7a01b24a793894cf66937be98352a1ccf908b33fd908eec5f40622933adbc0"
+      },
+      {
+        "path": "src/pages/Philanthropy.jsx",
+        "size": 15452,
+        "sha256": "47792b3f1a86d8b433325c07f4a1f8916639256e54b6d9155a6a6a5f1038d55f"
+      },
+      {
+        "path": "src/pages/PrivacyPolicy.jsx",
+        "size": 952,
+        "sha256": "d5d4a68b0762f7058e0c6cb5df010017b11b1b9ed00172a75358a685bc7d69d5"
+      },
+      {
+        "path": "src/pages/Profile.jsx",
+        "size": 498,
+        "sha256": "bd015764d7896cca316209c25ccd68d6216e76317af677b6252f3075ce8f76b8"
+      },
+      {
+        "path": "src/pages/Programs.jsx",
+        "size": 2542,
+        "sha256": "f9e630900709e761b5a9f53a33ee91f705c77667ac595ed9a5db1a2a1ec74e2a"
+      },
+      {
+        "path": "src/pages/Quiz.jsx",
+        "size": 4043,
+        "sha256": "56568226c4d817b214898bc6cb80a35b52b11f124cf0c366e59aae11d611c9ef"
+      },
+      {
+        "path": "src/pages/RefundPolicy.jsx",
+        "size": 871,
+        "sha256": "71339e78ef1bfc77c2f6e217bb8341548bf4aa9e143375de888b79698a42f70d"
+      },
+      {
+        "path": "src/pages/Settings.jsx",
+        "size": 1956,
+        "sha256": "331f99cd4a5413f12e21dd60e2bc0b4461aa2f801b0244c00d3c9fa7cd668b18"
+      },
+      {
+        "path": "src/pages/Sitemap.jsx",
+        "size": 1947,
+        "sha256": "da301588bf50560fbfb59c32cb0736ba343b888eac09204ede4e164fce0b2b8f"
+      },
+      {
+        "path": "src/pages/Sitemap.test.jsx",
+        "size": 2983,
+        "sha256": "b50233d405aafa4b1674fcd814cb1588c077fdb32ccc4c4f1fde07938f236e21"
+      },
+      {
+        "path": "src/pages/SomePage.jsx",
+        "size": 203,
+        "sha256": "42297aa4523bd0bc1b15b73e51da122dead16bf25b1419c4712aac2537d22b37"
+      },
+      {
+        "path": "src/pages/Student.jsx",
+        "size": 3568,
+        "sha256": "acc6f7236ecf216efd41fc1639a8527eecabb88b432c448b1a0610a2ffbe7b00"
+      },
+      {
+        "path": "src/pages/StudentDashboard.jsx",
+        "size": 2746,
+        "sha256": "771f25999481aa4b0d6229d19d5de5d9053ec1e0d3a76525fdd844fc388fb028"
+      },
+      {
+        "path": "src/pages/StudentHandbook.jsx",
+        "size": 325,
+        "sha256": "58b11730fb10f035761b0428bcbeb922800ea02aff1e5268deb08064e6f49c21"
+      },
+      {
+        "path": "src/pages/Support.jsx",
+        "size": 529,
+        "sha256": "12994ca7993a5a66500d25aac5c715e6659b23ff2525d8c96b66290e78a76739"
+      },
+      {
+        "path": "src/pages/TermsOfService.jsx",
+        "size": 1213,
+        "sha256": "0b48f9b10eb433f046b344465a46d8ce03a5123ff222bdf23b09c4ad30aed9b3"
+      },
+      {
+        "path": "src/pages/ThankYou.jsx",
+        "size": 1887,
+        "sha256": "48ffeed29c4a872b6cc748aa0c0d56538a2365d31b09014dd9e6d73aac700235"
+      },
+      {
+        "path": "src/pages/Untitled-1",
+        "size": 362,
+        "sha256": "e9793627fe13a08c88c1b8f3e5c351bb066bfcca66c2e07fcdd0a56a6a6fa285"
+      },
+      {
+        "path": "src/pages/Untitled-1.json",
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "src/pages/UserManagement.jsx",
+        "size": 1572,
+        "sha256": "40dd3da28cc14de69166d3c478017152e75d842b8c4a9e3957e429b5ab5018f4"
+      },
+      {
+        "path": "src/pages/import { BrowserRouter, Routes, Route } .jsx",
+        "size": 1602,
+        "sha256": "1238f1349f5ccdb2807799e0bc4ce99d23f40abff79b80a0c899e18d9b6551b6"
+      },
+      {
+        "path": "src/pages/index.astro",
+        "size": 1187,
+        "sha256": "08043cae293cc493d11a012e12d8ea1edd04abd6a0bfd56c8063e4c25b76c64f"
+      },
+      {
+        "path": "src/pages/simple.astro",
+        "size": 9057,
+        "sha256": "998130253881d89cf8bda00a92dea0986c1ae20ff2ba4c9cc52c7f7ac376a01f"
+      },
+      {
+        "path": "src/pages/sisters/MentorDirectory.jsx",
+        "size": 732,
+        "sha256": "b81ac13b16f64e3207756c16772255b1ff67ec2137a6cd3d68070779987633a1"
+      },
+      {
+        "path": "src/pages/sisters/MentorSignup.jsx",
+        "size": 2213,
+        "sha256": "0a48b62a08f7da69fc22dbd33927b2b9906d6cbe207d0539924de6cabea1d72d"
+      },
+      {
+        "path": "src/pages/sisters/Mentorship.jsx",
+        "size": 4253,
+        "sha256": "71edc95c97c8dec22fc317ae092e5f785128d8d9c7decea7b0dc958af5581161"
+      },
+      {
+        "path": "src/pages/sisters/PeerSupport.jsx",
+        "size": 637,
+        "sha256": "33f29187819cae741c81af871baf0eeeb65e21d3444ac274ceb678a19b780611"
+      },
+      {
+        "path": "src/pages/sisters/Untitled-1",
+        "size": 31,
+        "sha256": "465a33d688b3c56159515b0c20e101e703e84e6fd8f11018bf1b76da7fcba83d"
+      },
+      {
+        "path": "src/pages/sisters/Volunteer.jsx",
+        "size": 538,
+        "sha256": "5fc2d0d592ad85f57314395d78dc8e1ed83d31efb3ed5fb93fbfef68232aa0cf"
+      },
+      {
+        "path": "src/pages/sisters/VolunteerOpportunities.jsx",
+        "size": 397,
+        "sha256": "8c9f00083849d8baf8e9da79a7693f9f2ed8af84a666b3ac948a845772410848"
+      },
+      {
+        "path": "src/pages/sisters/VolunteerStories.jsx",
+        "size": 751,
+        "sha256": "64328dbe0b18662257da146b6838b0a7bad223158f59273394857d08c42faa90"
+      },
+      {
+        "path": "src/pages/sisters/Wellness.jsx",
+        "size": 639,
+        "sha256": "af24df56b42fa76a02eb501602a45b64fba80a4bc59a19eaaa41247dc5cc43fc"
+      },
+      {
+        "path": "src/pages/sisters/WellnessResources.jsx",
+        "size": 1103,
+        "sha256": "aacc5f7c193a21e0d734c276232421ea8fb047d22c54b6c91a7ab05f961d3c06"
+      },
+      {
+        "path": "src/pages/__tests__/Quiz.test.jsx",
+        "size": 607,
+        "sha256": "b3d1c633941c3eb875609b10f3acb9b39812dc9618754bcb0cedfac8617e8c84"
+      },
+      {
+        "path": "app/index.html",
+        "size": 199,
+        "sha256": "4c57e37097c33fd4bfd911054a8912aaf5415d6ff5e1c10df446999ce19d383f"
+      },
+      {
+        "path": "app/assets/index-D8-_n6B7.js",
+        "size": 395365,
+        "sha256": "103d1682be426d20d7c3688b572117343dcbee4805b9d051ac310ee84b4081de"
+      },
+      {
+        "path": "app/assets/index-D8-_n6B7.js.map",
+        "size": 1645825,
+        "sha256": null
+      },
+      {
+        "path": "app/assets/index-erZGo4Ol.css",
+        "size": 7942,
+        "sha256": "a1f6fc6cb46e40f0f330a524078c951e685c28e7183918644367eaeb26d36ed1"
+      },
+      {
+        "path": "public/academic-calendar.html",
+        "size": 5535,
+        "sha256": "f43d667b74c96c2b97e441046f3769fff9f9ec6c9fb80bfef34464247c662606"
+      },
+      {
+        "path": "public/apply.html",
+        "size": 4630,
+        "sha256": "befcda01fd5805522082d7b1fa55c97f8fda13694d62173fd217ea404f86f3a5"
+      },
+      {
+        "path": "public/donate.html",
+        "size": 1705,
+        "sha256": "fb800d1553ec02592ef3345fb99ff65ad5464fd92433fe861b2ba05f56a270e1"
+      },
+      {
+        "path": "public/employers.html",
+        "size": 4756,
+        "sha256": "71986a99b2679c36571292c20c6bd5be48d7a50bafcd207a025857e29df461c0"
+      },
+      {
+        "path": "public/federal-apprenticeships.html",
+        "size": 4830,
+        "sha256": "16dcd43c78ffa11f01f7f82ea5b620dfd192550600a095bad8b83edab666d977"
+      },
+      {
+        "path": "public/health.txt",
+        "size": 3,
+        "sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22"
+      },
+      {
+        "path": "public/index.html",
+        "size": 4842,
+        "sha256": "d7e24991c1ae2fb8398eb28d4ff7c67b760456429c7c71258d14a8e37d8c130e"
+      },
+      {
+        "path": "public/pay.html",
+        "size": 4759,
+        "sha256": "0c5c190d525126c647e6f878452af1c5be03f8d178151c12371d4e36a7facc62"
+      },
+      {
+        "path": "public/robots.txt",
+        "size": 79,
+        "sha256": "413f712b818fcbcd9c33914587c2641915a2346576718118bc0dda25b6481ad6"
+      },
+      {
+        "path": "public/search.html",
+        "size": 4043,
+        "sha256": "7143a912b17dc15f33fd40e52fedc24acb3fbe1eddffc52f730a9d804307a337"
+      },
+      {
+        "path": "public/sister_sites_nav_config.json",
+        "size": 1302,
+        "sha256": "c8eeadfc8221062d65629b6aca9b7d768adca5efc39408afe8f8f9e8422b608c"
+      },
+      {
+        "path": "public/sitemap-1.xml",
+        "size": 228,
+        "sha256": "52527ce5ebc8aac382efe2da89c9477baf5b9a06f35530292d4187266a03f0bd"
+      },
+      {
+        "path": "public/sitemap-index.xml",
+        "size": 355,
+        "sha256": "9ab4e54b44ff4d9684bcbfa4b6a5907281df7a06c8a275577467fc43d36f0a12"
+      },
+      {
+        "path": "public/sitemap.xml",
+        "size": 4797,
+        "sha256": "1dc7263ef08c8bc03d060e6885ac9520d94464ca24e83dfc64f64a8a705f913f"
+      },
+      {
+        "path": "public/sitemap_index.xml",
+        "size": 217,
+        "sha256": "8eafa89399bababd663e0097962fc06322484b0ed8ada47c490c2861df7c77ab"
+      },
+      {
+        "path": "public/sitemaps/fallback-sister-site-a.xml",
+        "size": 683,
+        "sha256": "eefd6e6c146373453af6c53db7c62110a4ecf32dbabadcd919ff810f91daff2c"
+      },
+      {
+        "path": "public/sitemaps/sitemap-static.xml",
+        "size": 578,
+        "sha256": "0dbe097beb8ae3240d6362edddc7553da800cc0415d6e9c4b2b411277c0c4b51"
+      },
+      {
+        "path": "public/sitemaps/sitemap_index.xml",
+        "size": 464,
+        "sha256": "8a207ef06f7c2e9c9d57f5ff96a123591761d1c448ec6606b9b6b1fa8caa8e10"
+      },
+      {
+        "path": "public/schema/organization.jsonld",
+        "size": 379,
+        "sha256": "24b5cdd35c728ddda22eb575679e73f4f06b9571fe5ffc764288e926a8c10e16"
+      },
+      {
+        "path": "public/js/download.js",
+        "size": 9569,
+        "sha256": "2d90644b5f82675e48b414259074be8b811d8dd5e393eb5b489a46e826e13c1e"
+      },
+      {
+        "path": "public/hls/sample/README.md",
+        "size": 658,
+        "sha256": "a4e02af7beba4cbc0201b2fb17e9fd597d7307f63bc010ffcdddc1c153711a02"
+      },
+      {
+        "path": "public/hls/sample/index.m3u8",
+        "size": 157,
+        "sha256": "3b50a50b2369a15b4c28323c4c581260f1c6cfadd7cbdd47a1f5aeb73835ea6f"
+      },
+      {
+        "path": "public/hls/sample/seg0.ts",
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "public/hls/sample/seg1.ts",
+        "size": 1,
+        "sha256": "36a9e7f1c95b82ffb99743e0c5c4ce95d83c9a430aac59f84ef3cbfab6145068"
+      },
+      {
+        "path": "public/hls/sample/seg2.ts",
+        "size": 1,
+        "sha256": "36a9e7f1c95b82ffb99743e0c5c4ce95d83c9a430aac59f84ef3cbfab6145068"
+      },
+      {
+        "path": "public/app/index.html",
+        "size": 2375,
+        "sha256": "f915edb59baae48f09e4d3a4601b624b6d5b0b41ce04b9e61a989e5fb4c11125"
+      },
+      {
+        "path": "public/app/assets/index-D8-_n6B7.js",
+        "size": 395365,
+        "sha256": "103d1682be426d20d7c3688b572117343dcbee4805b9d051ac310ee84b4081de"
+      },
+      {
+        "path": "public/app/assets/index-D8-_n6B7.js.map",
+        "size": 1645888,
+        "sha256": null
+      },
+      {
+        "path": "public/app/assets/index-erZGo4Ol.css",
+        "size": 7942,
+        "sha256": "a1f6fc6cb46e40f0f330a524078c951e685c28e7183918644367eaeb26d36ed1"
+      },
+      {
+        "path": "public/.well-known/security.txt",
+        "size": 280,
+        "sha256": "3bf252a7206be812b2cc8c667906f91accdedf31a9e2114f92077e8d77f565cb"
+      }
+    ]
+  }
+}

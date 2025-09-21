@@ -1,0 +1,84 @@
+<!-- HTML BLOCK 1: URGENT BANNER -->
+<!-- Copy this entire block into Wix HTML Component -->
+
+<div id="urgentBanner" style="
+    background: linear-gradient(45deg, #dc2626, #ef4444);
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+    position: relative;
+    overflow: hidden;
+    animation: pulse 2s infinite;
+">
+    <div style="position: relative; z-index: 2;">
+        🔥 <span style="text-transform: uppercase; letter-spacing: 1px;">LIMITED TIME:</span> 
+        <span id="bannerText">Next cohort starts in 7 days • Only 12 spots left • Apply now to secure your future</span>
+    </div>
+    
+    <!-- Animated background effect -->
+    <div style="
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        animation: shimmer 3s infinite;
+        z-index: 1;
+    "></div>
+</div>
+
+<style>
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.9; }
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+#urgentBanner:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+}
+</style>
+
+<script>
+// Rotating banner messages
+const banners = [
+    "Next cohort starts in 7 days • Only 12 spots left • Apply now to secure your future",
+    "FLASH SALE: Save $2,500 on Career Accelerator Program • Limited time only",
+    "LAST CHANCE: Early Bird Pricing Ends at Midnight • Don't miss out",
+    "EXCLUSIVE: Get 3 Months Free Mentoring with enrollment today",
+    "BREAKING: Only 15 spots left in next cohort • Secure your spot now"
+];
+
+let bannerIndex = 0;
+const bannerElement = document.getElementById('bannerText');
+
+function rotateBanner() {
+    if (bannerElement) {
+        bannerElement.style.opacity = '0';
+        setTimeout(() => {
+            bannerElement.textContent = banners[bannerIndex];
+            bannerElement.style.opacity = '1';
+            bannerIndex = (bannerIndex + 1) % banners.length;
+        }, 300);
+    }
+}
+
+// Rotate banner every 5 seconds
+setInterval(rotateBanner, 5000);
+
+// Click tracking
+document.getElementById('urgentBanner').addEventListener('click', function() {
+    // Add your tracking code here
+    console.log('Urgent banner clicked');
+    // Example: gtag('event', 'click', { event_category: 'urgent_banner' });
+});
+</script>

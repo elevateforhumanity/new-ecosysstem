@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wix Editor Components - Copy & Paste Ready</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .component-section {
+            background: white;
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .component-title {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            margin: -30px -30px 20px -30px;
+            border-radius: 10px 10px 0 0;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .copy-instructions {
+            background: #e8f4fd;
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        /* Component Styles */
+        .hero-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            background: #ff6b6b;
+            color: white;
+            padding: 18px 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+        }
+        
+        .urgency-banner {
+            background: #ff4757;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .program-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: 3px solid transparent;
+            margin: 20px 0;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-10px);
+            border-color: #667eea;
+        }
+        
+        .program-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .program-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .program-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin: 20px 0;
+        }
+        
+        .testimonial-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: #ffd700;
+        }
+        
+        .stats-container {
+            background: #2c3e50;
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .stat-item {
+            display: inline-block;
+            margin: 20px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+        
+        .countdown-timer {
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .timer-display {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: #2c3e50; margin-bottom: 40px;">Wix Editor Ready Components</h1>
+    <p style="text-align: center; color: #666; margin-bottom: 40px;">Copy and paste these components directly into Wix Editor. Each component is self-contained and optimized for Wix.</p>
+
+    <!-- Hero Banner Component -->
+    <div class="component-section">
+        <div class="component-title">🎯 Hero Banner Component</div>
+        <div class="copy-instructions">
+            <strong>Wix Instructions:</strong> Copy the entire hero-banner div below. In Wix Editor, add a "Custom Element" or "HTML Component" and paste this code. Adjust colors in Wix's design panel.
+        </div>
+        
+        <div class="hero-banner">
+            <h1 class="hero-title">Transform Your Career in 90 Days</h1>
+            <p class="hero-subtitle">Join 10,000+ professionals who landed high-paying jobs through our proven workforce development programs</p>
+            <a href="#programs" class="cta-button">Start Your Transformation</a>
+            <a href="#testimonials" class="cta-button" style="background: transparent; border: 2px solid white;">See Success Stories</a>
+        </div>
+    </div>
+
+    <!-- Urgency Banner Component -->
+    <div class="component-section">
+        <div class="component-title">🔥 Urgency Banner Component</div>
+        <div class="copy-instructions">
+            <strong>Wix Instructions:</strong> Add this as a strip at the top of your page. In Wix, use "Add Strip" then "HTML Component" and paste the urgency-banner div.
+        </div>
+        
+        <div class="urgency-banner" id="urgencyBanner1">
+            🔥 LIMITED TIME: 50% OFF All Programs - Only 24 Hours Left!
+        </div>
+    </div>
+
+    <!-- Program Card Component -->
+    <div class="component-section">
+        <div class="component-title">💼 Program Card Component</div>
+        <div class="copy-instructions">
+            <strong>Wix Instructions:</strong> Use this for each program offering. In Wix, add multiple "Custom Elements" in a grid layout. Copy this card structure for each program.
+        </div>
+        
+        <div class="program-card">
+            <div class="program-icon">💻</div>
+            <h3 class="program-title">Tech Bootcamp</h3>
+            <p>Master in-demand programming skills and land a tech job in 12 weeks</p>
+            <div class="program-price">$2,997</div>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 5px 0;">✓ Full-stack development training</li>
+                <li style="padding: 5px 0;">✓ 1-on-1 mentorship</li>
+                <li style="padding: 5px 0;">✓ Job placement assistance</li>
+                <li style="padding: 5px 0;">✓ Portfolio development</li>
+                <li style="padding: 5px 0;">✓ Industry certifications</li>
+            </ul>
+            <a href="#enroll" class="cta-button">Enroll Now</a>
+        </div>
+    </div>
+
+    <!-- Testimonial Component -->
+    <div class="component-section">
+        <div class="component-title">💬 Testimonial Component</div>
+        <div class="copy-instructions">
+            <strong>Wix Instructions:</strong> Perfect for testimonials section. Add as "Custom Element" in Wix. Create multiple testimonials by copying this structure.
+        </div>
+        
+        <div class="testimonial-card">
+            <p class="testimonial-text">"I went from unemployed to a $85K software developer role in just 3 months. This program changed my life!"</p>
+            <div class="testimonial-author">- Sarah Johnson, Software Developer</div>
+        </div>
+    </div>
+
+    <!-- Stats Component -->
+    <div class="component-section">
+        <div class="component-title">📊 Stats Component</div>
+        <div class="copy-instructions">
+            <strong>Wix Instructions:</strong> Add as a full-width strip in Wix. Use "Add Strip" > "Custom Element" and paste the stats-container div.
+        </div>
+        
+        <div class="stats-container">
+            <div class="stat-item">
+                <span class="stat-number">10,000+</span>
+                <div class="stat-label">Graduates Placed</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">95%</span>
+                <div class="stat-label">Job Placement Rate</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">$75K</span>
+                <div class="stat-label">Average Salary Increase</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">90</span>
+                <div class="stat-label">Days to Employment</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Countdown Timer Component -->
+    <div class="component-section">
+        <div class="component-title">⏰ Countdown Timer Component</div>
+        <div class="copy-instructions">
+            <strong>Wix Instructions:</strong> Add as "HTML Component" in Wix. The JavaScript will automatically calculate time remaining until midnight.
+        </div>
+        
+        <div class="countdown-timer">
+            <div>Special Offer Ends In:</div>
+            <div class="timer-display" id="countdown1">23:59:45</div>
+        </div>
+    </div>
+
+    <!-- CTA Button Component -->
+    <div class="component-section">
+        <div class="component-title">🎯 CTA Button Component</div>
+        <div class="copy-instructions">
+            <strong>Wix Instructions:</strong> Use Wix's button element and apply these styles in the design panel. Or add as "Custom Element" for exact styling.
+        </div>
+        
+        <div style="text-align: center; padding: 20px;">
+            <a href="#enroll" class="cta-button">Start Your Transformation</a>
+            <a href="#learn-more" class="cta-button" style="background: #667eea;">Learn More</a>
+            <a href="#contact" class="cta-button" style="background: #27ae60;">Get Free Consultation</a>
+        </div>
+    </div>
+
+    <!-- Wix Editor Integration Guide -->
+    <div class="component-section">
+        <div class="component-title">📋 Wix Editor Integration Guide</div>
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+            <h3>Step-by-Step Wix Integration:</h3>
+            <ol style="line-height: 2;">
+                <li><strong>Open Wix Editor:</strong> Go to your Wix site editor</li>
+                <li><strong>Add Elements:</strong> Click "Add" > "More" > "HTML Code" or "Custom Element"</li>
+                <li><strong>Copy Components:</strong> Copy any component div from above</li>
+                <li><strong>Paste Code:</strong> Paste into the HTML Code element</li>
+                <li><strong>Adjust Styling:</strong> Use Wix's design panel to modify colors, fonts, spacing</li>
+                <li><strong>Mobile Optimization:</strong> Check mobile view and adjust as needed</li>
+                <li><strong>Add Interactions:</strong> Use Wix's animation and interaction tools</li>
+            </ol>
+            
+            <h3>Wix-Specific Tips:</h3>
+            <ul style="line-height: 2;">
+                <li>Use Wix's color palette for brand consistency</li>
+                <li>Replace placeholder links with Wix page links</li>
+                <li>Add Wix forms for lead capture</li>
+                <li>Integrate with Wix analytics and tracking</li>
+                <li>Use Wix's SEO tools for optimization</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Rotating urgency banners
+        const banners = [
+            "🔥 LIMITED TIME: 50% OFF All Programs - Only 24 Hours Left!",
+            "⚡ FLASH SALE: Save $2,500 on Career Accelerator Program!",
+            "🎯 LAST CHANCE: Early Bird Pricing Ends at Midnight!",
+            "💰 EXCLUSIVE: Get 3 Months Free Mentoring - Today Only!",
+            "🚀 BREAKING: Only 15 Spots Left in Next Cohort!"
+        ];
+
+        let bannerIndex = 0;
+        const bannerElement = document.getElementById('urgencyBanner1');
+
+        function rotateBanner() {
+            if (bannerElement) {
+                bannerElement.style.opacity = '0';
+                setTimeout(() => {
+                    bannerElement.textContent = banners[bannerIndex];
+                    bannerElement.style.opacity = '1';
+                    bannerIndex = (bannerIndex + 1) % banners.length;
+                }, 300);
+            }
+        }
+
+        // Rotate banner every 5 seconds
+        setInterval(rotateBanner, 5000);
+
+        // Countdown timer
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            
+            const distance = tomorrow - now;
+            
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            const countdownElement = document.getElementById('countdown1');
+            if (countdownElement) {
+                countdownElement.textContent = 
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>

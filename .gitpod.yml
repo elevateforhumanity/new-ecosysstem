@@ -1,86 +1,15 @@
-# .gitpod.yml — Elevate for Humanity Auto-Reorg Environment
-image: gitpod/workspace-node:18
-
-# VS Code extensions for development
-vscode:
-  extensions:
-    - esbenp.prettier-vscode
-    - dbaeumer.vscode-eslint
-    - bradlc.vscode-tailwindcss
-    - ms-vscode.vscode-json
-    - redhat.vscode-yaml
-    - ms-vscode.vscode-typescript-next
-
-# Auto-reorganization and setup
+image:
+  file: .gitpod.Dockerfile
 tasks:
-  - name: Setup & Auto-Reorg
+  - name: EFH Autopilot
     init: |
-      npm install -g pnpm
-      pnpm --version
-      node -v
-      echo "🚀 Elevate for Humanity Development Environment"
-      echo "📦 Installing dependencies..."
-      npm install || pnpm install
+      set -e
+      npm ci || npm install
+      sudo apt-get update -y
+      sudo apt-get install -y ffmpeg jq
+      pip install --user awscli || true
     command: |
-      echo "🔄 Running automatic repo reorganization..."
-      node infra/scripts/repo-reorg.mjs || true
-      
-      echo "🌿 Creating reorganization branch..."
-      BRANCH_NAME="chore/reorg-$(date +%Y%m%d-%H%M%S)"
-      git checkout -b "$BRANCH_NAME" || true
-      
-      echo "📝 Staging changes..."
-      git add -A
-      
-      echo "💾 Committing reorganization..."
-      git commit -m "chore: repo reorg into /sites (marketing, programs, blog) + infra
-
-- Restructured into monorepo with separate Netlify sites
-- Marketing site: sites/marketing/ (homepage, programs, about, contact)
-- Programs site: sites/programs/ (deep resources and documentation)  
-- Blog site: sites/blog/ (future blog content)
-- Infrastructure: infra/ (scripts, CI/CD, automation)
-- Updated redirects and headers for production deployment
-- Added GitHub Actions for CI/CD pipeline
-- Configured Git LFS for large files
-- Ready for multi-site Netlify deployment
-
-Co-authored-by: Ona <no-reply@ona.com>" || echo "Nothing to commit"
-      
-      echo "🚀 Pushing to GitHub..."
-      git push -u origin HEAD || true
-      
-      echo "📊 Showing reorganization log..."
-      cat infra/scripts/reorg.log || echo "No reorg log found"
-      
-      echo ""
-      echo "✅ Reorganization complete!"
-      echo "🔗 Create a PR to merge the reorganization"
-      echo "🌐 Then set up Netlify sites pointing to:"
-      echo "   - Marketing: sites/marketing/"
-      echo "   - Programs: sites/programs/"
-      echo "   - Blog: sites/blog/"
-
-# Development ports
-ports:
-  - port: 8000
-    onOpen: open-preview
-    visibility: public
-    description: "Marketing Site Preview"
-  - port: 8001  
-    onOpen: ignore
-    visibility: public
-    description: "Programs Site Preview"
-  - port: 8002
-    onOpen: ignore
-    visibility: public
-    description: "Blog Site Preview"
-
-# GitHub integration
-github:
-  prebuilds:
-    master: true
-    branches: true
-    pullRequests: true
-    addCheck: true
-    addComment: true
+      set -e
+      chmod +x scripts/*.sh || true
+      node scripts/env-check.js
+      bash scripts/bootstrap.sh

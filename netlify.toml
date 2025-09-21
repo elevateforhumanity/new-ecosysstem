@@ -19,7 +19,7 @@
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com https://cdn.supabase.co https://esm.sh; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://api.stripe.com; frame-src https://js.stripe.com;"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://cdn.supabase.co https://esm.sh https://client.crisp.chat https://widget.intercom.io https://js.intercomcdn.com https://embed.tawk.to https://www.googletagmanager.com; connect-src 'self' https://*.supabase.co https://api.stripe.com https://client.crisp.chat https://widget.intercom.io https://nexus-websocket-a.intercom.io https://nexus-long-polling.intercom.io https://embed.tawk.to https://*.tawk.to https://www.google-analytics.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https:; frame-src https://js.stripe.com https://client.crisp.chat https://intercom-sheets.com https://js.intercomcdn.com https://widget.intercom.io https://embed.tawk.to https://*.tawk.to https://www.youtube.com https://player.vimeo.com;"
 
 [[headers]]
   for = "/assets/*"
@@ -221,3 +221,8 @@
   to = "/student-portal.html"
   status = 301
   force = true
+
+# Wix Logging Functions
+[functions]
+  directory = "netlify/functions"
+

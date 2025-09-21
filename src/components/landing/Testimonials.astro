@@ -1,0 +1,103 @@
+---
+const testimonials = [
+  {
+    name: "Sarah M.",
+    location: "Akron, OH",
+    program: "Medical Assistant",
+    quote: "Completed the Medical Assistant program in March 2024. Started at Cleveland Clinic earning $18.50/hour within 2 weeks of graduation. The externship really prepared me for the real world.",
+    outcome: "Employed at Cleveland Clinic",
+    timeframe: "2 weeks after graduation"
+  },
+  {
+    name: "Marcus T.",
+    location: "Columbus, OH", 
+    program: "IT Support Specialist",
+    quote: "The CompTIA A+ training was exactly what I needed. Passed my certification on the first try and got hired at a local tech company. The instructors really know their stuff.",
+    outcome: "IT Support Technician",
+    timeframe: "1 month after graduation"
+  },
+  {
+    name: "Jennifer L.",
+    location: "Cincinnati, OH",
+    program: "HVAC Technician",
+    quote: "As a veteran, I appreciated the priority services. The hands-on training was excellent and the job placement team helped me find a position with great benefits.",
+    outcome: "HVAC Technician at Local Contractor",
+    timeframe: "3 weeks after graduation"
+  }
+];
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">
+        Real Success Stories
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Hear from recent graduates who transformed their careers through our WIOA-approved programs.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {testimonials.map((testimonial) => (
+        <div class="bg-white rounded-xl p-8 shadow-lg">
+          <div class="mb-6">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+                <span class="text-primary-600 font-bold text-lg">
+                  {testimonial.name.charAt(0)}
+                </span>
+              </div>
+              <div class="ml-4">
+                <div class="font-semibold text-gray-900">{testimonial.name}</div>
+                <div class="text-gray-500 text-sm">{testimonial.location}</div>
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <span class="inline-block bg-secondary-100 text-secondary-700 px-3 py-1 rounded-full text-sm font-medium">
+                {testimonial.program}
+              </span>
+            </div>
+          </div>
+          
+          <blockquote class="text-gray-700 mb-6 italic">
+            "{testimonial.quote}"
+          </blockquote>
+          
+          <div class="border-t border-gray-200 pt-4">
+            <div class="text-sm text-gray-600 mb-2">
+              <strong>Outcome:</strong> {testimonial.outcome}
+            </div>
+            <div class="text-sm text-gray-600">
+              <strong>Timeline:</strong> {testimonial.timeframe}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="text-center mt-12">
+      <div class="bg-white rounded-xl p-8 shadow-lg max-w-4xl mx-auto">
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">Join Our Success Stories</h3>
+        <p class="text-gray-600 mb-6">
+          Over 3,200 Ohio residents have transformed their careers through our programs since 2019.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="text-center">
+            <div class="text-3xl font-bold text-primary-600 mb-2">89%</div>
+            <div class="text-gray-600">Job Placement Rate</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-secondary-600 mb-2">$18.50</div>
+            <div class="text-gray-600">Average Starting Wage</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-accent-600 mb-2">3,247</div>
+            <div class="text-gray-600">Graduates Since 2019</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

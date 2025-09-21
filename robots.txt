@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-
 # Main content pages
 Allow: /
 Allow: /programs/
@@ -11,13 +10,11 @@ Allow: /policies/
 Allow: /impact/
 Allow: /calendar/
 Allow: /eligibility-check/
-
 # Static assets
 Allow: /images/
 Allow: /assets/
 Allow: /css/
 Allow: /js/
-
 # Block admin and sensitive areas
 Disallow: /admin/
 Disallow: /api/
@@ -45,7 +42,6 @@ Disallow: /.git/
 Disallow: /backup/
 Disallow: /temp/
 Disallow: /_headers
-
 # Block duplicate pages
 Disallow: /index-authentic.html
 Disallow: /index-ecosystem.html
@@ -56,7 +52,6 @@ Disallow: /professional-site.html
 Disallow: /working-demo.html
 Disallow: /clean-professional.html
 Disallow: /fullsail-style-landing.html
-
 # Allow specific public files
 Allow: /sitemap.xml
 Allow: /robots.txt
@@ -64,12 +59,9 @@ Allow: /security.txt
 Allow: /.well-known/
 Allow: /browser-health-check.html
 Allow: /sitemap.html
-
 # Crawl delay for politeness
 Crawl-delay: 1
-
 # Sitemap location
-Sitemap: https://elevateforhumanity.org/sitemap.xml
-
 # Last updated
 # Generated: 2025-09-18
+Sitemap: https://elevateforhumanity.org/sitemap.xml

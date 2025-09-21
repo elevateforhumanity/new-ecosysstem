@@ -1,18 +1,23 @@
 {
-  "timestamp": "2025-09-18T04:30:46.475Z",
+  "timestamp": "2025-09-20T15:37:38.276Z",
   "totalChecks": 10,
-  "passedChecks": 10,
-  "failedChecks": 0,
-  "criticalFailures": 0,
+  "passedChecks": 0,
+  "failedChecks": 10,
+  "criticalFailures": 7,
   "details": [
     {
       "name": "Homepage Redirect",
       "url": "/",
       "critical": true,
-      "success": true,
-      "statusCode": 200,
+      "success": false,
+      "statusCode": 404,
       "issues": [
+        "HTTP 404",
+        "Missing content: \"hub.html\"",
+        "Missing content: \"Elevate for Humanity\"",
+        "Missing security header: x-frame-options",
         "Missing security header: x-xss-protection",
+        "Missing security header: strict-transport-security",
         "Missing security header: referrer-policy",
         "Missing security header: content-security-policy"
       ]
@@ -21,10 +26,16 @@
       "name": "Main Hub Page",
       "url": "/hub.html",
       "critical": true,
-      "success": true,
-      "statusCode": 200,
+      "success": false,
+      "statusCode": 404,
       "issues": [
+        "HTTP 404",
+        "Missing content: \"Workforce Development Hub\"",
+        "Missing content: \"Career Training\"",
+        "Missing content: \"WIOA\"",
+        "Missing security header: x-frame-options",
         "Missing security header: x-xss-protection",
+        "Missing security header: strict-transport-security",
         "Missing security header: referrer-policy",
         "Missing security header: content-security-policy"
       ]
@@ -33,10 +44,16 @@
       "name": "Programs Page",
       "url": "/programs.html",
       "critical": true,
-      "success": true,
-      "statusCode": 200,
+      "success": false,
+      "statusCode": 404,
       "issues": [
+        "HTTP 404",
+        "Missing content: \"AI Courses\"",
+        "Missing content: \"Data Science\"",
+        "Missing content: \"Programs\"",
+        "Missing security header: x-frame-options",
         "Missing security header: x-xss-protection",
+        "Missing security header: strict-transport-security",
         "Missing security header: referrer-policy",
         "Missing security header: content-security-policy"
       ]
@@ -45,10 +62,16 @@
       "name": "Equal Opportunity Compliance",
       "url": "/policies/eo.html",
       "critical": true,
-      "success": true,
-      "statusCode": 200,
+      "success": false,
+      "statusCode": 404,
       "issues": [
+        "HTTP 404",
+        "Missing content: \"Equal Opportunity Is the Law\"",
+        "Missing content: \"29 CFR\"",
+        "Missing content: \"discrimination\"",
+        "Missing security header: x-frame-options",
         "Missing security header: x-xss-protection",
+        "Missing security header: strict-transport-security",
         "Missing security header: referrer-policy",
         "Missing security header: content-security-policy"
       ]
@@ -57,10 +80,16 @@
       "name": "WIOA Grievance Procedures",
       "url": "/policies/grievance.html",
       "critical": true,
-      "success": true,
-      "statusCode": 200,
+      "success": false,
+      "statusCode": 404,
       "issues": [
+        "HTTP 404",
+        "Missing content: \"WIOA\"",
+        "Missing content: \"grievance\"",
+        "Missing content: \"20 CFR 683\"",
+        "Missing security header: x-frame-options",
         "Missing security header: x-xss-protection",
+        "Missing security header: strict-transport-security",
         "Missing security header: referrer-policy",
         "Missing security header: content-security-policy"
       ]
@@ -69,10 +98,16 @@
       "name": "Veterans Priority Service",
       "url": "/policies/veterans.html",
       "critical": true,
-      "success": true,
-      "statusCode": 200,
+      "success": false,
+      "statusCode": 404,
       "issues": [
+        "HTTP 404",
+        "Missing content: \"Priority of Service\"",
+        "Missing content: \"Veterans\"",
+        "Missing content: \"20 CFR 1010\"",
+        "Missing security header: x-frame-options",
         "Missing security header: x-xss-protection",
+        "Missing security header: strict-transport-security",
         "Missing security header: referrer-policy",
         "Missing security header: content-security-policy"
       ]
@@ -81,10 +116,16 @@
       "name": "Accessibility Statement",
       "url": "/policies/accessibility.html",
       "critical": true,
-      "success": true,
-      "statusCode": 200,
+      "success": false,
+      "statusCode": 404,
       "issues": [
+        "HTTP 404",
+        "Missing content: \"Accessibility\"",
+        "Missing content: \"WCAG 2.2 AA\"",
+        "Missing content: \"disabilities\"",
+        "Missing security header: x-frame-options",
         "Missing security header: x-xss-protection",
+        "Missing security header: strict-transport-security",
         "Missing security header: referrer-policy",
         "Missing security header: content-security-policy"
       ]
@@ -93,31 +134,44 @@
       "name": "Admin Dashboard",
       "url": "/admin-dashboard.html",
       "critical": false,
-      "success": true,
-      "statusCode": 200,
-      "issues": []
+      "success": false,
+      "statusCode": 404,
+      "issues": [
+        "HTTP 404",
+        "Missing content: \"Admin Dashboard\"",
+        "Missing content: \"Management\"",
+        "Missing content: \"Overview\""
+      ]
     },
     {
       "name": "Student Portal",
       "url": "/student-portal.html",
       "critical": false,
-      "success": true,
-      "statusCode": 200,
-      "issues": []
+      "success": false,
+      "statusCode": 404,
+      "issues": [
+        "HTTP 404",
+        "Missing content: \"Student Portal\"",
+        "Missing content: \"Dashboard\"",
+        "Missing content: \"Enrollment\""
+      ]
     },
     {
       "name": "Connect/Contact Page",
       "url": "/connect.html",
       "critical": false,
-      "success": true,
-      "statusCode": 200,
-      "issues": []
+      "success": false,
+      "statusCode": 404,
+      "issues": [
+        "HTTP 404",
+        "Missing content: \"Connect\"",
+        "Missing content: \"Contact\"",
+        "Missing content: \"form\""
+      ]
     }
   ],
   "securityHeaders": {
-    "x-frame-options": "SAMEORIGIN",
-    "x-content-type-options": "nosniff",
-    "strict-transport-security": "max-age=31536000; includeSubDomains"
+    "x-content-type-options": "nosniff"
   },
   "githubStatus": {
     "success": false,

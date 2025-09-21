@@ -1,0 +1,134 @@
+{
+  "timestamp": "2025-09-20T15:44:27.425Z",
+  "overall_score": 46,
+  "categories": {
+    "trust_credibility": {
+      "score": 60,
+      "issues": [
+        "Missing key statistics (graduation rate, job placement, salaries)",
+        "Missing employer partner logos and hiring information"
+      ],
+      "recommendations": [
+        "Display clear metrics: graduation rate, job placement rate, average starting salary",
+        "Show logos of partner employers who hire graduates"
+      ]
+    },
+    "value_proposition": {
+      "score": 0,
+      "issues": [
+        "Homepage unclear about target audience",
+        "What you offer not immediately clear",
+        "Unique value proposition not evident",
+        "Next steps not clear for visitors"
+      ],
+      "recommendations": [
+        "Clearly state who you help on homepage",
+        "Lead with clear program offerings",
+        "Highlight what makes you different/better",
+        "Make it obvious how visitors can start"
+      ]
+    },
+    "ux_design": {
+      "score": 20,
+      "issues": [
+        "Navigation could be clearer",
+        "Call-to-action buttons not prominent enough",
+        "Missing FAQ section",
+        "Accessibility improvements needed"
+      ],
+      "recommendations": [
+        "Simplify navigation - reduce clicks to key info",
+        "Add strong, visible CTAs throughout site",
+        "Add FAQ addressing common concerns",
+        "Improve alt text, contrast, keyboard navigation"
+      ]
+    },
+    "technical_seo": {
+      "score": 75,
+      "issues": [
+        "Page load speed could be improved"
+      ],
+      "recommendations": [
+        "Optimize images, minimize scripts, improve hosting"
+      ]
+    },
+    "conversion_optimization": {
+      "score": 75,
+      "issues": [
+        "Forms could be more user-friendly"
+      ],
+      "recommendations": [
+        "Simplify forms, add progress indicators, save options"
+      ]
+    }
+  },
+  "priority_fixes": [],
+  "quick_wins": [
+    {
+      "category": "conversion_optimization",
+      "recommendation": "Simplify forms, add progress indicators, save options",
+      "priority": "high"
+    }
+  ],
+  "long_term_improvements": [
+    {
+      "category": "trust_credibility",
+      "recommendation": "Display clear metrics: graduation rate, job placement rate, average starting salary",
+      "priority": "medium"
+    },
+    {
+      "category": "trust_credibility",
+      "recommendation": "Show logos of partner employers who hire graduates",
+      "priority": "medium"
+    },
+    {
+      "category": "value_proposition",
+      "recommendation": "Clearly state who you help on homepage",
+      "priority": "medium"
+    },
+    {
+      "category": "value_proposition",
+      "recommendation": "Lead with clear program offerings",
+      "priority": "medium"
+    },
+    {
+      "category": "value_proposition",
+      "recommendation": "Highlight what makes you different/better",
+      "priority": "medium"
+    },
+    {
+      "category": "value_proposition",
+      "recommendation": "Make it obvious how visitors can start",
+      "priority": "medium"
+    },
+    {
+      "category": "ux_design",
+      "recommendation": "Simplify navigation - reduce clicks to key info",
+      "priority": "medium"
+    },
+    {
+      "category": "ux_design",
+      "recommendation": "Add strong, visible CTAs throughout site",
+      "priority": "medium"
+    },
+    {
+      "category": "ux_design",
+      "recommendation": "Add FAQ addressing common concerns",
+      "priority": "medium"
+    },
+    {
+      "category": "ux_design",
+      "recommendation": "Improve alt text, contrast, keyboard navigation",
+      "priority": "medium"
+    }
+  ],
+  "generated_by": "Comprehensive Site Audit Tool v1.0",
+  "site": "elevateforhumanity.org",
+  "audit_methodology": "Based on workforce development best practices and conversion optimization",
+  "next_steps": [
+    "Implement priority fixes first",
+    "Focus on quick wins for immediate impact",
+    "Plan long-term improvements over 3-6 months",
+    "Re-audit monthly to track progress"
+  ]
+}

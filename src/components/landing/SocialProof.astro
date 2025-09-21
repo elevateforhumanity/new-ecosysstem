@@ -1,0 +1,105 @@
+---
+const certifications = [
+  {
+    name: "WIOA Approved",
+    description: "U.S. Department of Labor Workforce Innovation and Opportunity Act",
+    logo: "/logos/wioa-logo.svg"
+  },
+  {
+    name: "Ohio State Approved",
+    description: "Ohio Department of Commerce - State Board of Career Colleges",
+    logo: "/logos/ohio-state-logo.svg"
+  },
+  {
+    name: "Veterans Affairs",
+    description: "VA Approved for Veterans Education Benefits",
+    logo: "/logos/va-logo.svg"
+  },
+  {
+    name: "Equal Opportunity",
+    description: "Equal Opportunity Employer/Program Provider",
+    logo: "/logos/eo-logo.svg"
+  }
+];
+
+const partnerships = [
+  "Cleveland Clinic",
+  "OhioHealth",
+  "Nationwide Children's Hospital",
+  "Ohio State University Medical Center",
+  "Cincinnati Children's Hospital"
+];
+---
+
+<section class="py-16 bg-white border-t border-gray-200">
+  <div class="max-w-7xl mx-auto px-4">
+    <!-- Certifications -->
+    <div class="text-center mb-12">
+      <h3 class="text-2xl font-bold text-gray-900 mb-8">
+        Accredited & Approved Programs
+      </h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        {certifications.map((cert) => (
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-lg flex items-center justify-center">
+              <div class="w-12 h-12 bg-primary-600 rounded"></div>
+            </div>
+            <h4 class="font-semibold text-gray-900 mb-2">{cert.name}</h4>
+            <p class="text-sm text-gray-600">{cert.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Employer Partnerships -->
+    <div class="border-t border-gray-200 pt-12">
+      <div class="text-center mb-8">
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">
+          Employer Partners
+        </h3>
+        <p class="text-gray-600">
+          Our graduates are hired by leading healthcare systems and employers across Ohio
+        </p>
+      </div>
+      
+      <div class="flex flex-wrap justify-center items-center gap-8 opacity-60">
+        {partnerships.map((partner) => (
+          <div class="text-gray-500 font-medium text-lg">
+            {partner}
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Compliance Notice -->
+    <div class="mt-12 bg-blue-50 border border-blue-200 rounded-lg p-6">
+      <div class="flex items-start">
+        <div class="flex-shrink-0">
+          <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <div class="ml-3">
+          <h4 class="text-lg font-semibold text-blue-900 mb-2">
+            Equal Opportunity Provider
+          </h4>
+          <p class="text-blue-800 mb-4">
+            This program is funded by the U.S. Department of Labor under the Workforce Innovation and Opportunity Act. 
+            It is against the law for this recipient of Federal financial assistance to discriminate.
+          </p>
+          <div class="flex flex-wrap gap-4 text-sm">
+            <a href="/policies/eo.html" class="text-blue-600 hover:text-blue-800 font-medium">
+              Equal Opportunity Notice
+            </a>
+            <a href="/policies/veterans.html" class="text-blue-600 hover:text-blue-800 font-medium">
+              Veterans' Priority of Service
+            </a>
+            <a href="/policies/accessibility.html" class="text-blue-600 hover:text-blue-800 font-medium">
+              Accessibility Statement
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

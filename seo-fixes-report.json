@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-09-20T15:36:39.245Z",
+  "total_issues_found": 0,
+  "issues_fixed": 0,
+  "fix_rate": null,
+  "fixes_generated": {
+    "meta_descriptions": [],
+    "title_tags": [],
+    "canonical_urls": [],
+    "open_graph": [],
+    "h1_tags": []
+  },
+  "next_steps": [
+    "Apply the generated HTML fixes to each page",
+    "Test pages after applying fixes",
+    "Run crawl health check again to verify",
+    "Monitor search console for improvements"
+  ]
+}

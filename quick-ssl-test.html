@@ -63,35 +63,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🔒 SSL Connection Test</h1>
-        <p>This page tests if your SSL is working correctly.</p>
-        
-        <div id="auto-status" class="status info">
-            🔍 Checking SSL status automatically...
-        </div>
-        
-        <h2>Manual Tests</h2>
-        <button class="test-button" onclick="testMainDomain()">Test elevateforhumanity.org</button>
-        <button class="test-button" onclick="testWWWDomain()">Test www.elevateforhumanity.org</button>
-        <button class="test-button" onclick="testCurrentPage()">Test Current Page</button>
-        
-        <div id="test-results"></div>
-        
-        <h2>Current Connection Info</h2>
-        <div class="result">
-            <strong>Current URL:</strong> <span id="current-url"></span><br>
-            <strong>Protocol:</strong> <span id="protocol"></span><br>
-            <strong>Is Secure:</strong> <span id="is-secure"></span><br>
-            <strong>User Agent:</strong> <span id="user-agent"></span>
-        </div>
-        
-        <h2>What This Means</h2>
-        <div class="result">
-            <p><strong>✅ If you see this page with HTTPS:</strong> SSL is working!</p>
-            <p><strong>❌ If you see certificate errors:</strong> SSL needs to be fixed in Cloudflare</p>
-            <p><strong>🔄 If www redirects to non-www:</strong> Perfect! That's the recommended setup</p>
-        </div>
+    
         
         <h2>Quick Cloudflare Fix</h2>
         <div class="result">

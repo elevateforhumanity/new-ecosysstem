@@ -1,62 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Security Headers -->
     
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
-    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-    <meta charset="UTF-8">
-    <link rel="canonical" href="https://elevateforhumanity.org/programs.html">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    
-        
-            
-            
-            
-            
-        </div>
-
-        
-    <script src="/scripts/efh-universal.v2.2.js"></script>
-    <script>
-      // Load all partner programs with markup pricing
-      Promise.all([
-        fetch('/config/all-programs-with-stripe.json').then(r => r.json()),
-        fetch('/config/partners.json').then(r => r.json())
-      ])
-      .then(([programs, partners]) => {
-        // Group programs by category
-        const groupedPrograms = programs.reduce((acc, program) => {
-          if (!acc[program.category]) acc[program.category] = [];
-          acc[program.category].push({
-            ...program,
-            track: program.track || 'open-enrollment',
-            funding: program.funding || [],
-            price_display: `$${program.retail_price.toLocaleString()}`,
-            partner_name: partners.find(p => p.slug === program.partner)?.name || program.partner,
-            markup_info: `${program.markup_percent}% markup included`
-          });
-          return acc;
-        }, {});
-
-        // Flatten for display
-        const allPrograms = Object.values(groupedPrograms).flat();
-
-        window.EFHUniversal.renderApp({
-          programs: allPrograms,
-          partners: partners
-        });
-      })
-      .catch(e => console.error('Failed to load programs:', e));
-    </script>
-
-    <!-- EFH Universal Footer -->
     
 </body>
 </html>

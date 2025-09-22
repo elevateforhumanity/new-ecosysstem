@@ -1,0 +1,97 @@
+import { permissions, webMethod } from 'wix-web-module';
+import wixData from 'wix-data';
+
+// Secure admin configuration management for domain architecture
+// Supports Owner, Admin, Website Manager, Back Office Manager roles
+
+export const whoami = webMethod(permissions.Anyone, async () => {
+  const currentUser = await permissions.getCurrentUser();
+  if (!currentUser) return { loggedIn: false };
+  
+  const roles = await currentUser.getRoles();
+  const adminRoles = ['Owner', 'Admin', 'Website Manager', 'Back Office Manager'];
+  const isAdmin = roles.some(role => adminRoles.includes(role.name));
+  
+  return {
+    loggedIn: true,
+    isAdmin,
+    roles: roles.map(r => r.name),
+    userId: currentUser.id
+  };
+});
+
+export const getSettings = webMethod(permissions.Anyone, async () => {
+  try {
+    const results = await wixData.query('SiteSettings').find();
+    if (results.items.length > 0) {
+      return { success: true, settings: results.items[0] };
+    }
+    
+    // Return safe defaults if no settings found
+    return {
+      success: true,
+      settings: {
+        mainDomain: 'elevate4humanity.org',
+        subDomain: 'selfishincsupport.org',
+        brandMain: 'Elevate for Humanity',
+        brandSub: 'Selfish Inc Support',
+        showBrandBar: true,
+        subNoteOnHome: true,
+        redirectRoot: true,
+        rewriteLinks: true,
+        rewriteForms: true,
+        selfishOverlay: false
+      }
+    };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+export const saveSettings = webMethod(permissions.Anyone, async (partialSettings) => {
+  try {
+    // Verify admin permissions
+    const currentUser = await permissions.getCurrentUser();
+    if (!currentUser) {
+      return { success: false, error: 'Not logged in' };
+    }
+    
+    const roles = await currentUser.getRoles();
+    const adminRoles = ['Owner', 'Admin', 'Website Manager', 'Back Office Manager'];
+    const isAdmin = roles.some(role => adminRoles.includes(role.name));
+    
+    if (!isAdmin) {
+      return { success: false, error: 'Insufficient permissions' };
+    }
+    
+    // Get existing settings or create new
+    const existing = await wixData.query('SiteSettings').find();
+    
+    if (existing.items.length > 0) {
+      // Update existing record
+      const updated = { ...existing.items[0], ...partialSettings };
+      const result = await wixData.update('SiteSettings', updated);
+      return { success: true, settings: result };
+    } else {
+      // Create new record with defaults + partial
+      const newSettings = {
+        mainDomain: 'elevate4humanity.org',
+        subDomain: 'selfishincsupport.org',
+        brandMain: 'Elevate for Humanity',
+        brandSub: 'Selfish Inc Support',
+        showBrandBar: true,
+        subNoteOnHome: true,
+        redirectRoot: true,
+        rewriteLinks: true,
+        rewriteForms: true,
+        selfishOverlay: false,
+        ...partialSettings
+      };
+      
+      const result = await wixData.insert('SiteSettings', newSettings);
+      return { success: true, settings: result };
+    }
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});

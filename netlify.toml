@@ -190,7 +190,7 @@
   status = 301
   force = true
 
-# WWW to non-WWW redirect
+# WWW to non-WWW redirect  
 [[redirects]]
   from = "https://www.elevateforhumanity.org/*"
   to = "https://elevateforhumanity.org/:splat"

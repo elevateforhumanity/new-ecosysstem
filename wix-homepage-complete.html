@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevate for Humanity | Transform Your Career with Free WIOA Training</title>
+    <meta name="description" content="Free workforce development training in healthcare, technology, and skilled trades. WIOA-approved programs with 98% job placement rate. Veterans priority services available.">
+    <meta name="keywords" content="WIOA training, workforce development, career training, free education, job placement, healthcare training, technology bootcamp, skilled trades, veterans services">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Elevate for Humanity | Free Career Training Programs">
+    <meta property="og:description" content="Transform your career with free WIOA-approved training. 98% job placement rate, industry certifications, and ongoing support.">
+    <meta property="og:image" content="https://elevateforhumanity.org/images/social-preview.jpg">
+    <meta property="og:url" content="https://elevateforhumanity.org">
+    <meta property="og:type" content="website">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Elevate for Humanity",
+        "url": "https://elevateforhumanity.org",
+        "logo": "https://elevateforhumanity.org/images/logo.png",
+        "description": "WIOA-approved workforce development programs with free training and job placement assistance",
+        "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "IN",
+            "addressCountry": "US"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+1-317-555-9675",
+            "contactType": "customer service",
+            "email": "elevateforhumanity@gmail.com"
+        },
+        "sameAs": [
+            "https://elevate4humanity.org",
+            "https://www.linkedin.com/company/elevate-for-humanity",
+            "https://www.facebook.com/elevateforhumanity",
+            "https://www.instagram.com/elevateforhumanity",
+            "https://www.youtube.com/@elevateforhumanity"
+        ]
+    }
+    </script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+        
+        /* Header & Navigation */
+        .header { background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; height: 70px; }
+        .logo { font-size: 24px; font-weight: bold; color: #0066cc; text-decoration: none; }
+        .nav-menu { display: flex; list-style: none; gap: 30px; }
+        .nav-menu a { text-decoration: none; color: #333; font-weight: 500; transition: color 0.3s; }
+        .nav-menu a:hover { color: #0066cc; }
+        .cta-button { background: #ff6b35; color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: bold; transition: background 0.3s; }
+        .cta-button:hover { background: #e55a2b; }
+        
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #0066cc 0%, #004499 100%); color: white; padding: 120px 20px 80px; text-align: center; }
+        .hero-container { max-width: 1200px; margin: 0 auto; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; font-weight: 700; }
+        .hero p { font-size: 1.3rem; margin-bottom: 30px; opacity: 0.9; }
+        .hero-stats { display: flex; justify-content: center; gap: 40px; margin: 40px 0; }
+        .stat { text-align: center; }
+        .stat-number { font-size: 2.5rem; font-weight: bold; display: block; }
+        .stat-label { font-size: 0.9rem; opacity: 0.8; }
+        
+        /* Urgency Banner */
+        .urgency-banner { background: #ff6b35; color: white; padding: 15px; text-align: center; font-weight: bold; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+        
+        /* Programs Section */
+        .programs { padding: 80px 20px; background: #f8f9fa; }
+        .section-container { max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 20px; color: #333; }
+        .section-subtitle { text-align: center; font-size: 1.2rem; color: #666; margin-bottom: 60px; }
+        .programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .program-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .program-card:hover { transform: translateY(-5px); }
+        .program-icon { font-size: 3rem; margin-bottom: 20px; }
+        .program-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: #0066cc; }
+        .program-features { list-style: none; margin: 20px 0; }
+        .program-features li { padding: 5px 0; }
+        .program-features li:before { content: "✓ "; color: #28a745; font-weight: bold; }
+        
+        /* Success Stories */
+        .success-stories { padding: 80px 20px; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 40px; }
+        .testimonial { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .testimonial-quote { font-style: italic; font-size: 1.1rem; margin-bottom: 20px; }
+        .testimonial-author { font-weight: bold; color: #0066cc; }
+        .testimonial-role { color: #666; font-size: 0.9rem; }
+        
+        /* Sister Sites Section */
+        .sister-sites { padding: 80px 20px; background: #f8f9fa; }
+        .sites-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+        .site-card { background: white; padding: 25px; border-radius: 15px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .site-card h4 { color: #0066cc; margin-bottom: 15px; }
+        .site-link { display: inline-block; margin-top: 15px; color: #0066cc; text-decoration: none; font-weight: bold; }
+        .site-link:hover { text-decoration: underline; }
+        
+        /* CTA Section */
+        .cta-section { background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; padding: 80px 20px; text-align: center; }
+        .cta-buttons { display: flex; justify-content: center; gap: 20px; margin-top: 30px; flex-wrap: wrap; }
+        .btn-primary { background: white; color: #28a745; padding: 15px 30px; border-radius: 25px; text-decoration: none; font-weight: bold; transition: all 0.3s; }
+        .btn-primary:hover { background: #f8f9fa; transform: translateY(-2px); }
+        .btn-secondary { background: transparent; color: white; border: 2px solid white; padding: 15px 30px; border-radius: 25px; text-decoration: none; font-weight: bold; transition: all 0.3s; }
+        .btn-secondary:hover { background: white; color: #28a745; }
+        
+        /* Footer */
+        .footer { background: #333; color: white; padding: 60px 20px 20px; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
+        .footer-section h4 { margin-bottom: 20px; color: #0066cc; }
+        .footer-section ul { list-style: none; }
+        .footer-section ul li { margin-bottom: 10px; }
+        .footer-section ul li a { color: #ccc; text-decoration: none; transition: color 0.3s; }
+        .footer-section ul li a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid #555; margin-top: 40px; padding-top: 20px; text-align: center; color: #ccc; }
+        
+        /* Compliance Notice */
+        .compliance-notice { background: #e9ecef; border-left: 4px solid #0066cc; padding: 20px; margin: 20px 0; }
+        .compliance-notice h5 { color: #0066cc; margin-bottom: 10px; }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero-stats { flex-direction: column; gap: 20px; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="/" class="logo">Elevate for Humanity</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/programs">Programs</a></li>
+                    <li><a href="/success-stories">Success Stories</a></li>
+                    <li><a href="/employers">Employers</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="/apply" class="cta-button">Apply Now</a>
+        </div>
+    </header>
+
+    <!-- Urgency Banner -->
+    <div class="urgency-banner">
+        🚀 Next Cohort Starts January 15th - Only 12 Spots Remaining! Apply Today!
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Transform Your Career with Free Training</h1>
+            <p>WIOA-approved workforce development programs with industry certifications and guaranteed job placement support</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">10,000+</span>
+                    <span class="stat-label">Graduates Placed</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">98%</span>
+                    <span class="stat-label">Job Placement Rate</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">$75K</span>
+                    <span class="stat-label">Average Salary Increase</span>
+                </div>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="/eligibility-check" class="btn-primary">Check Eligibility</a>
+                <a href="/programs" class="btn-secondary">View Programs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="programs">
+        <div class="section-container">
+            <h2 class="section-title">Career-Changing Programs</h2>
+            <p class="section-subtitle">Choose from high-demand fields with guaranteed job placement assistance</p>
+            
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-icon">🏥</div>
+                    <h3>Healthcare Training</h3>
+                    <p>Launch your healthcare career with industry-recognized certifications</p>
+                    <ul class="program-features">
+                        <li>Medical Assistant Certification</li>
+                        <li>Certified Nursing Assistant (CNA)</li>
+                        <li>Pharmacy Technician</li>
+                        <li>Medical Billing & Coding</li>
+                        <li>Clinical rotations included</li>
+                    </ul>
+                    <a href="/programs/healthcare" class="site-link">Learn More →</a>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-icon">💻</div>
+                    <h3>Technology Bootcamp</h3>
+                    <p>Master in-demand tech skills with hands-on training and real projects</p>
+                    <ul class="program-features">
+                        <li>IT Support & Help Desk</li>
+                        <li>Cybersecurity Fundamentals</li>
+                        <li>Data Analysis & Visualization</li>
+                        <li>Cloud Computing (AWS/Azure)</li>
+                        <li>Industry certifications included</li>
+                    </ul>
+                    <a href="/programs/technology" class="site-link">Learn More →</a>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-icon">🔧</div>
+                    <h3>Skilled Trades</h3>
+                    <p>Build a stable career in high-paying skilled trades with apprenticeship opportunities</p>
+                    <ul class="program-features">
+                        <li>HVAC Technician Training</li>
+                        <li>Electrical Apprenticeship Prep</li>
+                        <li>Plumbing Fundamentals</li>
+                        <li>Construction Safety (OSHA)</li>
+                        <li>Union partnership pathways</li>
+                    </ul>
+                    <a href="/programs/trades" class="site-link">Learn More →</a>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-icon">📊</div>
+                    <h3>Business & Leadership</h3>
+                    <p>Develop essential business skills for management and entrepreneurship</p>
+                    <ul class="program-features">
+                        <li>Customer Service Excellence</li>
+                        <li>Administrative Support</li>
+                        <li>Project Management</li>
+                        <li>Digital Marketing Basics</li>
+                        <li>Leadership development</li>
+                    </ul>
+                    <a href="/programs/business" class="site-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="success-stories">
+        <div class="section-container">
+            <h2 class="section-title">Success Stories</h2>
+            <p class="section-subtitle">Real graduates, real career transformations</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <p class="testimonial-quote">"From unemployed to earning $65K as a Medical Assistant in just 8 months. The training was comprehensive and the job placement support was incredible."</p>
+                    <div class="testimonial-author">Sarah Johnson</div>
+                    <div class="testimonial-role">Medical Assistant, Cleveland Clinic</div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-quote">"The cybersecurity program changed my life. I went from retail to a $75K IT security role. The instructors were industry experts who really cared about our success."</p>
+                    <div class="testimonial-author">Marcus Williams</div>
+                    <div class="testimonial-role">Cybersecurity Analyst, Progressive Insurance</div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-quote">"As a veteran, I appreciated the priority services and support. The HVAC program led to my own contracting business within 2 years."</p>
+                    <div class="testimonial-author">David Rodriguez</div>
+                    <div class="testimonial-role">HVAC Contractor & Business Owner</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sister Sites & Ecosystem -->
+    <section class="sister-sites">
+        <div class="section-container">
+            <h2 class="section-title">Complete Ecosystem of Support</h2>
+            <p class="section-subtitle">Access our full network of services and resources</p>
+            
+            <div class="sites-grid">
+                <div class="site-card">
+                    <h4>🎓 EFH Learning Portal</h4>
+                    <p>Advanced LMS with 24/7 AI tutor and personalized learning paths</p>
+                    <a href="https://learn.elevateforhumanity.org" class="site-link">Access Portal</a>
+                </div>
+                
+                <div class="site-card">
+                    <h4>🏥 Serene Comfort Care</h4>
+                    <p>Healthcare services, CNA training, and Medicaid provider support</p>
+                    <a href="https://serenecomfortcare.com" class="site-link">Visit Site</a>
+                </div>
+                
+                <div class="site-card">
+                    <h4>🤝 Community Connect</h4>
+                    <p>Peer support network and mentorship platform for ongoing success</p>
+                    <a href="https://connect.elevateforhumanity.org" class="site-link">Join Network</a>
+                </div>
+                
+                <div class="site-card">
+                    <h4>🏛️ Government Services Hub</h4>
+                    <p>WIOA program administration and public sector partnerships</p>
+                    <a href="https://gov.elevateforhumanity.org" class="site-link">Learn More</a>
+                </div>
+                
+                <div class="site-card">
+                    <h4>💼 Codebase Store</h4>
+                    <p>Enterprise licensing system valued at $500K-$2M with DRM Protection, Multi-Tier Licensing, and API integration</p>
+                    <a href="https://store.elevateforhumanity.org" class="site-link">Browse Solutions</a>
+                </div>
+                
+                <div class="site-card">
+                    <h4>🚀 Rise Foundation</h4>
+                    <p>Multi-tenant SaaS platform with AI copilot and automation engine</p>
+                    <a href="https://rise.elevateforhumanity.org" class="site-link">Explore Platform</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meet the Founder -->
+    <section style="padding: 80px 20px; background: #f8f9fa;">
+        <div class="section-container">
+            <h2 class="section-title">Meet Our Founder</h2>
+            <p class="section-subtitle">Passionate about transforming lives through workforce development</p>
+            
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <div style="background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    <div style="width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(135deg, #0066cc, #28a745); margin: 0 auto 30px; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; font-weight: bold;">
+                        EFH
+                    </div>
+                    <h3 style="font-size: 2rem; margin-bottom: 20px; color: #0066cc;">Liz Jae</h3>
+                    <p style="font-size: 1.1rem; color: #666; margin-bottom: 30px; line-height: 1.6;">
+                        Founder and CEO of Elevate for Humanity, dedicated to empowering individuals through innovative workforce development programs. 
+                        With a passion for education, technology, and transforming lives, I founded EFH to bridge 
+                        the gap between training and meaningful employment opportunities.
+                    </p>
+                    
+                    <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 30px;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #0066cc;">10,000+</div>
+                            <div style="color: #666;">Lives Transformed</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #28a745;">98%</div>
+                            <div style="color: #666;">Success Rate</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #ff6b35;">$2M+</div>
+                            <div style="color: #666;">Platform Value</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                        <a href="/about" style="background: #0066cc; color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: bold;">📖 About Liz</a>
+                        <a href="/contact" style="background: #28a745; color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: bold;">📞 Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="section-container">
+            <h2>Ready to Transform Your Career?</h2>
+            <p>Join thousands of Indiana residents who have changed their lives through our programs. Free training, industry certifications, and guaranteed job placement support.</p>
+            
+            <div class="cta-buttons">
+                <a href="/apply" class="btn-primary">Apply Now - Free</a>
+                <a href="/eligibility-check" class="btn-secondary">Check Eligibility</a>
+                <a href="/contact" class="btn-secondary">Schedule Consultation</a>
+            </div>
+            
+            <div class="compliance-notice">
+                <h5>📞 Get Started Today</h5>
+                <p><strong>Phone:</strong> (317) 555-WORK | <strong>Email:</strong> elevateforhumanity@gmail.com</p>
+                <p><strong>Office Hours:</strong> Monday-Friday 8AM-6PM, Saturday 9AM-2PM | <strong>Location:</strong> Indianapolis, Indiana</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Programs</h4>
+                <ul>
+                    <li><a href="/programs/healthcare">Healthcare Training</a></li>
+                    <li><a href="/programs/technology">Technology Bootcamp</a></li>
+                    <li><a href="/programs/trades">Skilled Trades</a></li>
+                    <li><a href="/programs/business">Business & Leadership</a></li>
+                    <li><a href="/programs/all">View All Programs</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Student Resources</h4>
+                <ul>
+                    <li><a href="/student-portal">Student Portal Login</a></li>
+                    <li><a href="/eligibility-check">Eligibility Check</a></li>
+                    <li><a href="/financial-aid">Financial Aid</a></li>
+                    <li><a href="/career-services">Career Services</a></li>
+                    <li><a href="/support">Student Support</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Employers</h4>
+                <ul>
+                    <li><a href="/employers">Partner with Us</a></li>
+                    <li><a href="/employers/hire">Hire Our Graduates</a></li>
+                    <li><a href="/employers/apprenticeships">Apprenticeship Programs</a></li>
+                    <li><a href="/employers/custom-training">Custom Training</a></li>
+                    <li><a href="/employers/contact">Employer Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="/about">Our Mission</a></li>
+                    <li><a href="/about/team">Our Team</a></li>
+                    <li><a href="/success-stories">Success Stories</a></li>
+                    <li><a href="/news">News & Updates</a></li>
+                    <li><a href="/contact">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div style="display: flex; gap: 15px; margin-top: 10px;">
+                    <a href="https://www.linkedin.com/company/elevate-for-humanity" target="_blank" style="color: #0077b5; font-size: 24px;">💼</a>
+                    <a href="https://www.facebook.com/elevateforhumanity" target="_blank" style="color: #1877f2; font-size: 24px;">📘</a>
+                    <a href="https://www.instagram.com/elevateforhumanity" target="_blank" style="color: #e4405f; font-size: 24px;">📷</a>
+                    <a href="https://www.youtube.com/@elevateforhumanity" target="_blank" style="color: #ff0000; font-size: 24px;">📺</a>
+                </div>
+                <ul style="margin-top: 15px;">
+                    <li><a href="https://www.linkedin.com/company/elevate-for-humanity">LinkedIn</a></li>
+                    <li><a href="https://www.facebook.com/elevateforhumanity">Facebook</a></li>
+                    <li><a href="https://www.instagram.com/elevateforhumanity">Instagram</a></li>
+                    <li><a href="https://www.youtube.com/@elevateforhumanity">YouTube</a></li>
+                </ul>
+                
+                <h5 style="margin-top: 20px; color: #0066cc;">Meet Our Founder</h5>
+                <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">Liz Jae - Founder & CEO of Elevate for Humanity</p>
+                <ul style="margin-top: 10px;">
+                    <li><a href="/about" target="_blank">📖 Read Liz's Story</a></li>
+                    <li><a href="/contact" target="_blank">📞 Contact Leadership</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="compliance-notice">
+                <h5>Equal Opportunity Is the Law</h5>
+                <p>It is against the law for this recipient of Federal financial assistance to discriminate on the basis of race, color, religion, sex, national origin, age, disability, political affiliation or belief, and for beneficiaries only, citizenship or participation in any WIOA Title I-financially assisted program or activity.</p>
+                <p><strong>Veterans Priority of Service:</strong> Priority of service is provided to veterans and eligible spouses for all DOL-funded job training programs.</p>
+                <p><strong>Accessibility:</strong> Auxiliary aids and services are available upon request to individuals with disabilities. TTY via Relay 711. Language assistance services are available free of charge.</p>
+                <p><a href="/policies/equal-opportunity" style="color: #0066cc;">File a Complaint</a> | <a href="/policies/accessibility" style="color: #0066cc;">Accessibility Policy</a> | <a href="/policies/privacy" style="color: #0066cc;">Privacy Policy</a></p>
+            </div>
+            <p>&copy; 2024 Elevate for Humanity. All rights reserved. | <a href="/terms" style="color: #ccc;">Terms of Service</a> | <a href="/privacy" style="color: #ccc;">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactive Elements -->
+    <script>
+        // Countdown timer for urgency
+        function updateCountdown() {
+            const nextCohort = new Date('2024-01-15T09:00:00');
+            const now = new Date();
+            const diff = nextCohort - now;
+            
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const banner = document.querySelector('.urgency-banner');
+                banner.innerHTML = `🚀 Next Cohort Starts in ${days} Days, ${hours} Hours - Only 12 Spots Remaining! Apply Today!`;
+            }
+        }
+        
+        // Update countdown every hour
+        updateCountdown();
+        setInterval(updateCountdown, 3600000);
+        
+        // Smooth scrolling for anchor links (only if target exists)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Track CTA clicks for analytics
+        document.querySelectorAll('.cta-button, .btn-primary, .btn-secondary').forEach(button => {
+            button.addEventListener('click', function() {
+                // Analytics tracking would go here
+                console.log('CTA clicked:', this.textContent, this.href);
+            });
+        });
+    </script>
+</body>
+</html>

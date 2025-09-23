@@ -1,0 +1,355 @@
+{
+  "siteConfig": {
+    "primaryDomain": "elevateforhumanity.org",
+    "redirectDomain": "elevate4humanity.org",
+    "organization": "Elevate for Humanity",
+    "legalEntity": "2Exclusive LLC-S DBA Elevate for Humanity",
+    "umbrellaOrg": "Selfish Inc. DBA Rise Foundation"
+  },
+  "mainNavigation": {
+    "primary": [
+      {
+        "label": "Home",
+        "url": "/",
+        "description": "Main landing page with conversion focus"
+      },
+      {
+        "label": "Programs",
+        "url": "/programs",
+        "description": "Workforce development programs overview",
+        "submenu": [
+          {
+            "label": "Healthcare Training",
+            "url": "/programs/healthcare",
+            "description": "Medical Assistant, CNA, Pharmacy Tech programs"
+          },
+          {
+            "label": "Technology Bootcamp",
+            "url": "/programs/technology",
+            "description": "IT Support, Cybersecurity, Data Analysis, Cloud Computing"
+          },
+          {
+            "label": "Skilled Trades",
+            "url": "/programs/trades",
+            "description": "HVAC, Electrical, Plumbing, Construction Safety"
+          },
+          {
+            "label": "Business & Leadership",
+            "url": "/programs/business",
+            "description": "Customer Service, Admin Support, Project Management"
+          },
+          {
+            "label": "View All Programs",
+            "url": "/programs/all",
+            "description": "Complete program catalog"
+          }
+        ]
+      },
+      {
+        "label": "Success Stories",
+        "url": "/success-stories",
+        "description": "Graduate testimonials and career transformation stories"
+      },
+      {
+        "label": "Employers",
+        "url": "/employers",
+        "description": "Employer partnership portal",
+        "submenu": [
+          {
+            "label": "Partner with Us",
+            "url": "/employers/partner",
+            "description": "Become an employer partner"
+          },
+          {
+            "label": "Hire Our Graduates",
+            "url": "/employers/hire",
+            "description": "Access our talent pipeline"
+          },
+          {
+            "label": "Apprenticeship Programs",
+            "url": "/employers/apprenticeships",
+            "description": "Registered apprenticeship opportunities"
+          },
+          {
+            "label": "Custom Training",
+            "url": "/employers/custom-training",
+            "description": "Customized workforce training solutions"
+          }
+        ]
+      },
+      {
+        "label": "About",
+        "url": "/about",
+        "description": "Organization mission, team, and impact"
+      },
+      {
+        "label": "Contact",
+        "url": "/contact",
+        "description": "Contact information and support"
+      }
+    ],
+    "cta": {
+      "label": "Apply Now",
+      "url": "/apply",
+      "description": "Primary conversion action"
+    }
+  },
+  "sisterSites": {
+    "learningPortal": {
+      "name": "EFH Learning Portal",
+      "domain": "learn.elevateforhumanity.org",
+      "description": "Advanced LMS with 24/7 AI tutor and personalized learning paths",
+      "features": [
+        "24/7 AI Tutor with course-specific knowledge",
+        "AI Course Generator for complete curriculum creation",
+        "Federal Compliance Tracking (DOL/WIOA reporting)",
+        "Advanced Payment Processing with BNPL plans",
+        "White-Label Branding included",
+        "Real-time Analytics with compliance scores",
+        "87% course completion rate vs 65% industry average",
+        "98% job placement rate for workforce programs"
+      ],
+      "integration": {
+        "sso": true,
+        "apiEndpoint": "https://api.learn.elevateforhumanity.org",
+        "embedCode": "<iframe src='https://learn.elevateforhumanity.org/embed' width='100%' height='600'></iframe>",
+        "loginUrl": "/student-portal"
+      },
+      "costAdvantage": {
+        "comparison": "LearnWorlds",
+        "savings": "70-74% less expensive",
+        "noTransactionFees": true,
+        "annualSavings": "$3,000-$4,200"
+      }
+    },
+    "sereneComfortCare": {
+      "name": "Serene Comfort Care",
+      "domain": "serenecomfortcare.com",
+      "legalEntity": "Curvature Body Sculpting LLC DBA Serene Comfort Care",
+      "description": "Healthcare services, CNA training, and Medicaid provider support",
+      "services": [
+        "Healthcare services and billing",
+        "CNA training programs",
+        "Medicaid provider services",
+        "Healthcare workforce development",
+        "Clinical placement coordination"
+      ],
+      "integration": {
+        "crossReferral": true,
+        "sharedPrograms": ["CNA Training", "Medical Assistant"],
+        "billingSupport": true
+      }
+    },
+    "communityConnect": {
+      "name": "Community Connect",
+      "domain": "connect.elevateforhumanity.org",
+      "description": "Peer support network and mentorship platform for ongoing success",
+      "features": [
+        "Peer support network",
+        "Mentorship matching",
+        "Alumni network access",
+        "Career advancement tracking",
+        "Professional networking events",
+        "Ongoing career support"
+      ],
+      "integration": {
+        "graduateAccess": true,
+        "mentorshipProgram": true,
+        "networkingEvents": true
+      }
+    },
+    "governmentServicesHub": {
+      "name": "Government Services Hub",
+      "domain": "gov.elevateforhumanity.org",
+      "description": "WIOA program administration and public sector partnerships",
+      "services": [
+        "WIOA program administration",
+        "Federal compliance management",
+        "Public sector partnerships",
+        "Government contract management",
+        "Workforce development reporting",
+        "Equal opportunity compliance"
+      ],
+      "compliance": {
+        "wioaApproved": true,
+        "dolReporting": true,
+        "equalOpportunity": true,
+        "veteransPriority": true
+      }
+    },
+    "codebaseStore": {
+      "name": "Codebase Store",
+      "domain": "store.elevateforhumanity.org",
+      "description": "Enterprise licensing system and technology solutions marketplace",
+      "valuation": "$500K-$2M",
+      "features": [
+        "Advanced DRM Protection with dynamic watermarking",
+        "Multi-Tier Licensing (Individual $50K, Enterprise $500K-$3M)",
+        "Government licensing ($1M-$10M+)",
+        "Complete Platform licensing ($3.15B)",
+        "API integration and webhook support",
+        "Dashboard analytics and automated billing",
+        "25+ license system files with RESTful endpoints"
+      ],
+      "technologyStack": {
+        "frontend": "Astro.js with Tailwind CSS",
+        "backend": "Node.js with Express",
+        "database": "Supabase (PostgreSQL)",
+        "deployment": "Netlify with Cloudflare CDN",
+        "payment": "Stripe integration with BNPL options"
+      },
+      "integration": {
+        "licenseManagement": true,
+        "apiAccess": true,
+        "enterpriseSupport": true,
+        "customDevelopment": true
+      }
+    },
+    "riseFoundation": {
+      "name": "Rise Foundation Platform",
+      "domain": "rise.elevateforhumanity.org",
+      "legalEntity": "Selfish Inc. DBA Rise Foundation",
+      "description": "Multi-tenant SaaS platform with AI copilot and automation engine",
+      "features": [
+        "Multi-tenant SaaS architecture",
+        "AI copilot and automation engine",
+        "Philanthropic umbrella services",
+        "Fiscal intermediary functions",
+        "Grant management platform",
+        "Impact measurement and reporting"
+      ],
+      "integration": {
+        "umbrellaServices": true,
+        "fiscalSponsorship": true,
+        "grantManagement": true,
+        "impactTracking": true
+      }
+    }
+  },
+  "studentResources": {
+    "studentPortal": {
+      "url": "/student-portal",
+      "redirect": "https://learn.elevateforhumanity.org/login",
+      "description": "Access to learning management system"
+    },
+    "eligibilityCheck": {
+      "url": "/eligibility-check",
+      "description": "WIOA eligibility verification tool",
+      "integration": "embedded form with instant results"
+    },
+    "financialAid": {
+      "url": "/financial-aid",
+      "description": "Financial assistance and BNPL options",
+      "features": [
+        "WIOA funding eligibility",
+        "Buy Now Pay Later options (0-2.9% interest)",
+        "Scholarship opportunities",
+        "Payment plan options"
+      ]
+    },
+    "careerServices": {
+      "url": "/career-services",
+      "description": "Job placement and career support",
+      "features": [
+        "98% job placement rate",
+        "Resume and interview preparation",
+        "Employer network access",
+        "Ongoing career coaching",
+        "Salary negotiation support"
+      ]
+    }
+  },
+  "compliancePages": {
+    "equalOpportunity": {
+      "url": "/policies/equal-opportunity",
+      "title": "Equal Opportunity Is the Law",
+      "required": true,
+      "content": "Federal compliance notice for WIOA programs"
+    },
+    "veteransPriority": {
+      "url": "/policies/veterans",
+      "title": "Veterans' Priority of Service",
+      "required": true,
+      "content": "Priority service information for veterans and eligible spouses"
+    },
+    "accessibility": {
+      "url": "/policies/accessibility",
+      "title": "Accessibility Services",
+      "required": true,
+      "content": "Auxiliary aids and services availability, TTY via Relay 711"
+    },
+    "privacyPolicy": {
+      "url": "/privacy",
+      "title": "Privacy Policy",
+      "required": true,
+      "content": "Data protection and privacy practices"
+    },
+    "termsOfService": {
+      "url": "/terms",
+      "title": "Terms of Service",
+      "required": true,
+      "content": "Terms and conditions for service use"
+    }
+  },
+  "seoConfiguration": {
+    "primaryKeywords": [
+      "WIOA training",
+      "workforce development",
+      "career training",
+      "free education",
+      "job placement",
+      "healthcare training",
+      "technology bootcamp",
+      "skilled trades",
+      "veterans services"
+    ],
+    "localSEO": {
+      "state": "Indiana",
+      "serviceArea": "Indiana and surrounding regions",
+      "businessType": "Educational Organization"
+    },
+    "structuredData": {
+      "organization": true,
+      "educationalOrganization": true,
+      "localBusiness": true,
+      "courses": true
+    }
+  },
+  "integrationEndpoints": {
+    "lmsApi": "https://api.learn.elevateforhumanity.org/v1",
+    "codebaseApi": "https://api.store.elevateforhumanity.org/v1",
+    "communityApi": "https://api.connect.elevateforhumanity.org/v1",
+    "governmentApi": "https://api.gov.elevateforhumanity.org/v1",
+    "riseApi": "https://api.rise.elevateforhumanity.org/v1"
+  },
+  "contactInformation": {
+    "phone": "(317) 555-WORK",
+    "email": "elevateforhumanity@gmail.com",
+    "address": "Indianapolis, Indiana, United States",
+    "hours": "Monday-Friday 8AM-6PM, Saturday 9AM-2PM",
+    "emergencyContact": "24/7 student support available",
+    "languages": "English, Spanish (language assistance available)"
+  },
+  "founderSocialMedia": {
+    "personalFacebook": "https://www.facebook.com/lizjaecustomhairart",
+    "founderName": "Liz Jae",
+    "personalBio": "Founder and CEO of Elevate for Humanity, passionate about workforce development and transforming lives through education and technology. Also a talented custom hair artist bringing creativity and precision to everything she does."
+  },
+  "conversionOptimization": {
+    "primaryCTA": "Apply Now",
+    "secondaryCTA": "Check Eligibility",
+    "urgencyElements": [
+      "Next cohort countdown timer",
+      "Limited spots available",
+      "Free training emphasis",
+      "98% job placement rate"
+    ],
+    "trustSignals": [
+      "WIOA approved",
+      "Federal funding",
+      "Industry certifications",
+      "Graduate success stories",
+      "Employer partnerships"
+    ]
+  }
+}

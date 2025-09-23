@@ -1,0 +1,122 @@
+name: Autopilot CI (clean + build + health)
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-health:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🧰 Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: 📦 Install deps
+        run: npm ci
+
+      # --- CLEANUP & VERIFY --------------------------------------------------
+      - name: 🧹 Run cleanup (placeholders, junk)
+        run: |
+          if [ -f scripts/autopilot-cleanup.js ]; then
+            SKIP_BUILD=1 node scripts/autopilot-cleanup.js
+          else
+            echo "No scripts/autopilot-cleanup.js found — skipping."
+          fi
+
+      - name: 🔍 Fail if cleanup changed files (commit required)
+        run: |
+          if ! git diff --quiet; then
+            echo "::error::Cleanup altered files. Run 'node scripts/autopilot-cleanup.js' locally and commit the results."
+            git --no-pager diff --stat
+            exit 1
+          fi
+
+      # --- QUALITY GATES -----------------------------------------------------
+      - name: 🔎 Lint (if present)
+        run: npm run lint --if-present
+
+      - name: 🔎 Typecheck (if present)
+        run: npm run typecheck --if-present
+
+      - name: ⚙️ Build
+        run: npm run build --if-present
+
+      # --- HEALTH CHECK (Cloudflare + DNS + TLS) -----------------------------
+      - name: 🧪 Install CLI tools for healthcheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y dnsutils jq
+          echo "openssl version"; openssl version
+
+      - name: 🧾 Prepare .env.autopilot for healthcheck
+        if: ${{ secrets.CF_API_TOKEN && secrets.CF_ZONE_NAME }}
+        run: |
+          cat > .env.autopilot <<'ENV'
+          CF_API_TOKEN=${{ secrets.CF_API_TOKEN }}
+          CF_ZONE_NAME=${{ secrets.CF_ZONE_NAME }}
+          WIX_A_IP=${{ secrets.WIX_A_IP || '185.230.63.107' }}
+          WIX_CNAME_TARGET=${{ secrets.WIX_CNAME_TARGET || 'elevate4humanity.org' }}
+          SUPABASE_HOST=${{ secrets.SUPABASE_HOST }}
+          GITPOD_HOSTNAME=${{ secrets.GITPOD_HOSTNAME }}
+          ENV
+          chmod 600 .env.autopilot
+
+      - name: 🩺 Run project healthcheck
+        if: ${{ secrets.CF_API_TOKEN && secrets.CF_ZONE_NAME && hashFiles('efh-healthcheck.sh') != '' }}
+        run: |
+          chmod +x efh-healthcheck.sh
+          ./efh-healthcheck.sh
+
+      - name: 📝 Upload healthcheck log (optional)
+        if: always()
+        run: |
+          [ -f efh-healthcheck.sh ] && ./efh-healthcheck.sh > health.log 2>&1 || echo "no-healthcheck" > health.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: health-log
+          path: health.log
+
+  # OPTIONAL: enforce DNS on pushes to main only (never on PRs)
+  enforce-dns-on-main:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && secrets.CF_API_TOKEN && secrets.CF_ZONE_NAME && vars.ENFORCE_DNS == 'true' }}
+    needs: build-and-health
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: 🔐 Write .env.autopilot
+        run: |
+          cat > .env.autopilot <<'ENV'
+          CF_API_TOKEN=${{ secrets.CF_API_TOKEN }}
+          CF_ZONE_NAME=${{ secrets.CF_ZONE_NAME }}
+          WIX_A_IP=${{ secrets.WIX_A_IP || '185.230.63.107' }}
+          WIX_CNAME_TARGET=${{ secrets.WIX_CNAME_TARGET || 'elevate4humanity.org' }}
+          ENV
+      - name: 🚦 Enforce Cloudflare DNS/redirects (your autopilot script)
+        run: |
+          if [ -f autopilot-wix-pointing.cjs ]; then
+            node autopilot-wix-pointing.cjs
+          else
+            echo "No autopilot-wix-pointing.cjs found — skipping."
+          fi

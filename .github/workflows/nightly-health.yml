@@ -1,0 +1,30 @@
+name: Nightly Healthcheck
+
+on:
+  schedule:
+    - cron: "17 5 * * *"   # daily 05:17 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  nightly:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y dnsutils jq
+      - name: Write env
+        if: ${{ secrets.CF_API_TOKEN && secrets.CF_ZONE_NAME }}
+        run: |
+          cat > .env.autopilot <<'ENV'
+          CF_API_TOKEN=${{ secrets.CF_API_TOKEN }}
+          CF_ZONE_NAME=${{ secrets.CF_ZONE_NAME }}
+          WIX_A_IP=${{ secrets.WIX_A_IP || '185.230.63.107' }}
+          WIX_CNAME_TARGET=${{ secrets.WIX_CNAME_TARGET || 'elevate4humanity.org' }}
+          ENV
+      - name: Run health
+        if: ${{ secrets.CF_API_TOKEN && secrets.CF_ZONE_NAME && hashFiles('efh-healthcheck.sh') != '' }}
+        run: |
+          chmod +x efh-healthcheck.sh
+          ./efh-healthcheck.sh

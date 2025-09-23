@@ -8,9 +8,23 @@
     "slugify": "^1.6.6",
     "jsdom": "^23.0.0"
   },
+  "devDependencies": {
+    "rimraf": "^5.0.5"
+  },
   "scripts": {
     "build": "node scripts/dev-build.js",
     "autopilot": "bash scripts/autopilot-loop.sh",
-    "autopilot:dry": "bash scripts/autopilot-loop.sh --dry-run"
+    "autopilot:dry": "bash scripts/autopilot-loop.sh --dry-run",
+    "clean:fast": "rimraf .turbo .next/cache dist build coverage .cache",
+    "clean:all": "npm run clean:fast && rimraf node_modules && npm cache clean --force",
+    "clean:autopilot": "node scripts/autopilot-cleanup.js",
+    "health": "bash efh-healthcheck.sh",
+    "validate": "node validate-wix-content.cjs",
+    "dns": "node autopilot-wix-pointing.cjs",
+    "dns:watch": "node autopilot-wix-pointing.cjs --watch=300",
+    "blog:publish": "node wix-blog-system/push-blog.mjs",
+    "blog:test": "node wix-blog-system/autopilot-blog-integration.js test",
+    "blog:success": "node wix-blog-system/autopilot-blog-integration.js successStory",
+    "blog:program": "node wix-blog-system/autopilot-blog-integration.js programUpdate"
   }
 }

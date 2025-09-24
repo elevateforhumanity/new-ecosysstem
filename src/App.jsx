@@ -35,6 +35,11 @@ const Government = lazy(() => import("./pages/Government"));
 const Philanthropy = lazy(() => import("./pages/Philanthropy"));
 const Compliance = lazy(() => import("./pages/Compliance"));
 const Accessibility = lazy(() => import("./pages/Accessibility"));
+const DurableLanding = lazy(() => import("./pages/DurableLanding"));
+const DurableAI = lazy(() => import("./pages/DurableAI"));
+const DurableTemplates = lazy(() => import("./pages/DurableTemplates"));
+const DurableFeatures = lazy(() => import("./pages/DurableFeatures"));
+const DurablePricing = lazy(() => import("./pages/DurablePricing"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const AskWidget = lazy(() => import('./components/AskWidget'));
 const NavBar = lazy(() => import('./components/NavBar'));
@@ -53,6 +58,11 @@ export default function App() {
                 <Route path="/philanthropy" element={<Philanthropy />} />
                 <Route path="/compliance" element={<Compliance />} />
                 <Route path="/accessibility" element={<Accessibility />} />
+                <Route path="/durable" element={<DurableLanding />} />
+                <Route path="/durable-ai" element={<DurableAI />} />
+                <Route path="/durable-templates" element={<DurableTemplates />} />
+                <Route path="/durable-features" element={<DurableFeatures />} />
+                <Route path="/durable-pricing" element={<DurablePricing />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
               <AskWidget />

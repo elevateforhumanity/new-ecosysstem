@@ -1,3 +1,5 @@
+workspaceClass: large
+
 image:
   file: .gitpod.Dockerfile
 
@@ -21,17 +23,16 @@ ports:
     visibility: public
     onOpen: open-preview
 
-# One terminal runs the dev server with polling + proper host binding
+# One terminal runs the dev server with native watchers (no polling)
 tasks:
-  - name: Boost FS watchers & run dev
+  - name: Dev
     init: |
-      chmod +x scripts/boost-watches.sh scripts/dev.sh
-      ./scripts/boost-watches.sh
       corepack enable
       corepack prepare pnpm@9.7.0 --activate || true
-      if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; elif [ -f package-lock.json ]; then npm ci; else npm i; fi
+      pnpm install --frozen-lockfile || pnpm install
     command: |
-      ./scripts/dev.sh
+      # use native watchers (no polling) to cut CPU
+      HOST=0.0.0.0 WATCHPACK_POLLING=false CHOKIDAR_USEPOLLING=false pnpm dev
 
 vscode:
   extensions:

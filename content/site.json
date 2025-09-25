@@ -1,0 +1,63 @@
+{
+  "siteUrl": "https://elevateforhumanity.org",
+  "orgName": "Elevate for Humanity Career & Training Institute",
+  "phone": "(317) 555-1212",
+  "email": "info@elevateforhumanity.org",
+  "regionRoutes": {
+    "EmployIndy (Marion County)": {
+      "voucher": "./apply.html",
+      "paid-experience": "./employer-dashboard.html",
+      "apprenticeship": "./lms-advanced.html",
+      "ojt": "./employer-dashboard.html"
+    },
+    "Other Indiana County": {
+      "voucher": "./apply.html",
+      "paid-experience": "./employer-dashboard.html",
+      "apprenticeship": "./lms-advanced.html",
+      "ojt": "./employer-dashboard.html"
+    },
+    "Tennessee": {
+      "voucher": "./apply.html",
+      "paid-experience": "./employer-dashboard.html",
+      "apprenticeship": "./lms-advanced.html",
+      "ojt": "./employer-dashboard.html"
+    },
+    "Texas": {
+      "voucher": "./apply.html",
+      "paid-experience": "./employer-dashboard.html",
+      "apprenticeship": "./lms-advanced.html",
+      "ojt": "./employer-dashboard.html"
+    },
+    "Georgia": {
+      "voucher": "./apply.html",
+      "paid-experience": "./employer-dashboard.html",
+      "apprenticeship": "./lms-advanced.html",
+      "ojt": "./employer-dashboard.html"
+    }
+  },
+  "links": {
+    "studentIntake": "./apply.html",
+    "employerSignup": "./employer-dashboard.html",
+    "employerMouPdf": "./operational-agreements.html"
+  },
+  "hero": {
+    "headline": "Ignite Your Future: Fund Training Today",
+    "subhead": "Empower Dreams: Support Skills Development and Transform Lives at Elevate for Humanity. Invest in Growth, Today! Marion County.",
+    "image": ""
+  },
+  "programs": [
+    { "code": "BUS-START", "title": "Business Startup & Marketing", "price": 2500, "length": "6–8 weeks", "eligible": ["WRG","WIOA"], "image": "" },
+    { "code": "CNA-HHA", "title": "CNA/HHA (with partner)", "price": 4700, "length": "4–8 weeks", "eligible": ["WIOA"], "image": "" },
+    { "code": "OSHA-CPR", "title": "OSHA-10 + CPR", "price": 499, "length": "1–2 weeks", "eligible": ["WRG","WIOA"], "image": "" },
+    { "code": "DIGI-SKLS", "title": "Digital Skills Essentials", "price": 1200, "length": "4 weeks", "eligible": ["WRG","WIOA"], "image": "" }
+  ],
+  "brand": {
+    "bg": "#ffffff",
+    "card": "#f8fafc",
+    "line": "#e2e8f0",
+    "text": "#1e293b",
+    "muted": "#64748b",
+    "brand": "#2563eb",
+    "accent": "#22c55e"
+  }
+}

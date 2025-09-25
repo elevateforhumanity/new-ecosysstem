@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevate for Humanity Career and Technical Institute</title>
+    <meta name="description" content="Empowering Dreams: Support Skills Development and Transform Lives at Elevate for Humanity. Invest in Growth, Today! Marion County.">
+    <link rel="canonical" href="https://elevateforhumanity.org/">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2563eb;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #22c55e;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+        }
+        
+        .cta-button:hover {
+            background: #16a34a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+        }
+        
+        /* Carousel */
+        .carousel {
+            position: relative;
+            margin: 3rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .carousel-slide {
+            display: none;
+            position: relative;
+        }
+        
+        .carousel-slide.active {
+            display: block;
+        }
+        
+        .carousel-slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .carousel-nav:hover {
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .carousel-prev {
+            left: 20px;
+        }
+        
+        .carousel-next {
+            right: 20px;
+        }
+        
+        .carousel-dots {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+        
+        /* Mission Section */
+        .mission {
+            padding: 4rem 0;
+            background: #f8fafc;
+        }
+        
+        .mission-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .mission h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+        }
+        
+        .mission p {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+        
+        .mission-image {
+            text-align: center;
+        }
+        
+        .mission-image img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        /* Programs Section */
+        .programs {
+            padding: 4rem 0;
+        }
+        
+        .programs h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e293b;
+        }
+        
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .program-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .program-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .program-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+        
+        .program-card p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+        
+        .program-button {
+            background: #2563eb;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .program-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 4rem 0;
+            background: #f8fafc;
+        }
+        
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+        
+        .testimonials-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .testimonial blockquote {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #64748b;
+            line-height: 1.7;
+        }
+        
+        .testimonial cite {
+            font-weight: 600;
+            color: #1e293b;
+        }
+        
+        /* CTA Section */
+        .final-cta {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .final-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .final-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1e293b;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #22c55e;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            line-height: 1.7;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 1rem;
+            text-align: center;
+            color: #94a3b8;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .mission-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .carousel-nav {
+                display: none;
+            }
+        }
+        
+        /* Copy functionality */
+        .copy-section {
+            background: #f1f5f9;
+            padding: 2rem 0;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .copy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .copy-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .copy-text {
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+        
+        .copy-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            background: #1d4ed8;
+        }
+        
+        .copy-success {
+            background: #22c55e !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">Elevate for Humanity Career and Technical Institute</a>
+            <ul class="nav-links">
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#programs">Main Programs Page</a></li>
+                <li><a href="#lms">LMS</a></li>
+                <li><a href="#apply">Apply Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Ignite Your Future: Fund Training Today</h1>
+                <p>Empower Dreams: Support Skills Development and Transform Lives at Elevate for Humanity. Invest in Growth, Today! Marion County.</p>
+                <a href="#programs" class="cta-button">Fund Your Training</a>
+                
+                <!-- Carousel -->
+                <div class="carousel">
+                    <div class="carousel-slide active">
+                        <div style="width: 100%; height: 400px; background: linear-gradient(45deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">
+                            Black businessman talking to large group of entrepreneurs during an education event in conference hall.
+                        </div>
+                        <div class="carousel-caption">
+                            <h3>Professional Development</h3>
+                            <p>Empowering business leaders through comprehensive training programs</p>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide">
+                        <div style="width: 100%; height: 400px; background: linear-gradient(45deg, #22c55e, #16a34a); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">
+                            Webinar E-learning Skills Business Internet Technology Concepts Training
+                        </div>
+                        <div class="carousel-caption">
+                            <h3>Digital Learning</h3>
+                            <p>Modern e-learning platforms for skill development and career advancement</p>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide">
+                        <div style="width: 100%; height: 400px; background: linear-gradient(45deg, #f59e0b, #d97706); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">
+                            Corporate Training Presentation In Classroom
+                        </div>
+                        <div class="carousel-caption">
+                            <h3>Classroom Excellence</h3>
+                            <p>Interactive training sessions designed for maximum learning impact</p>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-nav carousel-prev" onclick="changeSlide(-1)">‹</button>
+                    <button class="carousel-nav carousel-next" onclick="changeSlide(1)">›</button>
+                </div>
+                
+                <div class="carousel-dots">
+                    <span class="dot active" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission">
+        <div class="container">
+            <div class="mission-content">
+                <div>
+                    <h2>Empowering Futures Through Skill Development</h2>
+                    <p>At Elevate for Humanity Career and Technical Institute, we are dedicated to bridging the gap between education and employment by funding innovative apprenticeship and training programs. Located in Marion County, IN, our mission is to empower individuals with the skills they need to excel in today's dynamic workforce.</p>
+                    <p>By investing in human potential, we aim to transform lives and build a more skilled, sustainable community. Join us as we pave the way for brighter futures through quality education and hands-on experience.</p>
+                </div>
+                <div class="mission-image">
+                    <div style="width: 100%; height: 300px; background: linear-gradient(45deg, #667eea, #764ba2); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1rem; text-align: center; padding: 2rem;">
+                        Training and skill development concept with icons of online course, conference, seminar, webinar, e-learning, coaching. Grow knowledge and abilities.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="programs">
+        <div class="container">
+            <h2>Invest in Tomorrow's Talent</h2>
+            <div class="program-grid">
+                <div class="program-card">
+                    <div class="program-icon">🎓</div>
+                    <h3>Empowering Apprenticeship Grants</h3>
+                    <p>Unlock new career paths with our tailored funding for apprenticeships designed for real-world skills.</p>
+                    <a href="#apply" class="program-button">Learn More</a>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-icon">💻</div>
+                    <h3>Innovative Training Program Support</h3>
+                    <p>Boost your future with our dynamic funding solutions for cutting-edge technical training programs.</p>
+                    <a href="#apply" class="program-button">Learn More</a>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-icon">🚀</div>
+                    <h3>Career Advancement Funding Solutions</h3>
+                    <p>Transform your professional journey with financial aid designed to elevate your career potential.</p>
+                    <a href="#apply" class="program-button">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>Partnering For Futures: Testimonials That Inspire</h2>
+            <p class="testimonials-subtitle">Transforming futures through hands-on learning and career pathways, Elevate for Humanity empowers every individual to thrive professionally.</p>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <div class="testimonial-avatar">JL</div>
+                    <blockquote>The support from Elevate for Humanity has been transformative. Their funding allowed me to enroll in a high-quality apprenticeship program, setting me on a path to a fulfilling career. Their dedication to student success is unmatched.</blockquote>
+                    <cite>- Jordan Lee</cite>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-avatar">AM</div>
+                    <blockquote>Elevate for Humanity provided essential funding that opened doors to my dream apprenticeship. Their commitment to empowering individuals with career opportunities is truly inspiring, and their support has been pivotal in advancing my professional journey.</blockquote>
+                    <cite>- Alex Morgan</cite>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-avatar">TR</div>
+                    <blockquote>Elevate for Humanity's funding was a game-changer for me. It enabled my participation in an incredible training program that propelled my career forward. Their unwavering support and commitment to individual growth are exceptional. I am deeply grateful for their contribution to my success.</blockquote>
+                    <cite>- Taylor Rivers</cite>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Copy Section -->
+    <section class="copy-section">
+        <div class="container">
+            <h3 style="text-align: center; margin-bottom: 2rem; color: #1e293b;">Quick Access Links</h3>
+            <div class="copy-grid">
+                <div class="copy-item">
+                    <span class="copy-text" id="student-portal">https://portal.elevateforhumanity.org/student</span>
+                    <button class="copy-btn" onclick="copyText('student-portal', this)">Copy</button>
+                </div>
+                <div class="copy-item">
+                    <span class="copy-text" id="apply-link">https://apply.elevateforhumanity.org</span>
+                    <button class="copy-btn" onclick="copyText('apply-link', this)">Copy</button>
+                </div>
+                <div class="copy-item">
+                    <span class="copy-text" id="contact-email">info@elevateforhumanity.org</span>
+                    <button class="copy-btn" onclick="copyText('contact-email', this)">Copy</button>
+                </div>
+                <div class="copy-item">
+                    <span class="copy-text" id="phone-number">(555) 123-4567</span>
+                    <button class="copy-btn" onclick="copyText('phone-number', this)">Copy</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section id="apply" class="final-cta">
+        <div class="container">
+            <h2>Empower Your Future Today</h2>
+            <p>Join our transformative programs and unlock career opportunities that align with industry demands. Flexible, grant-funded options mean more possibilities for growth. Elevate your skills with us!</p>
+            <a href="./apply.html" class="cta-button">Explore Programs</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Information</h3>
+                    <p>Elevate for Humanity Career and Technical Institute</p>
+                    <p>Marion County, Indiana</p>
+                    <p>Email: info@elevateforhumanity.org</p>
+                    <p>Phone: (555) 123-4567</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="./apply.html">Student Applications</a></p>
+                    <p><a href="./employer-dashboard.html">Employer Portal</a></p>
+                    <p><a href="./lms-advanced.html">Learning Management System</a></p>
+                    <p><a href="./resources.html">Resources</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Programs</h3>
+                    <p><a href="#programs">Apprenticeship Grants</a></p>
+                    <p><a href="#programs">Training Support</a></p>
+                    <p><a href="#programs">Career Advancement</a></p>
+                    <p><a href="#programs">Skills Development</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Compliance</h3>
+                    <p>Equal Opportunity Provider</p>
+                    <p>Veterans Priority Service</p>
+                    <p>Accessibility: TTY 711</p>
+                    <p>Language Assistance Available</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Elevate for Humanity Career and Technical Institute. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Carousel functionality
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            currentSlideIndex += direction;
+            if (currentSlideIndex >= slides.length) currentSlideIndex = 0;
+            if (currentSlideIndex < 0) currentSlideIndex = slides.length - 1;
+            showSlide(currentSlideIndex);
+        }
+
+        function currentSlide(index) {
+            currentSlideIndex = index - 1;
+            showSlide(currentSlideIndex);
+        }
+
+        // Auto-advance carousel
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+
+        // Copy functionality
+        function copyText(elementId, button) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showCopySuccess(button);
+                }).catch(() => {
+                    fallbackCopy(text, button);
+                });
+            } else {
+                fallbackCopy(text, button);
+            }
+        }
+
+        function fallbackCopy(text, button) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                showCopySuccess(button);
+            } catch (err) {
+                console.error('Copy failed:', err);
+            }
+            
+            document.body.removeChild(textarea);
+        }
+
+        function showCopySuccess(button) {
+            const originalText = button.textContent;
+            button.textContent = '✓ Copied!';
+            button.classList.add('copy-success');
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.classList.remove('copy-success');
+            }, 2000);
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        console.log('🎓 Elevate for Humanity Enterprise Landing Page loaded successfully');
+    </script>
+</body>
+</html>

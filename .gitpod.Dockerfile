@@ -1,21 +1,12 @@
 FROM gitpod/workspace-node:20
 
-# Enterprise dependencies for image processing, security, and build tools
 USER root
-RUN apt-get update && apt-get install -y \
-    libvips-dev \
-    jq \
-    curl \
-    ca-certificates \
-    git \
-    build-essential \
-    python3 \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    inotify-tools jq curl ca-certificates procps \
+ && rm -rf /var/lib/apt/lists/*
 
-# Switch back to gitpod user for security
+# Raise file watcher limits for hot reload at OS level
+RUN echo fs.inotify.max_user_watches=524288 >> /etc/sysctl.conf && \
+    echo fs.inotify.max_user_instances=1024 >> /etc/sysctl.conf
+
 USER gitpod
-
-# Pre-install global tools for faster workspace startup
-RUN npm install -g pnpm@9.7.0 && \
-    corepack enable && \
-    corepack prepare pnpm@9.7.0 --activate

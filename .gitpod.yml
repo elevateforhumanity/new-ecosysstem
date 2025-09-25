@@ -1,26 +1,7 @@
 image:
   file: .gitpod.Dockerfile
 
-# Enterprise-ready deterministic setup
-tasks:
-  - name: Setup
-    init: |
-      # Lock Node version and package manager
-      nvm install
-      nvm use
-      corepack enable
-      corepack prepare pnpm@9.7.0 --activate
-      
-      # Install with frozen lockfile for deterministic builds
-      pnpm install --frozen-lockfile
-      
-      # Pre-build for faster startup
-      pnpm build
-    command: |
-      # Start development server
-      pnpm dev
-
-# Enable prebuilds for faster workspace startup
+# Prebuilds make the workspace open ready-to-run
 github:
   prebuilds:
     master: true
@@ -28,32 +9,31 @@ github:
     pullRequests: true
     addBadge: false
 
+# Expose common dev ports as PUBLIC (so preview works)
+ports:
+  - port: 3000
+    visibility: public
+    onOpen: open-preview
+  - port: 5173
+    visibility: public
+    onOpen: open-preview
+  - port: 8080
+    visibility: public
+    onOpen: open-preview
+
+# One terminal runs the dev server with polling + proper host binding
+tasks:
+  - name: Boost FS watchers & run dev
+    init: |
+      chmod +x scripts/boost-watches.sh scripts/dev.sh
+      ./scripts/boost-watches.sh
+      corepack enable
+      corepack prepare pnpm@9.7.0 --activate || true
+      if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; elif [ -f package-lock.json ]; then npm ci; else npm i; fi
+    command: |
+      ./scripts/dev.sh
+
 vscode:
   extensions:
     - dbaeumer.vscode-eslint
     - esbenp.prettier-vscode
-    - ms-vscode.vscode-json
-    - bradlc.vscode-tailwindcss
-    - ms-vscode.vscode-typescript-next
-
-# Enterprise Git configuration
-gitConfig:
-  core.autocrlf: input
-  init.defaultBranch: main
-  pull.rebase: false
-  
-# Development server ports
-ports:
-  - port: 8080
-    onOpen: open-preview
-    visibility: public
-    description: "Main development server"
-  - port: 3000
-    onOpen: ignore
-    description: "Alternative server"
-  - port: 5173
-    onOpen: ignore
-    description: "Vite dev server"
-  - port: 8001
-    onOpen: ignore
-    description: "Preview server"

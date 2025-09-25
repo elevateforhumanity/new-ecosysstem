@@ -21,12 +21,13 @@ gitConfig:
   
 # Ports for development servers
 ports:
-  - port: 3000
-    onOpen: open-preview
-    description: "Main development server"
   - port: 8080
     onOpen: open-preview
+    visibility: public
+    description: "Main React application server"
+  - port: 3000
+    onOpen: ignore
     description: "Alternative server"
   - port: 5173
-    onOpen: open-preview
-    description: "Vite dev server"
+    onOpen: ignore
+    description: "Legacy Vite dev server"

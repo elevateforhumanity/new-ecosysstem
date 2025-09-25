@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevate for Humanity | Transform Your Career</title>
+    <meta name="description" content="Government contractor and private career school offering DOE, DOL aligned training programs. Free workforce development with job placement assistance.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header-top {
+            background: #0F2B6C;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .header-top .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-top a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .header-top a:hover {
+            text-decoration: underline;
+        }
+
+        .header-main {
+            padding: 15px 0;
+        }
+
+        .header-main .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: #0F2B6C;
+            text-decoration: none;
+        }
+
+        .nav {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 0;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #D91D3C;
+        }
+
+        .apply-btn {
+            background: #D91D3C;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: background 0.3s;
+        }
+
+        .apply-btn:hover {
+            background: #b91c1c;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(15, 43, 108, 0.7), rgba(217, 29, 60, 0.7)), 
+                        linear-gradient(135deg, #0F2B6C 0%, #D91D3C 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 25px;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            margin-bottom: 40px;
+            opacity: 0.95;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #D91D3C;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #0F2B6C;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: #0F2B6C;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: #D91D3C;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: #0F2B6C;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .feature-link {
+            color: #D91D3C;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .feature-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Testimonial Section */
+        .testimonial {
+            padding: 80px 0;
+            background: #0F2B6C;
+            color: white;
+            text-align: center;
+        }
+
+        .testimonial-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial blockquote {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-location {
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #D91D3C;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* Programs Section */
+        .programs {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .program-image {
+            height: 200px;
+            background: linear-gradient(45deg, #0F2B6C, #D91D3C);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .program-content {
+            padding: 30px;
+        }
+
+        .program-content h3 {
+            font-size: 1.3rem;
+            color: #0F2B6C;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .program-content p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: #D91D3C;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            text-align: center;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .features-grid,
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                <div>
+                    <a href="/programs">Programs</a>
+                    <a href="/student">Student Portal</a>
+                    <a href="/partners">Partners</a>
+                    <a href="/donate">Support Us</a>
+                </div>
+                <div>
+                    <a href="/connect">Contact</a>
+                    <a href="/about">About</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <a href="/" class="logo">ELEVATE FOR HUMANITY</a>
+                <nav class="nav">
+                    <a href="/government">Government</a>
+                    <a href="/programs">Programs</a>
+                    <a href="/lms">LMS</a>
+                    <a href="/student">Students</a>
+                    <a href="/partners">Partners</a>
+                </nav>
+                <a href="/programs" class="apply-btn">Apply Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🎯 Government Contractor & Career School</div>
+            <h1>Transform Your Future</h1>
+            <p>DOE • DOL aligned workforce development programs with guaranteed job placement assistance, employer partnerships, and comprehensive funding pathways for career advancement.</p>
+            <div class="hero-buttons">
+                <a href="/programs" class="btn btn-primary">Explore Programs</a>
+                <a href="/student" class="btn btn-secondary">Student Portal</a>
+                <a href="/government" class="btn btn-secondary">Government Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Elevate for Humanity?</h2>
+                <p>We provide comprehensive workforce development solutions with proven results and industry partnerships.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Free Training</h3>
+                    <p>100% free for eligible participants with WIOA funding and scholarship opportunities.</p>
+                    <a href="/programs" class="feature-link">View Programs →</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏛️</div>
+                    <h3>Government Aligned</h3>
+                    <p>DOE and DOL certified programs meeting federal compliance standards.</p>
+                    <a href="/government" class="feature-link">Learn More →</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💼</div>
+                    <h3>Job Placement</h3>
+                    <p>85% job placement rate with employer partnerships and career support services.</p>
+                    <a href="/partners" class="feature-link">Our Partners →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section style="padding: 80px 0; background: #f8f9fa;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Student Success Stories</h2>
+                <p>Real stories from graduates who transformed their careers through our programs</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
+                <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center;">
+                    <div style="width: 80px; height: 80px; background: #D91D3C; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">👩‍⚕️</div>
+                    <blockquote style="font-size: 1.2rem; font-style: italic; margin-bottom: 20px; color: #666;">
+                        "The Medical Assistant program changed my life. I went from working minimum wage to a stable healthcare career with benefits in just 6 months."
+                    </blockquote>
+                    <div style="font-weight: 700; color: #0F2B6C;">Sarah Johnson</div>
+                    <div style="color: #999; margin-top: 5px;">Medical Assistant Graduate • Columbus, OH</div>
+                </div>
+                <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center;">
+                    <div style="width: 80px; height: 80px; background: #D91D3C; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">👨‍💻</div>
+                    <blockquote style="font-size: 1.2rem; font-style: italic; margin-bottom: 20px; color: #666;">
+                        "The IT Support program gave me the skills and certifications I needed. I'm now working remotely for a tech company making twice what I used to earn."
+                    </blockquote>
+                    <div style="font-weight: 700; color: #0F2B6C;">Marcus Williams</div>
+                    <div style="color: #999; margin-top: 5px;">IT Support Specialist • Cleveland, OH</div>
+                </div>
+                <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center;">
+                    <div style="width: 80px; height: 80px; background: #D91D3C; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">🔧</div>
+                    <blockquote style="font-size: 1.2rem; font-style: italic; margin-bottom: 20px; color: #666;">
+                        "The HVAC apprenticeship program connected me directly with a union job. I'm earning great money and have excellent benefits for my family."
+                    </blockquote>
+                    <div style="font-weight: 700; color: #0F2B6C;">David Rodriguez</div>
+                    <div style="color: #999; margin-top: 5px;">HVAC Technician • Cincinnati, OH</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="section-header">
+                <h2>Proven Results & Impact</h2>
+                <p>Our track record speaks for itself - real outcomes for real people</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">12,500+</div>
+                    <div class="stat-label">Graduates Placed in Jobs</div>
+                    <div style="color: #D91D3C; font-weight: 600; margin-top: 5px;">Since 2018</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">87%</div>
+                    <div class="stat-label">Job Placement Rate</div>
+                    <div style="color: #D91D3C; font-weight: 600; margin-top: 5px;">Within 6 Months</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">650+</div>
+                    <div class="stat-label">Employer Partners</div>
+                    <div style="color: #D91D3C; font-weight: 600; margin-top: 5px;">Nationwide</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">$45K</div>
+                    <div class="stat-label">Average Starting Salary</div>
+                    <div style="color: #D91D3C; font-weight: 600; margin-top: 5px;">For Graduates</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Student Satisfaction</div>
+                    <div style="color: #D91D3C; font-weight: 600; margin-top: 5px;">Would Recommend</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">75+</div>
+                    <div class="stat-label">Training Programs</div>
+                    <div style="color: #D91D3C; font-weight: 600; margin-top: 5px;">Available Now</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section style="padding: 80px 0; background: #0F2B6C; color: white;">
+        <div class="container">
+            <div class="section-header" style="color: white;">
+                <h2>Why Choose Elevate for Humanity?</h2>
+                <p style="color: rgba(255,255,255,0.9);">We're more than just training - we're your partner in career transformation</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 60px;">
+                <div style="text-align: center;">
+                    <div style="width: 80px; height: 80px; background: #D91D3C; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">💰</div>
+                    <h3 style="margin-bottom: 15px; font-size: 1.3rem;">100% Free Training</h3>
+                    <p style="opacity: 0.9;">No tuition costs for eligible participants. WIOA funding, scholarships, and employer sponsorships available.</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="width: 80px; height: 80px; background: #D91D3C; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">🏛️</div>
+                    <h3 style="margin-bottom: 15px; font-size: 1.3rem;">Government Certified</h3>
+                    <p style="opacity: 0.9;">DOE and DOL aligned programs meeting all federal compliance standards and accreditation requirements.</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="width: 80px; height: 80px; background: #D91D3C; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">🤝</div>
+                    <h3 style="margin-bottom: 15px; font-size: 1.3rem;">Job Placement Guarantee</h3>
+                    <p style="opacity: 0.9;">Dedicated career services team with direct employer relationships and job placement assistance.</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="width: 80px; height: 80px; background: #D91D3C; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">⏰</div>
+                    <h3 style="margin-bottom: 15px; font-size: 1.3rem;">Flexible Scheduling</h3>
+                    <p style="opacity: 0.9;">Day, evening, weekend, and online options to fit your life and work schedule.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="programs">
+        <div class="container">
+            <div class="section-header">
+                <h2>Career-Focused Training Programs</h2>
+                <p>Industry-aligned programs with guaranteed job placement assistance and employer partnerships</p>
+            </div>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-image">🏥</div>
+                    <div class="program-content">
+                        <h3>Healthcare & Medical</h3>
+                        <p>Medical Assistant, CNA, Pharmacy Technician, Medical Billing, and Healthcare Administration with hands-on clinical experience and certification preparation.</p>
+                        <ul style="text-align: left; margin: 15px 0; color: #666;">
+                            <li>✓ 100% Free Training</li>
+                            <li>✓ Clinical Externships</li>
+                            <li>✓ National Certifications</li>
+                            <li>✓ Job Placement Assistance</li>
+                        </ul>
+                        <a href="/programs" class="btn btn-primary" style="font-size: 14px; padding: 10px 20px;">View Healthcare Programs</a>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-image">💻</div>
+                    <div class="program-content">
+                        <h3>Information Technology</h3>
+                        <p>IT Support, Cybersecurity, Data Analysis, Cloud Computing, and Software Development with industry-recognized certifications and hands-on labs.</p>
+                        <ul style="text-align: left; margin: 15px 0; color: #666;">
+                            <li>✓ CompTIA Certifications</li>
+                            <li>✓ Real-World Projects</li>
+                            <li>✓ Industry Partnerships</li>
+                            <li>✓ Remote Work Ready</li>
+                        </ul>
+                        <a href="/programs" class="btn btn-primary" style="font-size: 14px; padding: 10px 20px;">View IT Programs</a>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-image">🔧</div>
+                    <div class="program-content">
+                        <h3>Skilled Trades & Manufacturing</h3>
+                        <p>HVAC, Electrical, Plumbing, Welding, and Advanced Manufacturing with apprenticeship pathways and union partnerships.</p>
+                        <ul style="text-align: left; margin: 15px 0; color: #666;">
+                            <li>✓ Apprenticeship Programs</li>
+                            <li>✓ Union Partnerships</li>
+                            <li>✓ Industry Certifications</li>
+                            <li>✓ High-Demand Skills</li>
+                        </ul>
+                        <a href="/programs" class="btn btn-primary" style="font-size: 14px; padding: 10px 20px;">View Trade Programs</a>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-image">💼</div>
+                    <div class="program-content">
+                        <h3>Business & Administration</h3>
+                        <p>Customer Service, Administrative Support, Project Management, and Digital Marketing with professional development and soft skills training.</p>
+                        <ul style="text-align: left; margin: 15px 0; color: #666;">
+                            <li>✓ Professional Certifications</li>
+                            <li>✓ Soft Skills Training</li>
+                            <li>✓ Office Technology</li>
+                            <li>✓ Career Advancement</li>
+                        </ul>
+                        <a href="/programs" class="btn btn-primary" style="font-size: 14px; padding: 10px 20px;">View Business Programs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section style="padding: 80px 0; background: linear-gradient(135deg, #0F2B6C 0%, #D91D3C 100%); color: white; text-align: center;">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-weight: 700;">Ready to Transform Your Career?</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 40px; opacity: 0.95;">Join thousands who have advanced their careers through our proven workforce development programs.</p>
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <a href="/programs" class="btn" style="background: white; color: #0F2B6C; padding: 15px 30px; font-weight: 700;">Browse All Programs</a>
+                <a href="/student" class="btn" style="background: transparent; color: white; border: 2px solid white; padding: 15px 30px; font-weight: 700;">Student Login</a>
+                <a href="/connect" class="btn" style="background: transparent; color: white; border: 2px solid white; padding: 15px 30px; font-weight: 700;">Contact Advisor</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/programs">Training Programs</a></li>
+                        <li><a href="/student">Student Portal</a></li>
+                        <li><a href="/lms">Learning Management</a></li>
+                        <li><a href="/government">Government Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="/partners">Employer Partners</a></li>
+                        <li><a href="/donate">Support Our Mission</a></li>
+                        <li><a href="/pay">Payment Portal</a></li>
+                        <li><a href="/connect">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="/about">Our Mission</a></li>
+                        <li><a href="/accessibility">Accessibility</a></li>
+                        <li><a href="/philanthropy">Philanthropy</a></li>
+                        <li><a href="/compliance">Compliance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>Elevate for Humanity<br>
+                    Workforce Development Center<br>
+                    Phone: (555) 123-4567<br>
+                    Email: info@elevateforhumanity.org</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Equal Opportunity Is the Law — Veterans' Priority of Service. Auxiliary aids/services available upon request. TTY 711.</p>
+                <p>&copy; 2025 Elevate for Humanity. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+    <!-- Homepage -->
+    <url>
+        <loc>https://www.elevateforhumanity.org/</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Main Program Pages -->
+    <url>
+        <loc>https://www.elevateforhumanity.org/programs</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elevateforhumanity.org/student</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elevateforhumanity.org/lms</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Government & Compliance -->
+    <url>
+        <loc>https://www.elevateforhumanity.org/government</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elevateforhumanity.org/compliance</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Partner & Support Pages -->
+    <url>
+        <loc>https://www.elevateforhumanity.org/partners</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elevateforhumanity.org/donate</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elevateforhumanity.org/pay</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- Information Pages -->
+    <url>
+        <loc>https://www.elevateforhumanity.org/about</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elevateforhumanity.org/connect</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elevateforhumanity.org/accessibility</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.4</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elevateforhumanity.org/philanthropy</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- Program Category Pages -->
+    <url>
+        <loc>https://www.elevateforhumanity.org/programs/healthcare</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elevateforhumanity.org/programs/technology</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elevateforhumanity.org/programs/trades</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elevateforhumanity.org/programs/business</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Specific Program Pages -->
+    <url>
+        <loc>https://www.elevateforhumanity.org/programs/medical-assistant</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elevateforhumanity.org/programs/cna</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elevateforhumanity.org/programs/pharmacy-technician</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elevateforhumanity.org/programs/it-support</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elevateforhumanity.org/programs/cybersecurity</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elevateforhumanity.org/programs/hvac</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elevateforhumanity.org/programs/electrical</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Application Process -->
+    <url>
+        <loc>https://www.elevateforhumanity.org/apply</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.elevateforhumanity.org/eligibility</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+</urlset>

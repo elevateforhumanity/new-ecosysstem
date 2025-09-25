@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Durable Landing Pages - Preview Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .pages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .page-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .page-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .page-preview {
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ai-preview {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .templates-preview {
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .features-preview {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .pricing-preview {
+            background: linear-gradient(135deg, #45b7d1 0%, #96ceb4 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .original-preview {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .page-content {
+            padding: 2rem;
+        }
+        
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+        
+        .page-route {
+            font-family: 'Courier New', monospace;
+            background: #f7fafc;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            border-left: 4px solid #667eea;
+        }
+        
+        .page-description {
+            color: #718096;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .features-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .features-list li {
+            padding: 0.25rem 0;
+            color: #4a5568;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .features-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+            font-weight: bold;
+        }
+        
+        .page-cta {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .page-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .stats-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-item {
+            padding: 1rem;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+        
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.9);
+            color: #667eea;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .pages-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            body {
+                padding: 1rem;
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🚀 Durable Landing Pages</h1>
+            <p>Complete ecosystem of dynamic, interactive landing pages with seamless navigation and conversion-focused design</p>
+        </div>
+        
+        <!-- Pages Grid -->
+        <div class="pages-grid">
+            <!-- AI Builder Page -->
+            <div class="page-card">
+                <div class="page-preview ai-preview">
+                    <span class="pulse">🤖</span>
+                </div>
+                <div class="badge">AI Powered</div>
+                <div class="page-content">
+                    <h3 class="page-title">Durable AI Builder</h3>
+                    <div class="page-route">/durable-ai</div>
+                    <p class="page-description">
+                        Showcase AI-powered website creation in 30 seconds with live demos, 
+                        progress animations, and step-by-step process explanation.
+                    </p>
+                    <ul class="features-list">
+                        <li>Live demo counter with rotating examples</li>
+                        <li>AI capabilities breakdown</li>
+                        <li>Interactive progress animations</li>
+                        <li>30-second creation promise</li>
+                    </ul>
+                    <a href="/durable-ai" class="page-cta">Try AI Builder</a>
+                </div>
+            </div>
+            
+            <!-- Templates Page -->
+            <div class="page-card">
+                <div class="page-preview templates-preview">
+                    <span>🎨</span>
+                </div>
+                <div class="badge">150+ Templates</div>
+                <div class="page-content">
+                    <h3 class="page-title">Durable Templates</h3>
+                    <div class="page-route">/durable-templates</div>
+                    <p class="page-description">
+                        Browse 150+ professional templates with category filtering, 
+                        interactive previews, and instant customization options.
+                    </p>
+                    <ul class="features-list">
+                        <li>Category filtering system</li>
+                        <li>Interactive hover previews</li>
+                        <li>Mobile-responsive grid</li>
+                        <li>Template usage statistics</li>
+                    </ul>
+                    <a href="/durable-templates" class="page-cta">Browse Templates</a>
+                </div>
+            </div>
+            
+            <!-- Features Page -->
+            <div class="page-card">
+                <div class="page-preview features-preview">
+                    <span>⚡</span>
+                </div>
+                <div class="badge">Interactive</div>
+                <div class="page-content">
+                    <h3 class="page-title">Durable Features</h3>
+                    <div class="page-route">/durable-features</div>
+                    <p class="page-description">
+                        Comprehensive feature showcase with rotating highlights, 
+                        detailed breakdowns, and interactive demonstrations.
+                    </p>
+                    <ul class="features-list">
+                        <li>Auto-rotating feature highlights</li>
+                        <li>Complete feature categorization</li>
+                        <li>Interactive hover animations</li>
+                        <li>Detailed capability lists</li>
+                    </ul>
+                    <a href="/durable-features" class="page-cta">Explore Features</a>
+                </div>
+            </div>
+            
+            <!-- Pricing Page -->
+            <div class="page-card">
+                <div class="page-preview pricing-preview">
+                    <span>💰</span>
+                </div>
+                <div class="badge">Transparent</div>
+                <div class="page-content">
+                    <h3 class="page-title">Durable Pricing</h3>
+                    <div class="page-route">/durable-pricing</div>
+                    <p class="page-description">
+                        Transparent pricing with billing toggles, plan comparisons, 
+                        add-ons, and FAQ section for informed decisions.
+                    </p>
+                    <ul class="features-list">
+                        <li>Monthly/Yearly billing toggle</li>
+                        <li>Three-tier pricing structure</li>
+                        <li>Optional add-ons section</li>
+                        <li>FAQ and guarantees</li>
+                    </ul>
+                    <a href="/durable-pricing" class="page-cta">View Pricing</a>
+                </div>
+            </div>
+            
+            <!-- Original Landing -->
+            <div class="page-card">
+                <div class="page-preview original-preview">
+                    <span>🏠</span>
+                </div>
+                <div class="badge">Complete</div>
+                <div class="page-content">
+                    <h3 class="page-title">Original Durable Landing</h3>
+                    <div class="page-route">/durable</div>
+                    <p class="page-description">
+                        Comprehensive overview landing page with dynamic features, 
+                        statistics, pricing, and complete value proposition.
+                    </p>
+                    <ul class="features-list">
+                        <li>Dynamic features carousel</li>
+                        <li>Animated statistics counters</li>
+                        <li>Complete pricing overview</li>
+                        <li>Conversion-focused CTAs</li>
+                    </ul>
+                    <a href="/durable" class="page-cta">View Landing</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Statistics Section -->
+        <div class="stats-section">
+            <h2 style="margin-bottom: 1rem; color: #2d3748;">📊 Pages Overview</h2>
+            <p style="color: #718096; margin-bottom: 2rem;">Complete ecosystem statistics and features</p>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Dynamic Pages</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">27</div>
+                    <div class="stat-label">Components</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">21</div>
+                    <div class="stat-label">Interactive Elements</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">14</div>
+                    <div class="stat-label">Call-to-Actions</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Mobile Responsive</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">SEO</div>
+                    <div class="stat-label">Optimized</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Add some interactivity
+        document.querySelectorAll('.page-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+        
+        // Animate stats on scroll
+        const observerOptions = {
+            threshold: 0.5
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'pulse 1s ease-in-out';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.stat-number').forEach(stat => {
+            observer.observe(stat);
+        });
+    </script>
+</body>
+</html>

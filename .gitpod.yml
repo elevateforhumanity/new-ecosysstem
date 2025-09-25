@@ -1,12 +1,32 @@
 image:
   file: .gitpod.Dockerfile
 
+# Enterprise-ready deterministic setup
 tasks:
-  - name: EFH Auto-Clean & Setup
+  - name: Setup
     init: |
-      bash .gp/gitpod-start.sh --prebuild
+      # Lock Node version and package manager
+      nvm install
+      nvm use
+      corepack enable
+      corepack prepare pnpm@9.7.0 --activate
+      
+      # Install with frozen lockfile for deterministic builds
+      pnpm install --frozen-lockfile
+      
+      # Pre-build for faster startup
+      pnpm build
     command: |
-      bash .gp/gitpod-start.sh
+      # Start development server
+      pnpm dev
+
+# Enable prebuilds for faster workspace startup
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    addBadge: false
 
 vscode:
   extensions:
@@ -14,20 +34,26 @@ vscode:
     - esbenp.prettier-vscode
     - ms-vscode.vscode-json
     - bradlc.vscode-tailwindcss
+    - ms-vscode.vscode-typescript-next
 
-# Speed up repo clones in future workspaces
+# Enterprise Git configuration
 gitConfig:
   core.autocrlf: input
+  init.defaultBranch: main
+  pull.rebase: false
   
-# Ports for development servers
+# Development server ports
 ports:
   - port: 8080
     onOpen: open-preview
     visibility: public
-    description: "Main React application server"
+    description: "Main development server"
   - port: 3000
     onOpen: ignore
     description: "Alternative server"
   - port: 5173
     onOpen: ignore
-    description: "Legacy Vite dev server"
+    description: "Vite dev server"
+  - port: 8001
+    onOpen: ignore
+    description: "Preview server"

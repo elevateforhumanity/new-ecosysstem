@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Copy Demo - Working Example</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .copy-success {
+            background: #10b981 !important;
+            color: white !important;
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .notification.show {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <span id="notification-text">Copied to clipboard!</span>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl font-bold text-center mb-8">🎯 Simple Copy Demo</h1>
+        <p class="text-center text-gray-600 mb-12">Click any "Copy" button to test the functionality</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- API Endpoint -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold mb-4">🔌 API Endpoint</h3>
+                <div class="relative">
+                    <div class="bg-gray-100 p-3 rounded border font-mono text-sm" id="api-url">
+                        https://api.elevateforhumanity.org/v1/students
+                    </div>
+                    <button onclick="copyText('api-url', this)" class="absolute top-2 right-2 bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">
+                        📋 Copy
+                    </button>
+                </div>
+            </div>
+
+            <!-- Embed Code -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold mb-4">🔗 Embed Code</h3>
+                <div class="relative">
+                    <div class="bg-gray-900 text-green-400 p-3 rounded font-mono text-sm" id="embed-code">
+&lt;iframe src="https://lms.elevateforhumanity.org" 
+        width="100%" height="600"&gt;
+&lt;/iframe&gt;
+                    </div>
+                    <button onclick="copyText('embed-code', this)" class="absolute top-2 right-2 bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">
+                        📋 Copy
+                    </button>
+                </div>
+            </div>
+
+            <!-- Email Address -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold mb-4">📧 Contact Email</h3>
+                <div class="relative">
+                    <div class="bg-gray-100 p-3 rounded border font-mono text-sm" id="email">
+                        support@elevateforhumanity.org
+                    </div>
+                    <button onclick="copyText('email', this)" class="absolute top-2 right-2 bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">
+                        📋 Copy
+                    </button>
+                </div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold mb-4">📞 Phone Number</h3>
+                <div class="relative">
+                    <div class="bg-gray-100 p-3 rounded border font-mono text-sm" id="phone">
+                        (555) 123-4567
+                    </div>
+                    <button onclick="copyText('phone', this)" class="absolute top-2 right-2 bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">
+                        📋 Copy
+                    </button>
+                </div>
+            </div>
+
+            <!-- JavaScript Code -->
+            <div class="bg-white p-6 rounded-lg shadow-lg md:col-span-2">
+                <h3 class="text-xl font-bold mb-4">💻 JavaScript Integration</h3>
+                <div class="relative">
+                    <div class="bg-gray-900 text-yellow-400 p-3 rounded font-mono text-sm" id="js-code">
+// Initialize EFH LMS
+const lms = new EFH_LMS({
+    apiKey: 'your-api-key-here',
+    environment: 'production',
+    baseUrl: 'https://api.elevateforhumanity.org'
+});
+
+// Load student data
+lms.getStudent(123).then(student => {
+    console.log('Student loaded:', student);
+});
+                    </div>
+                    <button onclick="copyText('js-code', this)" class="absolute top-2 right-2 bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">
+                        📋 Copy
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Results -->
+        <div class="mt-12 bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold mb-4">🧪 Test Results</h3>
+            <div id="test-results" class="space-y-2">
+                <p class="text-gray-600">Click copy buttons above to see test results here...</p>
+            </div>
+        </div>
+
+        <!-- Back to LMS -->
+        <div class="text-center mt-8">
+            <a href="./LMS_WITH_COPY.html" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 inline-block">
+                ← Back to Full LMS
+            </a>
+        </div>
+    </div>
+
+    <script>
+        let copyCount = 0;
+
+        function copyText(elementId, button) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent || element.innerText;
+            
+            // Use modern clipboard API if available
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text.trim()).then(() => {
+                    showSuccess(button, text.trim());
+                }).catch(() => {
+                    // Fallback to older method
+                    fallbackCopy(text.trim(), button);
+                });
+            } else {
+                // Fallback for older browsers
+                fallbackCopy(text.trim(), button);
+            }
+        }
+
+        function fallbackCopy(text, button) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                showSuccess(button, text);
+            } catch (err) {
+                console.error('Copy failed:', err);
+                showError(button);
+            }
+            
+            document.body.removeChild(textarea);
+        }
+
+        function showSuccess(button, text) {
+            copyCount++;
+            
+            // Update button
+            const originalText = button.innerHTML;
+            button.innerHTML = '✅ Copied!';
+            button.classList.add('copy-success');
+            
+            // Show notification
+            showNotification('Copied to clipboard!');
+            
+            // Add to test results
+            addTestResult(`✅ Copy #${copyCount}: Successfully copied "${text.substring(0, 50)}${text.length > 50 ? '...' : ''}"`);
+            
+            // Reset button after 2 seconds
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove('copy-success');
+            }, 2000);
+        }
+
+        function showError(button) {
+            const originalText = button.innerHTML;
+            button.innerHTML = '❌ Failed';
+            button.style.background = '#ef4444';
+            
+            addTestResult(`❌ Copy failed - browser may not support clipboard access`);
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = '';
+            }, 2000);
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notification-text');
+            
+            notificationText.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function addTestResult(message) {
+            const resultsDiv = document.getElementById('test-results');
+            const timestamp = new Date().toLocaleTimeString();
+            
+            // Clear initial message if this is first result
+            if (copyCount === 1) {
+                resultsDiv.innerHTML = '';
+            }
+            
+            const resultElement = document.createElement('div');
+            resultElement.className = 'p-2 bg-gray-50 rounded border-l-4 border-green-500';
+            resultElement.innerHTML = `<span class="text-gray-500 text-sm">${timestamp}</span> - ${message}`;
+            
+            resultsDiv.insertBefore(resultElement, resultsDiv.firstChild);
+        }
+
+        // Test on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ Simple Copy Demo loaded successfully');
+            addTestResult('🚀 Page loaded - Copy functionality ready for testing');
+        });
+    </script>
+</body>
+</html>

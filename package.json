@@ -2,27 +2,36 @@
   "name": "efh-autopilot",
   "type": "module",
   "version": "2.0.0",
+  "engines": {
+    "node": "20.18.1",
+    "npm": ">=10.0.0"
+  },
+  "packageManager": "pnpm@9.7.0",
   "dependencies": {
-    "@supabase/supabase-js": "^2.45.4",
-    "@vitejs/plugin-react": "^4.7.0",
-    "jsdom": "^23.0.0",
-    "node-fetch": "^3.3.2",
-    "prop-types": "^15.8.1",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-helmet-async": "^2.0.5",
-    "react-router-dom": "^6.30.1",
-    "rollup-plugin-visualizer": "^6.0.3",
-    "slugify": "^1.6.6",
-    "vite": "^6.3.6"
+    "@supabase/supabase-js": "2.57.4",
+    "@vitejs/plugin-react": "4.7.0",
+    "jsdom": "23.2.0",
+    "node-fetch": "3.3.2",
+    "prop-types": "15.8.1",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "react-helmet-async": "2.0.5",
+    "react-router-dom": "6.30.1",
+    "rollup-plugin-visualizer": "6.0.3",
+    "slugify": "1.6.6",
+    "vite": "6.3.6"
   },
   "devDependencies": {
-    "rimraf": "^5.0.5"
+    "rimraf": "5.0.10"
   },
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 8080 --strictPort",
     "build": "vite build",
+    "start": "vite preview --host 0.0.0.0 --port 8080 --strictPort",
     "preview": "vite preview --host 0.0.0.0 --port 8080 --strictPort",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "verify": "pnpm typecheck && pnpm lint && pnpm build",
 
     "serve:keepalive": "bash scripts/dev-ensure.sh",
     "health:once": "node scripts/healthcheck.mjs --base http://localhost:8080",
@@ -31,7 +40,7 @@
     "autopilot": "bash scripts/autopilot-loop.sh",
     "autopilot:dry": "DRY_RUN=1 bash scripts/autopilot-loop.sh",
     "clean:fast": "rimraf .turbo .next/cache dist build coverage .cache",
-    "clean:all": "npm run clean:fast && rimraf node_modules && npm cache clean --force",
+    "clean:all": "pnpm clean:fast && rimraf node_modules && pnpm store prune",
     "clean:autopilot": "node scripts/autopilot-cleanup.js",
     "health": "bash efh-healthcheck.sh",
     "validate": "node validate-wix-content.cjs",

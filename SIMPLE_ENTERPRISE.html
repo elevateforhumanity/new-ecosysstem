@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevate for Humanity - Enterprise Workforce Development</title>
+    <meta name="description" content="Government contractor providing WIOA, JRI, WEX, OJT workforce development programs with 85% job placement rate.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .header-top {
+            background: #0F2B6C;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+        
+        .header-main {
+            background: white;
+            padding: 15px 20px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0F2B6C;
+        }
+        
+        nav {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: #0F2B6C;
+            text-decoration: none;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        nav a:hover {
+            background: #f5f5f5;
+        }
+        
+        .cta-btn {
+            background: #D91D3C;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .cta-btn:hover {
+            background: #b91c1c;
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 3px solid #0F2B6C;
+            margin-bottom: 30px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5em;
+            color: #0F2B6C;
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            font-size: 1.2em;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .funding {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .chips span {
+            background: white;
+            color: #0F2B6C;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .btn-primary {
+            display: block;
+            background: #0F2B6C;
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .btn-primary:hover {
+            background: #1e40af;
+        }
+        
+        .ctas {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .btn-large {
+            display: block;
+            background: #D91D3C;
+            color: white;
+            padding: 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .btn-large:hover {
+            background: #b91c1c;
+        }
+        
+        .btn-secondary {
+            display: block;
+            background: white;
+            color: #0F2B6C;
+            padding: 20px;
+            text-decoration: none;
+            border: 2px solid #0F2B6C;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .btn-secondary:hover {
+            background: #f5f5f5;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-box {
+            background: #f0f8ff;
+            padding: 25px;
+            text-align: center;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        .stat-box h3 {
+            font-size: 2.5em;
+            color: #D91D3C;
+            margin-bottom: 10px;
+        }
+        
+        .stat-box p {
+            color: #666;
+            font-weight: bold;
+        }
+        
+        .features, .solutions, .resources, .certifications, .contact {
+            margin-bottom: 40px;
+        }
+        
+        .features h2, .solutions h2, .resources h2, .certifications h2, .contact h2 {
+            color: #0F2B6C;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .feature {
+            background: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        .feature h3 {
+            color: #0F2B6C;
+            margin-bottom: 10px;
+        }
+        
+        .feature p {
+            color: #666;
+        }
+        
+        .solution-list, .resource-list {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .solution-list a, .resource-list a {
+            display: block;
+            padding: 15px;
+            background: white;
+            color: #333;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .solution-list a:hover, .resource-list a:hover {
+            background: #f5f5f5;
+        }
+        
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .cert {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        .cert h4 {
+            color: #0F2B6C;
+            margin-bottom: 5px;
+        }
+        
+        .cert p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .contact-item {
+            background: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        .contact-item h4 {
+            color: #0F2B6C;
+            margin-bottom: 10px;
+        }
+        
+        .contact-item p {
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        footer {
+            background: #f5f5f5;
+            padding: 30px 20px;
+            border-top: 1px solid #ddd;
+            margin-top: 40px;
+        }
+        
+        .compliance {
+            max-width: 1200px;
+            margin: 0 auto 20px;
+        }
+        
+        .compliance h3 {
+            color: #0F2B6C;
+            margin-bottom: 10px;
+        }
+        
+        .compliance p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .codes {
+            max-width: 1200px;
+            margin: 0 auto 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 4px;
+        }
+        
+        .codes p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .copyright {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .header-main {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav {
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2em;
+            }
+            
+            .chips {
+                justify-content: center;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cert-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chips {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            Government Contractor • DOE/DOL/DWD Aligned • Enterprise Solutions
+        </div>
+        <div class="header-main">
+            <div class="logo">ELEVATE FOR HUMANITY</div>
+            <nav>
+                <a href="#programs">Programs</a>
+                <a href="#government">Government</a>
+                <a href="#partners">Partners</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <a href="#enterprise" class="cta-btn">Enterprise Solutions</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Enterprise Workforce Development Solutions</h1>
+            <p>Leading government contractor delivering WIOA, JRI, WEX, and OJT programs. DOE • DWD • DOL aligned training with proven employer pipelines.</p>
+        </section>
+
+        <section class="funding">
+            <div class="chips">
+                <span>WIOA Certified</span>
+                <span>JRI Programs</span>
+                <span>WEX Training</span>
+                <span>OJT Partnerships</span>
+                <span>State: DWD / WorkOne</span>
+                <span>Federal: DOL Aligned</span>
+            </div>
+            <a href="#government" class="btn-primary">View Funding & Eligibility</a>
+        </section>
+
+        <section class="ctas">
+            <a href="#programs" class="btn-large">Explore Enterprise Programs</a>
+            <a href="#lms" class="btn-secondary">Access Learning Management System</a>
+        </section>
+
+        <section class="stats">
+            <div class="stat-box">
+                <h3>10,000+</h3>
+                <p>Professionals Trained</p>
+            </div>
+            <div class="stat-box">
+                <h3>85%</h3>
+                <p>Job Placement Rate</p>
+            </div>
+            <div class="stat-box">
+                <h3>500+</h3>
+                <p>Partner Organizations</p>
+            </div>
+        </section>
+
+        <section class="features" id="programs">
+            <h2>Enterprise Features</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <h3>Government Contracting</h3>
+                    <p>Certified government contractor with proven track record in federal and state workforce development programs.</p>
+                </div>
+                <div class="feature">
+                    <h3>Enterprise Analytics</h3>
+                    <p>Comprehensive reporting and analytics dashboard for tracking participant progress and program ROI.</p>
+                </div>
+                <div class="feature">
+                    <h3>Employer Partnerships</h3>
+                    <p>Direct pipelines to 500+ employer partners including Fortune 500 companies and healthcare systems.</p>
+                </div>
+                <div class="feature">
+                    <h3>Scalable Training</h3>
+                    <p>Enterprise-grade learning management system supporting thousands of concurrent users.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="solutions" id="government">
+            <h2>Enterprise Solutions</h2>
+            <div class="solution-list">
+                <a href="#partnerships">Corporate Partnership Programs</a>
+                <a href="#student-hub">Student Management Hub</a>
+                <a href="#analytics">Analytics & Reporting Dashboard</a>
+                <a href="#compliance-tools">Compliance & Audit Tools</a>
+                <a href="#api">API & Integration Services</a>
+                <a href="#support">Enterprise Support</a>
+            </div>
+        </section>
+
+        <section class="partnerships" id="partnerships">
+            <h2>Corporate Partnership Programs</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <h3>Fortune 500 Partnerships</h3>
+                    <p>Direct hiring partnerships with major corporations including healthcare systems, technology companies, and manufacturing leaders.</p>
+                </div>
+                <div class="feature">
+                    <h3>Custom Training Programs</h3>
+                    <p>Tailored workforce development programs designed to meet specific employer needs and industry requirements.</p>
+                </div>
+                <div class="feature">
+                    <h3>Apprenticeship Programs</h3>
+                    <p>Registered apprenticeship programs in high-demand fields with guaranteed employment pathways.</p>
+                </div>
+                <div class="feature">
+                    <h3>Talent Pipeline Management</h3>
+                    <p>End-to-end talent pipeline solutions from recruitment through placement and retention support.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="student-hub" id="student-hub">
+            <h2>Student Management Hub</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <h3>Learning Management System</h3>
+                    <p>Comprehensive LMS with course tracking, progress monitoring, and certification management.</p>
+                </div>
+                <div class="feature">
+                    <h3>Career Services Portal</h3>
+                    <p>Integrated career services including resume building, interview preparation, and job placement assistance.</p>
+                </div>
+                <div class="feature">
+                    <h3>Student Support Services</h3>
+                    <p>Wraparound support services including counseling, financial assistance, and academic advising.</p>
+                </div>
+                <div class="feature">
+                    <h3>Alumni Network</h3>
+                    <p>Active alumni network with mentorship opportunities and continuing education resources.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="analytics" id="analytics">
+            <h2>Analytics & Reporting Dashboard</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <h3>Real-Time Metrics</h3>
+                    <p>Live dashboard showing enrollment, completion rates, job placements, and program performance metrics.</p>
+                </div>
+                <div class="feature">
+                    <h3>Compliance Reporting</h3>
+                    <p>Automated compliance reporting for DOE, DOL, and state workforce development requirements.</p>
+                </div>
+                <div class="feature">
+                    <h3>ROI Analysis</h3>
+                    <p>Comprehensive return on investment analysis for training programs and employer partnerships.</p>
+                </div>
+                <div class="feature">
+                    <h3>Predictive Analytics</h3>
+                    <p>AI-powered analytics to predict student success and optimize program delivery.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="compliance-tools" id="compliance-tools">
+            <h2>Compliance & Audit Tools</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <h3>Federal Compliance</h3>
+                    <p>Built-in compliance tools for WIOA, DOE, DOL, and other federal workforce development requirements.</p>
+                </div>
+                <div class="feature">
+                    <h3>Audit Trail Management</h3>
+                    <p>Comprehensive audit trail tracking for all student interactions and program activities.</p>
+                </div>
+                <div class="feature">
+                    <h3>Documentation System</h3>
+                    <p>Automated documentation system for eligibility verification and program compliance.</p>
+                </div>
+                <div class="feature">
+                    <h3>Quality Assurance</h3>
+                    <p>Integrated quality assurance tools to ensure program standards and accreditation requirements.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="api" id="api">
+            <h2>API & Integration Services</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <h3>RESTful API</h3>
+                    <p>Comprehensive RESTful API for seamless integration with existing enterprise systems.</p>
+                </div>
+                <div class="feature">
+                    <h3>Single Sign-On</h3>
+                    <p>Enterprise SSO integration with Active Directory, SAML, and OAuth protocols.</p>
+                </div>
+                <div class="feature">
+                    <h3>Data Synchronization</h3>
+                    <p>Real-time data synchronization with HR systems, payroll, and enterprise databases.</p>
+                </div>
+                <div class="feature">
+                    <h3>Custom Integrations</h3>
+                    <p>Custom integration development for specialized enterprise requirements and legacy systems.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="support" id="support">
+            <h2>Enterprise Support</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <h3>24/7 Technical Support</h3>
+                    <p>Round-the-clock technical support with dedicated enterprise support team and priority response.</p>
+                </div>
+                <div class="feature">
+                    <h3>Implementation Services</h3>
+                    <p>Full implementation services including system setup, data migration, and user training.</p>
+                </div>
+                <div class="feature">
+                    <h3>Account Management</h3>
+                    <p>Dedicated account management team for ongoing support and strategic planning.</p>
+                </div>
+                <div class="feature">
+                    <h3>Training & Onboarding</h3>
+                    <p>Comprehensive training and onboarding programs for administrators and end users.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="resources" id="partners">
+            <h2>Resources & Support</h2>
+            <div class="resource-list">
+                <a href="#about">About Our Organization</a>
+                <a href="#case-studies">Enterprise Case Studies</a>
+                <a href="#whitepapers">Industry Whitepapers</a>
+                <a href="#webinars">Executive Webinars</a>
+                <a href="#contact">Contact Enterprise Team</a>
+            </div>
+        </section>
+
+        <section class="certifications">
+            <h2>Certifications & Compliance</h2>
+            <div class="cert-grid">
+                <div class="cert">
+                    <h4>DOE Contractor</h4>
+                    <p>Department of Energy</p>
+                </div>
+                <div class="cert">
+                    <h4>DOL Aligned</h4>
+                    <p>Department of Labor</p>
+                </div>
+                <div class="cert">
+                    <h4>WIOA Certified</h4>
+                    <p>Workforce Innovation</p>
+                </div>
+                <div class="cert">
+                    <h4>SOC 2 Type II</h4>
+                    <p>Security Compliance</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <h2>Enterprise Contact</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h4>Government Contracts</h4>
+                    <p>contracts@elevateforhumanity.org</p>
+                    <p>(555) 123-4567 ext. 101</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Enterprise Partnerships</h4>
+                    <p>partnerships@elevateforhumanity.org</p>
+                    <p>(555) 123-4567 ext. 102</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Technical Support</h4>
+                    <p>support@elevateforhumanity.org</p>
+                    <p>24/7 Hotline: (555) 123-4567</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="compliance">
+            <h3>Federal Compliance Statement</h3>
+            <p>Equal opportunity employer/program. Auxiliary aids and services are available upon request to individuals with disabilities. TTY 711.</p>
+            <p>Veterans and eligible spouses receive priority of service under all federal workforce development programs.</p>
+        </div>
+        <div class="codes">
+            <p><strong>CAGE Code:</strong> 8XYZ9 | <strong>DUNS:</strong> 123456789 | <strong>NAICS:</strong> 611519, 561320</p>
+        </div>
+        <div class="copyright">
+            © 2025 Elevate for Humanity, LLC. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Simple smooth scrolling for anchor links
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            
+            links.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Simple mobile menu toggle
+            const headerMain = document.querySelector('.header-main');
+            const nav = document.querySelector('nav');
+            
+            function createMobileToggle() {
+                if (window.innerWidth <= 768) {
+                    if (!document.querySelector('.mobile-toggle')) {
+                        const toggle = document.createElement('button');
+                        toggle.className = 'mobile-toggle';
+                        toggle.innerHTML = '☰ Menu';
+                        toggle.style.cssText = `
+                            background: #0F2B6C;
+                            color: white;
+                            border: none;
+                            padding: 10px 15px;
+                            border-radius: 4px;
+                            cursor: pointer;
+                            font-size: 14px;
+                        `;
+                        
+                        toggle.addEventListener('click', function() {
+                            if (nav.style.display === 'none') {
+                                nav.style.display = 'flex';
+                                nav.style.flexDirection = 'column';
+                                nav.style.width = '100%';
+                                nav.style.marginTop = '15px';
+                                this.innerHTML = '✕ Close';
+                            } else {
+                                nav.style.display = 'none';
+                                this.innerHTML = '☰ Menu';
+                            }
+                        });
+                        
+                        headerMain.appendChild(toggle);
+                        nav.style.display = 'none';
+                    }
+                } else {
+                    const toggle = document.querySelector('.mobile-toggle');
+                    if (toggle) {
+                        toggle.remove();
+                        nav.style.display = 'flex';
+                        nav.style.flexDirection = 'row';
+                        nav.style.width = 'auto';
+                        nav.style.marginTop = '0';
+                    }
+                }
+            }
+            
+            createMobileToggle();
+            window.addEventListener('resize', createMobileToggle);
+            
+            console.log('Simple Enterprise site loaded successfully');
+        });
+    </script>
+</body>
+</html>

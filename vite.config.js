@@ -15,6 +15,11 @@ export default defineConfig({
     visualizer({ filename: "dist/stats.html", gzipSize: true, brotliSize: true, template: "treemap" })
   ],
   base: '/',
+  server: {
+    host: '0.0.0.0',
+    port: 8012,
+    strictPort: true
+  },
   build: {
     outDir: 'dist',
     sourcemap: true

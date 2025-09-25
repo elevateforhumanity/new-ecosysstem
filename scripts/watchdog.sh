@@ -1,17 +1,20 @@
 #!/usr/bin/env bash
+# Usage: scripts/watchdog.sh "<command>"
 set -euo pipefail
+CMD="$1"
+LOG_DIR="${LOG_DIR:-.logs}"
+mkdir -p "$LOG_DIR"
+LOG_FILE="$LOG_DIR/server-8012.log"
+
+echo "[watchdog] supervising: $CMD"
+attempt=0
 while true; do
-  if ! pgrep -f "autopilot-loop.sh" >/dev/null; then
-    echo "🛟 Autopilot not running — restarting…"
-    nohup bash scripts/autopilot-loop.sh > .gp-logs/autopilot.out 2>&1 &
-  fi
-  if [ -n "${NETLIFY_SITE_ID:-}" ] && [ -n "${NETLIFY_AUTH_TOKEN:-}" ]; then
-    STATUS=$(curl -fsSL -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
-      "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID/deploys" | jq -r '.[0].state' || echo "unknown")
-    if [ "$STATUS" != "ready" ]; then
-      echo "❌ Bad deploy ($STATUS). Forcing rebuild…"
-      nohup bash scripts/autopilot-loop.sh > .gp-logs/autopilot.out 2>&1 &
-    fi
-  fi
-  sleep 60
+  attempt=$((attempt+1))
+  ts="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+  echo -e "\n[watchdog][$ts] start attempt #$attempt\n" | tee -a "$LOG_FILE"
+  bash -lc "$CMD" 2>&1 | tee -a "$LOG_FILE"
+  code="${PIPESTATUS[0]}"
+  echo "[watchdog] process exited with code $code" | tee -a "$LOG_FILE"
+  # Exponential backoff up to 10s
+  sleep $((attempt<5 ? attempt*2 : 10))
 done

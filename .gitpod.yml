@@ -3,54 +3,26 @@ workspaceClass: large
 image:
   file: .gitpod.Dockerfile
 
-# Universal port configuration - covers all common dev servers
 ports:
-  - port: 3000
-    visibility: public
-    onOpen: ignore
-    description: "Next.js dev server"
-  - port: 5173
-    visibility: public
-    onOpen: ignore
-    description: "Vite dev server"
-  - port: 8080
+  - port: 8012
     visibility: public
     onOpen: open-preview
-    description: "Static file server / Preview"
-  - port: 4000
-    visibility: public
-    onOpen: ignore
-    description: "Alternative dev server"
 
-# Auto-detect and start the right dev server
 tasks:
-  - name: Universal Dev Server
+  - name: Server (8012)
     init: |
       corepack enable
       corepack prepare pnpm@9.7.0 --activate || true
-      if [ -f pnpm-lock.yaml ]; then 
-        pnpm install --frozen-lockfile
-      elif [ -f package.json ]; then
-        pnpm install
-      fi
+      pnpm install --frozen-lockfile || pnpm install
+      chmod +x scripts/dev-8012.sh scripts/watchdog.sh scripts/healthcheck.sh scripts/autopilot.sh
     command: |
-      # Auto-detect project type and start appropriate server
-      if [ -f next.config.js ] || [ -f next.config.mjs ] || [ -d app ] || [ -d src/app ]; then
-        echo "🚀 Starting Next.js dev server on port 3000..."
-        HOST=0.0.0.0 WATCHPACK_POLLING=false CHOKIDAR_USEPOLLING=false pnpm dev
-      elif [ -f vite.config.js ] || [ -f vite.config.ts ]; then
-        echo "⚡ Starting Vite dev server on port 5173..."
-        HOST=0.0.0.0 WATCHPACK_POLLING=false CHOKIDAR_USEPOLLING=false pnpm dev
-      elif [ -f dist/index.html ]; then
-        echo "📁 Serving static files from dist/ on port 8080..."
-        cd dist && python3 -m http.server 8080 --bind 0.0.0.0
-      elif [ -f index.html ]; then
-        echo "📄 Serving static files from root on port 8080..."
-        python3 -m http.server 8080 --bind 0.0.0.0
-      else
-        echo "🔧 No recognized project type, starting static server on port 8080..."
-        python3 -m http.server 8080 --bind 0.0.0.0
-      fi
+      # Run the server under the watchdog so it auto-restarts on crash
+      scripts/watchdog.sh "scripts/dev-8012.sh"
+
+  - name: Autopilot
+    command: |
+      # Independent health monitor that restarts if the port goes unhealthy
+      scripts/autopilot.sh
 
 # Prebuilds for faster startup
 github:

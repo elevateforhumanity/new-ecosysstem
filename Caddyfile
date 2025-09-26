@@ -1,0 +1,44 @@
+:80 {
+  root * /srv
+  encode zstd gzip
+  try_files {path} {path}/ /index.html
+
+  # ---- health (web server only)
+  respond /health 200
+
+  # ---- Service routing: API + Admin + WebSockets → app:3000 (Node.js)
+  # ---- Background jobs handled by worker service (no direct routing)
+  @api path /api/* /auth/* /preview/*
+  @admin path /admin/*                     # add your admin UI/API here
+  @ws path /socket.io/* /ws/* /realtime/*  # socket.io or other WS paths
+
+  reverse_proxy @api app:3000 {
+    header_up Host {host}
+    header_up X-Forwarded-Proto {scheme}
+    header_up X-Forwarded-For {remote}
+  }
+  reverse_proxy @admin app:3000 {
+    header_up Host {host}
+    header_up X-Forwarded-Proto {scheme}
+    header_up X-Forwarded-For {remote}
+  }
+  reverse_proxy @ws app:3000 {
+    header_up Host {host}
+    header_up X-Forwarded-Proto {scheme}
+    header_up X-Forwarded-For {remote}
+    transport http {
+      keepalive 30s
+      versions h2c 1.1   # enables WebSockets/upgrade
+    }
+  }
+
+  # ---- root redirect to your landing page (leave this last so it doesn't catch /api/*)
+  @root path /
+  redir @root https://www.elevateforhumanity.org 302
+
+  header {
+    Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    X-Content-Type-Options "nosniff"
+    Referrer-Policy "strict-origin-when-cross-origin"
+  }
+}

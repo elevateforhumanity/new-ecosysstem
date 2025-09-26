@@ -1,42 +1,108 @@
-version: "3.9"
-
 services:
-  deviate:
-    container_name: deviate
+  web:  # Caddy static/proxy on :8012
+    image: caddy:2.8.4-alpine
+    container_name: efh-web
+    volumes:
+      - ./dist:/srv:ro
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    environment:
+      DURABLE_URL: https://www.elevateforhumanity.org
+    ports:
+      - "8012:80"
+    depends_on:
+      - app
+    restart: always
+    mem_limit: 128m
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/health"]
+      interval: 15s
+      timeout: 3s
+      retries: 5
+    
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  worker:  # Background jobs/cron
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.worker
+    container_name: efh-worker
+    environment:
+      NODE_ENV: production
+      WORKER_PORT: 4000
+      DURABLE_URL: https://www.elevateforhumanity.org
+    ports:
+      - "4000:4000"
+    restart: always
+    mem_limit: 256m
+    depends_on:
+      - app
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:4000/health"]
+      interval: 20s
+      timeout: 4s
+      retries: 5
+    
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  app:  # Node app on :3000
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    container_name: efh-app
+    environment:
+      NODE_ENV: production
+      PORT: 3000
     ports:
       - "3000:3000"
-    environment:
-      - NODE_ENV=development
-      - PORT=3000
-    restart: unless-stopped
-    mem_limit: 512m
-    cpus: 0.5
-    volumes:
-      - .:/app
-      - /app/node_modules
-    command: node simple-server.cjs
+    restart: always
+    mem_limit: 256m
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/health"]
+      interval: 15s
+      timeout: 3s
+      retries: 5
+    
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
-  # Alternative service for Vite development
-  frontend:
-    container_name: frontend
+  worker:  # Background jobs/cron
     build:
       context: .
-      dockerfile: Dockerfile.dev
-    ports:
-      - "5173:5173"
+      dockerfile: Dockerfile.worker
+    container_name: efh-worker
     environment:
-      - NODE_ENV=development
-    restart: unless-stopped
+      NODE_ENV: production
+      WORKER_PORT: 4000
+      DURABLE_URL: https://www.elevateforhumanity.org
+    ports:
+      - "4000:4000"
+    restart: always
     mem_limit: 256m
-    cpus: 0.3
-    volumes:
-      - .:/app
-      - /app/node_modules
-    command: npm run dev
-
-networks:
-  default:
-    name: elevateforhumanity-network
+    depends_on:
+      - app
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:4000/health"]
+      interval: 20s
+      timeout: 4s
+      retries: 5
+    
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

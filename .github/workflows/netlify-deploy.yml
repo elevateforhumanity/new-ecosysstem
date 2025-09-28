@@ -24,8 +24,19 @@ jobs:
       run: |
         npm ci || npm install --legacy-peer-deps || npm install --force
         
+    - name: Copy LMS to dist for build
+      run: |
+        mkdir -p dist
+        cp lms.html dist/
+        cp -r public/* dist/ 2>/dev/null || true
+        
     - name: Build site
       run: npm run build
+      
+    - name: Verify LMS file exists
+      run: |
+        ls -la dist/
+        echo "LMS file size: $(wc -c < dist/lms.html) bytes"
       
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v3.0

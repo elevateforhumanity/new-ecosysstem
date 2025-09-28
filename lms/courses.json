@@ -1,0 +1,62 @@
+[
+  {
+    "id": "healthcare-training",
+    "title": "Healthcare Training (ETPL)",
+    "summary": "Medical Assistant, CNA, Pharmacy Tech programs with clinical experience and job placement assistance.",
+    "hours": 120,
+    "delivery": "Hybrid: Online + Clinical",
+    "credential": "Industry Certification + EFH Certificate",
+    "tuition": 0,
+    "cover": "img/healthcare.jpg"
+  },
+  {
+    "id": "information-technology",
+    "title": "Information Technology",
+    "summary": "CompTIA A+, Network+, Security+ certification preparation with hands-on labs and career support.",
+    "hours": 80,
+    "delivery": "Self-paced + Live Labs",
+    "credential": "CompTIA Certifications",
+    "tuition": 0,
+    "cover": "img/technology.jpg"
+  },
+  {
+    "id": "construction-trades",
+    "title": "Construction Trades",
+    "summary": "Electrical, plumbing, HVAC, and general construction skills with apprenticeship pathways.",
+    "hours": 100,
+    "delivery": "Hands-on + Classroom",
+    "credential": "Trade Certification",
+    "tuition": 0,
+    "cover": "img/construction.jpg"
+  },
+  {
+    "id": "culinary-arts",
+    "title": "Culinary Arts",
+    "summary": "Professional cooking, food safety, restaurant management, and catering business skills.",
+    "hours": 90,
+    "delivery": "Kitchen Lab + Theory",
+    "credential": "ServSafe + Culinary Certificate",
+    "tuition": 0,
+    "cover": "img/culinary.jpg"
+  },
+  {
+    "id": "automotive-technology",
+    "title": "Automotive Technology",
+    "summary": "Engine repair, diagnostics, electrical systems, and hybrid vehicle technology training.",
+    "hours": 110,
+    "delivery": "Shop + Classroom",
+    "credential": "ASE Preparation + Certificate",
+    "tuition": 0,
+    "cover": "img/automotive.jpg"
+  },
+  {
+    "id": "business-administration",
+    "title": "Business Administration",
+    "summary": "Office management, customer service, accounting, digital marketing, and entrepreneurship skills.",
+    "hours": 60,
+    "delivery": "Online + Project-based",
+    "credential": "Business Certificate + Microsoft Office",
+    "tuition": 0,
+    "cover": "img/business.jpg"
+  }
+]

@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy Clean LMS to GitHub Pages
 
 on:
   push:
@@ -23,29 +23,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          
-      - name: Install dependencies
-        run: npm ci
-        
-      - name: Build
-        run: |
-          npm run build
-          cp lms.html dist/ || echo "LMS already in dist"
-          ls -la dist/lms.html
-          echo "LMS file size: $(wc -c < dist/lms.html) bytes"
           
       - name: Setup Pages
         uses: actions/configure-pages@v4
         
-      - name: Upload artifact
+      - name: Upload LMS artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: './lms'
           
       - name: Deploy to GitHub Pages
         id: deployment

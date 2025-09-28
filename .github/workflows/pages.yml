@@ -34,11 +34,10 @@ jobs:
         
       - name: Build
         run: |
-          mkdir -p dist
-          cp index.html dist/
-          cp -r src dist/
-          cp robots.txt dist/ || true
-          cp sitemap*.xml dist/ || true
+          npm run build
+          cp lms.html dist/ || echo "LMS already in dist"
+          ls -la dist/lms.html
+          echo "LMS file size: $(wc -c < dist/lms.html) bytes"
           
       - name: Setup Pages
         uses: actions/configure-pages@v4

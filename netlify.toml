@@ -1,12 +1,18 @@
 [build]
   publish = "dist"
-  command = "pnpm build"
+  command = "npm run build"
 
 [build.environment]
-  NODE_VERSION = "20.18.1"
+  NODE_VERSION = "18"
+  NPM_VERSION = "10"
   NEXT_TELEMETRY_DISABLED = "1"
-  PNPM_VERSION = "9.7.0"
   SECRETS_SCAN_SMART_DETECTION_ENABLED = "false"
+
+[dev]
+  command = "npm run dev"
+  port = 8012
+  targetPort = 8012
+  framework = "#custom"
 
 # Auto-deploy configuration
 [build.processing]
@@ -42,6 +48,17 @@
   for = "/index.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+# LMS redirects
+[[redirects]]
+  from = "/lms"
+  to = "/lms.html"
+  status = 200
+
+[[redirects]]
+  from = "/student-portal"
+  to = "/lms.html"
+  status = 200
 
 # Homepage redirects
 [[redirects]]

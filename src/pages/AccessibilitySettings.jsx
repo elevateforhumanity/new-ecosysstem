@@ -10,7 +10,3 @@ export default function AccessibilitySettings() {
     <main style={{ padding: 32, maxWidth: 700, margin: "0 auto" }}>
       <h1>Accessibility & Language</h1>
       <p>Adjust accessibility settings and select your language.</p>
-      {/* TODO: Add language selector, accessibility options */}
-    </main>
-  );
-}

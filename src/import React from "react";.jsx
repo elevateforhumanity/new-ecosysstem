@@ -14,7 +14,3 @@ export default function StudentHandbook() {
         <li>Academic Integrity</li>
         <li>Support & Resources</li>
       </ul>
-      {/* TODO: Add more detailed handbook sections as needed */}
-    </main>
-  );
-}

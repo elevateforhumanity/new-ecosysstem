@@ -27,21 +27,3 @@ export default function App() {
         <li>Two-factor authentication</li>
         <li>Notification preferences</li>
       </ul>
-      {/* TODO: Implement account and security settings */}
-      <Routes>
-        <Route path="/community" element={<Community />} />
-        <Route path="/integrations" element={<Integrations />} />
-        <Route path="/branding" element={<Branding />} />
-        <Route path="/mobile-app" element={<MobileApp />} />
-        <Route path="/accessibility-settings" element={<AccessibilitySettings />} />
-        <Route path="/support" element={<Support />} />
-        <Route path="/ecommerce" element={<Ecommerce />} />
-        <Route path="/curriculum-upload" element={<CurriculumUpload />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/certificates" element={<Certificates />} />
-        <Route path="/notifications" element={<Notifications />} />
-        <Route path="/settings" element={<Settings />} />
-      </Routes>
-    </main>
-  );
-}

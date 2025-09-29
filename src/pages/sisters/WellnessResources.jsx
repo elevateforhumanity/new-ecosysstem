@@ -36,7 +36,3 @@ export default function WellnessResources() {
           </a>
         </li>
       </ul>
-      {/* TODO: Add more local and campus resources */}
-    </main>
-  );
-}

@@ -16,7 +16,6 @@ export default function MentorSignup() {
   function handleSubmit(e) {
     e.preventDefault();
     setSubmitted(true);
-    // TODO: Send mentor signup data to backend or database
   }
 
   return (

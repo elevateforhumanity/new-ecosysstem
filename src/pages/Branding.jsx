@@ -10,7 +10,3 @@ export default function Branding() {
     <main style={{ padding: 32, maxWidth: 700, margin: "0 auto" }}>
       <h1>Branding & White Label</h1>
       <p>Customize your LMS branding, themes, and domains.</p>
-      {/* TODO: Add theme picker, logo upload, domain settings */}
-    </main>
-  );
-}

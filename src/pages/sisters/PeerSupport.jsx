@@ -13,7 +13,3 @@ export default function PeerSupport() {
         <li>Find a study buddy or accountability partner</li>
         <li>Access mental health and wellness resources</li>
       </ul>
-      {/* TODO: Add peer support chat, group signup, and resource links */}
-    </main>
-  );
-}

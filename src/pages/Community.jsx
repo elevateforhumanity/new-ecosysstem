@@ -22,7 +22,3 @@ export default function Community() {
           </li>
         ))}
       </ul>
-      {/* TODO: Add thread view, post creation, comments */}
-    </main>
-  );
-}

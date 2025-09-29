@@ -13,7 +13,3 @@ export default function Volunteer() {
         <li>Help develop curriculum</li>
         <li>Community outreach</li>
       </ul>
-      {/* TODO: Add volunteer signup form and more details */}
-    </main>
-  );
-}

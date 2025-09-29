@@ -15,7 +15,3 @@ export default function Ecommerce() {
         <li>Subscriptions</li>
         <li>Payment Management</li>
       </ul>
-      {/* TODO: Add product list, coupon creation, bundle management, subscriptions */}
-    </main>
-  );
-}

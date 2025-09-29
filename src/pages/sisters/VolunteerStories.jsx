@@ -18,7 +18,3 @@ export default function VolunteerStories() {
           <strong>Jordan:</strong> "Volunteering opened new career opportunities for me."
         </li>
       </ul>
-      {/* TODO: Add more stories and allow volunteers to submit their own */}
-    </main>
-  );
-}

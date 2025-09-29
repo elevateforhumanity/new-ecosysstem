@@ -12,7 +12,3 @@ export default function Profile() {
       <p>Name: Jane Doe</p>
       <p>Email: jane@example.com</p>
       <p>Role: Student</p>
-      {/* TODO: Add avatar upload, settings, password change */}
-    </main>
-  );
-}

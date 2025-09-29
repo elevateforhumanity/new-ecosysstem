@@ -48,7 +48,3 @@ export default function AnalyticsDashboard() {
           ))}
         </tbody>
       </table>
-      {/* TODO: Add charts, export options, and more detailed analytics */}
-    </main>
-  );
-}

@@ -13,7 +13,6 @@ export default function CurriculumUpload() {
   const handleUpload = async (e) => {
     e.preventDefault();
     setStatus("Processing...");
-    // TODO: Integrate with backend AI service for parsing
     setTimeout(() => {
       setCoursePreview({
         title: "Sample Course from Upload",

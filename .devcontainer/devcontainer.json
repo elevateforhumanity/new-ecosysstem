@@ -1,169 +1,56 @@
 {
-  "name": "elevate-ecosystem-live-coding",
+  "name": "elevate-react-app",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
   "hostRequirements": { 
     "cpus": 2, 
     "memory": "4gb", 
     "storage": "32gb" 
   },
-  "forwardPorts": [8080, 3000, 5173, 8012, 4000, 5000, 6000, 7000, 9000, 35729],
+  "forwardPorts": [8012, 8080],
   "portsAttributes": {
-    "8080": {
-      "label": "🏠 Main Homepage & Enrollment",
-      "onAutoForward": "openPreview",
-      "protocol": "https"
-    },
-    "3000": {
-      "label": "🔥 Hot Reload Server",
-      "onAutoForward": "openPreview",
-      "protocol": "https"
-    },
-    "5173": {
-      "label": "⚡ Vite Live Server",
-      "onAutoForward": "openPreview",
-      "protocol": "https"
-    },
     "8012": {
-      "label": "🤖 Autopilot Dashboard",
+      "label": "🚀 Development Server",
       "onAutoForward": "openPreview",
       "protocol": "https"
     },
-    "4000": {
-      "label": "🎓 Student Hub Portal",
+    "8080": {
+      "label": "📦 Production Preview",
       "onAutoForward": "openPreview",
       "protocol": "https"
-    },
-    "5000": {
-      "label": "💼 Workforce Development Center", 
-      "onAutoForward": "openPreview",
-      "protocol": "https"
-    },
-    "6000": {
-      "label": "🚀 Business Development Academy",
-      "onAutoForward": "openPreview",
-      "protocol": "https"
-    },
-    "7000": {
-      "label": "🔄 Career Transformation Hub",
-      "onAutoForward": "openPreview",
-      "protocol": "https"
-    },
-    "9000": {
-      "label": "🔧 API Services",
-      "onAutoForward": "silent"
-    },
-    "35729": {
-      "label": "🔄 LiveReload",
-      "onAutoForward": "ignore"
     }
   },
-  "postCreateCommand": "bash .devcontainer/setup-ecosystem.sh",
-  "postStartCommand": "bash .devcontainer/start-services.sh",
+  "postCreateCommand": "npm install -g pnpm@9.7.0 && pnpm install",
   "customizations": {
     "vscode": {
       "settings": {
         "terminal.integrated.defaultProfile.linux": "bash",
-        "terminal.integrated.profiles.linux": {
-          "bash": { "path": "/bin/bash", "args": ["-l"] }
-        },
-        "files.watcherExclude": {
-          "**/node_modules/**": true,
-          "**/.git/**": true,
-          "**/dist/**": true,
-          "**/.pnpm-store/**": true
-        },
-        "git.defaultCloneDirectory": "/workspaces",
-        "git.openRepositoryInParentFolders": "always",
-        "workbench.startupEditor": "readme",
-        "explorer.fileNesting.enabled": true,
-        "explorer.fileNesting.patterns": {
-          "package.json": "package-lock.json,pnpm-lock.yaml,yarn.lock",
-          "*.js": "${capture}.js.map,${capture}.min.js,${capture}.d.ts",
-          "*.ts": "${capture}.js,${capture}.js.map,${capture}.d.ts"
-        },
-        "liveServer.settings.donotShowInfoMsg": true,
-        "liveServer.settings.donotVerifyTags": true,
-        "liveServer.settings.port": 3000,
-        "liveServer.settings.root": "/",
-        "liveServer.settings.CustomBrowser": "chrome",
-        "liveServer.settings.AdvanceCustomBrowserCmdLine": "",
-        "liveServer.settings.NoBrowser": false,
-        "liveServer.settings.ignoreFiles": [
-          ".vscode/**",
-          "**/*.scss",
-          "**/*.sass",
-          "**/*.ts"
-        ],
-        "workbench.colorCustomizations": {
-          "statusBar.background": "#667eea",
-          "statusBar.foreground": "#ffffff",
-          "titleBar.activeBackground": "#764ba2",
-          "titleBar.activeForeground": "#ffffff"
-        },
         "files.autoSave": "afterDelay",
         "files.autoSaveDelay": 1000,
         "editor.formatOnSave": true,
-        "editor.codeActionsOnSave": {
-          "source.fixAll.eslint": "explicit"
-        }
+        "npm.packageManager": "pnpm"
       },
       "extensions": [
         "esbenp.prettier-vscode",
-        "ms-vscode.vscode-json",
-        "bradlc.vscode-tailwindcss",
         "ms-vscode.vscode-typescript-next",
         "ms-vscode.vscode-eslint",
-        "GitHub.copilot",
-        "GitHub.copilot-chat",
-        "ms-vscode.live-server",
-        "formulahendry.auto-rename-tag",
-        "christian-kohler.path-intellisense",
-        "ms-vscode.vscode-json",
-        "redhat.vscode-yaml",
-        "ms-vscode.vscode-markdown",
-        "ritwickdey.LiveServer",
-        "ms-vscode.vscode-html-language-features",
-        "ms-vscode.vscode-css-language-features"
+        "bradlc.vscode-tailwindcss"
       ]
     }
   },
   "features": {
     "ghcr.io/devcontainers/features/git:1": {
-      "ppa": true,
       "version": "latest"
     },
     "ghcr.io/devcontainers/features/github-cli:1": {
-      "installDirectlyFromGitHubRelease": true,
       "version": "latest"
     },
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {
-      "moby": true,
-      "azureDnsAutoDetection": true,
-      "installDockerBuildx": true
-    },
     "ghcr.io/devcontainers/features/node:1": {
-      "nodeGypDependencies": true,
-      "version": "20",
-      "nvmVersion": "latest"
+      "version": "20"
     }
   },
-  "mounts": [
-    "source=codespaces-ecosystem-cache,target=/workspaces/.cache,type=volume"
-  ],
   "remoteEnv": {
-    "WORKSPACE_ROOT": "/workspaces",
-    "ECOSYSTEM_MODE": "gitpod",
     "NODE_ENV": "development",
     "PNPM_HOME": "/usr/local/share/pnpm",
-    "PATH": "${PNPM_HOME}:${PATH}",
-    "LIVE_CODING_MODE": "enabled",
-    "AUTO_COMMIT_DEPLOY": "enabled",
-    "CLOUDFLARE_DEPLOYMENT": "auto",
-    "LANDING_PAGES_MODE": "individual",
-    "MAIN_HOMEPAGE_PORT": "8080",
-    "STUDENT_HUB_PORT": "4000",
-    "WORKFORCE_CENTER_PORT": "5000",
-    "BUSINESS_ACADEMY_PORT": "6000",
-    "CAREER_HUB_PORT": "7000"
+    "PATH": "${PNPM_HOME}:${PATH}"
   }
 }

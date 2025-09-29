@@ -4,14 +4,58 @@ image:
   file: .gitpod.Dockerfile
 
 ports:
+  - port: 8080
+    visibility: public
+    onOpen: open-preview
+    name: "🏠 Main Homepage & Enrollment"
+    description: "Primary marketing and enrollment gateway"
+    
   - port: 8012
     visibility: public
     onOpen: open-preview
+    name: "🤖 Autopilot Dashboard"
+    description: "System monitoring and automation control"
+    
+  - port: 4000
+    visibility: public
+    onOpen: notify
+    name: "🎓 Student Hub Portal"
+    description: "Student dashboard and learning management"
+    
+  - port: 5000
+    visibility: public
+    onOpen: notify
+    name: "💼 Workforce Development Center"
+    description: "WIOA training programs and job placement"
+    
+  - port: 6000
+    visibility: public
+    onOpen: notify
+    name: "🚀 Business Development Academy"
+    description: "Professional training and business growth"
+    
+  - port: 7000
+    visibility: public
+    onOpen: notify
+    name: "🔄 Career Transformation Hub"
+    description: "Career change guidance and planning"
+    
+  - port: 3000
+    visibility: public
+    onOpen: notify
+    name: "🔥 Hot Reload Server"
+    description: "Live coding development server"
+    
+  - port: 5173
+    visibility: public
+    onOpen: notify
+    name: "⚡ Vite Live Server"
+    description: "Vite development server with hot reload"
 
 tasks:
   - name: 🔥 Live Coding Environment
     init: |
-      echo "🚀 Initializing Live Coding Environment..."
+      echo "🚀 Initializing Live Coding Environment with Landing Pages..."
       corepack enable
       corepack prepare pnpm@9.7.0 --activate || true
       pnpm install --frozen-lockfile || pnpm install
@@ -19,26 +63,52 @@ tasks:
       chmod +x security/*.js
       npm install -g nodemon live-server
       echo "✅ Live coding dependencies installed"
+      echo "🌐 Setting up individual landing pages..."
+      ./scripts/setup-landing-page-routing.sh
     command: |
       echo "🔥 Starting Live Coding Server with Hot Reload..."
       scripts/live-coding-server.sh
 
+  - name: 🎓 Student Hub Portal (Port 4000)
+    command: |
+      echo "🎓 Starting Student Hub Portal..."
+      sleep 8  # Wait for main server
+      scripts/student-hub-server.sh
+
+  - name: 💼 Workforce Development Center (Port 5000)
+    command: |
+      echo "💼 Starting Workforce Development Center..."
+      sleep 10  # Wait for student hub
+      scripts/workforce-center-server.sh
+
+  - name: 🚀 Business Development Academy (Port 6000)
+    command: |
+      echo "🚀 Starting Business Development Academy..."
+      sleep 12  # Wait for workforce center
+      scripts/business-academy-server.sh
+
+  - name: 🔄 Career Transformation Hub (Port 7000)
+    command: |
+      echo "🔄 Starting Career Transformation Hub..."
+      sleep 14  # Wait for business academy
+      scripts/career-hub-server.sh
+
   - name: 🤖 Autopilot Auto-Commit & Deploy
     command: |
       echo "🤖 Starting Autopilot Auto-Commit & Deploy System..."
-      sleep 5  # Wait for live server to start
+      sleep 16  # Wait for all landing pages
       scripts/autopilot-auto-commit-deploy.sh
 
   - name: 🛡️ Security & Monitoring
     command: |
       echo "🛡️ Activating security systems..."
-      sleep 10  # Wait for other services
+      sleep 18  # Wait for autopilot
       scripts/autopilot-continuous-monitor.sh --auto-deploy
 
   - name: 📊 Development Dashboard
     command: |
       echo "📊 Starting development dashboard..."
-      sleep 15  # Wait for all services
+      sleep 20  # Wait for all services
       scripts/dev-8012.sh
 
 # Prebuilds for faster startup

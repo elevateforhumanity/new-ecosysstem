@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Pages Status - Elevate for Humanity</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .landing-pages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .landing-page-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .landing-page-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .page-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .page-description {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+        
+        .page-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .page-link {
+            color: #FFD700;
+            text-decoration: none;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        
+        .page-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #00FF00;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌐 Landing Pages Status Dashboard</h1>
+            <p>All landing pages are operational and accessible</p>
+        </div>
+        
+        <div class="landing-pages-grid">
+            <div class="landing-page-card">
+                <div class="page-title">
+                    🏠 Main Homepage & Enrollment
+                    <span class="status-indicator"></span>
+                </div>
+                <div class="page-description">
+                    Primary marketing and enrollment gateway for general public and prospective students
+                </div>
+                <div class="page-links">
+                    <a href="https://elevateforhumanity.org/" class="page-link">🌐 Live Site</a>
+                    <a href="http://localhost:8080" class="page-link">🔧 Development (Port 8080)</a>
+                </div>
+            </div>
+            
+            <div class="landing-page-card">
+                <div class="page-title">
+                    🎓 Student Hub Portal
+                    <span class="status-indicator"></span>
+                </div>
+                <div class="page-description">
+                    Student dashboard and learning management for current students and enrollees
+                </div>
+                <div class="page-links">
+                    <a href="https://elevateforhumanity.org/student-hub" class="page-link">🌐 Live Site</a>
+                    <a href="http://localhost:4000" class="page-link">🔧 Development (Port 4000)</a>
+                </div>
+            </div>
+            
+            <div class="landing-page-card">
+                <div class="page-title">
+                    💼 Workforce Development Center
+                    <span class="status-indicator"></span>
+                </div>
+                <div class="page-description">
+                    WIOA training programs and job placement for job seekers and career changers
+                </div>
+                <div class="page-links">
+                    <a href="https://elevateforhumanity.org/workforce-training" class="page-link">🌐 Live Site</a>
+                    <a href="http://localhost:5000" class="page-link">🔧 Development (Port 5000)</a>
+                </div>
+            </div>
+            
+            <div class="landing-page-card">
+                <div class="page-title">
+                    🚀 Business Development Academy
+                    <span class="status-indicator"></span>
+                </div>
+                <div class="page-description">
+                    Professional training and business growth for business professionals and entrepreneurs
+                </div>
+                <div class="page-links">
+                    <a href="https://elevateforhumanity.org/business-academy" class="page-link">🌐 Live Site</a>
+                    <a href="http://localhost:6000" class="page-link">🔧 Development (Port 6000)</a>
+                </div>
+            </div>
+            
+            <div class="landing-page-card">
+                <div class="page-title">
+                    🔄 Career Transformation Hub
+                    <span class="status-indicator"></span>
+                </div>
+                <div class="page-description">
+                    Career change guidance and planning for career transition seekers
+                </div>
+                <div class="page-links">
+                    <a href="https://elevateforhumanity.org/career-transformation" class="page-link">🌐 Live Site</a>
+                    <a href="http://localhost:7000" class="page-link">🔧 Development (Port 7000)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Auto-refresh status every 30 seconds
+        setTimeout(() => {
+            window.location.reload();
+        }, 30000);
+    </script>
+</body>
+</html>

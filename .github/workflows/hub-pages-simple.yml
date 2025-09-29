@@ -1,0 +1,60 @@
+name: Deploy Hub Pages (Simple)
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'hub-pages/**'
+      - '.github/workflows/hub-pages-simple.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify hub pages files
+        run: |
+          echo "📁 Hub pages directory contents:"
+          ls -la hub-pages/
+          echo ""
+          echo "📄 HTML files found:"
+          find hub-pages/ -name "*.html" -type f
+          echo ""
+          echo "✅ CNAME file:"
+          cat hub-pages/CNAME || echo "CNAME file missing"
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './hub-pages'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        
+      - name: Output deployment URL
+        run: |
+          echo "🚀 Hub pages deployed to: ${{ steps.deployment.outputs.page_url }}"
+          echo "📱 Hub URLs:"
+          echo "  Student Hub: ${{ steps.deployment.outputs.page_url }}/student-hub.html"
+          echo "  Business Hub: ${{ steps.deployment.outputs.page_url }}/business-hub.html"
+          echo "  Community Hub: ${{ steps.deployment.outputs.page_url }}/community-hub.html"
+          echo "  Educator Hub: ${{ steps.deployment.outputs.page_url }}/educator-hub.html"

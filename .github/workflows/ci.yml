@@ -3,8 +3,15 @@ name: CI
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'package.json'
+      - 'src/**'
+      - '.github/workflows/ci.yml'
   pull_request:
     branches: [ main ]
+    paths:
+      - 'package.json'
+      - 'src/**'
 
 jobs:
   build-test:

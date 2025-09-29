@@ -35,21 +35,16 @@ jobs:
           # Ensure CNAME file exists for custom domain
           echo "hubs.elevateforhumanity.org" > hub-pages/CNAME
           
-          # Create index.html that redirects to main site
-          cat > hub-pages/index.html << 'EOF'
-          <!DOCTYPE html>
-          <html>
-          <head>
-              <meta charset="UTF-8">
-              <title>Elevate for Humanity - Hub Pages</title>
-              <meta http-equiv="refresh" content="0;url=https://elevateforhumanity.org">
-              <link rel="canonical" href="https://elevateforhumanity.org">
-          </head>
-          <body>
-              <p>Redirecting to <a href="https://elevateforhumanity.org">Elevate for Humanity</a>...</p>
-          </body>
-          </html>
-          EOF
+          # Verify all required files exist
+          echo "Checking hub pages files:"
+          ls -la hub-pages/*.html
+          
+          # Create robots.txt if it doesn't exist
+          if [ ! -f hub-pages/robots.txt ]; then
+            echo "User-agent: *" > hub-pages/robots.txt
+            echo "Allow: /" >> hub-pages/robots.txt
+            echo "Sitemap: https://hubs.elevateforhumanity.org/sitemap.xml" >> hub-pages/robots.txt
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

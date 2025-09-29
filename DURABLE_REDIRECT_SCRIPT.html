@@ -1,0 +1,138 @@
+<!-- 
+DURABLE.CO REDIRECT SCRIPT
+Copy this code into your Durable site's custom HTML/code section
+This will redirect hub page URLs to the subdomain hosting
+-->
+
+<script>
+(function() {
+    'use strict';
+    
+    // Configuration
+    const HUB_SUBDOMAIN = 'https://hubs.elevateforhumanity.org';
+    const HUB_PAGES = ['student-hub', 'business-hub', 'community-hub', 'educator-hub'];
+    
+    // Get current path
+    const currentPath = window.location.pathname.toLowerCase();
+    const currentPage = currentPath.replace('/', '').replace(/\/$/, '');
+    
+    // Check if current page is a hub page
+    if (HUB_PAGES.includes(currentPage)) {
+        console.log('Hub page detected:', currentPage);
+        
+        // Construct redirect URL
+        const redirectUrl = `${HUB_SUBDOMAIN}/${currentPage}.html`;
+        
+        // Add tracking parameters if they exist
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.toString()) {
+            redirectUrl += '?' + urlParams.toString();
+        }
+        
+        console.log('Redirecting to:', redirectUrl);
+        
+        // Perform redirect
+        try {
+            // Use replace to avoid back button issues
+            window.location.replace(redirectUrl);
+        } catch (error) {
+            // Fallback for older browsers
+            window.location.href = redirectUrl;
+        }
+    }
+    
+    // Optional: Add hub page links to navigation
+    function addHubNavigation() {
+        // Look for navigation menu
+        const nav = document.querySelector('nav') || document.querySelector('.nav') || document.querySelector('#navigation');
+        
+        if (nav && !document.querySelector('.hub-links-added')) {
+            const hubLinks = document.createElement('div');
+            hubLinks.className = 'hub-links hub-links-added';
+            hubLinks.style.cssText = 'display: inline-block; margin-left: 20px;';
+            
+            hubLinks.innerHTML = `
+                <div style="position: relative; display: inline-block;">
+                    <button onclick="toggleHubMenu()" style="background: #667eea; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+                        Hubs ▼
+                    </button>
+                    <div id="hubDropdown" style="display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1000; min-width: 180px;">
+                        <a href="${HUB_SUBDOMAIN}/student-hub.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #333; border-bottom: 1px solid #eee;">🎓 Student Hub</a>
+                        <a href="${HUB_SUBDOMAIN}/business-hub.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #333; border-bottom: 1px solid #eee;">💼 Business Hub</a>
+                        <a href="${HUB_SUBDOMAIN}/community-hub.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #333; border-bottom: 1px solid #eee;">🤝 Community Hub</a>
+                        <a href="${HUB_SUBDOMAIN}/educator-hub.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #333;">👨‍🏫 Educator Hub</a>
+                    </div>
+                </div>
+            `;
+            
+            nav.appendChild(hubLinks);
+        }
+    }
+    
+    // Add hub navigation when page loads
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', addHubNavigation);
+    } else {
+        addHubNavigation();
+    }
+    
+})();
+
+// Global function for dropdown toggle
+function toggleHubMenu() {
+    const dropdown = document.getElementById('hubDropdown');
+    if (dropdown) {
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    const dropdown = document.getElementById('hubDropdown');
+    const button = event.target.closest('button');
+    
+    if (dropdown && !button) {
+        dropdown.style.display = 'none';
+    }
+});
+</script>
+
+<!-- 
+ALTERNATIVE: Meta Refresh Method (if JavaScript is disabled)
+Add these meta tags to specific pages in Durable:
+-->
+
+<!-- For /student-hub page: -->
+<!-- <meta http-equiv="refresh" content="0;url=https://hubs.elevateforhumanity.org/student-hub.html"> -->
+
+<!-- For /business-hub page: -->
+<!-- <meta http-equiv="refresh" content="0;url=https://hubs.elevateforhumanity.org/business-hub.html"> -->
+
+<!-- For /community-hub page: -->
+<!-- <meta http-equiv="refresh" content="0;url=https://hubs.elevateforhumanity.org/community-hub.html"> -->
+
+<!-- For /educator-hub page: -->
+<!-- <meta http-equiv="refresh" content="0;url=https://hubs.elevateforhumanity.org/educator-hub.html"> -->
+
+<!-- 
+IMPLEMENTATION INSTRUCTIONS:
+
+1. Copy the JavaScript code above (lines 6-80)
+2. Log into your Durable.co dashboard
+3. Go to your site editor
+4. Look for "Custom Code" or "HTML/CSS" section
+5. Paste the code in the <head> section or before </body>
+6. Save and publish your site
+
+The script will:
+- Automatically redirect hub page URLs to the subdomain
+- Add a "Hubs" dropdown menu to your navigation
+- Preserve any URL parameters during redirect
+- Work on all devices and browsers
+
+Test by visiting:
+- elevateforhumanity.org/student-hub (should redirect)
+- elevateforhumanity.org/business-hub (should redirect)
+- elevateforhumanity.org/community-hub (should redirect)
+- elevateforhumanity.org/educator-hub (should redirect)
+-->

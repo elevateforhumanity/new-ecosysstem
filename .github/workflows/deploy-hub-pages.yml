@@ -1,0 +1,64 @@
+name: Deploy Hub Pages to GitHub Pages
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - '*-hub.html'
+      - '.github/workflows/deploy-hub-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create hub pages directory
+        run: |
+          mkdir -p hub-pages
+          cp student-hub.html hub-pages/
+          cp business-hub.html hub-pages/
+          cp community-hub.html hub-pages/
+          cp educator-hub.html hub-pages/
+          
+          # Create index.html that redirects to main site
+          cat > hub-pages/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <meta charset="UTF-8">
+              <title>Elevate for Humanity - Hub Pages</title>
+              <meta http-equiv="refresh" content="0;url=https://elevateforhumanity.org">
+              <link rel="canonical" href="https://elevateforhumanity.org">
+          </head>
+          <body>
+              <p>Redirecting to <a href="https://elevateforhumanity.org">Elevate for Humanity</a>...</p>
+          </body>
+          </html>
+          EOF
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './hub-pages'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

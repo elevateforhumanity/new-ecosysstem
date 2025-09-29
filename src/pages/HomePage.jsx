@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { SEO } from "../lib/seo/SEO";
 import { testSupabaseConnection } from "../supabaseClient";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function HomePage() {
   const [supabaseStatus, setSupabaseStatus] = useState('checking');
@@ -16,12 +18,13 @@ export default function HomePage() {
   }, []);
 
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <SEO
         title="Home"
         description="Elevate for Humanity drives mentorship, education, and community impact."
         canonical={`${import.meta.env.VITE_SITE_URL || ""}/`}
       />
+      <Header />
       <main id="main-content" style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
         <header style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <h1 style={{ fontSize: '3rem', marginBottom: '1rem', color: '#1e40af' }}>
@@ -195,6 +198,7 @@ export default function HomePage() {
           </div>
         </section>
       </main>
-    </>
+      <Footer />
+    </div>
   );
 }

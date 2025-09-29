@@ -1,3 +1,12 @@
+# Landing page routes - serve static HTML files
+/student-hub /student-hub.html 200
+/business-hub /business-hub.html 200
+/community-hub /community-hub.html 200
+/educator-hub /educator-hub.html 200
+
+# SPA fallback for React Router
+/* /index.html 200
+
 # Redirect duplicate pages to canonical versions
 /index-authentic.html /hub.html 301
 /index-ecosystem.html /hub.html 301

@@ -1,41 +1,98 @@
-name: Deploy to CloudFlare Pages
+name: Deploy to Cloudflare Pages
 
 on:
   push:
+    branches: [ main, develop ]
+  pull_request:
     branches: [ main ]
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+        - production
+        - staging
+
+env:
+  NODE_VERSION: '20'
+  PNPM_VERSION: '9.7.0'
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    name: Deploy to CloudFlare Pages
+    name: Build and Deploy to Cloudflare Pages
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
-      - name: Build
+      - name: Build application
         run: |
+          echo "🏗️ Building application for Cloudflare Pages..."
+          
+          # Create dist directory
           mkdir -p dist
-          cp index.html dist/
-          cp -r src dist/
-          cp robots.txt dist/ || true
-          cp sitemap*.xml dist/ || true
-          cp _headers dist/ || true
-          cp _redirects dist/ || true
+          
+          # Copy all necessary files for deployment
+          cp index.html dist/ || echo "No index.html found"
+          cp hub.html dist/index.html || echo "Using hub.html as index"
+          
+          # Copy all HTML files
+          cp *.html dist/ 2>/dev/null || true
+          
+          # Copy assets and static files
+          cp -r assets dist/ 2>/dev/null || true
+          cp -r css dist/ 2>/dev/null || true
+          cp -r js dist/ 2>/dev/null || true
+          cp -r images dist/ 2>/dev/null || true
+          cp -r icons dist/ 2>/dev/null || true
+          
+          # Copy configuration files
+          cp robots.txt dist/ 2>/dev/null || true
+          cp sitemap*.xml dist/ 2>/dev/null || true
+          cp _headers dist/ 2>/dev/null || true
+          cp _redirects dist/ 2>/dev/null || true
+          cp manifest.json dist/ 2>/dev/null || true
+          
+          # Copy any additional directories
+          cp -r public/* dist/ 2>/dev/null || true
+          
+          echo "✅ Build complete - files ready for Cloudflare deployment"
+          ls -la dist/
 
-      - name: Deploy to CloudFlare Pages
+      - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
-          apiToken: 7W2pnC5oQxQKewWDjTLKB-1tY9Zd9xqEpA9qjyoB
-          accountId: ff0d5ca582b5911a626ba012935cf3ec
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: elevateforhumanity
-          directory: .
+          directory: dist
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          wranglerVersion: '3'
+
+      - name: Deployment Summary
+        run: |
+          echo "🚀 Deployment Summary"
+          echo "===================="
+          echo "✅ Successfully deployed to Cloudflare Pages"
+          echo "🌐 Project: elevateforhumanity"
+          echo "📁 Directory: dist"
+          echo "🔗 URL: https://elevateforhumanity.pages.dev"
+          echo "🎯 Custom Domain: https://elevateforhumanity.org"

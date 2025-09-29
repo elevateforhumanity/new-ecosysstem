@@ -2,7 +2,7 @@
 ## Multi-Cloud Deployment & Integration Suite (70+ Files)
 
 ### Integration Overview
-Comprehensive multi-platform integration system supporting deployment and management across Supabase, Cloudflare, Netlify, and Replit. Enables seamless multi-cloud architecture with automated deployment, monitoring, and optimization.
+Comprehensive multi-platform integration system supporting deployment and management across Supabase, Cloudflare, Cloudflare Pages, and Replit. Enables seamless multi-cloud architecture with automated deployment, monitoring, and optimization.
 
 ### Supabase Integration (18+ Files)
 
@@ -66,11 +66,11 @@ CLOUDFLARE_DEPLOYMENT_GUIDE.md   # Deployment guide
 CLOUDFLARE_SSL_FIX_GUIDE.md      # SSL troubleshooting
 ```
 
-### Netlify Integration (25+ Files)
+### Cloudflare Pages Integration (25+ Files)
 
-#### Core Netlify System
+#### Core Cloudflare Pages System
 ```
-netlify/
+cloudflare/
 ├── functions/
 │   └── wix-logs.js             # WIX logging function
 └── functions-disabled/         # Disabled functions
@@ -80,7 +80,7 @@ netlify-sister.toml             # Sister sites config
 netlify-old.toml                # Legacy configuration
 ```
 
-#### Netlify Environment Management
+#### Cloudflare Pages Environment Management
 ```
 netlify-env-config.js           # Environment configuration
 netlify-env-development.json    # Development settings
@@ -88,7 +88,7 @@ netlify-env-production.json     # Production settings
 netlify-env-staging.json        # Staging settings
 ```
 
-#### Netlify Deployment System
+#### Cloudflare Pages Deployment System
 ```
 netlify-deploy-package.md       # Deployment package
 netlify-auto-deploy.md          # Auto-deployment guide
@@ -96,7 +96,7 @@ netlify-ready/                  # Ready-to-deploy files
 netlify-deployment/             # Deployment directory
 ```
 
-#### Netlify Scripts & Automation
+#### Cloudflare Pages Scripts & Automation
 ```
 scripts/netlify-deploy.sh       # Deployment script
 scripts/cf-netlify-domain-autopilot.sh  # Domain automation
@@ -108,7 +108,7 @@ fix-netlify-deployment.js       # Deployment fixes
 fix-netlify-redirects.js        # Redirect management
 ```
 
-#### Netlify Documentation & Guides
+#### Cloudflare Pages Documentation & Guides
 ```
 NETLIFY_AUTOPILOT_GUIDE.md      # Autopilot guide
 NETLIFY_CLI_GUIDE.md            # CLI documentation
@@ -120,7 +120,7 @@ NETLIFY_WWW_FIX.md              # WWW redirect setup
 netlify-security-checklist.md   # Security checklist
 ```
 
-#### Netlify Testing & Verification
+#### Cloudflare Pages Testing & Verification
 ```
 verify-netlify.sh               # Deployment verification
 test-netlify-deployment.js      # Deployment testing
@@ -153,7 +153,7 @@ data/fixtures/Pasted--EFH-Hardened-server-mjs-Drop-this-at-project-root-next-to-
 #### 1. Multi-Cloud Architecture
 - **Database**: Supabase for primary data storage
 - **CDN**: Cloudflare for global content delivery
-- **Hosting**: Netlify for static site deployment
+- **Hosting**: Cloudflare Pages for static site deployment
 - **Development**: Replit for instant development
 
 #### 2. Automated Deployment Pipeline
@@ -180,13 +180,13 @@ data/fixtures/Pasted--EFH-Hardened-server-mjs-Drop-this-at-project-root-next-to-
 ```bash
 # Replit for instant development
 # Supabase for development database
-# Netlify for preview deployments
+# Cloudflare Pages for preview deployments
 # Cloudflare for development CDN
 ```
 
 #### Staging Environment
 ```bash
-# Netlify for staging deployment
+# Cloudflare Pages for staging deployment
 # Supabase staging database
 # Cloudflare staging configuration
 # Automated testing pipeline
@@ -195,7 +195,7 @@ data/fixtures/Pasted--EFH-Hardened-server-mjs-Drop-this-at-project-root-next-to-
 #### Production Environment
 ```bash
 # Cloudflare for production CDN
-# Netlify for production hosting
+# Cloudflare Pages for production hosting
 # Supabase for production database
 # Full monitoring and analytics
 ```
@@ -242,7 +242,7 @@ data/fixtures/Pasted--EFH-Hardened-server-mjs-Drop-this-at-project-root-next-to-
 - **SSL**: Automated certificate management
 - **Analytics**: Performance monitoring
 
-#### Netlify Capabilities
+#### Cloudflare Pages Capabilities
 - **Static Hosting**: Fast static site deployment
 - **Functions**: Serverless functions
 - **Forms**: Form handling
@@ -270,7 +270,7 @@ CLOUDFLARE_API_TOKEN=your-api-token
 CLOUDFLARE_ZONE_ID=your-zone-id
 CLOUDFLARE_ACCOUNT_ID=your-account-id
 
-# Netlify Configuration
+# Cloudflare Pages Configuration
 NETLIFY_AUTH_TOKEN=your-auth-token
 NETLIFY_SITE_ID=your-site-id
 

@@ -1,19 +1,44 @@
 {
-  "name": "elevate-for-humanity",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
-  "hostRequirements": { "cpus": 4, "memory": "8gb", "storage": "32gb" },
-  "forwardPorts": [8080, 3000, 5173],
+  "name": "elevate-ecosystem-codespaces",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "hostRequirements": { 
+    "cpus": 8, 
+    "memory": "16gb", 
+    "storage": "64gb" 
+  },
+  "forwardPorts": [8080, 3000, 5173, 8012, 4000, 5000, 9000],
   "portsAttributes": {
     "8080": {
-      "label": "Main Site",
+      "label": "Main Ecosystem",
       "onAutoForward": "openPreview"
     },
     "3000": {
       "label": "Development Server",
-      "onAutoForward": "openPreview"
+      "onAutoForward": "silent"
+    },
+    "5173": {
+      "label": "Vite Dev Server",
+      "onAutoForward": "silent"
+    },
+    "8012": {
+      "label": "Autopilot Server",
+      "onAutoForward": "silent"
+    },
+    "4000": {
+      "label": "Sister Site 1",
+      "onAutoForward": "silent"
+    },
+    "5000": {
+      "label": "Sister Site 2",
+      "onAutoForward": "silent"
+    },
+    "9000": {
+      "label": "API Services",
+      "onAutoForward": "silent"
     }
   },
-  "postCreateCommand": "npm install -g http-server && echo 'Dev container ready'",
+  "postCreateCommand": "bash .devcontainer/setup-ecosystem.sh",
+  "postStartCommand": "bash .devcontainer/start-services.sh",
   "customizations": {
     "vscode": {
       "settings": {
@@ -24,18 +49,64 @@
         "files.watcherExclude": {
           "**/node_modules/**": true,
           "**/.git/**": true,
-          "**/dist/**": true
+          "**/dist/**": true,
+          "**/.pnpm-store/**": true
+        },
+        "git.defaultCloneDirectory": "/workspaces",
+        "git.openRepositoryInParentFolders": "always",
+        "workbench.startupEditor": "readme",
+        "explorer.fileNesting.enabled": true,
+        "explorer.fileNesting.patterns": {
+          "package.json": "package-lock.json,pnpm-lock.yaml,yarn.lock",
+          "*.js": "${capture}.js.map,${capture}.min.js,${capture}.d.ts",
+          "*.ts": "${capture}.js,${capture}.js.map,${capture}.d.ts"
         }
       },
       "extensions": [
         "esbenp.prettier-vscode",
         "ms-vscode.vscode-json",
-        "bradlc.vscode-tailwindcss"
+        "bradlc.vscode-tailwindcss",
+        "ms-vscode.vscode-typescript-next",
+        "ms-vscode.vscode-eslint",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "ms-vscode.live-server",
+        "formulahendry.auto-rename-tag",
+        "christian-kohler.path-intellisense",
+        "ms-vscode.vscode-json",
+        "redhat.vscode-yaml",
+        "ms-vscode.vscode-markdown"
       ]
     }
   },
   "features": {
-    "ghcr.io/devcontainers/features/git:1": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+    "ghcr.io/devcontainers/features/git:1": {
+      "ppa": true,
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "installDirectlyFromGitHubRelease": true,
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "moby": true,
+      "azureDnsAutoDetection": true,
+      "installDockerBuildx": true
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "nodeGypDependencies": true,
+      "version": "20",
+      "nvmVersion": "latest"
+    }
+  },
+  "mounts": [
+    "source=codespaces-ecosystem-cache,target=/workspaces/.cache,type=volume"
+  ],
+  "remoteEnv": {
+    "WORKSPACE_ROOT": "/workspaces",
+    "ECOSYSTEM_MODE": "codespaces",
+    "NODE_ENV": "development",
+    "PNPM_HOME": "/usr/local/share/pnpm",
+    "PATH": "${PNPM_HOME}:${PATH}"
   }
 }

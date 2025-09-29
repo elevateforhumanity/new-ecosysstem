@@ -90,8 +90,8 @@ jobs:
         
         # Check Netlify functions
         FUNCTIONS=(
-          "/.netlify/functions/secure-api"
-          "/.netlify/functions/sitemap-cron"
+          "/api/secure-api"
+          "/api/sitemap-cron"
         )
         
         for func in "${FUNCTIONS[@]}"; do

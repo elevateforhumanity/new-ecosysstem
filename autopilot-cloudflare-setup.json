@@ -3,9 +3,9 @@
   "description": "Configure CloudFlare Pages for elevateforhumanity.org with government contracting and philanthropy platform",
   "priority": "high",
   "credentials": {
-    "cloudflare_api_token": "7W2pnC5oQxQKewWDjTLKB-1tY9Zd9xqEpA9qjyoB",
-    "account_id": "ff0d5ca582b5911a626ba012935cf3ec",
-    "zone_id": "0cde07dbe1f6b3e3c25ec30421ee7ced"
+    "cloudflare_api_token": "${CLOUDFLARE_API_TOKEN}",
+    "account_id": "${CLOUDFLARE_ACCOUNT_ID}",
+    "zone_id": "${CLOUDFLARE_ZONE_ID}"
   },
   "configuration": {
     "project_name": "elevateforhumanity",

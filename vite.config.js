@@ -16,9 +16,18 @@ export default defineConfig({
   ],
   base: '/',
   server: {
-    host: '0.0.0.0',
+    host: true,
     port: 8012,
-    strictPort: true
+    strictPort: false,
+    allowedHosts: 'all',
+    hmr: {
+      clientPort: 8012
+    }
+  },
+  preview: {
+    host: true,
+    port: 8080,
+    strictPort: false
   },
   build: {
     outDir: 'dist',

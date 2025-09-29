@@ -100,7 +100,7 @@ git clone --mirror https://github.com/elevateforhumanity/new-ecosysstem.git
 ### Key Configuration Files
 ```
 .replit - Replit configuration
-netlify.toml - Netlify deployment
+cloudflare-deploy.sh - Cloudflare deployment
 supabase/config.toml - Supabase configuration
 .github/workflows/ - 25 GitHub Actions
 docker-compose.yml - Docker setup

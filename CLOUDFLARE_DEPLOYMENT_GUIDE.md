@@ -1,150 +1,104 @@
 # 🚀 Cloudflare Pages Deployment Guide
 
 ## Overview
-Deploy elevateforhumanity.org to Cloudflare Pages for fast, global CDN hosting with automatic SSL and edge optimization.
 
-## Prerequisites
-- Cloudflare account
-- GitHub repository access
-- Domain added to Cloudflare DNS
+This project is configured for deployment exclusively to Cloudflare Pages, providing:
+- Fast global CDN
+- Automatic HTTPS
+- Custom domain support
+- GitHub integration
+- Environment variables support
 
-## Step 1: Setup Cloudflare Pages
+## Automatic Deployment
 
-### 1.1 Connect Repository
-1. Go to [Cloudflare Dashboard](https://dash.cloudflare.com) → Pages
-2. Click "Create a project" → "Connect to Git"
-3. Select your GitHub repository
-4. Choose the main/master branch
+### GitHub Actions (Recommended)
 
-### 1.2 Configure Build Settings
-```
-Framework preset: None (or Vite)
-Build command: npm run build
-Output directory: dist
-Root directory: / (leave empty)
-```
+Every push to the `main` branch automatically triggers deployment:
 
-### 1.3 Environment Variables
-Add these in Pages → Settings → Environment Variables:
-```
-NODE_VERSION = 20.17.0
-NPM_FLAGS = --production=false
-```
+1. **Commit your changes:**
+   ```bash
+   git add .
+   git commit -m "Your commit message"
+   ```
 
-## Step 2: Custom Domain Setup
+2. **Push to main branch:**
+   ```bash
+   git push origin main
+   ```
 
-### 2.1 Add Domain to Cloudflare
-1. Go to Cloudflare Dashboard → Websites
-2. Add site: `elevateforhumanity.org`
-3. Update nameservers at your registrar to Cloudflare's nameservers
+3. **Monitor deployment:**
+   - Check GitHub Actions tab for deployment status
+   - Visit https://elevateforhumanity.pages.dev once complete
 
-### 2.2 Configure DNS Records
-In Cloudflare DNS settings:
-```
-Type: A
-Name: @
-Content: [Cloudflare Pages IP from dashboard]
-Proxy: Enabled (orange cloud)
+### Manual Deployment
 
-Type: CNAME  
-Name: www
-Content: elevateforhumanity.org
-Proxy: Enabled (orange cloud)
-```
+Use the deployment script for manual deployments:
 
-### 2.3 Add Custom Domain to Pages
-1. Go to Pages → Your Project → Custom domains
-2. Add domain: `elevateforhumanity.org`
-3. Add domain: `www.elevateforhumanity.org`
-4. Cloudflare will automatically provision SSL certificates
-
-## Step 3: Verify Deployment
-
-### 3.1 Test Build
 ```bash
-# Test locally first
-npm run build
-npx serve dist
+# Prepare and deploy
+bash cloudflare-deploy.sh
 
-# Check build output
-ls -la dist/
+# Or use Wrangler CLI directly
+npx wrangler pages publish dist
 ```
 
-### 3.2 Test Live Site
-```bash
-# Test main domain
-curl -I https://elevateforhumanity.org
+## Configuration
 
-# Test www subdomain
-curl -I https://www.elevateforhumanity.org
+### Environment Variables
 
-# Test redirects
-curl -I https://elevateforhumanity.org/programs
-```
+Required secrets in GitHub repository settings:
+- `CLOUDFLARE_API_TOKEN` - Your Cloudflare API token
+- `CLOUDFLARE_ACCOUNT_ID` - Your Cloudflare account ID
 
-### 3.3 Verify SEO
-- Check robots.txt: `https://www.elevateforhumanity.org/robots.txt`
-- Check sitemap: `https://www.elevateforhumanity.org/sitemap-index.xml`
-- Verify canonical URLs in page source
+### Custom Domain
 
-## Step 4: Performance Optimization
+The site is configured for:
+- **Primary:** https://elevateforhumanity.org
+- **Pages URL:** https://elevateforhumanity.pages.dev
 
-### 4.1 Cloudflare Settings
-Enable these in Cloudflare Dashboard:
-- **Speed** → Auto Minify (CSS, JS, HTML)
-- **Speed** → Brotli compression
-- **Caching** → Browser Cache TTL: 4 hours
-- **SSL/TLS** → Full (strict)
+### Build Settings
 
-### 4.2 Page Rules (Optional)
-Create page rules for:
-- Cache everything: `*.elevateforhumanity.org/*`
-- Always use HTTPS: `*elevateforhumanity.org/*`
+- **Build command:** Handled by GitHub Actions
+- **Output directory:** `dist`
+- **Node.js version:** 20
+- **Package manager:** pnpm
 
-## Step 5: Monitoring & Analytics
+## Files Included in Deployment
 
-### 5.1 Cloudflare Analytics
-- Monitor traffic in Cloudflare Dashboard → Analytics
-- Track Core Web Vitals
-- Monitor security threats
+The deployment includes:
+- All HTML files
+- Assets (CSS, JS, images, icons)
+- Configuration files (_headers, _redirects, robots.txt)
+- Sitemap files
+- Manifest and favicon
 
-### 5.2 Google Search Console
-1. Add property: `https://www.elevateforhumanity.org`
-2. Verify via DNS TXT record
-3. Submit sitemap: `https://www.elevateforhumanity.org/sitemap-index.xml`
+## Security Features
+
+- Security headers configured in `_headers`
+- Content Security Policy (CSP)
+- HTTPS redirect
+- Cache optimization
 
 ## Troubleshooting
 
-### Build Failures
-- Check Node.js version (should be 20.17.0)
-- Verify package.json scripts
-- Check build logs in Pages dashboard
+### Deployment Fails
+1. Check GitHub Actions logs
+2. Verify Cloudflare API token is valid
+3. Ensure all required files are committed
 
-### DNS Issues
-- Ensure nameservers point to Cloudflare
-- Verify DNS records are proxied (orange cloud)
-- Wait up to 24 hours for global propagation
+### Site Not Loading
+1. Check Cloudflare Pages dashboard
+2. Verify DNS settings for custom domain
+3. Check browser console for errors
 
-### SSL Certificate Issues
-- Ensure SSL/TLS mode is "Full (strict)"
-- Check custom domain status in Pages
-- Contact Cloudflare support if needed
+### Build Issues
+1. Run `bash cloudflare-deploy.sh` locally
+2. Check for missing files in `dist` directory
+3. Verify all dependencies are installed
 
-## Files Created for Cloudflare
-- `_headers` - Security headers and CORS configuration
-- `_redirects` - URL redirects and SPA routing
-- `CLOUDFLARE_BUILD_CONFIG.md` - Build configuration reference
+## Support
 
-## Expected Performance
-- **Global CDN**: Sub-100ms response times worldwide
-- **SSL**: Automatic certificate provisioning and renewal
-- **Compression**: Brotli and Gzip compression enabled
-- **Caching**: Intelligent edge caching
-- **Security**: DDoS protection and WAF included
-
-## Support Resources
-- [Cloudflare Pages Documentation](https://developers.cloudflare.com/pages/)
-- [Cloudflare Community](https://community.cloudflare.com/)
-- [Cloudflare Support](https://support.cloudflare.com/)
-
-**Your site is now ready for deployment on Cloudflare Pages with optimal performance and security.**
+For deployment issues:
+1. Check Cloudflare Pages documentation
+2. Review GitHub Actions workflow logs
+3. Verify all environment variables are set correctly

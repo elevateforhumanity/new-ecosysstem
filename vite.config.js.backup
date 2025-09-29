@@ -1,0 +1,37 @@
+/*
+  Copyright (c) 2025 Elevate for Humanity
+  Commercial License. No resale, sublicensing, or redistribution allowed.
+  See LICENSE file for details.
+*/
+
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { visualizer } from "rollup-plugin-visualizer";
+
+export default defineConfig({
+  plugins: [
+    react(),
+    // Generates dist/stats.html on build (treemap visualization)
+    visualizer({ filename: "dist/stats.html", gzipSize: true, brotliSize: true, template: "treemap" })
+  ],
+  base: '/',
+  server: {
+    host: '0.0.0.0',
+    port: 8012,
+    strictPort: true,
+    allowedHosts: [
+      'localhost',
+      '127.0.0.1',
+      '0.0.0.0',
+      '.gitpod.dev',
+      '.gitpod.io',
+      '.github.dev',
+      '.codespaces.dev',
+      '8012--01999541-5193-736a-aec2-cfebece0ef39.us-east-1-01.gitpod.dev'
+    ]
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: true
+  }
+});

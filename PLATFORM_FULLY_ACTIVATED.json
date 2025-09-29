@@ -16,7 +16,7 @@
     "supabase_database": "Connected and ready",
     "edge_functions": "3 functions prepared",
     "github_workflows": "22 workflows configured",
-    "netlify_config": "Production ready",
+    "cloudflare_config": "Production ready",
     "environment_variables": "30+ variables set"
   },
   "capabilities": [

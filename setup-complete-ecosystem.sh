@@ -38,20 +38,21 @@ else
     git clone https://github.com/elevateforhumanity/new-ecosysstem
 fi
 
-# Sister site repositories - UPDATE THESE WITH ACTUAL REPO NAMES
+# Sister site repositories - AUTOPILOT ENABLED
 REPOS=(
-    # "hub-site"                    # Replace with actual hub repository name
-    # "programs-site"               # Replace with actual programs repository name  
-    # "lms-platform"                # Replace with actual LMS repository name
-    # "connect-community"           # Replace with actual connect repository name
-    # "payment-service"             # Replace with actual payment repository name
-    # "compliance-portal"           # Replace with actual compliance repository name
-    # "admin-dashboard"             # Replace with actual admin repository name
-    # "api-services"                # Replace with actual API repository name
-    # "shared-components"           # Replace with actual shared components repository name
-    # "database-schemas"            # Replace with actual database repository name
-    # "deployment-configs"          # Replace with actual deployment repository name
-    # "asset-storage"               # Replace with actual assets repository name
+    # Uncomment and update these with actual repository names when available
+    # "elevate-hub-site"            # Hub landing page
+    # "elevate-programs-platform"   # Programs catalog
+    # "elevate-lms-system"          # Learning management
+    # "elevate-connect-community"   # Community features
+    # "elevate-payment-service"     # Payment processing
+    # "elevate-compliance-portal"   # Compliance reporting
+    # "elevate-admin-dashboard"     # Admin interface
+    # "elevate-api-services"        # Backend APIs
+    # "elevate-shared-components"   # Shared UI components
+    # "elevate-database-schemas"    # Database definitions
+    # "elevate-deployment-configs"  # Infrastructure configs
+    # "elevate-asset-storage"       # Media and assets
 )
 
 # Clone each repository

@@ -1,6 +1,6 @@
 # Elevate4Humanity Complete Autopilot 🚀
 
-**Near-complete automation** for your entire stack: Wix CMS content, Netlify deploys, Cloudflare DNS/SSL, Supabase sync, SEO, performance gates, and backups.
+**Near-complete automation** for your entire stack: Wix CMS content, Cloudflare Pages deploys, Cloudflare DNS/SSL, Supabase sync, SEO, performance gates, and backups.
 
 ## 🎯 What the Autopilot CAN Do
 
@@ -8,7 +8,7 @@
 - **Wix CMS**: Create/update/delete programs, events, partners via API
 - **Dynamic Pages**: Auto-generate pages at `/programs/{slug}` when CMS items change
 - **Media Management**: Upload images from URLs to Wix Media Manager
-- **Netlify Deploys**: Trigger builds, attach domains, provision SSL
+- **Cloudflare Pages Deploys**: Trigger builds, attach domains, provision SSL
 - **Cloudflare DNS**: Set CNAMEs, enable security features, manage SSL
 - **Supabase Sync**: Bi-directional sync between Supabase and Wix
 - **SEO**: Generate sitemaps, ping search engines, performance audits
@@ -38,7 +38,7 @@ SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_SERVICE_KEY=your-service-role-key
 SUPABASE_ANON_KEY=your-anon-key
 
-# Netlify
+# Cloudflare Pages
 NETLIFY_SITE_ID=your-site-id
 NETLIFY_AUTH_TOKEN=your-personal-access-token
 NETLIFY_BUILD_HOOK=your-build-hook-id
@@ -75,7 +75,7 @@ R2_BUCKET=elevate4humanity-backups
 - Media: Upload files and images
 - Stores: Read/Write products (if using Wix Stores)
 
-**Netlify Token needs:**
+**Cloudflare Pages Token needs:**
 - Sites: Read/Write site configuration
 - Deploys: Trigger builds and deployments
 - DNS: Manage domain settings
@@ -192,8 +192,8 @@ npm run autopilot:dry     # Dry run mode (test without changes)
 
 ### Deployment & DNS
 ```bash
-./scripts/cf-netlify-domain-autopilot.sh  # DNS + SSL setup
-./scripts/netlify-deploy-trigger.sh       # Force deploy
+./scripts/cf-cloudflare-domain-autopilot.sh  # DNS + SSL setup
+./scripts/cloudflare-deploy-trigger.sh       # Force deploy
 ./scripts/blue-green-switch.sh            # Zero-downtime switch
 ```
 
@@ -235,7 +235,7 @@ npm run seo:all          # Generate fresh SEO assets
 
 ### Blue/Green Deployments
 ```bash
-# Switch www subdomain between two Netlify sites
+# Switch www subdomain between two Cloudflare Pages sites
 ./scripts/blue-green-switch.sh site-id-blue site-id-green
 ```
 
@@ -314,8 +314,8 @@ scripts/
 ├── wix-test-connection.js       # Connection testing
 ├── content-sync-engine.js       # Advanced sync logic
 ├── automation-suite.js          # Orchestration engine
-├── netlify-deploy-hooks.js      # Deployment automation
-├── cf-netlify-domain-autopilot.sh # DNS/SSL setup
+├── cloudflare-deploy-hooks.js      # Deployment automation
+├── cf-cloudflare-domain-autopilot.sh # DNS/SSL setup
 ├── cf-security-rules.json       # Cloudflare security config
 └── backup-supabase.sh           # Database backups
 
@@ -382,7 +382,7 @@ npm run content:sync
 
 ### Revert Deployment
 ```bash
-# Switch back to previous Netlify site
+# Switch back to previous Cloudflare Pages site
 ./scripts/blue-green-switch.sh $PREVIOUS_SITE_ID $CURRENT_SITE_ID
 ```
 

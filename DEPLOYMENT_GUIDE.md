@@ -23,8 +23,8 @@ Your enterprise landing page is built and ready for deployment in multiple forma
 3. Paste the entire HTML content
 4. Save and publish
 
-### **Option 2: Netlify (Recommended)**
-1. Go to [netlify.com](https://netlify.com)
+### **Option 2: Cloudflare Pages (Recommended)**
+1. Go to [cloudflare.com](https://cloudflare.com)
 2. Drag and drop the `dist/` folder
 3. Or connect your GitHub repo
 4. Build command: `node scripts/build-durable-site.mjs --inline`
@@ -75,7 +75,7 @@ Your enterprise landing page is built and ready for deployment in multiple forma
 
 ## 🎯 **RECOMMENDED DEPLOYMENT**
 
-**For immediate deployment:** Use **Netlify** - drag and drop the `dist/` folder for instant live site.
+**For immediate deployment:** Use **Cloudflare Pages** - drag and drop the `dist/` folder for instant live site.
 
 **For Durable integration:** Copy `dist/onepage-inline.html` content into Durable Custom HTML.
 

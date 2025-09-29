@@ -25,13 +25,13 @@ vercel --prod
 # Add environment variables in Vercel dashboard
 ```
 
-#### Option B: Netlify Functions
+#### Option B: Cloudflare Pages Functions
 ```bash
-npm install -g netlify-cli
-netlify login
-netlify deploy --prod
+npm install -g cloudflare-cli
+cloudflare login
+cloudflare deploy --prod
 
-# Add environment variables in Netlify dashboard
+# Add environment variables in Cloudflare Pages dashboard
 ```
 
 #### Option C: Railway

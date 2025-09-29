@@ -3,7 +3,7 @@
 ## 🔍 **COMMON DEPLOYMENT FAILURE CAUSES**
 
 ### **1. Build Command Issues**
-- Syntax errors in netlify.toml
+- Syntax errors in cloudflare.toml
 - Missing dependencies
 - File permission issues
 
@@ -17,7 +17,7 @@
 - Large commit size
 - Branch protection rules
 
-### **4. Netlify Configuration**
+### **4. Cloudflare Pages Configuration**
 - Build settings conflicts
 - Environment variable issues
 - Plugin conflicts
@@ -25,7 +25,7 @@
 ## 🔧 **IMMEDIATE TROUBLESHOOTING STEPS**
 
 ### **Check Build Logs:**
-1. Go to Netlify dashboard
+1. Go to Cloudflare Pages dashboard
 2. Click on failed deployment
 3. View detailed build logs
 4. Look for specific error messages
@@ -63,10 +63,10 @@ git commit -m "Remove large file"
 
 ## 🚀 **NEXT STEPS**
 
-**Please share the exact error message from Netlify build logs so I can provide a specific fix.**
+**Please share the exact error message from Cloudflare Pages build logs so I can provide a specific fix.**
 
 Common locations for error details:
-- Netlify dashboard → Site → Deploys → Failed deploy → View logs
+- Cloudflare Pages dashboard → Site → Deploys → Failed deploy → View logs
 - Look for red error messages
 - Check the "Deploy log" section
 

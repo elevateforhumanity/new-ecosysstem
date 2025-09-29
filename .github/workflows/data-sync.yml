@@ -276,8 +276,6 @@ jobs:
         echo "🔄 Triggering site rebuild..."
         
         # Trigger Netlify build hook if configured
-        if [ -n "${{ secrets.NETLIFY_BUILD_HOOK }}" ]; then
-          curl -X POST "${{ secrets.NETLIFY_BUILD_HOOK }}" \
             && echo "✅ Netlify rebuild triggered" \
             || echo "⚠️ Netlify rebuild failed"
         else

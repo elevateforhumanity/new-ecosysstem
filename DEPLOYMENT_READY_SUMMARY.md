@@ -10,7 +10,7 @@
 ### 📦 **Current Deployment Status:**
 - ✅ **411 files ready** in `deploy/` directory (43MB)
 - ✅ **Vite React app** built with real Supabase credentials
-- ✅ **netlify.toml** configured correctly
+- ✅ **cloudflare.toml** configured correctly
 - ✅ **_redirects** file syntax fixed
 - ✅ **Security headers** implemented
 - ✅ **All files committed** and pushed to repository
@@ -19,21 +19,21 @@
 
 ### **Option 1: Manual Deployment (Recommended)**
 ```bash
-# Login to Netlify (one-time setup)
-netlify login
+# Login to Cloudflare Pages (one-time setup)
+cloudflare login
 
 # Deploy to production
 cd deploy
-netlify deploy --prod --dir=.
+cloudflare deploy --prod --dir=.
 ```
 
 ### **Option 2: Drag & Drop Deployment**
-1. Go to https://app.netlify.com
+1. Go to https://app.cloudflare.com
 2. Drag the entire `deploy/` folder to the deployment area
 3. Your site will be live instantly!
 
 ### **Option 3: GitHub Integration (Automated)**
-1. Connect your GitHub repository to Netlify
+1. Connect your GitHub repository to Cloudflare Pages
 2. Set build settings:
    - **Build command:** `echo 'Using pre-built files'`
    - **Publish directory:** `deploy`
@@ -51,8 +51,8 @@ netlify deploy --prod --dir=.
 - ✅ **Multi-tenant architecture**
 
 ### **🔗 Expected URLs:**
-- **Main Site:** `https://your-site-name.netlify.app`
-- **Custom Domain:** Configure in Netlify dashboard
+- **Main Site:** `https://your-site-name.cloudflare.app`
+- **Custom Domain:** Configure in Cloudflare Pages dashboard
 - **Supabase Dashboard:** https://supabase.com/dashboard/project/kkzbqkyuunahdxcfdfzv
 
 ## 🎯 **Deployment Verification:**
@@ -65,7 +65,7 @@ Once deployed, your site should show:
 
 ## 🔐 **Environment Variables to Add:**
 
-After deployment, add these in Netlify dashboard:
+After deployment, add these in Cloudflare Pages dashboard:
 ```bash
 SUPABASE_URL=https://kkzbqkyuunahdxcfdfzv.supabase.co
 SUPABASE_ANON_KEY=your_jwt_token_from_supabase_dashboard
@@ -80,7 +80,7 @@ SUPABASE_SERVICE_ROLE_KEY=your_jwt_token_from_supabase_dashboard
 - ✅ All issues resolved  
 - ✅ All files committed
 - ✅ Deployment package ready
-- ✅ Just needs final `netlify deploy` command
+- ✅ Just needs final `cloudflare deploy` command
 
 **Total development time:** ~4 hours  
 **Platform capabilities:** 95,000+ pages, real-time DB, automation  

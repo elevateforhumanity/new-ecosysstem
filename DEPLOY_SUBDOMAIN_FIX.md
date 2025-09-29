@@ -19,8 +19,8 @@ Your deploy subdomains show malformed URLs:
 
 ### **Step 3: Expected Result**
 After clearing, the subdomains should show:
-- ✅ `deploy-preview-123--sitename.netlify.app`
-- ✅ `branch-name--sitename.netlify.app`
+- ✅ `deploy-preview-123--sitename.cloudflare.app`
+- ✅ `branch-name--sitename.cloudflare.app`
 
 ### **Step 4: Re-enable Custom Subdomains (Optional)**
 Only AFTER the SSL issue is fixed:

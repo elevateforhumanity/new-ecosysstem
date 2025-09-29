@@ -94,15 +94,13 @@ jobs:
         echo "📤 Deploying sitemaps to Netlify..."
         
         # Check if Netlify CLI is available or use deploy script
-        if [ -f "./deploy-netlify.sh" ]; then
-          chmod +x ./deploy-netlify.sh
-          ./deploy-netlify.sh
+        if [ -f "./cloudflare-deploy.sh" ]; then
+          chmod +x ./cloudflare-deploy.sh
+          ./cloudflare-deploy.sh
         else
           echo "⚠️ No deployment script found"
         fi
       env:
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
     - name: Notify search engines
       if: github.event_name == 'schedule' || github.event.inputs.notify_search_engines == 'true'

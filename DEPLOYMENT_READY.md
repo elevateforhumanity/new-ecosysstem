@@ -7,7 +7,7 @@ Your comprehensive site is now ready for deployment with:
 ### **Main Files:**
 - `index.html` - Main homepage (merged government + workforce)
 - `student-portal.html` - Complete student management system
-- `netlify.toml` - Deployment configuration
+- `cloudflare.toml` - Deployment configuration
 - `_headers` - Security headers
 - `sitemap.xml` - SEO optimization
 - `robots.txt` - Search engine guidance
@@ -24,17 +24,17 @@ Your comprehensive site is now ready for deployment with:
 
 ## 🌐 Deployment Options
 
-### **Option 1: Netlify (Recommended)**
-1. Go to [netlify.com](https://netlify.com)
+### **Option 1: Cloudflare Pages (Recommended)**
+1. Go to [cloudflare.com](https://cloudflare.com)
 2. Sign up/login
 3. Drag the entire `/workspaces` folder to deploy
-4. Your site will be live at: `https://[random-name].netlify.app`
+4. Your site will be live at: `https://[random-name].cloudflare.app`
 5. Custom domain: Add `elevateforhumanity.org` in site settings
 
-### **Option 2: GitHub + Netlify**
+### **Option 2: GitHub + Cloudflare Pages**
 1. Create GitHub repository
 2. Upload all files
-3. Connect Netlify to GitHub repo
+3. Connect Cloudflare Pages to GitHub repo
 4. Auto-deploy on changes
 
 ### **Option 3: Vercel**
@@ -51,7 +51,7 @@ Your comprehensive site is now ready for deployment with:
    - All links function
 
 2. **Add custom domain:**
-   - Point `elevateforhumanity.org` to Netlify
+   - Point `elevateforhumanity.org` to Cloudflare Pages
    - SSL certificate auto-generated
 
 3. **Configure email:**
@@ -68,10 +68,10 @@ Your comprehensive site is now ready for deployment with:
 
 ## 🎯 Live URLs (after deployment)
 
-- **Homepage:** `https://yoursite.netlify.app/`
-- **Student Portal:** `https://yoursite.netlify.app/student-portal`
-- **Enrollment:** `https://yoursite.netlify.app/enroll`
-- **Certificates:** `https://yoursite.netlify.app/certificates`
+- **Homepage:** `https://yoursite.cloudflare.app/`
+- **Student Portal:** `https://yoursite.cloudflare.app/student-portal`
+- **Enrollment:** `https://yoursite.cloudflare.app/enroll`
+- **Certificates:** `https://yoursite.cloudflare.app/certificates`
 
 ## 📞 Support
 

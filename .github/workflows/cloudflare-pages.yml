@@ -2,7 +2,7 @@ name: Deploy to Cloudflare Pages
 
 on:
   push:
-    branches: [ main, fix/vercel-build-now ]
+    branches: [ main, fix/vercel-build-now, "copilot/**" ]
   workflow_dispatch: {}
 
 concurrency:
@@ -35,17 +35,9 @@ jobs:
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          # Prefer secrets, fallback to repo variables if present
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || vars.CLOUDFLARE_ACCOUNT_ID }}
           projectName: ${{ secrets.CLOUDFLARE_PAGES_PROJECT || vars.CLOUDFLARE_PAGES_PROJECT }}
           directory: dist
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Deploy to Cloudflare Workers
-        uses: cloudflare/wrangler-action@1.8.0
-        with:
-          apiKey: ${{ secrets.CLOUDFLARE_API_KEY }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ${{ secrets.CLOUDFLARE_WORKERS_PROJECT }}
-          environment: production
-          workingDirectory: ./workers
-          command: npm run deploy
+        

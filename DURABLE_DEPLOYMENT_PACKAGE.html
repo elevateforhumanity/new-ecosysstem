@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Durable Deployment Package - Hub Pages</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; margin: 2rem; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .code-block { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 6px; padding: 1rem; margin: 1rem 0; overflow-x: auto; }
+        .highlight { background: #fff3cd; padding: 0.5rem; border-radius: 4px; margin: 1rem 0; }
+        .success { background: #d1edff; padding: 0.5rem; border-radius: 4px; margin: 1rem 0; }
+        .warning { background: #fff3cd; padding: 0.5rem; border-radius: 4px; margin: 1rem 0; }
+        .step { background: #f8f9fa; padding: 1rem; margin: 1rem 0; border-left: 4px solid #007bff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Durable Deployment Package</h1>
+        <p><strong>Complete Hub Pages Implementation for elevateforhumanity.org</strong></p>
+
+        <div class="success">
+            <strong>✅ READY FOR DEPLOYMENT</strong><br>
+            All hub pages are created and ready. Follow the steps below to complete the implementation.
+        </div>
+
+        <h2>📋 Step 1: Copy Redirect Script to Durable</h2>
+        <div class="step">
+            <p><strong>Instructions:</strong></p>
+            <ol>
+                <li>Login to your Durable.co dashboard</li>
+                <li>Go to your elevateforhumanity.org site editor</li>
+                <li>Find "Custom Code" or "HTML/CSS" section</li>
+                <li>Copy the script below and paste it in the &lt;head&gt; section</li>
+                <li>Save and publish your site</li>
+            </ol>
+        </div>
+
+        <div class="highlight">
+            <strong>⚠️ COPY THIS ENTIRE SCRIPT:</strong>
+        </div>
+
+        <div class="code-block">
+<pre><code>&lt;!-- HUB PAGES REDIRECT SCRIPT - ELEVATE FOR HUMANITY --&gt;
+&lt;script&gt;
+(function() {
+    'use strict';
+    
+    // Configuration
+    const HUB_SUBDOMAIN = 'https://hubs.elevateforhumanity.org';
+    const HUB_PAGES = ['student-hub', 'business-hub', 'community-hub', 'educator-hub'];
+    
+    // Get current path
+    const currentPath = window.location.pathname.toLowerCase();
+    const currentPage = currentPath.replace('/', '').replace(/\/$/, '');
+    
+    // Check if current page is a hub page
+    if (HUB_PAGES.includes(currentPage)) {
+        console.log('Hub page detected:', currentPage);
+        
+        // Construct redirect URL
+        let redirectUrl = `${HUB_SUBDOMAIN}/${currentPage}.html`;
+        
+        // Add tracking parameters if they exist
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.toString()) {
+            redirectUrl += '?' + urlParams.toString();
+        }
+        
+        console.log('Redirecting to:', redirectUrl);
+        
+        // Show loading message
+        document.body.innerHTML = `
+            &lt;div style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                text-align: center;
+            "&gt;
+                &lt;div&gt;
+                    &lt;div style="
+                        width: 50px;
+                        height: 50px;
+                        border: 4px solid rgba(255,255,255,0.3);
+                        border-top: 4px solid white;
+                        border-radius: 50%;
+                        animation: spin 1s linear infinite;
+                        margin: 0 auto 1rem;
+                    "&gt;&lt;/div&gt;
+                    &lt;h2 style="margin: 0 0 0.5rem; font-size: 1.5rem;"&gt;Loading ${currentPage.replace('-', ' ').replace(/\b\w/g, l =&gt; l.toUpperCase())}...&lt;/h2&gt;
+                    &lt;p style="margin: 0; opacity: 0.8;"&gt;Redirecting to specialized hub&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;style&gt;
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                &lt;/style&gt;
+            &lt;/div&gt;
+        `;
+        
+        // Perform redirect after short delay
+        setTimeout(() =&gt; {
+            try {
+                window.location.replace(redirectUrl);
+            } catch (error) {
+                window.location.href = redirectUrl;
+            }
+        }, 1000);
+    }
+    
+    // Add hub navigation dropdown
+    function addHubNavigation() {
+        const nav = document.querySelector('nav') || document.querySelector('.nav') || document.querySelector('#navigation');
+        
+        if (nav && !document.querySelector('.hub-nav-added')) {
+            const hubNav = document.createElement('div');
+            hubNav.className = 'hub-nav hub-nav-added';
+            hubNav.style.cssText = 'position: relative; display: inline-block; margin-left: 20px;';
+            
+            hubNav.innerHTML = `
+                &lt;button onclick="toggleHubDropdown()" style="
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    border: none;
+                    padding: 10px 16px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    font-size: 14px;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                "&gt;
+                    🎯 Hubs ▼
+                &lt;/button&gt;
+                &lt;div id="hubDropdown" style="
+                    display: none;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    background: white;
+                    border: 1px solid #e5e7eb;
+                    border-radius: 8px;
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+                    z-index: 1000;
+                    min-width: 220px;
+                    overflow: hidden;
+                "&gt;
+                    &lt;a href="/student-hub" style="display: block; padding: 12px 16px; text-decoration: none; color: #374151; border-bottom: 1px solid #f3f4f6; transition: all 0.2s ease;"&gt;
+                        &lt;div style="font-weight: 600; margin-bottom: 2px;"&gt;🎓 Student Hub&lt;/div&gt;
+                        &lt;div style="font-size: 12px; color: #6b7280;"&gt;Access courses and track progress&lt;/div&gt;
+                    &lt;/a&gt;
+                    &lt;a href="/business-hub" style="display: block; padding: 12px 16px; text-decoration: none; color: #374151; border-bottom: 1px solid #f3f4f6; transition: all 0.2s ease;"&gt;
+                        &lt;div style="font-weight: 600; margin-bottom: 2px;"&gt;💼 Business Hub&lt;/div&gt;
+                        &lt;div style="font-size: 12px; color: #6b7280;"&gt;Partner with us for workforce development&lt;/div&gt;
+                    &lt;/a&gt;
+                    &lt;a href="/community-hub" style="display: block; padding: 12px 16px; text-decoration: none; color: #374151; border-bottom: 1px solid #f3f4f6; transition: all 0.2s ease;"&gt;
+                        &lt;div style="font-weight: 600; margin-bottom: 2px;"&gt;🤝 Community Hub&lt;/div&gt;
+                        &lt;div style="font-size: 12px; color: #6b7280;"&gt;Connect with learners and share experiences&lt;/div&gt;
+                    &lt;/a&gt;
+                    &lt;a href="/educator-hub" style="display: block; padding: 12px 16px; text-decoration: none; color: #374151; transition: all 0.2s ease;"&gt;
+                        &lt;div style="font-weight: 600; margin-bottom: 2px;"&gt;👨‍🏫 Educator Hub&lt;/div&gt;
+                        &lt;div style="font-size: 12px; color: #6b7280;"&gt;Access LMS and curriculum resources&lt;/div&gt;
+                    &lt;/a&gt;
+                &lt;/div&gt;
+            `;
+            
+            nav.appendChild(hubNav);
+        }
+    }
+    
+    // Initialize when page loads
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', addHubNavigation);
+    } else {
+        addHubNavigation();
+    }
+})();
+
+// Global function for dropdown toggle
+function toggleHubDropdown() {
+    const dropdown = document.getElementById('hubDropdown');
+    if (dropdown) {
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    const dropdown = document.getElementById('hubDropdown');
+    const button = event.target.closest('button');
+    
+    if (dropdown && !button) {
+        dropdown.style.display = 'none';
+    }
+});
+&lt;/script&gt;</code></pre>
+        </div>
+
+        <h2>🌐 Step 2: Configure DNS (If Not Done)</h2>
+        <div class="step">
+            <p><strong>Add CNAME record in Cloudflare:</strong></p>
+            <ul>
+                <li><strong>Type:</strong> CNAME</li>
+                <li><strong>Name:</strong> hubs</li>
+                <li><strong>Target:</strong> elevateforhumanity.github.io</li>
+                <li><strong>Proxy:</strong> DNS only (gray cloud)</li>
+            </ul>
+        </div>
+
+        <h2>📋 Step 3: Enable GitHub Pages</h2>
+        <div class="step">
+            <p><strong>Repository Settings:</strong></p>
+            <ol>
+                <li>Go to: <a href="https://github.com/elevateforhumanity/new-ecosysstem/settings/pages" target="_blank">GitHub Pages Settings</a></li>
+                <li><strong>Source:</strong> GitHub Actions</li>
+                <li><strong>Custom domain:</strong> hubs.elevateforhumanity.org</li>
+                <li><strong>Enforce HTTPS:</strong> ✅ Enabled</li>
+                <li>Click <strong>Save</strong></li>
+            </ol>
+        </div>
+
+        <h2>🧪 Step 4: Test Implementation</h2>
+        <div class="step">
+            <p><strong>Test these URLs after 10-15 minutes:</strong></p>
+            <ul>
+                <li><a href="https://hubs.elevateforhumanity.org/student-hub.html" target="_blank">Student Hub</a></li>
+                <li><a href="https://hubs.elevateforhumanity.org/business-hub.html" target="_blank">Business Hub</a></li>
+                <li><a href="https://hubs.elevateforhumanity.org/community-hub.html" target="_blank">Community Hub</a></li>
+                <li><a href="https://hubs.elevateforhumanity.org/educator-hub.html" target="_blank">Educator Hub</a></li>
+            </ul>
+            
+            <p><strong>Test redirects from main site:</strong></p>
+            <ul>
+                <li><a href="https://elevateforhumanity.org/student-hub" target="_blank">elevateforhumanity.org/student-hub</a></li>
+                <li><a href="https://elevateforhumanity.org/business-hub" target="_blank">elevateforhumanity.org/business-hub</a></li>
+                <li><a href="https://elevateforhumanity.org/community-hub" target="_blank">elevateforhumanity.org/community-hub</a></li>
+                <li><a href="https://elevateforhumanity.org/educator-hub" target="_blank">elevateforhumanity.org/educator-hub</a></li>
+            </ul>
+        </div>
+
+        <h2>✅ Expected Results</h2>
+        <div class="success">
+            <p><strong>After successful implementation:</strong></p>
+            <ul>
+                <li>✅ All hub pages load with professional design</li>
+                <li>✅ Redirects work seamlessly from main site</li>
+                <li>✅ Navigation dropdown appears in main site header</li>
+                <li>✅ Fast loading via GitHub Pages CDN</li>
+                <li>✅ Mobile responsive on all devices</li>
+                <li>✅ SEO optimized with proper meta tags</li>
+            </ul>
+        </div>
+
+        <h2>🔧 Troubleshooting</h2>
+        <div class="warning">
+            <p><strong>If something doesn't work:</strong></p>
+            <ul>
+                <li><strong>DNS issues:</strong> Wait 15-30 minutes for propagation</li>
+                <li><strong>GitHub Pages 404:</strong> Check repository settings and wait for deployment</li>
+                <li><strong>Redirects not working:</strong> Verify script was added to Durable site</li>
+                <li><strong>SSL errors:</strong> GitHub Pages SSL takes 5-10 minutes to activate</li>
+            </ul>
+        </div>
+
+        <h2>📞 Support</h2>
+        <p>If you need assistance:</p>
+        <ul>
+            <li><strong>Durable:</strong> <a href="https://help.durable.co" target="_blank">help.durable.co</a></li>
+            <li><strong>GitHub Pages:</strong> <a href="https://docs.github.com/pages" target="_blank">docs.github.com/pages</a></li>
+            <li><strong>Cloudflare:</strong> <a href="https://support.cloudflare.com" target="_blank">support.cloudflare.com</a></li>
+        </ul>
+
+        <div class="success">
+            <p><strong>🎉 Congratulations!</strong> Your hub pages ecosystem is ready for deployment. Follow the steps above to complete the implementation.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -152,14 +152,14 @@ echo ""
 print_status "info" "Step 6: Testing main site redirects..."
 
 for page in "${HUB_PAGES[@]}"; do
-    local main_url="https://$MAIN_SITE/$page"
+    main_url="https://$MAIN_SITE/$page"
     
     # Test if URL returns something (not necessarily a redirect yet)
     if test_url "$main_url" 5; then
         print_status "success" "Main site: /$page is accessible"
         
         # Check if it's redirecting (would need the redirect script)
-        local content=$(curl -s --max-time 5 "$main_url" 2>/dev/null || echo "")
+        content=$(curl -s --max-time 5 "$main_url" 2>/dev/null || echo "")
         if [[ "$content" == *"$HUB_SUBDOMAIN"* ]]; then
             print_status "success" "Main site: /$page has redirect script"
         else
@@ -189,7 +189,8 @@ cat > deployment-status.json << EOF
   "hub_pages": {
 EOF
 
-for i, page in "${!HUB_PAGES[@]}"; do
+for i in "${!HUB_PAGES[@]}"; do
+    page="${HUB_PAGES[$i]}"
     cat >> deployment-status.json << EOF
     "$page": {
       "file_exists": true,

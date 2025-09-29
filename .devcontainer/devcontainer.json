@@ -1,40 +1,48 @@
 {
-  "name": "elevate-ecosystem-codespaces",
+  "name": "elevate-ecosystem-live-coding",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
   "hostRequirements": { 
     "cpus": 8, 
     "memory": "16gb", 
     "storage": "64gb" 
   },
-  "forwardPorts": [8080, 3000, 5173, 8012, 4000, 5000, 9000],
+  "forwardPorts": [8080, 3000, 5173, 8012, 4000, 5000, 9000, 35729],
   "portsAttributes": {
     "8080": {
-      "label": "Main Ecosystem",
-      "onAutoForward": "openPreview"
+      "label": "🌐 Live Site Preview",
+      "onAutoForward": "openPreview",
+      "protocol": "https"
     },
     "3000": {
-      "label": "Development Server",
-      "onAutoForward": "silent"
+      "label": "🔥 Hot Reload Server",
+      "onAutoForward": "openPreview",
+      "protocol": "https"
     },
     "5173": {
-      "label": "Vite Dev Server",
-      "onAutoForward": "silent"
+      "label": "⚡ Vite Live Server",
+      "onAutoForward": "openPreview",
+      "protocol": "https"
     },
     "8012": {
-      "label": "Autopilot Server",
-      "onAutoForward": "silent"
+      "label": "🤖 Autopilot Dashboard",
+      "onAutoForward": "openPreview",
+      "protocol": "https"
     },
     "4000": {
-      "label": "Sister Site 1",
+      "label": "🌟 Sister Site 1",
       "onAutoForward": "silent"
     },
     "5000": {
-      "label": "Sister Site 2",
+      "label": "🌟 Sister Site 2", 
       "onAutoForward": "silent"
     },
     "9000": {
-      "label": "API Services",
+      "label": "🔧 API Services",
       "onAutoForward": "silent"
+    },
+    "35729": {
+      "label": "🔄 LiveReload",
+      "onAutoForward": "ignore"
     }
   },
   "postCreateCommand": "bash .devcontainer/setup-ecosystem.sh",
@@ -60,6 +68,25 @@
           "package.json": "package-lock.json,pnpm-lock.yaml,yarn.lock",
           "*.js": "${capture}.js.map,${capture}.min.js,${capture}.d.ts",
           "*.ts": "${capture}.js,${capture}.js.map,${capture}.d.ts"
+        },
+        "liveServer.settings.donotShowInfoMsg": true,
+        "liveServer.settings.donotVerifyTags": true,
+        "liveServer.settings.port": 3000,
+        "liveServer.settings.root": "/",
+        "liveServer.settings.CustomBrowser": "chrome",
+        "liveServer.settings.AdvanceCustomBrowserCmdLine": "",
+        "liveServer.settings.NoBrowser": false,
+        "liveServer.settings.ignoreFiles": [
+          ".vscode/**",
+          "**/*.scss",
+          "**/*.sass",
+          "**/*.ts"
+        ],
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 1000,
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
         }
       },
       "extensions": [
@@ -104,9 +131,12 @@
   ],
   "remoteEnv": {
     "WORKSPACE_ROOT": "/workspaces",
-    "ECOSYSTEM_MODE": "codespaces",
+    "ECOSYSTEM_MODE": "gitpod",
     "NODE_ENV": "development",
     "PNPM_HOME": "/usr/local/share/pnpm",
-    "PATH": "${PNPM_HOME}:${PATH}"
+    "PATH": "${PNPM_HOME}:${PATH}",
+    "LIVE_CODING_MODE": "enabled",
+    "AUTO_COMMIT_DEPLOY": "enabled",
+    "CLOUDFLARE_DEPLOYMENT": "auto"
   }
 }

@@ -9,20 +9,37 @@ ports:
     onOpen: open-preview
 
 tasks:
-  - name: Server (8012)
+  - name: 🔥 Live Coding Environment
     init: |
+      echo "🚀 Initializing Live Coding Environment..."
       corepack enable
       corepack prepare pnpm@9.7.0 --activate || true
       pnpm install --frozen-lockfile || pnpm install
-      chmod +x scripts/dev-8012.sh scripts/watchdog.sh scripts/healthcheck.sh scripts/autopilot.sh
+      chmod +x scripts/*.sh
+      chmod +x security/*.js
+      npm install -g nodemon live-server
+      echo "✅ Live coding dependencies installed"
     command: |
-      # Run the server under the watchdog so it auto-restarts on crash
-      scripts/watchdog.sh "scripts/dev-8012.sh"
+      echo "🔥 Starting Live Coding Server with Hot Reload..."
+      scripts/live-coding-server.sh
 
-  - name: Autopilot
+  - name: 🤖 Autopilot Auto-Commit & Deploy
     command: |
-      # Independent health monitor that restarts if the port goes unhealthy
-      scripts/autopilot.sh
+      echo "🤖 Starting Autopilot Auto-Commit & Deploy System..."
+      sleep 5  # Wait for live server to start
+      scripts/autopilot-auto-commit-deploy.sh
+
+  - name: 🛡️ Security & Monitoring
+    command: |
+      echo "🛡️ Activating security systems..."
+      sleep 10  # Wait for other services
+      scripts/autopilot-continuous-monitor.sh --auto-deploy
+
+  - name: 📊 Development Dashboard
+    command: |
+      echo "📊 Starting development dashboard..."
+      sleep 15  # Wait for all services
+      scripts/dev-8012.sh
 
 # Prebuilds for faster startup
 github:

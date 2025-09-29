@@ -27,13 +27,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Create hub pages directory
+      - name: Prepare hub pages directory
         run: |
-          mkdir -p hub-pages
-          cp student-hub.html hub-pages/
-          cp business-hub.html hub-pages/
-          cp community-hub.html hub-pages/
-          cp educator-hub.html hub-pages/
+          # Use existing hub-pages directory with all files
+          ls -la hub-pages/
+          
+          # Ensure CNAME file exists for custom domain
+          echo "hubs.elevateforhumanity.org" > hub-pages/CNAME
           
           # Create index.html that redirects to main site
           cat > hub-pages/index.html << 'EOF'

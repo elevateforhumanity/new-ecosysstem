@@ -1,0 +1,27 @@
+name: Preview Health (Port 9000)
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 18, cache: npm }
+      - run: npm ci || npm install
+      - run: npm i -D http-proxy
+      - name: Run health checks
+        env:
+          API_PORT: 4400
+          VITE_DEV_PORT: 8012
+          PROXY_PORT: 9000
+          ROOT_CHECK_PATH: /
+          API_CHECK_PATH: /api/courses
+        run: |
+          nohup node server.js >/dev/null 2>&1 &  || true
+          nohup vite --host 0.0.0.0 --port $VITE_DEV_PORT >/dev/null 2>&1 &  || true
+          nohup node scripts/dev-proxy.js >/dev/null 2>&1 &  || true
+          ./scripts/ci-health.sh

@@ -48,23 +48,7 @@ jobs:
           echo "🏗️ Building application for Cloudflare Pages..."
           
           # Create dist directory
-          mkdir -p dist
-          
-          # Copy all necessary files for deployment
-          cp index.html dist/ || echo "No index.html found"
-          cp hub.html dist/index.html || echo "Using hub.html as index"
-          
-          # Copy all HTML files
-          cp *.html dist/ 2>/dev/null || true
-          
-          # Copy assets and static files
-          cp -r assets dist/ 2>/dev/null || true
-          cp -r css dist/ 2>/dev/null || true
-          cp -r js dist/ 2>/dev/null || true
-          cp -r images dist/ 2>/dev/null || true
-          cp -r icons dist/ 2>/dev/null || true
-          
-          # Copy configuration files
+          pnpm build
           cp robots.txt dist/ 2>/dev/null || true
           cp sitemap*.xml dist/ 2>/dev/null || true
           cp _headers dist/ 2>/dev/null || true

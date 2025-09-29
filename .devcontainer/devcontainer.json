@@ -2,9 +2,9 @@
   "name": "elevate-ecosystem-live-coding",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
   "hostRequirements": { 
-    "cpus": 8, 
-    "memory": "16gb", 
-    "storage": "64gb" 
+    "cpus": 2, 
+    "memory": "4gb", 
+    "storage": "32gb" 
   },
   "forwardPorts": [8080, 3000, 5173, 8012, 4000, 5000, 6000, 7000, 9000, 35729],
   "portsAttributes": {

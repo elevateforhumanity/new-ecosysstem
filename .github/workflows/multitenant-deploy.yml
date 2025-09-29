@@ -28,12 +28,7 @@ jobs:
 
       - name: Build for deployment
         run: |
-          mkdir -p dist
-          cp *.html dist/ 2>/dev/null || true
-          cp -r assets dist/ 2>/dev/null || true
-          cp -r css dist/ 2>/dev/null || true
-          cp -r js dist/ 2>/dev/null || true
-          cp -r images dist/ 2>/dev/null || true
+          pnpm build
           cp robots.txt dist/ 2>/dev/null || true
           cp sitemap*.xml dist/ 2>/dev/null || true
           cp _headers dist/ 2>/dev/null || true

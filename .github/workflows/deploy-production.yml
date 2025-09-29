@@ -28,16 +28,15 @@ jobs:
 
       - name: Build for deployment
         run: |
-          mkdir -p dist
-          cp *.html dist/ 2>/dev/null || true
-          cp -r assets dist/ 2>/dev/null || true
-          cp -r css dist/ 2>/dev/null || true
-          cp -r js dist/ 2>/dev/null || true
-          cp -r images dist/ 2>/dev/null || true
-          cp robots.txt dist/ 2>/dev/null || true
-          cp sitemap*.xml dist/ 2>/dev/null || true
-          cp _headers dist/ 2>/dev/null || true
-          cp _redirects dist/ 2>/dev/null || true
+          pnpm build
+          echo "Build completed successfully"
+          ls -la dist/
+          cp robots.txt dist/ 2>/dev/null || echo "robots.txt not found, skipping"
+          cp sitemap*.xml dist/ 2>/dev/null || echo "sitemap files not found, skipping"
+          cp _headers dist/ 2>/dev/null || echo "_headers not found, skipping"
+          cp _redirects dist/ 2>/dev/null || echo "_redirects not found, skipping"
+          echo "Final dist contents:"
+          ls -la dist/
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1

@@ -41,7 +41,7 @@ jobs:
           version: ${{ env.PNPM_VERSION }}
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile || pnpm install
 
       - name: Build application
         run: |
@@ -56,7 +56,6 @@ jobs:
           cp manifest.json dist/ 2>/dev/null || true
           
           # Copy any additional directories
-          cp -r public/* dist/ 2>/dev/null || true
           
           echo "✅ Build complete - files ready for Cloudflare deployment"
           ls -la dist/

@@ -1,7 +1,0 @@
-Contact: security@elevateforhumanity.org
-Expires: 2025-12-31T23:59:59.000Z
-Encryption: https://elevateforhumanity.org/pgp-key.txt
-Preferred-Languages: en
-Canonical: https://elevateforhumanity.org/.well-known/security.txt
-Policy: https://elevateforhumanity.org/security-policy
-Acknowledgments: https://elevateforhumanity.org/security-acknowledgments

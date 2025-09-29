@@ -1,1 +1,0 @@
-bash deep-refresh.sh

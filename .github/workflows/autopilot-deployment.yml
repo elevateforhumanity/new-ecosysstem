@@ -1,0 +1,327 @@
+name: Autopilot Continuous Deployment
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run health checks every 30 minutes
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Autopilot action to perform'
+        required: true
+        default: 'deploy'
+        type: choice
+        options:
+        - deploy
+        - health-check
+        - monitor
+        - rollback
+
+env:
+  NODE_VERSION: '20'
+  PNPM_VERSION: '9.7.0'
+  DEPLOYMENT_URL: 'https://elevateforhumanity.pages.dev'
+  CUSTOM_DOMAIN: 'https://elevateforhumanity.org'
+
+jobs:
+  autopilot-deploy:
+    runs-on: ubuntu-latest
+    name: Autopilot Deployment Engine
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'deploy')
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Prepare deployment files
+        run: |
+          echo "🚀 Autopilot: Preparing deployment files..."
+          bash cloudflare-deploy.sh
+          
+          echo "📊 Deployment statistics:"
+          echo "Files prepared: $(find dist -type f | wc -l)"
+          echo "Total size: $(du -sh dist | cut -f1)"
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: elevateforhumanity
+          directory: dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          wranglerVersion: '3'
+
+      - name: Wait for deployment propagation
+        run: |
+          echo "⏳ Waiting for deployment to propagate..."
+          sleep 60
+
+      - name: Verify deployment health
+        run: |
+          echo "🏥 Running deployment health checks..."
+          
+          # Function to check URL
+          check_url() {
+            local url=$1
+            local name=$2
+            echo "Checking $name: $url"
+            
+            if curl -s -f --max-time 30 "$url" > /dev/null; then
+              echo "✅ $name is responding"
+              return 0
+            else
+              echo "❌ $name is not responding"
+              return 1
+            fi
+          }
+          
+          # Check primary deployment URL
+          check_url "$DEPLOYMENT_URL" "Primary deployment"
+          
+          # Check custom domain (may take longer to propagate)
+          if check_url "$CUSTOM_DOMAIN" "Custom domain"; then
+            echo "✅ Custom domain verified"
+          else
+            echo "⚠️ Custom domain not yet responding (may still be propagating)"
+          fi
+          
+          # Check essential pages
+          echo "🔍 Checking essential pages..."
+          pages=("/" "/about.html" "/programs.html" "/lms.html" "/connect.html")
+          failed_pages=0
+          
+          for page in "${pages[@]}"; do
+            if curl -s -f --max-time 15 "${DEPLOYMENT_URL}${page}" > /dev/null; then
+              echo "✅ Page $page is accessible"
+            else
+              echo "❌ Page $page is not accessible"
+              ((failed_pages++))
+            fi
+          done
+          
+          if [ $failed_pages -eq 0 ]; then
+            echo "🎉 All essential pages are accessible"
+          else
+            echo "⚠️ $failed_pages pages are not accessible"
+            exit 1
+          fi
+
+      - name: Performance check
+        run: |
+          echo "⚡ Running performance checks..."
+          
+          # Measure response time
+          response_time=$(curl -s -o /dev/null -w "%{time_total}" --max-time 30 "$DEPLOYMENT_URL" || echo "30")
+          echo "Response time: ${response_time}s"
+          
+          if (( $(echo "$response_time < 5.0" | bc -l) )); then
+            echo "✅ Performance check passed (${response_time}s)"
+          else
+            echo "⚠️ Performance check warning (${response_time}s - slower than expected)"
+          fi
+
+      - name: Update deployment status
+        run: |
+          echo "📝 Recording deployment success..."
+          
+          cat > deployment-status.json << EOF
+          {
+            "status": "success",
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "commit": "${{ github.sha }}",
+            "branch": "${{ github.ref_name }}",
+            "deployment_url": "$DEPLOYMENT_URL",
+            "custom_domain": "$CUSTOM_DOMAIN",
+            "workflow_run": "${{ github.run_id }}",
+            "files_deployed": $(find dist -type f | wc -l),
+            "deployment_size": "$(du -sh dist | cut -f1)"
+          }
+          EOF
+          
+          echo "✅ Deployment completed successfully!"
+          echo "🌐 Site available at: $DEPLOYMENT_URL"
+          echo "🔗 Custom domain: $CUSTOM_DOMAIN"
+
+  health-check:
+    runs-on: ubuntu-latest
+    name: Autopilot Health Check
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'health-check')
+    
+    steps:
+      - name: Comprehensive health check
+        run: |
+          echo "🏥 Autopilot Health Check Starting..."
+          echo "===================================="
+          
+          health_score=0
+          total_checks=6
+          
+          # Check 1: Primary site connectivity
+          echo "1. Checking primary site connectivity..."
+          if curl -s -f --max-time 30 "$DEPLOYMENT_URL" > /dev/null; then
+            echo "✅ Primary site is responding"
+            ((health_score++))
+          else
+            echo "❌ Primary site is not responding"
+          fi
+          
+          # Check 2: Custom domain connectivity
+          echo "2. Checking custom domain connectivity..."
+          if curl -s -f --max-time 30 "$CUSTOM_DOMAIN" > /dev/null; then
+            echo "✅ Custom domain is responding"
+            ((health_score++))
+          else
+            echo "❌ Custom domain is not responding"
+          fi
+          
+          # Check 3: HTML content validation
+          echo "3. Validating HTML content..."
+          content=$(curl -s --max-time 30 "$DEPLOYMENT_URL" 2>/dev/null || echo "")
+          if echo "$content" | grep -q "<!DOCTYPE html\|<html"; then
+            echo "✅ Valid HTML content detected"
+            ((health_score++))
+          else
+            echo "❌ Invalid or missing HTML content"
+          fi
+          
+          # Check 4: Security headers
+          echo "4. Checking security headers..."
+          headers=$(curl -s -I --max-time 30 "$DEPLOYMENT_URL" 2>/dev/null || echo "")
+          if echo "$headers" | grep -q "X-Content-Type-Options\|X-Frame-Options"; then
+            echo "✅ Security headers present"
+            ((health_score++))
+          else
+            echo "❌ Security headers missing"
+          fi
+          
+          # Check 5: Essential pages
+          echo "5. Checking essential pages..."
+          pages=("/" "/about.html" "/programs.html" "/lms.html")
+          accessible_pages=0
+          
+          for page in "${pages[@]}"; do
+            if curl -s -f --max-time 15 "${DEPLOYMENT_URL}${page}" > /dev/null; then
+              ((accessible_pages++))
+            fi
+          done
+          
+          if [ $accessible_pages -ge 3 ]; then
+            echo "✅ Essential pages accessible ($accessible_pages/4)"
+            ((health_score++))
+          else
+            echo "❌ Essential pages not accessible ($accessible_pages/4)"
+          fi
+          
+          # Check 6: Performance
+          echo "6. Checking performance..."
+          response_time=$(curl -s -o /dev/null -w "%{time_total}" --max-time 30 "$DEPLOYMENT_URL" || echo "30")
+          if (( $(echo "$response_time < 5.0" | bc -l) )); then
+            echo "✅ Performance acceptable (${response_time}s)"
+            ((health_score++))
+          else
+            echo "❌ Performance poor (${response_time}s)"
+          fi
+          
+          # Calculate health percentage
+          health_percentage=$(( (health_score * 100) / total_checks ))
+          
+          echo ""
+          echo "📊 HEALTH CHECK RESULTS"
+          echo "======================="
+          echo "Score: $health_score/$total_checks ($health_percentage%)"
+          echo "Timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          
+          if [ $health_score -ge 5 ]; then
+            echo "🟢 Overall health: HEALTHY"
+            exit 0
+          elif [ $health_score -ge 3 ]; then
+            echo "🟡 Overall health: WARNING"
+            exit 0
+          else
+            echo "🔴 Overall health: CRITICAL"
+            exit 1
+          fi
+
+  monitor:
+    runs-on: ubuntu-latest
+    name: Autopilot Monitor
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'monitor'
+    
+    steps:
+      - name: Continuous monitoring
+        run: |
+          echo "👁️ Autopilot Continuous Monitoring..."
+          echo "===================================="
+          
+          monitor_duration=1800  # 30 minutes
+          check_interval=300     # 5 minutes
+          start_time=$(date +%s)
+          end_time=$((start_time + monitor_duration))
+          
+          while [ $(date +%s) -lt $end_time ]; do
+            echo "🔍 Monitoring check at $(date -u +%H:%M:%S)"
+            
+            # Quick health check
+            if curl -s -f --max-time 30 "$DEPLOYMENT_URL" > /dev/null; then
+              echo "✅ Site is responding normally"
+            else
+              echo "❌ Site is not responding - ALERT!"
+              # In a real scenario, this would trigger notifications
+            fi
+            
+            echo "⏳ Next check in $((check_interval / 60)) minutes..."
+            sleep $check_interval
+          done
+          
+          echo "✅ Monitoring session completed"
+
+  rollback:
+    runs-on: ubuntu-latest
+    name: Autopilot Rollback
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'rollback'
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 10
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Rollback deployment
+        run: |
+          echo "🔄 Autopilot Rollback Initiated..."
+          echo "================================="
+          
+          # Get the previous commit
+          previous_commit=$(git rev-parse HEAD~1)
+          echo "Current commit: $(git rev-parse HEAD)"
+          echo "Rolling back to: $previous_commit"
+          
+          # Create rollback branch
+          git checkout -b "autopilot-rollback-$(date +%s)"
+          git reset --hard $previous_commit
+          
+          echo "⚠️ Rollback prepared but not executed automatically"
+          echo "Manual verification required before proceeding"
+          echo "To complete rollback: git push origin main --force"

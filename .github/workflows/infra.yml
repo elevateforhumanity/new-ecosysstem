@@ -1,0 +1,38 @@
+name: "Infra: Cloudflare"
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'infra/**' ]
+  workflow_dispatch:
+  
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./infra
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "~1.0"
+          
+      - name: Terraform Init
+        run: terraform init
+        env:
+          TF_VAR_cf_api_token: ${{ secrets.CF_API_TOKEN }}
+          
+      - name: Terraform Plan
+        run: terraform plan
+        env:
+          TF_VAR_cf_api_token: ${{ secrets.CF_API_TOKEN }}
+          TF_VAR_zone_name: ${{ secrets.CF_ZONE_NAME }}
+          
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve
+        env:
+          TF_VAR_cf_api_token: ${{ secrets.CF_API_TOKEN }}
+          TF_VAR_zone_name: ${{ secrets.CF_ZONE_NAME }}

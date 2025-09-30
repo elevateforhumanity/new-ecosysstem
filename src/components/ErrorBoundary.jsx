@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*
   Copyright (c) 2025 Elevate for Humanity
   Commercial License. No resale, sublicensing, or redistribution allowed.
@@ -19,28 +18,10 @@ export class ErrorBoundary extends React.Component {
 
   componentDidCatch(error, errorInfo) {
     console.error("ErrorBoundary caught an error:", error, errorInfo);
-=======
-import React from 'react';
-
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false };
-  }
-
-  static getDerivedStateFromError(error) {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error, errorInfo) {
-    // You can log error info here
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
->>>>>>> c29cbd6 (chore: sync all config, add donate.html, fix build issues)
   }
 
   render() {
     if (this.state.hasError) {
-<<<<<<< HEAD
       return (
         <div style={{ 
           padding: '40px', 
@@ -72,12 +53,5 @@ class ErrorBoundary extends React.Component {
     return this.props.children;
   }
 }
-=======
-      return <h1>Something went wrong.</h1>;
-    }
-    return this.props.children;
-  }
-}
 
 export default ErrorBoundary;
->>>>>>> c29cbd6 (chore: sync all config, add donate.html, fix build issues)

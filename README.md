@@ -138,11 +138,59 @@ npm run env:check
 ## Deploy
 - Build: `npm run build`
 - Preview: `npm run preview`
-- CI builds on push; prod deploy triggers via Vercel Deploy Hook after CI passes.
+- CI builds on push; prod deploy triggers via Cloudflare Pages after CI passes.
+
+## Dev Autopilot System
+
+This project includes a comprehensive development autopilot system for easy setup and management:
+
+### Quick Start
+```bash
+# Complete setup (recommended)
+bash scripts/install-dev-autopilot.sh
+npm run dev:all
+
+# Environment validation
+npm run env:check
+```
+
+### Key Features
+- 🚀 **One-command setup**: Installs and configures entire dev environment
+- 🔄 **Auto-proxy**: Port 9000 → 8012 for external access (Codespaces/Gitpod)
+- 🔧 **Plugin health**: Automatic dependency repair and conflict resolution
+- 🌐 **Environment aware**: Supports Codespaces, Gitpod, and local development
+- ⚡ **Fast iteration**: Hot reload with proper host configuration
+
+### Available Scripts
+- `npm run dev:all` - Start dev server + proxy (recommended)
+- `npm run plugins:fix` - Auto-fix dependency issues
+- `npm run env:check` - Validate development environment
+
+📖 **Full Documentation**: See [DEV_AUTOPILOT.md](./DEV_AUTOPILOT.md) for complete usage guide.
 
 ## Environment Variables
 - See `.env.example`. Set in Vercel Project → Settings → Environment Variables.
 
 ## Troubleshooting
-- Clear lockfile + reinstall if install conflicts.
-- Use "Redeploy with cache disabled" in Vercel for a fresh build.
+
+### Quick Fixes
+```bash
+# Environment validation
+npm run env:check
+
+# Auto-fix common issues
+npm run plugins:fix
+
+# Nuclear option (rebuilds everything)
+npm run plugins:nuke
+```
+
+### Common Issues
+- **Build errors**: Run `npm run plugins:fix` first
+- **Port conflicts**: Check ports 8012/9000 availability
+- **Dependency conflicts**: Use `npm run plugins:nuke` for complete reset
+- **Environment setup**: Run dev autopilot installer
+
+### Legacy Notes
+- Clear lockfile + reinstall if install conflicts persist after autopilot fixes.
+- For Cloudflare Pages: use "Retry deployment" for fresh builds.

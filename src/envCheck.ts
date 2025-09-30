@@ -1,4 +1,4 @@
-const REQUIRED = ['VITE_SENTRY_DSN'] as const  // add more as needed
+const REQUIRED = [] as const  // VITE_SENTRY_DSN is optional for builds
 
 function isProd() {
   return import.meta.env.MODE === 'production'
@@ -26,11 +26,4 @@ export function checkEnv(requiredKeys: string[] = []): string[] {
     if (val === undefined || val === null || String(val).length === 0) missing.push(key);
   }
   return missing;
-}
-
-{
-  "terminal.integrated.profiles.linux": {
-    "bash (clean)": { "path": "/bin/bash", "args": ["--noprofile","--norc","-l"] }
-  },
-  "terminal.integrated.defaultProfile.linux": "bash (clean)"
 }

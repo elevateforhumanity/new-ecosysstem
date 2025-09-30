@@ -6,13 +6,30 @@ on:
 jobs:
   health:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 18, cache: npm }
-      - run: npm ci || npm install
-      - run: npm i -D http-proxy
+        with: 
+          node-version: 18
+          cache: npm
+      
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-health-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-health-
+      
+      - name: Install dependencies (fast)
+        run: npm ci --prefer-offline --no-audit --progress=false || npm install --no-audit --progress=false
+      
+      - name: Install proxy dependency
+        run: npm i -D http-proxy --no-save --no-audit
+      
       - name: Run health checks
         env:
           API_PORT: 4400

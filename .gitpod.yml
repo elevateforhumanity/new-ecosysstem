@@ -1,27 +1,11 @@
-workspaceClass: large
-ports:
-  - port: 9000
-    visibility: public
-    onOpen: open-preview
-  - port: 8012
-    visibility: private
-    onOpen: ignore
-  - port: 4400
-    visibility: private
-    onOpen: ignore
 tasks:
-  - name: Setup & Start
-    init: |
+  - name: setup-node
+    before: |
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+      nvm install 22
+      nvm alias default 22
+      nvm use 22
       corepack enable || true
-      corepack prepare pnpm@9.7.0 --activate || true
-      pnpm install --frozen-lockfile || pnpm install || npm ci || npm install
-      npm i -g pm2 || true
-      chmod +x scripts/dev-start.sh || true
-      chmod +x scripts/host-watchdog.sh || true
     command: |
-      gp ports visibility 9000 public || true
-      gp ports visibility 8012 private || true
-      pm2 start ecosystem.config.cjs --only api || pm2 start server.js --name api || true
-      pm2 start --name host-watchdog bash -- -c "bash scripts/host-watchdog.sh" || true
-      pm2 save || true
-      npm run dev:all
+      npm ci

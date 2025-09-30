@@ -17,7 +17,8 @@
     "dev:proxy": "node scripts/dev-proxy.js",
     "dev:all": "npm-run-all -p dev dev:proxy",
     "plugins:fix": "node scripts/plugins-diagnose.cjs --apply",
-    "plugins:nuke": "bash scripts/plugins-nuke.sh"
+    "plugins:nuke": "bash scripts/plugins-nuke.sh",
+    "env:check": "bash scripts/validate-environment.sh"
   },
   "dependencies": {
     "dotenv": "16.4.5",

@@ -25,11 +25,33 @@ jobs:
           node-version: '18'
           cache: npm
 
-      - name: Install deps
-        run: npm ci || npm i --legacy-peer-deps
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+            ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-      - name: Build
+      - name: Cache Vite build
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules/.vite
+            .vite
+          key: ${{ runner.os }}-vite-${{ hashFiles('**/vite.config.js', '**/package-lock.json') }}
+
+      - name: Install deps (fast mode)
+        run: npm ci --prefer-offline --no-audit --progress=false || npm i --legacy-peer-deps --no-audit --progress=false
+
+      - name: Build (optimized)
         run: npm run build
+        env:
+          NODE_ENV: production
+          CI: true
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1

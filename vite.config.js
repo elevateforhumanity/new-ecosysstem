@@ -27,25 +27,44 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
-    // Optimizations for faster builds
+    // Performance optimizations
     target: 'es2022',
-    minify: 'esbuild',
+    minify: 'esbuild', // Faster than terser
+    cssMinify: 'esbuild',
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
           router: ['react-router-dom'],
-        }
+          helmet: ['react-helmet-async']
+        },
+        // Enable for better caching
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
       }
-    },
-    // Increase chunk size warning limit
-    chunkSizeWarningLimit: 1000
+    }
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom'],
+    include: [
+      'react', 
+      'react-dom', 
+      'react-router-dom',
+      'react-helmet-async'
+    ],
     force: false
   },
   esbuild: {
-    target: 'es2022'
-  }
+    target: 'es2022',
+    // Speed up build
+    tsconfigRaw: {
+      compilerOptions: {
+        target: 'es2022',
+        useDefineForClassFields: true
+      }
+    }
+  },
+  // Cache directory for faster rebuilds
+  cacheDir: 'node_modules/.vite'
 });

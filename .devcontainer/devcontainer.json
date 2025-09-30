@@ -1,15 +1,25 @@
 {
-  "name": "elevate-frontend",
-  "hostRequirements": { "cpus": 8, "memory": "32gb", "storage": "64gb" },
-  "forwardPorts": [5173, 3000],
-  "postCreateCommand": "npm ci || npm i",
+  "name": "EFH Codespace",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/terraform:1": {}
+  },
+  "postCreateCommand": "npm i -g pm2 wrangler && npm ci",
+  "forwardPorts": [5173, 3000, 9200, 9300, 4100],
+  "portsAttributes": {
+    "5173": {
+      "label": "Vite Dev Server",
+      "onAutoForward": "openBrowser"
+    },
+    "3000": {
+      "label": "Preview Server"
+    }
+  },
   "customizations": {
     "vscode": {
       "settings": {
         "terminal.integrated.defaultProfile.linux": "bash",
-        "terminal.integrated.profiles.linux": {
-          "bash": { "path": "/bin/bash", "args": ["-l"] }
-        },
         "typescript.tsserver.maxTsServerMemory": 4096,
         "files.watcherExclude": {
           "**/node_modules/**": true,
@@ -17,7 +27,12 @@
           "**/dist/**": true
         }
       },
-      "extensions": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint"]
+      "extensions": [
+        "esbenp.prettier-vscode", 
+        "dbaeumer.vscode-eslint",
+        "bradlc.vscode-tailwindcss",
+        "ms-vscode.vscode-typescript-next"
+      ]
     }
   }
 }

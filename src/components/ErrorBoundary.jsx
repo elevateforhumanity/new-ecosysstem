@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*
   Copyright (c) 2025 Elevate for Humanity
   Commercial License. No resale, sublicensing, or redistribution allowed.
@@ -7,7 +6,7 @@
 
 import React from "react";
 
-export class ErrorBoundary extends React.Component {
+class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false, error: null };
@@ -18,49 +17,36 @@ export class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
+    // Surface a consistent log to aid debugging while keeping the UI friendly
     console.error("ErrorBoundary caught an error:", error, errorInfo);
-=======
-import React from 'react';
-
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false };
-  }
-
-  static getDerivedStateFromError(error) {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error, errorInfo) {
-    // You can log error info here
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
->>>>>>> c29cbd6 (chore: sync all config, add donate.html, fix build issues)
   }
 
   render() {
-    if (this.state.hasError) {
-<<<<<<< HEAD
+    const { hasError } = this.state;
+
+    if (hasError) {
       return (
-        <div style={{ 
-          padding: '40px', 
-          textAlign: 'center',
-          backgroundColor: '#f8f9fa',
-          border: '1px solid #dee2e6',
-          borderRadius: '8px',
-          margin: '20px'
-        }}>
+        <div
+          style={{
+            padding: "40px",
+            textAlign: "center",
+            backgroundColor: "#f8f9fa",
+            border: "1px solid #dee2e6",
+            borderRadius: "8px",
+            margin: "20px",
+          }}
+        >
           <h2>Something went wrong</h2>
           <p>We're sorry, but something unexpected happened.</p>
-          <button 
-            onClick={() => window.location.reload()} 
+          <button
+            onClick={() => window.location.reload()}
             style={{
-              padding: '10px 20px',
-              backgroundColor: '#007bff',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer'
+              padding: "10px 20px",
+              backgroundColor: "#007bff",
+              color: "white",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
             }}
           >
             Reload Page
@@ -72,12 +58,5 @@ class ErrorBoundary extends React.Component {
     return this.props.children;
   }
 }
-=======
-      return <h1>Something went wrong.</h1>;
-    }
-    return this.props.children;
-  }
-}
 
 export default ErrorBoundary;
->>>>>>> c29cbd6 (chore: sync all config, add donate.html, fix build issues)

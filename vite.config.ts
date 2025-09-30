@@ -1,13 +1,25 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App.jsx";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-createRoot(document.getElementById("root")).render(<App />);
-
 export default defineConfig({
   plugins: [react()],
-  server: { host: true, port: 5173, strictPort: true },
-  preview: { host: true, port: 3000, strictPort: true }
+  server: { 
+    host: '0.0.0.0', 
+    port: Number(process.env.VITE_DEV_PORT || 8012), 
+    strictPort: true,
+    proxy: {
+      '/api': { 
+        target: 'http://127.0.0.1:4400', 
+        changeOrigin: true, 
+        secure: false, 
+        ws: true 
+      },
+      '/health': { 
+        target: 'http://127.0.0.1:4400', 
+        changeOrigin: true, 
+        secure: false 
+      }
+    }
+  },
+  preview: { host: '0.0.0.0', port: 4173, strictPort: true }
 });

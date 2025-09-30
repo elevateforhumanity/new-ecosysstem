@@ -26,13 +26,12 @@ import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { HelmetProvider } from "react-helmet-async";
+import FundingImpact from "./pages/FundingImpact.jsx";
 
 const StudentDashboard = lazy(() => import("./pages/StudentDashboard"));
 const Quiz = lazy(() => import("./pages/Quiz"));
 const MentorDirectory = lazy(() => import("./pages/sisters/MentorDirectory"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-import React from "react";
-import FundingImpact from "./pages/FundingImpact.jsx";
 
 function Home() {
   return (

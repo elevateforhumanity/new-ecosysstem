@@ -1,85 +1,190 @@
 /**
- * AI Copilot & Autopilot System - Superior to LearnWorlds
- * Intelligent course management and automation
+ * Advanced LMS Copilot & Autopilot System
+ * NO OpenAI - Uses Supabase for configuration management
  * 
- * Copyright (c) 2024 Elevate for Humanity
+ * Copyright (c) 2025 Elevate for Humanity
  * Licensed Use Only - Unauthorized use prohibited
  */
 
 import { createClient } from '@supabase/supabase-js';
 
-class LMSCopilotAutopilot {
+class AdvancedLMSCopilot {
   constructor() {
+    // Use hardcoded Supabase keys (already working)
     this.supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+      'https://cuxzzpsyufcewtmicszk.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1eHp6cHN5dWZjZXd0bWljc3prIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjEwNDcsImV4cCI6MjA3MzczNzA0N30.DyFtzoKha_tuhKiSIPoQlKonIpaoSYrlhzntCUvLUnA'
     );
-    this.openaiApiKey = process.env.OPENAI_API_KEY;
+    
     this.isAutopilotEnabled = false;
-    this.subscriptionTier = 'basic'; // basic, copilot, autopilot
+    this.subscriptionTier = 'autopilot'; // Always enabled
+    this.configCache = null;
   }
 
   /**
-   * AI Copilot - Intelligent Assistant
-   * Helps users with course creation and management
+   * Get all API keys and configuration from Supabase
    */
-  async copilotAssist(userQuery, context = {}) {
-    const prompt = `
-    You are an intelligent LMS Copilot for Elevate for Humanity platform.
-    You help users create, manage, and optimize their online courses.
-    
-    User Query: ${userQuery}
-    Context: ${JSON.stringify(context)}
-    
-    Provide helpful, actionable advice. If the user needs to:
-    - Create content: Suggest AI generation
-    - Improve engagement: Recommend interactive elements
-    - Optimize performance: Analyze metrics and suggest improvements
-    - Technical issues: Provide step-by-step solutions
-    
-    Be concise, helpful, and professional.
-    `;
+  async getAllKeys() {
+    try {
+      const { data, error } = await this.supabase
+        .from('system_configuration')
+        .select('*')
+        .single();
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${this.openaiApiKey}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: 'gpt-4-turbo-preview',
-        messages: [
-          {
-            role: 'system',
-            content: 'You are an expert LMS assistant helping educators create world-class online courses.'
-          },
-          {
-            role: 'user',
-            content: prompt
-          }
-        ],
-        temperature: 0.7,
-        max_tokens: 1000
-      })
-    });
+      if (error) {
+        console.error('Failed to fetch keys from Supabase:', error);
+        return this.getDefaultKeys();
+      }
 
-    const result = await response.json();
+      this.configCache = data;
+      return data;
+    } catch (error) {
+      console.error('Error fetching keys:', error);
+      return this.getDefaultKeys();
+    }
+  }
+
+  /**
+   * Get default keys (fallback)
+   */
+  getDefaultKeys() {
     return {
-      response: result.choices[0].message.content,
-      suggestions: await this.generateActionableSuggestions(userQuery, context),
-      quickActions: await this.getQuickActions(userQuery)
+      stripe_publishable_key: 'pk_live_51QKf1pLnR5uCr7QFPRO67YbLsefbX0z9pJCjR0g3QH3WGbqxNIgNNDnHfTGhEZSY9gCrR9KbKxGqKxVn8FtJd1x00XYpMBqCf',
+      stripe_secret_key: process.env.STRIPE_SECRET_KEY || '',
+      stripe_webhook_secret: process.env.STRIPE_WEBHOOK_SECRET || '',
+      supabase_url: 'https://cuxzzpsyufcewtmicszk.supabase.co',
+      supabase_anon_key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1eHp6cHN5dWZjZXd0bWljc3prIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjEwNDcsImV4cCI6MjA3MzczNzA0N30.DyFtzoKha_tuhKiSIPoQlKonIpaoSYrlhzntCUvLUnA',
+      supabase_service_key: process.env.SUPABASE_SERVICE_KEY || '',
+      google_analytics_id: 'G-EFHWORKFORCE01',
+      google_tag_manager_id: process.env.GOOGLE_TAG_MANAGER_ID || '',
+      cloudflare_account_id: process.env.CLOUDFLARE_ACCOUNT_ID || '',
+      cloudflare_api_token: process.env.CLOUDFLARE_API_TOKEN || '',
+      contact_phone: '317-314-3757',
+      contact_email: 'info@elevateforhumanity.org'
     };
   }
 
   /**
-   * Autopilot Mode - Full Automation
-   * Automatically manages course creation, updates, and optimization
+   * Store keys in Supabase
    */
-  async enableAutopilot(courseId, autopilotSettings = {}) {
-    if (this.subscriptionTier !== 'autopilot') {
-      throw new Error('Autopilot requires subscription upgrade');
+  async storeKeys(keys) {
+    try {
+      const { data, error } = await this.supabase
+        .from('system_configuration')
+        .upsert({
+          id: 1,
+          ...keys,
+          updated_at: new Date().toISOString()
+        });
+
+      if (error) throw error;
+
+      this.configCache = keys;
+      return { success: true, message: 'Keys stored successfully' };
+    } catch (error) {
+      console.error('Failed to store keys:', error);
+      return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * Copilot Assistant - Rule-based, no AI needed
+   */
+  async copilotAssist(userQuery, context = {}) {
+    const query = userQuery.toLowerCase();
+    
+    // Rule-based responses
+    if (query.includes('key') || query.includes('api') || query.includes('configuration')) {
+      const keys = await this.getAllKeys();
+      return {
+        response: 'I can help you manage your API keys and configuration.',
+        suggestions: [
+          'View all configured keys',
+          'Update Stripe keys',
+          'Update Cloudflare credentials',
+          'Update Google Analytics ID'
+        ],
+        quickActions: [
+          { action: 'view_keys', label: 'View Keys' },
+          { action: 'update_keys', label: 'Update Keys' }
+        ],
+        keys: keys
+      };
     }
 
+    if (query.includes('course') || query.includes('content')) {
+      return {
+        response: 'I can help you manage courses and content.',
+        suggestions: [
+          'Create new course',
+          'Generate course content',
+          'Analyze course performance',
+          'Optimize student engagement'
+        ],
+        quickActions: [
+          { action: 'create_course', label: 'Create Course' },
+          { action: 'analyze_performance', label: 'Analyze Performance' }
+        ]
+      };
+    }
+
+    if (query.includes('student') || query.includes('enrollment')) {
+      return {
+        response: 'I can help you manage students and enrollments.',
+        suggestions: [
+          'View student progress',
+          'Send engagement messages',
+          'Generate reports',
+          'Manage enrollments'
+        ],
+        quickActions: [
+          { action: 'view_students', label: 'View Students' },
+          { action: 'send_message', label: 'Send Message' }
+        ]
+      };
+    }
+
+    if (query.includes('payment') || query.includes('stripe')) {
+      const keys = await this.getAllKeys();
+      return {
+        response: 'I can help you manage payments and Stripe integration.',
+        suggestions: [
+          'View Stripe configuration',
+          'Test payment flow',
+          'View transactions',
+          'Update webhook settings'
+        ],
+        quickActions: [
+          { action: 'view_stripe', label: 'View Stripe Config' },
+          { action: 'test_payment', label: 'Test Payment' }
+        ],
+        stripe: {
+          publishable_key: keys.stripe_publishable_key,
+          webhook_configured: !!keys.stripe_webhook_secret
+        }
+      };
+    }
+
+    // Default response
+    return {
+      response: 'I can help you with courses, students, payments, and system configuration.',
+      suggestions: [
+        'Manage API keys',
+        'Create courses',
+        'View student progress',
+        'Configure payments'
+      ],
+      quickActions: [
+        { action: 'dashboard', label: 'Go to Dashboard' },
+        { action: 'help', label: 'Get Help' }
+      ]
+    };
+  }
+
+  /**
+   * Enable Autopilot Mode
+   */
+  async enableAutopilot(courseId, autopilotSettings = {}) {
     this.isAutopilotEnabled = true;
     
     const settings = {
@@ -142,11 +247,10 @@ class LMSCopilotAutopilot {
   }
 
   /**
-   * Auto Content Generation
+   * Auto Content Generation (Template-based, no AI)
    */
   async autoContentGeneration(courseId) {
     try {
-      // Get course data
       const { data: course } = await this.supabase
         .from('courses')
         .select('*, modules(*, lessons(*))')
@@ -156,12 +260,11 @@ class LMSCopilotAutopilot {
       // Analyze content gaps
       const contentGaps = await this.analyzeContentGaps(course);
 
-      // Generate missing content
+      // Generate missing content using templates
       for (const gap of contentGaps) {
         await this.generateMissingContent(gap, courseId);
       }
 
-      // Update course with new content
       await this.logAutopilotAction(courseId, 'content_generation', {
         gaps_found: contentGaps.length,
         content_generated: contentGaps.length
@@ -173,22 +276,100 @@ class LMSCopilotAutopilot {
   }
 
   /**
+   * Analyze content gaps
+   */
+  async analyzeContentGaps(course) {
+    const gaps = [];
+
+    for (const module of course.modules || []) {
+      // Check for missing introduction
+      if (!module.lessons?.find(l => l.type === 'introduction')) {
+        gaps.push({
+          type: 'introduction',
+          module_id: module.id,
+          module_name: module.name
+        });
+      }
+
+      // Check for missing summary
+      if (!module.lessons?.find(l => l.type === 'summary')) {
+        gaps.push({
+          type: 'summary',
+          module_id: module.id,
+          module_name: module.name
+        });
+      }
+
+      // Check for missing assessment
+      if (!module.assessment_id) {
+        gaps.push({
+          type: 'assessment',
+          module_id: module.id,
+          module_name: module.name
+        });
+      }
+    }
+
+    return gaps;
+  }
+
+  /**
+   * Generate missing content using templates
+   */
+  async generateMissingContent(gap, courseId) {
+    const templates = {
+      introduction: {
+        title: `Introduction to ${gap.module_name}`,
+        content: `Welcome to ${gap.module_name}. In this module, you will learn key concepts and practical skills.`,
+        type: 'introduction',
+        duration: 5
+      },
+      summary: {
+        title: `${gap.module_name} Summary`,
+        content: `Congratulations on completing ${gap.module_name}! Let's review what you've learned.`,
+        type: 'summary',
+        duration: 5
+      },
+      assessment: {
+        title: `${gap.module_name} Assessment`,
+        type: 'quiz',
+        passing_score: 70,
+        questions: []
+      }
+    };
+
+    const template = templates[gap.type];
+    if (!template) return;
+
+    if (gap.type === 'assessment') {
+      await this.supabase
+        .from('assessments')
+        .insert({
+          module_id: gap.module_id,
+          ...template
+        });
+    } else {
+      await this.supabase
+        .from('lessons')
+        .insert({
+          module_id: gap.module_id,
+          ...template
+        });
+    }
+  }
+
+  /**
    * Auto Student Engagement
    */
   async autoStudentEngagement(courseId) {
     try {
-      // Get student engagement metrics
       const engagement = await this.getEngagementMetrics(courseId);
-
-      // Identify low engagement areas
       const lowEngagementLessons = engagement.lessons.filter(l => l.completionRate < 0.7);
 
-      // Generate engagement improvements
       for (const lesson of lowEngagementLessons) {
         await this.improveEngagement(lesson, courseId);
       }
 
-      // Send personalized messages to struggling students
       await this.sendPersonalizedEncouragement(courseId);
 
       await this.logAutopilotAction(courseId, 'student_engagement', {
@@ -202,14 +383,77 @@ class LMSCopilotAutopilot {
   }
 
   /**
+   * Get engagement metrics
+   */
+  async getEngagementMetrics(courseId) {
+    const { data: enrollments } = await this.supabase
+      .from('enrollments')
+      .select('*, progress(*)')
+      .eq('course_id', courseId);
+
+    const { data: lessons } = await this.supabase
+      .from('lessons')
+      .select('*, completions(*)')
+      .eq('course_id', courseId);
+
+    return {
+      totalStudents: enrollments?.length || 0,
+      strugglingStudents: enrollments?.filter(e => e.progress < 0.3).length || 0,
+      lessons: lessons?.map(l => ({
+        id: l.id,
+        name: l.title,
+        completionRate: (l.completions?.length || 0) / (enrollments?.length || 1)
+      })) || []
+    };
+  }
+
+  /**
+   * Improve engagement for low-performing lessons
+   */
+  async improveEngagement(lesson, courseId) {
+    // Add engagement elements
+    await this.supabase
+      .from('lesson_enhancements')
+      .insert({
+        lesson_id: lesson.id,
+        type: 'engagement_boost',
+        enhancements: {
+          add_quiz: true,
+          add_discussion: true,
+          add_resources: true
+        }
+      });
+  }
+
+  /**
+   * Send personalized encouragement
+   */
+  async sendPersonalizedEncouragement(courseId) {
+    const { data: strugglingStudents } = await this.supabase
+      .from('enrollments')
+      .select('*, users(*)')
+      .eq('course_id', courseId)
+      .lt('progress', 0.3);
+
+    for (const enrollment of strugglingStudents || []) {
+      await this.supabase
+        .from('notifications')
+        .insert({
+          user_id: enrollment.user_id,
+          type: 'encouragement',
+          title: 'Keep Going!',
+          message: `You're doing great! Keep up the momentum in your course.`,
+          course_id: courseId
+        });
+    }
+  }
+
+  /**
    * Auto Performance Optimization
    */
   async autoPerformanceOptimization(courseId) {
     try {
-      // Analyze course performance
       const performance = await this.analyzeCoursePerformance(courseId);
-
-      // Optimize based on data
       const optimizations = [];
 
       if (performance.videoLoadTime > 3000) {
@@ -225,8 +469,7 @@ class LMSCopilotAutopilot {
       }
 
       await this.logAutopilotAction(courseId, 'performance_optimization', {
-        optimizations_applied: optimizations.length,
-        performance_improvement: await this.calculatePerformanceImprovement(courseId)
+        optimizations_applied: optimizations.length
       });
 
     } catch (error) {
@@ -235,214 +478,38 @@ class LMSCopilotAutopilot {
   }
 
   /**
-   * Auto Assessment Creation
+   * Analyze course performance
    */
-  async autoAssessmentCreation(courseId) {
-    try {
-      // Get modules without assessments
-      const { data: modulesWithoutAssessments } = await this.supabase
-        .from('modules')
-        .select('*')
-        .eq('course_id', courseId)
-        .is('assessment_id', null);
-
-      // Generate assessments for each module
-      for (const module of modulesWithoutAssessments) {
-        const assessment = await this.generateModuleAssessment(module);
-        
-        const { data: newAssessment } = await this.supabase
-          .from('assessments')
-          .insert(assessment)
-          .select()
-          .single();
-
-        // Link assessment to module
-        await this.supabase
-          .from('modules')
-          .update({ assessment_id: newAssessment.id })
-          .eq('id', module.id);
-      }
-
-      await this.logAutopilotAction(courseId, 'assessment_creation', {
-        assessments_created: modulesWithoutAssessments.length
-      });
-
-    } catch (error) {
-      console.error('Auto assessment creation failed:', error);
-    }
-  }
-
-  /**
-   * Auto Marketing Optimization
-   */
-  async autoMarketingOptimization(courseId) {
-    try {
-      // Get course marketing data
-      const { data: course } = await this.supabase
-        .from('courses')
-        .select('*')
-        .eq('id', courseId)
-        .single();
-
-      // Optimize course title and description for SEO
-      const optimizedMarketing = await this.optimizeMarketingContent(course);
-
-      // Update course with optimized content
-      await this.supabase
-        .from('courses')
-        .update({
-          title: optimizedMarketing.title,
-          description: optimizedMarketing.description,
-          keywords: optimizedMarketing.keywords,
-          meta_description: optimizedMarketing.metaDescription
-        })
-        .eq('id', courseId);
-
-      // Generate social media content
-      const socialContent = await this.generateSocialMediaContent(course);
-
-      await this.logAutopilotAction(courseId, 'marketing_optimization', {
-        seo_optimized: true,
-        social_content_generated: socialContent.length
-      });
-
-    } catch (error) {
-      console.error('Auto marketing optimization failed:', error);
-    }
-  }
-
-  /**
-   * Generate actionable suggestions based on user query
-   */
-  async generateActionableSuggestions(query, context) {
-    const suggestions = [];
-
-    // Analyze query intent
-    const intent = await this.analyzeQueryIntent(query);
-
-    switch (intent) {
-      case 'course_creation':
-        suggestions.push({
-          action: 'upload_document',
-          title: 'Upload Document for AI Course Creation',
-          description: 'Upload any document and let AI create a complete course automatically'
-        });
-        break;
-
-      case 'engagement_improvement':
-        suggestions.push({
-          action: 'enable_autopilot',
-          title: 'Enable Autopilot for Automatic Engagement',
-          description: 'Let AI automatically optimize student engagement'
-        });
-        break;
-
-      case 'content_optimization':
-        suggestions.push({
-          action: 'ai_content_analysis',
-          title: 'AI Content Analysis',
-          description: 'Get AI recommendations for improving your content'
-        });
-        break;
-
-      default:
-        suggestions.push({
-          action: 'copilot_chat',
-          title: 'Continue with AI Copilot',
-          description: 'Get more detailed assistance from AI Copilot'
-        });
-    }
-
-    return suggestions;
-  }
-
-  /**
-   * Get quick actions based on user query
-   */
-  async getQuickActions(query) {
-    return [
-      {
-        id: 'create_course',
-        title: '🚀 Create Course with AI',
-        description: 'Upload document → Complete course in minutes'
-      },
-      {
-        id: 'enable_autopilot',
-        title: '🤖 Enable Autopilot',
-        description: 'Fully automated course management'
-      },
-      {
-        id: 'generate_content',
-        title: '✨ Generate Content',
-        description: 'AI-powered lesson and video creation'
-      },
-      {
-        id: 'optimize_performance',
-        title: '📊 Optimize Performance',
-        description: 'AI analysis and improvements'
-      }
-    ];
-  }
-
-  /**
-   * Subscription Management
-   */
-  async upgradeSubscription(userId, tier) {
-    const tiers = {
-      basic: {
-        price: 0,
-        features: ['Basic LMS', 'Manual course creation']
-      },
-      copilot: {
-        price: 49,
-        features: ['AI Copilot', 'Content suggestions', 'Performance insights']
-      },
-      autopilot: {
-        price: 149,
-        features: ['Full Autopilot', 'Automatic content generation', 'Auto optimization', 'Auto engagement']
-      }
-    };
-
-    const { data: subscription } = await this.supabase
-      .from('subscriptions')
-      .upsert({
-        user_id: userId,
-        tier: tier,
-        price: tiers[tier].price,
-        features: tiers[tier].features,
-        status: 'active',
-        billing_cycle: 'monthly',
-        next_billing_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
-      })
-      .select()
+  async analyzeCoursePerformance(courseId) {
+    const { data: metrics } = await this.supabase
+      .from('course_metrics')
+      .select('*')
+      .eq('course_id', courseId)
       .single();
 
-    this.subscriptionTier = tier;
-
-    return {
-      subscription,
-      message: `Successfully upgraded to ${tier} tier`,
-      features: tiers[tier].features
+    return metrics || {
+      videoLoadTime: 0,
+      dropoffRate: 0,
+      assessmentFailRate: 0
     };
   }
 
   /**
-   * Log autopilot actions for transparency
+   * Log autopilot action
    */
-  async logAutopilotAction(courseId, action, details) {
+  async logAutopilotAction(courseId, action, data) {
     await this.supabase
       .from('autopilot_logs')
       .insert({
         course_id: courseId,
         action: action,
-        details: details,
-        timestamp: new Date(),
-        status: 'completed'
+        data: data,
+        timestamp: new Date()
       });
   }
 
   /**
-   * Get autopilot status and recent actions
+   * Get autopilot status
    */
   async getAutopilotStatus(courseId) {
     const { data: settings } = await this.supabase
@@ -451,7 +518,7 @@ class LMSCopilotAutopilot {
       .eq('course_id', courseId)
       .single();
 
-    const { data: recentActions } = await this.supabase
+    const { data: logs } = await this.supabase
       .from('autopilot_logs')
       .select('*')
       .eq('course_id', courseId)
@@ -461,32 +528,15 @@ class LMSCopilotAutopilot {
     return {
       enabled: settings?.enabled || false,
       settings: settings?.settings || {},
-      recentActions: recentActions || [],
-      nextScheduledAction: await this.getNextScheduledAction(courseId)
+      recentActions: logs || []
     };
-  }
-
-  /**
-   * Analyze query intent using AI
-   */
-  async analyzeQueryIntent(query) {
-    const intents = {
-      'course_creation': ['create', 'new course', 'build', 'make'],
-      'engagement_improvement': ['engagement', 'students not completing', 'dropoff'],
-      'content_optimization': ['improve content', 'optimize', 'better'],
-      'performance_analysis': ['analytics', 'performance', 'metrics']
-    };
-
-    const queryLower = query.toLowerCase();
-    
-    for (const [intent, keywords] of Object.entries(intents)) {
-      if (keywords.some(keyword => queryLower.includes(keyword))) {
-        return intent;
-      }
-    }
-
-    return 'general';
   }
 }
 
-export default LMSCopilotAutopilot;
+// Export for use
+export default AdvancedLMSCopilot;
+
+// Also export as CommonJS for Node.js
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = AdvancedLMSCopilot;
+}

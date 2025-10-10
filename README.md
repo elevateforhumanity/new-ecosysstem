@@ -8,6 +8,13 @@ Click the button below to open this repository in Gitpod:
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/elevateforhumanity/fix2)
 
+## 📖 Documentation
+
+- **[QUICK_REFERENCE.md](QUICK_REFERENCE.md)** - Quick copy commands and common customizations
+- **[SETUP_CHECKLIST.md](SETUP_CHECKLIST.md)** - Step-by-step setup checklist
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Guidelines for contributing
+- **[templates/](templates/)** - Pre-configured templates for different project types
+
 ## 📁 What's Included
 
 This repository contains essential configuration files that ensure proper VS Code and environment setup in Gitpod:
@@ -37,6 +44,41 @@ Recommended VS Code extensions including:
 - Docker support
 - YAML support
 - GitHub Copilot and Pull Request integration
+
+### Additional Configuration Files
+
+#### `.editorconfig`
+Ensures consistent coding styles across different editors and IDEs:
+- Character encoding (UTF-8)
+- Line endings (LF)
+- Indentation style and size
+- Trailing whitespace handling
+
+#### `.prettierrc`
+Code formatting configuration for Prettier:
+- Semicolons, quotes, and trailing commas
+- Print width and tab width
+- Line endings
+
+#### `.eslintrc.json`
+JavaScript/TypeScript linting rules:
+- Code style enforcement
+- Best practices
+- Error prevention
+
+#### `.gitignore`
+Common patterns to exclude from version control:
+- Dependencies (node_modules, vendor)
+- Build outputs (dist, build)
+- IDE files
+- Environment variables
+- Temporary files
+
+#### `.github/workflows/validate.yml`
+GitHub Actions workflow that automatically validates:
+- YAML syntax in `.gitpod.yml` and templates
+- JSON syntax in VS Code configuration files
+- Presence of essential documentation
 
 ## 🔧 How to Use This Template
 

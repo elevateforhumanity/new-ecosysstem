@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: ${REPO_NAME}
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: STRIPE_PUBLISHABLE_KEY
+        value: pk_live_51QKf1pLnR5uCr7QFPRO67YbLsefbX0z9pJCjR0g3QH3WGbqxNIgNNDnHfTGhEZSY9gCrR9KbKxGqKxVn8FtJd1x00XYpMBqCf
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: CLOUDFLARE_ACCOUNT_ID
+        sync: false
+      - key: CLOUDFLARE_API_TOKEN
+        sync: false
+      - key: GOOGLE_ANALYTICS_ID
+        value: G-EFHWORKFORCE01

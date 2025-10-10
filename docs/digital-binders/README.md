@@ -42,15 +42,44 @@ Welcome to the Digital Binders system! This comprehensive documentation covers a
 
 - [Clinical Informatics Overview](clinical-informatics/README.md)
 
-### 6. SEO & Analytics
+### 6. Credentialing Partners
+**Industry certification partners, exam preparation, and credential pathways**
+
+- [Credentialing Partners Overview](credentialing-partners/README.md)
+
+### 7. SEO & Analytics
 **Search engine optimization and Google Analytics implementation**
 
 - [SEO & Analytics Guide](seo-analytics/README.md)
 
-### 7. Chat Assistant Integration
+### 8. Chat Assistant Integration
 **AI-powered support on every page**
 
 - [Chat Assistant Integration](chat-assistant-integration.md)
+
+---
+
+## 🎓 Featured: Free Certifications
+
+Get industry-recognized credentials at **NO COST** to you! We partner with leading credentialing organizations to provide:
+
+### Healthcare Certifications
+- **AHIMA**: RHIA, RHIT, CCA certifications (Value: $799-$1,499)
+- **HIMSS**: CPHIMS, CAHIMS certifications (Value: $1,295-$1,895)
+- **Epic Systems**: EHR certifications (Value: $500-$1,000 per module)
+- **Cerner/Oracle**: EHR certifications (Value: $1,200)
+
+### IT Certifications
+- **CompTIA**: A+, Network+, Security+ (Value: $746-$1,092)
+- **Microsoft**: Azure, Microsoft 365 (Value: $499-$965)
+- **AWS**: Cloud Practitioner, Solutions Architect (Value: $600-$1,150)
+- **Cisco**: CCNA, CyberOps (Value: $1,300-$1,500)
+
+### Business Certifications
+- **PMI**: CAPM, PMP (Value: $1,025-$1,905)
+- **HRCI**: aPHR, PHR (Value: $1,100-$1,595)
+
+[View All Credentialing Partners](credentialing-partners/README.md)
 
 ---
 

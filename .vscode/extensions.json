@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "eamodio.gitlens",
+    "ms-python.python",
+    "ms-vscode.vscode-typescript-next",
+    "github.copilot",
+    "github.vscode-pull-request-github",
+    "redhat.vscode-yaml",
+    "ms-azuretools.vscode-docker"
+  ],
+  "unwantedRecommendations": []
+}

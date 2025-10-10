@@ -1,0 +1,45 @@
+# Gitpod Configuration
+# This file configures your Gitpod workspace for optimal development experience
+
+# Docker image to use (optional - Gitpod provides a default workspace-full image)
+image: gitpod/workspace-full:latest
+
+# Tasks to run on workspace start
+tasks:
+  - name: Setup Environment
+    init: |
+      echo "Initializing workspace..."
+      # Add any installation commands here
+      # Example: npm install, pip install -r requirements.txt, etc.
+    command: |
+      echo "Workspace ready!"
+      echo "VS Code and environment are now properly configured."
+
+# VS Code extensions to install automatically
+vscode:
+  extensions:
+    - dbaeumer.vscode-eslint
+    - esbenp.prettier-vscode
+    - eamodio.gitlens
+    - ms-python.python
+    - ms-vscode.vscode-typescript-next
+
+# Ports configuration (expose ports your application needs)
+ports:
+  - port: 3000
+    onOpen: notify
+    visibility: public
+  - port: 8080
+    onOpen: notify
+    visibility: public
+
+# GitHub prebuilds configuration
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    pullRequestsFromForks: false
+    addCheck: true
+    addComment: false
+    addBadge: false

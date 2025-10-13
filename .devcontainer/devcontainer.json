@@ -18,7 +18,7 @@
 	//
 	// Browse more options at: https://hub.docker.com/r/microsoft/devcontainers
 	// or build your own using the Dockerfile option below.
-	"image": "mcr.microsoft.com/devcontainers/universal:3.0.3"
+	"image": "mcr.microsoft.com/devcontainers/universal:3.0.3",
 	// Use "build":
 	// instead of the image to use a Dockerfile to build an image.
 	// "build": {
@@ -32,4 +32,22 @@
     //     "moby": false
     //   }
     // }
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"esbenp.prettier-vscode",
+				"github.copilot",
+				"github.copilot-chat",
+				"eamodio.gitlens",
+				"ms-python.python",
+				"ms-vscode.vscode-typescript-next",
+				"github.vscode-pull-request-github",
+				"redhat.vscode-yaml",
+				"ms-azuretools.vscode-docker",
+				"christian-kohler.path-intellisense",
+				"yzhang.markdown-all-in-one"
+			]
+		}
+	}
 }

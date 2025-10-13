@@ -16,11 +16,27 @@ tasks:
 # VS Code extensions to install automatically
 vscode:
   extensions:
+    # Code Quality
     - dbaeumer.vscode-eslint
     - esbenp.prettier-vscode
+    
+    # AI Pair Programming
+    - github.copilot
+    - github.copilot-chat
+    
+    # Git Integration
     - eamodio.gitlens
+    - github.vscode-pull-request-github
+    
+    # Language Support
     - ms-python.python
     - ms-vscode.vscode-typescript-next
+    
+    # Configuration & Utilities
+    - redhat.vscode-yaml
+    - ms-azuretools.vscode-docker
+    - christian-kohler.path-intellisense
+    - yzhang.markdown-all-in-one
 
 # Ports configuration (expose ports your application needs)
 ports:

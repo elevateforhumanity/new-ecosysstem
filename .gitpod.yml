@@ -6,10 +6,26 @@ image: gitpod/workspace-full:latest
 
 # Tasks to run on workspace start
 tasks:
-  - name: Welcome
+  - name: Setup Environment
+    init: |
+      # Install Rust toolchain
+      if ! command -v rustc &> /dev/null; then
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable
+        source "$HOME/.cargo/env"
+      fi
     command: |
+      # Load Rust environment
+      source "$HOME/.cargo/env" 2>/dev/null || true
+      
       echo "🎓 Welcome to Elevate for Humanity Platform!"
       echo "📚 Digital Binders: docs/digital-binders/"
+      echo ""
+      echo "Development Tools:"
+      echo "  Node.js: $(node --version)"
+      echo "  Python: $(python3 --version | cut -d' ' -f2)"
+      echo "  Go: $(go version | cut -d' ' -f3)"
+      echo "  Rust: $(rustc --version | cut -d' ' -f2)"
+      echo ""
       echo "✅ All systems ready for development"
 
 # VS Code extensions to install automatically

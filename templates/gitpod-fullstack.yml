@@ -1,0 +1,45 @@
+# Full Stack Project Configuration (React + Node.js Backend)
+
+image: gitpod/workspace-full:latest
+
+tasks:
+  - name: Backend
+    init: |
+      cd backend
+      npm install
+    command: |
+      cd backend
+      npm run dev
+  
+  - name: Frontend
+    init: |
+      cd frontend
+      npm install
+    command: |
+      cd frontend
+      npm start
+
+vscode:
+  extensions:
+    - dbaeumer.vscode-eslint
+    - esbenp.prettier-vscode
+    - eamodio.gitlens
+    - ms-vscode.vscode-typescript-next
+    - dsznajder.es7-react-js-snippets
+    - github.copilot
+
+ports:
+  - port: 3000  # Frontend
+    onOpen: open-browser
+    visibility: public
+  - port: 5000  # Backend API
+    onOpen: notify
+    visibility: public
+
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    pullRequestsFromForks: false
+    addCheck: true

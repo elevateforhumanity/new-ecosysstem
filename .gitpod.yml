@@ -1,9 +1,8 @@
 # Gitpod Configuration
 # Elevate for Humanity - Workforce Development Platform
 
-# Use dev container configuration
-image:
-  file: .devcontainer/devcontainer.json
+# Use Gitpod's universal image with all development tools
+image: gitpod/workspace-full:latest
 
 # Tasks to run on workspace start
 tasks:

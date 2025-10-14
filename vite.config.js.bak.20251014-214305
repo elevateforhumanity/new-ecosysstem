@@ -12,19 +12,21 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
-    sourcemap: true,
     minify: 'terser',
     terserOptions: {
       compress: {
+        // Remove console.log in production
         drop_console: mode === 'production',
         drop_debugger: true,
       },
     },
     rollupOptions: {
       output: {
+        // Force new build hash to bust cache
         entryFileNames: `assets/[name]-[hash]-${Date.now()}.js`,
         chunkFileNames: `assets/[name]-[hash]-${Date.now()}.js`,
         assetFileNames: `assets/[name]-[hash]-${Date.now()}.[ext]`,
+        // Optimize chunk splitting
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           'ui-vendor': ['lucide-react'],

@@ -14,17 +14,34 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { ToastProvider } from "./components/Toast";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { ProgressProvider } from "./contexts/ProgressContext";
-import ChatAssistant from "./components/ChatAssistant";
 import "./styles/accessibility.css";
 import "./styles/theme.css";
 import "./styles/responsive.css";
 
-const HomePage = lazy(() => import("./pages/HomePage"));
-const ProfessionalHome = lazy(() => import("./pages/ProfessionalHome"));
-const Government = lazy(() => import("./pages/Government"));
-const Philanthropy = lazy(() => import("./pages/Philanthropy"));
-const Compliance = lazy(() => import("./pages/Compliance"));
-const Accessibility = lazy(() => import("./pages/Accessibility"));
+// Safe lazy loader with error handling
+const safeLazy = (importFn, componentName) => {
+  return lazy(() => 
+    importFn().catch(err => {
+      console.error(`[EFH] Failed to load ${componentName}:`, err);
+      return {
+        default: () => (
+          <div style={{ padding: '2rem', textAlign: 'center' }}>
+            <h2>Component Load Error</h2>
+            <p>Failed to load: {componentName}</p>
+            <p style={{ color: '#666', fontSize: '0.875rem' }}>{err.message}</p>
+          </div>
+        )
+      };
+    })
+  );
+};
+
+const HomePage = safeLazy(() => import("./pages/HomePage"), "HomePage");
+const ProfessionalHome = safeLazy(() => import("./pages/ProfessionalHome"), "ProfessionalHome");
+const Government = safeLazy(() => import("./pages/Government"), "Government");
+const Philanthropy = safeLazy(() => import("./pages/Philanthropy"), "Philanthropy");
+const Compliance = safeLazy(() => import("./pages/Compliance"), "Compliance");
+const Accessibility = safeLazy(() => import("./pages/Accessibility"), "Accessibility");
 const DurableLanding = lazy(() => import("./pages/DurableLanding"));
 const MainLanding = lazy(() => import("./pages/MainLanding"));
 const DurableAI = lazy(() => import("./pages/DurableAI"));
@@ -47,6 +64,7 @@ const Connect = lazy(() => import("./pages/Connect"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const AskWidget = lazy(() => import('./components/AskWidget'));
 const NavBar = lazy(() => import('./components/NavBar'));
+const ChatAssistant = lazy(() => import('./components/ChatAssistant'));
 
 // New pages for complete platform
 const GetStarted = lazy(() => import("./pages/GetStarted"));
@@ -167,7 +185,16 @@ export default function App() {
             <ProgressProvider>
               <BrowserRouter>
                 <ErrorBoundary>
-              <Suspense fallback={<div style={{ padding: 40 }}>Loading...</div>}>
+              <Suspense fallback={
+                <div style={{ 
+                  padding: '2rem', 
+                  textAlign: 'center',
+                  fontFamily: 'system-ui, -apple-system, sans-serif'
+                }}>
+                  <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>⏳</div>
+                  <div>Loading...</div>
+                </div>
+              }>
                 <NavBar />
                 <Routes>
                 <Route path="/" element={<HomePage />} />

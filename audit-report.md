@@ -1,6 +1,6 @@
 # Elevate SaaS Audit
 
-_Generated: 2025-10-10 11:29 UTC_
+_Generated: 2025-10-14 17:19 UTC_
 
 This report compares your repository against a secure, boring SaaS baseline (Next.js + Supabase RLS + Cloudflare Workers/Queues + Stripe + Terraform + CI + CSP + Secrets).
 

@@ -7,6 +7,11 @@
     "npm": ">=10.0.0"
   },
   "packageManager": "pnpm@9.7.0",
+  "overrides": {
+    "@sentry/react": {
+      "react": "19.1.1"
+    }
+  },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@sentry/react": "^7.99.0",

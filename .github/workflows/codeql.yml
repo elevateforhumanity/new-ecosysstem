@@ -1,0 +1,76 @@
+name: "CodeQL Security Scanning"
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  schedule:
+    # Run CodeQL analysis weekly on Mondays at 6 AM UTC
+    - cron: '0 6 * * 1'
+
+jobs:
+  analyze:
+    name: Analyze Code
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+      pull-requests: write
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'javascript', 'typescript' ]
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          # Specify additional queries to run
+          queries: security-extended,security-and-quality
+          # Enable debug mode for troubleshooting
+          debug: false
+      
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+      
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{matrix.language}}"
+          upload: true
+          # Fail the build if critical vulnerabilities are found
+          fail-on: error
+      
+      - name: Upload SARIF results
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: ../results
+      
+      - name: Comment PR with results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const results = fs.readFileSync('../results/${{ matrix.language }}.sarif', 'utf8');
+            const parsed = JSON.parse(results);
+            const alerts = parsed.runs[0].results.length;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## CodeQL Analysis Results (${{ matrix.language }})\n\n${alerts} potential security issues found. Review the Security tab for details.`
+            });

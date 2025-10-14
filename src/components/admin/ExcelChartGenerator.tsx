@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface ExcelChartConfig {
   type: 'pie' | 'bar' | 'line' | 'doughnut' | 'column';

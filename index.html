@@ -144,7 +144,19 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link" style="position: absolute; left: -9999px; z-index: 999; padding: 1em; background: #000; color: #fff; text-decoration: none;">Skip to main content</a>
+    
+    <div id="root" role="application" aria-label="Elevate for Humanity Application"></div>
+    
+    <!-- No JavaScript fallback -->
+    <noscript>
+      <div role="alert" style="padding: 2rem; text-align: center; background: #fff3cd; border: 2px solid #ffc107;">
+        <h1>JavaScript Required</h1>
+        <p>This application requires JavaScript to be enabled. Please enable JavaScript in your browser settings to continue.</p>
+      </div>
+    </noscript>
+    
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

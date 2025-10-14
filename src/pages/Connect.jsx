@@ -38,7 +38,6 @@ export default function Connect() {
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    console.log("Form submitted:", formData);
     setSubmitted(true);
     setLoading(false);
   };

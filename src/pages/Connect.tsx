@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Users, Calendar, MapPin, Briefcase, MessageCircle, Star, Clock, ChevronRight } from "lucide-react";
+import { Users, Calendar, MapPin, Briefcase, MessageCircle, Star, ChevronRight } from "lucide-react";
 import { Link, useRoute } from "wouter";
 
 export default function Connect() {

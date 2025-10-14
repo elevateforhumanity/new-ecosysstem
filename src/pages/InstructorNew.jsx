@@ -32,7 +32,6 @@ export default function InstructorNew() {
   };
 
   const handleCreate = () => {
-    console.log("Creating course:", courseData);
   };
 
   const isStepValid = () => {

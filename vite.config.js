@@ -5,18 +5,31 @@ const gpURL = process.env.GITPOD_WORKSPACE_URL || ''
 const gpHost = gpURL ? new URL(gpURL).host : undefined
 const gpPortHost = gpHost ? `5173--${gpHost}` : undefined
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react()],
   publicDir: 'public',
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        // Remove console.log in production
+        drop_console: mode === 'production',
+        drop_debugger: true,
+      },
+    },
     rollupOptions: {
       output: {
         // Force new build hash to bust cache
         entryFileNames: `assets/[name]-[hash]-${Date.now()}.js`,
         chunkFileNames: `assets/[name]-[hash]-${Date.now()}.js`,
-        assetFileNames: `assets/[name]-[hash]-${Date.now()}.[ext]`
+        assetFileNames: `assets/[name]-[hash]-${Date.now()}.[ext]`,
+        // Optimize chunk splitting
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'ui-vendor': ['lucide-react'],
+        },
       }
     }
   },
@@ -36,4 +49,4 @@ export default defineConfig({
     port: 4173,
     allowedHosts: [/\.gitpod\.dev$/],
   },
-})
+}))

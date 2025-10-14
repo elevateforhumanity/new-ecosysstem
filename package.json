@@ -71,7 +71,7 @@
     "dev:api": "node server/index.js",
     "dev:full": "concurrently -k -n VITE,API -c green,cyan \"./scripts/start-vite.sh\" \"./scripts/start-api.sh\"",
     "autopilot": "./scripts/autopilot.sh",
-    "build": "vite build && node scripts/inject-meta.js",
+    "build": "vite build && node scripts/inject-critical-content.cjs",
     "build:base": "vite build",
     "start": "echo 'This is a static site. Use npm run preview to test locally.'",
     "start:frontend": "vite preview --host 0.0.0.0 --port 8080 --strictPort",
@@ -105,6 +105,7 @@
     "sitemap:generate": "node scripts/generate-sitemap.cjs",
     "cf:deploy": "wrangler pages deploy dist --project-name=elevateforhumanity",
     "cf:dev": "wrangler pages dev dist",
-    "postinstall": "echo '🤖 Advanced Autopilot Ready' && echo 'Run: npm run autopilot:always'"
+    "postinstall": "echo '🤖 Advanced Autopilot Ready' && echo 'Run: npm run autopilot:always'",
+    "build:seo": "npm run build"
   }
 }

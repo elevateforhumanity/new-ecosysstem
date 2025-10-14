@@ -333,6 +333,23 @@ async function syncCoursework(classroom: any, task: SyncTask): Promise<string> {
 async function syncRoster(classroom: any, task: SyncTask): Promise<string> {
   const { payload, event_source } = task;
 
+  // Resolve user email using identity mapping if needed
+  let userEmail = payload.user_email;
+  if (!userEmail && payload.user_id) {
+    const { data: resolvedEmail } = await supabase.rpc('resolve_lms_identity', {
+      p_lms_source: event_source,
+      p_lms_user_id: payload.user_id,
+      p_fallback_email: null,
+    });
+    
+    if (resolvedEmail) {
+      userEmail = resolvedEmail;
+      console.error(`Resolved ${payload.user_id} → ${userEmail}`);
+    } else {
+      throw new Error(`Cannot resolve email for LMS user ${payload.user_id}. Add to identity map.`);
+    }
+  }
+
   // Get course mapping
   const { data: courseMapping } = await supabase
     .from('lms_classroom_course_map')
@@ -350,7 +367,7 @@ async function syncRoster(classroom: any, task: SyncTask): Promise<string> {
   // Check if student already enrolled
   const { data: existingMapping } = await supabase
     .from('lms_classroom_roster_map')
-    .select('classroom_enrollment_id')
+    .select('classroom_enrollment_id, enrollment_status')
     .eq('lms_source', event_source)
     .eq('lms_course_id', payload.course_id)
     .eq('lms_user_id', payload.user_id)
@@ -359,38 +376,87 @@ async function syncRoster(classroom: any, task: SyncTask): Promise<string> {
   let enrollmentId: string;
 
   if (existingMapping && payload.action !== 'remove') {
-    // Already enrolled
+    // Already enrolled - update status to active
     enrollmentId = existingMapping.classroom_enrollment_id;
-    console.log(`Student already enrolled: ${payload.user_email}`);
+    
+    // Reactivate if previously removed
+    if (existingMapping.enrollment_status !== 'active') {
+      await supabase
+        .from('lms_classroom_roster_map')
+        .update({ 
+          enrollment_status: 'active',
+          updated_at: new Date().toISOString(),
+        })
+        .eq('lms_source', event_source)
+        .eq('lms_course_id', payload.course_id)
+        .eq('lms_user_id', payload.user_id);
+      
+      console.error(`Reactivated student: ${userEmail}`);
+    } else {
+      console.error(`Student already enrolled: ${userEmail}`);
+    }
   } else if (payload.action === 'remove') {
     // Remove student
     if (existingMapping) {
+      // Check if protected from auto-unenroll
+      const { data: isProtected } = await supabase.rpc('is_protected_from_unenroll', {
+        p_email: userEmail,
+      });
+      
+      if (isProtected) {
+        console.error(`⚠️  Cannot remove protected user: ${userEmail}`);
+        throw new Error(`User ${userEmail} is protected from removal`);
+      }
+      
       await classroom.courses.students.delete({
         courseId: classroomCourseId,
-        userId: payload.user_email,
+        userId: userEmail,
       });
 
       // Update mapping status
       await supabase
         .from('lms_classroom_roster_map')
-        .update({ enrollment_status: 'removed' })
+        .update({ 
+          enrollment_status: 'removed',
+          updated_at: new Date().toISOString(),
+        })
         .eq('lms_source', event_source)
         .eq('lms_course_id', payload.course_id)
         .eq('lms_user_id', payload.user_id);
 
-      console.log(`Removed student: ${payload.user_email}`);
+      console.error(`Removed student: ${userEmail}`);
     }
     enrollmentId = 'removed';
   } else {
     // Enroll new student
-    const response = await classroom.courses.students.create({
-      courseId: classroomCourseId,
-      requestBody: {
-        userId: payload.user_email,
-      },
-    });
+    try {
+      const response = await classroom.courses.students.create({
+        courseId: classroomCourseId,
+        requestBody: {
+          userId: userEmail,
+        },
+      });
 
-    enrollmentId = response.data.userId!;
+      enrollmentId = response.data.userId!;
+    } catch (error: any) {
+      // If user doesn't exist in domain, send invite
+      if (error.code === 404 || error.message?.includes('not found')) {
+        console.error(`User ${userEmail} not in domain, sending invite...`);
+        
+        const inviteResponse = await classroom.invitations.create({
+          requestBody: {
+            courseId: classroomCourseId,
+            userId: userEmail,
+            role: payload.role === 'teacher' ? 'TEACHER' : 'STUDENT',
+          },
+        });
+        
+        enrollmentId = inviteResponse.data.userId!;
+        console.error(`Sent invite to: ${userEmail}`);
+      } else {
+        throw error;
+      }
+    }
 
     // Create mapping
     await supabase
@@ -399,7 +465,7 @@ async function syncRoster(classroom: any, task: SyncTask): Promise<string> {
         lms_source: event_source,
         lms_course_id: payload.course_id,
         lms_user_id: payload.user_id,
-        lms_user_email: payload.user_email,
+        lms_user_email: userEmail,
         lms_user_role: payload.role || 'student',
         classroom_course_id: classroomCourseId,
         classroom_user_id: enrollmentId,
@@ -407,9 +473,10 @@ async function syncRoster(classroom: any, task: SyncTask): Promise<string> {
         enrollment_status: 'active',
         lms_data: payload,
         last_synced_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
       });
 
-    console.log(`Enrolled student: ${payload.user_email}`);
+    console.error(`Enrolled student: ${userEmail}`);
   }
 
   return enrollmentId;
@@ -433,6 +500,40 @@ function parseDueDate(dateString: string): { year: number; month: number; day: n
 function parseDueTime(timeString: string): { hours: number; minutes: number } {
   const [hours, minutes] = timeString.split(':').map(Number);
   return { hours, minutes };
+}
+
+/**
+ * Process auto-unenroll based on policy
+ */
+async function processAutoUnenroll(): Promise<void> {
+  console.error('\n🔄 Processing auto-unenroll...');
+  
+  const { data: results, error } = await supabase.rpc('process_auto_unenroll');
+  
+  if (error) {
+    console.error('❌ Auto-unenroll failed:', error.message);
+    return;
+  }
+  
+  if (!results || results.length === 0) {
+    console.error('✅ No users to unenroll');
+    return;
+  }
+  
+  const dryRun = results[0]?.dry_run;
+  const action = dryRun ? 'Would unenroll' : 'Unenrolled';
+  
+  console.error(`\n${dryRun ? '🔍 DRY RUN MODE' : '⚠️  LIVE MODE'}`);
+  console.error(`${action} ${results.length} users:\n`);
+  
+  results.forEach((r: any) => {
+    console.error(`  - ${r.google_email} (${r.lms_source}/${r.lms_course_id}) - ${r.days_inactive} days inactive`);
+  });
+  
+  if (dryRun) {
+    console.error('\n💡 To enable live unenroll:');
+    console.error('   UPDATE lms_unenroll_policy SET dry_run_mode = FALSE, auto_unenroll = TRUE;');
+  }
 }
 
 /**
@@ -463,6 +564,10 @@ async function runSyncLoop(maxTasks: number = 10): Promise<void> {
   }
 
   console.log(`✅ Processed ${processedCount} tasks`);
+  
+  // After processing adds, enforce removals
+  console.error('\n🔄 Checking auto-unenroll policy...');
+  await processAutoUnenroll();
 }
 
 /**
@@ -482,4 +587,4 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     });
 }
 
-export { runSyncLoop, processSyncTask };
+export { runSyncLoop, processSyncTask, processAutoUnenroll };

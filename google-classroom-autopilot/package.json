@@ -9,6 +9,9 @@
     "auth:redeem": "tsx src/index.ts auth:redeem",
     "courses:list": "tsx src/index.ts courses:list",
     "autopilot:run": "tsx src/index.ts autopilot:run",
+    "lms:sync": "tsx src/lms-sync.ts 50",
+    "lms:sync:large": "tsx src/lms-sync.ts 200",
+    "lms:reconcile": "tsx src/lms-sync.ts 1000",
     "dev": "tsx watch src/index.ts"
   },
   "keywords": [

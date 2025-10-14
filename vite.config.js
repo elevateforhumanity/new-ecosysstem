@@ -7,6 +7,7 @@ const gpPortHost = gpHost ? `5173--${gpHost}` : undefined
 
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
+  base: '/',
   publicDir: 'public',
   build: {
     outDir: 'dist',

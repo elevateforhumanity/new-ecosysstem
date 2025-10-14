@@ -12,14 +12,24 @@ function showFatal(e) {
   console.error('[EFH] React mount error:', e)
 }
 
+console.log('[EFH] Starting React app...')
+console.log('[EFH] Environment:', {
+  mode: import.meta.env.MODE,
+  supabaseUrl: import.meta.env.VITE_SUPABASE_URL ? 'SET' : 'MISSING',
+  siteUrl: import.meta.env.VITE_SITE_URL || 'not set'
+})
+
 try {
   const rootEl = document.getElementById('root')
   if (!rootEl) throw new Error('#root not found in index.html')
+  console.log('[EFH] Root element found, mounting React...')
   createRoot(rootEl).render(
     <React.StrictMode>
       <App />
     </React.StrictMode>
   )
+  console.log('[EFH] React mounted successfully')
 } catch (e) {
+  console.error('[EFH] FATAL ERROR:', e)
   showFatal(e)
 }

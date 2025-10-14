@@ -1,0 +1,31 @@
+# Elevate for Humanity - Robots.txt
+User-agent: *
+Allow: /
+
+# Disallow private/auth areas only
+Disallow: /api/
+Disallow: /admin/
+Disallow: /admin-console
+Disallow: /_next/
+Disallow: /private/
+
+# Sitemaps
+Sitemap: https://elevateforhumanity.onrender.com/sitemap.xml
+Sitemap: https://elevateforhumanity.onrender.com/sitemaps/sitemap-main.xml
+Sitemap: https://elevateforhumanity.onrender.com/sitemaps/sitemap-programs.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /

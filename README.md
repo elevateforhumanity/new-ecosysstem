@@ -1,186 +1,89 @@
-# fix2 - Gitpod and VS Code Configuration Template
+# Elevate for Humanity - Full Application
 
-This repository provides a template configuration to fix VS Code and environment issues when working with Gitpod. Use these configuration files to ensure your repositories work correctly on Gitpod.
+Complete workforce development platform with email management, Google Classroom integration, and comprehensive admin tools.
 
 ## 🚀 Quick Start
 
-Click the button below to open this repository in Gitpod:
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/elevateforhumanity/fix2)
-
-## 📖 Documentation
-
-- **[QUICK_REFERENCE.md](QUICK_REFERENCE.md)** - Quick copy commands and common customizations
-- **[SETUP_CHECKLIST.md](SETUP_CHECKLIST.md)** - Step-by-step setup checklist
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Guidelines for contributing
-- **[templates/](templates/)** - Pre-configured templates for different project types
-
-## 📁 What's Included
-
-This repository contains essential configuration files that ensure proper VS Code and environment setup in Gitpod:
-
-### `.gitpod.yml`
-The main Gitpod configuration file that:
-- Specifies the Docker image to use
-- Defines startup tasks and initialization scripts
-- Lists VS Code extensions to install automatically
-- Configures port forwarding
-- Sets up GitHub prebuilds for faster workspace starts
-
-### `.vscode/settings.json`
-VS Code workspace settings that:
-- Enable format on save
-- Configure code formatting preferences
-- Set up code actions (auto-fix, organize imports)
-- Configure default formatters for different file types
-- Set terminal and Git preferences
-
-### `.vscode/extensions.json`
-Recommended VS Code extensions including:
-- ESLint for JavaScript/TypeScript linting
-- Prettier for code formatting
-- GitLens for enhanced Git capabilities
-- Python support
-- Docker support
-- YAML support
-- GitHub Copilot and Pull Request integration
-
-### Additional Configuration Files
-
-#### `.editorconfig`
-Ensures consistent coding styles across different editors and IDEs:
-- Character encoding (UTF-8)
-- Line endings (LF)
-- Indentation style and size
-- Trailing whitespace handling
-
-#### `.prettierrc`
-Code formatting configuration for Prettier:
-- Semicolons, quotes, and trailing commas
-- Print width and tab width
-- Line endings
-
-#### `.eslintrc.json`
-JavaScript/TypeScript linting rules:
-- Code style enforcement
-- Best practices
-- Error prevention
-
-#### `.gitignore`
-Common patterns to exclude from version control:
-- Dependencies (node_modules, vendor)
-- Build outputs (dist, build)
-- IDE files
-- Environment variables
-- Temporary files
-
-#### `.github/workflows/validate.yml`
-GitHub Actions workflow that automatically validates:
-- YAML syntax in `.gitpod.yml` and templates
-- JSON syntax in VS Code configuration files
-- Presence of essential documentation
-
-## 🔧 How to Use This Template
-
-### For New Repositories
-
-1. **Copy configuration files to your repository:**
-   ```bash
-   # Copy .gitpod.yml
-   cp .gitpod.yml /path/to/your/repo/
-   
-   # Copy .vscode directory
-   cp -r .vscode /path/to/your/repo/
-   ```
-
-2. **Customize for your project:**
-   - Edit `.gitpod.yml` to add your project-specific setup commands
-   - Modify the `init` task to install dependencies (npm install, pip install, etc.)
-   - Adjust port configurations based on your application
-   - Add or remove VS Code extensions in both files
-
-3. **Commit and push:**
-   ```bash
-   git add .gitpod.yml .vscode/
-   git commit -m "Add Gitpod and VS Code configuration"
-   git push
-   ```
-
-### For Existing Repositories
-
-If you already have `.gitpod.yml` or `.vscode` configuration:
-
-1. **Merge configurations carefully** - Don't overwrite existing settings
-2. **Test in Gitpod** - Open your repository in Gitpod to verify everything works
-3. **Adjust as needed** - Each project may have unique requirements
-
-## 🛠️ Customization Guide
-
-### Adding Project Dependencies
-
-Edit the `init` section in `.gitpod.yml`:
-
-```yaml
-tasks:
-  - name: Setup Environment
-    init: |
-      # Node.js project
-      npm install
-      
-      # Python project
-      pip install -r requirements.txt
-      
-      # Multiple commands
-      npm install
-      npm run build
+```bash
+npm install
+cp .env.example .env
+# Edit .env with your credentials
+npm run dev
 ```
 
-### Configuring Ports
+## ✨ Key Features
 
-Add ports your application uses:
+### Email Management (NEW)
+- ✅ Email Events Dashboard - Monitor all email activity
+- ✅ Resend Failed Emails - Admin-only with safety checks
+- ✅ Do Not Contact List - GDPR-compliant blocking
+- ✅ Auto-DNC - Automatic blocking on bounces/spam
+- ✅ Audit Trail - Complete logging
 
-```yaml
-ports:
-  - port: 3000
-    onOpen: open-browser  # Options: notify, open-browser, open-preview, ignore
-    visibility: public     # Options: public, private
+### Security & Compliance
+- ✅ Role-Based Access Control (RBAC)
+- ✅ Row-Level Security (RLS)
+- ✅ 12-hour cooldown between resends
+- ✅ Maximum 3 resend attempts
+- ✅ GDPR Compliant
+
+## 📁 Structure
+
+```
+fix2/
+├── src/                          # React application
+├── google-classroom-autopilot/   # Backend services
+│   ├── sql/                      # Database migrations
+│   │   └── 06_do_not_contact_and_rbac.sql  # NEW
+│   └── src/
+│       └── email-resend.ts       # Email API
+├── docs/                         # Documentation
+│   ├── EMAIL_RESEND_RBAC_DNC.md
+│   └── SETUP_EMAIL_RESEND.md
+└── public/                       # Static assets
 ```
 
-### Adding VS Code Extensions
+## 🔧 Setup
 
-Edit `.vscode/extensions.json` or add to `.gitpod.yml`:
-
-```yaml
-vscode:
-  extensions:
-    - publisher.extension-name
+### 1. Database
+```bash
+psql -d your_db -f google-classroom-autopilot/sql/06_do_not_contact_and_rbac.sql
 ```
 
-## 🐛 Common Issues and Solutions
+### 2. Set Admin Role
+```sql
+UPDATE auth.users
+SET raw_user_meta_data = jsonb_set(
+  COALESCE(raw_user_meta_data, '{}'::jsonb),
+  '{role}', '"admin"'
+)
+WHERE email = 'admin@example.com';
+```
 
-### Issue: Extensions not installing automatically
-**Solution:** Ensure extension IDs are correct in both `.gitpod.yml` and `.vscode/extensions.json`
+### 3. Build
+```bash
+npm install
+npm run build
+npm run dev
+```
 
-### Issue: Workspace initialization fails
-**Solution:** Check the `init` commands in `.gitpod.yml` for errors. View logs in Gitpod terminal.
+## 🔐 Admin Access
 
-### Issue: Port not accessible
-**Solution:** Verify port configuration in `.gitpod.yml` and ensure your app is listening on `0.0.0.0` not `localhost`
+- **Email Events**: `/admin/email-events`
+- **Do Not Contact**: `/admin/do-not-contact`
 
-### Issue: Formatting not working
-**Solution:** Install the Prettier extension and ensure it's set as the default formatter in settings.json
+## 📚 Documentation
 
-## 📚 Resources
+- [Email Resend Features](docs/EMAIL_RESEND_RBAC_DNC.md)
+- [Setup Guide](docs/SETUP_EMAIL_RESEND.md)
+- [Implementation Summary](IMPLEMENTATION_SUMMARY.md)
 
-- [Gitpod Documentation](https://www.gitpod.io/docs)
-- [Gitpod .gitpod.yml Reference](https://www.gitpod.io/docs/references/gitpod-yml)
-- [VS Code Settings Reference](https://code.visualstudio.com/docs/getstarted/settings)
-- [VS Code Extension Marketplace](https://marketplace.visualstudio.com/vscode)
+## 🧪 Testing
 
-## 🤝 Contributing
+```bash
+psql -d your_db -f google-classroom-autopilot/sql/test_rbac_dnc.sql
+```
 
-Feel free to submit issues or pull requests to improve this template configuration.
+---
 
-## 📝 License
-
-This configuration template is provided as-is for use in any project.
+**Status**: ✅ Production Ready | **Version**: 2.0.0

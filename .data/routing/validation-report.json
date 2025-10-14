@@ -1,0 +1,79 @@
+{
+  "timestamp": "2025-10-03T22:42:23.847Z",
+  "totalPages": 108,
+  "totalImports": 99,
+  "totalRoutes": 105,
+  "missingImports": [
+    {
+      "name": "AccessibilitySettings",
+      "file": "/workspaces/ecosystem2/src/pages/AccessibilitySettings.jsx",
+      "relativePath": "AccessibilitySettings.jsx",
+      "route": "/accessibility-settings"
+    },
+    {
+      "name": "Sitemap.test",
+      "file": "/workspaces/ecosystem2/src/pages/Sitemap.test.jsx",
+      "relativePath": "Sitemap.test.jsx",
+      "route": "/sitemap.test"
+    },
+    {
+      "name": "Quiz.test",
+      "file": "/workspaces/ecosystem2/src/pages/__tests__/Quiz.test.jsx",
+      "relativePath": "__tests__/Quiz.test.jsx",
+      "route": "/quiz.test"
+    }
+  ],
+  "missingRoutes": [
+    {
+      "name": "AccessibilitySettings",
+      "file": "/workspaces/ecosystem2/src/pages/AccessibilitySettings.jsx",
+      "relativePath": "AccessibilitySettings.jsx",
+      "route": "/accessibility-settings"
+    },
+    {
+      "name": "Sitemap.test",
+      "file": "/workspaces/ecosystem2/src/pages/Sitemap.test.jsx",
+      "relativePath": "Sitemap.test.jsx",
+      "route": "/sitemap.test"
+    },
+    {
+      "name": "Quiz.test",
+      "file": "/workspaces/ecosystem2/src/pages/__tests__/Quiz.test.jsx",
+      "relativePath": "__tests__/Quiz.test.jsx",
+      "route": "/quiz.test"
+    }
+  ],
+  "unusedImports": [],
+  "issues": [
+    {
+      "type": "missing_import",
+      "component": "AccessibilitySettings",
+      "file": "/workspaces/ecosystem2/src/pages/AccessibilitySettings.jsx"
+    },
+    {
+      "type": "missing_import",
+      "component": "Sitemap.test",
+      "file": "/workspaces/ecosystem2/src/pages/Sitemap.test.jsx"
+    },
+    {
+      "type": "missing_import",
+      "component": "Quiz.test",
+      "file": "/workspaces/ecosystem2/src/pages/__tests__/Quiz.test.jsx"
+    },
+    {
+      "type": "missing_route",
+      "component": "AccessibilitySettings",
+      "route": "/accessibility-settings"
+    },
+    {
+      "type": "missing_route",
+      "component": "Sitemap.test",
+      "route": "/sitemap.test"
+    },
+    {
+      "type": "missing_route",
+      "component": "Quiz.test",
+      "route": "/quiz.test"
+    }
+  ]
+}

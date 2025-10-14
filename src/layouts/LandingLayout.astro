@@ -1,0 +1,100 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+}
+
+const { title, description, canonical } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Security Headers -->
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  
+  {canonical && <link rel="canonical" href={canonical}>}
+  
+  <!-- Professional Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="/src/styles/global.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={canonical || "https://elevateforhumanity.org"}>
+  
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Elevate for Humanity",
+    "description": "WIOA-approved workforce development training programs",
+    "url": "https://elevateforhumanity.org",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "OH",
+      "addressCountry": "US"
+    }
+  }
+  </script>
+</head>
+<body class="font-sans antialiased bg-gray-50">
+  <slot />
+  
+  <!-- Professional Footer -->
+  <footer class="bg-gray-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="col-span-1 md:col-span-2">
+          <h3 class="text-lg font-semibold mb-4">Elevate for Humanity</h3>
+          <p class="text-gray-300 mb-4">WIOA-approved workforce development programs serving Ohio residents since 2019.</p>
+          <div class="flex space-x-4">
+            <span class="text-sm text-gray-400">Equal Opportunity Provider</span>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold mb-4">Programs</h4>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="/programs/healthcare" class="hover:text-white">Healthcare Training</a></li>
+            <li><a href="/programs/technology" class="hover:text-white">Technology Programs</a></li>
+            <li><a href="/programs/trades" class="hover:text-white">Skilled Trades</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold mb-4">Resources</h4>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="/eligibility-check.html" class="hover:text-white">Check Eligibility</a></li>
+            <li><a href="/hub.html" class="hover:text-white">Student Portal</a></li>
+            <li><a href="/policies/eo.html" class="hover:text-white">Equal Opportunity</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+        <p>&copy; 2024 Elevate for Humanity. All rights reserved. | WIOA Approved Provider</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

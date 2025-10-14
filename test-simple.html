@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Simple Test</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+      console.log('[TEST] Script executing...');
+      const root = document.getElementById('root');
+      console.log('[TEST] Root element:', root);
+      if (root) {
+        root.innerHTML = '<h1 style="color: green;">✅ JavaScript is executing!</h1>';
+        console.log('[TEST] Content injected');
+      } else {
+        console.error('[TEST] Root element not found!');
+      }
+    </script>
+  </body>
+</html>

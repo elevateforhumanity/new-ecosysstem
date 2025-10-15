@@ -640,20 +640,24 @@ async function connectPayout(request, env, corsHeaders) {
 }
 
 /**
- * Use OpenAI GPT-4 to interpret natural language into structured command
+ * Use Cloudflare Workers AI to interpret natural language into structured command
+ * NO OPENAI COSTS - Uses open-source Llama 3 model
  * Returns: { action: string, params: object }
  */
 async function interpretPrompt(prompt, env) {
-  const systemPrompt = `You are the EFH Autopilot Agent. Respond only in valid JSON: { action: string, params: object }
+  const systemPrompt = `You are the EFH Autopilot Agent. Respond ONLY in valid JSON format: { "action": "string", "params": {} }
 
 Available actions:
-- createProgram: Create new training program (params: title, tuition, hours, cip_code, org_id)
+- createProgram: Create new training program (params: title, tuition, hours, cip_code)
 - updateTuition: Update program tuition (params: id, amount)
-- createAffiliate: Add affiliate partner (params: name, email, commission_rate)
+- createAffiliate: Add affiliate partner (params: user_id, tier)
 - addStudent: Enroll student (params: student_id, program_id)
 - generateReport: Generate ETPL/compliance report (params: type)
-- processPayout: Handle affiliate payout (params: affiliate_id, amount)
+- createReferral: Create referral (params: affiliate_id, client_name, source)
+- calculateCommission: Calculate commission (params: referral_id, basis_amount, percent)
+- runPayoutBatch: Process payouts (params: cutoff_date)
 - updateEnrollment: Modify enrollment (params: enrollment_id, status)
+- getStats: Get dashboard stats (params: {})
 
 Examples:
 User: "Create a new Tax Prep Training program for $2500 tuition"
@@ -663,38 +667,54 @@ User: "Update tuition for program abc123 to $3000"
 Response: {"action":"updateTuition","params":{"id":"abc123","amount":3000}}
 
 User: "Generate ETPL report"
-Response: {"action":"generateReport","params":{"type":"etpl"}}`;
+Response: {"action":"generateReport","params":{"type":"etpl"}}
 
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${env.OPENAI_API_KEY}`,
-    },
-    body: JSON.stringify({
-      model: 'gpt-4',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: prompt }
-      ],
-      response_format: { type: 'json_object' },
-      temperature: 0.3,
-    })
-  });
+IMPORTANT: Respond with ONLY the JSON object, no other text.`;
+
+  // Use Cloudflare Workers AI (Llama 3.1 8B Instruct)
+  const response = await fetch(
+    `https://api.cloudflare.com/client/v4/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/ai/run/@cf/meta/llama-3.1-8b-instruct`,
+    {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${env.CLOUDFLARE_API_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: prompt }
+        ],
+        temperature: 0.2,
+        max_tokens: 512,
+      })
+    }
+  );
 
   if (!response.ok) {
     const error = await response.text();
-    throw new Error(`OpenAI API error: ${error}`);
+    throw new Error(`Workers AI error: ${error}`);
   }
 
   const data = await response.json();
-  const content = data.choices[0].message.content;
+  const content = data.result?.response || '';
   
+  // Extract JSON from response (model might add extra text)
+  let jsonMatch = content.match(/\{[\s\S]*\}/);
+  if (!jsonMatch) {
+    throw new Error('No JSON found in model response');
+  }
+
   let actionData;
   try {
-    actionData = JSON.parse(content);
+    actionData = JSON.parse(jsonMatch[0]);
   } catch (e) {
-    throw new Error('Bad JSON from model');
+    throw new Error(`Bad JSON from model: ${content}`);
+  }
+
+  // Validate structure
+  if (!actionData.action || !actionData.params) {
+    throw new Error('Invalid action structure from model');
   }
 
   return actionData;

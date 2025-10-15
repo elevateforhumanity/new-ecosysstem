@@ -5,6 +5,10 @@ name = "efh-agent"
 main = "agent-worker.js"
 compatibility_date = "2024-10-14"
 
+# Cron trigger for automated payout batches (3 AM UTC daily)
+[triggers]
+crons = ["0 3 * * *"]
+
 # R2 Bucket for file storage
 [[r2_buckets]]
 binding = "EFH_BUCKET"

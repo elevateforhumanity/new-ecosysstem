@@ -2,273 +2,312 @@
 import React, { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
-const Pg_About_8d4e37 = React.lazy(() => import(/* @vite-ignore */ './pages/About.jsx'));
-const Pg_Accessibility_f9a050 = React.lazy(() => import(/* @vite-ignore */ './pages/Accessibility.jsx'));
-const Pg_AccessibilitySettings_d4e4c8 = React.lazy(() => import(/* @vite-ignore */ './pages/AccessibilitySettings.jsx'));
-const Pg_Account_0703ce = React.lazy(() => import(/* @vite-ignore */ './pages/Account.jsx'));
-const Pg_AdminConsole_3b95a5 = React.lazy(() => import(/* @vite-ignore */ './pages/AdminConsole.jsx'));
-const Pg_AdminDashboard_d4786f = React.lazy(() => import(/* @vite-ignore */ './pages/AdminDashboard.jsx'));
-const Pg_Analytics_c11c43 = React.lazy(() => import(/* @vite-ignore */ './pages/Analytics.jsx'));
-const Pg_AnalyticsDashboard_2d3f73 = React.lazy(() => import(/* @vite-ignore */ './pages/AnalyticsDashboard.jsx'));
-const Pg_Assignment_c80e61 = React.lazy(() => import(/* @vite-ignore */ './pages/Assignment.jsx'));
-const Pg_BingSiteVerification_a0d8b0 = React.lazy(() => import(/* @vite-ignore */ './pages/BingSiteVerification.jsx'));
-const Pg_Branding_a8adf7 = React.lazy(() => import(/* @vite-ignore */ './pages/Branding.jsx'));
-const Pg_BusinessHub_44db4d = React.lazy(() => import(/* @vite-ignore */ './pages/BusinessHub.jsx'));
-const Pg_Calendar_349e4c = React.lazy(() => import(/* @vite-ignore */ './pages/Calendar.jsx'));
-const Pg_Certificates_3da608 = React.lazy(() => import(/* @vite-ignore */ './pages/Certificates.jsx'));
-const Pg_CloneLanding_ada451 = React.lazy(() => import(/* @vite-ignore */ './pages/CloneLanding.jsx'));
-const Pg_Community_b55b04 = React.lazy(() => import(/* @vite-ignore */ './pages/Community.jsx'));
-const Pg_CommunityHub_e1c8d0 = React.lazy(() => import(/* @vite-ignore */ './pages/CommunityHub.jsx'));
-const Pg_Compliance_605436 = React.lazy(() => import(/* @vite-ignore */ './pages/Compliance.jsx'));
-const Pg_Connect_601255 = React.lazy(() => import(/* @vite-ignore */ './pages/Connect.jsx'));
-const Pg_Course_4186fe = React.lazy(() => import(/* @vite-ignore */ './pages/Course.jsx'));
-const Pg_CourseBuilder_3e58d7 = React.lazy(() => import(/* @vite-ignore */ './pages/CourseBuilder.jsx'));
-const Pg_CourseCatalog_fc6f47 = React.lazy(() => import(/* @vite-ignore */ './pages/CourseCatalog.jsx'));
-const Pg_CourseDetail_60c1b1 = React.lazy(() => import(/* @vite-ignore */ './pages/CourseDetail.jsx'));
-const Pg_CourseLibrary_ddf14c = React.lazy(() => import(/* @vite-ignore */ './pages/CourseLibrary.jsx'));
-const Pg_CurriculumUpload_56de12 = React.lazy(() => import(/* @vite-ignore */ './pages/CurriculumUpload.jsx'));
-const Pg_Docs_c0cbdd = React.lazy(() => import(/* @vite-ignore */ './pages/Docs.jsx'));
-const Pg_Donate_3970a4 = React.lazy(() => import(/* @vite-ignore */ './pages/Donate.jsx'));
-const Pg_DonatePage_9ade1b = React.lazy(() => import(/* @vite-ignore */ './pages/DonatePage.jsx'));
-const Pg_DurableFeatures_ea9035 = React.lazy(() => import(/* @vite-ignore */ './pages/DurableFeatures.jsx'));
-const Pg_DurableLanding_e01133 = React.lazy(() => import(/* @vite-ignore */ './pages/DurableLanding.jsx'));
-const Pg_DurablePricing_1888d2 = React.lazy(() => import(/* @vite-ignore */ './pages/DurablePricing.jsx'));
-const Pg_DurableTemplates_241579 = React.lazy(() => import(/* @vite-ignore */ './pages/DurableTemplates.jsx'));
-const Pg_Ecommerce_b3b778 = React.lazy(() => import(/* @vite-ignore */ './pages/Ecommerce.jsx'));
-const Pg_Ecosystem_ae9629 = React.lazy(() => import(/* @vite-ignore */ './pages/Ecosystem.jsx'));
-const Pg_EducatorHub_1b924d = React.lazy(() => import(/* @vite-ignore */ './pages/EducatorHub.jsx'));
-const Pg_ElevateBrain_63c58e = React.lazy(() => import(/* @vite-ignore */ './pages/ElevateBrain.jsx'));
-const Pg_Email_c99137 = React.lazy(() => import(/* @vite-ignore */ './pages/Email.jsx'));
-const Pg_FileManager_32ca2d = React.lazy(() => import(/* @vite-ignore */ './pages/FileManager.jsx'));
-const Pg_ForgotPassword_cc7708 = React.lazy(() => import(/* @vite-ignore */ './pages/ForgotPassword.jsx'));
-const Pg_Forms_77d58c = React.lazy(() => import(/* @vite-ignore */ './pages/Forms.jsx'));
-const Pg_FundingImpact_0a29e7 = React.lazy(() => import(/* @vite-ignore */ './pages/FundingImpact.jsx'));
-const Pg_GetStarted_16f9e8 = React.lazy(() => import(/* @vite-ignore */ './pages/GetStarted.jsx'));
-const Pg_GoogleAnalyticsSetup_344f29 = React.lazy(() => import(/* @vite-ignore */ './pages/GoogleAnalyticsSetup.jsx'));
-const Pg_GoogleSiteVerification_72473f = React.lazy(() => import(/* @vite-ignore */ './pages/GoogleSiteVerification.jsx'));
-const Pg_Government_129c06 = React.lazy(() => import(/* @vite-ignore */ './pages/Government.jsx'));
-const Pg_Groups_ec65ea = React.lazy(() => import(/* @vite-ignore */ './pages/Groups.jsx'));
-const Pg_Hub_45b82a = React.lazy(() => import(/* @vite-ignore */ './pages/Hub.jsx'));
-const Pg_Instructor_06bad9 = React.lazy(() => import(/* @vite-ignore */ './pages/Instructor.jsx'));
-const Pg_InstructorEdit_35f490 = React.lazy(() => import(/* @vite-ignore */ './pages/InstructorEdit.jsx'));
-const Pg_InstructorNew_2d5ff0 = React.lazy(() => import(/* @vite-ignore */ './pages/InstructorNew.jsx'));
-const Pg_Integrations_86a2d5 = React.lazy(() => import(/* @vite-ignore */ './pages/Integrations.jsx'));
-const Pg_KingdomKonnect_0b954a = React.lazy(() => import(/* @vite-ignore */ './pages/KingdomKonnect.jsx'));
-const Pg_Login_241ed0 = React.lazy(() => import(/* @vite-ignore */ './pages/Login.jsx'));
-const Pg_MainLanding_fc5318 = React.lazy(() => import(/* @vite-ignore */ './pages/MainLanding.jsx'));
-const Pg_MobileApp_62aec9 = React.lazy(() => import(/* @vite-ignore */ './pages/MobileApp.jsx'));
-const Pg_Notifications_3bb854 = React.lazy(() => import(/* @vite-ignore */ './pages/Notifications.jsx'));
-const Pg_Partners_42493b = React.lazy(() => import(/* @vite-ignore */ './pages/Partners.jsx'));
-const Pg_Pay_ff19b2 = React.lazy(() => import(/* @vite-ignore */ './pages/Pay.jsx'));
-const Pg_Philanthropy_6d774a = React.lazy(() => import(/* @vite-ignore */ './pages/Philanthropy.jsx'));
-const Pg_PrivacyPolicy_34d2d5 = React.lazy(() => import(/* @vite-ignore */ './pages/PrivacyPolicy.jsx'));
-const Pg_Profile_0b9666 = React.lazy(() => import(/* @vite-ignore */ './pages/Profile.jsx'));
-const Pg_Programs_e8b278 = React.lazy(() => import(/* @vite-ignore */ './pages/Programs.jsx'));
-const Pg_Quiz_53273b = React.lazy(() => import(/* @vite-ignore */ './pages/Quiz.jsx'));
-const Pg_RefundPolicy_4bf158 = React.lazy(() => import(/* @vite-ignore */ './pages/RefundPolicy.jsx'));
-const Pg_SereneComfortCare_c80357 = React.lazy(() => import(/* @vite-ignore */ './pages/SereneComfortCare.jsx'));
-const Pg_Settings_39d6a3 = React.lazy(() => import(/* @vite-ignore */ './pages/Settings.jsx'));
-const Pg_Sheets_331070 = React.lazy(() => import(/* @vite-ignore */ './pages/Sheets.jsx'));
-const Pg_Sitemap_aa9865 = React.lazy(() => import(/* @vite-ignore */ './pages/Sitemap.jsx'));
-const Pg_Sites_ead718 = React.lazy(() => import(/* @vite-ignore */ './pages/Sites.jsx'));
-const Pg_Slides_a8df48 = React.lazy(() => import(/* @vite-ignore */ './pages/Slides.jsx'));
-const Pg_Student_5d723d = React.lazy(() => import(/* @vite-ignore */ './pages/Student.jsx'));
-const Pg_StudentDashboard_0b17af = React.lazy(() => import(/* @vite-ignore */ './pages/StudentDashboard.jsx'));
-const Pg_StudentHandbook_2597aa = React.lazy(() => import(/* @vite-ignore */ './pages/StudentHandbook.jsx'));
-const Pg_StudentHub_c19ec9 = React.lazy(() => import(/* @vite-ignore */ './pages/StudentHub.jsx'));
-const Pg_Support_24d4c3 = React.lazy(() => import(/* @vite-ignore */ './pages/Support.jsx'));
-const Pg_TermsOfService_0cac3f = React.lazy(() => import(/* @vite-ignore */ './pages/TermsOfService.jsx'));
-const Pg_ThankYou_cc34d7 = React.lazy(() => import(/* @vite-ignore */ './pages/ThankYou.jsx'));
-const Pg_UrbanBuildCrew_4cf576 = React.lazy(() => import(/* @vite-ignore */ './pages/UrbanBuildCrew.jsx'));
-const Pg_UserManagement_814993 = React.lazy(() => import(/* @vite-ignore */ './pages/UserManagement.jsx'));
-const Pg_VerifyCertificate_53075f = React.lazy(() => import(/* @vite-ignore */ './pages/VerifyCertificate.jsx'));
-const Pg_VerifyEmail_2dcacb = React.lazy(() => import(/* @vite-ignore */ './pages/VerifyEmail.jsx'));
-const Pg_VideoMeeting_cdd4c1 = React.lazy(() => import(/* @vite-ignore */ './pages/VideoMeeting.jsx'));
-const Pg_Vids_95fe41 = React.lazy(() => import(/* @vite-ignore */ './pages/Vids.jsx'));
-const Pg_AITutor_bf5169 = React.lazy(() => import(/* @vite-ignore */ './pages/AITutor.jsx'));
-const Pg_DurableAI_08b494 = React.lazy(() => import(/* @vite-ignore */ './pages/DurableAI.jsx'));
-const Pg_Home_eabdf9 = React.lazy(() => import(/* @vite-ignore */ './pages/Home.jsx'));
-const Pg_HomePage_ff2289 = React.lazy(() => import(/* @vite-ignore */ './pages/HomePage.jsx'));
-const Pg_LMS_d8e5d5 = React.lazy(() => import(/* @vite-ignore */ './pages/LMS.jsx'));
-const Pg_LMSLanding_cb1ad1 = React.lazy(() => import(/* @vite-ignore */ './pages/LMSLanding.jsx'));
-const Pg_NotFound_f6ea8b = React.lazy(() => import(/* @vite-ignore */ './pages/NotFound.jsx'));
-const Pg_NotebookLM_825272 = React.lazy(() => import(/* @vite-ignore */ './pages/NotebookLM.jsx'));
-const Pg_ResetPassword_70c64f = React.lazy(() => import(/* @vite-ignore */ './pages/ResetPassword.jsx'));
-const Pg_SearchResults_14de53 = React.lazy(() => import(/* @vite-ignore */ './pages/SearchResults.jsx'));
-const Pg_Sitemap_test_e5b4ad = React.lazy(() => import(/* @vite-ignore */ './pages/Sitemap.test.jsx'));
-const Pg_NotFound_45b73a = React.lazy(() => import(/* @vite-ignore */ './pages/__generated__/NotFound.jsx'));
-const Pg_Quiz_test_94cb17 = React.lazy(() => import(/* @vite-ignore */ './pages/__tests__/Quiz.test.jsx'));
-const Pg_MentorDirectory_e3ed5d = React.lazy(() => import(/* @vite-ignore */ './pages/sisters/MentorDirectory.jsx'));
-const Pg_MentorSignup_009a7e = React.lazy(() => import(/* @vite-ignore */ './pages/sisters/MentorSignup.jsx'));
-const Pg_Mentorship_a1357f = React.lazy(() => import(/* @vite-ignore */ './pages/sisters/Mentorship.jsx'));
-const Pg_PeerSupport_9d90ac = React.lazy(() => import(/* @vite-ignore */ './pages/sisters/PeerSupport.jsx'));
-const Pg_Volunteer_78319e = React.lazy(() => import(/* @vite-ignore */ './pages/sisters/Volunteer.jsx'));
-const Pg_VolunteerOpportunities_e6d168 = React.lazy(() => import(/* @vite-ignore */ './pages/sisters/VolunteerOpportunities.jsx'));
-const Pg_VolunteerStories_720d7b = React.lazy(() => import(/* @vite-ignore */ './pages/sisters/VolunteerStories.jsx'));
-const Pg_Wellness_22d3da = React.lazy(() => import(/* @vite-ignore */ './pages/sisters/Wellness.jsx'));
-const Pg_WellnessResources_5d7e86 = React.lazy(() => import(/* @vite-ignore */ './pages/sisters/WellnessResources.jsx'));
-const Pg_AccessibilityProvider_0c4d69 = React.lazy(() => import(/* @vite-ignore */ './components/AccessibilityProvider.jsx'));
-const Pg_AskWidget_6d9bee = React.lazy(() => import(/* @vite-ignore */ './components/AskWidget.jsx'));
-const Pg_Chart_4917da = React.lazy(() => import(/* @vite-ignore */ './components/Chart.jsx'));
-const Pg_ChatAssistant_1c3e89 = React.lazy(() => import(/* @vite-ignore */ './components/ChatAssistant.tsx'));
-const Pg_DurableNav_fd3b82 = React.lazy(() => import(/* @vite-ignore */ './components/DurableNav.jsx'));
-const Pg_ErrorBoundary_b8552c = React.lazy(() => import(/* @vite-ignore */ './components/ErrorBoundary.jsx'));
-const Pg_Footer_ad96cb = React.lazy(() => import(/* @vite-ignore */ './components/Footer.jsx'));
-const Pg_FrameworkSettingsPanel_5ded31 = React.lazy(() => import(/* @vite-ignore */ './components/FrameworkSettingsPanel.tsx'));
-const Pg_Header_2e703e = React.lazy(() => import(/* @vite-ignore */ './components/Header.jsx'));
-const Pg_LoadingSpinner_4bf7ae = React.lazy(() => import(/* @vite-ignore */ './components/LoadingSpinner.jsx'));
-const Pg_NavBar_0e800f = React.lazy(() => import(/* @vite-ignore */ './components/NavBar.jsx'));
-const Pg_ProtectedRoute_fe9bc9 = React.lazy(() => import(/* @vite-ignore */ './components/ProtectedRoute.jsx'));
-const Pg_SEO_3357c1 = React.lazy(() => import(/* @vite-ignore */ './components/SEO.jsx'));
-const Pg_Toast_d3fd19 = React.lazy(() => import(/* @vite-ignore */ './components/Toast.jsx'));
-const Pg_VideoInterview_c485cf = React.lazy(() => import(/* @vite-ignore */ './components/VideoInterview.jsx'));
-const Pg_AutoAttritionTracker_b6911f = React.lazy(() => import(/* @vite-ignore */ './components/admin/AutoAttritionTracker.tsx'));
-const Pg_AutoFlowCharts_a2f8ac = React.lazy(() => import(/* @vite-ignore */ './components/admin/AutoFlowCharts.tsx'));
-const Pg_AutoProgramGenerator_01b70e = React.lazy(() => import(/* @vite-ignore */ './components/admin/AutoProgramGenerator.tsx'));
-const Pg_CopilotAssistant_4ec335 = React.lazy(() => import(/* @vite-ignore */ './components/admin/CopilotAssistant.tsx'));
-const Pg_CopilotDeployment_9ca4f9 = React.lazy(() => import(/* @vite-ignore */ './components/admin/CopilotDeployment.tsx'));
-const Pg_ExcelChartGenerator_b9ce9e = React.lazy(() => import(/* @vite-ignore */ './components/admin/ExcelChartGenerator.tsx'));
-const Pg_IntelligentDataProcessor_8644d1 = React.lazy(() => import(/* @vite-ignore */ './components/admin/IntelligentDataProcessor.tsx'));
-const Pg_LearningBarrierAnalyzer_5f93a7 = React.lazy(() => import(/* @vite-ignore */ './components/admin/LearningBarrierAnalyzer.tsx'));
-const Pg_WIOAComplianceDashboard_9d8ffc = React.lazy(() => import(/* @vite-ignore */ './components/admin/WIOAComplianceDashboard.tsx'));
-const Pg_DocumentEditor_e42e6f = React.lazy(() => import(/* @vite-ignore */ './components/editor/DocumentEditor.jsx'));
-const Pg_FileUpload_306604 = React.lazy(() => import(/* @vite-ignore */ './components/files/FileUpload.jsx'));
-const Pg_MeetingRoom_6fa9e3 = React.lazy(() => import(/* @vite-ignore */ './components/video/MeetingRoom.jsx'));
+const Pg_About_9ad732 = React.lazy(() => import(/* @vite-ignore */ './pages/About.jsx'));
+const Pg_Accessibility_7a693b = React.lazy(() => import(/* @vite-ignore */ './pages/Accessibility.jsx'));
+const Pg_AccessibilitySettings_719655 = React.lazy(() => import(/* @vite-ignore */ './pages/AccessibilitySettings.jsx'));
+const Pg_Account_d05eb3 = React.lazy(() => import(/* @vite-ignore */ './pages/Account.jsx'));
+const Pg_AdminConsole_eedc68 = React.lazy(() => import(/* @vite-ignore */ './pages/AdminConsole.jsx'));
+const Pg_AdminDashboard_182cfc = React.lazy(() => import(/* @vite-ignore */ './pages/AdminDashboard.jsx'));
+const Pg_AutopilotAdmin_a1b2c3 = React.lazy(() => import(/* @vite-ignore */ './pages/AutopilotAdmin.tsx'));
+const Pg_Analytics_d31455 = React.lazy(() => import(/* @vite-ignore */ './pages/Analytics.jsx'));
+const Pg_AnalyticsDashboard_b03045 = React.lazy(() => import(/* @vite-ignore */ './pages/AnalyticsDashboard.jsx'));
+const Pg_Assignment_cf2a4f = React.lazy(() => import(/* @vite-ignore */ './pages/Assignment.jsx'));
+const Pg_BingSiteVerification_4287d3 = React.lazy(() => import(/* @vite-ignore */ './pages/BingSiteVerification.jsx'));
+const Pg_Branding_a7e651 = React.lazy(() => import(/* @vite-ignore */ './pages/Branding.jsx'));
+const Pg_BusinessHub_bc14fb = React.lazy(() => import(/* @vite-ignore */ './pages/BusinessHub.jsx'));
+const Pg_Calendar_711755 = React.lazy(() => import(/* @vite-ignore */ './pages/Calendar.jsx'));
+const Pg_Certificates_c00ba3 = React.lazy(() => import(/* @vite-ignore */ './pages/Certificates.jsx'));
+const Pg_CloneLanding_dd6673 = React.lazy(() => import(/* @vite-ignore */ './pages/CloneLanding.jsx'));
+const Pg_Community_a0c44e = React.lazy(() => import(/* @vite-ignore */ './pages/Community.jsx'));
+const Pg_CommunityHub_960234 = React.lazy(() => import(/* @vite-ignore */ './pages/CommunityHub.jsx'));
+const Pg_Compliance_09e8e1 = React.lazy(() => import(/* @vite-ignore */ './pages/Compliance.jsx'));
+const Pg_Connect_b7fdef = React.lazy(() => import(/* @vite-ignore */ './pages/Connect.jsx'));
+const Pg_Course_162b98 = React.lazy(() => import(/* @vite-ignore */ './pages/Course.jsx'));
+const Pg_CourseBuilder_24ddaa = React.lazy(() => import(/* @vite-ignore */ './pages/CourseBuilder.jsx'));
+const Pg_CourseCatalog_7c033d = React.lazy(() => import(/* @vite-ignore */ './pages/CourseCatalog.jsx'));
+const Pg_CourseDetail_af4b3f = React.lazy(() => import(/* @vite-ignore */ './pages/CourseDetail.jsx'));
+const Pg_CourseLibrary_0982e6 = React.lazy(() => import(/* @vite-ignore */ './pages/CourseLibrary.jsx'));
+const Pg_CurriculumUpload_779e27 = React.lazy(() => import(/* @vite-ignore */ './pages/CurriculumUpload.jsx'));
+const Pg_Docs_621788 = React.lazy(() => import(/* @vite-ignore */ './pages/Docs.jsx'));
+const Pg_Donate_d566bf = React.lazy(() => import(/* @vite-ignore */ './pages/Donate.jsx'));
+const Pg_DonatePage_9fc357 = React.lazy(() => import(/* @vite-ignore */ './pages/DonatePage.jsx'));
+const Pg_DurableFeatures_480b37 = React.lazy(() => import(/* @vite-ignore */ './pages/DurableFeatures.jsx'));
+const Pg_DurableLanding_22e287 = React.lazy(() => import(/* @vite-ignore */ './pages/DurableLanding.jsx'));
+const Pg_DurablePricing_d5473f = React.lazy(() => import(/* @vite-ignore */ './pages/DurablePricing.jsx'));
+const Pg_DurableTemplates_8ff38e = React.lazy(() => import(/* @vite-ignore */ './pages/DurableTemplates.jsx'));
+const Pg_Ecommerce_09023c = React.lazy(() => import(/* @vite-ignore */ './pages/Ecommerce.jsx'));
+const Pg_Ecosystem_9af402 = React.lazy(() => import(/* @vite-ignore */ './pages/Ecosystem.jsx'));
+const Pg_EducatorHub_4eb5d7 = React.lazy(() => import(/* @vite-ignore */ './pages/EducatorHub.jsx'));
+const Pg_ElevateBrain_05009b = React.lazy(() => import(/* @vite-ignore */ './pages/ElevateBrain.jsx'));
+const Pg_Email_69003b = React.lazy(() => import(/* @vite-ignore */ './pages/Email.jsx'));
+const Pg_FileManager_a6e11f = React.lazy(() => import(/* @vite-ignore */ './pages/FileManager.jsx'));
+const Pg_ForgotPassword_a01413 = React.lazy(() => import(/* @vite-ignore */ './pages/ForgotPassword.jsx'));
+const Pg_Forms_cd743c = React.lazy(() => import(/* @vite-ignore */ './pages/Forms.jsx'));
+const Pg_FundingImpact_bc1ce6 = React.lazy(() => import(/* @vite-ignore */ './pages/FundingImpact.jsx'));
+const Pg_GetStarted_5c99bb = React.lazy(() => import(/* @vite-ignore */ './pages/GetStarted.jsx'));
+const Pg_GoogleAnalyticsSetup_47a2b1 = React.lazy(() => import(/* @vite-ignore */ './pages/GoogleAnalyticsSetup.jsx'));
+const Pg_GoogleSiteVerification_6ddc68 = React.lazy(() => import(/* @vite-ignore */ './pages/GoogleSiteVerification.jsx'));
+const Pg_Government_5dfc29 = React.lazy(() => import(/* @vite-ignore */ './pages/Government.jsx'));
+const Pg_Groups_f91f40 = React.lazy(() => import(/* @vite-ignore */ './pages/Groups.jsx'));
+const Pg_Hub_349983 = React.lazy(() => import(/* @vite-ignore */ './pages/Hub.jsx'));
+const Pg_Instructor_2bcb94 = React.lazy(() => import(/* @vite-ignore */ './pages/Instructor.jsx'));
+const Pg_InstructorEdit_9d2acc = React.lazy(() => import(/* @vite-ignore */ './pages/InstructorEdit.jsx'));
+const Pg_InstructorNew_e17f71 = React.lazy(() => import(/* @vite-ignore */ './pages/InstructorNew.jsx'));
+const Pg_Integrations_ddd497 = React.lazy(() => import(/* @vite-ignore */ './pages/Integrations.jsx'));
+const Pg_KingdomKonnect_a1e604 = React.lazy(() => import(/* @vite-ignore */ './pages/KingdomKonnect.jsx'));
+const Pg_Login_606a55 = React.lazy(() => import(/* @vite-ignore */ './pages/Login.jsx'));
+const Pg_MainLanding_a12495 = React.lazy(() => import(/* @vite-ignore */ './pages/MainLanding.jsx'));
+const Pg_MobileApp_266e94 = React.lazy(() => import(/* @vite-ignore */ './pages/MobileApp.jsx'));
+const Pg_Notifications_18a7c9 = React.lazy(() => import(/* @vite-ignore */ './pages/Notifications.jsx'));
+const Pg_Partners_a75e9e = React.lazy(() => import(/* @vite-ignore */ './pages/Partners.jsx'));
+const Pg_Pay_fcde61 = React.lazy(() => import(/* @vite-ignore */ './pages/Pay.jsx'));
+const Pg_Philanthropy_d9e5db = React.lazy(() => import(/* @vite-ignore */ './pages/Philanthropy.jsx'));
+const Pg_PrivacyPolicy_af5f28 = React.lazy(() => import(/* @vite-ignore */ './pages/PrivacyPolicy.jsx'));
+const Pg_Profile_992c76 = React.lazy(() => import(/* @vite-ignore */ './pages/Profile.jsx'));
+const Pg_Programs_394c8c = React.lazy(() => import(/* @vite-ignore */ './pages/Programs.jsx'));
+const Pg_Quiz_e3a8a1 = React.lazy(() => import(/* @vite-ignore */ './pages/Quiz.jsx'));
+const Pg_RefundPolicy_6a0e30 = React.lazy(() => import(/* @vite-ignore */ './pages/RefundPolicy.jsx'));
+const Pg_SereneComfortCare_ce3423 = React.lazy(() => import(/* @vite-ignore */ './pages/SereneComfortCare.jsx'));
+const Pg_Settings_53a5d6 = React.lazy(() => import(/* @vite-ignore */ './pages/Settings.jsx'));
+const Pg_Sheets_9951f0 = React.lazy(() => import(/* @vite-ignore */ './pages/Sheets.jsx'));
+const Pg_Sitemap_27d952 = React.lazy(() => import(/* @vite-ignore */ './pages/Sitemap.jsx'));
+const Pg_Sites_9c33d8 = React.lazy(() => import(/* @vite-ignore */ './pages/Sites.jsx'));
+const Pg_Slides_c60b65 = React.lazy(() => import(/* @vite-ignore */ './pages/Slides.jsx'));
+const Pg_Student_2a05ca = React.lazy(() => import(/* @vite-ignore */ './pages/Student.jsx'));
+const Pg_StudentDashboard_a8dcfe = React.lazy(() => import(/* @vite-ignore */ './pages/StudentDashboard.jsx'));
+const Pg_StudentHandbook_dcf738 = React.lazy(() => import(/* @vite-ignore */ './pages/StudentHandbook.jsx'));
+const Pg_StudentHub_3c4a40 = React.lazy(() => import(/* @vite-ignore */ './pages/StudentHub.jsx'));
+const Pg_Support_0c3964 = React.lazy(() => import(/* @vite-ignore */ './pages/Support.jsx'));
+const Pg_TermsOfService_f4fb17 = React.lazy(() => import(/* @vite-ignore */ './pages/TermsOfService.jsx'));
+const Pg_ThankYou_b94fb3 = React.lazy(() => import(/* @vite-ignore */ './pages/ThankYou.jsx'));
+const Pg_UrbanBuildCrew_a447b4 = React.lazy(() => import(/* @vite-ignore */ './pages/UrbanBuildCrew.jsx'));
+const Pg_UserManagement_d00a48 = React.lazy(() => import(/* @vite-ignore */ './pages/UserManagement.jsx'));
+const Pg_VerifyCertificate_080077 = React.lazy(() => import(/* @vite-ignore */ './pages/VerifyCertificate.jsx'));
+const Pg_VerifyEmail_080e7d = React.lazy(() => import(/* @vite-ignore */ './pages/VerifyEmail.jsx'));
+const Pg_VideoMeeting_145faf = React.lazy(() => import(/* @vite-ignore */ './pages/VideoMeeting.jsx'));
+const Pg_Vids_dd80eb = React.lazy(() => import(/* @vite-ignore */ './pages/Vids.jsx'));
+const Pg_AITutor_70296b = React.lazy(() => import(/* @vite-ignore */ './pages/AITutor.jsx'));
+const Pg_AutopilotAdmin_f5f945 = React.lazy(() => import(/* @vite-ignore */ './pages/AutopilotAdmin.tsx'));
+const Pg_DurableAI_184762 = React.lazy(() => import(/* @vite-ignore */ './pages/DurableAI.jsx'));
+const Pg_Home_801217 = React.lazy(() => import(/* @vite-ignore */ './pages/Home.jsx'));
+const Pg_HomePage_d3d2d7 = React.lazy(() => import(/* @vite-ignore */ './pages/HomePage.jsx'));
+const Pg_InstructorCourseCreate_528885 = React.lazy(() => import(/* @vite-ignore */ './pages/InstructorCourseCreate.jsx'));
+const Pg_LMS_5a89a9 = React.lazy(() => import(/* @vite-ignore */ './pages/LMS.jsx'));
+const Pg_LMSDashboard_800de2 = React.lazy(() => import(/* @vite-ignore */ './pages/LMSDashboard.jsx'));
+const Pg_LMSLanding_3cdaf3 = React.lazy(() => import(/* @vite-ignore */ './pages/LMSLanding.jsx'));
+const Pg_NotFound_0781cb = React.lazy(() => import(/* @vite-ignore */ './pages/NotFound.jsx'));
+const Pg_NotebookLM_4bf590 = React.lazy(() => import(/* @vite-ignore */ './pages/NotebookLM.jsx'));
+const Pg_ProfessionalHome_3b2a46 = React.lazy(() => import(/* @vite-ignore */ './pages/ProfessionalHome.jsx'));
+const Pg_ProgramsDurable_cedbb9 = React.lazy(() => import(/* @vite-ignore */ './pages/ProgramsDurable.jsx'));
+const Pg_ResetPassword_59f7e0 = React.lazy(() => import(/* @vite-ignore */ './pages/ResetPassword.jsx'));
+const Pg_SearchResults_9e7574 = React.lazy(() => import(/* @vite-ignore */ './pages/SearchResults.jsx'));
+const Pg_Sitemap_test_da85d4 = React.lazy(() => import(/* @vite-ignore */ './pages/Sitemap.test.jsx'));
+const Pg_NotFound_82a810 = React.lazy(() => import(/* @vite-ignore */ './pages/__generated__/NotFound.jsx'));
+const Pg_Quiz_test_d549e9 = React.lazy(() => import(/* @vite-ignore */ './pages/__tests__/Quiz.test.jsx'));
+const Pg_MentorDirectory_e62b12 = React.lazy(() => import(/* @vite-ignore */ './pages/sisters/MentorDirectory.jsx'));
+const Pg_MentorSignup_551667 = React.lazy(() => import(/* @vite-ignore */ './pages/sisters/MentorSignup.jsx'));
+const Pg_Mentorship_206ac9 = React.lazy(() => import(/* @vite-ignore */ './pages/sisters/Mentorship.jsx'));
+const Pg_PeerSupport_dcdfb3 = React.lazy(() => import(/* @vite-ignore */ './pages/sisters/PeerSupport.jsx'));
+const Pg_Volunteer_047216 = React.lazy(() => import(/* @vite-ignore */ './pages/sisters/Volunteer.jsx'));
+const Pg_VolunteerOpportunities_13383c = React.lazy(() => import(/* @vite-ignore */ './pages/sisters/VolunteerOpportunities.jsx'));
+const Pg_VolunteerStories_f74359 = React.lazy(() => import(/* @vite-ignore */ './pages/sisters/VolunteerStories.jsx'));
+const Pg_Wellness_1ace55 = React.lazy(() => import(/* @vite-ignore */ './pages/sisters/Wellness.jsx'));
+const Pg_WellnessResources_5e7651 = React.lazy(() => import(/* @vite-ignore */ './pages/sisters/WellnessResources.jsx'));
+const Pg_AIPageBuilder_481826 = React.lazy(() => import(/* @vite-ignore */ './components/AIPageBuilder.tsx'));
+const Pg_AccessibilityProvider_e36b62 = React.lazy(() => import(/* @vite-ignore */ './components/AccessibilityProvider.jsx'));
+const Pg_AskWidget_c75624 = React.lazy(() => import(/* @vite-ignore */ './components/AskWidget.jsx'));
+const Pg_AssetGenerator_9d56ce = React.lazy(() => import(/* @vite-ignore */ './components/AssetGenerator.tsx'));
+const Pg_Chart_42ff4f = React.lazy(() => import(/* @vite-ignore */ './components/Chart.jsx'));
+const Pg_ChatAssistant_c0fbdf = React.lazy(() => import(/* @vite-ignore */ './components/ChatAssistant.tsx'));
+const Pg_DurableNav_bcd4a3 = React.lazy(() => import(/* @vite-ignore */ './components/DurableNav.jsx'));
+const Pg_ErrorBoundary_645d40 = React.lazy(() => import(/* @vite-ignore */ './components/ErrorBoundary.jsx'));
+const Pg_Footer_ab20f6 = React.lazy(() => import(/* @vite-ignore */ './components/Footer.jsx'));
+const Pg_FrameworkSettingsPanel_340b72 = React.lazy(() => import(/* @vite-ignore */ './components/FrameworkSettingsPanel.tsx'));
+const Pg_Header_788ed0 = React.lazy(() => import(/* @vite-ignore */ './components/Header.jsx'));
+const Pg_LoadingSpinner_47e479 = React.lazy(() => import(/* @vite-ignore */ './components/LoadingSpinner.jsx'));
+const Pg_NavBar_f26899 = React.lazy(() => import(/* @vite-ignore */ './components/NavBar.jsx'));
+const Pg_OrchestratorAdmin_cbbf0b = React.lazy(() => import(/* @vite-ignore */ './components/OrchestratorAdmin.tsx'));
+const Pg_PageManager_69388d = React.lazy(() => import(/* @vite-ignore */ './components/PageManager.tsx'));
+const Pg_ProtectedRoute_4bfe54 = React.lazy(() => import(/* @vite-ignore */ './components/ProtectedRoute.jsx'));
+const Pg_SEO_5d35d3 = React.lazy(() => import(/* @vite-ignore */ './components/SEO.jsx'));
+const Pg_Toast_72e717 = React.lazy(() => import(/* @vite-ignore */ './components/Toast.jsx'));
+const Pg_VideoInterview_5a9fd0 = React.lazy(() => import(/* @vite-ignore */ './components/VideoInterview.jsx'));
+const Pg_AutoAttritionTracker_54a9ee = React.lazy(() => import(/* @vite-ignore */ './components/admin/AutoAttritionTracker.tsx'));
+const Pg_AutoFlowCharts_4f5f87 = React.lazy(() => import(/* @vite-ignore */ './components/admin/AutoFlowCharts.tsx'));
+const Pg_AutoProgramGenerator_7bb614 = React.lazy(() => import(/* @vite-ignore */ './components/admin/AutoProgramGenerator.tsx'));
+const Pg_CopilotAssistant_816761 = React.lazy(() => import(/* @vite-ignore */ './components/admin/CopilotAssistant.tsx'));
+const Pg_CopilotDeployment_95cf5c = React.lazy(() => import(/* @vite-ignore */ './components/admin/CopilotDeployment.tsx'));
+const Pg_ExcelChartGenerator_628179 = React.lazy(() => import(/* @vite-ignore */ './components/admin/ExcelChartGenerator.tsx'));
+const Pg_IntelligentDataProcessor_4f1245 = React.lazy(() => import(/* @vite-ignore */ './components/admin/IntelligentDataProcessor.tsx'));
+const Pg_LearningBarrierAnalyzer_6ef7ac = React.lazy(() => import(/* @vite-ignore */ './components/admin/LearningBarrierAnalyzer.tsx'));
+const Pg_WIOAComplianceDashboard_642adf = React.lazy(() => import(/* @vite-ignore */ './components/admin/WIOAComplianceDashboard.tsx'));
+const Pg_ClassroomAdminPanel_5d69fe = React.lazy(() => import(/* @vite-ignore */ './components/classroom/admin/ClassroomAdminPanel.tsx'));
+const Pg_DoNotContactPanel_3d0cfe = React.lazy(() => import(/* @vite-ignore */ './components/classroom/admin/DoNotContactPanel.tsx'));
+const Pg_EmailEventsPanel_8d376a = React.lazy(() => import(/* @vite-ignore */ './components/classroom/admin/EmailEventsPanel.tsx'));
+const Pg_IdentityMappingPanel_048715 = React.lazy(() => import(/* @vite-ignore */ './components/classroom/admin/IdentityMappingPanel.tsx'));
+const Pg_TimelineView_cd4aed = React.lazy(() => import(/* @vite-ignore */ './components/classroom/admin/TimelineView.tsx'));
+const Pg_UnenrollPolicyPanel_16f314 = React.lazy(() => import(/* @vite-ignore */ './components/classroom/admin/UnenrollPolicyPanel.tsx'));
+const Pg_CourseCreationForm_8a1ee7 = React.lazy(() => import(/* @vite-ignore */ './components/classroom/instructor/CourseCreationForm.tsx'));
+const Pg_GradingInterface_8a28b6 = React.lazy(() => import(/* @vite-ignore */ './components/classroom/instructor/GradingInterface.tsx'));
+const Pg_DocumentEditor_4e877a = React.lazy(() => import(/* @vite-ignore */ './components/editor/DocumentEditor.jsx'));
+const Pg_FileUpload_24922c = React.lazy(() => import(/* @vite-ignore */ './components/files/FileUpload.jsx'));
+const Pg_button_be9ef9 = React.lazy(() => import(/* @vite-ignore */ './components/ui/button.jsx'));
+const Pg_card_a1c847 = React.lazy(() => import(/* @vite-ignore */ './components/ui/card.jsx'));
+const Pg_MeetingRoom_1ffe46 = React.lazy(() => import(/* @vite-ignore */ './components/video/MeetingRoom.jsx'));
 const Pg_NotFound = React.lazy(() => import('./pages/__generated__/NotFound.jsx'));
 
 const routes = [
-  { path: '/about', element: <Pg_About_8d4e37 /> },
-  { path: '/login', element: <Pg_Login_241ed0 /> },
-  { path: '/donate', element: <Pg_Donate_3970a4 /> },
-  { path: '/programs', element: <Pg_Programs_e8b278 /> },
-  { path: '/hub', element: <Pg_Hub_45b82a /> },
-  { path: '/pay', element: <Pg_Pay_ff19b2 /> },
-  { path: '/lms', element: <Pg_LMS_d8e5d5 /> },
-  { path: '/seo', element: <Pg_SEO_3357c1 /> },
-  { path: '/docs', element: <Pg_Docs_c0cbdd /> },
-  { path: '/quiz', element: <Pg_Quiz_53273b /> },
-  { path: '/vids', element: <Pg_Vids_95fe41 /> },
-  { path: '/home', element: <Pg_Home_eabdf9 /> },
-  { path: '/email', element: <Pg_Email_c99137 /> },
-  { path: '/forms', element: <Pg_Forms_77d58c /> },
-  { path: '/sites', element: <Pg_Sites_ead718 /> },
-  { path: '/chart', element: <Pg_Chart_4917da /> },
-  { path: '/toast', element: <Pg_Toast_d3fd19 /> },
-  { path: '/course', element: <Pg_Course_4186fe /> },
-  { path: '/groups', element: <Pg_Groups_ec65ea /> },
-  { path: '/sheets', element: <Pg_Sheets_331070 /> },
-  { path: '/slides', element: <Pg_Slides_a8df48 /> },
-  { path: '/footer', element: <Pg_Footer_ad96cb /> },
-  { path: '/header', element: <Pg_Header_2e703e /> },
-  { path: '/account', element: <Pg_Account_0703ce /> },
-  { path: '/connect', element: <Pg_Connect_601255 /> },
-  { path: '/profile', element: <Pg_Profile_0b9666 /> },
-  { path: '/sitemap', element: <Pg_Sitemap_aa9865 /> },
-  { path: '/student', element: <Pg_Student_5d723d /> },
-  { path: '/support', element: <Pg_Support_24d4c3 /> },
-  { path: '/aitutor', element: <Pg_AITutor_bf5169 /> },
-  { path: '/nav-bar', element: <Pg_NavBar_0e800f /> },
-  { path: '/branding', element: <Pg_Branding_a8adf7 /> },
-  { path: '/calendar', element: <Pg_Calendar_349e4c /> },
-  { path: '/partners', element: <Pg_Partners_42493b /> },
-  { path: '/settings', element: <Pg_Settings_39d6a3 /> },
-  { path: '/analytics', element: <Pg_Analytics_c11c43 /> },
-  { path: '/community', element: <Pg_Community_b55b04 /> },
-  { path: '/ecommerce', element: <Pg_Ecommerce_b3b778 /> },
-  { path: '/ecosystem', element: <Pg_Ecosystem_ae9629 /> },
-  { path: '/thank-you', element: <Pg_ThankYou_cc34d7 /> },
-  { path: '/home-page', element: <Pg_HomePage_ff2289 /> },
-  { path: '/not-found', element: <Pg_NotFound_f6ea8b /> },
-  { path: '/assignment', element: <Pg_Assignment_c80e61 /> },
-  { path: '/compliance', element: <Pg_Compliance_605436 /> },
-  { path: '/government', element: <Pg_Government_129c06 /> },
-  { path: '/instructor', element: <Pg_Instructor_06bad9 /> },
-  { path: '/mobile-app', element: <Pg_MobileApp_62aec9 /> },
-  { path: '/durable-ai', element: <Pg_DurableAI_08b494 /> },
-  { path: '/lmslanding', element: <Pg_LMSLanding_cb1ad1 /> },
-  { path: '/ask-widget', element: <Pg_AskWidget_6d9bee /> },
-  { path: '/donate-page', element: <Pg_DonatePage_9ade1b /> },
-  { path: '/get-started', element: <Pg_GetStarted_16f9e8 /> },
-  { path: '/student-hub', element: <Pg_StudentHub_c19ec9 /> },
-  { path: '/notebook-lm', element: <Pg_NotebookLM_825272 /> },
-  { path: '/durable-nav', element: <Pg_DurableNav_fd3b82 /> },
-  { path: '/business-hub', element: <Pg_BusinessHub_44db4d /> },
-  { path: '/certificates', element: <Pg_Certificates_3da608 /> },
-  { path: '/educator-hub', element: <Pg_EducatorHub_1b924d /> },
-  { path: '/file-manager', element: <Pg_FileManager_32ca2d /> },
-  { path: '/integrations', element: <Pg_Integrations_86a2d5 /> },
-  { path: '/main-landing', element: <Pg_MainLanding_fc5318 /> },
-  { path: '/philanthropy', element: <Pg_Philanthropy_6d774a /> },
-  { path: '/verify-email', element: <Pg_VerifyEmail_2dcacb /> },
-  { path: '/sitemap.test', element: <Pg_Sitemap_test_e5b4ad /> },
-  { path: '/accessibility', element: <Pg_Accessibility_f9a050 /> },
-  { path: '/admin-console', element: <Pg_AdminConsole_3b95a5 /> },
-  { path: '/clone-landing', element: <Pg_CloneLanding_ada451 /> },
-  { path: '/community-hub', element: <Pg_CommunityHub_e1c8d0 /> },
-  { path: '/course-detail', element: <Pg_CourseDetail_60c1b1 /> },
-  { path: '/elevate-brain', element: <Pg_ElevateBrain_63c58e /> },
-  { path: '/notifications', element: <Pg_Notifications_3bb854 /> },
-  { path: '/refund-policy', element: <Pg_RefundPolicy_4bf158 /> },
-  { path: '/video-meeting', element: <Pg_VideoMeeting_cdd4c1 /> },
-  { path: '/course-builder', element: <Pg_CourseBuilder_3e58d7 /> },
-  { path: '/course-catalog', element: <Pg_CourseCatalog_fc6f47 /> },
-  { path: '/course-library', element: <Pg_CourseLibrary_ddf14c /> },
-  { path: '/funding-impact', element: <Pg_FundingImpact_0a29e7 /> },
-  { path: '/instructor-new', element: <Pg_InstructorNew_2d5ff0 /> },
-  { path: '/privacy-policy', element: <Pg_PrivacyPolicy_34d2d5 /> },
-  { path: '/reset-password', element: <Pg_ResetPassword_70c64f /> },
-  { path: '/search-results', element: <Pg_SearchResults_14de53 /> },
-  { path: '/chat-assistant', element: <Pg_ChatAssistant_1c3e89 /> },
-  { path: '/error-boundary', element: <Pg_ErrorBoundary_b8552c /> },
-  { path: '/admin-dashboard', element: <Pg_AdminDashboard_d4786f /> },
-  { path: '/durable-landing', element: <Pg_DurableLanding_e01133 /> },
-  { path: '/durable-pricing', element: <Pg_DurablePricing_1888d2 /> },
-  { path: '/forgot-password', element: <Pg_ForgotPassword_cc7708 /> },
-  { path: '/instructor-edit', element: <Pg_InstructorEdit_35f490 /> },
-  { path: '/kingdom-konnect', element: <Pg_KingdomKonnect_0b954a /> },
-  { path: '/user-management', element: <Pg_UserManagement_814993 /> },
-  { path: '/loading-spinner', element: <Pg_LoadingSpinner_4bf7ae /> },
-  { path: '/protected-route', element: <Pg_ProtectedRoute_fe9bc9 /> },
-  { path: '/video-interview', element: <Pg_VideoInterview_c485cf /> },
-  { path: '/durable-features', element: <Pg_DurableFeatures_ea9035 /> },
-  { path: '/student-handbook', element: <Pg_StudentHandbook_2597aa /> },
-  { path: '/terms-of-service', element: <Pg_TermsOfService_0cac3f /> },
-  { path: '/urban-build-crew', element: <Pg_UrbanBuildCrew_4cf576 /> },
-  { path: '/sisters/wellness', element: <Pg_Wellness_22d3da /> },
-  { path: '/curriculum-upload', element: <Pg_CurriculumUpload_56de12 /> },
-  { path: '/durable-templates', element: <Pg_DurableTemplates_241579 /> },
-  { path: '/student-dashboard', element: <Pg_StudentDashboard_0b17af /> },
-  { path: '/-tests-/quiz.test', element: <Pg_Quiz_test_94cb17 /> },
-  { path: '/sisters/volunteer', element: <Pg_Volunteer_78319e /> },
-  { path: '/files/file-upload', element: <Pg_FileUpload_306604 /> },
-  { path: '/verify-certificate', element: <Pg_VerifyCertificate_53075f /> },
-  { path: '/sisters/mentorship', element: <Pg_Mentorship_a1357f /> },
-  { path: '/video/meeting-room', element: <Pg_MeetingRoom_6fa9e3 /> },
-  { path: '/analytics-dashboard', element: <Pg_AnalyticsDashboard_2d3f73 /> },
-  { path: '/serene-comfort-care', element: <Pg_SereneComfortCare_c80357 /> },
-  { path: '/sisters/peer-support', element: <Pg_PeerSupport_9d90ac /> },
-  { path: '/-generated-/not-found', element: <Pg_NotFound_45b73a /> },
-  { path: '/sisters/mentor-signup', element: <Pg_MentorSignup_009a7e /> },
-  { path: '/accessibility-settings', element: <Pg_AccessibilitySettings_d4e4c8 /> },
-  { path: '/bing-site-verification', element: <Pg_BingSiteVerification_a0d8b0 /> },
-  { path: '/google-analytics-setup', element: <Pg_GoogleAnalyticsSetup_344f29 /> },
-  { path: '/accessibility-provider', element: <Pg_AccessibilityProvider_0c4d69 /> },
-  { path: '/admin/auto-flow-charts', element: <Pg_AutoFlowCharts_a2f8ac /> },
-  { path: '/editor/document-editor', element: <Pg_DocumentEditor_e42e6f /> },
-  { path: '/admin/copilot-assistant', element: <Pg_CopilotAssistant_4ec335 /> },
-  { path: '/google-site-verification', element: <Pg_GoogleSiteVerification_72473f /> },
-  { path: '/sisters/mentor-directory', element: <Pg_MentorDirectory_e3ed5d /> },
-  { path: '/framework-settings-panel', element: <Pg_FrameworkSettingsPanel_5ded31 /> },
-  { path: '/admin/copilot-deployment', element: <Pg_CopilotDeployment_9ca4f9 /> },
-  { path: '/sisters/volunteer-stories', element: <Pg_VolunteerStories_720d7b /> },
-  { path: '/sisters/wellness-resources', element: <Pg_WellnessResources_5d7e86 /> },
-  { path: '/admin/excel-chart-generator', element: <Pg_ExcelChartGenerator_b9ce9e /> },
-  { path: '/admin/auto-attrition-tracker', element: <Pg_AutoAttritionTracker_b6911f /> },
-  { path: '/admin/auto-program-generator', element: <Pg_AutoProgramGenerator_01b70e /> },
-  { path: '/admin/wioacompliance-dashboard', element: <Pg_WIOAComplianceDashboard_9d8ffc /> },
-  { path: '/sisters/volunteer-opportunities', element: <Pg_VolunteerOpportunities_e6d168 /> },
-  { path: '/admin/learning-barrier-analyzer', element: <Pg_LearningBarrierAnalyzer_5f93a7 /> },
-  { path: '/admin/intelligent-data-processor', element: <Pg_IntelligentDataProcessor_8644d1 /> },
+  { path: '/about', element: <Pg_About_9ad732 /> },
+  { path: '/login', element: <Pg_Login_606a55 /> },
+  { path: '/donate', element: <Pg_Donate_d566bf /> },
+  { path: '/programs', element: <Pg_Programs_394c8c /> },
+  { path: '/hub', element: <Pg_Hub_349983 /> },
+  { path: '/pay', element: <Pg_Pay_fcde61 /> },
+  { path: '/lms', element: <Pg_LMS_5a89a9 /> },
+  { path: '/seo', element: <Pg_SEO_5d35d3 /> },
+  { path: '/docs', element: <Pg_Docs_621788 /> },
+  { path: '/quiz', element: <Pg_Quiz_e3a8a1 /> },
+  { path: '/vids', element: <Pg_Vids_dd80eb /> },
+  { path: '/home', element: <Pg_Home_801217 /> },
+  { path: '/email', element: <Pg_Email_69003b /> },
+  { path: '/forms', element: <Pg_Forms_cd743c /> },
+  { path: '/sites', element: <Pg_Sites_9c33d8 /> },
+  { path: '/chart', element: <Pg_Chart_42ff4f /> },
+  { path: '/toast', element: <Pg_Toast_72e717 /> },
+  { path: '/course', element: <Pg_Course_162b98 /> },
+  { path: '/groups', element: <Pg_Groups_f91f40 /> },
+  { path: '/sheets', element: <Pg_Sheets_9951f0 /> },
+  { path: '/slides', element: <Pg_Slides_c60b65 /> },
+  { path: '/footer', element: <Pg_Footer_ab20f6 /> },
+  { path: '/header', element: <Pg_Header_788ed0 /> },
+  { path: '/account', element: <Pg_Account_d05eb3 /> },
+  { path: '/connect', element: <Pg_Connect_b7fdef /> },
+  { path: '/profile', element: <Pg_Profile_992c76 /> },
+  { path: '/sitemap', element: <Pg_Sitemap_27d952 /> },
+  { path: '/student', element: <Pg_Student_2a05ca /> },
+  { path: '/support', element: <Pg_Support_0c3964 /> },
+  { path: '/aitutor', element: <Pg_AITutor_70296b /> },
+  { path: '/nav-bar', element: <Pg_NavBar_f26899 /> },
+  { path: '/ui/card', element: <Pg_card_a1c847 /> },
+  { path: '/branding', element: <Pg_Branding_a7e651 /> },
+  { path: '/calendar', element: <Pg_Calendar_711755 /> },
+  { path: '/partners', element: <Pg_Partners_a75e9e /> },
+  { path: '/settings', element: <Pg_Settings_53a5d6 /> },
+  { path: '/analytics', element: <Pg_Analytics_d31455 /> },
+  { path: '/community', element: <Pg_Community_a0c44e /> },
+  { path: '/ecommerce', element: <Pg_Ecommerce_09023c /> },
+  { path: '/ecosystem', element: <Pg_Ecosystem_9af402 /> },
+  { path: '/thank-you', element: <Pg_ThankYou_b94fb3 /> },
+  { path: '/home-page', element: <Pg_HomePage_d3d2d7 /> },
+  { path: '/not-found', element: <Pg_NotFound_0781cb /> },
+  { path: '/ui/button', element: <Pg_button_be9ef9 /> },
+  { path: '/assignment', element: <Pg_Assignment_cf2a4f /> },
+  { path: '/compliance', element: <Pg_Compliance_09e8e1 /> },
+  { path: '/government', element: <Pg_Government_5dfc29 /> },
+  { path: '/instructor', element: <Pg_Instructor_2bcb94 /> },
+  { path: '/mobile-app', element: <Pg_MobileApp_266e94 /> },
+  { path: '/durable-ai', element: <Pg_DurableAI_184762 /> },
+  { path: '/lmslanding', element: <Pg_LMSLanding_3cdaf3 /> },
+  { path: '/ask-widget', element: <Pg_AskWidget_c75624 /> },
+  { path: '/donate-page', element: <Pg_DonatePage_9fc357 /> },
+  { path: '/get-started', element: <Pg_GetStarted_5c99bb /> },
+  { path: '/student-hub', element: <Pg_StudentHub_3c4a40 /> },
+  { path: '/notebook-lm', element: <Pg_NotebookLM_4bf590 /> },
+  { path: '/durable-nav', element: <Pg_DurableNav_bcd4a3 /> },
+  { path: '/business-hub', element: <Pg_BusinessHub_bc14fb /> },
+  { path: '/certificates', element: <Pg_Certificates_c00ba3 /> },
+  { path: '/educator-hub', element: <Pg_EducatorHub_4eb5d7 /> },
+  { path: '/file-manager', element: <Pg_FileManager_a6e11f /> },
+  { path: '/integrations', element: <Pg_Integrations_ddd497 /> },
+  { path: '/main-landing', element: <Pg_MainLanding_a12495 /> },
+  { path: '/philanthropy', element: <Pg_Philanthropy_d9e5db /> },
+  { path: '/verify-email', element: <Pg_VerifyEmail_080e7d /> },
+  { path: '/lmsdashboard', element: <Pg_LMSDashboard_800de2 /> },
+  { path: '/sitemap.test', element: <Pg_Sitemap_test_da85d4 /> },
+  { path: '/page-manager', element: <Pg_PageManager_69388d /> },
+  { path: '/accessibility', element: <Pg_Accessibility_7a693b /> },
+  { path: '/admin-console', element: <Pg_AdminConsole_eedc68 /> },
+  { path: '/clone-landing', element: <Pg_CloneLanding_dd6673 /> },
+  { path: '/community-hub', element: <Pg_CommunityHub_960234 /> },
+  { path: '/course-detail', element: <Pg_CourseDetail_af4b3f /> },
+  { path: '/elevate-brain', element: <Pg_ElevateBrain_05009b /> },
+  { path: '/notifications', element: <Pg_Notifications_18a7c9 /> },
+  { path: '/refund-policy', element: <Pg_RefundPolicy_6a0e30 /> },
+  { path: '/video-meeting', element: <Pg_VideoMeeting_145faf /> },
+  { path: '/course-builder', element: <Pg_CourseBuilder_24ddaa /> },
+  { path: '/course-catalog', element: <Pg_CourseCatalog_7c033d /> },
+  { path: '/course-library', element: <Pg_CourseLibrary_0982e6 /> },
+  { path: '/funding-impact', element: <Pg_FundingImpact_bc1ce6 /> },
+  { path: '/instructor-new', element: <Pg_InstructorNew_e17f71 /> },
+  { path: '/privacy-policy', element: <Pg_PrivacyPolicy_af5f28 /> },
+  { path: '/reset-password', element: <Pg_ResetPassword_59f7e0 /> },
+  { path: '/search-results', element: <Pg_SearchResults_9e7574 /> },
+  { path: '/aipage-builder', element: <Pg_AIPageBuilder_481826 /> },
+  { path: '/chat-assistant', element: <Pg_ChatAssistant_c0fbdf /> },
+  { path: '/error-boundary', element: <Pg_ErrorBoundary_645d40 /> },
+  { path: '/admin-dashboard', element: <Pg_AdminDashboard_182cfc /> },
+  { path: '/durable-landing', element: <Pg_DurableLanding_22e287 /> },
+  { path: '/durable-pricing', element: <Pg_DurablePricing_d5473f /> },
+  { path: '/forgot-password', element: <Pg_ForgotPassword_a01413 /> },
+  { path: '/instructor-edit', element: <Pg_InstructorEdit_9d2acc /> },
+  { path: '/kingdom-konnect', element: <Pg_KingdomKonnect_a1e604 /> },
+  { path: '/user-management', element: <Pg_UserManagement_d00a48 /> },
+  { path: '/autopilot-admin', element: <Pg_AutopilotAdmin_a1b2c3 /> },
+  { path: '/asset-generator', element: <Pg_AssetGenerator_9d56ce /> },
+  { path: '/loading-spinner', element: <Pg_LoadingSpinner_47e479 /> },
+  { path: '/protected-route', element: <Pg_ProtectedRoute_4bfe54 /> },
+  { path: '/video-interview', element: <Pg_VideoInterview_5a9fd0 /> },
+  { path: '/durable-features', element: <Pg_DurableFeatures_480b37 /> },
+  { path: '/student-handbook', element: <Pg_StudentHandbook_dcf738 /> },
+  { path: '/terms-of-service', element: <Pg_TermsOfService_f4fb17 /> },
+  { path: '/urban-build-crew', element: <Pg_UrbanBuildCrew_a447b4 /> },
+  { path: '/programs-durable', element: <Pg_ProgramsDurable_cedbb9 /> },
+  { path: '/sisters/wellness', element: <Pg_Wellness_1ace55 /> },
+  { path: '/curriculum-upload', element: <Pg_CurriculumUpload_779e27 /> },
+  { path: '/durable-templates', element: <Pg_DurableTemplates_8ff38e /> },
+  { path: '/student-dashboard', element: <Pg_StudentDashboard_a8dcfe /> },
+  { path: '/professional-home', element: <Pg_ProfessionalHome_3b2a46 /> },
+  { path: '/-tests-/quiz.test', element: <Pg_Quiz_test_d549e9 /> },
+  { path: '/sisters/volunteer', element: <Pg_Volunteer_047216 /> },
+  { path: '/files/file-upload', element: <Pg_FileUpload_24922c /> },
+  { path: '/verify-certificate', element: <Pg_VerifyCertificate_080077 /> },
+  { path: '/sisters/mentorship', element: <Pg_Mentorship_206ac9 /> },
+  { path: '/orchestrator-admin', element: <Pg_OrchestratorAdmin_cbbf0b /> },
+  { path: '/video/meeting-room', element: <Pg_MeetingRoom_1ffe46 /> },
+  { path: '/analytics-dashboard', element: <Pg_AnalyticsDashboard_b03045 /> },
+  { path: '/serene-comfort-care', element: <Pg_SereneComfortCare_ce3423 /> },
+  { path: '/sisters/peer-support', element: <Pg_PeerSupport_dcdfb3 /> },
+  { path: '/-generated-/not-found', element: <Pg_NotFound_82a810 /> },
+  { path: '/sisters/mentor-signup', element: <Pg_MentorSignup_551667 /> },
+  { path: '/accessibility-settings', element: <Pg_AccessibilitySettings_719655 /> },
+  { path: '/bing-site-verification', element: <Pg_BingSiteVerification_4287d3 /> },
+  { path: '/google-analytics-setup', element: <Pg_GoogleAnalyticsSetup_47a2b1 /> },
+  { path: '/accessibility-provider', element: <Pg_AccessibilityProvider_e36b62 /> },
+  { path: '/admin/auto-flow-charts', element: <Pg_AutoFlowCharts_4f5f87 /> },
+  { path: '/editor/document-editor', element: <Pg_DocumentEditor_4e877a /> },
+  { path: '/admin/copilot-assistant', element: <Pg_CopilotAssistant_816761 /> },
+  { path: '/google-site-verification', element: <Pg_GoogleSiteVerification_6ddc68 /> },
+  { path: '/instructor-course-create', element: <Pg_InstructorCourseCreate_528885 /> },
+  { path: '/sisters/mentor-directory', element: <Pg_MentorDirectory_e62b12 /> },
+  { path: '/framework-settings-panel', element: <Pg_FrameworkSettingsPanel_340b72 /> },
+  { path: '/admin/copilot-deployment', element: <Pg_CopilotDeployment_95cf5c /> },
+  { path: '/sisters/volunteer-stories', element: <Pg_VolunteerStories_f74359 /> },
+  { path: '/sisters/wellness-resources', element: <Pg_WellnessResources_5e7651 /> },
+  { path: '/admin/excel-chart-generator', element: <Pg_ExcelChartGenerator_628179 /> },
+  { path: '/admin/auto-attrition-tracker', element: <Pg_AutoAttritionTracker_54a9ee /> },
+  { path: '/admin/auto-program-generator', element: <Pg_AutoProgramGenerator_7bb614 /> },
+  { path: '/classroom/admin/timeline-view', element: <Pg_TimelineView_cd4aed /> },
+  { path: '/admin/wioacompliance-dashboard', element: <Pg_WIOAComplianceDashboard_642adf /> },
+  { path: '/sisters/volunteer-opportunities', element: <Pg_VolunteerOpportunities_13383c /> },
+  { path: '/admin/learning-barrier-analyzer', element: <Pg_LearningBarrierAnalyzer_6ef7ac /> },
+  { path: '/admin/intelligent-data-processor', element: <Pg_IntelligentDataProcessor_4f1245 /> },
+  { path: '/classroom/admin/email-events-panel', element: <Pg_EmailEventsPanel_8d376a /> },
+  { path: '/classroom/admin/do-not-contact-panel', element: <Pg_DoNotContactPanel_3d0cfe /> },
+  { path: '/classroom/admin/classroom-admin-panel', element: <Pg_ClassroomAdminPanel_5d69fe /> },
+  { path: '/classroom/admin/unenroll-policy-panel', element: <Pg_UnenrollPolicyPanel_16f314 /> },
+  { path: '/classroom/admin/identity-mapping-panel', element: <Pg_IdentityMappingPanel_048715 /> },
+  { path: '/classroom/instructor/grading-interface', element: <Pg_GradingInterface_8a28b6 /> },
+  { path: '/classroom/instructor/course-creation-form', element: <Pg_CourseCreationForm_8a1ee7 /> },
   { path: '*', element: <Pg_NotFound /> }
 ];
 

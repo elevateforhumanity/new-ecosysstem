@@ -496,6 +496,142 @@ Deno.serve(async (req: Request) => {
         break;
       }
 
+      case "logAgentEvent": {
+        // Log AI agent activity
+        const { data: event, error } = await supabase
+          .from("agent_events")
+          .insert({
+            event_type: params.source || 'manual',
+            action_name: params.plan?.action || 'unknown',
+            parameters: {
+              from: params.from,
+              subject: params.subject,
+              plan: params.plan,
+              metadata: params.metadata,
+            },
+            result: params.result,
+            created_at: new Date().toISOString(),
+          })
+          .select()
+          .single();
+
+        if (error) throw error;
+        data = event;
+        message = `✅ Agent event logged: ${event.id}`;
+        break;
+      }
+
+      case "sendFollowupEmail": {
+        // Queue email for sending
+        const { data: email, error } = await supabase
+          .from("email_queue")
+          .insert({
+            to_email: params.to,
+            template_name: params.template,
+            template_variables: params.vars || {},
+            subject: params.subject || `Message from Elevate for Humanity`,
+            status: 'pending',
+            created_at: new Date().toISOString(),
+          })
+          .select()
+          .single();
+
+        if (error) throw error;
+        data = email;
+        message = `✅ Email queued to ${params.to}`;
+        break;
+      }
+
+      case "createLead": {
+        // Check if lead exists
+        const { data: existing } = await supabase
+          .from("leads")
+          .select("id")
+          .eq("email", params.email)
+          .single();
+
+        if (existing) {
+          // Update existing lead
+          const { data: lead, error } = await supabase
+            .from("leads")
+            .update({
+              name: params.name,
+              source: params.source,
+              notes: params.notes,
+              last_contact: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            })
+            .eq("id", existing.id)
+            .select()
+            .single();
+
+          if (error) throw error;
+          data = lead;
+          message = `✅ Lead updated: ${params.email}`;
+        } else {
+          // Create new lead
+          const { data: lead, error } = await supabase
+            .from("leads")
+            .insert({
+              email: params.email,
+              name: params.name,
+              source: params.source || 'unknown',
+              notes: params.notes,
+              status: 'new',
+              last_contact: new Date().toISOString(),
+              created_at: new Date().toISOString(),
+            })
+            .select()
+            .single();
+
+          if (error) throw error;
+          data = lead;
+          message = `✅ Lead created: ${params.email}`;
+        }
+        break;
+      }
+
+      case "updateLead": {
+        const updates: any = {
+          updated_at: new Date().toISOString(),
+        };
+        
+        if (params.status) updates.status = params.status;
+        if (params.notes) updates.notes = params.notes;
+        
+        const { data: lead, error } = await supabase
+          .from("leads")
+          .update(updates)
+          .eq("id", params.leadId)
+          .select()
+          .single();
+
+        if (error) throw error;
+        data = lead;
+        message = `✅ Lead updated: ${lead.email}`;
+        break;
+      }
+
+      case "scheduleTask": {
+        const { data: task, error } = await supabase
+          .from("scheduled_tasks")
+          .insert({
+            lead_id: params.leadId,
+            scheduled_for: params.followupDate,
+            action_type: params.action,
+            notes: params.notes,
+            status: 'pending',
+            created_at: new Date().toISOString(),
+          })
+          .select()
+          .single();
+
+        if (error) throw error;
+        data = task;
+        message = `✅ Task scheduled for ${params.followupDate}`;
+        break;
+      }
+
       default:
         message = `❌ Unknown action: ${action}`;
         data = null;

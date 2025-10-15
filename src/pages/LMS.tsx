@@ -422,6 +422,14 @@ export default function LMS() {
               </div>
             </div>
 
+            {/* Overall Progress Badge */}
+            <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl border-2 border-yellow-200 p-6 text-center">
+              <div className="text-4xl mb-2">🏆</div>
+              <h4 className="font-semibold mb-1">Overall Progress</h4>
+              <div className="text-3xl font-bold text-orange-600 mb-2">45%</div>
+              <p className="text-sm text-gray-600">Keep going! You're doing great.</p>
+            </div>
+
             {/* Federal Compliance Tracking */}
             <div className="bg-orange-50 border border-orange-200 rounded-lg p-6">
               <h3 className="text-lg font-medium text-orange-900 mb-2">

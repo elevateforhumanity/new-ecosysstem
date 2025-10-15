@@ -1,0 +1,94 @@
+{
+  "task": "fix_missing_lms_features",
+  "description": "Use autopilot to identify and fix all missing LMS features",
+  "priority": "high",
+  "components": [
+    {
+      "name": "grade_book",
+      "status": "missing",
+      "required_tables": ["grades", "grade_categories"],
+      "required_pages": ["GradeBook.jsx", "StudentGrades.jsx"],
+      "required_api": ["/api/grades", "/api/grades/calculate"]
+    },
+    {
+      "name": "quiz_system",
+      "status": "partial",
+      "required_tables": ["quizzes", "quiz_questions", "quiz_attempts"],
+      "required_pages": ["QuizBuilder.jsx", "QuizTake.jsx", "QuizResults.jsx"],
+      "required_api": ["/api/quizzes", "/api/quizzes/submit"]
+    },
+    {
+      "name": "live_classes",
+      "status": "missing",
+      "required_tables": ["live_sessions", "session_attendance"],
+      "required_pages": ["LiveClassSchedule.jsx", "LiveClassRoom.jsx"],
+      "required_api": ["/api/live-sessions", "/api/live-sessions/join"]
+    },
+    {
+      "name": "analytics_dashboard",
+      "status": "missing",
+      "required_tables": ["analytics_events", "user_activity"],
+      "required_pages": ["AnalyticsDashboard.jsx", "StudentAnalytics.jsx"],
+      "required_api": ["/api/analytics", "/api/analytics/reports"]
+    },
+    {
+      "name": "notifications",
+      "status": "partial",
+      "required_tables": ["notifications", "notification_preferences"],
+      "required_pages": ["NotificationCenter.jsx", "NotificationSettings.jsx"],
+      "required_api": ["/api/notifications", "/api/notifications/mark-read"]
+    }
+  ],
+  "autopilot_actions": [
+    {
+      "action": "analyze_missing_features",
+      "endpoint": "https://efh-autopilot-analyzer.workers.dev/analyze",
+      "params": {
+        "scan_directories": ["src/pages", "supabase/migrations", "workers"],
+        "check_tables": true,
+        "check_routes": true,
+        "check_api": true
+      }
+    },
+    {
+      "action": "generate_missing_components",
+      "endpoint": "https://efh-autopilot-orchestrator.workers.dev/autopilot/plan",
+      "params": {
+        "task": "generate_components",
+        "components": ["grade_book", "quiz_system", "analytics_dashboard"]
+      }
+    },
+    {
+      "action": "create_database_migrations",
+      "endpoint": "https://efh-autopilot-orchestrator.workers.dev/autopilot/plan",
+      "params": {
+        "task": "create_migrations",
+        "tables": ["grades", "quizzes", "live_sessions", "analytics_events"]
+      }
+    },
+    {
+      "action": "deploy_workers",
+      "endpoint": "https://efh-autopilot-orchestrator.workers.dev/autopilot/ensure-infra",
+      "params": {
+        "want": {
+          "workers": ["analytics-worker", "quiz-worker"],
+          "kvNamespaces": ["ANALYTICS_CACHE"],
+          "r2Buckets": ["quiz-media"]
+        }
+      }
+    }
+  ],
+  "validation": {
+    "check_database": "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'public'",
+    "check_routes": "npm run routes:check",
+    "check_workers": "wrangler deployments list",
+    "check_tests": "npm test"
+  },
+  "expected_outcome": {
+    "total_tables": 30,
+    "total_pages": 30,
+    "total_workers": 5,
+    "total_api_endpoints": 25,
+    "completion_percentage": 100
+  }
+}

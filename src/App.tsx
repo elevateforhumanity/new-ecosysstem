@@ -387,7 +387,21 @@ function Programs() {
     </section>
   );
 }
-const LMS = () => <Page title="LMS">Login to your courses, track certifications, and monitor progress.</Page>;
+// Import actual LMS components
+import LMSPage from './pages/LMS';
+import LMSCoursesPage from './pages/LMSCourses';
+import LMSAssignmentsPage from './pages/LMSAssignments';
+import LMSProgressPage from './pages/LMSProgress';
+import AdminRTIPage from './pages/AdminRTI';
+import StudentProgressPage from './pages/StudentProgress';
+import OJTTimesheetPage from './pages/OJTTimesheet';
+import MentorPortalPage from './pages/MentorPortal';
+import MentorSignPage from './pages/MentorSign';
+
+const LMS = () => <LMSPage />;
+const LMSCourses = () => <LMSCoursesPage />;
+const LMSAssignments = () => <LMSAssignmentsPage />;
+const LMSProgress = () => <LMSProgressPage />;
 const Connect = () => <Page title="Connect">Reach out through our contact form, explore the directory, or begin a partner intake.</Page>;
 const Pay = () => <Page title="Pay">Secure payment links (Stripe) and invoices for tuition and services.</Page>;
 const Compliance = () => <Page title="Compliance">Access policies, DOL/DWD documentation, and reporting portals.</Page>;
@@ -826,6 +840,14 @@ export default function App() {
           <Route path="/hub" element={<Hub />} />
           <Route path="/programs" element={<Programs />} />
           <Route path="/lms" element={<LMS />} />
+          <Route path="/lms/courses" element={<LMSCourses />} />
+          <Route path="/lms/assignments" element={<LMSAssignments />} />
+          <Route path="/lms/progress" element={<LMSProgress />} />
+          <Route path="/admin/rti" element={<AdminRTIPage />} />
+          <Route path="/student/progress" element={<StudentProgressPage />} />
+          <Route path="/ojt/timesheet" element={<OJTTimesheetPage />} />
+          <Route path="/mentor/portal" element={<MentorPortalPage />} />
+          <Route path="/mentor/sign" element={<MentorSignPage />} />
           <Route path="/connect" element={<Connect />} />
           <Route path="/pay" element={<Pay />} />
           <Route path="/compliance" element={<Compliance />} />

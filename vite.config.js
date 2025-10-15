@@ -1,13 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import vike from 'vike/plugin'
 
 const gpURL = process.env.GITPOD_WORKSPACE_URL || ''
 const gpHost = gpURL ? new URL(gpURL).host : undefined
 const gpPortHost = gpHost ? `5173--${gpHost}` : undefined
 
 export default defineConfig(({ mode }) => ({
-  plugins: [react(), vike({ prerender: true })],
+  plugins: [react()],
   base: '/',
   publicDir: 'public',
   build: {

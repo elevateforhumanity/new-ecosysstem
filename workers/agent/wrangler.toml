@@ -9,19 +9,19 @@ compatibility_date = "2024-10-14"
 [ai]
 binding = "AI"
 
-# KV namespace for activity logs
-[[kv_namespaces]]
-binding = "AI_EMPLOYEE_LOGS"
-id = "YOUR_KV_NAMESPACE_ID"
+# KV namespace for activity logs (optional - comment out if not available)
+# [[kv_namespaces]]
+# binding = "AI_EMPLOYEE_LOGS"
+# id = "YOUR_KV_NAMESPACE_ID"
 
 # Cron trigger for automated payout batches (3 AM UTC daily)
 [triggers]
 crons = ["0 3 * * *"]
 
-# R2 Bucket for file storage
-[[r2_buckets]]
-binding = "EFH_BUCKET"
-bucket_name = "efh-private"
+# R2 Bucket for file storage (optional - comment out if not available)
+# [[r2_buckets]]
+# binding = "EFH_BUCKET"
+# bucket_name = "efh-private"
 
 # Environment variables (set via: wrangler secret put <NAME>)
 # Required secrets:

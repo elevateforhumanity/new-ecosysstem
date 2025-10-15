@@ -694,28 +694,43 @@ async function handleFormSubmission(env, formData) {
  * Log AI employee activity
  */
 async function logActivity(env, activity) {
-  // Store in KV for quick retrieval
-  const key = `activity:${Date.now()}`;
-  await env.AI_EMPLOYEE_LOGS.put(key, JSON.stringify(activity), {
-    expirationTtl: 60 * 60 * 24 * 30, // 30 days
-  });
+  // Store in KV for quick retrieval (if available)
+  if (env.AI_EMPLOYEE_LOGS) {
+    try {
+      const key = `activity:${Date.now()}`;
+      await env.AI_EMPLOYEE_LOGS.put(key, JSON.stringify(activity), {
+        expirationTtl: 60 * 60 * 24 * 30, // 30 days
+      });
+    } catch (error) {
+      console.warn('KV logging failed:', error);
+    }
+  }
 }
 
 /**
  * Get recent AI employee tasks
  */
 async function getRecentTasks(env) {
-  const list = await env.AI_EMPLOYEE_LOGS.list({ limit: 50 });
-  const tasks = [];
-  
-  for (const key of list.keys) {
-    const value = await env.AI_EMPLOYEE_LOGS.get(key.name);
-    if (value) {
-      tasks.push(JSON.parse(value));
-    }
+  if (!env.AI_EMPLOYEE_LOGS) {
+    return [];
   }
   
-  return tasks.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+  try {
+    const list = await env.AI_EMPLOYEE_LOGS.list({ limit: 50 });
+    const tasks = [];
+    
+    for (const key of list.keys) {
+      const value = await env.AI_EMPLOYEE_LOGS.get(key.name);
+      if (value) {
+        tasks.push(JSON.parse(value));
+      }
+    }
+    
+    return tasks.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+  } catch (error) {
+    console.warn('Failed to get tasks from KV:', error);
+    return [];
+  }
 }
 
 /**

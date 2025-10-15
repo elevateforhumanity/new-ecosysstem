@@ -1,3 +1,6 @@
 name = "ai-form-gen"
 main = "worker.js"
 compatibility_date = "2024-09-01"
+
+[vars]
+BRAND_NAME = "Elevate For Humanity"

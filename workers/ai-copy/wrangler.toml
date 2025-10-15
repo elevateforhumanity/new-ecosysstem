@@ -1,3 +1,7 @@
 name = "ai-copy"
 main = "worker.js"
 compatibility_date = "2024-09-01"
+
+[vars]
+BRAND_NAME = "Elevate For Humanity"
+BRAND_COLORS = "red, orange, blue, white"

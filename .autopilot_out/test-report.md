@@ -1,28 +1,22 @@
 # EFH Test Report
-Base URL: https://5173--0199e898-a551-7da5-ae3e-ede91f5fa3a8.us-east-1-01.gitpod.dev
-Generated: 2025-10-15T17:43:45.180Z
-Total Duration: 1903ms
+Base URL: http://localhost:3000
+Generated: 2025-10-15T18:36:09.720Z
+Total Duration: 279ms
 
 **Summary**
-- PASS: 3
+- PASS: 1
 - FAIL: 9
-- WARN: 4
+- WARN: 0
 
 | Kind | Name | Code | Time | Status | Note |
 |------|------|------|------|--------|------|
-| API | /api/health | 500 | 272ms | FAIL | Non-2xx (500) |
-| API | /api/ai-tutor/chat | 500 | 7ms | FAIL | Non-2xx (500) |
-| API | /api/courses | 500 | 5ms | FAIL | Non-2xx (500) |
-| API-ERR | /api/health | 500 | 4ms | PASS | Handled error path |
-| API-ERR | /api/ai-tutor/chat | 500 | 5ms | PASS | Handled error path |
-| API-ERR | /api/courses | 500 | 5ms | PASS | Handled error path |
-| PAGE | / | 200 | 387ms | WARN | Loaded w/ console errors: Failed to load resource: the server responded with a status of 404 () |
-| PAGE | /get-started | 500 | 40ms | FAIL | Empty or non-2xx. Console: Failed to load resource: the server responded with a status of 500 () |
-| PAGE | /programs | 200 | 250ms | WARN | Loaded w/ console errors: Failed to load resource: the server responded with a status of 403 () |
-| PAGE | /about | 200 | 247ms | WARN | Loaded w/ console errors: Failed to load resource: the server responded with a status of 403 () |
-| PAGE | /connect | 500 | 40ms | FAIL | Empty or non-2xx. Console: Failed to load resource: the server responded with a status of 500 () |
-| PAGE | /courses | 500 | 38ms | FAIL | Empty or non-2xx. Console: Failed to load resource: the server responded with a status of 500 () |
-| PAGE | /lms | 200 | 288ms | WARN | Loaded w/ console errors: Failed to load resource: the server responded with a status of 403 () |
-| PAGE | /dashboard | 500 | 41ms | FAIL | Empty or non-2xx. Console: Failed to load resource: the server responded with a status of 500 () |
-| PAGE | /profile | 500 | 39ms | FAIL | Empty or non-2xx. Console: Failed to load resource: the server responded with a status of 500 () |
-| PAGE | /settings | 500 | 42ms | FAIL | Empty or non-2xx. Console: Failed to load resource: the server responded with a status of 500 () |
+| API | /api/health | ERR | 16ms | FAIL | connect ECONNREFUSED 127.0.0.1:3000 |
+| API-ERR | /api/health | SIM | 2ms | PASS | Thrown & caught (acceptable) |
+| PAGE | / | ERR | 30ms | FAIL | page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/ Call log: - navigating to "http://localhost:3000/", waiting until "load" |
+| PAGE | /get-started | ERR | 22ms | FAIL | page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/get-started Call log: - navigating to "http://localhost:3000/get-started", waiting until "load" |
+| PAGE | /programs | ERR | 21ms | FAIL | page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/programs Call log: - navigating to "http://localhost:3000/programs", waiting until "load" |
+| PAGE | /about | ERR | 21ms | FAIL | page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/about Call log: - navigating to "http://localhost:3000/about", waiting until "load" |
+| PAGE | /connect | ERR | 20ms | FAIL | page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/connect Call log: - navigating to "http://localhost:3000/connect", waiting until "load" |
+| PAGE | /government | ERR | 21ms | FAIL | page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/government Call log: - navigating to "http://localhost:3000/government", waiting until "load" |
+| PAGE | /philanthropy | ERR | 22ms | FAIL | page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/philanthropy Call log: - navigating to "http://localhost:3000/philanthropy", waiting until "load" |
+| PAGE | /professional | ERR | 21ms | FAIL | page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/professional Call log: - navigating to "http://localhost:3000/professional", waiting until "load" |

@@ -5,3 +5,23 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
+    ignore:
+      # Tailwind CSS v4 has breaking changes - stay on v3.x for now
+      - dependency-name: "tailwindcss"
+        update-types: ["version-update:semver-major"]
+      # React 19.2+ may have compatibility issues with react-helmet-async
+      - dependency-name: "react"
+        update-types: ["version-update:semver-minor", "version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-minor", "version-update:semver-major"]
+      # Sentry v10+ requires migration
+      - dependency-name: "@sentry/react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@sentry/tracing"
+        update-types: ["version-update:semver-major"]
+      # Vite 7+ may have breaking changes
+      - dependency-name: "vite"
+        update-types: ["version-update:semver-major"]
+      # React Router 7+ has breaking changes
+      - dependency-name: "react-router-dom"
+        update-types: ["version-update:semver-major"]

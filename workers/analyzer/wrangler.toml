@@ -1,0 +1,17 @@
+name = "efh-autopilot-analyzer"
+main = "analyzer.js"
+compatibility_date = "2024-09-01"
+
+[triggers]
+crons = ["5 3 * * *"]
+
+[[kv_namespaces]]
+binding = "LOGS"
+id = ""
+
+[[kv_namespaces]]
+binding = "SUMMARIES"
+id = ""
+
+[vars]
+ORG_NAME = "EFH"

@@ -23,9 +23,3 @@ crons = ["*/15 * * * *"]
 # Required secrets:
 # - CF_API_TOKEN: Cloudflare API token with Workers Scripts:Edit, KV:Edit, R2:Edit, Account:Read
 # - CF_ACCOUNT_ID: Your Cloudflare account ID
-
-[env.production]
-name = "efh-autopilot-orchestrator"
-
-[env.staging]
-name = "efh-autopilot-orchestrator-staging"

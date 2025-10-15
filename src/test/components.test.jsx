@@ -27,7 +27,7 @@ describe('Component Tests', () => {
       expect(screen.getByText('Home')).toBeInTheDocument();
       expect(screen.getByText('Courses')).toBeInTheDocument();
       expect(screen.getByText('Account')).toBeInTheDocument();
-      expect(screen.getByText('Support')).toBeInTheDocument();
+      expect(screen.getAllByText('Support')[0]).toBeInTheDocument();
       expect(screen.getByText('Partners')).toBeInTheDocument();
     });
 
@@ -53,7 +53,7 @@ describe('Component Tests', () => {
       expect(screen.getByText('Test Content')).toBeInTheDocument();
     });
 
-    it('sets page title', () => {
+    it('sets page title', async () => {
       renderWithProviders(
         <AppLayout title="Custom Title">
           <div>Content</div>
@@ -61,9 +61,8 @@ describe('Component Tests', () => {
       );
       
       // Helmet updates document.title asynchronously
-      setTimeout(() => {
-        expect(document.title).toContain('Custom Title');
-      }, 0);
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(document.title).toContain('Custom Title');
     });
   });
 

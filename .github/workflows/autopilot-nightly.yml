@@ -1,0 +1,125 @@
+name: EFH Autopilot Nightly
+
+on:
+  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run mode (no actual changes)'
+        required: true
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      task:
+        description: 'Task to run'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - 'all'
+          - 'generate-jobs'
+          - 'seed-github'
+          - 'export-candidates'
+  
+  # Scheduled run (nightly at 2 AM UTC)
+  schedule:
+    - cron: '0 2 * * *'
+
+env:
+  DRY_RUN: ${{ github.event.inputs.dry_run || 'true' }}
+  NODE_ENV: production
+
+jobs:
+  autopilot:
+    name: Run Autopilot Tasks
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: 'no-site/package-lock.json'
+      
+      - name: Install dependencies
+        working-directory: ./no-site
+        run: npm ci
+      
+      - name: Create .env file
+        working-directory: ./no-site
+        run: |
+          cat > .env << EOF
+          DRY_RUN=${{ env.DRY_RUN }}
+          NODE_ENV=${{ env.NODE_ENV }}
+          GITHUB_TOKEN=${{ secrets.AUTOPILOT_GITHUB_TOKEN }}
+          GITHUB_OWNER=${{ github.repository_owner }}
+          GITHUB_REPO=${{ github.event.repository.name }}
+          SUPABASE_URL=${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY=${{ secrets.SUPABASE_SERVICE_KEY }}
+          SLACK_BOT_TOKEN=${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_HIRING_CHANNEL=${{ secrets.SLACK_HIRING_CHANNEL }}
+          OUTPUT_DIR=.autopilot_out
+          ORG_NAME=Elevate for Humanity
+          ORG_LOCATION=Indianapolis, IN
+          ORG_WEBSITE=https://elevateforhumanity.org
+          ORG_EMAIL=hiring@elevateforhumanity.org
+          EOF
+      
+      - name: Generate job posts
+        if: ${{ github.event.inputs.task == 'all' || github.event.inputs.task == 'generate-jobs' || github.event_name == 'schedule' }}
+        working-directory: ./no-site
+        run: npm run generate:jobs
+      
+      - name: Seed GitHub
+        if: ${{ github.event.inputs.task == 'all' || github.event.inputs.task == 'seed-github' }}
+        working-directory: ./no-site
+        run: npm run seed:github
+      
+      - name: Export candidates
+        if: ${{ github.event.inputs.task == 'all' || github.event.inputs.task == 'export-candidates' || github.event_name == 'schedule' }}
+        working-directory: ./no-site
+        run: npm run export:candidates
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: autopilot-output-${{ github.run_number }}
+          path: no-site/.autopilot_out/
+          retention-days: 30
+      
+      - name: Notify on failure
+        if: failure() && secrets.SLACK_BOT_TOKEN != ''
+        uses: slackapi/slack-github-action@v1
+        with:
+          channel-id: ${{ secrets.SLACK_HIRING_CHANNEL }}
+          slack-message: |
+            ❌ EFH Autopilot workflow failed
+            
+            *Workflow:* ${{ github.workflow }}
+            *Run:* <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|#${{ github.run_number }}>
+            *Triggered by:* ${{ github.actor }}
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      
+      - name: Summary
+        if: always()
+        run: |
+          echo "## 🤖 EFH Autopilot Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Mode:** ${{ env.DRY_RUN == 'true' && 'DRY RUN' || 'LIVE' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Task:** ${{ github.event.inputs.task || 'scheduled' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Artifacts" >> $GITHUB_STEP_SUMMARY
+          echo "Download the generated files from the artifacts section above." >> $GITHUB_STEP_SUMMARY
+
+permissions:
+  contents: read
+  issues: write
+  actions: read

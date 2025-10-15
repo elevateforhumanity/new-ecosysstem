@@ -74,7 +74,7 @@ describe('Protected Routes', () => {
       const routes = [
         '/admin-console',
         '/admin-dashboard',
-        '/user-management'
+        '/admin/user-management'
       ];
       
       routes.forEach(route => {

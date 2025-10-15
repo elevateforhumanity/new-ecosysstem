@@ -13,18 +13,27 @@ export default function CurriculumUpload() {
   const handleUpload = async (e) => {
     e.preventDefault();
     setStatus("Processing...");
-    setTimeout(() => {
-      setCoursePreview({
-        title: "Sample Course from Upload",
-        modules: [
-          { title: "Module 1: Introduction", lessons: ["Lesson 1", "Lesson 2"] },
-          { title: "Module 2: Advanced Topics", lessons: ["Lesson 3"] },
-        ],
-        quizzes: [{ title: "Quiz 1", questions: 5 }],
-        coverUrl: "/images/sample-cover.jpg",
+    
+    try {
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          setCoursePreview({
+            title: "Sample Course from Upload",
+            modules: [
+              { title: "Module 1: Introduction", lessons: ["Lesson 1", "Lesson 2"] },
+              { title: "Module 2: Advanced Topics", lessons: ["Lesson 3"] },
+            ],
+            quizzes: [{ title: "Quiz 1", questions: 5 }],
+            coverUrl: "/images/sample-cover.jpg",
+          });
+          setStatus("Preview generated! Review and publish.");
+          resolve();
+        }, 2000);
       });
-      setStatus("Preview generated! Review and publish.");
-    }, 2000);
+    } catch (error) {
+      console.error('Upload error:', error);
+      setStatus("Failed to process upload. Please try again.");
+    }
   };
 
   return (

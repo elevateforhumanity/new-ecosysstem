@@ -56,22 +56,27 @@ export function Sheets() {
   const handleCellSubmit = async () => {
     if (!activeSheet) return;
     
-    const cellKey = `${selectedCell.row},${selectedCell.col}`;
-    const isFormula = cellValue.startsWith('=');
-    
-    // Update cell
-    const newCell = {
-      row: selectedCell.row,
-      col: selectedCell.col,
-      value: cellValue,
-      formula: isFormula ? cellValue : null,
-      displayValue: cellValue
-    };
-    
-    activeSheet.cells[cellKey] = newCell;
-    setIsEditing(false);
-    
-    // In production, save to backend
+    try {
+      const cellKey = `${selectedCell.row},${selectedCell.col}`;
+      const isFormula = cellValue.startsWith('=');
+      
+      // Update cell
+      const newCell = {
+        row: selectedCell.row,
+        col: selectedCell.col,
+        value: cellValue,
+        formula: isFormula ? cellValue : null,
+        displayValue: cellValue
+      };
+      
+      activeSheet.cells[cellKey] = newCell;
+      setIsEditing(false);
+      
+      // In production, save to backend
+    } catch (error) {
+      console.error('Cell update error:', error);
+      alert('Failed to update cell. Please try again.');
+    }
   };
 
   const columnToLetter = (col) => {

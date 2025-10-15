@@ -1,0 +1,29 @@
+{
+  "name": "efh-autopilot-cli",
+  "version": "1.0.0",
+  "description": "EFH Hiring Autopilot - CLI-only mode (no website required)",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "generate:jobs": "node scripts/generate-jobs.js",
+    "seed:github": "node scripts/seed-github.js",
+    "export:candidates": "node scripts/export-candidates.js",
+    "test:slack": "node scripts/test-slack.js",
+    "create:invite": "node scripts/create-interview-invite.js",
+    "setup": "node scripts/setup.js"
+  },
+  "keywords": ["hiring", "automation", "cli"],
+  "author": "Elevate for Humanity",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@octokit/rest": "^20.0.2",
+    "@supabase/supabase-js": "^2.57.4",
+    "axios": "^1.12.2",
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "dotenv": "^16.3.1",
+    "inquirer": "^9.2.12",
+    "ora": "^8.0.1"
+  }
+}

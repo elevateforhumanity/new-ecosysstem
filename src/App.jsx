@@ -183,7 +183,12 @@ export default function App() {
         <AccessibilityProvider>
           <ToastProvider>
             <ProgressProvider>
-              <BrowserRouter>
+              <BrowserRouter
+                future={{
+                  v7_startTransition: true,
+                  v7_relativeSplatPath: true,
+                }}
+              >
                 <ErrorBoundary>
               <Suspense fallback={
                 <div style={{ 
@@ -258,7 +263,6 @@ export default function App() {
         <Route path="/curriculum-upload" element={<ProtectedRoute requiredRole="instructor"><CurriculumUpload /></ProtectedRoute>} />
         <Route path="/docs" element={<Docs />} />
         <Route path="/donate-page" element={<DonatePage />} />
-        <Route path="/donate-page" element={<DonatePage />} />
         <Route path="/durable-a-i" element={<DurableAI />} />
         <Route path="/durable-landing" element={<DurableLanding />} />
         <Route path="/ecommerce" element={<Ecommerce />} />
@@ -275,7 +279,6 @@ export default function App() {
         <Route path="/instructor-new" element={<ProtectedRoute requiredRole="instructor"><InstructorNew /></ProtectedRoute>} />
         <Route path="/integrations" element={<Integrations />} />
         <Route path="/kingdom-konnect" element={<KingdomKonnect />} />
-        <Route path="/l-m-s" element={<LMS />} />
         <Route path="/l-m-s" element={<LMS />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mobile-app" element={<MobileApp />} />

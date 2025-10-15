@@ -4,7 +4,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { SEO } from "../lib/seo/SEO";
+import { SEO } from "../components/SEO";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";

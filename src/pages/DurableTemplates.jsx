@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { SEO } from "../lib/seo/SEO";
+import { SEO } from "../components/SEO";
 import DurableNav from "../components/DurableNav";
 
 export default function DurableTemplates() {

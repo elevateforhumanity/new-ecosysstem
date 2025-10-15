@@ -270,6 +270,29 @@ export const TOOL_REGISTRY = {
       }
     ]
   },
+
+  // ===== System Management =====
+  createCloudflareToken: {
+    description: "Create Cloudflare API token with deployment permissions",
+    category: "system",
+    riskLevel: "high",
+    requiresApproval: true,
+    parameters: {
+      accountId: { type: "string", required: true, description: "Cloudflare account ID" },
+      existingToken: { type: "string", required: true, description: "Current API token with token creation permission" },
+      tokenName: { type: "string", required: false, description: "Name for the new token" },
+    },
+    examples: [
+      {
+        input: "Create deployment token for Workers",
+        output: {
+          accountId: "6ba1d2a52a3fa230972960db307ac7c0",
+          existingToken: "current_token_here",
+          tokenName: "EFH Deployment Token"
+        }
+      }
+    ]
+  },
 };
 
 /**

@@ -136,7 +136,7 @@ export default {
 };
 
 /**
- * Generate a complete page
+ * Generate a complete page with section images and icons
  */
 async function generatePage(env, pageType, description, sections = []) {
   const systemPrompt = `You are an expert web designer for ${BRAND_THEME.organization}.
@@ -157,16 +157,23 @@ REQUIREMENTS:
 - Include proper semantic HTML
 - Add hover effects and transitions
 - Make it accessible (ARIA labels, alt text)
+- Include image placeholders like {{IMG:programs}}, {{IMG:services}} where section images belong
+- Include icon placeholders like {{ICON:partners}}, {{ICON:features}} for small badges
 
 OUTPUT FORMAT (JSON):
 {
+  "title": "Page title",
   "html": "<section>...</section>",
   "tailwindClasses": ["text-red-600", "bg-orange-500"],
   "summary": "Brief description of the page",
   "sections": ["hero", "features", "cta"]
 }
 
-IMPORTANT: Respond ONLY with valid JSON. No markdown, no code blocks.`;
+IMPORTANT: 
+- Respond ONLY with valid JSON. No markdown, no code blocks.
+- DO NOT include hero image markup - we will inject it automatically
+- Place {{IMG:sectionname}} where card/section images should go
+- Place {{ICON:name}} where small icons/badges should go`;
 
   const userPrompt = `Create a ${pageType} page for ${BRAND_THEME.organization}.
 
@@ -189,17 +196,68 @@ Make it professional, engaging, and aligned with our mission of providing access
   const text = response.response || '';
   const jsonMatch = text.match(/\{[\s\S]*\}/);
   
-  if (jsonMatch) {
-    const page = JSON.parse(jsonMatch[0]);
-    return {
-      ...page,
-      pageType,
-      theme: BRAND_THEME,
-      generatedAt: new Date().toISOString(),
-    };
+  if (!jsonMatch) {
+    throw new Error('Failed to generate page - invalid AI response');
   }
+  
+  const basePage = JSON.parse(jsonMatch[0]);
+  
+  // Generate hero image
+  const heroPrompt = `Hero banner for ${pageType} page. Brand colors: red (#E53935), orange (#FF9800), blue (#2196F3), white. Style: clean, empowering, professional, vibrant, modern education platform.`;
+  const heroUrl = await generateImage(env, heroPrompt, { width: 1280, height: 560 });
+  
+  // Extract placeholders from HTML
+  const placeholders = extractPlaceholders(basePage.html);
+  const assets = {};
+  
+  // Generate section images
+  for (const tag of placeholders.IMG) {
+    const prompt = `Section banner for "${tag}" in brand colors red, orange, blue, white. Style: modern, high-contrast, minimal text, web hero/card graphic, education theme.`;
+    assets[`IMG:${tag}`] = await generateImage(env, prompt, { width: 1024, height: 640 });
+  }
+  
+  // Generate SVG icons
+  for (const tag of placeholders.ICON) {
+    assets[`ICON:${tag}`] = generateSvgIcon(tag);
+  }
+  
+  // Build final HTML with hero and replaced placeholders
+  let finalHtml = `<section class="relative overflow-hidden">
+  <img src="${heroUrl}" alt="Hero image" class="w-full h-[480px] object-cover" />
+  <div class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white px-4">
+    <h1 class="text-5xl font-bold mb-2 text-center">${escapeHtml(basePage.title || pageType)}</h1>
+    <p class="text-lg max-w-2xl text-center">${escapeHtml(basePage.summary || description)}</p>
+  </div>
+</section>
+${basePage.html}`;
 
-  throw new Error('Failed to generate page - invalid AI response');
+  // Replace image placeholders
+  for (const [key, value] of Object.entries(assets)) {
+    if (key.startsWith('IMG:')) {
+      const tag = key.slice(4);
+      const pattern = new RegExp(`\\{\\{IMG:${escapeRegExp(tag)}\\}\\}`, 'g');
+      finalHtml = finalHtml.replace(
+        pattern,
+        `<img src="${value}" alt="${escapeHtml(tag)} image" class="w-full h-48 object-cover rounded-xl shadow" loading="lazy" />`
+      );
+    } else if (key.startsWith('ICON:')) {
+      const tag = key.slice(5);
+      const pattern = new RegExp(`\\{\\{ICON:${escapeRegExp(tag)}\\}\\}`, 'g');
+      finalHtml = finalHtml.replace(pattern, value);
+    }
+  }
+  
+  return {
+    title: basePage.title || pageType,
+    html: finalHtml,
+    tailwindClasses: basePage.tailwindClasses || [],
+    summary: basePage.summary || description,
+    sections: basePage.sections || [],
+    assets,
+    pageType,
+    theme: BRAND_THEME,
+    generatedAt: new Date().toISOString(),
+  };
 }
 
 /**

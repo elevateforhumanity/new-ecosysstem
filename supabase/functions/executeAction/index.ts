@@ -632,6 +632,15 @@ Deno.serve(async (req: Request) => {
         break;
       }
 
+      case "createCloudflareToken": {
+        // Import dynamically to avoid issues
+        const { createCloudflareToken } = await import('./actions/createCloudflareToken.ts');
+        const result = await createCloudflareToken(supabase, params);
+        data = result;
+        message = `✅ Cloudflare API token created: ${result.tokenName}`;
+        break;
+      }
+
       default:
         message = `❌ Unknown action: ${action}`;
         data = null;

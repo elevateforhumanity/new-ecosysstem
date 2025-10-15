@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS generated_pages (
   tailwind_classes JSONB,
   sections JSONB, -- Array of section names
   theme JSONB, -- Brand theme used
+  assets JSONB, -- Generated images and icons { "IMG:programs": "url", "ICON:partners": "svg" }
   status TEXT NOT NULL DEFAULT 'draft', -- draft, published, archived
   version INTEGER NOT NULL DEFAULT 1,
   published_at TIMESTAMPTZ,

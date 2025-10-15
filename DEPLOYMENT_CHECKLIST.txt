@@ -1,0 +1,126 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║                                                                      ║
+║   🚀 LMS DEPLOYMENT CHECKLIST                                        ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+STEP 1: SUPABASE (DATABASE) - 15 minutes
+═══════════════════════════════════════════════════════════════════════
+
+[ ] 1. Go to supabase.com/dashboard
+[ ] 2. Create new project: "elevate-lms"
+[ ] 3. Save database password
+[ ] 4. Wait for project creation (2-3 min)
+[ ] 5. Open SQL Editor
+[ ] 6. Run migration 001_initial_schema.sql
+[ ] 7. Run migration 002_lms_schema.sql
+[ ] 8. Run migration 003_lms_seed_data.sql
+[ ] 9. Run migrations 004-012 in order
+[ ] 10. Verify tables in Table Editor
+[ ] 11. Go to Settings → API
+[ ] 12. Copy SUPABASE_URL
+[ ] 13. Copy SUPABASE_ANON_KEY
+[ ] 14. Copy SUPABASE_SERVICE_KEY
+[ ] 15. Save credentials securely
+
+STEP 2: RENDER (BACKEND) - 10 minutes
+═══════════════════════════════════════════════════════════════════════
+
+[ ] 1. Generate JWT secret:
+       node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+[ ] 2. Go to dashboard.render.com
+[ ] 3. Sign in with GitHub
+[ ] 4. Click "New +" → "Web Service"
+[ ] 5. Connect repository: elevateforhumanity/fix2
+[ ] 6. Configure:
+       Name: efh-lms-backend
+       Region: Oregon
+       Branch: main
+       Root Directory: backend
+       Build: npm install
+       Start: npm start
+       Plan: Free
+[ ] 7. Add environment variables:
+       NODE_ENV=production
+       SUPABASE_URL=<from step 1>
+       SUPABASE_ANON_KEY=<from step 1>
+       SUPABASE_SERVICE_KEY=<from step 1>
+       JWT_SECRET=<from step 2.1>
+       FRONTEND_URL=https://elevateforhumanity.pages.dev
+[ ] 8. Click "Create Web Service"
+[ ] 9. Wait for deployment (3-5 min)
+[ ] 10. Copy backend URL
+[ ] 11. Test: curl <backend-url>/health
+[ ] 12. Test: curl <backend-url>/api/v1/courses
+
+STEP 3: CLOUDFLARE PAGES (FRONTEND) - 10 minutes
+═══════════════════════════════════════════════════════════════════════
+
+[ ] 1. Go to dash.cloudflare.com
+[ ] 2. Click "Workers & Pages"
+[ ] 3. Click "Create application"
+[ ] 4. Click "Pages" → "Connect to Git"
+[ ] 5. Select repository: elevateforhumanity/fix2
+[ ] 6. Configure:
+       Project: elevateforhumanity
+       Branch: main
+       Build: npm run build
+       Output: dist
+[ ] 7. Add environment variables:
+       VITE_SUPABASE_URL=<from step 1>
+       VITE_SUPABASE_ANON_KEY=<from step 1>
+       VITE_API_URL=<from step 2.10>
+[ ] 8. Click "Save and Deploy"
+[ ] 9. Wait for build (2-3 min)
+[ ] 10. Copy frontend URL
+[ ] 11. Go back to Render
+[ ] 12. Update FRONTEND_URL to Cloudflare URL
+[ ] 13. Wait for backend redeploy
+
+STEP 4: VERIFICATION - 5 minutes
+═══════════════════════════════════════════════════════════════════════
+
+[ ] 1. Open frontend URL in browser
+[ ] 2. Home page loads
+[ ] 3. Click "Browse Courses"
+[ ] 4. Courses page displays
+[ ] 5. Click "Sign Up"
+[ ] 6. Create test account
+[ ] 7. Redirected to dashboard
+[ ] 8. Click "Browse Courses"
+[ ] 9. Click on a course
+[ ] 10. Click "Enroll Now"
+[ ] 11. Course appears in dashboard
+[ ] 12. Click "Continue Learning"
+[ ] 13. Course player loads
+[ ] 14. Test backend: curl <backend-url>/health
+[ ] 15. Test API: curl <backend-url>/api/v1/courses
+
+DEPLOYMENT COMPLETE! 🎉
+═══════════════════════════════════════════════════════════════════════
+
+Your LMS is live at:
+  Frontend: https://elevateforhumanity.pages.dev
+  Backend:  https://efh-lms-backend.onrender.com
+  Database: Supabase (managed)
+
+Cost: $0/month (free tier)
+
+NEXT STEPS (OPTIONAL)
+═══════════════════════════════════════════════════════════════════════
+
+[ ] Set up custom domain
+[ ] Configure monitoring (UptimeRobot)
+[ ] Add error tracking (Sentry)
+[ ] Set up analytics (Google Analytics)
+[ ] Configure email notifications
+[ ] Add payment processing (Stripe)
+[ ] Enable Google Classroom sync
+
+═══════════════════════════════════════════════════════════════════════
+
+Total Time: 30-40 minutes
+Difficulty: Easy
+Status: Ready to Deploy ✅
+
+For detailed instructions, see: DEPLOY_NOW_GUIDE.md

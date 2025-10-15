@@ -5,11 +5,17 @@ const { createClient } = require('@supabase/supabase-js');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Validate environment variables
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://cuxzzpsyufcewtmicszk.supabase.co';
+const SUPABASE_KEY = process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_KEY;
+
+if (!SUPABASE_KEY) {
+  console.error('❌ ERROR: SUPABASE_ANON_KEY or SUPABASE_SERVICE_KEY must be set');
+  process.exit(1);
+}
+
 // Supabase client
-const supabase = createClient(
-  process.env.SUPABASE_URL || 'https://cuxzzpsyufcewtmicszk.supabase.co',
-  process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY
-);
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // Middleware
 app.use(cors());

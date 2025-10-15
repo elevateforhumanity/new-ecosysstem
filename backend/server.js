@@ -262,11 +262,59 @@ app.get('/api/dashboard/:userId', async (req, res) => {
   }
 });
 
+// ==================== AI AGENT ====================
+
+// Agent proxy endpoint
+app.post('/api/agent', async (req, res) => {
+  try {
+    const { prompt } = req.body;
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+      return res.status(401).json({ success: false, error: 'Unauthorized' });
+    }
+
+    // Forward to Cloudflare Worker
+    const agentUrl = process.env.AGENT_WORKER_URL || 'https://efh-agent.your-subdomain.workers.dev';
+    
+    const response = await fetch(agentUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': authHeader,
+      },
+      body: JSON.stringify({ prompt }),
+    });
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Get agent command history
+app.get('/api/agent/history', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('agent_events')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(50);
+
+    if (error) throw error;
+    res.json({ success: true, data });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`✅ LMS Backend running on port ${PORT}`);
   console.log(`📡 API: http://localhost:${PORT}/api`);
   console.log(`🏥 Health: http://localhost:${PORT}/health`);
+  console.log(`🤖 Agent: http://localhost:${PORT}/api/agent`);
 });
 
 module.exports = app;

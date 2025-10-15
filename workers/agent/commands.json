@@ -1,0 +1,136 @@
+{
+  "$schema": "https://efh.example/schemas/agent-commands.schema.json",
+  "version": "1.0.0",
+  "commands": [
+    {
+      "name": "createProgram",
+      "description": "Create a new training program (ETPL-ready).",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["title", "tuition", "hours", "cip_code"],
+        "properties": {
+          "title": { "type": "string", "minLength": 3 },
+          "tuition": { "type": "number", "minimum": 0 },
+          "hours": { "type": "integer", "minimum": 1 },
+          "cip_code": { "type": "string" },
+          "delivery": { "type": "string", "enum": ["online", "hybrid", "in-person"], "default": "online" },
+          "description": { "type": "string" },
+          "credentials": { "type": "string" }
+        }
+      },
+      "rolesAllowed": ["admin", "staff"]
+    },
+    {
+      "name": "updateTuition",
+      "description": "Update tuition for a program.",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["id", "amount"],
+        "properties": {
+          "id": { "type": "string", "format": "uuid" },
+          "amount": { "type": "number", "minimum": 0 }
+        }
+      },
+      "rolesAllowed": ["admin", "staff"]
+    },
+    {
+      "name": "createAffiliate",
+      "description": "Register a new affiliate (W-9 required).",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["user_id", "tier"],
+        "properties": {
+          "user_id": { "type": "string", "format": "uuid" },
+          "tier": { "type": "string", "enum": ["standard", "gold", "platinum"] },
+          "w9_file_id": { "type": "string", "format": "uuid" }
+        }
+      },
+      "rolesAllowed": ["admin"]
+    },
+    {
+      "name": "createReferral",
+      "description": "Create a referral record tied to an affiliate.",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["affiliate_id", "client_name", "source"],
+        "properties": {
+          "affiliate_id": { "type": "string", "format": "uuid" },
+          "client_name": { "type": "string" },
+          "source": { "type": "string", "enum": ["link", "qr", "manual", "import"] }
+        }
+      },
+      "rolesAllowed": ["admin", "staff", "affiliate"]
+    },
+    {
+      "name": "calculateCommission",
+      "description": "Calculate commission for a referral after return/payment.",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["referral_id", "basis_amount", "percent"],
+        "properties": {
+          "referral_id": { "type": "string", "format": "uuid" },
+          "basis_amount": { "type": "number", "minimum": 0 },
+          "percent": { "type": "number", "minimum": 0, "maximum": 100 }
+        }
+      },
+      "rolesAllowed": ["admin", "staff"]
+    },
+    {
+      "name": "runPayoutBatch",
+      "description": "Create a payout batch for approved commissions.",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["cutoff_date"],
+        "properties": {
+          "cutoff_date": { "type": "string", "format": "date" }
+        }
+      },
+      "rolesAllowed": ["admin"]
+    },
+    {
+      "name": "getETPLReport",
+      "description": "Return ETPL outcomes (completions/placements/tuition).",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "rolesAllowed": ["admin", "staff"]
+    },
+    {
+      "name": "addStudent",
+      "description": "Enroll a student in a program.",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["student_id", "program_id"],
+        "properties": {
+          "student_id": { "type": "string", "format": "uuid" },
+          "program_id": { "type": "string", "format": "uuid" }
+        }
+      },
+      "rolesAllowed": ["admin", "staff"]
+    },
+    {
+      "name": "updateEnrollment",
+      "description": "Modify student enrollment status.",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["enrollment_id", "status"],
+        "properties": {
+          "enrollment_id": { "type": "string", "format": "uuid" },
+          "status": { "type": "string", "enum": ["active", "completed", "dropped"] },
+          "progress": { "type": "number", "minimum": 0, "maximum": 100 }
+        }
+      },
+      "rolesAllowed": ["admin", "staff"]
+    },
+    {
+      "name": "getStats",
+      "description": "Retrieve dashboard statistics.",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "rolesAllowed": ["admin", "staff"]
+    }
+  ]
+}

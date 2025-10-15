@@ -7,11 +7,11 @@ crons = ["5 3 * * *"]
 
 [[kv_namespaces]]
 binding = "LOGS"
-id = ""
+id = "3d78624bd6304f74a09465a6dcdffed5"
 
 [[kv_namespaces]]
 binding = "SUMMARIES"
-id = ""
+id = "a2ff1a04136041faa6461d10d6b1ab61"
 
 [vars]
 ORG_NAME = "EFH"

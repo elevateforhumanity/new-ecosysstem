@@ -5,10 +5,9 @@ compatibility_date = "2024-10-14"
 [vars]
 ORCHESTRATOR_NAME = "efh-autopilot-orchestrator"
 
-# KV namespace for autopilot registry (will be created by orchestrator if needed)
-# [[kv_namespaces]]
-# binding = "REGISTRY"
-# id = "YOUR_KV_NAMESPACE_ID"
+[[kv_namespaces]]
+binding = "REGISTRY"
+id = "f8ab4f8ad558406eaea36934805125c7"
 
 # R2 bucket for assets (optional, will be created by orchestrator if needed)
 # [[r2_buckets]]

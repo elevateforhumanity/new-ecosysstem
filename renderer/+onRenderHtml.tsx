@@ -29,6 +29,7 @@ export const onRenderHtml: OnRenderHtmlAsync = async (pageContext): Promise<any>
     <meta property="og:description" content="${description}" />
     <meta property="og:type" content="website" />
     <link rel="icon" href="/images/Elevate_for_Humanity_logo.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
     <div id="page-view">${dangerouslySkipEscape(pageHtml)}</div>

@@ -67,8 +67,6 @@
     "rimraf": "5.0.10",
     "terser": "^5.44.0",
     "typescript": "^5.9.3",
-    "vike": "^0.4.195",
-    "vite-plugin-ssr": "^0.4.142",
     "vitest": "^3.2.4"
   },
   "scripts": {
@@ -76,10 +74,9 @@
     "dev:api": "node server/index.js",
     "dev:full": "concurrently -k -n VITE,API -c green,cyan \"./scripts/start-vite.sh\" \"./scripts/start-api.sh\"",
     "autopilot": "./scripts/autopilot.sh",
-    "build": "vite build && node scripts/copy-client-to-dist.mjs",
+    "build": "vite build",
     "postbuild": "node scripts/generate-sitemap-complete.mjs && node scripts/robots.mjs",
-    "build:old": "vite build && node scripts/inject-critical-content.cjs",
-    "build:base": "vite build",
+    "build:old": "vite build",
     "start": "echo 'This is a static site. Use npm run preview to test locally.'",
     "start:frontend": "vite preview --host 0.0.0.0 --port 8080 --strictPort",
     "preview": "vite preview --host 0.0.0.0 --port 8080 --strictPort",

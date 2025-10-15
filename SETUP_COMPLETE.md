@@ -80,36 +80,34 @@ All routes serve unique, pre-rendered content:
 
 ---
 
-## ⚠️ One Manual Step Required
+## ⚡ One-Command Setup (Optional)
 
-### Configure GitHub Secrets
+### Enable Auto-Deploy in 2 Minutes
 
-To enable automatic deployments on every push to main:
+**Quick Start:** See `QUICK_START.md` for the fastest setup!
 
-**1. Go to GitHub Secrets:**
+**One-Command Setup:**
+```bash
+# 1. Create GitHub token: https://github.com/settings/tokens/new
+#    - Scopes: Check 'repo'
+#    - Copy the token
+
+# 2. Run setup script:
+GH_TOKEN='your_token_here' ./scripts/one-command-setup.sh
 ```
-https://github.com/elevateforhumanity/fix2/settings/secrets/actions
+
+**That's it!** The script automatically:
+- ✅ Sets CLOUDFLARE_API_TOKEN
+- ✅ Sets CLOUDFLARE_ACCOUNT_ID
+- ✅ Sets CLOUDFLARE_ZONE_ID (if available)
+- ✅ Verifies all secrets
+
+**Verify Setup:**
+```bash
+GH_TOKEN='your_token' ./scripts/verify-secrets.sh
 ```
 
-**2. Add these three secrets:**
-
-| Secret Name | Value |
-|-------------|-------|
-| `CLOUDFLARE_API_TOKEN` | `Vr7RBd1RDQUSbly2jqjU2hvbC1SBk_1iDuSNIYOS` |
-| `CLOUDFLARE_ACCOUNT_ID` | `6ba1d2a52a3fa230972960db307ac7c0` |
-| `CLOUDFLARE_ZONE_ID` | Get from Cloudflare Dashboard |
-
-**3. Get Zone ID:**
-- Go to: https://dash.cloudflare.com/
-- Click on your domain
-- Copy "Zone ID" from right sidebar
-
-**4. Verify:**
-- Push a commit to main branch
-- Check: https://github.com/elevateforhumanity/fix2/actions
-- Workflow should run automatically
-
-**Detailed instructions:** See `GITHUB_SECRETS_GUIDE.md`
+**Manual Setup:** See `GITHUB_SECRETS_GUIDE.md` for step-by-step instructions
 
 ---
 

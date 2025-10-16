@@ -5,13 +5,20 @@ export function ElevateBrain() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Simple password check (in production, use proper authentication)
-    if (password === 'admin123') {
-      setIsAuthenticated(true);
-    } else {
-      alert('Invalid password');
+    try {
+      const { supabase } = await import('../supabaseClient');
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (user && (user.email?.includes('@elevateforhumanity.org') || user.user_metadata?.role === 'admin')) {
+        setIsAuthenticated(true);
+      } else {
+        alert('Access denied. Admin privileges required.');
+      }
+    } catch (error) {
+      alert('Authentication failed. Please log in first.');
+      window.location.href = '/login';
     }
   };
 

@@ -20,7 +20,7 @@ export default function Login() {
     setFormData({ ...formData, [e.target.name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     
@@ -29,7 +29,21 @@ export default function Login() {
       return;
     }
     
-    console.log("Login attempt:", formData);
+    try {
+      const { supabase } = await import('../supabaseClient');
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
+      });
+      
+      if (error) throw error;
+      
+      // Redirect to dashboard on success
+      window.location.href = '/lms/dashboard';
+    } catch (err) {
+      setError(err.message || 'Login failed. Please try again.');
+      console.error('Login error:', err);
+    }
   };
 
   return (

@@ -1,10 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Building, Clock, DollarSign, Users, Award, ChevronRight } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
+import { addBreadcrumbSchema } from "../utils/addCourseSchema";
 
 export default function Programs() {
   const params = useParams();
   const [selectedCategory, setSelectedCategory] = useState("all");
+
+  // Add breadcrumb schema for SEO
+  useEffect(() => {
+    addBreadcrumbSchema([
+      { name: "Home", url: "https://elevateforhumanity.pages.dev/" },
+      { name: "Programs", url: "https://elevateforhumanity.pages.dev/programs" }
+    ]);
+  }, []);
 
   const programCategories = [
     { id: "all", name: "All Programs", count: 50 },

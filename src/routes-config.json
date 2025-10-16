@@ -1,0 +1,94 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "name": "Home",
+      "component": "HomePage",
+      "public": true,
+      "seo": {
+        "title": "Home - Elevate for Humanity",
+        "description": "Transform your career with comprehensive workforce development programs",
+        "priority": 1.0
+      }
+    },
+    {
+      "path": "/courses",
+      "name": "Courses",
+      "component": "CourseCatalog",
+      "public": true,
+      "seo": {
+        "title": "Browse Courses",
+        "description": "Explore our comprehensive catalog of professional development courses",
+        "priority": 0.9
+      }
+    },
+    {
+      "path": "/courses/:id",
+      "name": "Course Detail",
+      "component": "CourseDetail",
+      "public": true,
+      "dynamic": true
+    },
+    {
+      "path": "/programs",
+      "name": "Programs",
+      "component": "Programs",
+      "public": true,
+      "seo": {
+        "title": "Workforce Development Programs",
+        "description": "Comprehensive training programs for career advancement",
+        "priority": 0.9
+      }
+    },
+    {
+      "path": "/lms",
+      "name": "Learning Management System",
+      "component": "LMS",
+      "public": true,
+      "seo": {
+        "title": "Learning Platform",
+        "description": "Access your courses and track your progress",
+        "priority": 0.9
+      }
+    },
+    {
+      "path": "/dashboard",
+      "name": "Dashboard",
+      "component": "StudentDashboard",
+      "protected": true
+    },
+    {
+      "path": "/login",
+      "name": "Login",
+      "component": "Login",
+      "public": true,
+      "seo": {
+        "title": "Login",
+        "description": "Sign in to your account",
+        "priority": 0.5
+      }
+    },
+    {
+      "path": "/partners",
+      "name": "Partners",
+      "component": "Partners",
+      "public": true,
+      "seo": {
+        "title": "Partner With Us",
+        "description": "Join our ecosystem of organizations making a difference",
+        "priority": 0.8
+      }
+    },
+    {
+      "path": "/donate",
+      "name": "Donate",
+      "component": "Donate",
+      "public": true,
+      "seo": {
+        "title": "Support Our Mission",
+        "description": "Help us provide education and training to those in need",
+        "priority": 0.7
+      }
+    }
+  ]
+}

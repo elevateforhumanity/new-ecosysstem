@@ -1,31 +1,26 @@
 # Elevate for Humanity - Robots.txt
 User-agent: *
 Allow: /
-Disallow: /api/
-Disallow: /admin/
-Disallow: /_next/
-Disallow: /private/
 
 # Sitemaps
-Sitemap: https://elevateforhumanity.org/sitemap.xml
-Sitemap: https://elevateforhumanity.org/sitemaps/sitemap-main.xml
-Sitemap: https://elevateforhumanity.org/sitemaps/sitemap-programs.xml
-Sitemap: https://elevateforhumanity.org/sitemaps/sitemap-government.xml
-Sitemap: https://elevateforhumanity.org/sitemaps/sitemap-philanthropy.xml
-Sitemap: https://elevateforhumanity.org/sitemaps/sitemap-blog.xml
+Sitemap: https://lms.elevateforhumanity.org/sitemap.xml
+Sitemap: https://lms.elevateforhumanity.org/sitemap-pages.xml
+Sitemap: https://lms.elevateforhumanity.org/sitemap-courses.xml
 
-# Crawl-delay for respectful crawling
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /profile/
+Disallow: /settings/
+
+# Allow public pages
+Allow: /courses
+Allow: /programs
+Allow: /partners
+Allow: /about
+Allow: /contact
+Allow: /donate
+
+# Crawl delay
 Crawl-delay: 1
-
-# Allow all major search engines
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Slurp
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /

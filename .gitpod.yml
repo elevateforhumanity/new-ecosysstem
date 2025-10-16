@@ -7,10 +7,20 @@ image:
 
 # Tasks to run on workspace start
 tasks:
-  - name: Welcome
+  - name: Setup & Deploy
+    init: |
+      echo "🚀 Initializing Autopilot System..."
+      pnpm install
+      echo "✅ Dependencies installed"
     command: |
       echo "🎓 Welcome to Elevate for Humanity Platform!"
       echo "📚 Digital Binders: docs/digital-binders/"
+      echo ""
+      echo "🤖 Autopilot Commands Available:"
+      echo "   • bash scripts/full-autopilot-deploy.sh - Full deployment"
+      echo "   • pnpm dev - Start development server"
+      echo "   • pnpm build - Build for production"
+      echo ""
       echo "✅ All systems ready for development"
 
 # VS Code extensions to install automatically

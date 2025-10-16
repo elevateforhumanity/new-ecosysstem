@@ -157,6 +157,71 @@ else
   echo "   - SUPABASE_SERVICE_KEY"
 fi
 
+# Step 7: Update Render Environment Variables
+echo ""
+echo "📝 Step 7: Updating Render Environment Variables..."
+if [[ -n "${RENDER_API_KEY:-}" ]] && [[ -n "${RENDER_SERVICE_ID:-}" ]]; then
+  echo "   🔑 Render credentials found"
+  
+  # Update VITE_SUPABASE_URL
+  RESPONSE=$(curl -s -X PUT "https://api.render.com/v1/services/${RENDER_SERVICE_ID}/env-vars/VITE_SUPABASE_URL" \
+    -H "Authorization: Bearer ${RENDER_API_KEY}" \
+    -H "Content-Type: application/json" \
+    -d "{\"value\": \"${SUPABASE_URL}\"}" 2>&1)
+  
+  if echo "$RESPONSE" | grep -q "error"; then
+    echo "   ⚠️  Could not update VITE_SUPABASE_URL on Render"
+  else
+    echo "   ✅ Updated VITE_SUPABASE_URL on Render"
+  fi
+  
+  # Update VITE_SUPABASE_ANON_KEY
+  RESPONSE=$(curl -s -X PUT "https://api.render.com/v1/services/${RENDER_SERVICE_ID}/env-vars/VITE_SUPABASE_ANON_KEY" \
+    -H "Authorization: Bearer ${RENDER_API_KEY}" \
+    -H "Content-Type: application/json" \
+    -d "{\"value\": \"${SUPABASE_ANON_KEY}\"}" 2>&1)
+  
+  if echo "$RESPONSE" | grep -q "error"; then
+    echo "   ⚠️  Could not update VITE_SUPABASE_ANON_KEY on Render"
+  else
+    echo "   ✅ Updated VITE_SUPABASE_ANON_KEY on Render"
+  fi
+  
+  # Update SUPABASE_SERVICE_KEY
+  RESPONSE=$(curl -s -X PUT "https://api.render.com/v1/services/${RENDER_SERVICE_ID}/env-vars/SUPABASE_SERVICE_KEY" \
+    -H "Authorization: Bearer ${RENDER_API_KEY}" \
+    -H "Content-Type: application/json" \
+    -d "{\"value\": \"${SUPABASE_SERVICE_KEY}\"}" 2>&1)
+  
+  if echo "$RESPONSE" | grep -q "error"; then
+    echo "   ⚠️  Could not update SUPABASE_SERVICE_KEY on Render"
+  else
+    echo "   ✅ Updated SUPABASE_SERVICE_KEY on Render"
+  fi
+  
+  echo ""
+  echo "   🚀 Triggering Render deployment..."
+  if [[ -n "${RENDER_DEPLOY_HOOK:-}" ]]; then
+    curl -s -X POST "${RENDER_DEPLOY_HOOK}" >/dev/null && echo "   ✅ Deployment triggered" || echo "   ⚠️  Could not trigger deployment"
+  else
+    echo "   ℹ️  No RENDER_DEPLOY_HOOK set - deploy manually or set the hook"
+  fi
+else
+  echo "   ⚠️  Render API credentials not found"
+  echo "   To enable Render integration, set:"
+  echo "     export RENDER_API_KEY='your-render-api-key'"
+  echo "     export RENDER_SERVICE_ID='your-render-service-id'"
+  echo "     export RENDER_DEPLOY_HOOK='https://api.render.com/deploy/srv-xxx'"
+  echo ""
+  echo "   Get these from:"
+  echo "   - API Key: https://dashboard.render.com/account/settings"
+  echo "   - Service ID: https://dashboard.render.com/ (in service URL)"
+  echo "   - Deploy Hook: Service Settings → Deploy Hook"
+  echo ""
+  echo "   Or manually add environment variables in Render dashboard:"
+  echo "   https://dashboard.render.com/web/${RENDER_SERVICE_ID:-your-service}/env"
+fi
+
 # Summary
 echo ""
 echo "============================"
@@ -169,14 +234,23 @@ echo "   ✅ Updated .env.example"
 echo "   ✅ Created .env file"
 echo "   ✅ Applied database migrations"
 echo "   ✅ Tested connection"
+if [[ -n "${RENDER_API_KEY:-}" ]] && [[ -n "${RENDER_SERVICE_ID:-}" ]]; then
+  echo "   ✅ Updated Render environment variables"
+fi
 echo ""
 echo "🚀 Next Steps:"
 echo "   1. Commit changes: git add . && git commit -m 'feat: Configure Supabase'"
 echo "   2. Push to GitHub: git push origin main"
 echo "   3. Verify deployment at: https://elevateforhumanity.pages.dev"
+if [[ -n "${RENDER_API_KEY:-}" ]] && [[ -n "${RENDER_SERVICE_ID:-}" ]]; then
+  echo "   4. Check Render deployment: https://dashboard.render.com/"
+fi
 echo ""
 echo "📝 Manual Steps (if needed):"
 echo "   - Add GitHub Secrets: https://github.com/elevateforhumanity/fix2/settings/secrets/actions"
+if [[ -z "${RENDER_API_KEY:-}" ]] || [[ -z "${RENDER_SERVICE_ID:-}" ]]; then
+  echo "   - Add Render env vars: https://dashboard.render.com/web/${RENDER_SERVICE_ID:-your-service}/env"
+fi
 echo "   - Test locally: npm run dev"
 echo ""
 echo "🎉 Your Supabase is ready!"

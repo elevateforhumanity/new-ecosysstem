@@ -1,0 +1,4 @@
+Contact: mailto:security@elevateforhumanity.org
+Expires: 2025-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://lms.elevateforhumanity.org/.well-known/security.txt

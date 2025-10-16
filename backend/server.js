@@ -13,7 +13,6 @@ const PORT = process.env.PORT || 3001;
 
 // Validate required environment variables
 require('./env-guard');
-}
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_KEY;

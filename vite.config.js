@@ -4,6 +4,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  base: '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -11,6 +12,7 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
+    sourcemap: true,
     rollupOptions: {
       output: {
         manualChunks: {
@@ -24,5 +26,6 @@ export default defineConfig({
   server: {
     port: 5173,
     host: '0.0.0.0',
+    strictPort: true,
   },
 });

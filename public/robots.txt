@@ -3,9 +3,9 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://lms.elevateforhumanity.org/sitemap.xml
-Sitemap: https://lms.elevateforhumanity.org/sitemap-pages.xml
-Sitemap: https://lms.elevateforhumanity.org/sitemap-courses.xml
+Sitemap: https://elevateforhumanity.pages.dev/sitemap.xml
+Sitemap: https://elevateforhumanity.pages.dev/sitemaps/sitemap-main.xml
+Sitemap: https://elevateforhumanity.pages.dev/sitemaps/sitemap-programs.xml
 
 # Disallow admin and private areas
 Disallow: /admin/

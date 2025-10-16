@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 
 const DOMAIN = 'https://elevateforhumanity.org';
-const OUTPUT_DIR = path.join(__dirname, '../public');
+const OUTPUT_DIR = path.join(__dirname, '../frontend/public');
 const SITEMAP_DIR = path.join(OUTPUT_DIR, 'sitemaps');
 
 // Ensure directories exist

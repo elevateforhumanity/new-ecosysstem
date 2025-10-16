@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { BookOpen, Play, CheckCircle, Clock, Award, Download, User, Loader2 } from "lucide-react";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 
 export default function LMS() {
   // Route params not currently used; simplifying to static view for now.

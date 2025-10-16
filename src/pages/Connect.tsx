@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Users, Calendar, MapPin, Briefcase, MessageCircle, Star, Clock, ChevronRight } from "lucide-react";
-import { Link, useRoute } from "wouter";
+import { Link, useParams } from "react-router-dom";
 
 export default function Connect() {
-  const [match, params] = useRoute("/connect/:section?");
+  const params = useParams();
   const [activeTab, setActiveTab] = useState(params?.section || "overview");
 
   const upcomingEvents = [

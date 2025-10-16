@@ -1,5 +1,5 @@
 import { Building, Users, GraduationCap, FileCheck, CreditCard } from "lucide-react";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 
 export default function Hub() {
   const sisterSites = [

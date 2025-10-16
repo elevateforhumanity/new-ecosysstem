@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { api } from '../lib/api';
-import { SEO } from '../components/SEO';
+import SEO from '../components/SEO';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 
 export default function SearchResults() {

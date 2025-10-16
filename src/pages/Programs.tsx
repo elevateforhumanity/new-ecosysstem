@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Building, Clock, DollarSign, Users, Award, ChevronRight } from "lucide-react";
-import { Link, useRoute } from "wouter";
+import { Link, useParams } from "react-router-dom";
 
 export default function Programs() {
-  const [match, params] = useRoute("/programs/:slug?");
+  const params = useParams();
   const [selectedCategory, setSelectedCategory] = useState("all");
 
   const programCategories = [

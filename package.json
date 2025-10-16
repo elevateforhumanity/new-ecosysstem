@@ -3,7 +3,7 @@
   "type": "module",
   "version": "2.0.0",
   "engines": {
-    "node": "20.11.1",
+    "node": ">=20.11.1",
     "npm": ">=10.0.0"
   },
   "packageManager": "pnpm@9.7.0",
@@ -17,6 +17,7 @@
     "axios": "^1.12.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "compression": "^1.8.1",
     "express": "^5.1.0",
     "jsdom": "23.2.0",
     "lucide-react": "^0.545.0",
@@ -58,7 +59,8 @@
     "rimraf": "5.0.10",
     "typescript": "^5.9.3",
     "vite-plugin-ssr": "^0.4.142",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "wrangler": "^4.43.0"
   },
   "scripts": {
     "dev": "vite",

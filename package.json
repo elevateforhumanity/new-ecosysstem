@@ -75,7 +75,6 @@
     "start": "node serve-static.cjs",
     "start:backend": "cd backend && npm start",
     "start:frontend": "node serve-static.cjs",
-    "start:frontend": "vite preview --host 0.0.0.0 --port 8080 --strictPort",
     "preview": "vite preview --host 0.0.0.0 --port 8080 --strictPort",
     "test": "vitest run",
     "test:watch": "vitest",

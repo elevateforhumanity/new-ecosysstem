@@ -12,12 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Validate required environment variables
-const requiredEnvVars = ['SUPABASE_URL', 'JWT_SECRET'];
-const missingEnvVars = requiredEnvVars.filter(varName => !process.env[varName]);
-
-if (missingEnvVars.length > 0) {
-  console.error(`❌ ERROR: Missing required environment variables: ${missingEnvVars.join(', ')}`);
-  process.exit(1);
+require('./env-guard');
 }
 
 const SUPABASE_URL = process.env.SUPABASE_URL;

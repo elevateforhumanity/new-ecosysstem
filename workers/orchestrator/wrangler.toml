@@ -1,0 +1,24 @@
+name = "efh-autopilot-orchestrator"
+main = "orchestrator.js"
+compatibility_date = "2024-10-14"
+
+[vars]
+ORCHESTRATOR_NAME = "efh-autopilot-orchestrator"
+
+[[kv_namespaces]]
+binding = "REGISTRY"
+id = "f8ab4f8ad558406eaea36934805125c7"
+
+# R2 bucket for assets (optional, will be created by orchestrator if needed)
+# [[r2_buckets]]
+# binding = "ASSETS"
+# bucket_name = "efh-assets"
+
+# Cron trigger for periodic health checks (every 15 minutes)
+[triggers]
+crons = ["*/15 * * * *"]
+
+# Environment variables (set via: wrangler secret put <NAME>)
+# Required secrets:
+# - CF_API_TOKEN: Cloudflare API token with Workers Scripts:Edit, KV:Edit, R2:Edit, Account:Read
+# - CF_ACCOUNT_ID: Your Cloudflare account ID

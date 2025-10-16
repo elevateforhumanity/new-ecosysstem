@@ -1,0 +1,238 @@
+:root {
+  /* Light theme colors */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8f9fa;
+  --color-bg-tertiary: #f5f5f5;
+  --color-text-primary: #212529;
+  --color-text-secondary: #6c757d;
+  --color-text-tertiary: #999999;
+  --color-border: #dee2e6;
+  --color-border-light: #e9ecef;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-shadow-hover: rgba(0, 0, 0, 0.15);
+  
+  /* Brand colors */
+  --color-primary: #007bff;
+  --color-primary-hover: #0056b3;
+  --color-success: #28a745;
+  --color-danger: #dc3545;
+  --color-warning: #ffc107;
+  --color-info: #17a2b8;
+  
+  /* Component specific */
+  --color-card-bg: #ffffff;
+  --color-card-border: #dee2e6;
+  --color-input-bg: #ffffff;
+  --color-input-border: #ced4da;
+  --color-modal-overlay: rgba(0, 0, 0, 0.5);
+  --color-navbar-bg: #f5f5f5;
+  --color-sidebar-bg: #ffffff;
+  
+  /* Transitions */
+  --transition-theme: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme='dark'],
+.dark-mode {
+  /* Dark theme colors */
+  --color-bg-primary: #1a1a1a;
+  --color-bg-secondary: #2d2d2d;
+  --color-bg-tertiary: #3a3a3a;
+  --color-text-primary: #e9ecef;
+  --color-text-secondary: #adb5bd;
+  --color-text-tertiary: #6c757d;
+  --color-border: #495057;
+  --color-border-light: #3a3a3a;
+  --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-shadow-hover: rgba(0, 0, 0, 0.5);
+  
+  /* Brand colors (slightly adjusted for dark mode) */
+  --color-primary: #4dabf7;
+  --color-primary-hover: #339af0;
+  --color-success: #51cf66;
+  --color-danger: #ff6b6b;
+  --color-warning: #ffd43b;
+  --color-info: #22b8cf;
+  
+  /* Component specific */
+  --color-card-bg: #2d2d2d;
+  --color-card-border: #495057;
+  --color-input-bg: #2d2d2d;
+  --color-input-border: #495057;
+  --color-modal-overlay: rgba(0, 0, 0, 0.7);
+  --color-navbar-bg: #2d2d2d;
+  --color-sidebar-bg: #2d2d2d;
+}
+
+/* Apply theme colors to common elements */
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  transition: var(--transition-theme);
+}
+
+/* Cards */
+.card,
+[class*='card'] {
+  background-color: var(--color-card-bg);
+  border-color: var(--color-card-border);
+  color: var(--color-text-primary);
+  transition: var(--transition-theme);
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  background-color: var(--color-input-bg);
+  border-color: var(--color-input-border);
+  color: var(--color-text-primary);
+  transition: var(--transition-theme);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+/* Buttons */
+button:not([class*='btn-primary']):not([class*='btn-success']):not([class*='btn-danger']) {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+  transition: var(--transition-theme);
+}
+
+/* Links */
+a {
+  color: var(--color-primary);
+  transition: var(--transition-theme);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* Borders */
+hr,
+.border,
+[class*='border'] {
+  border-color: var(--color-border);
+}
+
+/* Shadows */
+.shadow,
+[class*='shadow'] {
+  box-shadow: 0 2px 8px var(--color-shadow);
+}
+
+.shadow:hover,
+[class*='shadow']:hover {
+  box-shadow: 0 4px 12px var(--color-shadow-hover);
+}
+
+/* Code blocks */
+pre,
+code {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+}
+
+/* Tables */
+table {
+  color: var(--color-text-primary);
+}
+
+table thead {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-border);
+}
+
+table tbody tr {
+  border-color: var(--color-border-light);
+}
+
+table tbody tr:hover {
+  background-color: var(--color-bg-tertiary);
+}
+
+/* Modals */
+.modal-overlay {
+  background-color: var(--color-modal-overlay);
+}
+
+.modal-content {
+  background-color: var(--color-card-bg);
+  color: var(--color-text-primary);
+}
+
+/* Navigation */
+nav {
+  background-color: var(--color-navbar-bg);
+  border-color: var(--color-border);
+}
+
+/* Sidebar */
+aside,
+.sidebar {
+  background-color: var(--color-sidebar-bg);
+  border-color: var(--color-border);
+}
+
+/* Scrollbar (webkit browsers) */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
+
+/* Dark mode specific adjustments */
+.dark-mode img {
+  opacity: 0.9;
+}
+
+.dark-mode img:hover {
+  opacity: 1;
+}
+
+/* Ensure proper contrast for accessibility */
+.dark-mode .text-muted {
+  color: var(--color-text-secondary) !important;
+}
+
+.dark-mode .bg-light {
+  background-color: var(--color-bg-secondary) !important;
+}
+
+.dark-mode .bg-white {
+  background-color: var(--color-bg-primary) !important;
+}
+
+/* Animation for theme transitions */
+* {
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
+/* Disable transitions for elements that shouldn't animate */
+*:focus,
+*:active,
+input,
+textarea,
+select {
+  transition-duration: 0s;
+}

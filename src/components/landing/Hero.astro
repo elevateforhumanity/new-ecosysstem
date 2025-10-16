@@ -1,0 +1,90 @@
+---
+export interface Props {
+  headline: string;
+  subheadline: string;
+  stats: Array<{
+    number: string;
+    label: string;
+  }>;
+}
+
+const { headline, subheadline, stats } = Astro.props;
+---
+
+<section class="relative bg-gradient-to-br from-primary-700 to-primary-900 text-white">
+  <div class="absolute inset-0 bg-black opacity-10"></div>
+  
+  <div class="relative max-w-7xl mx-auto px-4 py-20 lg:py-32">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Content -->
+      <div>
+        <div class="mb-6">
+          <span class="inline-block bg-secondary-500 text-white px-4 py-2 rounded-full text-sm font-medium mb-4">
+            WIOA Approved Provider
+          </span>
+        </div>
+        
+        <h1 class="text-4xl lg:text-6xl font-bold leading-tight mb-6">
+          {headline}
+        </h1>
+        
+        <p class="text-xl lg:text-2xl text-blue-100 mb-8 leading-relaxed">
+          {subheadline}
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 mb-8">
+          <a 
+            href="/eligibility-check.html" 
+            class="bg-secondary-500 hover:bg-secondary-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200 text-center"
+          >
+            Check Your Eligibility
+          </a>
+          <a 
+            href="/programs.html" 
+            class="border-2 border-white text-white hover:bg-white hover:text-primary-700 px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200 text-center"
+          >
+            View Programs
+          </a>
+        </div>
+        
+        <div class="flex items-center space-x-6 text-sm">
+          <div class="flex items-center">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+            100% Free for Eligible Residents
+          </div>
+          <div class="flex items-center">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+            Veterans Priority Services
+          </div>
+        </div>
+      </div>
+      
+      <!-- Stats Card -->
+      <div class="bg-white text-gray-900 rounded-2xl p-8 shadow-2xl">
+        <h3 class="text-2xl font-bold mb-6 text-center">Program Results</h3>
+        <div class="grid grid-cols-1 gap-6">
+          {stats.map((stat) => (
+            <div class="text-center border-b border-gray-200 last:border-b-0 pb-4 last:pb-0">
+              <div class="text-3xl lg:text-4xl font-bold text-primary-600 mb-2">
+                {stat.number}
+              </div>
+              <div class="text-gray-600 font-medium">
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div class="mt-6 pt-6 border-t border-gray-200">
+          <p class="text-sm text-gray-500 text-center">
+            Data from 2019-2024 program graduates
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

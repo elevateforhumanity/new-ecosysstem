@@ -1,0 +1,37 @@
+---
+import LandingLayout from '../layouts/LandingLayout.astro';
+import Navigation from '../components/landing/Navigation.astro';
+import Hero from '../components/landing/Hero.astro';
+import Programs from '../components/landing/Programs.astro';
+import Testimonials from '../components/landing/Testimonials.astro';
+import SocialProof from '../components/landing/SocialProof.astro';
+import CTA from '../components/landing/CTA.astro';
+
+const stats = [
+  { number: "89%", label: "Job Placement Rate" },
+  { number: "$18.50", label: "Average Starting Wage" },
+  { number: "3,247", label: "Graduates Since 2019" }
+];
+---
+
+<LandingLayout 
+  title="Elevate for Humanity | WIOA Workforce Development Programs"
+  description="Transform your career with WIOA-approved workforce development programs. Free training in healthcare, technology, and skilled trades. Veteran priority services available."
+  canonical="https://elevateforhumanity.org/"
+>
+  <Navigation />
+  
+  <Hero 
+    headline="Ohio's #1 WIOA Training Provider"
+    subheadline="3,247 graduates placed in careers since 2019"
+    stats={stats}
+  />
+  
+  <Programs />
+  
+  <Testimonials />
+  
+  <SocialProof />
+  
+  <CTA />
+</LandingLayout>

@@ -1,0 +1,10 @@
+name = "efh-autopilot-monitor"
+main = "src/worker.ts"
+compatibility_date = "2024-10-01"
+
+[triggers]
+crons = ["*/5 * * * *"]  # every 5 minutes
+
+[vars]
+TARGET_URL = "https://5173--0199d93c-8734-75a0-bd32-135ce9e5e10d.us-east-1-01.gitpod.dev"
+SLACK_WEBHOOK = "https://hooks.slack.com/services/CHANGE_ME"

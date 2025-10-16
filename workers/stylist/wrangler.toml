@@ -1,0 +1,18 @@
+name = "efh-ai-stylist"
+main = "ai-stylist.js"
+compatibility_date = "2024-10-14"
+
+# Workers AI binding
+[ai]
+binding = "AI"
+
+# Environment variables (set via: wrangler secret put <NAME>)
+# Required secrets:
+# - CF_ACCOUNT_ID: Your Cloudflare account ID
+# - CF_API_TOKEN: Your Cloudflare API token
+
+[env.production]
+name = "efh-ai-stylist"
+
+[env.staging]
+name = "efh-ai-stylist-staging"

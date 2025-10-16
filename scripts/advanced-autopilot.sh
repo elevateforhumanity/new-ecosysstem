@@ -213,7 +213,7 @@ while [ $LOOP_COUNT -lt $MAX_LOOPS ]; do
     # 14. Test Deployment Configuration
     log_info "Testing deployment configuration..."
     
-    if [ -f "render.yaml" ] || [ -f "vercel.json" ] || [ -f "netlify.toml" ]; then
+    if [ -f "render.yaml" ]; then
         log_success "Deployment configuration found"
     else
         log_warning "No deployment configuration found"

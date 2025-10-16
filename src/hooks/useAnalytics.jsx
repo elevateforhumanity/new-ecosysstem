@@ -1,9 +1,14 @@
 import { useEffect } from 'react';
-import { trackPageView } from '../utils/analytics';
 
 export const useAnalytics = (pageName) => {
   useEffect(() => {
-    trackPageView(window.location.pathname, pageName);
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'page_view', {
+        page_title: pageName,
+        page_location: window.location.href,
+        page_path: window.location.pathname,
+      });
+    }
   }, [pageName]);
 };
 

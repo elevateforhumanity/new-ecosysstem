@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { SEO } from "../components/SEO";
+import { SEO } from "../lib/seo/SEO";
 
 export default function MainLanding() {
   const [currentFeature, setCurrentFeature] = useState(0);

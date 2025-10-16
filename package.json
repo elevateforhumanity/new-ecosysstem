@@ -3,25 +3,21 @@
   "type": "module",
   "version": "2.0.0",
   "engines": {
-    "node": "20.11.1",
+    "node": ">=20.11.1",
     "npm": ">=10.0.0"
   },
   "packageManager": "pnpm@9.7.0",
-  "overrides": {
-    "@sentry/react": {
-      "react": "19.1.1"
-    }
-  },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@sentry/react": "^7.99.0",
     "@sentry/tracing": "^7.99.0",
     "@supabase/supabase-js": "2.57.4",
-    "@testing-library/dom": "^10.4.1",
     "@vitejs/plugin-react": "4.7.0",
     "autoprefixer": "^10.4.21",
+    "axios": "^1.12.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "compression": "^1.8.1",
     "express": "^5.1.0",
     "jsdom": "23.2.0",
     "lucide-react": "^0.545.0",
@@ -33,15 +29,13 @@
     "react-helmet-async": "^2.0.5",
     "react-hook-form": "^7.64.0",
     "react-router-dom": "6.30.1",
-    "recharts": "^3.2.1",
     "rollup-plugin-visualizer": "6.0.3",
     "slugify": "1.6.6",
     "socket.io-client": "^4.8.1",
     "tailwind-merge": "^3.3.1",
-    "tailwindcss": "~3.4.18",
+    "tailwindcss": "^3.4.18",
     "tailwindcss-animate": "^1.0.7",
     "vite": "6.3.6",
-    "wouter": "^3.7.1",
     "zod": "^4.1.11",
     "zustand": "^5.0.8"
   },
@@ -56,27 +50,25 @@
     "@typescript-eslint/parser": "^8.46.1",
     "@vitest/coverage-v8": "^3.2.4",
     "@vitest/ui": "^3.2.4",
-    "axios": "^1.12.2",
     "eslint": "^9.37.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.0",
     "happy-dom": "^20.0.0",
     "jest": "^29.7.0",
     "js-yaml": "^4.1.0",
-    "playwright": "^1.56.0",
     "rimraf": "5.0.10",
-    "terser": "^5.44.0",
     "typescript": "^5.9.3",
-    "vitest": "^3.2.4"
+    "vite-plugin-ssr": "^0.4.142",
+    "vitest": "^3.2.4",
+    "wrangler": "^4.43.0"
   },
   "scripts": {
     "dev": "vite",
     "dev:api": "node server/index.js",
     "dev:full": "concurrently -k -n VITE,API -c green,cyan \"./scripts/start-vite.sh\" \"./scripts/start-api.sh\"",
     "autopilot": "./scripts/autopilot.sh",
-    "build": "vite build",
-    "postbuild": "node scripts/generate-sitemap-complete.mjs && node scripts/robots.mjs",
-    "build:old": "vite build",
+    "build": "vite build && node scripts/inject-meta.js",
+    "build:base": "vite build",
     "start": "echo 'This is a static site. Use npm run preview to test locally.'",
     "start:frontend": "vite preview --host 0.0.0.0 --port 8080 --strictPort",
     "preview": "vite preview --host 0.0.0.0 --port 8080 --strictPort",
@@ -106,16 +98,9 @@
     "deploy:cloudflare": "bash cloudflare-deploy.sh",
     "deploy:auto": "npm run autopilot:advanced && npm run deploy:cloudflare",
     "compliance:check": "node scripts/compliance-check.js",
-    "sitemap:generate": "node scripts/generate-sitemap-complete.mjs",
-    "sitemap:verify": "node scripts/verify-sitemaps.mjs",
-    "sitemap:test": "node scripts/test-crawlability.mjs",
+    "sitemap:generate": "node scripts/generate-sitemap.cjs",
     "cf:deploy": "wrangler pages deploy dist --project-name=elevateforhumanity",
     "cf:dev": "wrangler pages dev dist",
-    "postinstall": "echo '🤖 Advanced Autopilot Ready' && echo 'Run: npm run autopilot:always'",
-    "build:seo": "npm run build",
-    "social:setup": "node scripts/setup-social-oauth.js",
-    "social:test": "node scripts/social-media-automation.js test",
-    "social:start": "node scripts/social-media-automation.js start",
-    "social:report": "node scripts/social-media-automation.js report"
+    "postinstall": "echo '🤖 Advanced Autopilot Ready' && echo 'Run: npm run autopilot:always'"
   }
 }

@@ -31,38 +31,37 @@ test('renders sitemap page with proper title', () => {
 test('displays navigation sections', () => {
   render(<SitemapWithProviders />);
   
-  // Check for key links instead of section headers
-  expect(screen.getByText('Home')).toBeInTheDocument();
-  expect(screen.getByText('About')).toBeInTheDocument();
-  expect(screen.getByText('Course Library')).toBeInTheDocument();
-  expect(screen.getByText('Student Portal')).toBeInTheDocument();
+  expect(screen.getAllByText('Main Navigation')[0]).toBeInTheDocument();
+  expect(screen.getAllByText('Student Resources')[0]).toBeInTheDocument();
+  expect(screen.getAllByText('Instructor & Admin')[0]).toBeInTheDocument();
+  expect(screen.getAllByText('Legal & Compliance')[0]).toBeInTheDocument();
 });
 
 test('contains key navigation links', () => {
   render(<SitemapWithProviders />);
   
-  // Test key navigation links
-  const homeLinks = screen.getAllByRole('link', { name: 'Home' });
+  // Test key navigation links using getAllByRole and checking first instance
+  const homeLinks = screen.getAllByRole('link', { name: /🏠 Home/ });
   expect(homeLinks[0]).toHaveAttribute('href', '/');
   
-  const courseLinks = screen.getAllByRole('link', { name: 'Course Library' });
+  const courseLinks = screen.getAllByRole('link', { name: /📚 Course Library/ });
   expect(courseLinks[0]).toHaveAttribute('href', '/courses');
   
-  const studentLinks = screen.getAllByRole('link', { name: 'Student Portal' });
+  const studentLinks = screen.getAllByRole('link', { name: /👨‍🎓 Student Portal/ });
   expect(studentLinks[0]).toHaveAttribute('href', '/student');
 });
 
-test('displays legal and policy links', () => {
+test('displays quick action buttons', () => {
   render(<SitemapWithProviders />);
   
-  const privacyLinks = screen.getAllByRole('link', { name: 'Privacy Policy' });
-  expect(privacyLinks[0]).toHaveAttribute('href', '/privacy-policy');
+  const enrollLinks = screen.getAllByRole('link', { name: /💳 Enroll & Pay/ });
+  expect(enrollLinks[0]).toHaveAttribute('href', '/pay');
   
-  const refundLinks = screen.getAllByRole('link', { name: 'Refund Policy' });
-  expect(refundLinks[0]).toHaveAttribute('href', '/refund-policy');
+  const partnerLinks = screen.getAllByRole('link', { name: /🤝 Partner Portal/ });
+  expect(partnerLinks[0]).toHaveAttribute('href', '/partners');
   
-  const termsLinks = screen.getAllByRole('link', { name: 'Terms of Service' });
-  expect(termsLinks[0]).toHaveAttribute('href', '/terms-of-service');
+  const accountLinks = screen.getAllByRole('link', { name: /👤 My Account/ });
+  expect(accountLinks[0]).toHaveAttribute('href', '/account');
 });
 
 test('includes handbook image with proper alt text', () => {
@@ -76,7 +75,7 @@ test('includes handbook image with proper alt text', () => {
 test('has proper SEO structure for search engines', () => {
   render(<SitemapWithProviders />);
 
-  // Verify the component renders the main content
+  // Verify the component renders the main content that will be enhanced by Helmet
   expect(screen.getAllByRole('heading', { level: 1 })[0]).toBeInTheDocument();
-  expect(screen.getAllByRole('heading', { level: 1 })[0]).toHaveTextContent('Site Map');
+  expect(screen.getAllByText(/Navigate through all sections/)[0]).toBeInTheDocument();
 });

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 
 interface DoNotContactEntry {
@@ -45,7 +45,7 @@ export default function DoNotContactPanel() {
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    const { error } = await supabase.rpc('add_to_do_not_contact', {
+    const { data, error } = await supabase.rpc('add_to_do_not_contact', {
       p_email: newEntry.email,
       p_reason: newEntry.reason,
       p_reason_details: newEntry.reason_details || null,
@@ -67,7 +67,7 @@ export default function DoNotContactPanel() {
       return;
     }
 
-    const { error } = await supabase.rpc('remove_from_do_not_contact', {
+    const { data, error } = await supabase.rpc('remove_from_do_not_contact', {
       p_email: email,
     });
 

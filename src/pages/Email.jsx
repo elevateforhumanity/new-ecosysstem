@@ -21,6 +21,7 @@ export function Email() {
   };
 
   const sendEmail = () => {
+    console.log('Sending email:', newEmail);
     setComposing(false);
     setNewEmail({ to: '', subject: '', body: '' });
   };

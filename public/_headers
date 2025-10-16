@@ -1,20 +1,20 @@
+# Security Headers
 /*
-  # Security Headers
-  X-Frame-Options: SAMEORIGIN
+  X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
-  
-  # Content Security Policy - Optimized for Cloudflare Pages + CDNs
-  Content-Security-Policy: default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://www.googletagmanager.com https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://api.stripe.com https://*.supabase.co wss://*.supabase.co https://www.google-analytics.com https: wss:; frame-src 'self' https://js.stripe.com https://hooks.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'
-  
-  # HSTS
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  
-  # Cache Control
-  Cache-Control: public, max-age=0, must-revalidate
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
 
+# CORS Headers - Allow Supabase and Render API
+/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS, PATCH
+  Access-Control-Allow-Headers: Content-Type, Authorization, apikey, X-Client-Info, X-Supabase-Auth
+  Access-Control-Allow-Credentials: true
+
+# Cache static assets
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
@@ -24,25 +24,22 @@
 /*.css
   Cache-Control: public, max-age=31536000, immutable
 
-/*.png
-  Cache-Control: public, max-age=31536000, immutable
-
-/*.jpg
-  Cache-Control: public, max-age=31536000, immutable
-
-/*.jpeg
-  Cache-Control: public, max-age=31536000, immutable
-
-/*.svg
+/*.woff2
   Cache-Control: public, max-age=31536000, immutable
 
 /*.woff
   Cache-Control: public, max-age=31536000, immutable
 
-/*.woff2
+/*.ttf
   Cache-Control: public, max-age=31536000, immutable
 
+# Don't cache HTML files
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# API routes should not be cached
 /api/*
-  Cache-Control: no-store, no-cache, must-revalidate
-  Pragma: no-cache
-  Expires: 0
+  Cache-Control: no-cache, no-store, must-revalidate

@@ -1,40 +1,28 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
 
-const gpURL = process.env.GITPOD_WORKSPACE_URL || ''
-const gpHost = gpURL ? new URL(gpURL).host : undefined
-const gpPortHost = gpHost ? `5173--${gpHost}` : undefined
-
-export default defineConfig(({ mode }) => ({
+export default defineConfig({
   plugins: [react()],
-  base: '/',
-  publicDir: 'public',
-  build: {
-    outDir: 'dist',
-    emptyOutDir: true,
-    sourcemap: true,
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: mode === 'production',
-        drop_debugger: true,
-      },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
     },
   },
+  build: {
+    outDir: 'dist',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'supabase': ['@supabase/supabase-js'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
+  },
   server: {
-    host: true,
     port: 5173,
-    strictPort: true,
-    cors: true,
-    allowedHosts: gpHost ? [/\.gitpod\.dev$/, gpHost, gpPortHost] : true,
-    hmr: gpPortHost ? { host: gpPortHost, protocol: 'wss', clientPort: 443 } : undefined,
-    origin: gpPortHost ? `https://${gpPortHost}` : undefined,
-    fs: {
-      deny: ['**/data/**', '**/docs/**', '**/dist/**']
-    }
+    host: '0.0.0.0',
   },
-  preview: {
-    port: 4173,
-    allowedHosts: [/\.gitpod\.dev$/],
-  },
-}))
+});

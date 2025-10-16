@@ -1,5 +1,5 @@
 import React from "react";
-import { SEO } from "../components/SEO";
+import { SEO } from "../lib/seo/SEO";
 
 export default function DonatePage() {
   return (

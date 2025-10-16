@@ -14,56 +14,51 @@ export function Slides() {
   }, []);
 
   const loadPresentation = async () => {
-    try {
-      // Mock data for demo
-      const mockPresentation = {
-        id: 'pres_1',
-        title: 'Untitled Presentation',
-        theme: {
-          primaryColor: '#4285f4',
-          backgroundColor: '#ffffff',
-          fontFamily: 'Arial'
-        },
-        slidesData: [
-          {
-            id: 'slide1',
-            layout: 'title',
-            elements: [
-              {
-                id: 'title',
-                type: 'text',
-                content: 'Welcome to Elevate Slides',
-                x: 50,
-                y: 200,
-                width: 700,
-                height: 100,
-                fontSize: 48,
-                fontWeight: 'bold',
-                textAlign: 'center',
-                color: '#000000'
-              },
-              {
-                id: 'subtitle',
-                type: 'text',
-                content: 'Create beautiful presentations',
-                x: 50,
-                y: 320,
-                width: 700,
-                height: 60,
-                fontSize: 24,
-                textAlign: 'center',
-                color: '#666666'
-              }
-            ]
-          }
-        ]
-      };
-      
-      setPresentation(mockPresentation);
-    } catch (error) {
-      console.error('Failed to load presentation:', error);
-      alert('Failed to load presentation. Please refresh the page.');
-    }
+    // Mock data for demo
+    const mockPresentation = {
+      id: 'pres_1',
+      title: 'Untitled Presentation',
+      theme: {
+        primaryColor: '#4285f4',
+        backgroundColor: '#ffffff',
+        fontFamily: 'Arial'
+      },
+      slidesData: [
+        {
+          id: 'slide1',
+          layout: 'title',
+          elements: [
+            {
+              id: 'title',
+              type: 'text',
+              content: 'Welcome to Elevate Slides',
+              x: 50,
+              y: 200,
+              width: 700,
+              height: 100,
+              fontSize: 48,
+              fontWeight: 'bold',
+              textAlign: 'center',
+              color: '#000000'
+            },
+            {
+              id: 'subtitle',
+              type: 'text',
+              content: 'Create beautiful presentations',
+              x: 50,
+              y: 320,
+              width: 700,
+              height: 60,
+              fontSize: 24,
+              textAlign: 'center',
+              color: '#666666'
+            }
+          ]
+        }
+      ]
+    };
+    
+    setPresentation(mockPresentation);
   };
 
   const addSlide = () => {

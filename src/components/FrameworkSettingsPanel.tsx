@@ -4,7 +4,7 @@
   See LICENSE file for details.
 */
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { frameworkSettings } from '../lib/frameworkSettings';
 
 export function FrameworkSettingsPanel() {

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { CreditCard, DollarSign, FileText, CheckCircle, AlertCircle, Clock, Receipt } from "lucide-react";
-import { Link, useRoute } from "wouter";
+import { Link, useParams } from "react-router-dom";
 
 export default function Pay() {
-  const [match, params] = useRoute("/pay/:action?");
+  const params = useParams();
   const [selectedProgram, setSelectedProgram] = useState(null);
 
   const programs = [

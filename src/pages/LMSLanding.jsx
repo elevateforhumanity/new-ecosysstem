@@ -6,7 +6,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { SEO } from "../components/SEO";
+import { SEO } from "../lib/seo/SEO";
 
 export default function LMSLanding() {
   const features = [

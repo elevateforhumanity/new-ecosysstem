@@ -49,29 +49,15 @@ export function NotebookLM() {
     if (!question.trim()) return;
     setLoading(true);
 
-    try {
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          setAnswer({
-            question,
-            answer: `Based on your sources, here's what I found:\n\n${question} is an important topic. According to Source 1, there are several key considerations...\n\nKey points:\n1. First important point\n2. Second important point\n3. Third important point\n\nWould you like me to elaborate on any of these points?`,
-            sources: sources.slice(0, 3).map(s => ({ title: s.title, citation: `${s.title}, p.1` })),
-            timestamp: new Date()
-          });
-          resolve();
-        }, 1500);
-      });
-    } catch (error) {
-      console.error('Question processing error:', error);
+    setTimeout(() => {
       setAnswer({
         question,
-        answer: 'Failed to process your question. Please try again.',
-        sources: [],
+        answer: `Based on your sources, here's what I found:\n\n${question} is an important topic. According to Source 1, there are several key considerations...\n\nKey points:\n1. First important point\n2. Second important point\n3. Third important point\n\nWould you like me to elaborate on any of these points?`,
+        sources: sources.slice(0, 3).map(s => ({ title: s.title, citation: `${s.title}, p.1` })),
         timestamp: new Date()
       });
-    } finally {
       setLoading(false);
-    }
+    }, 1500);
   };
 
   return (

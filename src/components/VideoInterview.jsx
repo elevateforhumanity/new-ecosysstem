@@ -109,6 +109,7 @@ export default function VideoInterview() {
       });
       
       if (response.ok) {
+        console.log('Video uploaded successfully');
       }
     } catch (error) {
       console.error('Upload error:', error);

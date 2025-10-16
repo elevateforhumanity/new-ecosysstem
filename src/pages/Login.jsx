@@ -29,6 +29,7 @@ export default function Login() {
       return;
     }
     
+    console.log("Login attempt:", formData);
   };
 
   return (

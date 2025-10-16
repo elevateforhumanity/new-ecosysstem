@@ -3,136 +3,68 @@
   Commercial License. No resale, sublicensing, or redistribution allowed.
   See LICENSE file for details.
 */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AppLayout from "../layouts/AppLayout";
-import { supabase } from "../lib/supabase";
 
 export default function Certificates() {
   const [filter, setFilter] = useState("all");
-  const [certificates, setCertificates] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [pagination, setPagination] = useState({
-    page: 1,
-    limit: 12,
-    total: 0,
-    totalPages: 0
+
+  const certificates = [
+    {
+      id: 1,
+      courseName: "Introduction to Web Development",
+      instructor: "Dr. Sarah Johnson",
+      completionDate: "2024-12-15",
+      issueDate: "2024-12-16",
+      certificateId: "CERT-2024-001234",
+      grade: "95%",
+      status: "issued",
+      skills: ["HTML", "CSS", "JavaScript"],
+    },
+    {
+      id: 2,
+      courseName: "Data Science Fundamentals",
+      instructor: "Prof. Michael Chen",
+      completionDate: "2024-11-28",
+      issueDate: "2024-11-29",
+      certificateId: "CERT-2024-001189",
+      grade: "88%",
+      status: "issued",
+      skills: ["Python", "Data Analysis", "Statistics"],
+    },
+    {
+      id: 3,
+      courseName: "Digital Marketing Essentials",
+      instructor: "Emily Rodriguez",
+      completionDate: "2024-10-10",
+      issueDate: "2024-10-11",
+      certificateId: "CERT-2024-000987",
+      grade: "92%",
+      status: "issued",
+      skills: ["SEO", "Social Media", "Content Marketing"],
+    },
+    {
+      id: 4,
+      courseName: "Project Management Professional",
+      instructor: "James Wilson",
+      completionDate: null,
+      issueDate: null,
+      certificateId: null,
+      grade: "In Progress",
+      status: "in-progress",
+      progress: 65,
+      skills: ["Agile", "Scrum", "Leadership"],
+    },
+  ];
+
+  const filteredCertificates = certificates.filter((cert) => {
+    if (filter === "all") return true;
+    return cert.status === filter;
   });
-  const [selectedCertificate, setSelectedCertificate] = useState(null);
 
-  useEffect(() => {
-    fetchCertificates();
-  }, [pagination.page]);
-
-  const fetchCertificates = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      if (!session) {
-        window.location.href = '/login';
-        return;
-      }
-
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-      const response = await fetch(
-        `${apiUrl}/api/v1/certificates?page=${pagination.page}&limit=${pagination.limit}`,
-        {
-          headers: {
-            'Authorization': `Bearer ${session.access_token}`,
-            'Content-Type': 'application/json'
-          }
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch certificates');
-      }
-
-      const result = await response.json();
-      
-      if (result.success) {
-        setCertificates(result.data || []);
-        setPagination(result.pagination);
-      } else {
-        throw new Error(result.error || 'Failed to fetch certificates');
-      }
-    } catch (err) {
-      console.error('Error fetching certificates:', err);
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const downloadCertificate = async (certificate) => {
-    // In production, this would generate/download a PDF
-    alert(`Downloading certificate: ${certificate.certificate_number}`);
-  };
-
-  const shareCertificate = async (certificate) => {
-    const shareUrl = `${window.location.origin}/certificates/${certificate.id}`;
-    
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: `Certificate - ${certificate.courses.title}`,
-          text: `I earned a certificate for completing ${certificate.courses.title}!`,
-          url: shareUrl
-        });
-      } catch (error) {
-        console.log('Error sharing:', error);
-      }
-    } else {
-      // Fallback: copy to clipboard
-      navigator.clipboard.writeText(shareUrl);
-      alert('Certificate link copied to clipboard!');
-    }
-  };
-
-  const formatDate = (dateString) => {
-    if (!dateString) return 'N/A';
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
-
-  const filteredCertificates = certificates;
-  const issuedCount = certificates.length;
-  const inProgressCount = 0;
-
-  if (loading) {
-    return (
-      <AppLayout>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: 32, textAlign: 'center' }}>
-          <div style={{ fontSize: 18, color: '#666' }}>Loading certificates...</div>
-        </div>
-      </AppLayout>
-    );
-  }
-
-  if (error) {
-    return (
-      <AppLayout>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: 32 }}>
-          <div style={{ 
-            backgroundColor: '#fee', 
-            padding: 20, 
-            borderRadius: 8, 
-            border: '1px solid #fcc',
-            color: '#c00'
-          }}>
-            Error: {error}
-          </div>
-        </div>
-      </AppLayout>
-    );
-  }
+  const issuedCount = certificates.filter((c) => c.status === "issued").length;
+  const inProgressCount = certificates.filter((c) => c.status === "in-progress").length;
 
   return (
     <AppLayout>
@@ -282,25 +214,25 @@ export default function Certificates() {
                   {/* Course Name & Status */}
                   <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
                     <h3 style={{ fontSize: 20, fontWeight: 600, margin: 0 }}>
-                      {cert.courses?.title || 'Unknown Course'}
+                      {cert.courseName}
                     </h3>
                     <span
                       style={{
                         padding: "4px 12px",
-                        backgroundColor: "#d4edda",
-                        color: "#155724",
+                        backgroundColor: cert.status === "issued" ? "#d4edda" : "#fff3cd",
+                        color: cert.status === "issued" ? "#155724" : "#856404",
                         borderRadius: 12,
                         fontSize: 12,
                         fontWeight: 500,
                       }}
                     >
-                      Issued
+                      {cert.status === "issued" ? "Issued" : "In Progress"}
                     </span>
                   </div>
 
-                  {/* Description */}
+                  {/* Instructor */}
                   <p style={{ fontSize: 14, color: "#666", marginBottom: 12 }}>
-                    {cert.courses?.description || ''}
+                    Instructor: {cert.instructor}
                   </p>
 
                   {/* Details Grid */}
@@ -312,38 +244,68 @@ export default function Certificates() {
                       marginBottom: 16,
                     }}
                   >
-                    <div>
-                      <div style={{ fontSize: 12, color: "#999", marginBottom: 4 }}>
-                        Issue Date
-                      </div>
-                      <div style={{ fontSize: 14, fontWeight: 500 }}>
-                        {formatDate(cert.issued_at)}
-                      </div>
-                    </div>
-
-                    <div>
-                      <div style={{ fontSize: 12, color: "#999", marginBottom: 4 }}>
-                        Certificate ID
-                      </div>
-                      <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "monospace" }}>
-                        {cert.certificate_number}
-                      </div>
-                    </div>
-
-                    {cert.expires_at && (
+                    {cert.completionDate && (
                       <div>
                         <div style={{ fontSize: 12, color: "#999", marginBottom: 4 }}>
-                          Expires
+                          Completion Date
                         </div>
                         <div style={{ fontSize: 14, fontWeight: 500 }}>
-                          {formatDate(cert.expires_at)}
+                          {new Date(cert.completionDate).toLocaleDateString()}
                         </div>
                       </div>
                     )}
+
+                    {cert.certificateId && (
+                      <div>
+                        <div style={{ fontSize: 12, color: "#999", marginBottom: 4 }}>
+                          Certificate ID
+                        </div>
+                        <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "monospace" }}>
+                          {cert.certificateId}
+                        </div>
+                      </div>
+                    )}
+
+                    <div>
+                      <div style={{ fontSize: 12, color: "#999", marginBottom: 4 }}>
+                        Grade
+                      </div>
+                      <div style={{ fontSize: 14, fontWeight: 500 }}>
+                        {cert.grade}
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Skills - removed as not in API response */}
-                  {false && (
+                  {/* Progress Bar (for in-progress courses) */}
+                  {cert.status === "in-progress" && cert.progress !== undefined && (
+                    <div style={{ marginBottom: 16 }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+                        <span style={{ fontSize: 12, color: "#666" }}>Progress</span>
+                        <span style={{ fontSize: 12, fontWeight: 600 }}>{cert.progress}%</span>
+                      </div>
+                      <div
+                        style={{
+                          width: "100%",
+                          height: 8,
+                          backgroundColor: "#e0e0e0",
+                          borderRadius: 4,
+                          overflow: "hidden",
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: `${cert.progress}%`,
+                            height: "100%",
+                            backgroundColor: "#007bff",
+                            transition: "width 0.3s",
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Skills */}
+                  {cert.skills && cert.skills.length > 0 && (
                     <div>
                       <div style={{ fontSize: 12, color: "#999", marginBottom: 8 }}>
                         Skills Covered
@@ -389,65 +351,62 @@ export default function Certificates() {
               </div>
 
               {/* Actions */}
-              <div
-                style={{
-                  display: "flex",
-                  gap: 12,
-                  marginTop: 20,
-                  paddingTop: 20,
-                  borderTop: "1px solid #f0f0f0",
-                }}
-              >
-                <button
-                  onClick={() => downloadCertificate(cert)}
+              {cert.status === "issued" && (
+                <div
                   style={{
-                    padding: "8px 20px",
-                    backgroundColor: "#007bff",
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: 6,
-                    fontSize: 14,
-                    fontWeight: 500,
-                    cursor: "pointer",
+                    display: "flex",
+                    gap: 12,
+                    marginTop: 20,
+                    paddingTop: 20,
+                    borderTop: "1px solid #f0f0f0",
                   }}
                 >
-                  Download PDF
-                </button>
-                <button
-                  onClick={() => shareCertificate(cert)}
-                  style={{
-                    padding: "8px 20px",
-                    backgroundColor: "#fff",
-                    color: "#007bff",
-                    border: "1px solid #007bff",
-                    borderRadius: 6,
-                    fontSize: 14,
-                    fontWeight: 500,
-                    cursor: "pointer",
-                  }}
-                >
-                  Share
-                </button>
-                <Link
-                  to={`/verify-certificate?id=${cert.id}`}
-                  style={{
-                    padding: "8px 20px",
-                    backgroundColor: "#fff",
-                    color: "#666",
-                    border: "1px solid #ddd",
-                    borderRadius: 6,
-                    fontSize: 14,
-                    fontWeight: 500,
-                    cursor: "pointer",
-                    textDecoration: 'none',
-                    display: 'inline-block'
-                  }}
-                >
-                  Verify Certificate
-                </Link>
-              </div>
+                  <button
+                    style={{
+                      padding: "8px 20px",
+                      backgroundColor: "#007bff",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: 6,
+                      fontSize: 14,
+                      fontWeight: 500,
+                      cursor: "pointer",
+                    }}
+                  >
+                    Download PDF
+                  </button>
+                  <button
+                    style={{
+                      padding: "8px 20px",
+                      backgroundColor: "#fff",
+                      color: "#007bff",
+                      border: "1px solid #007bff",
+                      borderRadius: 6,
+                      fontSize: 14,
+                      fontWeight: 500,
+                      cursor: "pointer",
+                    }}
+                  >
+                    Share on LinkedIn
+                  </button>
+                  <button
+                    style={{
+                      padding: "8px 20px",
+                      backgroundColor: "#fff",
+                      color: "#666",
+                      border: "1px solid #ddd",
+                      borderRadius: 6,
+                      fontSize: 14,
+                      fontWeight: 500,
+                      cursor: "pointer",
+                    }}
+                  >
+                    Verify Certificate
+                  </button>
+                </div>
+              )}
 
-              {false && (
+              {cert.status === "in-progress" && (
                 <div
                   style={{
                     marginTop: 20,
@@ -477,53 +436,6 @@ export default function Certificates() {
           ))}
         </div>
 
-        {/* Pagination */}
-        {pagination.totalPages > 1 && (
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'center', 
-            alignItems: 'center',
-            gap: 12,
-            marginTop: 32 
-          }}>
-            <button
-              onClick={() => setPagination(prev => ({ ...prev, page: prev.page - 1 }))}
-              disabled={pagination.page === 1}
-              style={{
-                padding: "8px 16px",
-                backgroundColor: pagination.page === 1 ? "#f0f0f0" : "#007bff",
-                color: pagination.page === 1 ? "#999" : "#fff",
-                border: "none",
-                borderRadius: 6,
-                fontSize: 14,
-                fontWeight: 500,
-                cursor: pagination.page === 1 ? "not-allowed" : "pointer",
-              }}
-            >
-              Previous
-            </button>
-            <span style={{ fontSize: 14, color: '#666' }}>
-              Page {pagination.page} of {pagination.totalPages}
-            </span>
-            <button
-              onClick={() => setPagination(prev => ({ ...prev, page: prev.page + 1 }))}
-              disabled={pagination.page === pagination.totalPages}
-              style={{
-                padding: "8px 16px",
-                backgroundColor: pagination.page === pagination.totalPages ? "#f0f0f0" : "#007bff",
-                color: pagination.page === pagination.totalPages ? "#999" : "#fff",
-                border: "none",
-                borderRadius: 6,
-                fontSize: 14,
-                fontWeight: 500,
-                cursor: pagination.page === pagination.totalPages ? "not-allowed" : "pointer",
-              }}
-            >
-              Next
-            </button>
-          </div>
-        )}
-
         {filteredCertificates.length === 0 && (
           <div
             style={{
@@ -541,7 +453,7 @@ export default function Certificates() {
               Complete courses to earn certificates and showcase your skills
             </p>
             <Link
-              to="/lms"
+              to="/courses"
               style={{
                 display: "inline-block",
                 padding: "12px 24px",

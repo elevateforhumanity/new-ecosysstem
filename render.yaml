@@ -3,7 +3,7 @@ services:
     name: elevateforhumanity
     env: node
     buildCommand: pnpm install --frozen-lockfile=false && pnpm run build
-    startCommand: node serve-static.js
+    startCommand: node serve-static.cjs
     routes:
       # Serve sitemap and robots.txt as static files (SEO)
       - type: rewrite
@@ -64,16 +64,19 @@ services:
       - path: /*
         name: Strict-Transport-Security
         value: max-age=31536000; includeSubDomains; preload
-      # CORS Headers for Supabase
+      # CORS Headers - Allow Cloudflare Pages, Supabase, and local dev
       - path: /*
         name: Access-Control-Allow-Origin
-        value: https://cuxzzpsyufcewtmicszk.supabase.co
+        value: "*"
       - path: /*
         name: Access-Control-Allow-Methods
-        value: GET, POST, PUT, DELETE, OPTIONS
+        value: GET, POST, PUT, DELETE, OPTIONS, PATCH
       - path: /*
         name: Access-Control-Allow-Headers
-        value: Content-Type, Authorization, apikey
+        value: Content-Type, Authorization, apikey, X-Client-Info, X-Supabase-Auth
+      - path: /*
+        name: Access-Control-Allow-Credentials
+        value: "true"
       # Cache Headers
       - path: /assets/*
         name: Cache-Control
@@ -89,6 +92,12 @@ services:
         value: production
       - key: VITE_SUPABASE_URL
         value: https://cuxzzpsyufcewtmicszk.supabase.co
-      # Add VITE_SUPABASE_ANON_KEY in Render dashboard (secret)
-      # - key: VITE_SUPABASE_ANON_KEY
-      #   sync: false  # Mark as secret in dashboard
+      - key: VITE_SUPABASE_ANON_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1eHp6cHN5dWZjZXd0bWljc3prIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjEwNDcsImV4cCI6MjA3MzczNzA0N30.DyFtzoKha_tuhKiSIPoQlKonIpaoSYrlhzntCUvLUnA
+      - key: VITE_API_URL
+        value: https://elevateforhumanity.onrender.com
+      - key: CLOUDFLARE_PAGES_URL
+        value: https://elevateforhumanity.pages.dev
+      # Add these secrets in Render dashboard if needed:
+      # - SUPABASE_SERVICE_KEY (for admin operations)
+      # - CLOUDFLARE_API_TOKEN (for backend operations)

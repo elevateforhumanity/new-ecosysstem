@@ -48,6 +48,7 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
     quill.on('text-change', (delta, oldDelta, source) => {
       if (source === 'user') {
         // Broadcast changes to other users (in production, use WebSocket)
+        console.log('Content changed:', delta);
       }
     });
 
@@ -55,6 +56,7 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
     quill.on('selection-change', (range, oldRange, source) => {
       if (range && source === 'user') {
         // Broadcast cursor position
+        console.log('Cursor at:', range);
       }
     });
 

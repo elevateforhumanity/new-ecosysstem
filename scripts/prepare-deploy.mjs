@@ -54,7 +54,7 @@ const coreFiles = [
   '_headers',
   '_redirects',
   'netlify.toml',
-  'vercel.json'
+
 ];
 
 coreFiles.forEach(file => {

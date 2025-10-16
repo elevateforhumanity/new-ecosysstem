@@ -42,7 +42,9 @@ export default function Login() {
       window.location.href = '/lms/dashboard';
     } catch (err) {
       setError(err.message || 'Login failed. Please try again.');
-      console.error('Login error:', err);
+      if (import.meta.env.DEV) {
+        console.error('Login error:', err);
+      }
     }
   };
 

@@ -35,4 +35,14 @@ export default defineConfig({
     host: '0.0.0.0',
     strictPort: true,
   },
+  preview: {
+    port: 8080,
+    host: '0.0.0.0',
+    strictPort: false,
+    allowedHosts: [
+      '.gitpod.dev',
+      '.gitpod.io',
+      'localhost',
+    ],
+  },
 });

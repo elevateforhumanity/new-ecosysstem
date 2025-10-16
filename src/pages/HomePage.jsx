@@ -35,7 +35,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff' }}>
+    <div className="min-h-screen bg-background">
       <SEO
         title="Elevate for Humanity - FREE Productivity Suite & Training Programs"
         description="Access free productivity tools (Sheets, Slides, Docs, Video Meetings) and get FREE job training in Construction, Healthcare, CDL, and more. Marion County, IN."
@@ -45,62 +45,77 @@ export default function HomePage() {
       
       <main id="main-content">
         {/* Hero Section */}
-        <section style={{ background: 'linear-gradient(135deg, #1e40af 0%, #7c3aed 100%)', color: 'white', padding: '5rem 2rem', textAlign: 'center' }}>
-          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <div style={{ display: 'inline-block', background: 'rgba(255,255,255,0.2)', padding: '0.5rem 1.5rem', borderRadius: '50px', marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: '600' }}>
-              🎓 Marion County, IN • 100% FREE Programs
+        <section className="relative bg-gradient-to-br from-blue-700 via-purple-600 to-purple-700 text-white py-20 px-4 text-center overflow-hidden">
+          <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]" />
+          <div className="relative max-w-7xl mx-auto">
+            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-6 py-2 rounded-full mb-6 text-sm font-semibold">
+              <span className="text-2xl">🎓</span>
+              <span>Marion County, IN • 100% FREE Programs</span>
             </div>
             
-            <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', marginBottom: '1.5rem', fontWeight: '800', lineHeight: '1.1' }}>
-              Empowering People.<br/>Elevating Communities.
+            <h1 className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+              Empowering People.<br/>
+              <span className="text-yellow-300">Elevating Communities.</span>
             </h1>
             
-            <p style={{ fontSize: 'clamp(1.2rem, 3vw, 1.8rem)', marginBottom: '2rem', opacity: 0.95, maxWidth: '900px', margin: '0 auto 2rem' }}>
+            <p className="text-xl md:text-2xl mb-8 opacity-95 max-w-4xl mx-auto leading-relaxed">
               We connect education, employment, and entrepreneurship through workforce innovation and philanthropy. ETPL provider and DOL apprenticeship sponsor.
             </p>
 
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '3rem' }}>
-              <Link to="/programs" style={{ padding: '1.25rem 3rem', background: '#10b981', color: 'white', textDecoration: 'none', borderRadius: '50px', fontSize: '1.25rem', fontWeight: 'bold', boxShadow: '0 8px 20px rgba(16,185,129,0.4)' }}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <Link to="/programs" className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
                 Explore Programs
               </Link>
-              <Link to="/connect" style={{ padding: '1.25rem 3rem', background: 'rgba(255,255,255,0.2)', color: 'white', textDecoration: 'none', borderRadius: '50px', fontSize: '1.25rem', fontWeight: 'bold', border: '2px solid white' }}>
+              <Link to="/connect" className="px-8 py-4 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-full text-lg font-bold border-2 border-white transition-all">
                 Partner With Us
               </Link>
-              <Link to="/get-started" style={{ padding: '1.25rem 3rem', background: 'white', color: '#1e40af', textDecoration: 'none', borderRadius: '50px', fontSize: '1.25rem', fontWeight: 'bold', boxShadow: '0 8px 20px rgba(255,255,255,0.3)' }}>
+              <Link to="/get-started" className="px-8 py-4 bg-white hover:bg-gray-100 text-blue-700 rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
                 Apply Now
               </Link>
             </div>
 
             {/* Stats */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem', maxWidth: '900px', margin: '0 auto' }}>
-              <div><div style={{ fontSize: '3rem', fontWeight: 'bold', color: '#fbbf24' }}>1,247</div><div style={{ fontSize: '1rem', opacity: 0.9 }}>Students Trained</div></div>
-              <div><div style={{ fontSize: '3rem', fontWeight: 'bold', color: '#fbbf24' }}>92%</div><div style={{ fontSize: '1rem', opacity: 0.9 }}>Job Placement Rate</div></div>
-              <div><div style={{ fontSize: '3rem', fontWeight: 'bold', color: '#fbbf24' }}>$2.85M</div><div style={{ fontSize: '1rem', opacity: 0.9 }}>Funding Distributed</div></div>
-              <div><div style={{ fontSize: '3rem', fontWeight: 'bold', color: '#fbbf24' }}>100%</div><div style={{ fontSize: '1rem', opacity: 0.9 }}>FREE to Students</div></div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+              <div className="backdrop-blur-sm bg-white/10 rounded-2xl p-6">
+                <div className="text-5xl font-bold text-yellow-300 mb-2">1,247</div>
+                <div className="text-sm opacity-90">Students Trained</div>
+              </div>
+              <div className="backdrop-blur-sm bg-white/10 rounded-2xl p-6">
+                <div className="text-5xl font-bold text-yellow-300 mb-2">92%</div>
+                <div className="text-sm opacity-90">Job Placement Rate</div>
+              </div>
+              <div className="backdrop-blur-sm bg-white/10 rounded-2xl p-6">
+                <div className="text-5xl font-bold text-yellow-300 mb-2">$2.85M</div>
+                <div className="text-sm opacity-90">Funding Distributed</div>
+              </div>
+              <div className="backdrop-blur-sm bg-white/10 rounded-2xl p-6">
+                <div className="text-5xl font-bold text-yellow-300 mb-2">100%</div>
+                <div className="text-sm opacity-90">FREE to Students</div>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Productivity Suite */}
-        <section style={{ padding: '5rem 2rem', background: '#f8fafc' }}>
-          <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-              <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', marginBottom: '1rem', color: '#1f2937', fontWeight: '700' }}>FREE Productivity Suite</h2>
-              <p style={{ fontSize: '1.25rem', color: '#64748b', maxWidth: '700px', margin: '0 auto' }}>Professional tools for work, school, and life. No subscription. No limits.</p>
+        <section className="py-20 px-4 bg-slate-50">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">FREE Productivity Suite</h2>
+              <p className="text-xl text-slate-600 max-w-3xl mx-auto">Professional tools for work, school, and life. No subscription. No limits.</p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {productivityApps.map((app, idx) => (
-                <Link key={idx} to={app.path} style={{ background: 'white', padding: '2rem', borderRadius: '12px', textDecoration: 'none', border: '1px solid #e2e8f0', transition: 'all 0.2s', display: 'block' }}>
-                  <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>{app.icon}</div>
-                  <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: '#1f2937', fontWeight: '600' }}>{app.name}</h3>
-                  <p style={{ color: '#64748b', fontSize: '0.95rem' }}>{app.description}</p>
+                <Link key={idx} to={app.path} className="group bg-white p-8 rounded-xl border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-200">
+                  <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">{app.icon}</div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{app.name}</h3>
+                  <p className="text-slate-600 text-sm">{app.description}</p>
                 </Link>
               ))}
             </div>
 
-            <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-              <div style={{ display: 'inline-block', background: '#dcfce7', color: '#166534', padding: '1rem 2rem', borderRadius: '12px', fontWeight: '600', fontSize: '1.125rem' }}>
+            <div className="text-center mt-12">
+              <div className="inline-block bg-green-100 text-green-800 px-8 py-4 rounded-xl font-semibold text-lg">
                 ✅ All tools are 100% FREE • No credit card required • Unlimited use
               </div>
             </div>
@@ -108,36 +123,36 @@ export default function HomePage() {
         </section>
 
         {/* Training Programs */}
-        <section style={{ padding: '5rem 2rem', background: 'white' }}>
-          <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-              <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', marginBottom: '1rem', color: '#1f2937', fontWeight: '700' }}>FREE Job Training Programs</h2>
-              <p style={{ fontSize: '1.25rem', color: '#64748b', maxWidth: '800px', margin: '0 auto' }}>Get certified in high-demand careers. Funded by WIOA, DOL, and state grants. You pay nothing.</p>
+        <section className="py-20 px-4 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">FREE Job Training Programs</h2>
+              <p className="text-xl text-slate-600 max-w-4xl mx-auto">Get certified in high-demand careers. Funded by WIOA, DOL, and state grants. You pay nothing.</p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '2rem' }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {trainingPrograms.map((program, idx) => (
-                <div key={idx} style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)', padding: '2rem', borderRadius: '16px', border: '2px solid #e2e8f0', position: 'relative' }}>
-                  <div style={{ position: 'absolute', top: '1rem', right: '1rem', background: '#dcfce7', color: '#166534', padding: '0.5rem 1rem', borderRadius: '20px', fontSize: '0.875rem', fontWeight: '700' }}>
+                <div key={idx} className="relative bg-gradient-to-br from-white to-slate-50 p-8 rounded-2xl border-2 border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-200">
+                  <div className="absolute top-4 right-4 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-bold">
                     {program.placement} Placement
                   </div>
-                  <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>{program.icon}</div>
-                  <h3 style={{ fontSize: '1.5rem', marginBottom: '0.75rem', color: '#1f2937', fontWeight: '600' }}>{program.name}</h3>
-                  <div style={{ marginBottom: '1rem' }}>
-                    <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.5rem' }}>⏱️ Duration: <strong>{program.duration}</strong></div>
-                    <div style={{ fontSize: '0.875rem', color: '#64748b' }}>🎓 Earn: <strong>{program.credentials}</strong></div>
+                  <div className="text-6xl mb-4">{program.icon}</div>
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-3">{program.name}</h3>
+                  <div className="space-y-2 mb-4">
+                    <div className="text-sm text-slate-600">⏱️ Duration: <strong className="text-gray-900">{program.duration}</strong></div>
+                    <div className="text-sm text-slate-600">🎓 Earn: <strong className="text-gray-900">{program.credentials}</strong></div>
                   </div>
-                  <Link to="/programs" style={{ display: 'block', textAlign: 'center', padding: '0.875rem', background: '#1e40af', color: 'white', textDecoration: 'none', borderRadius: '8px', fontWeight: '600', marginTop: '1rem' }}>
+                  <Link to="/programs" className="block text-center py-3 bg-blue-700 hover:bg-blue-800 text-white rounded-lg font-semibold mt-4 transition-colors">
                     Learn More & Enroll
                   </Link>
                 </div>
               ))}
             </div>
 
-            <div style={{ marginTop: '4rem', background: '#fef3c7', padding: '2.5rem', borderRadius: '16px', textAlign: 'center' }}>
-              <h3 style={{ fontSize: '2rem', marginBottom: '1rem', color: '#92400e', fontWeight: '700' }}>💰 Funding Available</h3>
-              <p style={{ fontSize: '1.125rem', color: '#78350f', marginBottom: '1.5rem' }}>Programs funded by: WIOA • WRG • OJT • WEX • JRI • DOL • State Grants</p>
-              <div style={{ display: 'inline-block', background: '#92400e', color: '#fef3c7', padding: '1rem 2.5rem', borderRadius: '50px', fontWeight: '700', fontSize: '1.25rem' }}>
+            <div className="mt-16 bg-yellow-100 p-10 rounded-2xl text-center">
+              <h3 className="text-3xl font-bold text-yellow-900 mb-4">💰 Funding Available</h3>
+              <p className="text-lg text-yellow-800 mb-6">Programs funded by: WIOA • WRG • OJT • WEX • JRI • DOL • State Grants</p>
+              <div className="inline-block bg-yellow-900 text-yellow-100 px-10 py-4 rounded-full font-bold text-xl">
                 You Pay: $0.00
               </div>
             </div>
@@ -145,42 +160,42 @@ export default function HomePage() {
         </section>
 
         {/* How It Works */}
-        <section style={{ padding: '5rem 2rem', background: '#f8fafc' }}>
-          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', marginBottom: '3rem', color: '#1f2937', fontWeight: '700', textAlign: 'center' }}>How It Works</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
-              <div style={{ textAlign: 'center' }}>
-                <div style={{ width: '80px', height: '80px', background: '#1e40af', color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', fontWeight: 'bold', margin: '0 auto 1.5rem' }}>1</div>
-                <h3 style={{ fontSize: '1.5rem', marginBottom: '0.75rem', color: '#1f2937' }}>Choose Your Path</h3>
-                <p style={{ color: '#64748b' }}>Browse programs and select the career that interests you</p>
+        <section className="py-20 px-4 bg-slate-50">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-16 text-center">How It Works</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="text-center">
+                <div className="w-20 h-20 bg-blue-700 text-white rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">1</div>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-3">Choose Your Path</h3>
+                <p className="text-slate-600">Browse programs and select the career that interests you</p>
               </div>
-              <div style={{ textAlign: 'center' }}>
-                <div style={{ width: '80px', height: '80px', background: '#7c3aed', color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', fontWeight: 'bold', margin: '0 auto 1.5rem' }}>2</div>
-                <h3 style={{ fontSize: '1.5rem', marginBottom: '0.75rem', color: '#1f2937' }}>Get Funded</h3>
-                <p style={{ color: '#64748b' }}>We help you access grants and funding - you pay nothing</p>
+              <div className="text-center">
+                <div className="w-20 h-20 bg-purple-600 text-white rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">2</div>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-3">Get Funded</h3>
+                <p className="text-slate-600">We help you access grants and funding - you pay nothing</p>
               </div>
-              <div style={{ textAlign: 'center' }}>
-                <div style={{ width: '80px', height: '80px', background: '#10b981', color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', fontWeight: 'bold', margin: '0 auto 1.5rem' }}>3</div>
-                <h3 style={{ fontSize: '1.5rem', marginBottom: '0.75rem', color: '#1f2937' }}>Get Trained</h3>
-                <p style={{ color: '#64748b' }}>Complete hands-on training and earn industry certifications</p>
+              <div className="text-center">
+                <div className="w-20 h-20 bg-green-500 text-white rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">3</div>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-3">Get Trained</h3>
+                <p className="text-slate-600">Complete hands-on training and earn industry certifications</p>
               </div>
-              <div style={{ textAlign: 'center' }}>
-                <div style={{ width: '80px', height: '80px', background: '#ef4444', color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', fontWeight: 'bold', margin: '0 auto 1.5rem' }}>4</div>
-                <h3 style={{ fontSize: '1.5rem', marginBottom: '0.75rem', color: '#1f2937' }}>Get Hired</h3>
-                <p style={{ color: '#64748b' }}>Job placement assistance connects you with employers</p>
+              <div className="text-center">
+                <div className="w-20 h-20 bg-red-500 text-white rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">4</div>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-3">Get Hired</h3>
+                <p className="text-slate-600">Job placement assistance connects you with employers</p>
               </div>
             </div>
           </div>
         </section>
 
         {/* Final CTA */}
-        <section style={{ background: 'linear-gradient(135deg, #1e40af 0%, #7c3aed 100%)', color: 'white', padding: '5rem 2rem', textAlign: 'center' }}>
-          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', marginBottom: '1.5rem', fontWeight: '700' }}>Ready to Transform Your Future?</h2>
-            <p style={{ fontSize: '1.5rem', marginBottom: '3rem', opacity: 0.95 }}>Join 1,247 students who've already started their journey to better careers</p>
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link to="/programs" style={{ padding: '1.25rem 3rem', background: 'white', color: '#1e40af', textDecoration: 'none', borderRadius: '50px', fontSize: '1.25rem', fontWeight: 'bold' }}>Enroll in Training</Link>
-              <Link to="/connect" style={{ padding: '1.25rem 3rem', background: 'transparent', color: 'white', textDecoration: 'none', borderRadius: '50px', fontSize: '1.25rem', fontWeight: 'bold', border: '2px solid white' }}>Contact Us</Link>
+        <section className="bg-gradient-to-br from-blue-700 via-purple-600 to-purple-700 text-white py-20 px-4 text-center">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Transform Your Future?</h2>
+            <p className="text-2xl mb-12 opacity-95">Join 1,247 students who've already started their journey to better careers</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/programs" className="px-10 py-4 bg-white text-blue-700 rounded-full text-xl font-bold hover:bg-gray-100 transition-colors shadow-lg">Enroll in Training</Link>
+              <Link to="/connect" className="px-10 py-4 bg-transparent text-white rounded-full text-xl font-bold border-2 border-white hover:bg-white/10 transition-colors">Contact Us</Link>
             </div>
           </div>
         </section>

@@ -5,6 +5,12 @@
 */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
+import { Separator } from "../components/ui/separator";
+import { AlertCircle, Mail, Lock, Chrome } from "lucide-react";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -14,6 +20,7 @@ export default function Login() {
   });
 
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
@@ -23,9 +30,11 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
     
     if (!formData.email || !formData.password) {
       setError("Please enter both email and password");
+      setLoading(false);
       return;
     }
     
@@ -45,367 +54,180 @@ export default function Login() {
       if (import.meta.env.DEV) {
         console.error('Login error:', err);
       }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const { supabase } = await import('../supabaseClient');
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/lms/dashboard`
+        }
+      });
+      if (error) throw error;
+    } catch (err) {
+      setError(err.message || 'Google login failed');
     }
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#f5f5f5",
-        padding: 20,
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          maxWidth: 440,
-          backgroundColor: "#fff",
-          borderRadius: 12,
-          padding: 48,
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-        }}
-      >
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 p-4">
+      <div className="w-full max-w-md">
         {/* Logo/Brand */}
-        <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <h1
-            style={{
-              fontSize: 28,
-              fontWeight: 700,
-              color: "#333",
-              marginBottom: 8,
-            }}
-          >
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl mb-4 shadow-lg">
+            <span className="text-3xl font-bold text-white">E</span>
+          </div>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
             Elevate for Humanity
           </h1>
-          <p style={{ color: "#666", fontSize: 16 }}>
-            Sign in to your account
+          <p className="text-gray-600">
+            Sign in to continue your learning journey
           </p>
         </div>
 
-        {/* Error Message */}
-        {error && (
-          <div
-            style={{
-              padding: 12,
-              backgroundColor: "#f8d7da",
-              color: "#721c24",
-              borderRadius: 6,
-              marginBottom: 20,
-              fontSize: 14,
-              border: "1px solid #f5c6cb",
-            }}
-          >
-            {error}
-          </div>
-        )}
+        <Card className="shadow-xl border-0">
+          <CardHeader className="space-y-1">
+            <CardTitle className="text-2xl font-bold">Welcome back</CardTitle>
+            <CardDescription>
+              Enter your credentials to access your account
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {/* Error Message */}
+            {error && (
+              <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-800 text-sm">
+                <AlertCircle className="h-4 w-4 flex-shrink-0" />
+                <span>{error}</span>
+              </div>
+            )}
 
-        {/* Login Form */}
-        <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: 20 }}>
-            <label
-              htmlFor="email"
-              style={{
-                display: "block",
-                marginBottom: 8,
-                fontWeight: 500,
-                fontSize: 14,
-                color: "#333",
-              }}
-            >
-              Email Address
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="you@example.com"
-              required
-              style={{
-                width: "100%",
-                padding: "12px 14px",
-                border: "1px solid #ddd",
-                borderRadius: 6,
-                fontSize: 14,
-                outline: "none",
-                transition: "border-color 0.2s",
-              }}
-              onFocus={(e) => (e.target.style.borderColor = "#007bff")}
-              onBlur={(e) => (e.target.style.borderColor = "#ddd")}
-            />
-          </div>
+            {/* Login Form */}
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="email">Email Address</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="you@example.com"
+                    className="pl-10"
+                    required
+                  />
+                </div>
+              </div>
 
-          <div style={{ marginBottom: 20 }}>
-            <label
-              htmlFor="password"
-              style={{
-                display: "block",
-                marginBottom: 8,
-                fontWeight: 500,
-                fontSize: 14,
-                color: "#333",
-              }}
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="••••••••"
-              required
-              style={{
-                width: "100%",
-                padding: "12px 14px",
-                border: "1px solid #ddd",
-                borderRadius: 6,
-                fontSize: 14,
-                outline: "none",
-                transition: "border-color 0.2s",
-              }}
-              onFocus={(e) => (e.target.style.borderColor = "#007bff")}
-              onBlur={(e) => (e.target.style.borderColor = "#ddd")}
-            />
-          </div>
+              <div className="space-y-2">
+                <Label htmlFor="password">Password</Label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="••••••••"
+                    className="pl-10"
+                    required
+                  />
+                </div>
+              </div>
 
-          {/* Remember Me & Forgot Password */}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: 24,
-            }}
-          >
-            <label
-              style={{
-                display: "flex",
-                alignItems: "center",
-                fontSize: 14,
-                cursor: "pointer",
-              }}
+              {/* Remember Me & Forgot Password */}
+              <div className="flex items-center justify-between">
+                <label className="flex items-center gap-2 text-sm cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="rememberMe"
+                    checked={formData.rememberMe}
+                    onChange={handleChange}
+                    className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span className="text-gray-700">Remember me</span>
+                </label>
+                <Link
+                  to="/forgot-password"
+                  className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+                >
+                  Forgot password?
+                </Link>
+              </div>
+
+              {/* Submit Button */}
+              <Button
+                type="submit"
+                className="w-full"
+                size="lg"
+                disabled={loading}
+              >
+                {loading ? "Signing in..." : "Sign In"}
+              </Button>
+            </form>
+
+            {/* Divider */}
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <Separator />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-white px-2 text-muted-foreground">
+                  Or continue with
+                </span>
+              </div>
+            </div>
+
+            {/* Social Login */}
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full"
+              size="lg"
+              onClick={handleGoogleLogin}
             >
-              <input
-                type="checkbox"
-                name="rememberMe"
-                checked={formData.rememberMe}
-                onChange={handleChange}
-                style={{
-                  marginRight: 8,
-                  width: 16,
-                  height: 16,
-                  cursor: "pointer",
-                }}
-              />
-              Remember me
-            </label>
-            <Link
-              to="/forgot-password"
-              style={{
-                fontSize: 14,
-                color: "#007bff",
-                textDecoration: "none",
-              }}
-            >
-              Forgot password?
+              <Chrome className="mr-2 h-5 w-5" />
+              Sign in with Google
+            </Button>
+          </CardContent>
+          <CardFooter className="flex flex-col space-y-4">
+            <div className="text-sm text-center text-gray-600">
+              Don't have an account?{" "}
+              <Link
+                to="/get-started"
+                className="text-blue-600 hover:text-blue-700 font-semibold"
+              >
+                Sign up for free
+              </Link>
+            </div>
+            <div className="text-xs text-center text-gray-500">
+              By signing in, you agree to our{" "}
+              <Link to="/terms-of-service" className="underline hover:text-gray-700">
+                Terms of Service
+              </Link>{" "}
+              and{" "}
+              <Link to="/privacy-policy" className="underline hover:text-gray-700">
+                Privacy Policy
+              </Link>
+            </div>
+          </CardFooter>
+        </Card>
+
+        {/* Help Text */}
+        <div className="mt-8 text-center">
+          <p className="text-sm text-gray-600">
+            Need help?{" "}
+            <Link to="/support" className="text-blue-600 hover:text-blue-700 font-medium">
+              Contact Support
             </Link>
-          </div>
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            style={{
-              width: "100%",
-              padding: "12px 24px",
-              backgroundColor: "#007bff",
-              color: "#fff",
-              border: "none",
-              borderRadius: 6,
-              fontSize: 16,
-              fontWeight: 600,
-              cursor: "pointer",
-              transition: "background-color 0.2s",
-            }}
-            onMouseEnter={(e) => (e.target.style.backgroundColor = "#0056b3")}
-            onMouseLeave={(e) => (e.target.style.backgroundColor = "#007bff")}
-          >
-            Sign In
-          </button>
-        </form>
-
-        {/* Divider */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            margin: "24px 0",
-          }}
-        >
-          <div
-            style={{
-              flex: 1,
-              height: 1,
-              backgroundColor: "#e0e0e0",
-            }}
-          />
-          <span
-            style={{
-              padding: "0 16px",
-              fontSize: 14,
-              color: "#666",
-            }}
-          >
-            OR
-          </span>
-          <div
-            style={{
-              flex: 1,
-              height: 1,
-              backgroundColor: "#e0e0e0",
-            }}
-          />
-        </div>
-
-        {/* Social Login Buttons */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          <button
-            type="button"
-            style={{
-              width: "100%",
-              padding: "12px 24px",
-              backgroundColor: "#fff",
-              color: "#333",
-              border: "1px solid #ddd",
-              borderRadius: 6,
-              fontSize: 14,
-              fontWeight: 500,
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 8,
-              transition: "background-color 0.2s",
-            }}
-            onMouseEnter={(e) => (e.target.style.backgroundColor = "#f8f8f8")}
-            onMouseLeave={(e) => (e.target.style.backgroundColor = "#fff")}
-          >
-            <svg width="18" height="18" viewBox="0 0 18 18">
-              <path
-                fill="#4285F4"
-                d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"
-              />
-              <path
-                fill="#34A853"
-                d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"
-              />
-              <path
-                fill="#FBBC05"
-                d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.348 2.825.957 4.039l3.007-2.332z"
-              />
-              <path
-                fill="#EA4335"
-                d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z"
-              />
-            </svg>
-            Continue with Google
-          </button>
-
-          <button
-            type="button"
-            style={{
-              width: "100%",
-              padding: "12px 24px",
-              backgroundColor: "#fff",
-              color: "#333",
-              border: "1px solid #ddd",
-              borderRadius: 6,
-              fontSize: 14,
-              fontWeight: 500,
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 8,
-              transition: "background-color 0.2s",
-            }}
-            onMouseEnter={(e) => (e.target.style.backgroundColor = "#f8f8f8")}
-            onMouseLeave={(e) => (e.target.style.backgroundColor = "#fff")}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2">
-              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-            </svg>
-            Continue with Facebook
-          </button>
-        </div>
-
-        {/* Sign Up Link */}
-        <div
-          style={{
-            marginTop: 24,
-            textAlign: "center",
-            fontSize: 14,
-            color: "#666",
-          }}
-        >
-          Don't have an account?{" "}
-          <Link
-            to="/signup"
-            style={{
-              color: "#007bff",
-              textDecoration: "none",
-              fontWeight: 500,
-            }}
-          >
-            Sign up
-          </Link>
-        </div>
-
-        {/* Footer Links */}
-        <div
-          style={{
-            marginTop: 32,
-            paddingTop: 24,
-            borderTop: "1px solid #e0e0e0",
-            display: "flex",
-            justifyContent: "center",
-            gap: 24,
-            fontSize: 13,
-          }}
-        >
-          <Link
-            to="/privacy-policy"
-            style={{
-              color: "#666",
-              textDecoration: "none",
-            }}
-          >
-            Privacy
-          </Link>
-          <Link
-            to="/terms-of-service"
-            style={{
-              color: "#666",
-              textDecoration: "none",
-            }}
-          >
-            Terms
-          </Link>
-          <Link
-            to="/support"
-            style={{
-              color: "#666",
-              textDecoration: "none",
-            }}
-          >
-            Help
-          </Link>
+          </p>
         </div>
       </div>
     </div>

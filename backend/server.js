@@ -997,6 +997,10 @@ app.post('/api/lms/submit', authenticateToken, async (req, res) => {
   }
 });
 
+// ==================== STRIPE ENROLLMENT ROUTES ====================
+const enrollmentRoutes = require('./routes/enrollment');
+app.use('/api/enrollments', enrollmentRoutes);
+
 // Error handling middleware (must be last)
 app.use((err, req, res, next) => {
   console.error('Unhandled error:', err);

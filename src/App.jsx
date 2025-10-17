@@ -20,6 +20,7 @@ import "./styles/theme.css";
 import "./styles/responsive.css";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
+const FullSailLanding = lazy(() => import("./pages/FullSailLanding"));
 const ProfessionalHome = lazy(() => import("./pages/ProfessionalHome"));
 const Government = lazy(() => import("./pages/Government"));
 const Philanthropy = lazy(() => import("./pages/Philanthropy"));
@@ -170,7 +171,8 @@ export default function App() {
               <Suspense fallback={<div style={{ padding: 40 }}>Loading...</div>}>
                 <NavBar />
                 <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/" element={<FullSailLanding />} />
+                <Route path="/home" element={<HomePage />} />
                 <Route path="/professional" element={<ProfessionalHome />} />
                 <Route path="/government" element={<Government />} />
                 <Route path="/philanthropy" element={<Philanthropy />} />

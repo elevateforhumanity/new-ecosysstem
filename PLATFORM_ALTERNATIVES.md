@@ -3,6 +3,7 @@
 ## Current Situation
 
 **Gitpod Costs:**
+
 - Standard: $9/month (50 hours)
 - Professional: $39/month (100 hours)
 - You're finding it expensive
@@ -14,12 +15,14 @@
 ### 1. 🏆 **GitHub Codespaces** (Best Alternative)
 
 **Cost:**
+
 - **Free Tier:** 120 core-hours/month for GitHub Pro users ($4/month)
 - **2-core:** $0.18/hour
 - **4-core:** $0.36/hour
 - **Storage:** $0.07/GB/month
 
 **Why It's Better:**
+
 - ✅ Uses your existing `.devcontainer/devcontainer.json`
 - ✅ Native GitHub integration
 - ✅ Same VS Code experience
@@ -27,11 +30,13 @@
 - ✅ No migration needed - just open your repo
 
 **Setup:**
+
 1. Open https://github.com/elevateforhumanity/fix2
 2. Click "Code" → "Codespaces" → "Create codespace"
 3. Done! Your `.devcontainer` config works automatically
 
 **Monthly Cost Example:**
+
 - 40 hours/month on 2-core = $7.20
 - 40 hours/month on 4-core = $14.40
 - **Cheaper than Gitpod Standard ($9)**
@@ -43,11 +48,13 @@
 **Cost:** $0
 
 **Requirements:**
+
 - Node.js 20+
 - pnpm
 - Git
 
 **Setup:**
+
 ```bash
 # Clone repo
 git clone https://github.com/elevateforhumanity/fix2.git
@@ -64,12 +71,14 @@ http://localhost:5173
 ```
 
 **Pros:**
+
 - ✅ Completely free
 - ✅ Fastest performance
 - ✅ Works offline
 - ✅ Full control
 
 **Cons:**
+
 - ❌ Need to install tools locally
 - ❌ No cloud collaboration
 - ❌ Different environment per machine
@@ -79,22 +88,26 @@ http://localhost:5173
 ### 3. 🎨 **Replit** (Freemium)
 
 **Cost:**
+
 - **Free:** Limited resources, public repos
 - **Hacker:** $7/month
 - **Pro:** $20/month
 
 **Pros:**
+
 - ✅ Browser-based
 - ✅ Collaborative coding
 - ✅ Built-in database
 - ✅ Easy deployment
 
 **Cons:**
+
 - ❌ Less powerful than Gitpod
 - ❌ Can be slow for large projects
 - ❌ Limited customization
 
 **Setup:**
+
 1. Go to https://replit.com
 2. Import from GitHub
 3. Set run command: `npm run dev`
@@ -104,22 +117,26 @@ http://localhost:5173
 ### 4. 📦 **CodeSandbox** (Freemium)
 
 **Cost:**
+
 - **Free:** Public repos
 - **Pro:** $9/month
 - **Team:** $12/user/month
 
 **Pros:**
+
 - ✅ Instant setup
 - ✅ Great for React projects
 - ✅ Live preview
 - ✅ Collaborative
 
 **Cons:**
+
 - ❌ Limited for large projects
 - ❌ Can be slow
 - ❌ Less control than Gitpod
 
 **Setup:**
+
 1. Go to https://codesandbox.io
 2. Import from GitHub
 3. Automatic detection
@@ -131,17 +148,20 @@ http://localhost:5173
 **Cost:** Free for open source
 
 **Pros:**
+
 - ✅ Runs entirely in browser
 - ✅ Instant startup
 - ✅ No server needed
 - ✅ Great for React
 
 **Cons:**
+
 - ❌ Limited backend support
 - ❌ Can't run all Node.js features
 - ❌ Smaller projects only
 
 **Setup:**
+
 1. Go to https://stackblitz.com
 2. Import from GitHub
 3. Instant environment
@@ -151,22 +171,26 @@ http://localhost:5173
 ### 6. ☁️ **AWS Cloud9** (Pay-as-you-go)
 
 **Cost:**
+
 - **t2.micro:** ~$0.01/hour (~$7/month if running 24/7)
 - **t3.small:** ~$0.02/hour (~$15/month)
 - **Storage:** $0.10/GB/month
 
 **Pros:**
+
 - ✅ Full AWS integration
 - ✅ Very cheap if managed well
 - ✅ Powerful instances available
 - ✅ Full Linux environment
 
 **Cons:**
+
 - ❌ More complex setup
 - ❌ Need AWS account
 - ❌ Can forget to stop instances (costs add up)
 
 **Setup:**
+
 1. AWS Console → Cloud9
 2. Create environment
 3. Clone your repo
@@ -177,22 +201,26 @@ http://localhost:5173
 ### 7. 🔵 **DigitalOcean Droplets** (DIY)
 
 **Cost:**
+
 - **Basic:** $4/month (1GB RAM)
 - **Standard:** $12/month (2GB RAM)
 - **Plus storage:** $1/10GB/month
 
 **Pros:**
+
 - ✅ Very cheap
 - ✅ Full control
 - ✅ Can run 24/7
 - ✅ Multiple projects
 
 **Cons:**
+
 - ❌ Need to set up yourself
 - ❌ Manage security
 - ❌ No built-in IDE
 
 **Setup:**
+
 1. Create droplet
 2. SSH in
 3. Install Node, pnpm, git
@@ -203,16 +231,16 @@ http://localhost:5173
 
 ## Cost Comparison
 
-| Platform | Free Tier | Paid (40h/month) | Best For |
-|----------|-----------|------------------|----------|
-| **GitHub Codespaces** | 120h/month | $7-14 | ⭐ Best overall |
-| **Local Dev** | Unlimited | $0 | ⭐ Cheapest |
-| **Gitpod** | 50h/month | $9 | Current |
-| **Replit** | Limited | $7-20 | Beginners |
-| **CodeSandbox** | Public only | $9 | Quick prototypes |
-| **StackBlitz** | Unlimited | $0 | Small projects |
-| **AWS Cloud9** | None | $7-15 | AWS users |
-| **DigitalOcean** | None | $4-12 | DIY enthusiasts |
+| Platform              | Free Tier   | Paid (40h/month) | Best For         |
+| --------------------- | ----------- | ---------------- | ---------------- |
+| **GitHub Codespaces** | 120h/month  | $7-14            | ⭐ Best overall  |
+| **Local Dev**         | Unlimited   | $0               | ⭐ Cheapest      |
+| **Gitpod**            | 50h/month   | $9               | Current          |
+| **Replit**            | Limited     | $7-20            | Beginners        |
+| **CodeSandbox**       | Public only | $9               | Quick prototypes |
+| **StackBlitz**        | Unlimited   | $0               | Small projects   |
+| **AWS Cloud9**        | None        | $7-15            | AWS users        |
+| **DigitalOcean**      | None        | $4-12            | DIY enthusiasts  |
 
 ---
 
@@ -221,6 +249,7 @@ http://localhost:5173
 ### For You (EFH Project)
 
 **Option 1: GitHub Codespaces** (Recommended)
+
 - ✅ No migration needed (uses your `.devcontainer`)
 - ✅ Better free tier (120 hours vs 50)
 - ✅ Cheaper paid tier ($7-14 vs $9)
@@ -228,12 +257,14 @@ http://localhost:5173
 - ✅ Same experience as Gitpod
 
 **Option 2: Local Development** (Backup)
+
 - ✅ Completely free
 - ✅ Fastest performance
 - ✅ Works offline
 - ✅ Good for focused work
 
 **Option 3: Hybrid Approach** (Best of Both)
+
 - Use **local dev** for daily work (free)
 - Use **GitHub Codespaces** for:
   - Quick fixes on the go
@@ -271,6 +302,7 @@ http://localhost:5173
 ### To Local Development (15 minutes)
 
 1. **Install prerequisites:**
+
    ```bash
    # Install Node.js 20+ from nodejs.org
    # Install pnpm
@@ -278,23 +310,27 @@ http://localhost:5173
    ```
 
 2. **Clone repo:**
+
    ```bash
    git clone https://github.com/elevateforhumanity/fix2.git
    cd fix2
    ```
 
 3. **Install dependencies:**
+
    ```bash
    pnpm install
    ```
 
 4. **Create .env file:**
+
    ```bash
    cp .env.example .env
    # Edit .env with your Supabase credentials
    ```
 
 5. **Start dev server:**
+
    ```bash
    npm run dev
    ```
@@ -309,16 +345,19 @@ http://localhost:5173
 ## Cost Savings Calculator
 
 ### Current (Gitpod)
+
 - **Plan:** Standard $9/month
 - **Hours:** 50/month
 - **Cost per hour:** $0.18
 
 ### GitHub Codespaces
+
 - **Free tier:** 120 hours/month (with GitHub Pro $4/month)
 - **Paid (2-core):** $0.18/hour
 - **Paid (4-core):** $0.36/hour
 
 **Savings Example:**
+
 - If you use 40 hours/month:
   - Gitpod: $9/month
   - Codespaces (2-core): $7.20/month
@@ -330,6 +369,7 @@ http://localhost:5173
   - **Save: $24.60/month ($295.20/year)**
 
 ### Local Development
+
 - **Cost:** $0
 - **Savings:** $9-39/month ($108-468/year)
 
@@ -347,6 +387,7 @@ http://localhost:5173
 6. ✅ **Can switch anytime** - Not locked in
 
 **Backup with local dev** for:
+
 - Offline work
 - Faster performance
 - Extended sessions

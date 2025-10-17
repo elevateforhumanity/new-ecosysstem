@@ -12,7 +12,7 @@
   --color-shadow-hover: rgba(0, 0, 0, 0.15);
   
   /* Brand colors */
-  --color-primary: #007bff;
+  --color-primary: var(--brand-info);
   --color-primary-hover: #0056b3;
   --color-success: var(--brand-success);
   --color-danger: var(--brand-danger);

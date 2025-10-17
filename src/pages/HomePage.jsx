@@ -69,7 +69,7 @@ export default function HomePage() {
               <Link to="/connect" className="px-8 py-4 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-full text-lg font-bold border-2 border-white transition-all">
                 Partner With Us
               </Link>
-              <Link to="/get-started" className="px-8 py-4 bg-white hover:bg-gray-100 text-blue-700 rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
+              <Link to="/get-started" className="px-8 py-4 bg-white hover:bg-brand-surface-dark text-brand-info rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
                 Apply Now
               </Link>
             </div>
@@ -100,7 +100,7 @@ export default function HomePage() {
         <section className="py-20 px-4 bg-brand-surface">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">FREE Productivity Suite</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-text mb-4">FREE Productivity Suite</h2>
               <p className="text-xl text-brand-text-muted max-w-3xl mx-auto">Professional tools for work, school, and life. No subscription. No limits.</p>
             </div>
 
@@ -108,7 +108,7 @@ export default function HomePage() {
               {productivityApps.map((app, idx) => (
                 <Link key={idx} to={app.path} className="group bg-white p-8 rounded-xl border border-brand-border hover:border-blue-300 hover:shadow-lg transition-all duration-200">
                   <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">{app.icon}</div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{app.name}</h3>
+                  <h3 className="text-xl font-semibold text-brand-text mb-2">{app.name}</h3>
                   <p className="text-brand-text-muted text-sm">{app.description}</p>
                 </Link>
               ))}
@@ -126,7 +126,7 @@ export default function HomePage() {
         <section className="py-20 px-4 bg-white">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">FREE Job Training Programs</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-text mb-4">FREE Job Training Programs</h2>
               <p className="text-xl text-brand-text-muted max-w-4xl mx-auto">Get certified in high-demand careers. Funded by WIOA, DOL, and state grants. You pay nothing.</p>
             </div>
 
@@ -137,10 +137,10 @@ export default function HomePage() {
                     {program.placement} Placement
                   </div>
                   <div className="text-6xl mb-4">{program.icon}</div>
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-3">{program.name}</h3>
+                  <h3 className="text-2xl font-semibold text-brand-text mb-3">{program.name}</h3>
                   <div className="space-y-2 mb-4">
-                    <div className="text-sm text-brand-text-muted">⏱️ Duration: <strong className="text-gray-900">{program.duration}</strong></div>
-                    <div className="text-sm text-brand-text-muted">🎓 Earn: <strong className="text-gray-900">{program.credentials}</strong></div>
+                    <div className="text-sm text-brand-text-muted">⏱️ Duration: <strong className="text-brand-text">{program.duration}</strong></div>
+                    <div className="text-sm text-brand-text-muted">🎓 Earn: <strong className="text-brand-text">{program.credentials}</strong></div>
                   </div>
                   <Link to="/programs" className="block text-center py-3 bg-brand-info-hover hover:bg-blue-800 text-white rounded-lg font-semibold mt-4 transition-colors">
                     Learn More & Enroll
@@ -162,26 +162,26 @@ export default function HomePage() {
         {/* How It Works */}
         <section className="py-20 px-4 bg-brand-surface">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-16 text-center">How It Works</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-brand-text mb-16 text-center">How It Works</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="text-center">
                 <div className="w-20 h-20 bg-brand-info-hover text-white rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">1</div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-3">Choose Your Path</h3>
+                <h3 className="text-2xl font-semibold text-brand-text mb-3">Choose Your Path</h3>
                 <p className="text-brand-text-muted">Browse programs and select the career that interests you</p>
               </div>
               <div className="text-center">
                 <div className="w-20 h-20 bg-brand-secondary text-white rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">2</div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-3">Get Funded</h3>
+                <h3 className="text-2xl font-semibold text-brand-text mb-3">Get Funded</h3>
                 <p className="text-brand-text-muted">We help you access grants and funding - you pay nothing</p>
               </div>
               <div className="text-center">
                 <div className="w-20 h-20 bg-green-500 text-white rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">3</div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-3">Get Trained</h3>
+                <h3 className="text-2xl font-semibold text-brand-text mb-3">Get Trained</h3>
                 <p className="text-brand-text-muted">Complete hands-on training and earn industry certifications</p>
               </div>
               <div className="text-center">
                 <div className="w-20 h-20 bg-red-500 text-white rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">4</div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-3">Get Hired</h3>
+                <h3 className="text-2xl font-semibold text-brand-text mb-3">Get Hired</h3>
                 <p className="text-brand-text-muted">Job placement assistance connects you with employers</p>
               </div>
             </div>
@@ -194,7 +194,7 @@ export default function HomePage() {
             <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Transform Your Future?</h2>
             <p className="text-2xl mb-12 opacity-95">Join 1,247 students who've already started their journey to better careers</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/programs" className="px-10 py-4 bg-white text-blue-700 rounded-full text-xl font-bold hover:bg-gray-100 transition-colors shadow-lg">Enroll in Training</Link>
+              <Link to="/programs" className="px-10 py-4 bg-white text-brand-info rounded-full text-xl font-bold hover:bg-brand-surface-dark transition-colors shadow-lg">Enroll in Training</Link>
               <Link to="/connect" className="px-10 py-4 bg-transparent text-white rounded-full text-xl font-bold border-2 border-white hover:bg-white/10 transition-colors">Contact Us</Link>
             </div>
           </div>

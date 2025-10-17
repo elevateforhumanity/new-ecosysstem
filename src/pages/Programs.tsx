@@ -122,14 +122,14 @@ export default function Programs() {
     : featuredPrograms.filter(program => program.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-brand-surface">
       {/* Header */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Elevate Learn2Earn Workforce Programs</h1>
-              <p className="text-gray-600 mt-2">Federal DOL/DWD compliant training programs with guaranteed job placement support</p>
+              <h1 className="text-3xl font-bold text-brand-text">Elevate Learn2Earn Workforce Programs</h1>
+              <p className="text-brand-text-muted mt-2">Federal DOL/DWD compliant training programs with guaranteed job placement support</p>
             </div>
             <div className="bg-brand-surface text-brand-success px-4 py-2 rounded-full text-sm font-medium">
               💰 Federal Funding Available
@@ -149,7 +149,7 @@ export default function Programs() {
                 className={`whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   selectedCategory === category.id
                     ? "bg-brand-info text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    : "bg-brand-surface-dark text-brand-text hover:bg-brand-border"
                 }`}
               >
                 {category.name} ({category.count})
@@ -185,24 +185,24 @@ export default function Programs() {
                   )}
                 </div>
 
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{program.title}</h3>
-                <p className="text-gray-600 text-sm mb-4">{program.description}</p>
+                <h3 className="text-xl font-bold text-brand-text mb-2">{program.title}</h3>
+                <p className="text-brand-text-muted text-sm mb-4">{program.description}</p>
 
                 {/* Program Stats */}
                 <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-brand-text-muted">
                     <Clock className="h-4 w-4 mr-1" />
                     {program.duration}
                   </div>
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-brand-text-muted">
                     <DollarSign className="h-4 w-4 mr-1" />
                     {program.cost}
                   </div>
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-brand-text-muted">
                     <Users className="h-4 w-4 mr-1" />
                     {program.participants} enrolled
                   </div>
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-brand-text-muted">
                     <Award className="h-4 w-4 mr-1" />
                     {program.jobPlacementRate}% placement
                   </div>
@@ -210,10 +210,10 @@ export default function Programs() {
 
                 {/* Key Features */}
                 <div className="mb-4">
-                  <h4 className="text-sm font-semibold text-gray-900 mb-2">Key Features:</h4>
+                  <h4 className="text-sm font-semibold text-brand-text mb-2">Key Features:</h4>
                   <div className="space-y-1">
                     {program.features.slice(0, 3).map((feature, index) => (
-                      <div key={index} className="flex items-center text-sm text-gray-600">
+                      <div key={index} className="flex items-center text-sm text-brand-text-muted">
                         <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
                         {feature}
                       </div>
@@ -222,15 +222,15 @@ export default function Programs() {
                 </div>
 
                 {/* Outcome Stats */}
-                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                <div className="bg-brand-surface rounded-lg p-4 mb-4">
                   <div className="grid grid-cols-2 gap-4 text-center">
                     <div>
-                      <div className="text-2xl font-bold text-green-600">{program.jobPlacementRate}%</div>
-                      <div className="text-xs text-gray-600">Job Placement</div>
+                      <div className="text-2xl font-bold text-brand-success">{program.jobPlacementRate}%</div>
+                      <div className="text-xs text-brand-text-muted">Job Placement</div>
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-blue-600">{program.averageSalary}</div>
-                      <div className="text-xs text-gray-600">Avg. Salary</div>
+                      <div className="text-2xl font-bold text-brand-info">{program.averageSalary}</div>
+                      <div className="text-xs text-brand-text-muted">Avg. Salary</div>
                     </div>
                   </div>
                 </div>
@@ -245,7 +245,7 @@ export default function Programs() {
                   </Link>
                   <Link 
                     href={`/pay?program=${program.id}`}
-                    className="w-full bg-white text-blue-600 border border-blue-600 py-2 px-4 rounded-lg hover:bg-blue-50 transition-colors text-center block"
+                    className="w-full bg-white text-brand-info border border-blue-600 py-2 px-4 rounded-lg hover:bg-blue-50 transition-colors text-center block"
                   >
                     Enroll Now
                   </Link>

@@ -145,7 +145,7 @@ export default function VideoInterview() {
           <h2 className="text-3xl font-bold text-brand-success mb-4">
             Interview Complete!
           </h2>
-          <p className="text-lg text-gray-700 mb-6">
+          <p className="text-lg text-brand-text mb-6">
             Thank you for completing your video interview. Our team will review your responses and contact you within 2-3 business days.
           </p>
           <div className="bg-white p-4 rounded-lg">
@@ -170,11 +170,11 @@ export default function VideoInterview() {
           <span className="text-sm font-medium">
             Question {currentQuestion + 1} of {questions.length}
           </span>
-          <span className="text-sm text-gray-600">
+          <span className="text-sm text-brand-text-muted">
             {Math.round(((currentQuestion + 1) / questions.length) * 100)}% Complete
           </span>
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-2">
+        <div className="w-full bg-brand-border rounded-full h-2">
           <div 
             className="bg-brand-info h-2 rounded-full transition-all"
             style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
@@ -192,7 +192,7 @@ export default function VideoInterview() {
             💡 <strong>Tip:</strong> {questions[currentQuestion].tips}
           </p>
         </div>
-        <p className="text-gray-600">
+        <p className="text-brand-text-muted">
           You have <strong>2 minutes</strong> to answer. Take a moment to think before you start recording.
         </p>
       </div>
@@ -266,9 +266,9 @@ export default function VideoInterview() {
       
       {/* Instructions */}
       {!recording && !videoBlob && (
-        <div className="mt-6 bg-gray-50 rounded-lg p-4">
+        <div className="mt-6 bg-brand-surface rounded-lg p-4">
           <h3 className="font-bold mb-2">Before You Start:</h3>
-          <ul className="space-y-1 text-sm text-gray-700">
+          <ul className="space-y-1 text-sm text-brand-text">
             <li>✅ Find a quiet, well-lit location</li>
             <li>✅ Look directly at the camera</li>
             <li>✅ Speak clearly and confidently</li>

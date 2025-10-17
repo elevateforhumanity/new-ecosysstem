@@ -131,8 +131,8 @@ export function CopilotAssistant() {
           <span className="text-white font-bold">🤖</span>
         </div>
         <div>
-          <h2 className="text-xl font-bold text-gray-900">Copilot Assistant</h2>
-          <p className="text-gray-600">I'll help you import and track student data</p>
+          <h2 className="text-xl font-bold text-brand-text">Copilot Assistant</h2>
+          <p className="text-brand-text-muted">I'll help you import and track student data</p>
         </div>
       </div>
 
@@ -163,7 +163,7 @@ export function CopilotAssistant() {
 
       {/* Data Input Area */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-brand-text mb-2">
           📋 Paste Student Data (Excel, CSV, or any format)
         </label>
         <textarea
@@ -173,7 +173,7 @@ export function CopilotAssistant() {
 Example:
 John Smith, Medical Assistant, 2025-01-15, john@email.com
 Sarah Johnson, IT Support, 2025-01-22, sarah@email.com"
-          className="w-full h-32 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+          className="w-full h-32 p-3 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus"
         />
         <button
           onClick={() => parseStudentData(pastedData)}
@@ -189,21 +189,21 @@ Sarah Johnson, IT Support, 2025-01-22, sarah@email.com"
         <div className="parsed-records">
           <h3 className="text-lg font-semibold mb-3">📊 Detected Records ({parsedRecords.length})</h3>
           <div className="overflow-x-auto">
-            <table className="min-w-full bg-white border border-gray-200">
-              <thead className="bg-gray-50">
+            <table className="min-w-full bg-white border border-brand-border">
+              <thead className="bg-brand-surface">
                 <tr>
-                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
-                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Program</th>
-                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Start Date</th>
-                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                  <th className="px-4 py-2 text-left text-xs font-medium text-brand-text-light uppercase">Name</th>
+                  <th className="px-4 py-2 text-left text-xs font-medium text-brand-text-light uppercase">Program</th>
+                  <th className="px-4 py-2 text-left text-xs font-medium text-brand-text-light uppercase">Start Date</th>
+                  <th className="px-4 py-2 text-left text-xs font-medium text-brand-text-light uppercase">Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {parsedRecords.slice(0, 5).map((record, index) => (
                   <tr key={index}>
-                    <td className="px-4 py-2 text-sm text-gray-900">{record.name}</td>
-                    <td className="px-4 py-2 text-sm text-gray-600">{record.program}</td>
-                    <td className="px-4 py-2 text-sm text-gray-600">{record.startDate}</td>
+                    <td className="px-4 py-2 text-sm text-brand-text">{record.name}</td>
+                    <td className="px-4 py-2 text-sm text-brand-text-muted">{record.program}</td>
+                    <td className="px-4 py-2 text-sm text-brand-text-muted">{record.startDate}</td>
                     <td className="px-4 py-2">
                       <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-brand-surface text-brand-success">
                         {record.status}
@@ -214,7 +214,7 @@ Sarah Johnson, IT Support, 2025-01-22, sarah@email.com"
               </tbody>
             </table>
             {parsedRecords.length > 5 && (
-              <p className="text-sm text-gray-500 mt-2">
+              <p className="text-sm text-brand-text-light mt-2">
                 ... and {parsedRecords.length - 5} more records
               </p>
             )}
@@ -223,16 +223,16 @@ Sarah Johnson, IT Support, 2025-01-22, sarah@email.com"
       )}
 
       {/* Quick Actions */}
-      <div className="quick-actions mt-6 p-4 bg-gray-50 rounded-lg">
+      <div className="quick-actions mt-6 p-4 bg-brand-surface rounded-lg">
         <h4 className="font-semibold mb-3">🚀 Quick Actions</h4>
         <div className="grid grid-cols-2 gap-3">
-          <button className="p-3 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 text-left">
+          <button className="p-3 bg-white border border-brand-border rounded-lg hover:bg-brand-surface text-left">
             <div className="font-medium">📊 View Analytics</div>
-            <div className="text-sm text-gray-600">Check retention rates</div>
+            <div className="text-sm text-brand-text-muted">Check retention rates</div>
           </button>
-          <button className="p-3 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 text-left">
+          <button className="p-3 bg-white border border-brand-border rounded-lg hover:bg-brand-surface text-left">
             <div className="font-medium">📋 WIOA Reports</div>
-            <div className="text-sm text-gray-600">Generate compliance reports</div>
+            <div className="text-sm text-brand-text-muted">Generate compliance reports</div>
           </button>
         </div>
       </div>

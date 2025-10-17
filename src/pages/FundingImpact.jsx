@@ -14,15 +14,15 @@ export default function FundingImpact() {
       <div style={{ marginTop: 32 }}>
         <h2>Program Metrics</h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16, marginTop: 16 }}>
-          <div style={{ padding: 16, border: "1px solid #ddd", borderRadius: 8 }}>
+          <div style={{ padding: 16, border: "1px solid var(--brand-border)", borderRadius: 8 }}>
             <h3>WIOA Participants</h3>
             <p style={{ fontSize: 32, fontWeight: "bold", color: "#4f46e5" }}>247</p>
           </div>
-          <div style={{ padding: 16, border: "1px solid #ddd", borderRadius: 8 }}>
+          <div style={{ padding: 16, border: "1px solid var(--brand-border)", borderRadius: 8 }}>
             <h3>WRG Enrollments</h3>
             <p style={{ fontSize: 32, fontWeight: "bold", color: "var(--brand-success)" }}>89</p>
           </div>
-          <div style={{ padding: 16, border: "1px solid #ddd", borderRadius: 8 }}>
+          <div style={{ padding: 16, border: "1px solid var(--brand-border)", borderRadius: 8 }}>
             <h3>VR Placements</h3>
             <p style={{ fontSize: 32, fontWeight: "bold", color: "var(--brand-warning)" }}>34</p>
           </div>

@@ -29,7 +29,7 @@ export function FrameworkSettingsPanel() {
 
   const renderOverview = () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
-      <div style={{ padding: 20, border: '1px solid #e2e8f0', borderRadius: 12, background: 'var(--brand-surface)' }}>
+      <div style={{ padding: 20, border: '1px solid var(--brand-border)', borderRadius: 12, background: 'var(--brand-surface)' }}>
         <h3 style={{ margin: '0 0 16px 0', color: '#1e293b' }}>🏗️ Framework Stack</h3>
         <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
           <li>⚛️ React {config.frontend.version}</li>
@@ -40,7 +40,7 @@ export function FrameworkSettingsPanel() {
         </ul>
       </div>
 
-      <div style={{ padding: 20, border: '1px solid #e2e8f0', borderRadius: 12, background: validation.isValid ? '#f0fdf4' : '#fef2f2' }}>
+      <div style={{ padding: 20, border: '1px solid var(--brand-border)', borderRadius: 12, background: validation.isValid ? '#f0fdf4' : '#fef2f2' }}>
         <h3 style={{ margin: '0 0 16px 0', color: validation.isValid ? '#166534' : 'var(--brand-danger)' }}>
           {validation.isValid ? '✅ Configuration Valid' : '❌ Configuration Issues'}
         </h3>
@@ -66,15 +66,15 @@ export function FrameworkSettingsPanel() {
         )}
       </div>
 
-      <div style={{ padding: 20, border: '1px solid #e2e8f0', borderRadius: 12, background: 'var(--brand-surface)' }}>
+      <div style={{ padding: 20, border: '1px solid var(--brand-border)', borderRadius: 12, background: 'var(--brand-surface)' }}>
         <h3 style={{ margin: '0 0 16px 0', color: '#1e293b' }}>🌐 Ecosystem</h3>
-        <p style={{ margin: '0 0 12px 0', fontSize: '0.875rem', color: '#64748b' }}>
+        <p style={{ margin: '0 0 12px 0', fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>
           Multi-site: {config.ecosystem.multiSite ? 'Enabled' : 'Disabled'}
         </p>
         {config.ecosystem.sisterSites && (
           <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
             {config.ecosystem.sisterSites.map((site, i) => (
-              <li key={i} style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: 4 }}>
+              <li key={i} style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)', marginBottom: 4 }}>
                 🔗 {site.name}
               </li>
             ))}
@@ -93,7 +93,7 @@ export function FrameworkSettingsPanel() {
         <h3 style={{ marginTop: 0, textTransform: 'capitalize' }}>{sectionKey} Configuration</h3>
         <pre style={{
           background: 'var(--brand-surface)',
-          border: '1px solid #e2e8f0',
+          border: '1px solid var(--brand-border)',
           borderRadius: 8,
           padding: 16,
           overflow: 'auto',
@@ -110,14 +110,14 @@ export function FrameworkSettingsPanel() {
     <div>
       <div style={{ marginBottom: 24 }}>
         <h2 style={{ margin: '0 0 8px 0' }}>Framework Configuration</h2>
-        <p style={{ margin: 0, color: '#64748b', fontSize: '0.875rem' }}>
+        <p style={{ margin: 0, color: 'var(--brand-text-muted)', fontSize: '0.875rem' }}>
           Manage your application framework settings and view system configuration
         </p>
       </div>
 
       <div style={{ 
         display: 'flex', 
-        borderBottom: '2px solid #e2e8f0', 
+        borderBottom: '2px solid var(--brand-border)', 
         marginBottom: 24,
         flexWrap: 'wrap',
         gap: 8
@@ -130,7 +130,7 @@ export function FrameworkSettingsPanel() {
               padding: '8px 16px',
               border: 'none',
               background: activeSection === section.id ? 'var(--brand-info)' : 'transparent',
-              color: activeSection === section.id ? 'white' : '#64748b',
+              color: activeSection === section.id ? 'white' : 'var(--brand-text-muted)',
               cursor: 'pointer',
               borderRadius: '6px',
               fontSize: '0.875rem',
@@ -151,11 +151,11 @@ export function FrameworkSettingsPanel() {
         marginTop: 32, 
         padding: 16, 
         background: 'var(--brand-surface)', 
-        border: '1px solid #e2e8f0', 
+        border: '1px solid var(--brand-border)', 
         borderRadius: 8 
       }}>
         <h4 style={{ margin: '0 0 8px 0', color: '#1e293b' }}>Configuration Info</h4>
-        <p style={{ margin: 0, fontSize: '0.875rem', color: '#64748b' }}>
+        <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>
           Last updated: {config.meta.lastUpdated} | Version: {config.meta.version}
         </p>
       </div>

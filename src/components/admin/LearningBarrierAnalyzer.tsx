@@ -192,8 +192,8 @@ export function LearningBarrierAnalyzer() {
       case 'critical': return 'text-red-600 bg-brand-surface border-red-200';
       case 'high': return 'text-orange-600 bg-brand-surface border-orange-200';
       case 'medium': return 'text-yellow-600 bg-yellow-100 border-yellow-200';
-      case 'low': return 'text-green-600 bg-brand-surface border-green-200';
-      default: return 'text-gray-600 bg-gray-100 border-gray-200';
+      case 'low': return 'text-brand-success bg-brand-surface border-green-200';
+      default: return 'text-brand-text-muted bg-brand-surface-dark border-brand-border';
     }
   };
 
@@ -212,8 +212,8 @@ export function LearningBarrierAnalyzer() {
     <div className="learning-barrier-analyzer">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">🧠 Learning Barrier Analyzer</h2>
-          <p className="text-gray-600">AI-powered identification and automatic remediation of learning challenges</p>
+          <h2 className="text-2xl font-bold text-brand-text">🧠 Learning Barrier Analyzer</h2>
+          <p className="text-brand-text-muted">AI-powered identification and automatic remediation of learning challenges</p>
         </div>
         <div className="flex items-center space-x-4">
           <label className="flex items-center">
@@ -223,7 +223,7 @@ export function LearningBarrierAnalyzer() {
               onChange={(e) => setAutoRemediationEnabled(e.target.checked)}
               className="mr-2"
             />
-            <span className="text-sm text-gray-700">Auto-Remediation</span>
+            <span className="text-sm text-brand-text">Auto-Remediation</span>
           </label>
           <button
             onClick={runBarrierAnalysis}
@@ -239,20 +239,20 @@ export function LearningBarrierAnalyzer() {
         <div className="text-center py-8 bg-blue-50 rounded-lg mb-6">
           <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mb-4"></div>
           <p className="text-brand-info font-medium">🤖 AI is analyzing learning patterns and identifying barriers...</p>
-          <p className="text-blue-600 text-sm mt-2">This may take a few moments while I process all student data</p>
+          <p className="text-brand-info text-sm mt-2">This may take a few moments while I process all student data</p>
         </div>
       )}
 
       {/* Detected Barriers */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">🚨 Detected Learning Barriers</h3>
+        <h3 className="text-lg font-semibold text-brand-text mb-4">🚨 Detected Learning Barriers</h3>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {barriers.map((barrier) => (
             <div key={barrier.id} className="bg-white border rounded-lg p-6 shadow-sm">
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h4 className="font-semibold text-gray-900">{barrier.subject}</h4>
-                  <p className="text-sm text-gray-600 mt-1">{barrier.description}</p>
+                  <h4 className="font-semibold text-brand-text">{barrier.subject}</h4>
+                  <p className="text-sm text-brand-text-muted mt-1">{barrier.description}</p>
                 </div>
                 <span className={`px-2 py-1 text-xs font-medium rounded-full border ${getSeverityColor(barrier.severity)}`}>
                   {barrier.severity.toUpperCase()}
@@ -260,11 +260,11 @@ export function LearningBarrierAnalyzer() {
               </div>
 
               <div className="mb-4">
-                <div className="flex items-center text-sm text-gray-600 mb-2">
+                <div className="flex items-center text-sm text-brand-text-muted mb-2">
                   <span className="font-medium">👥 Affected Students:</span>
                   <span className="ml-2 font-bold text-red-600">{barrier.affectedStudents}</span>
                 </div>
-                <div className="text-xs text-gray-500">
+                <div className="text-xs text-brand-text-light">
                   Identified: {new Date(barrier.identifiedDate).toLocaleDateString()}
                 </div>
               </div>
@@ -281,7 +281,7 @@ export function LearningBarrierAnalyzer() {
                 <h6 className="font-medium text-brand-success mb-1">{barrier.autoRemediation.title}</h6>
                 <p className="text-sm text-green-700 mb-3">{barrier.autoRemediation.description}</p>
                 
-                <div className="text-xs text-green-600 mb-3">
+                <div className="text-xs text-brand-success mb-3">
                   ⏱️ Estimated time: {barrier.autoRemediation.estimatedTime}
                 </div>
 
@@ -312,26 +312,26 @@ export function LearningBarrierAnalyzer() {
 
       {/* Struggling Students */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">👨‍🎓 Students Needing Support</h3>
+        <h3 className="text-lg font-semibold text-brand-text mb-4">👨‍🎓 Students Needing Support</h3>
         <div className="bg-white border rounded-lg overflow-hidden">
           <table className="min-w-full">
-            <thead className="bg-gray-50">
+            <thead className="bg-brand-surface">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Student</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Program</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Struggling Areas</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Performance</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Auto Actions</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Student</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Program</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Struggling Areas</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Performance</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Auto Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
               {strugglingStudents.map((student) => (
                 <tr key={student.studentId}>
                   <td className="px-6 py-4">
-                    <div className="font-medium text-gray-900">{student.studentName}</div>
-                    <div className="text-sm text-gray-500">{student.studentId}</div>
+                    <div className="font-medium text-brand-text">{student.studentName}</div>
+                    <div className="text-sm text-brand-text-light">{student.studentId}</div>
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-600">{student.program}</td>
+                  <td className="px-6 py-4 text-sm text-brand-text-muted">{student.program}</td>
                   <td className="px-6 py-4">
                     <div className="flex flex-wrap gap-1">
                       {student.strugglingAreas.map((area, index) => (
@@ -343,7 +343,7 @@ export function LearningBarrierAnalyzer() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center">
-                      <div className="w-16 bg-gray-200 rounded-full h-2 mr-2">
+                      <div className="w-16 bg-brand-border rounded-full h-2 mr-2">
                         <div 
                           className={`h-2 rounded-full ${
                             student.performanceScore >= 80 ? 'bg-green-500' :
@@ -358,7 +358,7 @@ export function LearningBarrierAnalyzer() {
                   <td className="px-6 py-4">
                     <div className="space-y-1">
                       {student.recommendedActions.slice(0, 2).map((action, index) => (
-                        <div key={index} className="text-xs bg-brand-surface text-blue-700 px-2 py-1 rounded">
+                        <div key={index} className="text-xs bg-brand-surface text-brand-info px-2 py-1 rounded">
                           🤖 {action}
                         </div>
                       ))}
@@ -377,15 +377,15 @@ export function LearningBarrierAnalyzer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
           <div>
             <div className="font-medium text-brand-info">Learning Analytics</div>
-            <div className="text-blue-600">Continuously analyzing student performance patterns</div>
+            <div className="text-brand-info">Continuously analyzing student performance patterns</div>
           </div>
           <div>
             <div className="font-medium text-brand-info">Barrier Detection</div>
-            <div className="text-blue-600">AI identifies struggles before they become critical</div>
+            <div className="text-brand-info">AI identifies struggles before they become critical</div>
           </div>
           <div>
             <div className="font-medium text-brand-info">Auto-Remediation</div>
-            <div className="text-blue-600">Automatically creates and deploys targeted training</div>
+            <div className="text-brand-info">Automatically creates and deploys targeted training</div>
           </div>
         </div>
       </div>

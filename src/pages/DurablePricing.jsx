@@ -52,13 +52,13 @@ export default function DurablePricing() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-16">
+    <div className="min-h-screen bg-brand-surface py-16">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-5xl font-bold text-brand-text mb-4">
             Simple, Transparent Pricing
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-brand-text-muted max-w-2xl mx-auto">
             Choose the plan that's right for you
           </p>
         </div>
@@ -67,7 +67,7 @@ export default function DurablePricing() {
           {plans.map((plan, index) => (
             <div 
               key={index} 
-              className={`bg-white p-8 rounded-xl shadow-lg ${plan.highlighted ? 'ring-4 ring-indigo-500 transform scale-105' : ''}`}
+              className={`bg-white p-8 rounded-xl shadow-lg ${plan.highlighted ? 'ring-4 ring-brand-focus transform scale-105' : ''}`}
             >
               {plan.highlighted && (
                 <div className="bg-indigo-500 text-white text-sm font-semibold px-4 py-1 rounded-full inline-block mb-4">
@@ -77,13 +77,13 @@ export default function DurablePricing() {
               <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
               <div className="mb-6">
                 <span className="text-5xl font-bold">{plan.price}</span>
-                <span className="text-gray-600 ml-2">/ {plan.period}</span>
+                <span className="text-brand-text-muted ml-2">/ {plan.period}</span>
               </div>
               <ul className="space-y-3 mb-8">
                 {plan.features.map((feature, i) => (
                   <li key={i} className="flex items-start">
                     <span className="text-green-500 mr-2">✓</span>
-                    <span className="text-gray-600">{feature}</span>
+                    <span className="text-brand-text-muted">{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -92,7 +92,7 @@ export default function DurablePricing() {
                 className={`block text-center py-3 px-6 rounded-lg font-semibold transition ${
                   plan.highlighted 
                     ? 'bg-brand-info text-white hover:bg-brand-info-hover' 
-                    : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                    : 'bg-brand-surface-dark text-brand-text hover:bg-brand-border'
                 }`}
               >
                 {plan.cta}

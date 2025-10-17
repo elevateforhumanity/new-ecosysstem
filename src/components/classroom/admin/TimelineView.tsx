@@ -300,15 +300,15 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
 
   const getEventColor = (type: string, status?: string) => {
     if (status === 'completed' || status === 'delivered' || status === 'opened') {
-      return 'text-green-600 bg-green-50';
+      return 'text-brand-success bg-green-50';
     }
     if (status === 'failed' || status === 'bounced') {
       return 'text-red-600 bg-red-50';
     }
     if (status === 'running' || status === 'sent') {
-      return 'text-blue-600 bg-blue-50';
+      return 'text-brand-info bg-blue-50';
     }
-    return 'text-gray-600 bg-gray-50';
+    return 'text-brand-text-muted bg-brand-surface';
   };
 
   const filteredEvents = events.filter(event => {
@@ -318,13 +318,13 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
 
   return (
     <div className="bg-white rounded-lg shadow">
-      <div className="p-6 border-b border-gray-200">
+      <div className="p-6 border-b border-brand-border">
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-semibold">Timeline</h2>
           <select
             value={filter}
             onChange={e => setFilter(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="px-4 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
           >
             <option value="all">All Events</option>
             <option value="task">Tasks</option>
@@ -339,7 +339,7 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
         {loading ? (
           <div className="text-center py-12">
             <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-            <p className="mt-4 text-gray-600">Loading timeline...</p>
+            <p className="mt-4 text-brand-text-muted">Loading timeline...</p>
           </div>
         ) : filteredEvents.length > 0 ? (
           <div className="space-y-4">
@@ -356,7 +356,7 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
                     <span className="text-lg">{getEventIcon(event.type, event.status)}</span>
                   </div>
                   {index < filteredEvents.length - 1 && (
-                    <div className="w-0.5 h-full bg-gray-200 flex-1 mt-2"></div>
+                    <div className="w-0.5 h-full bg-brand-border flex-1 mt-2"></div>
                   )}
                 </div>
 
@@ -364,20 +364,20 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
                 <div className="flex-1 pb-8">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="font-semibold text-gray-900">{event.action}</h3>
-                      <p className="text-sm text-gray-600 mt-1">{event.details}</p>
+                      <h3 className="font-semibold text-brand-text">{event.action}</h3>
+                      <p className="text-sm text-brand-text-muted mt-1">{event.details}</p>
                       {event.metadata && Object.keys(event.metadata).length > 0 && (
                         <details className="mt-2">
-                          <summary className="text-xs text-blue-600 cursor-pointer">
+                          <summary className="text-xs text-brand-info cursor-pointer">
                             View details
                           </summary>
-                          <pre className="mt-2 text-xs bg-gray-50 p-2 rounded overflow-x-auto">
+                          <pre className="mt-2 text-xs bg-brand-surface p-2 rounded overflow-x-auto">
                             {JSON.stringify(event.metadata, null, 2)}
                           </pre>
                         </details>
                       )}
                     </div>
-                    <span className="text-xs text-gray-500 whitespace-nowrap ml-4">
+                    <span className="text-xs text-brand-text-light whitespace-nowrap ml-4">
                       {new Date(event.timestamp).toLocaleString()}
                     </span>
                   </div>
@@ -387,7 +387,7 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
           </div>
         ) : (
           <div className="text-center py-12">
-            <p className="text-gray-600">No timeline events found</p>
+            <p className="text-brand-text-muted">No timeline events found</p>
           </div>
         )}
       </div>

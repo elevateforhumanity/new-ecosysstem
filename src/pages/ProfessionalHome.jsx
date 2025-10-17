@@ -167,16 +167,16 @@ export default function ProfessionalHome() {
         </section>
 
         {/* ABOUT + MISSION SECTION */}
-        <section className="py-16 px-4 bg-gray-50">
+        <section className="py-16 px-4 bg-brand-surface">
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold mb-6 text-gray-900">
+              <h2 className="text-4xl font-bold mb-6 text-brand-text">
                 Building Pathways to Opportunity
               </h2>
-              <p className="text-lg text-gray-700 mb-4 leading-relaxed">
+              <p className="text-lg text-brand-text mb-4 leading-relaxed">
                 At Elevate for Humanity Career & Technical Institute, we bridge education and employment through certified workforce training, entrepreneurship support, and community development.
               </p>
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+              <p className="text-lg text-brand-text mb-6 leading-relaxed">
                 As a registered ETPL provider and DOL apprenticeship sponsor, we create equitable pathways for individuals to gain skills, certifications, and sustainable careers.
               </p>
               <Link 
@@ -187,7 +187,7 @@ export default function ProfessionalHome() {
               </Link>
             </div>
             <div className="bg-brand-surface rounded-lg p-8 h-64 flex items-center justify-center">
-              <p className="text-gray-500 text-center">
+              <p className="text-brand-text-light text-center">
                 [Hero Image: Community members learning together in training lab]
               </p>
             </div>
@@ -197,25 +197,25 @@ export default function ProfessionalHome() {
         {/* FEATURED PROGRAMS */}
         <section className="py-16 px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-4 text-gray-900">
+            <h2 className="text-4xl font-bold text-center mb-4 text-brand-text">
               Featured Programs
             </h2>
-            <p className="text-center text-gray-600 mb-12 text-lg">
+            <p className="text-center text-brand-text-muted mb-12 text-lg">
               Discover career pathways designed for your success
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {featuredPrograms.map((program, index) => (
                 <div 
                   key={index}
-                  className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-blue-500 hover:shadow-lg transition-all"
+                  className="bg-white border-2 border-brand-border rounded-lg p-6 hover:border-blue-500 hover:shadow-lg transition-all"
                 >
                   <div className="text-5xl mb-4">{program.icon}</div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900">{program.title}</h3>
-                  <p className="text-sm text-blue-600 font-semibold mb-3">{program.subtitle}</p>
-                  <p className="text-gray-600 mb-4">{program.description}</p>
+                  <h3 className="text-xl font-bold mb-2 text-brand-text">{program.title}</h3>
+                  <p className="text-sm text-brand-info font-semibold mb-3">{program.subtitle}</p>
+                  <p className="text-brand-text-muted mb-4">{program.description}</p>
                   <Link 
                     to={program.link}
-                    className="text-blue-600 font-semibold hover:text-brand-info inline-flex items-center"
+                    className="text-brand-info font-semibold hover:text-brand-info inline-flex items-center"
                   >
                     Learn More →
                   </Link>
@@ -226,19 +226,19 @@ export default function ProfessionalHome() {
         </section>
 
         {/* PARTNER & EMPLOYER STRIP */}
-        <section className="py-12 px-4 bg-gray-100">
+        <section className="py-12 px-4 bg-brand-surface-dark">
           <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-2xl font-bold mb-6 text-gray-900">
+            <h2 className="text-2xl font-bold mb-6 text-brand-text">
               Our Partnerships Strengthen Communities
             </h2>
-            <p className="text-gray-600 mb-8">
+            <p className="text-brand-text-muted mb-8">
               Together, we're creating job-ready futures
             </p>
             <div className="flex flex-wrap justify-center gap-8 items-center">
               {partners.map((partner, index) => (
                 <div 
                   key={index}
-                  className="bg-white px-6 py-4 rounded-lg shadow-sm border border-gray-200 font-semibold text-gray-700"
+                  className="bg-white px-6 py-4 rounded-lg shadow-sm border border-brand-border font-semibold text-brand-text"
                 >
                   {partner}
                 </div>
@@ -258,32 +258,32 @@ export default function ProfessionalHome() {
         {/* INNOVATION SECTION */}
         <section className="py-16 px-4 bg-gradient-to-r from-purple-50 to-blue-50">
           <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-6 text-gray-900">
+            <h2 className="text-4xl font-bold mb-6 text-brand-text">
               Powered by Innovation
             </h2>
-            <p className="text-lg text-gray-700 mb-8 max-w-3xl mx-auto">
+            <p className="text-lg text-brand-text mb-8 max-w-3xl mx-auto">
               Elevate for Humanity's ecosystem integrates AI learning assistants, real-time data analytics, and secure cloud infrastructure—connecting learners, employers, and funders through one unified platform.
             </p>
             <div className="grid md:grid-cols-4 gap-6 mt-12">
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 <div className="text-3xl mb-3">📊</div>
                 <h3 className="font-bold mb-2">Real-time Data</h3>
-                <p className="text-sm text-gray-600">Job placement analytics</p>
+                <p className="text-sm text-brand-text-muted">Job placement analytics</p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 <div className="text-3xl mb-3">✅</div>
                 <h3 className="font-bold mb-2">Compliance</h3>
-                <p className="text-sm text-gray-600">Automated reporting</p>
+                <p className="text-sm text-brand-text-muted">Automated reporting</p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 <div className="text-3xl mb-3">🤖</div>
                 <h3 className="font-bold mb-2">AI Tutoring</h3>
-                <p className="text-sm text-gray-600">Personalized learning</p>
+                <p className="text-sm text-brand-text-muted">Personalized learning</p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 <div className="text-3xl mb-3">🔒</div>
                 <h3 className="font-bold mb-2">Secure</h3>
-                <p className="text-sm text-gray-600">Cloud infrastructure</p>
+                <p className="text-sm text-brand-text-muted">Cloud infrastructure</p>
               </div>
             </div>
           </div>
@@ -307,18 +307,18 @@ export default function ProfessionalHome() {
         {/* TESTIMONIALS */}
         <section className="py-16 px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-12 text-gray-900">
+            <h2 className="text-4xl font-bold text-center mb-12 text-brand-text">
               Success Stories
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
               {testimonials.map((testimonial, index) => (
                 <div 
                   key={index}
-                  className="bg-gray-50 p-8 rounded-lg border-l-4 border-blue-500"
+                  className="bg-brand-surface p-8 rounded-lg border-l-4 border-blue-500"
                 >
-                  <p className="text-gray-700 mb-4 italic">"{testimonial.quote}"</p>
-                  <div className="font-semibold text-gray-900">{testimonial.author}</div>
-                  <div className="text-sm text-gray-600">{testimonial.role}</div>
+                  <p className="text-brand-text mb-4 italic">"{testimonial.quote}"</p>
+                  <div className="font-semibold text-brand-text">{testimonial.author}</div>
+                  <div className="text-sm text-brand-text-muted">{testimonial.role}</div>
                 </div>
               ))}
             </div>
@@ -337,13 +337,13 @@ export default function ProfessionalHome() {
             <div className="flex flex-wrap gap-4 justify-center">
               <Link 
                 to="/donate" 
-                className="bg-white text-green-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-green-50 transition-colors shadow-lg"
+                className="bg-white text-brand-success px-8 py-4 rounded-lg font-semibold text-lg hover:bg-green-50 transition-colors shadow-lg"
               >
                 Donate
               </Link>
               <Link 
                 to="/volunteer" 
-                className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-green-600 transition-colors"
+                className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-brand-success transition-colors"
               >
                 Volunteer
               </Link>

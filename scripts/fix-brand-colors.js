@@ -71,6 +71,18 @@ const COLOR_MAP = {
   '#1f2937': 'var(--brand-text)',
   '#374151': 'var(--brand-text)',
   '#111827': 'var(--brand-text)',
+  
+  // Additional grays (common in codebase)
+  '#666': 'var(--brand-text-muted)',
+  '#666666': 'var(--brand-text-muted)',
+  '#e0e0e0': 'var(--brand-border)',
+  '#ddd': 'var(--brand-border)',
+  '#dddddd': 'var(--brand-border)',
+  '#e2e8f0': 'var(--brand-border)',
+  '#64748b': 'var(--brand-text-muted)',
+  
+  // Additional blues
+  '#007bff': 'var(--brand-info)',
 };
 
 // Tailwind class mappings
@@ -110,6 +122,25 @@ const TAILWIND_CLASS_MAP = {
   'bg-orange-100': 'bg-brand-surface',
   'bg-pink-100': 'bg-brand-surface',
   
+  // Gray backgrounds
+  'bg-gray-50': 'bg-brand-surface',
+  'bg-gray-100': 'bg-brand-surface-dark',
+  'bg-gray-200': 'bg-brand-border',
+  
+  // Text colors
+  'text-gray-500': 'text-brand-text-light',
+  'text-gray-600': 'text-brand-text-muted',
+  'text-gray-700': 'text-brand-text',
+  'text-gray-800': 'text-brand-text',
+  'text-gray-900': 'text-brand-text',
+  
+  // Blue text
+  'text-blue-600': 'text-brand-info',
+  'text-blue-700': 'text-brand-info',
+  
+  // Green text
+  'text-green-600': 'text-brand-success',
+  
   // Text colors
   'text-indigo-700': 'text-brand-info',
   'text-indigo-800': 'text-brand-info',
@@ -133,6 +164,8 @@ const TAILWIND_CLASS_MAP = {
   'border-slate-200': 'border-brand-border',
   'border-slate-300': 'border-brand-border-dark',
   'border-amber-200': 'border-brand-border',
+  'border-gray-200': 'border-brand-border',
+  'border-gray-300': 'border-brand-border-dark',
   
   // Hover states
   'hover:bg-indigo-100': 'hover:bg-brand-surface-dark',
@@ -143,8 +176,20 @@ const TAILWIND_CLASS_MAP = {
   'hover:bg-amber-600': 'hover:bg-brand-warning-hover',
   'hover:bg-amber-700': 'hover:bg-brand-warning-hover',
   'hover:bg-green-700': 'hover:bg-brand-success-hover',
+  'hover:bg-gray-50': 'hover:bg-brand-surface',
+  'hover:bg-gray-100': 'hover:bg-brand-surface-dark',
   
   'hover:text-indigo-600': 'hover:text-brand-info',
+  'hover:text-blue-600': 'hover:text-brand-info',
+  
+  // Ring colors (focus states)
+  'ring-blue-500': 'ring-brand-focus',
+  'ring-indigo-500': 'ring-brand-focus',
+  
+  // Focus states
+  'focus:border-blue-500': 'focus:border-brand-primary',
+  'focus:ring-blue-200': 'focus:ring-brand-focus',
+  'focus:ring-blue-500': 'focus:ring-brand-focus',
 };
 
 // Files/directories to ignore
@@ -189,6 +234,24 @@ class BrandColorFixer {
         count += matches.length;
       }
     });
+
+    return { content: modified, count };
+  }
+
+  fixRgbaColors(content) {
+    let modified = content;
+    let count = 0;
+
+    // Common RGBA patterns to brand tokens
+    const rgbaMap = {
+      'rgba(0,0,0,0.1)': 'rgba(0, 0, 0, 0.1)',  // Keep common transparencies
+      'rgba(0, 0, 0, 0.1)': 'rgba(0, 0, 0, 0.1)',
+      'rgba(0,0,0,0.05)': 'rgba(0, 0, 0, 0.05)',
+      'rgba(0, 0, 0, 0.05)': 'rgba(0, 0, 0, 0.05)',
+    };
+
+    // Note: RGBA is often used for shadows/opacity, which are context-specific
+    // We'll leave most RGBA as-is for now, but normalize spacing
 
     return { content: modified, count };
   }

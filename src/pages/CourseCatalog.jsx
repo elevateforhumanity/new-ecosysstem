@@ -135,8 +135,8 @@ export default function CourseCatalog() {
         {searchTerm === "" && selectedCategory === "all" && (
           <section className="mb-16">
             <div className="flex items-center gap-3 mb-6">
-              <TrendingUp className="h-6 w-6 text-blue-600" />
-              <h2 className="text-3xl font-bold text-gray-900">Featured Courses</h2>
+              <TrendingUp className="h-6 w-6 text-brand-info" />
+              <h2 className="text-3xl font-bold text-brand-text">Featured Courses</h2>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {featuredCourses.map((course) => (
@@ -157,7 +157,7 @@ export default function CourseCatalog() {
                         <span className="font-semibold">{course.rating}</span>
                       </div>
                     </div>
-                    <CardTitle className="text-xl group-hover:text-blue-600 transition-colors">
+                    <CardTitle className="text-xl group-hover:text-brand-info transition-colors">
                       {course.title}
                     </CardTitle>
                     <CardDescription className="text-base line-clamp-2">
@@ -196,7 +196,7 @@ export default function CourseCatalog() {
 
         {/* All Courses with Tabs */}
         <section>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">
+          <h2 className="text-3xl font-bold text-brand-text mb-6">
             {searchTerm ? `Search Results (${filteredCourses.length})` : "All Courses"}
           </h2>
           
@@ -229,7 +229,7 @@ export default function CourseCatalog() {
                           <span className="font-semibold">{course.rating}</span>
                         </div>
                       </div>
-                      <CardTitle className="text-lg group-hover:text-blue-600 transition-colors">
+                      <CardTitle className="text-lg group-hover:text-brand-info transition-colors">
                         {course.title}
                       </CardTitle>
                       <CardDescription className="line-clamp-2">

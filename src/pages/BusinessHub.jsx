@@ -13,12 +13,12 @@ export default function BusinessHub() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
             <div className="flex items-center">
-              <h1 className="text-2xl font-bold text-gray-900">Elevate for Humanity</h1>
+              <h1 className="text-2xl font-bold text-brand-text">Elevate for Humanity</h1>
             </div>
             <nav className="hidden md:flex space-x-8">
-              <a href="/programs" className="text-gray-500 hover:text-gray-900">Programs</a>
-              <a href="/partners" className="text-gray-500 hover:text-gray-900">Partners</a>
-              <a href="/connect" className="text-gray-500 hover:text-gray-900">Contact</a>
+              <a href="/programs" className="text-brand-text-light hover:text-brand-text">Programs</a>
+              <a href="/partners" className="text-brand-text-light hover:text-brand-text">Partners</a>
+              <a href="/connect" className="text-brand-text-light hover:text-brand-text">Contact</a>
             </nav>
           </div>
         </div>
@@ -27,10 +27,10 @@ export default function BusinessHub() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl">
+          <h1 className="text-4xl font-bold text-brand-text sm:text-5xl md:text-6xl">
             Business Hub
           </h1>
-          <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+          <p className="mt-3 max-w-md mx-auto text-base text-brand-text-light sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
             Partner with us to build a skilled workforce. Access talent, training programs, and Elevate Learn2Earn Workforce solutions.
           </p>
           <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
@@ -45,7 +45,7 @@ export default function BusinessHub() {
             <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
               <a
                 href="/connect"
-                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-emerald-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10"
+                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-emerald-600 bg-white hover:bg-brand-surface md:py-4 md:text-lg md:px-10"
               >
                 Contact Us
               </a>
@@ -66,8 +66,8 @@ export default function BusinessHub() {
                       </svg>
                     </span>
                   </div>
-                  <h3 className="mt-8 text-lg font-medium text-gray-900 tracking-tight">Talent Pipeline</h3>
-                  <p className="mt-5 text-base text-gray-500">
+                  <h3 className="mt-8 text-lg font-medium text-brand-text tracking-tight">Talent Pipeline</h3>
+                  <p className="mt-5 text-base text-brand-text-light">
                     Access a pipeline of skilled graduates ready for immediate employment in your industry.
                   </p>
                 </div>
@@ -84,8 +84,8 @@ export default function BusinessHub() {
                       </svg>
                     </span>
                   </div>
-                  <h3 className="mt-8 text-lg font-medium text-gray-900 tracking-tight">Custom Training</h3>
-                  <p className="mt-5 text-base text-gray-500">
+                  <h3 className="mt-8 text-lg font-medium text-brand-text tracking-tight">Custom Training</h3>
+                  <p className="mt-5 text-base text-brand-text-light">
                     Develop customized training programs tailored to your specific industry needs and requirements.
                   </p>
                 </div>
@@ -102,8 +102,8 @@ export default function BusinessHub() {
                       </svg>
                     </span>
                   </div>
-                  <h3 className="mt-8 text-lg font-medium text-gray-900 tracking-tight">Elevate Learn2Earn Workforce</h3>
-                  <p className="mt-5 text-base text-gray-500">
+                  <h3 className="mt-8 text-lg font-medium text-brand-text tracking-tight">Elevate Learn2Earn Workforce</h3>
+                  <p className="mt-5 text-base text-brand-text-light">
                     Comprehensive Elevate Learn2Earn Workforce solutions including upskilling and reskilling programs.
                   </p>
                 </div>
@@ -117,13 +117,13 @@ export default function BusinessHub() {
       <footer className="bg-white">
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
           <div className="flex justify-center space-x-6 md:order-2">
-            <a href="/privacy-policy" className="text-gray-400 hover:text-gray-500">
+            <a href="/privacy-policy" className="text-gray-400 hover:text-brand-text-light">
               Privacy
             </a>
-            <a href="/terms" className="text-gray-400 hover:text-gray-500">
+            <a href="/terms" className="text-gray-400 hover:text-brand-text-light">
               Terms
             </a>
-            <a href="/connect" className="text-gray-400 hover:text-gray-500">
+            <a href="/connect" className="text-gray-400 hover:text-brand-text-light">
               Contact
             </a>
           </div>

@@ -74,7 +74,7 @@ export default function Certificates() {
           <h1 style={{ fontSize: 32, fontWeight: 700, marginBottom: 8 }}>
             My Certificates
           </h1>
-          <p style={{ color: "#666", fontSize: 16 }}>
+          <p style={{ color: "var(--brand-text-muted)", fontSize: 16 }}>
             View, download, and share your earned certificates
           </p>
         </div>
@@ -93,13 +93,13 @@ export default function Certificates() {
               backgroundColor: "#fff",
               padding: 24,
               borderRadius: 8,
-              border: "1px solid #e0e0e0",
+              border: "1px solid var(--brand-border)",
             }}
           >
-            <div style={{ fontSize: 32, fontWeight: 700, color: "#007bff", marginBottom: 8 }}>
+            <div style={{ fontSize: 32, fontWeight: 700, color: "var(--brand-info)", marginBottom: 8 }}>
               {issuedCount}
             </div>
-            <div style={{ fontSize: 14, color: "#666" }}>Certificates Earned</div>
+            <div style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>Certificates Earned</div>
           </div>
 
           <div
@@ -107,13 +107,13 @@ export default function Certificates() {
               backgroundColor: "#fff",
               padding: 24,
               borderRadius: 8,
-              border: "1px solid #e0e0e0",
+              border: "1px solid var(--brand-border)",
             }}
           >
             <div style={{ fontSize: 32, fontWeight: 700, color: "var(--brand-success)", marginBottom: 8 }}>
               {inProgressCount}
             </div>
-            <div style={{ fontSize: 14, color: "#666" }}>In Progress</div>
+            <div style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>In Progress</div>
           </div>
 
           <div
@@ -121,13 +121,13 @@ export default function Certificates() {
               backgroundColor: "#fff",
               padding: 24,
               borderRadius: 8,
-              border: "1px solid #e0e0e0",
+              border: "1px solid var(--brand-border)",
             }}
           >
             <div style={{ fontSize: 32, fontWeight: 700, color: "var(--brand-warning)", marginBottom: 8 }}>
               {certificates.reduce((acc, cert) => acc + (cert.skills?.length || 0), 0)}
             </div>
-            <div style={{ fontSize: 14, color: "#666" }}>Skills Acquired</div>
+            <div style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>Skills Acquired</div>
           </div>
         </div>
 
@@ -137,7 +137,7 @@ export default function Certificates() {
             display: "flex",
             gap: 12,
             marginBottom: 24,
-            borderBottom: "2px solid #e0e0e0",
+            borderBottom: "2px solid var(--brand-border)",
           }}
         >
           <button
@@ -145,9 +145,9 @@ export default function Certificates() {
             style={{
               padding: "12px 24px",
               backgroundColor: "transparent",
-              color: filter === "all" ? "#007bff" : "#666",
+              color: filter === "all" ? "var(--brand-info)" : "var(--brand-text-muted)",
               border: "none",
-              borderBottom: filter === "all" ? "2px solid #007bff" : "2px solid transparent",
+              borderBottom: filter === "all" ? "2px solid var(--brand-info)" : "2px solid transparent",
               fontSize: 14,
               fontWeight: 600,
               cursor: "pointer",
@@ -161,9 +161,9 @@ export default function Certificates() {
             style={{
               padding: "12px 24px",
               backgroundColor: "transparent",
-              color: filter === "issued" ? "#007bff" : "#666",
+              color: filter === "issued" ? "var(--brand-info)" : "var(--brand-text-muted)",
               border: "none",
-              borderBottom: filter === "issued" ? "2px solid #007bff" : "2px solid transparent",
+              borderBottom: filter === "issued" ? "2px solid var(--brand-info)" : "2px solid transparent",
               fontSize: 14,
               fontWeight: 600,
               cursor: "pointer",
@@ -177,9 +177,9 @@ export default function Certificates() {
             style={{
               padding: "12px 24px",
               backgroundColor: "transparent",
-              color: filter === "in-progress" ? "#007bff" : "#666",
+              color: filter === "in-progress" ? "var(--brand-info)" : "var(--brand-text-muted)",
               border: "none",
-              borderBottom: filter === "in-progress" ? "2px solid #007bff" : "2px solid transparent",
+              borderBottom: filter === "in-progress" ? "2px solid var(--brand-info)" : "2px solid transparent",
               fontSize: 14,
               fontWeight: 600,
               cursor: "pointer",
@@ -197,7 +197,7 @@ export default function Certificates() {
               key={cert.id}
               style={{
                 backgroundColor: "#fff",
-                border: "1px solid #e0e0e0",
+                border: "1px solid var(--brand-border)",
                 borderRadius: 8,
                 padding: 24,
                 transition: "box-shadow 0.2s",
@@ -231,7 +231,7 @@ export default function Certificates() {
                   </div>
 
                   {/* Instructor */}
-                  <p style={{ fontSize: 14, color: "#666", marginBottom: 12 }}>
+                  <p style={{ fontSize: 14, color: "var(--brand-text-muted)", marginBottom: 12 }}>
                     Instructor: {cert.instructor}
                   </p>
 
@@ -280,14 +280,14 @@ export default function Certificates() {
                   {cert.status === "in-progress" && cert.progress !== undefined && (
                     <div style={{ marginBottom: 16 }}>
                       <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-                        <span style={{ fontSize: 12, color: "#666" }}>Progress</span>
+                        <span style={{ fontSize: 12, color: "var(--brand-text-muted)" }}>Progress</span>
                         <span style={{ fontSize: 12, fontWeight: 600 }}>{cert.progress}%</span>
                       </div>
                       <div
                         style={{
                           width: "100%",
                           height: 8,
-                          backgroundColor: "#e0e0e0",
+                          backgroundColor: "var(--brand-border)",
                           borderRadius: 4,
                           overflow: "hidden",
                         }}
@@ -296,7 +296,7 @@ export default function Certificates() {
                           style={{
                             width: `${cert.progress}%`,
                             height: "100%",
-                            backgroundColor: "#007bff",
+                            backgroundColor: "var(--brand-info)",
                             transition: "width 0.3s",
                           }}
                         />
@@ -335,13 +335,13 @@ export default function Certificates() {
                   style={{
                     width: 120,
                     height: 90,
-                    backgroundColor: cert.status === "issued" ? "#f8f8f8" : "#e0e0e0",
+                    backgroundColor: cert.status === "issued" ? "#f8f8f8" : "var(--brand-border)",
                     borderRadius: 4,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     marginLeft: 24,
-                    border: "1px solid #ddd",
+                    border: "1px solid var(--brand-border)",
                   }}
                 >
                   <span style={{ fontSize: 32 }}>
@@ -364,7 +364,7 @@ export default function Certificates() {
                   <button
                     style={{
                       padding: "8px 20px",
-                      backgroundColor: "#007bff",
+                      backgroundColor: "var(--brand-info)",
                       color: "#fff",
                       border: "none",
                       borderRadius: 6,
@@ -379,8 +379,8 @@ export default function Certificates() {
                     style={{
                       padding: "8px 20px",
                       backgroundColor: "#fff",
-                      color: "#007bff",
-                      border: "1px solid #007bff",
+                      color: "var(--brand-info)",
+                      border: "1px solid var(--brand-info)",
                       borderRadius: 6,
                       fontSize: 14,
                       fontWeight: 500,
@@ -393,8 +393,8 @@ export default function Certificates() {
                     style={{
                       padding: "8px 20px",
                       backgroundColor: "#fff",
-                      color: "#666",
-                      border: "1px solid #ddd",
+                      color: "var(--brand-text-muted)",
+                      border: "1px solid var(--brand-border)",
                       borderRadius: 6,
                       fontSize: 14,
                       fontWeight: 500,
@@ -449,7 +449,7 @@ export default function Certificates() {
             <h3 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>
               No certificates yet
             </h3>
-            <p style={{ fontSize: 14, color: "#666", marginBottom: 24 }}>
+            <p style={{ fontSize: 14, color: "var(--brand-text-muted)", marginBottom: 24 }}>
               Complete courses to earn certificates and showcase your skills
             </p>
             <Link
@@ -457,7 +457,7 @@ export default function Certificates() {
               style={{
                 display: "inline-block",
                 padding: "12px 24px",
-                backgroundColor: "#007bff",
+                backgroundColor: "var(--brand-info)",
                 color: "#fff",
                 borderRadius: 6,
                 fontSize: 14,
@@ -482,13 +482,13 @@ export default function Certificates() {
           <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}>
             Certificate Verification
           </h3>
-          <p style={{ fontSize: 14, color: "#666", marginBottom: 16, lineHeight: 1.6 }}>
+          <p style={{ fontSize: 14, color: "var(--brand-text-muted)", marginBottom: 16, lineHeight: 1.6 }}>
             All certificates include a unique verification code. Employers or institutions can verify the authenticity of your certificate by entering the certificate ID on our verification page.
           </p>
           <Link
             to="/verify-certificate"
             style={{
-              color: "#007bff",
+              color: "var(--brand-info)",
               textDecoration: "none",
               fontSize: 14,
               fontWeight: 500,

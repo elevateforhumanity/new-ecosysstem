@@ -11,8 +11,8 @@ export default function AccessibilitySettings() {
     <AppLayout>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: 32 }}>
         <h1 style={{ fontSize: 32, fontWeight: 700, marginBottom: 32 }}>Accessibility Settings</h1>
-        <div style={{ backgroundColor: "#fff", padding: 24, borderRadius: 8, border: "1px solid #e0e0e0" }}>
-          <p style={{ fontSize: 16, color: "#666" }}>Configure accessibility options for better user experience.</p>
+        <div style={{ backgroundColor: "#fff", padding: 24, borderRadius: 8, border: "1px solid var(--brand-border)" }}>
+          <p style={{ fontSize: 16, color: "var(--brand-text-muted)" }}>Configure accessibility options for better user experience.</p>
         </div>
       </div>
     </AppLayout>

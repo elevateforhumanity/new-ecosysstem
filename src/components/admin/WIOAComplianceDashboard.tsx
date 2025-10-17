@@ -271,7 +271,7 @@ export function WIOAComplianceDashboard() {
       case 'exceeds':
       case 'compliant':
       case 'completed':
-        return 'text-green-600 bg-brand-surface';
+        return 'text-brand-success bg-brand-surface';
       case 'meets':
       case 'warning':
       case 'in_progress':
@@ -281,9 +281,9 @@ export function WIOAComplianceDashboard() {
       case 'overdue':
         return 'text-red-600 bg-brand-surface';
       case 'upcoming':
-        return 'text-blue-600 bg-brand-surface';
+        return 'text-brand-info bg-brand-surface';
       default:
-        return 'text-gray-600 bg-gray-100';
+        return 'text-brand-text-muted bg-brand-surface-dark';
     }
   };
 
@@ -292,8 +292,8 @@ export function WIOAComplianceDashboard() {
       case 'critical': return 'text-red-600 bg-brand-surface border-red-200';
       case 'high': return 'text-orange-600 bg-brand-surface border-orange-200';
       case 'medium': return 'text-yellow-600 bg-yellow-100 border-yellow-200';
-      case 'low': return 'text-blue-600 bg-brand-surface border-blue-200';
-      default: return 'text-gray-600 bg-gray-100 border-gray-200';
+      case 'low': return 'text-brand-info bg-brand-surface border-blue-200';
+      default: return 'text-brand-text-muted bg-brand-surface-dark border-brand-border';
     }
   };
 
@@ -301,7 +301,7 @@ export function WIOAComplianceDashboard() {
     return (
       <div className="text-center py-8">
         <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-        <p className="mt-4 text-gray-600">Loading WIOA compliance data...</p>
+        <p className="mt-4 text-brand-text-muted">Loading WIOA compliance data...</p>
       </div>
     );
   }
@@ -310,14 +310,14 @@ export function WIOAComplianceDashboard() {
     <div className="wioa-compliance-dashboard">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">📊 WIOA Compliance Dashboard</h2>
-          <p className="text-gray-600">Real-time performance monitoring and automated reporting</p>
+          <h2 className="text-2xl font-bold text-brand-text">📊 WIOA Compliance Dashboard</h2>
+          <p className="text-brand-text-muted">Real-time performance monitoring and automated reporting</p>
         </div>
         <div className="flex items-center space-x-4">
           <select
             value={selectedTimeframe}
             onChange={(e) => setSelectedTimeframe(e.target.value)}
-            className="border border-gray-300 rounded px-3 py-2 text-sm"
+            className="border border-brand-border-dark rounded px-3 py-2 text-sm"
           >
             <option value="current_quarter">Current Quarter</option>
             <option value="last_quarter">Last Quarter</option>
@@ -331,7 +331,7 @@ export function WIOAComplianceDashboard() {
               onChange={(e) => setAutoReporting(e.target.checked)}
               className="mr-2"
             />
-            <span className="text-sm text-gray-700">Auto Reporting</span>
+            <span className="text-sm text-brand-text">Auto Reporting</span>
           </label>
           <label className="flex items-center">
             <input
@@ -340,7 +340,7 @@ export function WIOAComplianceDashboard() {
               onChange={(e) => setRealTimeMode(e.target.checked)}
               className="mr-2"
             />
-            <span className="text-sm text-gray-700">Real-time Updates</span>
+            <span className="text-sm text-brand-text">Real-time Updates</span>
           </label>
         </div>
       </div>
@@ -349,12 +349,12 @@ export function WIOAComplianceDashboard() {
       <div className="bg-white border rounded-lg p-6 mb-6">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">Overall Compliance Score</h3>
-            <p className="text-gray-600">Based on all WIOA performance indicators</p>
+            <h3 className="text-lg font-semibold text-brand-text">Overall Compliance Score</h3>
+            <p className="text-brand-text-muted">Based on all WIOA performance indicators</p>
           </div>
           <div className="text-right">
-            <div className="text-4xl font-bold text-green-600">{metrics.complianceStatus.overallScore}%</div>
-            <div className="text-sm text-gray-500">Excellent Standing</div>
+            <div className="text-4xl font-bold text-brand-success">{metrics.complianceStatus.overallScore}%</div>
+            <div className="text-sm text-brand-text-light">Excellent Standing</div>
           </div>
         </div>
       </div>
@@ -362,7 +362,7 @@ export function WIOAComplianceDashboard() {
       {/* Real-time Alerts */}
       {metrics.realTimeAlerts.length > 0 && (
         <div className="mb-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">🚨 Active Alerts</h3>
+          <h3 className="text-lg font-semibold text-brand-text mb-4">🚨 Active Alerts</h3>
           <div className="space-y-3">
             {metrics.realTimeAlerts.map((alert) => (
               <div key={alert.id} className={`border rounded-lg p-4 ${getSeverityColor(alert.severity)}`}>
@@ -374,9 +374,9 @@ export function WIOAComplianceDashboard() {
                   </div>
                   <div className="flex items-center space-x-2">
                     {alert.autoResolution && (
-                      <span className="text-xs bg-brand-surface text-blue-700 px-2 py-1 rounded">🤖 Auto-resolving</span>
+                      <span className="text-xs bg-brand-surface text-brand-info px-2 py-1 rounded">🤖 Auto-resolving</span>
                     )}
-                    <button className="text-xs bg-white px-3 py-1 rounded border hover:bg-gray-50">
+                    <button className="text-xs bg-white px-3 py-1 rounded border hover:bg-brand-surface">
                       Resolve
                     </button>
                   </div>
@@ -389,12 +389,12 @@ export function WIOAComplianceDashboard() {
 
       {/* Performance Indicators */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">📈 WIOA Performance Indicators</h3>
+        <h3 className="text-lg font-semibold text-brand-text mb-4">📈 WIOA Performance Indicators</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {metrics.performanceIndicators.map((indicator, index) => (
             <div key={index} className="bg-white border rounded-lg p-6">
               <div className="flex items-start justify-between mb-4">
-                <h4 className="font-medium text-gray-900 text-sm">{indicator.indicator}</h4>
+                <h4 className="font-medium text-brand-text text-sm">{indicator.indicator}</h4>
                 <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(indicator.status)}`}>
                   {indicator.status.toUpperCase()}
                 </span>
@@ -402,11 +402,11 @@ export function WIOAComplianceDashboard() {
               
               <div className="mb-4">
                 <div className="flex items-baseline space-x-2">
-                  <span className="text-2xl font-bold text-gray-900">
+                  <span className="text-2xl font-bold text-brand-text">
                     {indicator.indicator.includes('Earnings') ? '$' : ''}{indicator.actual}
                     {!indicator.indicator.includes('Earnings') ? '%' : ''}
                   </span>
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm text-brand-text-light">
                     Target: {indicator.indicator.includes('Earnings') ? '$' : ''}{indicator.target}
                     {!indicator.indicator.includes('Earnings') ? '%' : ''}
                   </span>
@@ -414,7 +414,7 @@ export function WIOAComplianceDashboard() {
               </div>
 
               <div className="mb-4">
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="w-full bg-brand-border rounded-full h-2">
                   <div 
                     className={`h-2 rounded-full ${
                       indicator.actual >= indicator.target ? 'bg-green-500' : 'bg-yellow-500'
@@ -424,7 +424,7 @@ export function WIOAComplianceDashboard() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between text-xs text-gray-500">
+              <div className="flex items-center justify-between text-xs text-brand-text-light">
                 <span>
                   {indicator.trend === 'improving' ? '📈' : 
                    indicator.trend === 'declining' ? '📉' : '➡️'} {indicator.trend}
@@ -439,41 +439,41 @@ export function WIOAComplianceDashboard() {
       {/* Participant Demographics */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <div className="bg-white border rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">👥 Participant Demographics</h3>
+          <h3 className="text-lg font-semibold text-brand-text mb-4">👥 Participant Demographics</h3>
           <div className="space-y-3">
             <div className="flex justify-between items-center">
-              <span className="text-gray-600">Total Participants</span>
-              <span className="font-bold text-gray-900">{metrics.participantData.totalParticipants}</span>
+              <span className="text-brand-text-muted">Total Participants</span>
+              <span className="font-bold text-brand-text">{metrics.participantData.totalParticipants}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-gray-600">Veterans</span>
+              <span className="text-brand-text-muted">Veterans</span>
               <span className="font-medium">{metrics.participantData.demographics.veterans}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-gray-600">Dislocated Workers</span>
+              <span className="text-brand-text-muted">Dislocated Workers</span>
               <span className="font-medium">{metrics.participantData.demographics.dislocatedWorkers}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-gray-600">Low Income</span>
+              <span className="text-brand-text-muted">Low Income</span>
               <span className="font-medium">{metrics.participantData.demographics.lowIncome}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-gray-600">Youth (14-24)</span>
+              <span className="text-brand-text-muted">Youth (14-24)</span>
               <span className="font-medium">{metrics.participantData.demographics.youth}</span>
             </div>
           </div>
         </div>
 
         <div className="bg-white border rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">📚 Program Performance</h3>
+          <h3 className="text-lg font-semibold text-brand-text mb-4">📚 Program Performance</h3>
           <div className="space-y-3">
             {metrics.participantData.byProgram.map((program, index) => (
-              <div key={index} className="border-b border-gray-200 last:border-b-0 pb-2 last:pb-0">
+              <div key={index} className="border-b border-brand-border last:border-b-0 pb-2 last:pb-0">
                 <div className="flex justify-between items-center mb-1">
-                  <span className="font-medium text-gray-900">{program.program}</span>
-                  <span className="text-sm text-gray-500">{program.participants} enrolled</span>
+                  <span className="font-medium text-brand-text">{program.program}</span>
+                  <span className="text-sm text-brand-text-light">{program.participants} enrolled</span>
                 </div>
-                <div className="flex justify-between text-sm text-gray-600">
+                <div className="flex justify-between text-sm text-brand-text-muted">
                   <span>Completions: {program.completions}</span>
                   <span>Placements: {program.placements}</span>
                   <span>Rate: {((program.placements / program.participants) * 100).toFixed(1)}%</span>
@@ -486,23 +486,23 @@ export function WIOAComplianceDashboard() {
 
       {/* Reporting Schedule */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">📅 Reporting Schedule</h3>
+        <h3 className="text-lg font-semibold text-brand-text mb-4">📅 Reporting Schedule</h3>
         <div className="bg-white border rounded-lg overflow-hidden">
           <table className="min-w-full">
-            <thead className="bg-gray-50">
+            <thead className="bg-brand-surface">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Report Type</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Due Date</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Auto-Generated</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Report Type</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Due Date</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Status</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Auto-Generated</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
               {metrics.reportingSchedule.map((report, index) => (
                 <tr key={index}>
-                  <td className="px-6 py-4 font-medium text-gray-900">{report.reportType}</td>
-                  <td className="px-6 py-4 text-sm text-gray-600">{report.dueDate}</td>
+                  <td className="px-6 py-4 font-medium text-brand-text">{report.reportType}</td>
+                  <td className="px-6 py-4 text-sm text-brand-text-muted">{report.dueDate}</td>
                   <td className="px-6 py-4">
                     <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(report.status)}`}>
                       {report.status.replace('_', ' ').toUpperCase()}
@@ -512,11 +512,11 @@ export function WIOAComplianceDashboard() {
                     {report.autoGenerated ? (
                       <span className="text-xs bg-brand-surface text-green-700 px-2 py-1 rounded">🤖 Yes</span>
                     ) : (
-                      <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded">Manual</span>
+                      <span className="text-xs bg-brand-surface-dark text-brand-text px-2 py-1 rounded">Manual</span>
                     )}
                   </td>
                   <td className="px-6 py-4">
-                    <button className="text-xs bg-brand-surface text-blue-700 px-3 py-1 rounded hover:bg-blue-200">
+                    <button className="text-xs bg-brand-surface text-brand-info px-3 py-1 rounded hover:bg-blue-200">
                       {report.status === 'completed' ? 'View' : 'Generate'}
                     </button>
                   </td>
@@ -529,20 +529,20 @@ export function WIOAComplianceDashboard() {
 
       {/* Compliance Areas */}
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">✅ Compliance Areas</h3>
+        <h3 className="text-lg font-semibold text-brand-text mb-4">✅ Compliance Areas</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {metrics.complianceStatus.areas.map((area, index) => (
             <div key={index} className="bg-white border rounded-lg p-6">
               <div className="flex items-start justify-between mb-4">
-                <h4 className="font-medium text-gray-900">{area.area}</h4>
+                <h4 className="font-medium text-brand-text">{area.area}</h4>
                 <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(area.status)}`}>
                   {area.status.replace('_', ' ').toUpperCase()}
                 </span>
               </div>
               
               <div className="mb-4">
-                <div className="text-2xl font-bold text-gray-900 mb-1">{area.score}%</div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="text-2xl font-bold text-brand-text mb-1">{area.score}%</div>
+                <div className="w-full bg-brand-border rounded-full h-2">
                   <div 
                     className={`h-2 rounded-full ${
                       area.score >= 90 ? 'bg-green-500' : 
@@ -553,7 +553,7 @@ export function WIOAComplianceDashboard() {
                 </div>
               </div>
 
-              <div className="text-xs text-gray-500 space-y-1">
+              <div className="text-xs text-brand-text-light space-y-1">
                 <div>Last Audit: {area.lastAudit}</div>
                 <div>Next Review: {area.nextReview}</div>
               </div>

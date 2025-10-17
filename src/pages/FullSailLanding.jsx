@@ -107,7 +107,7 @@ const FullSailLanding = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-brand-surface">
       {/* Header Banner */}
       <div className="bg-gray-900 text-white text-center py-3 text-sm">
         <span className="bg-orange-500 text-white px-3 py-1 rounded font-bold mr-2">
@@ -151,19 +151,19 @@ const FullSailLanding = () => {
             </div>
 
             {/* Lead Capture Form */}
-            <div className="bg-white text-gray-800 p-8 lg:p-10 shadow-2xl">
+            <div className="bg-white text-brand-text p-8 lg:p-10 shadow-2xl">
               <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                <h2 className="text-2xl font-bold text-brand-text mb-2">
                   Get Program Info
                 </h2>
-                <p className="text-gray-600">
+                <p className="text-brand-text-muted">
                   Find out if you qualify for free training
                 </p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
-                  <label htmlFor="firstName" className="block font-bold text-gray-800 mb-1">
+                  <label htmlFor="firstName" className="block font-bold text-brand-text mb-1">
                     First Name *
                   </label>
                   <input
@@ -172,13 +172,13 @@ const FullSailLanding = () => {
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded focus:border-orange-500 focus:outline-none text-base"
+                    className="w-full px-4 py-3 border-2 border-brand-border-dark rounded focus:border-orange-500 focus:outline-none text-base"
                     required
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="lastName" className="block font-bold text-gray-800 mb-1">
+                  <label htmlFor="lastName" className="block font-bold text-brand-text mb-1">
                     Last Name *
                   </label>
                   <input
@@ -187,13 +187,13 @@ const FullSailLanding = () => {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded focus:border-orange-500 focus:outline-none text-base"
+                    className="w-full px-4 py-3 border-2 border-brand-border-dark rounded focus:border-orange-500 focus:outline-none text-base"
                     required
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block font-bold text-gray-800 mb-1">
+                  <label htmlFor="email" className="block font-bold text-brand-text mb-1">
                     Email Address *
                   </label>
                   <input
@@ -202,13 +202,13 @@ const FullSailLanding = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded focus:border-orange-500 focus:outline-none text-base"
+                    className="w-full px-4 py-3 border-2 border-brand-border-dark rounded focus:border-orange-500 focus:outline-none text-base"
                     required
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="phone" className="block font-bold text-gray-800 mb-1">
+                  <label htmlFor="phone" className="block font-bold text-brand-text mb-1">
                     Phone Number *
                   </label>
                   <input
@@ -217,13 +217,13 @@ const FullSailLanding = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded focus:border-orange-500 focus:outline-none text-base"
+                    className="w-full px-4 py-3 border-2 border-brand-border-dark rounded focus:border-orange-500 focus:outline-none text-base"
                     required
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="program" className="block font-bold text-gray-800 mb-1">
+                  <label htmlFor="program" className="block font-bold text-brand-text mb-1">
                     Program Interest *
                   </label>
                   <select
@@ -231,7 +231,7 @@ const FullSailLanding = () => {
                     name="program"
                     value={formData.program}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded focus:border-orange-500 focus:outline-none text-base bg-white"
+                    className="w-full px-4 py-3 border-2 border-brand-border-dark rounded focus:border-orange-500 focus:outline-none text-base bg-white"
                     required
                   >
                     <option value="">Select a Program</option>
@@ -245,7 +245,7 @@ const FullSailLanding = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="employment" className="block font-bold text-gray-800 mb-1">
+                  <label htmlFor="employment" className="block font-bold text-brand-text mb-1">
                     Current Employment Status *
                   </label>
                   <select
@@ -253,7 +253,7 @@ const FullSailLanding = () => {
                     name="employment"
                     value={formData.employment}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded focus:border-orange-500 focus:outline-none text-base bg-white"
+                    className="w-full px-4 py-3 border-2 border-brand-border-dark rounded focus:border-orange-500 focus:outline-none text-base bg-white"
                     required
                   >
                     <option value="">Select Status</option>
@@ -271,7 +271,7 @@ const FullSailLanding = () => {
                   Get Free Program Info
                 </button>
 
-                <p className="text-xs text-gray-600 leading-relaxed mt-4">
+                <p className="text-xs text-brand-text-muted leading-relaxed mt-4">
                   By submitting this form, you consent to receive emails and texts from Elevate for Humanity. 
                   You may opt out at any time. Message and data rates may apply.
                 </p>
@@ -282,9 +282,9 @@ const FullSailLanding = () => {
       </div>
 
       {/* Programs Section */}
-      <div className="py-16 px-6 bg-gray-50">
+      <div className="py-16 px-6 bg-brand-surface">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
+          <h2 className="text-4xl font-bold text-center text-brand-text mb-12">
             Choose Your Career Path
           </h2>
           
@@ -295,15 +295,15 @@ const FullSailLanding = () => {
                 className="bg-white rounded-lg p-8 shadow-lg hover:-translate-y-2 transition-transform text-center"
               >
                 <span className="text-5xl block mb-5">{program.icon}</span>
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                <h3 className="text-2xl font-bold text-brand-text mb-4">
                   {program.title}
                 </h3>
-                <p className="text-gray-600 mb-5 leading-relaxed">
+                <p className="text-brand-text-muted mb-5 leading-relaxed">
                   {program.description}
                 </p>
                 <ul className="text-left space-y-2 mb-6">
                   {program.features.map((feature, idx) => (
-                    <li key={idx} className="text-gray-800 text-sm pl-5 relative">
+                    <li key={idx} className="text-brand-text text-sm pl-5 relative">
                       <span className="absolute left-0 text-orange-500 font-bold">•</span>
                       {feature}
                     </li>

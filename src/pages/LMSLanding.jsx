@@ -27,8 +27,8 @@ import {
 
 export default function LMSLanding() {
   const features = [
-    { icon: BookOpen, title: "Course Management", description: "Create, organize, and deliver engaging course content", color: "text-blue-600" },
-    { icon: FileText, title: "Assignments & Quizzes", description: "Build assessments with automatic grading", color: "text-green-600" },
+    { icon: BookOpen, title: "Course Management", description: "Create, organize, and deliver engaging course content", color: "text-brand-info" },
+    { icon: FileText, title: "Assignments & Quizzes", description: "Build assessments with automatic grading", color: "text-brand-success" },
     { icon: BarChart3, title: "Grade Book", description: "Track student progress and performance", color: "text-purple-600" },
     { icon: MessageSquare, title: "Discussion Forums", description: "Foster collaboration and peer learning", color: "text-orange-600" },
     { icon: Video, title: "Video Lectures", description: "Upload and stream course videos", color: "text-red-600" },
@@ -89,7 +89,7 @@ export default function LMSLanding() {
               Trusted by 1,247+ Students
             </Badge>
             
-            <h2 className="text-5xl md:text-6xl font-extrabold mb-6 text-gray-900 leading-tight">
+            <h2 className="text-5xl md:text-6xl font-extrabold mb-6 text-brand-text leading-tight">
               Your Complete<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                 Learning Platform
@@ -106,7 +106,7 @@ export default function LMSLanding() {
                 <Card className="group hover:shadow-2xl hover:scale-105 transition-all duration-300 border-2 hover:border-blue-500 cursor-pointer h-full">
                   <CardHeader className="text-center">
                     <div className="w-16 h-16 bg-brand-surface rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-500 transition-colors">
-                      <Users className="h-8 w-8 text-blue-600 group-hover:text-white transition-colors" />
+                      <Users className="h-8 w-8 text-brand-info group-hover:text-white transition-colors" />
                     </div>
                     <CardTitle className="text-2xl">Student Portal</CardTitle>
                     <CardDescription className="text-base">
@@ -144,7 +144,7 @@ export default function LMSLanding() {
                 <Card className="group hover:shadow-2xl hover:scale-105 transition-all duration-300 border-2 hover:border-green-500 cursor-pointer h-full">
                   <CardHeader className="text-center">
                     <div className="w-16 h-16 bg-brand-surface rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500 transition-colors">
-                      <BookOpen className="h-8 w-8 text-green-600 group-hover:text-white transition-colors" />
+                      <BookOpen className="h-8 w-8 text-brand-success group-hover:text-white transition-colors" />
                     </div>
                     <CardTitle className="text-2xl">Course Catalog</CardTitle>
                     <CardDescription className="text-base">
@@ -169,8 +169,8 @@ export default function LMSLanding() {
               {stats.map((stat, idx) => (
                 <Card key={idx} className="text-center border-0 shadow-lg">
                   <CardContent className="pt-6">
-                    <stat.icon className="h-10 w-10 mx-auto mb-4 text-blue-600" />
-                    <div className="text-4xl font-extrabold text-blue-700 mb-2">
+                    <stat.icon className="h-10 w-10 mx-auto mb-4 text-brand-info" />
+                    <div className="text-4xl font-extrabold text-brand-info mb-2">
                       {stat.number}
                     </div>
                     <div className="text-sm font-semibold text-brand-text-muted uppercase tracking-wide">
@@ -187,7 +187,7 @@ export default function LMSLanding() {
         <section className="py-20 px-4 bg-white">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-text mb-4">
                 Everything You Need to Learn & Teach
               </h2>
               <p className="text-xl text-brand-text-muted max-w-3xl mx-auto">
@@ -225,7 +225,7 @@ export default function LMSLanding() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/login">
-                <Button size="lg" className="bg-white text-blue-700 hover:bg-gray-100 text-lg px-10 py-6 rounded-full shadow-2xl">
+                <Button size="lg" className="bg-white text-brand-info hover:bg-brand-surface-dark text-lg px-10 py-6 rounded-full shadow-2xl">
                   Access Student Portal
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
@@ -242,14 +242,14 @@ export default function LMSLanding() {
         {/* Support Section */}
         <section className="py-16 px-4 bg-brand-surface">
           <div className="max-w-5xl mx-auto">
-            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12 text-center">
+            <h3 className="text-3xl md:text-4xl font-bold text-brand-text mb-12 text-center">
               Need Help Getting Started?
             </h3>
             <div className="grid md:grid-cols-3 gap-8">
               <Card className="text-center hover:shadow-xl transition-shadow">
                 <CardHeader>
                   <div className="w-16 h-16 bg-brand-surface rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <BookOpen className="h-8 w-8 text-blue-600" />
+                    <BookOpen className="h-8 w-8 text-brand-info" />
                   </div>
                   <CardTitle className="text-xl">Student Guide</CardTitle>
                   <CardDescription className="text-base">
@@ -258,7 +258,7 @@ export default function LMSLanding() {
                 </CardHeader>
                 <CardContent>
                   <Link to="/student-handbook">
-                    <Button variant="link" className="text-blue-600 font-semibold">
+                    <Button variant="link" className="text-brand-info font-semibold">
                       View Guide <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </Link>
@@ -268,7 +268,7 @@ export default function LMSLanding() {
               <Card className="text-center hover:shadow-xl transition-shadow">
                 <CardHeader>
                   <div className="w-16 h-16 bg-brand-surface rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <MessageSquare className="h-8 w-8 text-green-600" />
+                    <MessageSquare className="h-8 w-8 text-brand-success" />
                   </div>
                   <CardTitle className="text-xl">Technical Support</CardTitle>
                   <CardDescription className="text-base">
@@ -277,7 +277,7 @@ export default function LMSLanding() {
                 </CardHeader>
                 <CardContent>
                   <Link to="/connect">
-                    <Button variant="link" className="text-blue-600 font-semibold">
+                    <Button variant="link" className="text-brand-info font-semibold">
                       Contact Support <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </Link>
@@ -296,7 +296,7 @@ export default function LMSLanding() {
                 </CardHeader>
                 <CardContent>
                   <Link to="/support">
-                    <Button variant="link" className="text-blue-600 font-semibold">
+                    <Button variant="link" className="text-brand-info font-semibold">
                       View FAQs <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </Link>

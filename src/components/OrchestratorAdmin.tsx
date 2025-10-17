@@ -112,14 +112,14 @@ export default function OrchestratorAdmin() {
     <div className="max-w-7xl mx-auto p-6">
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-red-600 mb-2">Autopilot Orchestrator</h1>
-        <p className="text-gray-600">Master controller for all AI systems</p>
+        <p className="text-brand-text-muted">Master controller for all AI systems</p>
       </div>
 
       {/* Diagnostics */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-semibold text-gray-800">System Diagnostics</h2>
+            <h2 className="text-2xl font-semibold text-brand-text">System Diagnostics</h2>
             <button
               onClick={runDiagnose}
               disabled={loading}
@@ -133,7 +133,7 @@ export default function OrchestratorAdmin() {
             <div className="space-y-4">
               {/* Token Status */}
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">API Token</h3>
+                <h3 className="font-semibold text-brand-text mb-2">API Token</h3>
                 <div className={`px-3 py-2 rounded ${getStatusColor(!!diagnose.token.error)}`}>
                   {diagnose.token.error ? (
                     <span>❌ {JSON.stringify(diagnose.token.error)}</span>
@@ -145,7 +145,7 @@ export default function OrchestratorAdmin() {
 
               {/* KV Namespaces */}
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">KV Namespaces</h3>
+                <h3 className="font-semibold text-brand-text mb-2">KV Namespaces</h3>
                 <div className={`px-3 py-2 rounded ${getStatusColor(!!diagnose.resources.kv?.error)}`}>
                   {diagnose.resources.kv?.error ? (
                     <span>❌ {JSON.stringify(diagnose.resources.kv.error)}</span>
@@ -157,7 +157,7 @@ export default function OrchestratorAdmin() {
 
               {/* R2 Buckets */}
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">R2 Buckets</h3>
+                <h3 className="font-semibold text-brand-text mb-2">R2 Buckets</h3>
                 <div className={`px-3 py-2 rounded ${getStatusColor(!!diagnose.resources.r2?.error)}`}>
                   {diagnose.resources.r2?.error ? (
                     <span>❌ {JSON.stringify(diagnose.resources.r2.error)}</span>
@@ -169,7 +169,7 @@ export default function OrchestratorAdmin() {
 
               {/* Workers */}
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">Workers</h3>
+                <h3 className="font-semibold text-brand-text mb-2">Workers</h3>
                 <div className={`px-3 py-2 rounded ${getStatusColor(!!diagnose.resources.workers?.error)}`}>
                   {diagnose.resources.workers?.error ? (
                     <span>❌ {JSON.stringify(diagnose.resources.workers.error)}</span>
@@ -188,7 +188,7 @@ export default function OrchestratorAdmin() {
               </button>
             </div>
           ) : (
-            <div className="text-center text-gray-500 py-8">
+            <div className="text-center text-brand-text-light py-8">
               Loading diagnostics...
             </div>
           )}
@@ -196,14 +196,14 @@ export default function OrchestratorAdmin() {
 
         {/* Task Runner */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Run Task</h2>
+          <h2 className="text-2xl font-semibold text-brand-text mb-4">Run Task</h2>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-brand-text mb-2">
               Select Task
             </label>
             <select
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full border border-brand-border-dark rounded-lg px-4 py-2 focus:ring-2 focus:ring-brand-focus focus:border-transparent"
               value={selectedTask}
               onChange={(e) => setSelectedTask(e.target.value)}
             >
@@ -227,7 +227,7 @@ export default function OrchestratorAdmin() {
           </button>
 
           {taskResult && (
-            <div className="bg-gray-50 rounded-lg p-4 overflow-auto max-h-64">
+            <div className="bg-brand-surface rounded-lg p-4 overflow-auto max-h-64">
               <pre className="text-xs">{JSON.stringify(taskResult, null, 2)}</pre>
             </div>
           )}
@@ -237,7 +237,7 @@ export default function OrchestratorAdmin() {
       {/* Registered Autopilots */}
       <div className="bg-white rounded-lg shadow-md p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-semibold text-gray-800">Registered Autopilots ({autopilots.length})</h2>
+          <h2 className="text-2xl font-semibold text-brand-text">Registered Autopilots ({autopilots.length})</h2>
           <button
             onClick={loadAutopilots}
             className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors"
@@ -247,18 +247,18 @@ export default function OrchestratorAdmin() {
         </div>
 
         {autopilots.length === 0 ? (
-          <div className="text-center text-gray-500 py-8">
+          <div className="text-center text-brand-text-light py-8">
             No autopilots registered yet. Run the registration script to add them.
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {autopilots.map((ap) => (
-              <div key={ap.name} className="border border-gray-200 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-900 mb-2">{ap.name}</h3>
-                <p className="text-xs text-gray-600 mb-3 truncate">{ap.endpoint}</p>
+              <div key={ap.name} className="border border-brand-border rounded-lg p-4">
+                <h3 className="font-semibold text-brand-text mb-2">{ap.name}</h3>
+                <p className="text-xs text-brand-text-muted mb-3 truncate">{ap.endpoint}</p>
                 
                 <div className="mb-3">
-                  <h4 className="text-xs font-medium text-gray-700 mb-1">Capabilities:</h4>
+                  <h4 className="text-xs font-medium text-brand-text mb-1">Capabilities:</h4>
                   <div className="flex flex-wrap gap-1">
                     {ap.capabilities.map((cap) => (
                       <span
@@ -273,8 +273,8 @@ export default function OrchestratorAdmin() {
 
                 {(ap.needs.kvNamespaces?.length || ap.needs.r2Buckets?.length) && (
                   <div>
-                    <h4 className="text-xs font-medium text-gray-700 mb-1">Needs:</h4>
-                    <div className="text-xs text-gray-600">
+                    <h4 className="text-xs font-medium text-brand-text mb-1">Needs:</h4>
+                    <div className="text-xs text-brand-text-muted">
                       {ap.needs.kvNamespaces?.length && (
                         <div>KV: {ap.needs.kvNamespaces.join(', ')}</div>
                       )}

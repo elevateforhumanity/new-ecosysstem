@@ -305,20 +305,20 @@ export function CopilotDeployment() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'text-green-600 bg-brand-surface';
-      case 'deploying': return 'text-blue-600 bg-brand-surface';
-      case 'inactive': return 'text-gray-600 bg-gray-100';
+      case 'active': return 'text-brand-success bg-brand-surface';
+      case 'deploying': return 'text-brand-info bg-brand-surface';
+      case 'inactive': return 'text-brand-text-muted bg-brand-surface-dark';
       case 'error': return 'text-red-600 bg-brand-surface';
-      default: return 'text-gray-600 bg-gray-100';
+      default: return 'text-brand-text-muted bg-brand-surface-dark';
     }
   };
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'beginner': return 'text-green-600 bg-brand-surface';
+      case 'beginner': return 'text-brand-success bg-brand-surface';
       case 'intermediate': return 'text-yellow-600 bg-yellow-100';
       case 'advanced': return 'text-red-600 bg-brand-surface';
-      default: return 'text-gray-600 bg-gray-100';
+      default: return 'text-brand-text-muted bg-brand-surface-dark';
     }
   };
 
@@ -326,8 +326,8 @@ export function CopilotDeployment() {
     <div className="copilot-deployment">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">🚀 Copilot Deployment Center</h2>
-          <p className="text-gray-600">Deploy and manage AI-powered assistance for your staff</p>
+          <h2 className="text-2xl font-bold text-brand-text">🚀 Copilot Deployment Center</h2>
+          <p className="text-brand-text-muted">Deploy and manage AI-powered assistance for your staff</p>
         </div>
         <button
           onClick={deployAllFeatures}
@@ -345,7 +345,7 @@ export function CopilotDeployment() {
             <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600 mr-4"></div>
             <div>
               <h3 className="font-semibold text-blue-900">🤖 Deploying Copilot Features...</h3>
-              <div className="text-sm text-blue-700 mt-1">
+              <div className="text-sm text-brand-info mt-1">
                 Setting up AI assistance for your staff members
               </div>
             </div>
@@ -355,25 +355,25 @@ export function CopilotDeployment() {
 
       {/* Copilot Features */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">🤖 Active Copilot Features</h3>
+        <h3 className="text-lg font-semibold text-brand-text mb-4">🤖 Active Copilot Features</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {copilotFeatures.map((feature) => (
             <div key={feature.id} className="bg-white border rounded-lg p-6">
               <div className="flex items-start justify-between mb-4">
-                <h4 className="font-semibold text-gray-900">{feature.name}</h4>
+                <h4 className="font-semibold text-brand-text">{feature.name}</h4>
                 <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(feature.status)}`}>
                   {feature.status.toUpperCase()}
                 </span>
               </div>
               
-              <p className="text-sm text-gray-600 mb-4">{feature.description}</p>
+              <p className="text-sm text-brand-text-muted mb-4">{feature.description}</p>
               
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Usage Rate:</span>
+                  <span className="text-brand-text-muted">Usage Rate:</span>
                   <span className="font-medium">{feature.usage}%</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="w-full bg-brand-border rounded-full h-2">
                   <div 
                     className="bg-blue-500 h-2 rounded-full"
                     style={{ width: `${feature.usage}%` }}
@@ -381,10 +381,10 @@ export function CopilotDeployment() {
                 </div>
                 
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Effectiveness:</span>
-                  <span className="font-medium text-green-600">{feature.effectiveness}%</span>
+                  <span className="text-brand-text-muted">Effectiveness:</span>
+                  <span className="font-medium text-brand-success">{feature.effectiveness}%</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="w-full bg-brand-border rounded-full h-2">
                   <div 
                     className="bg-green-500 h-2 rounded-full"
                     style={{ width: `${feature.effectiveness}%` }}
@@ -398,18 +398,18 @@ export function CopilotDeployment() {
 
       {/* Step-by-Step Guides */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">📚 Step-by-Step Guides for Staff</h3>
+        <h3 className="text-lg font-semibold text-brand-text mb-4">📚 Step-by-Step Guides for Staff</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {stepByStepGuides.map((guide) => (
             <div key={guide.id} className="bg-white border rounded-lg p-6">
               <div className="flex items-start justify-between mb-4">
-                <h4 className="font-semibold text-gray-900">{guide.title}</h4>
+                <h4 className="font-semibold text-brand-text">{guide.title}</h4>
                 <span className={`px-2 py-1 text-xs font-medium rounded-full ${getDifficultyColor(guide.difficulty)}`}>
                   {guide.difficulty.toUpperCase()}
                 </span>
               </div>
               
-              <div className="space-y-2 text-sm text-gray-600 mb-4">
+              <div className="space-y-2 text-sm text-brand-text-muted mb-4">
                 <div>📂 Category: {guide.category.replace('_', ' ')}</div>
                 <div>⏱️ Time: {guide.estimatedTime}</div>
                 <div>📋 Steps: {guide.steps.length}</div>
@@ -417,7 +417,7 @@ export function CopilotDeployment() {
               
               <button
                 onClick={() => setSelectedGuide(guide)}
-                className="w-full bg-brand-surface text-blue-700 py-2 rounded hover:bg-blue-200 font-medium"
+                className="w-full bg-brand-surface text-brand-info py-2 rounded hover:bg-blue-200 font-medium"
               >
                 📖 View Guide
               </button>
@@ -434,7 +434,7 @@ export function CopilotDeployment() {
               <h3 className="text-xl font-bold">{selectedGuide.title}</h3>
               <button
                 onClick={() => setSelectedGuide(null)}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-brand-text-light hover:text-brand-text"
               >
                 ✕
               </button>
@@ -447,10 +447,10 @@ export function CopilotDeployment() {
                     <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">
                       {step.stepNumber}
                     </div>
-                    <h4 className="font-semibold text-gray-900">{step.title}</h4>
+                    <h4 className="font-semibold text-brand-text">{step.title}</h4>
                   </div>
                   
-                  <p className="text-gray-700 mb-2">{step.description}</p>
+                  <p className="text-brand-text mb-2">{step.description}</p>
                   
                   <div className="bg-blue-50 border border-blue-200 rounded p-3 mb-3">
                     <div className="font-medium text-blue-900 mb-1">🎯 Action:</div>

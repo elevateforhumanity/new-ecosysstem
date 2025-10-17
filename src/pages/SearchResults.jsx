@@ -115,7 +115,7 @@ export default function SearchResults() {
                   width: '100%',
                   padding: '8px 12px',
                   fontSize: 14,
-                  border: '1px solid #ddd',
+                  border: '1px solid var(--brand-border)',
                   borderRadius: 6,
                 }}
               >
@@ -137,7 +137,7 @@ export default function SearchResults() {
                   width: '100%',
                   padding: '8px 12px',
                   fontSize: 14,
-                  border: '1px solid #ddd',
+                  border: '1px solid var(--brand-border)',
                   borderRadius: 6,
                 }}
               >
@@ -161,7 +161,7 @@ export default function SearchResults() {
                   width: '100%',
                   padding: '8px 12px',
                   fontSize: 14,
-                  border: '1px solid #ddd',
+                  border: '1px solid var(--brand-border)',
                   borderRadius: 6,
                 }}
               >
@@ -178,7 +178,7 @@ export default function SearchResults() {
                 width: '100%',
                 padding: '8px 12px',
                 fontSize: 14,
-                border: '1px solid #ddd',
+                border: '1px solid var(--brand-border)',
                 borderRadius: 6,
                 backgroundColor: 'white',
                 cursor: 'pointer',
@@ -211,25 +211,25 @@ export default function SearchResults() {
                     display: 'block',
                     padding: 20,
                     backgroundColor: 'white',
-                    border: '1px solid #ddd',
+                    border: '1px solid var(--brand-border)',
                     borderRadius: 8,
                     textDecoration: 'none',
                     color: 'inherit',
                     transition: 'all 0.2s',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = '#007bff';
+                    e.currentTarget.style.borderColor = 'var(--brand-info)';
                     e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 123, 255, 0.1)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = '#ddd';
+                    e.currentTarget.style.borderColor = 'var(--brand-border)';
                     e.currentTarget.style.boxShadow = 'none';
                   }}
                 >
                   <div style={{ display: 'flex', gap: 16 }}>
                     <div style={{ fontSize: 32 }}>{getResultIcon(result.type)}</div>
                     <div style={{ flex: 1 }}>
-                      <h3 style={{ fontSize: 18, marginBottom: 8, color: '#007bff' }}>
+                      <h3 style={{ fontSize: 18, marginBottom: 8, color: 'var(--brand-info)' }}>
                         {result.title}
                       </h3>
                       {result.description && (

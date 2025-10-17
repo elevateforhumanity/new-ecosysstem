@@ -31,7 +31,7 @@ export default function AnalyticsDashboard() {
               <td style={{ padding: 8 }}>{row.course}</td>
               <td style={{ padding: 8 }}>{row.enrolled}</td>
               <td style={{ padding: 8 }}>
-                <div style={{ background: "#e0e0e0", borderRadius: 6, width: 120 }}>
+                <div style={{ background: "var(--brand-border)", borderRadius: 6, width: 120 }}>
                   <div style={{
                     width: `${row.avgProgress}%`,
                     background: "#1976d2",

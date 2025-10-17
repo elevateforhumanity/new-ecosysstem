@@ -14,7 +14,7 @@ export default function RefundPolicy() {
         <h1 style={{ fontSize: 36, fontWeight: 700, marginBottom: 8 }}>
           Refund Policy
         </h1>
-        <p style={{ fontSize: 14, color: "#666", marginBottom: 32 }}>
+        <p style={{ fontSize: 14, color: "var(--brand-text-muted)", marginBottom: 32 }}>
           Last updated: January 1, 2025
         </p>
 
@@ -59,7 +59,7 @@ export default function RefundPolicy() {
               <li>Submit your request</li>
             </ol>
             <p>
-              Alternatively, you can contact our support team at <a href="mailto:refunds@elevateforhumanity.org" style={{ color: "#007bff" }}>refunds@elevateforhumanity.org</a>
+              Alternatively, you can contact our support team at <a href="mailto:refunds@elevateforhumanity.org" style={{ color: "var(--brand-info)" }}>refunds@elevateforhumanity.org</a>
             </p>
           </section>
 
@@ -140,7 +140,7 @@ export default function RefundPolicy() {
                 <strong>Email:</strong> refunds@elevateforhumanity.org
               </p>
               <p style={{ marginBottom: 8 }}>
-                <strong>Support:</strong> <Link to="/support" style={{ color: "#007bff" }}>Visit Support Center</Link>
+                <strong>Support:</strong> <Link to="/support" style={{ color: "var(--brand-info)" }}>Visit Support Center</Link>
               </p>
               <p>
                 <strong>Phone:</strong> +1 (555) 123-4567
@@ -153,7 +153,7 @@ export default function RefundPolicy() {
           style={{
             marginTop: 48,
             paddingTop: 32,
-            borderTop: "1px solid #e0e0e0",
+            borderTop: "1px solid var(--brand-border)",
             display: "flex",
             gap: 24,
             justifyContent: "center",
@@ -162,7 +162,7 @@ export default function RefundPolicy() {
           <Link
             to="/privacy-policy"
             style={{
-              color: "#007bff",
+              color: "var(--brand-info)",
               textDecoration: "none",
               fontSize: 14,
               fontWeight: 500,
@@ -173,7 +173,7 @@ export default function RefundPolicy() {
           <Link
             to="/terms-of-service"
             style={{
-              color: "#007bff",
+              color: "var(--brand-info)",
               textDecoration: "none",
               fontSize: 14,
               fontWeight: 500,
@@ -184,7 +184,7 @@ export default function RefundPolicy() {
           <Link
             to="/support"
             style={{
-              color: "#007bff",
+              color: "var(--brand-info)",
               textDecoration: "none",
               fontSize: 14,
               fontWeight: 500,

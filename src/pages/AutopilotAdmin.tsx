@@ -290,13 +290,13 @@ export default function AutopilotAdmin() {
     loadStats();
   }, [days]);
 
-  const bgClass = darkMode ? "bg-gray-900 text-white" : "bg-gray-50 text-gray-900";
+  const bgClass = darkMode ? "bg-gray-900 text-white" : "bg-brand-surface text-brand-text";
   const cardClass = darkMode
     ? "bg-gray-800 border-gray-700"
-    : "bg-white border-gray-200";
+    : "bg-white border-brand-border";
   const inputClass = darkMode
     ? "bg-gray-700 border-gray-600 text-white"
-    : "bg-white border-gray-300 text-gray-900";
+    : "bg-white border-brand-border-dark text-brand-text";
 
   return (
     <AppLayout>
@@ -323,7 +323,7 @@ export default function AutopilotAdmin() {
 
         {/* Orchestrator Section */}
         <div className={`mb-6 p-4 border rounded-lg shadow ${cardClass}`}>
-          <h2 className="font-semibold mb-4 text-blue-600 text-xl">
+          <h2 className="font-semibold mb-4 text-brand-info text-xl">
             🎯 Orchestrator
           </h2>
 
@@ -332,13 +332,13 @@ export default function AutopilotAdmin() {
             <h3 className="font-semibold mb-2">Registered Autopilots</h3>
             {loading && <p>Loading...</p>}
             {!loading && autopilots.length === 0 && (
-              <p className="text-gray-500">No autopilots registered yet.</p>
+              <p className="text-brand-text-light">No autopilots registered yet.</p>
             )}
             {!loading && autopilots.length > 0 && (
               <div className="overflow-x-auto">
                 <table className="w-full text-sm border-collapse">
                   <thead>
-                    <tr className={darkMode ? "bg-gray-700" : "bg-gray-100"}>
+                    <tr className={darkMode ? "bg-gray-700" : "bg-brand-surface-dark"}>
                       <th className="p-2 text-left">Name</th>
                       <th className="p-2 text-left">Capabilities</th>
                       <th className="p-2 text-left">Endpoint</th>
@@ -353,11 +353,11 @@ export default function AutopilotAdmin() {
                         <td className="p-2">
                           {(a.capabilities || []).join(", ")}
                         </td>
-                        <td className="p-2 text-blue-700 text-xs">
+                        <td className="p-2 text-brand-info text-xs">
                           {a.endpoint}
                           <button
                             onClick={() => copyToClipboard(a.endpoint)}
-                            className="ml-2 text-gray-500 hover:text-blue-600"
+                            className="ml-2 text-brand-text-light hover:text-brand-info"
                           >
                             📋
                           </button>
@@ -485,7 +485,7 @@ export default function AutopilotAdmin() {
 
         {/* Log Analyzer Section */}
         <div className={`mb-6 p-4 border rounded-lg shadow ${cardClass}`}>
-          <h2 className="font-semibold mb-4 text-blue-600 text-xl">
+          <h2 className="font-semibold mb-4 text-brand-info text-xl">
             📊 Log Analyzer
           </h2>
 
@@ -557,16 +557,16 @@ export default function AutopilotAdmin() {
             >
               📋 Copy URL
             </button>
-            {loading && <span className="text-sm text-gray-500">Working…</span>}
+            {loading && <span className="text-sm text-brand-text-light">Working…</span>}
           </div>
 
           {/* Summary Display */}
           {summary && (
             <div className={`p-4 border rounded mb-6 shadow ${cardClass}`}>
-              <h2 className="font-semibold text-lg text-blue-700">
+              <h2 className="font-semibold text-lg text-brand-info">
                 Summary: {summary.date}
               </h2>
-              <p className="text-sm text-gray-600 mb-2">
+              <p className="text-sm text-brand-text-muted mb-2">
                 OK: {summary.counts?.ok ?? summary.n_ok} · Fail:{" "}
                 {summary.counts?.fail ?? summary.n_fail}
               </p>
@@ -602,7 +602,7 @@ export default function AutopilotAdmin() {
           {/* Logs Table */}
           <div className="overflow-x-auto border rounded">
             <table className="min-w-full text-sm">
-              <thead className={darkMode ? "bg-gray-700" : "bg-gray-100"}>
+              <thead className={darkMode ? "bg-gray-700" : "bg-brand-surface-dark"}>
                 <tr>
                   <th className="p-2 text-left">Time</th>
                   <th className="p-2 text-left">Autopilot</th>
@@ -634,7 +634,7 @@ export default function AutopilotAdmin() {
                 {!logs.length && (
                   <tr>
                     <td
-                      className="p-4 text-center text-gray-500"
+                      className="p-4 text-center text-brand-text-light"
                       colSpan={6}
                     >
                       No events
@@ -666,7 +666,7 @@ export default function AutopilotAdmin() {
             <div className="grid gap-6 md:grid-cols-2">
               {/* Daily OK vs Fail */}
               <div className={`border rounded-lg p-4 shadow ${cardClass}`}>
-                <h3 className="font-semibold mb-2 text-blue-700">
+                <h3 className="font-semibold mb-2 text-brand-info">
                   Daily OK vs Fail
                 </h3>
                 <ResponsiveContainer width="100%" height={260}>
@@ -680,14 +680,14 @@ export default function AutopilotAdmin() {
                     <Bar dataKey="fail" stackId="a" fill="var(--brand-danger)" />
                   </BarChart>
                 </ResponsiveContainer>
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-brand-text-light mt-1">
                   Range: {statsData.range.start} → {statsData.range.end}
                 </p>
               </div>
 
               {/* Failure Rate */}
               <div className={`border rounded-lg p-4 shadow ${cardClass}`}>
-                <h3 className="font-semibold mb-2 text-blue-700">
+                <h3 className="font-semibold mb-2 text-brand-info">
                   % Failure Rate
                 </h3>
                 <ResponsiveContainer width="100%" height={260}>
@@ -710,7 +710,7 @@ export default function AutopilotAdmin() {
               <div
                 className={`border rounded-lg p-4 shadow md:col-span-2 ${cardClass}`}
               >
-                <h3 className="font-semibold mb-2 text-blue-700">
+                <h3 className="font-semibold mb-2 text-brand-info">
                   Top Tasks (volume & failure %)
                 </h3>
                 <ResponsiveContainer width="100%" height={300}>
@@ -730,7 +730,7 @@ export default function AutopilotAdmin() {
               <div
                 className={`border rounded-lg p-4 shadow md:col-span-2 ${cardClass}`}
               >
-                <h3 className="font-semibold mb-2 text-blue-700">
+                <h3 className="font-semibold mb-2 text-brand-info">
                   Top Autopilots (volume & failure %)
                 </h3>
                 <ResponsiveContainer width="100%" height={300}>
@@ -752,7 +752,7 @@ export default function AutopilotAdmin() {
         {/* Log Panel */}
         <div
           className={`p-4 rounded-lg font-mono text-sm whitespace-pre-wrap max-h-96 overflow-auto ${
-            darkMode ? "bg-black text-green-400" : "bg-gray-100 text-gray-900"
+            darkMode ? "bg-black text-green-400" : "bg-brand-surface-dark text-brand-text"
           }`}
         >
           {log || "Ready."}

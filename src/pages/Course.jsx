@@ -84,18 +84,18 @@ export default function Course() {
         <div
           style={{
             width: 320,
-            borderRight: "1px solid #e0e0e0",
+            borderRight: "1px solid var(--brand-border)",
             overflowY: "auto",
             backgroundColor: "#f8f8f8",
           }}
         >
           {/* Course Header */}
-          <div style={{ padding: 20, borderBottom: "1px solid #e0e0e0", backgroundColor: "#fff" }}>
+          <div style={{ padding: 20, borderBottom: "1px solid var(--brand-border)", backgroundColor: "#fff" }}>
             <Link
               to="/courses"
               style={{
                 fontSize: 14,
-                color: "#007bff",
+                color: "var(--brand-info)",
                 textDecoration: "none",
                 marginBottom: 12,
                 display: "block",
@@ -106,19 +106,19 @@ export default function Course() {
             <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
               {course.title}
             </h2>
-            <p style={{ fontSize: 13, color: "#666", marginBottom: 12 }}>
+            <p style={{ fontSize: 13, color: "var(--brand-text-muted)", marginBottom: 12 }}>
               {course.instructor}
             </p>
             <div>
               <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-                <span style={{ fontSize: 12, color: "#666" }}>Course Progress</span>
+                <span style={{ fontSize: 12, color: "var(--brand-text-muted)" }}>Course Progress</span>
                 <span style={{ fontSize: 12, fontWeight: 600 }}>{course.progress}%</span>
               </div>
               <div
                 style={{
                   width: "100%",
                   height: 6,
-                  backgroundColor: "#e0e0e0",
+                  backgroundColor: "var(--brand-border)",
                   borderRadius: 3,
                   overflow: "hidden",
                 }}
@@ -142,7 +142,7 @@ export default function Course() {
                   style={{
                     padding: "12px 20px",
                     backgroundColor: "#fff",
-                    borderBottom: "1px solid #e0e0e0",
+                    borderBottom: "1px solid var(--brand-border)",
                     fontWeight: 600,
                     fontSize: 14,
                   }}
@@ -247,7 +247,7 @@ export default function Course() {
               <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>
                 {currentLesson?.title}
               </h1>
-              <p style={{ fontSize: 14, color: "#666", marginBottom: 24 }}>
+              <p style={{ fontSize: 14, color: "var(--brand-text-muted)", marginBottom: 24 }}>
                 Duration: {currentLesson?.duration}
               </p>
 
@@ -256,7 +256,7 @@ export default function Course() {
                 style={{
                   display: "flex",
                   gap: 24,
-                  borderBottom: "2px solid #e0e0e0",
+                  borderBottom: "2px solid var(--brand-border)",
                   marginBottom: 24,
                 }}
               >
@@ -265,9 +265,9 @@ export default function Course() {
                   style={{
                     padding: "12px 0",
                     backgroundColor: "transparent",
-                    color: !showNotes ? "#007bff" : "#666",
+                    color: !showNotes ? "var(--brand-info)" : "var(--brand-text-muted)",
                     border: "none",
-                    borderBottom: !showNotes ? "2px solid #007bff" : "2px solid transparent",
+                    borderBottom: !showNotes ? "2px solid var(--brand-info)" : "2px solid transparent",
                     fontSize: 14,
                     fontWeight: 600,
                     cursor: "pointer",
@@ -281,9 +281,9 @@ export default function Course() {
                   style={{
                     padding: "12px 0",
                     backgroundColor: "transparent",
-                    color: showNotes ? "#007bff" : "#666",
+                    color: showNotes ? "var(--brand-info)" : "var(--brand-text-muted)",
                     border: "none",
-                    borderBottom: showNotes ? "2px solid #007bff" : "2px solid transparent",
+                    borderBottom: showNotes ? "2px solid var(--brand-info)" : "2px solid transparent",
                     fontSize: 14,
                     fontWeight: 600,
                     cursor: "pointer",
@@ -300,7 +300,7 @@ export default function Course() {
                   <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}>
                     Lesson Overview
                   </h3>
-                  <p style={{ fontSize: 14, color: "#666", lineHeight: 1.7, marginBottom: 20 }}>
+                  <p style={{ fontSize: 14, color: "var(--brand-text-muted)", lineHeight: 1.7, marginBottom: 20 }}>
                     This lesson covers the fundamentals of {currentLesson?.title.toLowerCase()}. 
                     You'll learn key concepts, best practices, and practical applications that you 
                     can immediately apply to your projects.
@@ -309,7 +309,7 @@ export default function Course() {
                   <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}>
                     Learning Objectives
                   </h3>
-                  <ul style={{ fontSize: 14, color: "#666", lineHeight: 1.7, marginBottom: 20 }}>
+                  <ul style={{ fontSize: 14, color: "var(--brand-text-muted)", lineHeight: 1.7, marginBottom: 20 }}>
                     <li>Understand core concepts and terminology</li>
                     <li>Apply techniques to real-world scenarios</li>
                     <li>Build practical skills through hands-on practice</li>
@@ -375,7 +375,7 @@ export default function Course() {
                   <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}>
                     My Notes
                   </h3>
-                  <p style={{ fontSize: 14, color: "#666", marginBottom: 16 }}>
+                  <p style={{ fontSize: 14, color: "var(--brand-text-muted)", marginBottom: 16 }}>
                     Take notes while watching the lesson. Your notes are automatically saved.
                   </p>
                   <textarea
@@ -386,7 +386,7 @@ export default function Course() {
                       width: "100%",
                       minHeight: 300,
                       padding: 12,
-                      border: "1px solid #ddd",
+                      border: "1px solid var(--brand-border)",
                       borderRadius: 6,
                       fontSize: 14,
                       fontFamily: "inherit",
@@ -397,7 +397,7 @@ export default function Course() {
                     style={{
                       marginTop: 12,
                       padding: "8px 20px",
-                      backgroundColor: "#007bff",
+                      backgroundColor: "var(--brand-info)",
                       color: "#fff",
                       border: "none",
                       borderRadius: 6,
@@ -417,7 +417,7 @@ export default function Course() {
           <div
             style={{
               padding: 20,
-              borderTop: "1px solid #e0e0e0",
+              borderTop: "1px solid var(--brand-border)",
               backgroundColor: "#fff",
               display: "flex",
               justifyContent: "space-between",
@@ -429,8 +429,8 @@ export default function Course() {
               style={{
                 padding: "10px 24px",
                 backgroundColor: activeLesson === 1 ? "#f0f0f0" : "#fff",
-                color: activeLesson === 1 ? "#999" : "#007bff",
-                border: "1px solid #ddd",
+                color: activeLesson === 1 ? "#999" : "var(--brand-info)",
+                border: "1px solid var(--brand-border)",
                 borderRadius: 6,
                 fontSize: 14,
                 fontWeight: 500,
@@ -444,7 +444,7 @@ export default function Course() {
             <button
               style={{
                 padding: "10px 24px",
-                backgroundColor: completedLessons.includes(activeLesson) ? "var(--brand-success)" : "#007bff",
+                backgroundColor: completedLessons.includes(activeLesson) ? "var(--brand-success)" : "var(--brand-info)",
                 color: "#fff",
                 border: "none",
                 borderRadius: 6,
@@ -460,7 +460,7 @@ export default function Course() {
             <button
               style={{
                 padding: "10px 24px",
-                backgroundColor: "#007bff",
+                backgroundColor: "var(--brand-info)",
                 color: "#fff",
                 border: "none",
                 borderRadius: 6,

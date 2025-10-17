@@ -156,7 +156,7 @@ export default function EmailEventsPanel() {
       case 'sent':
         return 'bg-yellow-100 text-yellow-800';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-brand-surface-dark text-brand-text';
     }
   };
 
@@ -193,7 +193,7 @@ export default function EmailEventsPanel() {
     <div className="max-w-7xl mx-auto p-6">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Email Events Dashboard</h1>
-        <p className="text-gray-600">Monitor email delivery, opens, and engagement</p>
+        <p className="text-brand-text-muted">Monitor email delivery, opens, and engagement</p>
       </div>
 
       {/* Alert Message */}
@@ -208,7 +208,7 @@ export default function EmailEventsPanel() {
             </div>
             <button
               onClick={() => setAlertMessage(null)}
-              className={`text-sm font-medium ${alertMessage.type === 'success' ? 'text-green-600 hover:text-brand-success' : 'text-red-600 hover:text-red-800'}`}
+              className={`text-sm font-medium ${alertMessage.type === 'success' ? 'text-brand-success hover:text-brand-success' : 'text-red-600 hover:text-red-800'}`}
             >
               Dismiss
             </button>
@@ -221,11 +221,11 @@ export default function EmailEventsPanel() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
           {stats.map((stat, index) => (
             <div key={index} className="bg-white rounded-lg shadow p-6">
-              <div className="text-sm text-gray-600 mb-1">
+              <div className="text-sm text-brand-text-muted mb-1">
                 {stat.provider} - {stat.email_type}
               </div>
               <div className="text-3xl font-bold mb-2">{stat.total_sent}</div>
-              <div className="text-sm text-gray-600">Total Sent</div>
+              <div className="text-sm text-brand-text-muted">Total Sent</div>
               <div className="mt-4 space-y-1 text-sm">
                 <div className="flex justify-between">
                   <span>Delivered:</span>
@@ -249,11 +249,11 @@ export default function EmailEventsPanel() {
       <div className="bg-white rounded-lg shadow p-6 mb-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Status</label>
+            <label className="block text-sm font-medium text-brand-text mb-2">Filter by Status</label>
             <select
               value={filter}
               onChange={e => setFilter(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
             >
               <option value="all">All Statuses</option>
               <option value="queued">Queued</option>
@@ -268,13 +268,13 @@ export default function EmailEventsPanel() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Search</label>
+            <label className="block text-sm font-medium text-brand-text mb-2">Search</label>
             <input
               type="text"
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
               placeholder="Search by recipient or subject..."
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
             />
           </div>
         </div>
@@ -284,11 +284,11 @@ export default function EmailEventsPanel() {
       {loading ? (
         <div className="text-center py-12">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          <p className="mt-4 text-gray-600">Loading email events...</p>
+          <p className="mt-4 text-brand-text-muted">Loading email events...</p>
         </div>
       ) : (
         <div className="bg-white rounded-lg shadow overflow-hidden">
-          <div className="p-6 border-b border-gray-200">
+          <div className="p-6 border-b border-brand-border">
             <h2 className="text-xl font-semibold">
               Recent Email Events ({filteredEvents.length})
             </h2>
@@ -296,38 +296,38 @@ export default function EmailEventsPanel() {
 
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50">
+              <thead className="bg-brand-surface">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                     Recipient
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                     Subject
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                     Type
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                     Provider
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                     Sent
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {filteredEvents.map(event => (
-                  <tr key={event.id} className="hover:bg-gray-50">
+                  <tr key={event.id} className="hover:bg-brand-surface">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="font-medium text-gray-900">{event.recipient}</span>
+                          <span className="font-medium text-brand-text">{event.recipient}</span>
                           {event.blocked_by_dnc && (
                             <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-brand-surface text-red-800" title="On Do Not Contact list">
                               🚫 DNC
@@ -335,7 +335,7 @@ export default function EmailEventsPanel() {
                           )}
                         </div>
                         {event.student_name && (
-                          <div className="text-sm text-gray-500">{event.student_name}</div>
+                          <div className="text-sm text-brand-text-light">{event.student_name}</div>
                         )}
                         {event.resend_count && event.resend_count > 0 && (
                           <div className="text-xs text-orange-600 mt-1">
@@ -346,14 +346,14 @@ export default function EmailEventsPanel() {
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="text-sm text-gray-900">{event.subject}</div>
+                      <div className="text-sm text-brand-text">{event.subject}</div>
                       {event.provider_message_id && (
-                        <div className="text-xs text-gray-500 mt-1">
+                        <div className="text-xs text-brand-text-light mt-1">
                           ID: {event.provider_message_id.substring(0, 20)}...
                         </div>
                       )}
                       {event.correlation_id && (
-                        <div className="text-xs text-blue-600 mt-1">
+                        <div className="text-xs text-brand-info mt-1">
                           📎 {event.correlation_id.substring(0, 30)}...
                         </div>
                       )}
@@ -363,10 +363,10 @@ export default function EmailEventsPanel() {
                         </div>
                       )}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-brand-text-light">
                       {event.email_type}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-brand-text-light">
                       {event.provider}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -381,15 +381,15 @@ export default function EmailEventsPanel() {
                         <div className="text-xs text-red-600 mt-1">{event.error_message}</div>
                       )}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-brand-text-light">
                       {event.sent_at ? new Date(event.sent_at).toLocaleString() : '-'}
                       {event.delivered_at && (
-                        <div className="text-xs text-green-600">
+                        <div className="text-xs text-brand-success">
                           Delivered: {new Date(event.delivered_at).toLocaleString()}
                         </div>
                       )}
                       {event.opened_at && (
-                        <div className="text-xs text-blue-600">
+                        <div className="text-xs text-brand-info">
                           Opened: {new Date(event.opened_at).toLocaleString()}
                         </div>
                       )}
@@ -398,7 +398,7 @@ export default function EmailEventsPanel() {
                       {(event.status === 'failed' || event.status === 'bounced') && (
                         <>
                           {!isAdmin ? (
-                            <span className="text-xs text-gray-500" title="Admin access required">
+                            <span className="text-xs text-brand-text-light" title="Admin access required">
                               Admin only
                             </span>
                           ) : event.blocked_by_dnc ? (
@@ -406,14 +406,14 @@ export default function EmailEventsPanel() {
                               Blocked (DNC)
                             </span>
                           ) : event.resend_count && event.resend_count >= 3 ? (
-                            <span className="text-xs text-gray-500" title="Maximum resend attempts reached">
+                            <span className="text-xs text-brand-text-light" title="Maximum resend attempts reached">
                               Max attempts
                             </span>
                           ) : (
                             <button
                               onClick={() => handleResend(event.id)}
                               disabled={resendingIds.has(event.id)}
-                              className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md text-white bg-brand-info hover:bg-brand-info-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                              className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md text-white bg-brand-info hover:bg-brand-info-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-focus disabled:opacity-50 disabled:cursor-not-allowed"
                               title={event.resend_count ? `Resent ${event.resend_count} time(s)` : 'Resend this email'}
                             >
                               {resendingIds.has(event.id) ? 'Resending...' : 'Resend'}
@@ -430,7 +430,7 @@ export default function EmailEventsPanel() {
 
           {filteredEvents.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-gray-600">No email events found</p>
+              <p className="text-brand-text-muted">No email events found</p>
             </div>
           )}
         </div>

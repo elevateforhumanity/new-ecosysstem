@@ -81,7 +81,7 @@ export default function Login() {
           >
             Elevate for Humanity
           </h1>
-          <p style={{ color: "#666", fontSize: 16 }}>
+          <p style={{ color: "var(--brand-text-muted)", fontSize: 16 }}>
             Sign in to your account
           </p>
         </div>
@@ -129,14 +129,14 @@ export default function Login() {
               style={{
                 width: "100%",
                 padding: "12px 14px",
-                border: "1px solid #ddd",
+                border: "1px solid var(--brand-border)",
                 borderRadius: 6,
                 fontSize: 14,
                 outline: "none",
                 transition: "border-color 0.2s",
               }}
-              onFocus={(e) => (e.target.style.borderColor = "#007bff")}
-              onBlur={(e) => (e.target.style.borderColor = "#ddd")}
+              onFocus={(e) => (e.target.style.borderColor = "var(--brand-info)")}
+              onBlur={(e) => (e.target.style.borderColor = "var(--brand-border)")}
             />
           </div>
 
@@ -164,14 +164,14 @@ export default function Login() {
               style={{
                 width: "100%",
                 padding: "12px 14px",
-                border: "1px solid #ddd",
+                border: "1px solid var(--brand-border)",
                 borderRadius: 6,
                 fontSize: 14,
                 outline: "none",
                 transition: "border-color 0.2s",
               }}
-              onFocus={(e) => (e.target.style.borderColor = "#007bff")}
-              onBlur={(e) => (e.target.style.borderColor = "#ddd")}
+              onFocus={(e) => (e.target.style.borderColor = "var(--brand-info)")}
+              onBlur={(e) => (e.target.style.borderColor = "var(--brand-border)")}
             />
           </div>
 
@@ -210,7 +210,7 @@ export default function Login() {
               to="/forgot-password"
               style={{
                 fontSize: 14,
-                color: "#007bff",
+                color: "var(--brand-info)",
                 textDecoration: "none",
               }}
             >
@@ -224,7 +224,7 @@ export default function Login() {
             style={{
               width: "100%",
               padding: "12px 24px",
-              backgroundColor: "#007bff",
+              backgroundColor: "var(--brand-info)",
               color: "#fff",
               border: "none",
               borderRadius: 6,
@@ -234,7 +234,7 @@ export default function Login() {
               transition: "background-color 0.2s",
             }}
             onMouseEnter={(e) => (e.target.style.backgroundColor = "#0056b3")}
-            onMouseLeave={(e) => (e.target.style.backgroundColor = "#007bff")}
+            onMouseLeave={(e) => (e.target.style.backgroundColor = "var(--brand-info)")}
           >
             Sign In
           </button>
@@ -252,14 +252,14 @@ export default function Login() {
             style={{
               flex: 1,
               height: 1,
-              backgroundColor: "#e0e0e0",
+              backgroundColor: "var(--brand-border)",
             }}
           />
           <span
             style={{
               padding: "0 16px",
               fontSize: 14,
-              color: "#666",
+              color: "var(--brand-text-muted)",
             }}
           >
             OR
@@ -268,7 +268,7 @@ export default function Login() {
             style={{
               flex: 1,
               height: 1,
-              backgroundColor: "#e0e0e0",
+              backgroundColor: "var(--brand-border)",
             }}
           />
         </div>
@@ -282,7 +282,7 @@ export default function Login() {
               padding: "12px 24px",
               backgroundColor: "#fff",
               color: "#333",
-              border: "1px solid #ddd",
+              border: "1px solid var(--brand-border)",
               borderRadius: 6,
               fontSize: 14,
               fontWeight: 500,
@@ -324,7 +324,7 @@ export default function Login() {
               padding: "12px 24px",
               backgroundColor: "#fff",
               color: "#333",
-              border: "1px solid #ddd",
+              border: "1px solid var(--brand-border)",
               borderRadius: 6,
               fontSize: 14,
               fontWeight: 500,
@@ -351,14 +351,14 @@ export default function Login() {
             marginTop: 24,
             textAlign: "center",
             fontSize: 14,
-            color: "#666",
+            color: "var(--brand-text-muted)",
           }}
         >
           Don't have an account?{" "}
           <Link
             to="/signup"
             style={{
-              color: "#007bff",
+              color: "var(--brand-info)",
               textDecoration: "none",
               fontWeight: 500,
             }}
@@ -372,7 +372,7 @@ export default function Login() {
           style={{
             marginTop: 32,
             paddingTop: 24,
-            borderTop: "1px solid #e0e0e0",
+            borderTop: "1px solid var(--brand-border)",
             display: "flex",
             justifyContent: "center",
             gap: 24,
@@ -382,7 +382,7 @@ export default function Login() {
           <Link
             to="/privacy-policy"
             style={{
-              color: "#666",
+              color: "var(--brand-text-muted)",
               textDecoration: "none",
             }}
           >
@@ -391,7 +391,7 @@ export default function Login() {
           <Link
             to="/terms-of-service"
             style={{
-              color: "#666",
+              color: "var(--brand-text-muted)",
               textDecoration: "none",
             }}
           >
@@ -400,7 +400,7 @@ export default function Login() {
           <Link
             to="/support"
             style={{
-              color: "#666",
+              color: "var(--brand-text-muted)",
               textDecoration: "none",
             }}
           >

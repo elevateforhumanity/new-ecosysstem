@@ -123,7 +123,7 @@ export default function UnenrollPolicyPanel() {
   return (
     <div className="unenroll-policy-panel" style={{ padding: '2rem' }}>
       <h2>Auto-Unenroll Policy</h2>
-      <p style={{ color: '#666', marginBottom: '2rem' }}>
+      <p style={{ color: 'var(--brand-text-muted)', marginBottom: '2rem' }}>
         Configure automatic unenrollment for inactive users
       </p>
 
@@ -158,7 +158,7 @@ export default function UnenrollPolicyPanel() {
               Enable Auto-Unenroll
             </span>
           </label>
-          <p style={{ fontSize: '0.9rem', color: '#666', marginTop: '0.5rem', marginLeft: '28px' }}>
+          <p style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)', marginTop: '0.5rem', marginLeft: '28px' }}>
             Master switch to enable/disable automatic unenrollment
           </p>
         </div>
@@ -176,7 +176,7 @@ export default function UnenrollPolicyPanel() {
               Dry Run Mode
             </span>
           </label>
-          <p style={{ fontSize: '0.9rem', color: '#666', marginTop: '0.5rem', marginLeft: '28px' }}>
+          <p style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)', marginTop: '0.5rem', marginLeft: '28px' }}>
             Log unenroll actions without executing them (recommended for testing)
           </p>
         </div>
@@ -194,7 +194,7 @@ export default function UnenrollPolicyPanel() {
             onChange={(e) => setGracePeriodDays(parseInt(e.target.value))}
             style={{ padding: '0.5rem', width: '100px', border: '1px solid #ccc', borderRadius: '4px' }}
           />
-          <p style={{ fontSize: '0.9rem', color: '#666', marginTop: '0.5rem' }}>
+          <p style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)', marginTop: '0.5rem' }}>
             Days of inactivity before unenrolling a user
           </p>
         </div>
@@ -218,7 +218,7 @@ export default function UnenrollPolicyPanel() {
               fontSize: '0.9rem',
             }}
           />
-          <p style={{ fontSize: '0.9rem', color: '#666', marginTop: '0.5rem' }}>
+          <p style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)', marginTop: '0.5rem' }}>
             Email domains that should never be auto-unenrolled (one per line)
           </p>
         </div>
@@ -242,7 +242,7 @@ export default function UnenrollPolicyPanel() {
               fontSize: '0.9rem',
             }}
           />
-          <p style={{ fontSize: '0.9rem', color: '#666', marginTop: '0.5rem' }}>
+          <p style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)', marginTop: '0.5rem' }}>
             Specific emails that should never be auto-unenrolled (one per line)
           </p>
         </div>
@@ -253,7 +253,7 @@ export default function UnenrollPolicyPanel() {
           disabled={saving}
           style={{
             padding: '0.75rem 2rem',
-            background: '#007bff',
+            background: 'var(--brand-info)',
             color: 'white',
             border: 'none',
             borderRadius: '4px',
@@ -287,7 +287,7 @@ export default function UnenrollPolicyPanel() {
           <div>
             <h3>Unenroll Candidates ({candidates.length})</h3>
             {candidates.length === 0 ? (
-              <p style={{ color: '#666' }}>No users eligible for unenroll</p>
+              <p style={{ color: 'var(--brand-text-muted)' }}>No users eligible for unenroll</p>
             ) : (
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
@@ -301,7 +301,7 @@ export default function UnenrollPolicyPanel() {
                 </thead>
                 <tbody>
                   {candidates.slice(0, 50).map((c, idx) => (
-                    <tr key={idx} style={{ borderBottom: '1px solid #ddd' }}>
+                    <tr key={idx} style={{ borderBottom: '1px solid var(--brand-border)' }}>
                       <td style={{ padding: '0.75rem' }}>{c.google_email}</td>
                       <td style={{ padding: '0.75rem' }}>{c.lms_source}</td>
                       <td style={{ padding: '0.75rem', fontFamily: 'monospace', fontSize: '0.85rem' }}>
@@ -317,7 +317,7 @@ export default function UnenrollPolicyPanel() {
               </table>
             )}
             {candidates.length > 50 && (
-              <p style={{ marginTop: '1rem', color: '#666', fontSize: '0.9rem' }}>
+              <p style={{ marginTop: '1rem', color: 'var(--brand-text-muted)', fontSize: '0.9rem' }}>
                 Showing first 50 of {candidates.length} candidates
               </p>
             )}

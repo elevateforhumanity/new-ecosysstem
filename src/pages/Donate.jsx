@@ -36,7 +36,7 @@ export default function Donate() {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '3rem' }}>
           <div>
-            <form onSubmit={handleDonate} style={{ background: 'white', padding: '2rem', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+            <form onSubmit={handleDonate} style={{ background: 'white', padding: '2rem', borderRadius: '8px', border: '1px solid var(--brand-border)' }}>
               <h2 style={{ fontSize: '1.75rem', marginBottom: '1.5rem', color: 'var(--brand-text)' }}>Make a Donation</h2>
               
               <div style={{ marginBottom: '2rem' }}>
@@ -51,12 +51,12 @@ export default function Donate() {
                 <label style={{ display: 'block', marginBottom: '0.75rem', fontWeight: '600', color: 'var(--brand-text)' }}>Donation Amount</label>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem', marginBottom: '1rem' }}>
                   {presetAmounts.map(amt => (
-                    <button key={amt} type="button" onClick={() => setAmount(amt)} style={{ padding: '1rem', backgroundColor: amount === amt ? 'var(--brand-secondary)' : 'white', color: amount === amt ? 'white' : 'var(--brand-text)', border: '2px solid #e2e8f0', borderRadius: '6px', fontWeight: '600', fontSize: '1.125rem', cursor: 'pointer' }}>${amt}</button>
+                    <button key={amt} type="button" onClick={() => setAmount(amt)} style={{ padding: '1rem', backgroundColor: amount === amt ? 'var(--brand-secondary)' : 'white', color: amount === amt ? 'white' : 'var(--brand-text)', border: '2px solid var(--brand-border)', borderRadius: '6px', fontWeight: '600', fontSize: '1.125rem', cursor: 'pointer' }}>${amt}</button>
                   ))}
                 </div>
-                <button type="button" onClick={() => setAmount("custom")} style={{ width: '100%', padding: '1rem', backgroundColor: amount === "custom" ? 'var(--brand-secondary)' : 'white', color: amount === "custom" ? 'white' : 'var(--brand-text)', border: '2px solid #e2e8f0', borderRadius: '6px', fontWeight: '600', cursor: 'pointer', marginBottom: '0.75rem' }}>Custom Amount</button>
+                <button type="button" onClick={() => setAmount("custom")} style={{ width: '100%', padding: '1rem', backgroundColor: amount === "custom" ? 'var(--brand-secondary)' : 'white', color: amount === "custom" ? 'white' : 'var(--brand-text)', border: '2px solid var(--brand-border)', borderRadius: '6px', fontWeight: '600', cursor: 'pointer', marginBottom: '0.75rem' }}>Custom Amount</button>
                 {amount === "custom" && (
-                  <input type="number" placeholder="Enter amount" value={customAmount} onChange={(e) => setCustomAmount(e.target.value)} min="1" required style={{ width: '100%', padding: '0.75rem', border: '1px solid #e2e8f0', borderRadius: '6px', fontSize: '1rem' }} />
+                  <input type="number" placeholder="Enter amount" value={customAmount} onChange={(e) => setCustomAmount(e.target.value)} min="1" required style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--brand-border)', borderRadius: '6px', fontSize: '1rem' }} />
                 )}
               </div>
 

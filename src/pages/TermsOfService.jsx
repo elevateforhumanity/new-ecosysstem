@@ -14,7 +14,7 @@ export default function TermsOfService() {
         <h1 style={{ fontSize: 36, fontWeight: 700, marginBottom: 8 }}>
           Terms of Service
         </h1>
-        <p style={{ fontSize: 14, color: "#666", marginBottom: 32 }}>
+        <p style={{ fontSize: 14, color: "var(--brand-text-muted)", marginBottom: 32 }}>
           Last updated: January 1, 2025
         </p>
 
@@ -125,7 +125,7 @@ export default function TermsOfService() {
               9. Refund Policy
             </h2>
             <p>
-              Please refer to our <Link to="/refund-policy" style={{ color: "#007bff" }}>Refund Policy</Link> for information about refunds and cancellations.
+              Please refer to our <Link to="/refund-policy" style={{ color: "var(--brand-info)" }}>Refund Policy</Link> for information about refunds and cancellations.
             </p>
           </section>
 
@@ -205,7 +205,7 @@ export default function TermsOfService() {
           style={{
             marginTop: 48,
             paddingTop: 32,
-            borderTop: "1px solid #e0e0e0",
+            borderTop: "1px solid var(--brand-border)",
             display: "flex",
             gap: 24,
             justifyContent: "center",
@@ -214,7 +214,7 @@ export default function TermsOfService() {
           <Link
             to="/privacy-policy"
             style={{
-              color: "#007bff",
+              color: "var(--brand-info)",
               textDecoration: "none",
               fontSize: 14,
               fontWeight: 500,
@@ -225,7 +225,7 @@ export default function TermsOfService() {
           <Link
             to="/refund-policy"
             style={{
-              color: "#007bff",
+              color: "var(--brand-info)",
               textDecoration: "none",
               fontSize: 14,
               fontWeight: 500,
@@ -236,7 +236,7 @@ export default function TermsOfService() {
           <Link
             to="/support"
             style={{
-              color: "#007bff",
+              color: "var(--brand-info)",
               textDecoration: "none",
               fontSize: 14,
               fontWeight: 500,

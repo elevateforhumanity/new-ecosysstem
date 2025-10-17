@@ -8,7 +8,7 @@ function BootError({ err }: { err: unknown }) {
       <pre style={{whiteSpace:'pre-wrap',fontSize:12,opacity:.8,background:'#f3f4f6',padding:'1rem',borderRadius:8,marginTop:'1rem'}}>
         {String(err instanceof Error ? err.stack || err.message : err)}
       </pre>
-      <p style={{marginTop:'1rem',color:'#666'}}>Check import path casing, lazy imports, env usage, router setup.</p>
+      <p style={{marginTop:'1rem',color:'var(--brand-text-muted)'}}>Check import path casing, lazy imports, env usage, router setup.</p>
       <button 
         onClick={() => window.location.reload()} 
         style={{marginTop:'1rem',padding:'0.5rem 1rem',background:'var(--brand-info)',color:'white',border:'none',borderRadius:6,cursor:'pointer'}}

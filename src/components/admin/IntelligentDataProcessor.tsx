@@ -286,8 +286,8 @@ export function IntelligentDataProcessor() {
   return (
     <div className="intelligent-processor bg-white rounded-lg shadow-lg p-6">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">🤖 Intelligent Data Processor</h2>
-        <p className="text-gray-600">Paste any format - I'll figure it out and create everything automatically!</p>
+        <h2 className="text-2xl font-bold text-brand-text mb-2">🤖 Intelligent Data Processor</h2>
+        <p className="text-brand-text-muted">Paste any format - I'll figure it out and create everything automatically!</p>
       </div>
 
       {/* Copilot Messages */}
@@ -306,7 +306,7 @@ export function IntelligentDataProcessor() {
 
       {/* Input Area */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-brand-text mb-2">
           📋 Paste Student Data (Any Format)
         </label>
         <textarea
@@ -322,7 +322,7 @@ Examples:
 
 John Smith    Medical Assistant    2025-01-15    john@email.com
 Sarah Johnson IT Support         2025-01-22    sarah@email.com"
-          className="w-full h-40 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 font-mono text-sm"
+          className="w-full h-40 p-4 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus font-mono text-sm"
         />
         
         <div className="mt-4 flex space-x-3">
@@ -336,7 +336,7 @@ Sarah Johnson IT Support         2025-01-22    sarah@email.com"
           
           <button
             onClick={() => setRawInput('')}
-            className="bg-gray-200 text-gray-700 px-4 py-3 rounded-lg hover:bg-gray-300"
+            className="bg-brand-border text-brand-text px-4 py-3 rounded-lg hover:bg-gray-300"
           >
             Clear
           </button>
@@ -351,15 +351,15 @@ Sarah Johnson IT Support         2025-01-22    sarah@email.com"
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
               <div>
                 <div className="font-medium text-brand-success">Students Processed</div>
-                <div className="text-2xl font-bold text-green-600">{processedData.students.length}</div>
+                <div className="text-2xl font-bold text-brand-success">{processedData.students.length}</div>
               </div>
               <div>
                 <div className="font-medium text-brand-success">Programs Detected</div>
-                <div className="text-2xl font-bold text-green-600">{processedData.programs.length}</div>
+                <div className="text-2xl font-bold text-brand-success">{processedData.programs.length}</div>
               </div>
               <div>
                 <div className="font-medium text-brand-success">Flow Charts Created</div>
-                <div className="text-2xl font-bold text-green-600">{processedData.flowCharts.length}</div>
+                <div className="text-2xl font-bold text-brand-success">{processedData.flowCharts.length}</div>
               </div>
               <div>
                 <div className="font-medium text-brand-success">At-Risk Students</div>
@@ -372,7 +372,7 @@ Sarah Johnson IT Support         2025-01-22    sarah@email.com"
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <button className="p-4 bg-blue-50 border border-blue-200 rounded-lg hover:bg-brand-surface text-left">
               <div className="font-medium text-blue-900">📊 View Flow Charts</div>
-              <div className="text-sm text-blue-700 mt-1">See auto-generated visualizations</div>
+              <div className="text-sm text-brand-info mt-1">See auto-generated visualizations</div>
             </button>
             
             <button className="p-4 bg-green-50 border border-green-200 rounded-lg hover:bg-brand-surface text-left">

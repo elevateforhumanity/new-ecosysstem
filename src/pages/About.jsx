@@ -37,8 +37,8 @@ export default function About() {
   ];
 
   const values = [
-    { icon: Target, title: "Our Mission", description: "To empower learners and communities through innovative, inclusive, and compliant online education that creates pathways to prosperity and meaningful careers.", color: "text-blue-600", bg: "bg-blue-50" },
-    { icon: Eye, title: "Our Vision", description: "A world where quality education and workforce training are accessible to all, regardless of background or circumstance, creating thriving communities.", color: "text-green-600", bg: "bg-green-50" },
+    { icon: Target, title: "Our Mission", description: "To empower learners and communities through innovative, inclusive, and compliant online education that creates pathways to prosperity and meaningful careers.", color: "text-brand-info", bg: "bg-blue-50" },
+    { icon: Eye, title: "Our Vision", description: "A world where quality education and workforce training are accessible to all, regardless of background or circumstance, creating thriving communities.", color: "text-brand-success", bg: "bg-green-50" },
     { icon: Heart, title: "Our Values", description: "Excellence, accessibility, integrity, innovation, and community impact guide everything we do.", color: "text-purple-600", bg: "bg-purple-50" },
   ];
 
@@ -47,7 +47,7 @@ export default function About() {
       icon: GraduationCap, 
       title: "Education & Training", 
       description: "Comprehensive Learn2Earn Workforce programs, apprenticeships, and skills training designed to meet industry demands.",
-      color: "text-blue-600",
+      color: "text-brand-info",
       bg: "bg-blue-50"
     },
     { 
@@ -68,7 +68,7 @@ export default function About() {
       icon: Users, 
       title: "Community Impact", 
       description: "Building stronger communities through education, mentorship, and workforce initiatives.",
-      color: "text-green-600",
+      color: "text-brand-success",
       bg: "bg-green-50"
     },
   ];
@@ -156,21 +156,21 @@ export default function About() {
               <Badge className="mb-4 text-base px-6 py-2">
                 Our Story
               </Badge>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-text mb-6">
                 Building Pathways to Prosperity
               </h2>
             </div>
 
             <Card className="border-2 shadow-xl animate-fade-in-up" style={{ animationDelay: '200ms' }}>
-              <CardContent className="p-8 md:p-12 space-y-6 text-lg leading-relaxed text-gray-700">
+              <CardContent className="p-8 md:p-12 space-y-6 text-lg leading-relaxed text-brand-text">
                 <p>
-                  Founded by <strong className="text-blue-600">Elizabeth L. Greene</strong>, Elevate for Humanity emerged from a vision to create meaningful pathways to prosperity through education and Learn2Earn Workforce programs. As a certified <strong>Veteran-Owned Small Business</strong>, we understand the challenges faced by those seeking to transform their lives through education.
+                  Founded by <strong className="text-brand-info">Elizabeth L. Greene</strong>, Elevate for Humanity emerged from a vision to create meaningful pathways to prosperity through education and Learn2Earn Workforce programs. As a certified <strong>Veteran-Owned Small Business</strong>, we understand the challenges faced by those seeking to transform their lives through education.
                 </p>
                 <p>
-                  In partnership with Selfish Inc. dba, we've built a government-compliant nonprofit dedicated to accessible, high-quality education. We are <strong className="text-green-600">DOL, DWD, and DOE compliant</strong>, committed to transparency, accessibility, and student success.
+                  In partnership with Selfish Inc. dba, we've built a government-compliant nonprofit dedicated to accessible, high-quality education. We are <strong className="text-brand-success">DOL, DWD, and DOE compliant</strong>, committed to transparency, accessibility, and student success.
                 </p>
-                <p className="text-xl font-semibold text-gray-900">
-                  Today, we serve over <span className="text-blue-600">1,247 learners annually</span>, maintain an <span className="text-green-600">87% graduation rate</span>, and have distributed <span className="text-purple-600">$2.85M in funding</span> to support educational opportunities.
+                <p className="text-xl font-semibold text-brand-text">
+                  Today, we serve over <span className="text-brand-info">1,247 learners annually</span>, maintain an <span className="text-brand-success">87% graduation rate</span>, and have distributed <span className="text-purple-600">$2.85M in funding</span> to support educational opportunities.
                 </p>
               </CardContent>
             </Card>
@@ -181,7 +181,7 @@ export default function About() {
         <section className="py-20 px-4 bg-brand-surface">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 animate-fade-in-up">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-text mb-4">
                 What We Do
               </h2>
               <p className="text-xl text-brand-text-muted max-w-3xl mx-auto">
@@ -215,8 +215,8 @@ export default function About() {
         <section className="py-20 px-4 bg-white">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12 animate-fade-in-up">
-              <Shield className="h-16 w-16 text-blue-600 mx-auto mb-4" />
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              <Shield className="h-16 w-16 text-brand-info mx-auto mb-4" />
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-text mb-4">
                 Certifications & Compliance
               </h2>
               <p className="text-xl text-brand-text-muted">
@@ -232,8 +232,8 @@ export default function About() {
                   style={{ animationDelay: `${idx * 50}ms` }}
                 >
                   <CardContent className="p-6">
-                    <CheckCircle2 className="h-8 w-8 text-green-600 mx-auto mb-3" />
-                    <p className="font-semibold text-gray-900">{cert}</p>
+                    <CheckCircle2 className="h-8 w-8 text-brand-success mx-auto mb-3" />
+                    <p className="font-semibold text-brand-text">{cert}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -253,7 +253,7 @@ export default function About() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style={{ animationDelay: '200ms' }}>
               <Link to="/programs">
-                <Button size="lg" className="bg-white text-blue-700 hover:bg-gray-100 text-lg px-10 py-6 rounded-full shadow-2xl">
+                <Button size="lg" className="bg-white text-brand-info hover:bg-brand-surface-dark text-lg px-10 py-6 rounded-full shadow-2xl">
                   Explore Programs
                 </Button>
               </Link>

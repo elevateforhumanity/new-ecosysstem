@@ -34,11 +34,11 @@ export default function HomePage() {
       </section>
 
       {/* Programs Preview */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-brand-surface">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">Popular Programs</h2>
-            <p className="text-xl text-gray-600">Choose from our WIOA approved programs</p>
+            <h2 className="text-4xl font-bold text-brand-text mb-4">Popular Programs</h2>
+            <p className="text-xl text-brand-text-muted">Choose from our WIOA approved programs</p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -51,9 +51,9 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="p-6">
-                <p className="text-gray-600 mb-4">Learn to protect digital assets and networks from cyber threats.</p>
+                <p className="text-brand-text-muted mb-4">Learn to protect digital assets and networks from cyber threats.</p>
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-sm text-gray-500">12-16 weeks</span>
+                  <span className="text-sm text-brand-text-light">12-16 weeks</span>
                   <span className="bg-brand-surface text-brand-success px-3 py-1 rounded-full text-sm">$65K+ avg</span>
                 </div>
                 <Link to="/programs/cybersecurity" className="block w-full bg-brand-info text-white text-center py-3 rounded-lg hover:bg-brand-info-hover transition-colors">
@@ -71,9 +71,9 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="p-6">
-                <p className="text-gray-600 mb-4">Master AWS, Azure, and Google Cloud platforms.</p>
+                <p className="text-brand-text-muted mb-4">Master AWS, Azure, and Google Cloud platforms.</p>
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-sm text-gray-500">10-14 weeks</span>
+                  <span className="text-sm text-brand-text-light">10-14 weeks</span>
                   <span className="bg-brand-surface text-brand-success px-3 py-1 rounded-full text-sm">$70K+ avg</span>
                 </div>
                 <Link to="/programs/cloud-computing" className="block w-full bg-brand-info text-white text-center py-3 rounded-lg hover:bg-brand-info-hover transition-colors">
@@ -91,9 +91,9 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="p-6">
-                <p className="text-gray-600 mb-4">CNA and Home Health Aide certification programs.</p>
+                <p className="text-brand-text-muted mb-4">CNA and Home Health Aide certification programs.</p>
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-sm text-gray-500">6-8 weeks</span>
+                  <span className="text-sm text-brand-text-light">6-8 weeks</span>
                   <span className="bg-brand-surface text-brand-success px-3 py-1 rounded-full text-sm">$35K+ avg</span>
                 </div>
                 <Link to="/programs/healthcare" className="block w-full bg-brand-info text-white text-center py-3 rounded-lg hover:bg-brand-info-hover transition-colors">
@@ -115,26 +115,26 @@ export default function HomePage() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">Why Choose Elevate?</h2>
+            <h2 className="text-4xl font-bold text-brand-text mb-4">Why Choose Elevate?</h2>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="text-5xl mb-4">✅</div>
               <h3 className="text-xl font-bold mb-2">WIOA Approved</h3>
-              <p className="text-gray-600">Federally approved programs with funding available</p>
+              <p className="text-brand-text-muted">Federally approved programs with funding available</p>
             </div>
             
             <div className="text-center">
               <div className="text-5xl mb-4">💼</div>
               <h3 className="text-xl font-bold mb-2">Job Placement</h3>
-              <p className="text-gray-600">Career support and job placement assistance</p>
+              <p className="text-brand-text-muted">Career support and job placement assistance</p>
             </div>
             
             <div className="text-center">
               <div className="text-5xl mb-4">🎓</div>
               <h3 className="text-xl font-bold mb-2">Industry Certifications</h3>
-              <p className="text-gray-600">Earn recognized credentials from top providers</p>
+              <p className="text-brand-text-muted">Earn recognized credentials from top providers</p>
             </div>
           </div>
         </div>

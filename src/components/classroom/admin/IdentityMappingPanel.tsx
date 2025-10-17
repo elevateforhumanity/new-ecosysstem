@@ -181,14 +181,14 @@ export default function IdentityMappingPanel() {
   return (
     <div className="identity-mapping-panel" style={{ padding: '2rem' }}>
       <h2>LMS Identity Mapping</h2>
-      <p style={{ color: '#666', marginBottom: '2rem' }}>
+      <p style={{ color: 'var(--brand-text-muted)', marginBottom: '2rem' }}>
         Upload CSV to map LMS user IDs to Google email addresses
       </p>
 
       {/* Upload Section */}
       <div style={{ marginBottom: '2rem', padding: '1.5rem', background: '#f5f5f5', borderRadius: '8px' }}>
         <h3>Upload CSV</h3>
-        <p style={{ fontSize: '0.9rem', color: '#666', marginBottom: '1rem' }}>
+        <p style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)', marginBottom: '1rem' }}>
           Format: <code>lms_source,lms_user_id,google_email,full_name</code>
         </p>
         <input
@@ -234,7 +234,7 @@ export default function IdentityMappingPanel() {
             </thead>
             <tbody>
               {batches.map((batch) => (
-                <tr key={batch.import_batch_id} style={{ borderBottom: '1px solid #ddd' }}>
+                <tr key={batch.import_batch_id} style={{ borderBottom: '1px solid var(--brand-border)' }}>
                   <td style={{ padding: '0.75rem', fontFamily: 'monospace', fontSize: '0.85rem' }}>
                     {batch.import_batch_id.substring(0, 8)}...
                   </td>
@@ -249,7 +249,7 @@ export default function IdentityMappingPanel() {
                       disabled={applying}
                       style={{
                         padding: '0.5rem 1rem',
-                        background: '#007bff',
+                        background: 'var(--brand-info)',
                         color: 'white',
                         border: 'none',
                         borderRadius: '4px',
@@ -281,7 +281,7 @@ export default function IdentityMappingPanel() {
             </thead>
             <tbody>
               {summary.map((s) => (
-                <tr key={s.lms_source} style={{ borderBottom: '1px solid #ddd' }}>
+                <tr key={s.lms_source} style={{ borderBottom: '1px solid var(--brand-border)' }}>
                   <td style={{ padding: '0.75rem' }}>{s.lms_source}</td>
                   <td style={{ padding: '0.75rem', textAlign: 'right' }}>{s.total_mappings}</td>
                   <td style={{ padding: '0.75rem', textAlign: 'right' }}>{s.unique_emails}</td>

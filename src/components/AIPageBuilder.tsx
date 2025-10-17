@@ -161,22 +161,22 @@ export default function AIPageBuilder() {
     <div className="max-w-7xl mx-auto p-6">
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-red-600 mb-2">AI Website Stylist</h1>
-        <p className="text-gray-600">Generate branded pages with AI - powered by Workers AI</p>
+        <p className="text-brand-text-muted">Generate branded pages with AI - powered by Workers AI</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Configuration Panel */}
         <div className="space-y-6">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Page Configuration</h2>
+            <h2 className="text-2xl font-semibold text-brand-text mb-4">Page Configuration</h2>
 
             {/* Page Type */}
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-brand-text mb-2">
                 Page Type
               </label>
               <select
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full border border-brand-border-dark rounded-lg px-4 py-2 focus:ring-2 focus:ring-brand-focus focus:border-transparent"
                 value={pageType}
                 onChange={(e) => setPageType(e.target.value)}
               >
@@ -187,17 +187,17 @@ export default function AIPageBuilder() {
                 ))}
               </select>
               {currentTemplate && (
-                <p className="text-sm text-gray-500 mt-1">{currentTemplate.description}</p>
+                <p className="text-sm text-brand-text-light mt-1">{currentTemplate.description}</p>
               )}
             </div>
 
             {/* Description */}
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-brand-text mb-2">
                 Page Description
               </label>
               <textarea
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full border border-brand-border-dark rounded-lg px-4 py-2 focus:ring-2 focus:ring-brand-focus focus:border-transparent"
                 rows={4}
                 placeholder="Describe what the page should highlight..."
                 value={description}
@@ -205,11 +205,11 @@ export default function AIPageBuilder() {
               />
               {currentTemplate && currentTemplate.examples.length > 0 && (
                 <div className="mt-2">
-                  <p className="text-xs text-gray-500 mb-1">Examples:</p>
+                  <p className="text-xs text-brand-text-light mb-1">Examples:</p>
                   {currentTemplate.examples.map((example, i) => (
                     <button
                       key={i}
-                      className="text-xs text-blue-600 hover:text-brand-info block mb-1"
+                      className="text-xs text-brand-info hover:text-brand-info block mb-1"
                       onClick={() => setDescription(example)}
                     >
                       • {example}
@@ -221,7 +221,7 @@ export default function AIPageBuilder() {
 
             {/* Sections */}
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-brand-text mb-2">
                 Sections to Include
               </label>
               <div className="flex flex-wrap gap-2">
@@ -259,15 +259,15 @@ export default function AIPageBuilder() {
           {/* Save Panel */}
           {generatedPage && (
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">Save Page</h2>
+              <h2 className="text-2xl font-semibold text-brand-text mb-4">Save Page</h2>
 
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-brand-text mb-2">
                   Page Name
                 </label>
                 <input
                   type="text"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full border border-brand-border-dark rounded-lg px-4 py-2 focus:ring-2 focus:ring-brand-focus focus:border-transparent"
                   placeholder="e.g., Home Page"
                   value={pageName}
                   onChange={(e) => setPageName(e.target.value)}
@@ -275,17 +275,17 @@ export default function AIPageBuilder() {
               </div>
 
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-brand-text mb-2">
                   URL Slug
                 </label>
                 <input
                   type="text"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full border border-brand-border-dark rounded-lg px-4 py-2 focus:ring-2 focus:ring-brand-focus focus:border-transparent"
                   placeholder="e.g., home"
                   value={pageSlug}
                   onChange={(e) => setPageSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-'))}
                 />
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-brand-text-light mt-1">
                   Will be accessible at: /pages/{pageSlug}
                 </p>
               </div>
@@ -331,12 +331,12 @@ export default function AIPageBuilder() {
                 </div>
 
                 <div
-                  className="border border-gray-200 rounded-lg p-4 bg-gray-50 overflow-auto"
+                  className="border border-brand-border rounded-lg p-4 bg-brand-surface overflow-auto"
                   style={{ maxHeight: '600px' }}
                   dangerouslySetInnerHTML={{ __html: generatedPage.html }}
                 />
 
-                <div className="mt-4 text-xs text-gray-500">
+                <div className="mt-4 text-xs text-brand-text-light">
                   Generated at: {new Date(generatedPage.generatedAt).toLocaleString()}
                 </div>
               </div>
@@ -356,8 +356,8 @@ export default function AIPageBuilder() {
                   d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                 />
               </svg>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No Page Generated Yet</h3>
-              <p className="text-gray-500">
+              <h3 className="text-lg font-medium text-brand-text mb-2">No Page Generated Yet</h3>
+              <p className="text-brand-text-light">
                 Configure your page settings and click "Generate Page with AI" to see the preview
               </p>
             </div>

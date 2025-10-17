@@ -56,7 +56,7 @@ export default function Connect() {
           <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--brand-info)' }}>
             Thank You for Reaching Out!
           </h1>
-          <p style={{ fontSize: '1.25rem', color: '#64748b', marginBottom: '2rem' }}>
+          <p style={{ fontSize: '1.25rem', color: 'var(--brand-text-muted)', marginBottom: '2rem' }}>
             We've received your message and will respond within 24-48 hours.
           </p>
           <button
@@ -98,7 +98,7 @@ export default function Connect() {
           <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--brand-info)' }}>
             Get in Touch
           </h1>
-          <p style={{ fontSize: '1.25rem', color: '#64748b', maxWidth: '700px', margin: '0 auto' }}>
+          <p style={{ fontSize: '1.25rem', color: 'var(--brand-text-muted)', maxWidth: '700px', margin: '0 auto' }}>
             Have questions about our programs? Want to partner with us? We'd love to hear from you.
           </p>
         </header>
@@ -106,7 +106,7 @@ export default function Connect() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
           {/* Contact Form */}
           <div style={{ gridColumn: 'span 2' }}>
-            <form onSubmit={handleSubmit} style={{ background: 'white', padding: '2rem', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+            <form onSubmit={handleSubmit} style={{ background: 'white', padding: '2rem', borderRadius: '8px', border: '1px solid var(--brand-border)' }}>
               <h2 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', color: 'var(--brand-text)' }}>Send Us a Message</h2>
               
               <div style={{ marginBottom: '1.5rem' }}>
@@ -121,7 +121,7 @@ export default function Connect() {
                   style={{
                     width: '100%',
                     padding: '0.75rem',
-                    border: '1px solid #e2e8f0',
+                    border: '1px solid var(--brand-border)',
                     borderRadius: '6px',
                     fontSize: '1rem'
                   }}
@@ -150,7 +150,7 @@ export default function Connect() {
                     style={{
                       width: '100%',
                       padding: '0.75rem',
-                      border: '1px solid #e2e8f0',
+                      border: '1px solid var(--brand-border)',
                       borderRadius: '6px',
                       fontSize: '1rem'
                     }}
@@ -170,7 +170,7 @@ export default function Connect() {
                     style={{
                       width: '100%',
                       padding: '0.75rem',
-                      border: '1px solid #e2e8f0',
+                      border: '1px solid var(--brand-border)',
                       borderRadius: '6px',
                       fontSize: '1rem'
                     }}
@@ -191,7 +191,7 @@ export default function Connect() {
                     style={{
                       width: '100%',
                       padding: '0.75rem',
-                      border: '1px solid #e2e8f0',
+                      border: '1px solid var(--brand-border)',
                       borderRadius: '6px',
                       fontSize: '1rem'
                     }}
@@ -210,7 +210,7 @@ export default function Connect() {
                     style={{
                       width: '100%',
                       padding: '0.75rem',
-                      border: '1px solid #e2e8f0',
+                      border: '1px solid var(--brand-border)',
                       borderRadius: '6px',
                       fontSize: '1rem'
                     }}
@@ -231,7 +231,7 @@ export default function Connect() {
                   style={{
                     width: '100%',
                     padding: '0.75rem',
-                    border: '1px solid #e2e8f0',
+                    border: '1px solid var(--brand-border)',
                     borderRadius: '6px',
                     fontSize: '1rem'
                   }}
@@ -251,7 +251,7 @@ export default function Connect() {
                   style={{
                     width: '100%',
                     padding: '0.75rem',
-                    border: '1px solid #e2e8f0',
+                    border: '1px solid var(--brand-border)',
                     borderRadius: '6px',
                     fontSize: '1rem',
                     fontFamily: 'inherit',
@@ -302,14 +302,14 @@ export default function Connect() {
 
               <div style={{ marginBottom: '1.5rem' }}>
                 <div style={{ fontWeight: '600', color: 'var(--brand-text)', marginBottom: '0.5rem' }}>🏢 Office Hours</div>
-                <div style={{ color: '#64748b' }}>
+                <div style={{ color: 'var(--brand-text-muted)' }}>
                   Monday - Friday<br />
                   9:00 AM - 5:00 PM EST
                 </div>
               </div>
             </div>
 
-            <div style={{ background: 'white', padding: '2rem', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+            <div style={{ background: 'white', padding: '2rem', borderRadius: '8px', border: '1px solid var(--brand-border)' }}>
               <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', color: 'var(--brand-text)' }}>Quick Links</h3>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 <li style={{ marginBottom: '0.75rem' }}>

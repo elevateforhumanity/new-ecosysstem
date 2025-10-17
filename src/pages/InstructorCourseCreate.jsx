@@ -48,7 +48,7 @@ export default function InstructorCourseCreate() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-brand-surface">
       <SEO
         title="Create Course | Instructor Portal"
         description="Create and manage your courses"
@@ -57,8 +57,8 @@ export default function InstructorCourseCreate() {
       
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Create New Course</h1>
-          <p className="text-lg text-gray-600">Build your course content and publish to students</p>
+          <h1 className="text-4xl font-bold text-brand-text mb-2">Create New Course</h1>
+          <p className="text-lg text-brand-text-muted">Build your course content and publish to students</p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -95,8 +95,8 @@ export default function InstructorCourseCreate() {
                   <label className="block text-sm font-medium mb-2">Course Thumbnail</label>
                   <div className="border-2 border-dashed rounded-lg p-8 text-center">
                     <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-                    <p className="text-sm text-gray-600 mb-2">Click to upload or drag and drop</p>
-                    <p className="text-xs text-gray-500">PNG, JPG up to 5MB</p>
+                    <p className="text-sm text-brand-text-muted mb-2">Click to upload or drag and drop</p>
+                    <p className="text-xs text-brand-text-light">PNG, JPG up to 5MB</p>
                     <input type="file" className="hidden" accept="image/*" />
                   </div>
                 </div>
@@ -117,7 +117,7 @@ export default function InstructorCourseCreate() {
                       <h3 className="font-semibold">Module {idx + 1}: {module.title}</h3>
                       <Button variant="ghost" size="sm">Edit</Button>
                     </div>
-                    <p className="text-sm text-gray-600">{module.lessons.length} lessons</p>
+                    <p className="text-sm text-brand-text-muted">{module.lessons.length} lessons</p>
                   </div>
                 ))}
 
@@ -155,7 +155,7 @@ export default function InstructorCourseCreate() {
                   {currentModule.lessons.length > 0 && (
                     <div className="space-y-2 mb-4">
                       {currentModule.lessons.map((lesson, idx) => (
-                        <div key={lesson.id} className="flex items-center gap-2 p-2 bg-gray-50 rounded">
+                        <div key={lesson.id} className="flex items-center gap-2 p-2 bg-brand-surface rounded">
                           {lesson.type === 'video' && <Video className="w-4 h-4" />}
                           {lesson.type === 'reading' && <FileText className="w-4 h-4" />}
                           {lesson.type === 'assignment' && <Upload className="w-4 h-4" />}
@@ -188,16 +188,16 @@ export default function InstructorCourseCreate() {
                 <CardTitle>Course Preview</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="aspect-video bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                  <p className="text-gray-500">Thumbnail Preview</p>
+                <div className="aspect-video bg-brand-border rounded-lg mb-4 flex items-center justify-center">
+                  <p className="text-brand-text-light">Thumbnail Preview</p>
                 </div>
                 <h3 className="font-semibold mb-2">
                   {course.title || "Course Title"}
                 </h3>
-                <p className="text-sm text-gray-600 mb-4">
+                <p className="text-sm text-brand-text-muted mb-4">
                   {course.description || "Course description will appear here..."}
                 </p>
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-brand-text-light">
                   <p>{course.modules.length} modules</p>
                   <p>{course.modules.reduce((acc, m) => acc + m.lessons.length, 0)} lessons</p>
                 </div>
@@ -233,13 +233,13 @@ export default function InstructorCourseCreate() {
                 <CardTitle>Need Help?</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2 text-sm">
-                <p className="text-gray-600">
+                <p className="text-brand-text-muted">
                   <strong>Videos:</strong> Upload to Google Drive automatically
                 </p>
-                <p className="text-gray-600">
+                <p className="text-brand-text-muted">
                   <strong>Assignments:</strong> Students submit through the platform
                 </p>
-                <p className="text-gray-600">
+                <p className="text-brand-text-muted">
                   <strong>Quizzes:</strong> Auto-graded with instant feedback
                 </p>
                 <Button variant="link" size="sm" className="p-0">

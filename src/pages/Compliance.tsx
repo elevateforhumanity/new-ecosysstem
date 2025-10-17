@@ -144,24 +144,24 @@ export default function Compliance() {
       {/* Key Metrics */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
         <div className="bg-white p-6 rounded-lg shadow text-center">
-          <div className="text-2xl font-bold text-blue-600">{complianceMetrics.totalParticipants.toLocaleString()}</div>
-          <div className="text-gray-600 text-sm">Total Participants</div>
+          <div className="text-2xl font-bold text-brand-info">{complianceMetrics.totalParticipants.toLocaleString()}</div>
+          <div className="text-brand-text-muted text-sm">Total Participants</div>
         </div>
         <div className="bg-white p-6 rounded-lg shadow text-center">
-          <div className="text-2xl font-bold text-green-600">{complianceMetrics.activeEnrollments}</div>
-          <div className="text-gray-600 text-sm">Active Enrollments</div>
+          <div className="text-2xl font-bold text-brand-success">{complianceMetrics.activeEnrollments}</div>
+          <div className="text-brand-text-muted text-sm">Active Enrollments</div>
         </div>
         <div className="bg-white p-6 rounded-lg shadow text-center">
           <div className="text-2xl font-bold text-purple-600">{complianceMetrics.completionRate}%</div>
-          <div className="text-gray-600 text-sm">Completion Rate</div>
+          <div className="text-brand-text-muted text-sm">Completion Rate</div>
         </div>
         <div className="bg-white p-6 rounded-lg shadow text-center">
           <div className="text-2xl font-bold text-orange-600">{complianceMetrics.employmentRate}%</div>
-          <div className="text-gray-600 text-sm">Employment Rate</div>
+          <div className="text-brand-text-muted text-sm">Employment Rate</div>
         </div>
         <div className="bg-white p-6 rounded-lg shadow text-center">
-          <div className="text-2xl font-bold text-green-600">{complianceMetrics.federalCompliance}%</div>
-          <div className="text-gray-600 text-sm">Federal Compliance</div>
+          <div className="text-2xl font-bold text-brand-success">{complianceMetrics.federalCompliance}%</div>
+          <div className="text-brand-text-muted text-sm">Federal Compliance</div>
         </div>
       </div>
 
@@ -174,7 +174,7 @@ export default function Compliance() {
             className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-all text-left"
           >
             <div className="flex items-center justify-between mb-3">
-              <area.icon className="h-8 w-8 text-blue-600" />
+              <area.icon className="h-8 w-8 text-brand-info" />
               <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
                 area.status === 'compliant' 
                   ? 'bg-brand-surface text-brand-success'
@@ -183,18 +183,18 @@ export default function Compliance() {
                 {area.status}
               </span>
             </div>
-            <h3 className="font-medium text-gray-900 mb-2">{area.title}</h3>
-            <p className="text-gray-600 text-sm mb-3">{area.description}</p>
+            <h3 className="font-medium text-brand-text mb-2">{area.title}</h3>
+            <p className="text-brand-text-muted text-sm mb-3">{area.description}</p>
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-gray-500">Participants</span>
+                <span className="text-brand-text-light">Participants</span>
                 <span className="font-medium">{area.participants.toLocaleString()}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-500">Completion</span>
+                <span className="text-brand-text-light">Completion</span>
                 <span className="font-medium">{area.completion}%</span>
               </div>
-              <div className="bg-gray-200 rounded-full h-2">
+              <div className="bg-brand-border rounded-full h-2">
                 <div 
                   className="bg-brand-info rounded-full h-2" 
                   style={{ width: `${area.completion}%` }}
@@ -208,7 +208,7 @@ export default function Compliance() {
       {/* Recent Activity */}
       <div className="bg-white rounded-lg shadow">
         <div className="p-6 border-b">
-          <h3 className="text-lg font-medium text-gray-900">Recent Compliance Activity</h3>
+          <h3 className="text-lg font-medium text-brand-text">Recent Compliance Activity</h3>
         </div>
         <div className="p-6">
           <div className="space-y-4">
@@ -221,19 +221,19 @@ export default function Compliance() {
                 }`}>
                   <CheckCircle className={`h-4 w-4 ${
                     activity.status === 'completed' 
-                      ? 'text-green-600' 
+                      ? 'text-brand-success' 
                       : 'text-yellow-600'
                   }`} />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-sm font-medium text-gray-900">{activity.type}</h4>
-                    <span className="text-xs text-gray-500">
+                    <h4 className="text-sm font-medium text-brand-text">{activity.type}</h4>
+                    <span className="text-xs text-brand-text-light">
                       {new Date(activity.timestamp).toLocaleDateString()}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-600">{activity.description}</p>
-                  <p className="text-xs text-gray-500">By {activity.user}</p>
+                  <p className="text-sm text-brand-text-muted">{activity.description}</p>
+                  <p className="text-xs text-brand-text-light">By {activity.user}</p>
                 </div>
               </div>
             ))}
@@ -252,10 +252,10 @@ export default function Compliance() {
         <div className="p-6 border-b">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <section.icon className="h-8 w-8 text-blue-600" />
+              <section.icon className="h-8 w-8 text-brand-info" />
               <div>
-                <h2 className="text-xl font-bold text-gray-900">{section.title}</h2>
-                <p className="text-gray-600">{section.description}</p>
+                <h2 className="text-xl font-bold text-brand-text">{section.title}</h2>
+                <p className="text-brand-text-muted">{section.description}</p>
               </div>
             </div>
             <span className={`px-3 py-1 text-sm font-semibold rounded-full ${
@@ -270,11 +270,11 @@ export default function Compliance() {
         <div className="p-6">
           <div className="grid md:grid-cols-3 gap-6 mb-8">
             <div className="bg-blue-50 p-4 rounded-lg">
-              <div className="text-2xl font-bold text-blue-600">{section.participants.toLocaleString()}</div>
-              <div className="text-blue-700 text-sm">Total Participants</div>
+              <div className="text-2xl font-bold text-brand-info">{section.participants.toLocaleString()}</div>
+              <div className="text-brand-info text-sm">Total Participants</div>
             </div>
             <div className="bg-green-50 p-4 rounded-lg">
-              <div className="text-2xl font-bold text-green-600">{section.completion}%</div>
+              <div className="text-2xl font-bold text-brand-success">{section.completion}%</div>
               <div className="text-green-700 text-sm">Completion Rate</div>
             </div>
             <div className="bg-purple-50 p-4 rounded-lg">
@@ -287,15 +287,15 @@ export default function Compliance() {
           <div className="space-y-6">
             {sectionId === 'iep' && (
               <div>
-                <h3 className="text-lg font-medium text-gray-900 mb-4">Individual Employment Plan Management</h3>
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <p className="text-gray-700 mb-4">
+                <h3 className="text-lg font-medium text-brand-text mb-4">Individual Employment Plan Management</h3>
+                <div className="bg-brand-surface rounded-lg p-4">
+                  <p className="text-brand-text mb-4">
                     Complete IEP lifecycle management including assessment, goal setting, service planning, and progress tracking.
                   </p>
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <h4 className="font-medium text-gray-900 mb-2">Key Features:</h4>
-                      <ul className="text-sm text-gray-600 space-y-1">
+                      <h4 className="font-medium text-brand-text mb-2">Key Features:</h4>
+                      <ul className="text-sm text-brand-text-muted space-y-1">
                         <li>• Comprehensive career assessments</li>
                         <li>• SMART goal setting and tracking</li>
                         <li>• Service coordination and referrals</li>
@@ -303,8 +303,8 @@ export default function Compliance() {
                       </ul>
                     </div>
                     <div>
-                      <h4 className="font-medium text-gray-900 mb-2">Federal Requirements:</h4>
-                      <ul className="text-sm text-gray-600 space-y-1">
+                      <h4 className="font-medium text-brand-text mb-2">Federal Requirements:</h4>
+                      <ul className="text-sm text-brand-text-muted space-y-1">
                         <li>• WIOA Section 134 compliance</li>
                         <li>• Career pathway alignment</li>
                         <li>• Barrier identification and services</li>
@@ -318,15 +318,15 @@ export default function Compliance() {
 
             {sectionId === 'pirl' && (
               <div>
-                <h3 className="text-lg font-medium text-gray-900 mb-4">PIRL Federal Reporting</h3>
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <p className="text-gray-700 mb-4">
+                <h3 className="text-lg font-medium text-brand-text mb-4">PIRL Federal Reporting</h3>
+                <div className="bg-brand-surface rounded-lg p-4">
+                  <p className="text-brand-text mb-4">
                     Automated PIRL (Participant Individual Record Layout) data collection and federal submission system.
                   </p>
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <h4 className="font-medium text-gray-900 mb-2">Data Collection:</h4>
-                      <ul className="text-sm text-gray-600 space-y-1">
+                      <h4 className="font-medium text-brand-text mb-2">Data Collection:</h4>
+                      <ul className="text-sm text-brand-text-muted space-y-1">
                         <li>• Participant demographics</li>
                         <li>• Employment history and outcomes</li>
                         <li>• Education and training completion</li>
@@ -334,8 +334,8 @@ export default function Compliance() {
                       </ul>
                     </div>
                     <div>
-                      <h4 className="font-medium text-gray-900 mb-2">Federal Submission:</h4>
-                      <ul className="text-sm text-gray-600 space-y-1">
+                      <h4 className="font-medium text-brand-text mb-2">Federal Submission:</h4>
+                      <ul className="text-sm text-brand-text-muted space-y-1">
                         <li>• Quarterly DOL reporting</li>
                         <li>• Data validation and quality checks</li>
                         <li>• Performance metrics calculation</li>
@@ -351,10 +351,10 @@ export default function Compliance() {
               <button className="bg-brand-info text-white px-6 py-2 rounded-lg hover:bg-brand-info-hover transition-colors">
                 Generate Report
               </button>
-              <button className="bg-white text-blue-600 border border-blue-600 px-6 py-2 rounded-lg hover:bg-blue-50 transition-colors">
+              <button className="bg-white text-brand-info border border-blue-600 px-6 py-2 rounded-lg hover:bg-blue-50 transition-colors">
                 Export Data
               </button>
-              <button className="bg-gray-100 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-200 transition-colors">
+              <button className="bg-brand-surface-dark text-brand-text px-6 py-2 rounded-lg hover:bg-brand-border transition-colors">
                 View Documentation
               </button>
             </div>
@@ -377,14 +377,14 @@ export default function Compliance() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-brand-surface">
       {/* Header */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Federal Compliance Portal</h1>
-              <p className="text-gray-600 mt-1">Complete DOL/DWD compliance management for Elevate Learn2Earn Workforce programs</p>
+              <h1 className="text-3xl font-bold text-brand-text">Federal Compliance Portal</h1>
+              <p className="text-brand-text-muted mt-1">Complete DOL/DWD compliance management for Elevate Learn2Earn Workforce programs</p>
             </div>
             <div className="flex items-center space-x-4">
               <div className="bg-brand-surface text-brand-success px-3 py-1 rounded-full text-sm font-medium">
@@ -409,7 +409,7 @@ export default function Compliance() {
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-colors ${
                   activeSection === section.id
                     ? "bg-brand-info text-white"
-                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                    : "text-brand-text-muted hover:text-brand-text hover:bg-brand-surface-dark"
                 }`}
               >
                 <section.icon className="h-4 w-4" />

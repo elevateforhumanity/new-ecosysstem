@@ -96,15 +96,15 @@ export default function DoNotContactPanel() {
       hard_bounce: 'bg-brand-surface text-red-800',
       spam_complaint: 'bg-brand-surface text-brand-warning',
       admin_block: 'bg-brand-surface text-brand-secondary',
-      legal_requirement: 'bg-gray-100 text-gray-800',
+      legal_requirement: 'bg-brand-surface-dark text-brand-text',
     };
-    return colors[reason] || 'bg-gray-100 text-gray-800';
+    return colors[reason] || 'bg-brand-surface-dark text-brand-text';
   };
 
   if (loading) {
     return (
       <div className="flex items-center justify-center p-12">
-        <div className="text-gray-500">Loading...</div>
+        <div className="text-brand-text-light">Loading...</div>
       </div>
     );
   }
@@ -115,11 +115,11 @@ export default function DoNotContactPanel() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold mb-2">Do Not Contact List</h1>
-            <p className="text-gray-600">Manage email addresses that should not receive communications</p>
+            <p className="text-brand-text-muted">Manage email addresses that should not receive communications</p>
           </div>
           <button
             onClick={() => setShowAddForm(!showAddForm)}
-            className="px-4 py-2 bg-brand-info text-white rounded-lg hover:bg-brand-info-hover focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-4 py-2 bg-brand-info text-white rounded-lg hover:bg-brand-info-hover focus:outline-none focus:ring-2 focus:ring-brand-focus"
           >
             {showAddForm ? 'Cancel' : 'Add Entry'}
           </button>
@@ -138,7 +138,7 @@ export default function DoNotContactPanel() {
             </div>
             <button
               onClick={() => setAlertMessage(null)}
-              className={`text-sm font-medium ${alertMessage.type === 'success' ? 'text-green-600 hover:text-brand-success' : 'text-red-600 hover:text-red-800'}`}
+              className={`text-sm font-medium ${alertMessage.type === 'success' ? 'text-brand-success hover:text-brand-success' : 'text-red-600 hover:text-red-800'}`}
             >
               Dismiss
             </button>
@@ -152,23 +152,23 @@ export default function DoNotContactPanel() {
           <h2 className="text-xl font-semibold mb-4">Add to Do Not Contact</h2>
           <form onSubmit={handleAdd} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+              <label className="block text-sm font-medium text-brand-text mb-2">Email Address</label>
               <input
                 type="email"
                 required
                 value={newEntry.email}
                 onChange={(e) => setNewEntry({ ...newEntry, email: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
                 placeholder="user@example.com"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Reason</label>
+              <label className="block text-sm font-medium text-brand-text mb-2">Reason</label>
               <select
                 value={newEntry.reason}
                 onChange={(e) => setNewEntry({ ...newEntry, reason: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
               >
                 <option value="user_request">User Request</option>
                 <option value="hard_bounce">Hard Bounce</option>
@@ -179,38 +179,38 @@ export default function DoNotContactPanel() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Details (Optional)</label>
+              <label className="block text-sm font-medium text-brand-text mb-2">Details (Optional)</label>
               <textarea
                 value={newEntry.reason_details}
                 onChange={(e) => setNewEntry({ ...newEntry, reason_details: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
                 rows={3}
                 placeholder="Additional context..."
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Expiration Date (Optional)</label>
+              <label className="block text-sm font-medium text-brand-text mb-2">Expiration Date (Optional)</label>
               <input
                 type="datetime-local"
                 value={newEntry.expires_at}
                 onChange={(e) => setNewEntry({ ...newEntry, expires_at: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
               />
-              <p className="text-xs text-gray-500 mt-1">Leave empty for permanent block</p>
+              <p className="text-xs text-brand-text-light mt-1">Leave empty for permanent block</p>
             </div>
 
             <div className="flex gap-3">
               <button
                 type="submit"
-                className="px-4 py-2 bg-brand-info text-white rounded-lg hover:bg-brand-info-hover focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="px-4 py-2 bg-brand-info text-white rounded-lg hover:bg-brand-info-hover focus:outline-none focus:ring-2 focus:ring-brand-focus"
               >
                 Add to List
               </button>
               <button
                 type="button"
                 onClick={() => setShowAddForm(false)}
-                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                className="px-4 py-2 bg-brand-border text-brand-text rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
               >
                 Cancel
               </button>
@@ -222,20 +222,20 @@ export default function DoNotContactPanel() {
       {/* Statistics */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <div className="bg-white rounded-lg shadow p-6">
-          <div className="text-3xl font-bold text-gray-900">{entries.length}</div>
-          <div className="text-sm text-gray-600">Total Blocked</div>
+          <div className="text-3xl font-bold text-brand-text">{entries.length}</div>
+          <div className="text-sm text-brand-text-muted">Total Blocked</div>
         </div>
         <div className="bg-white rounded-lg shadow p-6">
-          <div className="text-3xl font-bold text-gray-900">
+          <div className="text-3xl font-bold text-brand-text">
             {entries.filter(e => e.expires_at && new Date(e.expires_at) > new Date()).length}
           </div>
-          <div className="text-sm text-gray-600">Temporary Blocks</div>
+          <div className="text-sm text-brand-text-muted">Temporary Blocks</div>
         </div>
         <div className="bg-white rounded-lg shadow p-6">
-          <div className="text-3xl font-bold text-gray-900">
+          <div className="text-3xl font-bold text-brand-text">
             {entries.filter(e => !e.expires_at || new Date(e.expires_at) <= new Date()).length}
           </div>
-          <div className="text-sm text-gray-600">Permanent Blocks</div>
+          <div className="text-sm text-brand-text-muted">Permanent Blocks</div>
         </div>
       </div>
 
@@ -243,35 +243,35 @@ export default function DoNotContactPanel() {
       <div className="bg-white rounded-lg shadow overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+            <thead className="bg-brand-surface">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                   Email
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                   Reason
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                   Details
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                   Added By
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                   Added
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                   Expires
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                   Actions
                 </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {entries.map((entry) => (
-                <tr key={entry.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                <tr key={entry.id} className="hover:bg-brand-surface">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-brand-text">
                     {entry.email}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -279,16 +279,16 @@ export default function DoNotContactPanel() {
                       {getReasonLabel(entry.reason)}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-500 max-w-xs truncate">
+                  <td className="px-6 py-4 text-sm text-brand-text-light max-w-xs truncate">
                     {entry.reason_details || '-'}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-brand-text-light">
                     {entry.added_by_email || 'System'}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-brand-text-light">
                     {new Date(entry.created_at).toLocaleDateString()}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-brand-text-light">
                     {entry.expires_at ? (
                       <span className={new Date(entry.expires_at) > new Date() ? 'text-orange-600' : 'text-gray-400'}>
                         {new Date(entry.expires_at).toLocaleDateString()}
@@ -313,7 +313,7 @@ export default function DoNotContactPanel() {
 
         {entries.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-500">No entries in Do Not Contact list</p>
+            <p className="text-brand-text-light">No entries in Do Not Contact list</p>
           </div>
         )}
       </div>

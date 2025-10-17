@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-brand-surface flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full text-center">
         <div className="mb-8">
           <h1 className="text-9xl font-bold text-gray-300">404</h1>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Page Not Found</h2>
-          <p className="text-gray-600 mb-8">
+          <h2 className="text-2xl font-bold text-brand-text mb-2">Page Not Found</h2>
+          <p className="text-brand-text-muted mb-8">
             The page you're looking for doesn't exist in our Elevate Learn2Earn Workforce ecosystem.
           </p>
         </div>
@@ -24,15 +24,15 @@ export default function NotFound() {
           
           <button 
             onClick={() => window.history.back()}
-            className="w-full bg-white text-gray-700 border border-gray-300 py-3 px-6 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center"
+            className="w-full bg-white text-brand-text border border-brand-border-dark py-3 px-6 rounded-lg hover:bg-brand-surface transition-colors flex items-center justify-center"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Go Back
           </button>
         </div>
 
-        <div className="mt-8 text-sm text-gray-500">
-          <p>Need help? Visit our <Link href="/connect" className="text-blue-600 hover:text-blue-700">Connect</Link> community for support.</p>
+        <div className="mt-8 text-sm text-brand-text-light">
+          <p>Need help? Visit our <Link href="/connect" className="text-brand-info hover:text-brand-info">Connect</Link> community for support.</p>
         </div>
       </div>
     </div>

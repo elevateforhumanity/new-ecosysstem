@@ -6,10 +6,10 @@ export default function DurableLanding() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="text-center mb-16">
-          <h1 className="text-6xl font-bold text-gray-900 mb-6">
+          <h1 className="text-6xl font-bold text-brand-text mb-6">
             Build Durable Skills for the Future
           </h1>
-          <p className="text-2xl text-gray-600 max-w-3xl mx-auto mb-8">
+          <p className="text-2xl text-brand-text-muted max-w-3xl mx-auto mb-8">
             Master the essential skills that employers value most and build a lasting career
           </p>
           <div className="flex gap-4 justify-center">
@@ -26,17 +26,17 @@ export default function DurableLanding() {
           <div className="bg-white p-8 rounded-xl shadow-lg">
             <div className="text-5xl mb-4">💬</div>
             <h3 className="text-2xl font-bold mb-4">Communication</h3>
-            <p className="text-gray-600">Master professional communication, presentation, and interpersonal skills</p>
+            <p className="text-brand-text-muted">Master professional communication, presentation, and interpersonal skills</p>
           </div>
           <div className="bg-white p-8 rounded-xl shadow-lg">
             <div className="text-5xl mb-4">🧠</div>
             <h3 className="text-2xl font-bold mb-4">Critical Thinking</h3>
-            <p className="text-gray-600">Develop problem-solving and analytical thinking abilities</p>
+            <p className="text-brand-text-muted">Develop problem-solving and analytical thinking abilities</p>
           </div>
           <div className="bg-white p-8 rounded-xl shadow-lg">
             <div className="text-5xl mb-4">🤝</div>
             <h3 className="text-2xl font-bold mb-4">Collaboration</h3>
-            <p className="text-gray-600">Learn to work effectively in teams and lead projects</p>
+            <p className="text-brand-text-muted">Learn to work effectively in teams and lead projects</p>
           </div>
         </div>
 
@@ -45,19 +45,19 @@ export default function DurableLanding() {
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h3 className="text-xl font-semibold mb-3">🎯 Career Resilience</h3>
-              <p className="text-gray-600">Skills that remain valuable regardless of technological changes</p>
+              <p className="text-brand-text-muted">Skills that remain valuable regardless of technological changes</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-3">📈 Higher Earning Potential</h3>
-              <p className="text-gray-600">Professionals with strong durable skills earn 20% more on average</p>
+              <p className="text-brand-text-muted">Professionals with strong durable skills earn 20% more on average</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-3">🌟 Leadership Opportunities</h3>
-              <p className="text-gray-600">Essential for advancing into management and leadership roles</p>
+              <p className="text-brand-text-muted">Essential for advancing into management and leadership roles</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-3">🔄 Adaptability</h3>
-              <p className="text-gray-600">Easily transition between industries and roles</p>
+              <p className="text-brand-text-muted">Easily transition between industries and roles</p>
             </div>
           </div>
         </div>

@@ -21,7 +21,7 @@ export default function AppLayout({ title, children }) {
         </nav>
       </header>
       <main id="main-content">{children}</main>
-      <footer style={{ padding: 24, textAlign: "center", fontSize: 12, color: "#64748b", borderTop: "1px solid #e0e0e0" }}>
+      <footer style={{ padding: 24, textAlign: "center", fontSize: 12, color: "var(--brand-text-muted)", borderTop: "1px solid var(--brand-border)" }}>
         <div style={{ marginBottom: 16 }}>
           <NavLink style={footerLinkStyle} to="/privacy-policy">Privacy Policy</NavLink>
           {" | "}
@@ -38,13 +38,13 @@ export default function AppLayout({ title, children }) {
 }
 
 const linkStyle = ({ isActive }) => ({
-  color: isActive ? "#38bdf8" : "#e2e8f0",
+  color: isActive ? "#38bdf8" : "var(--brand-border)",
   textDecoration: "none",
   fontWeight: 500
 });
 
 const footerLinkStyle = {
-  color: "#64748b",
+  color: "var(--brand-text-muted)",
   textDecoration: "none",
   fontSize: 12
 };

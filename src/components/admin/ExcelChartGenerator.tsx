@@ -225,7 +225,7 @@ export function ExcelChartGenerator() {
 
     return (
       <div className="bg-white border rounded-lg p-4">
-        <h4 className="font-medium text-gray-900 mb-4 text-center">{chart.title}</h4>
+        <h4 className="font-medium text-brand-text mb-4 text-center">{chart.title}</h4>
         <div className="flex items-center justify-center">
           <div className="relative">
             <svg width="200" height="200" viewBox="0 0 200 200">
@@ -275,7 +275,7 @@ export function ExcelChartGenerator() {
                     className="w-3 h-3 rounded mr-2"
                     style={{ backgroundColor: item.color }}
                   ></div>
-                  <span className="text-gray-700">
+                  <span className="text-brand-text">
                     {item.label} {chart.showPercentages && `(${item.percentage.toFixed(1)}%)`}
                   </span>
                 </div>
@@ -291,8 +291,8 @@ export function ExcelChartGenerator() {
     <div className="excel-chart-generator">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">📊 Excel Chart Generator</h2>
-          <p className="text-gray-600">Automatically generate professional pie charts and export to Excel</p>
+          <h2 className="text-2xl font-bold text-brand-text">📊 Excel Chart Generator</h2>
+          <p className="text-brand-text-muted">Automatically generate professional pie charts and export to Excel</p>
         </div>
         <button
           onClick={generateExcelWithCharts}
@@ -305,24 +305,24 @@ export function ExcelChartGenerator() {
 
       {/* Export Options */}
       <div className="bg-white border rounded-lg p-6 mb-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">📋 Export Options</h3>
+        <h3 className="text-lg font-semibold text-brand-text mb-4">📋 Export Options</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">File Name</label>
+            <label className="block text-sm font-medium text-brand-text mb-2">File Name</label>
             <input
               type="text"
               value={exportOptions.fileName}
               onChange={(e) => setExportOptions(prev => ({ ...prev, fileName: e.target.value }))}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
+              className="w-full border border-brand-border-dark rounded px-3 py-2 text-sm"
             />
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Chart Size</label>
+            <label className="block text-sm font-medium text-brand-text mb-2">Chart Size</label>
             <select
               value={exportOptions.chartSize}
               onChange={(e) => setExportOptions(prev => ({ ...prev, chartSize: e.target.value as any }))}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
+              className="w-full border border-brand-border-dark rounded px-3 py-2 text-sm"
             >
               <option value="small">Small</option>
               <option value="medium">Medium</option>
@@ -338,7 +338,7 @@ export function ExcelChartGenerator() {
                 onChange={(e) => setExportOptions(prev => ({ ...prev, includeCharts: e.target.checked }))}
                 className="mr-2"
               />
-              <span className="text-sm text-gray-700">Include Charts</span>
+              <span className="text-sm text-brand-text">Include Charts</span>
             </label>
             <label className="flex items-center">
               <input
@@ -347,7 +347,7 @@ export function ExcelChartGenerator() {
                 onChange={(e) => setExportOptions(prev => ({ ...prev, includeRawData: e.target.checked }))}
                 className="mr-2"
               />
-              <span className="text-sm text-gray-700">Include Raw Data</span>
+              <span className="text-sm text-brand-text">Include Raw Data</span>
             </label>
           </div>
 
@@ -359,7 +359,7 @@ export function ExcelChartGenerator() {
                 onChange={(e) => setExportOptions(prev => ({ ...prev, includeFormatting: e.target.checked }))}
                 className="mr-2"
               />
-              <span className="text-sm text-gray-700">Professional Formatting</span>
+              <span className="text-sm text-brand-text">Professional Formatting</span>
             </label>
           </div>
         </div>
@@ -386,17 +386,17 @@ export function ExcelChartGenerator() {
       {/* Chart Selection */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-gray-900">📊 Available Charts</h3>
+          <h3 className="text-lg font-semibold text-brand-text">📊 Available Charts</h3>
           <div className="flex space-x-2">
             <button
               onClick={() => setSelectedCharts(availableCharts.map(c => c.title))}
-              className="text-sm bg-brand-surface text-blue-700 px-3 py-1 rounded hover:bg-blue-200"
+              className="text-sm bg-brand-surface text-brand-info px-3 py-1 rounded hover:bg-blue-200"
             >
               Select All
             </button>
             <button
               onClick={() => setSelectedCharts([])}
-              className="text-sm bg-gray-100 text-gray-700 px-3 py-1 rounded hover:bg-gray-200"
+              className="text-sm bg-brand-surface-dark text-brand-text px-3 py-1 rounded hover:bg-brand-border"
             >
               Clear All
             </button>
@@ -420,7 +420,7 @@ export function ExcelChartGenerator() {
               <PieChartPreview chart={chart} />
               
               <div className="mt-3 text-center">
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-brand-text-muted">
                   Type: {chart.type} | Data Points: {chart.data.length}
                 </div>
               </div>
@@ -435,7 +435,7 @@ export function ExcelChartGenerator() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className="bg-white rounded p-4">
             <h4 className="font-medium text-blue-900 mb-2">🎨 Professional Charts</h4>
-            <ul className="text-sm text-blue-700 space-y-1">
+            <ul className="text-sm text-brand-info space-y-1">
               <li>• Pie charts with custom colors</li>
               <li>• Doughnut charts for emphasis</li>
               <li>• Data labels and percentages</li>
@@ -445,7 +445,7 @@ export function ExcelChartGenerator() {
           
           <div className="bg-white rounded p-4">
             <h4 className="font-medium text-blue-900 mb-2">📊 Data Integration</h4>
-            <ul className="text-sm text-blue-700 space-y-1">
+            <ul className="text-sm text-brand-info space-y-1">
               <li>• Raw data tables included</li>
               <li>• WIOA compliance metrics</li>
               <li>• Multiple worksheets</li>
@@ -455,7 +455,7 @@ export function ExcelChartGenerator() {
           
           <div className="bg-white rounded p-4">
             <h4 className="font-medium text-blue-900 mb-2">🎯 Customization</h4>
-            <ul className="text-sm text-blue-700 space-y-1">
+            <ul className="text-sm text-brand-info space-y-1">
               <li>• Adjustable chart sizes</li>
               <li>• Custom file naming</li>
               <li>• Professional formatting</li>

@@ -52,7 +52,7 @@ export default function About() {
         </section>
 
         {/* Story Section */}
-        <section style={{ marginBottom: '4rem', background: 'white', padding: '3rem', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+        <section style={{ marginBottom: '4rem', background: 'white', padding: '3rem', borderRadius: '8px', border: '1px solid var(--brand-border)' }}>
           <h2 style={{ fontSize: '2rem', marginBottom: '2rem', color: 'var(--brand-text)', textAlign: 'center' }}>Our Story</h2>
           <div style={{ maxWidth: '900px', margin: '0 auto' }}>
             <p style={{ fontSize: '1.125rem', lineHeight: '1.8', color: 'var(--brand-text)', marginBottom: '1.5rem' }}>
@@ -101,22 +101,22 @@ export default function About() {
             <div>
               <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>🎖️</div>
               <div style={{ fontWeight: '600', color: 'var(--brand-text)' }}>Veteran-Owned</div>
-              <div style={{ fontSize: '0.875rem', color: '#64748b' }}>Small Business</div>
+              <div style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>Small Business</div>
             </div>
             <div>
               <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>✅</div>
               <div style={{ fontWeight: '600', color: 'var(--brand-text)' }}>DOL Compliant</div>
-              <div style={{ fontSize: '0.875rem', color: '#64748b' }}>Department of Labor</div>
+              <div style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>Department of Labor</div>
             </div>
             <div>
               <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>✅</div>
               <div style={{ fontWeight: '600', color: 'var(--brand-text)' }}>DWD Compliant</div>
-              <div style={{ fontSize: '0.875rem', color: '#64748b' }}>Elevate Learn2Earn Workforce</div>
+              <div style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>Elevate Learn2Earn Workforce</div>
             </div>
             <div>
               <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>✅</div>
               <div style={{ fontWeight: '600', color: 'var(--brand-text)' }}>DOE Compliant</div>
-              <div style={{ fontSize: '0.875rem', color: '#64748b' }}>Department of Education</div>
+              <div style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>Department of Education</div>
             </div>
           </div>
         </section>
@@ -170,12 +170,12 @@ function ServiceCard({ icon, title, description }) {
       background: 'white', 
       padding: '2rem', 
       borderRadius: '8px', 
-      border: '1px solid #e2e8f0',
+      border: '1px solid var(--brand-border)',
       textAlign: 'center'
     }}>
       <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>{icon}</div>
       <h3 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', color: 'var(--brand-text)' }}>{title}</h3>
-      <p style={{ color: '#64748b', lineHeight: '1.6' }}>{description}</p>
+      <p style={{ color: 'var(--brand-text-muted)', lineHeight: '1.6' }}>{description}</p>
     </div>
   );
 }

@@ -168,7 +168,7 @@ export default function ClassroomAdminPanel() {
     <div className="max-w-6xl mx-auto p-6">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Google Classroom Admin Panel</h1>
-        <p className="text-gray-600">Queue tasks for Google Classroom autopilot</p>
+        <p className="text-brand-text-muted">Queue tasks for Google Classroom autopilot</p>
       </div>
 
       {message && (
@@ -189,11 +189,11 @@ export default function ClassroomAdminPanel() {
             <button
               key={template.id}
               onClick={() => setSelectedTemplate(template)}
-              className="p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow text-left border border-gray-200"
+              className="p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow text-left border border-brand-border"
             >
               <div className="text-4xl mb-3">{template.icon}</div>
               <h3 className="text-lg font-semibold mb-2">{template.name}</h3>
-              <p className="text-sm text-gray-600">{template.description}</p>
+              <p className="text-sm text-brand-text-muted">{template.description}</p>
             </button>
           ))}
         </div>
@@ -204,7 +204,7 @@ export default function ClassroomAdminPanel() {
               <span className="text-4xl">{selectedTemplate.icon}</span>
               <div>
                 <h2 className="text-2xl font-bold">{selectedTemplate.name}</h2>
-                <p className="text-gray-600">{selectedTemplate.description}</p>
+                <p className="text-brand-text-muted">{selectedTemplate.description}</p>
               </div>
             </div>
             <button
@@ -213,7 +213,7 @@ export default function ClassroomAdminPanel() {
                 setFormData({});
                 setMessage(null);
               }}
-              className="text-gray-500 hover:text-gray-700"
+              className="text-brand-text-light hover:text-brand-text"
             >
               ✕
             </button>
@@ -222,7 +222,7 @@ export default function ClassroomAdminPanel() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {selectedTemplate.fields.map(field => (
               <div key={field.name}>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-brand-text mb-1">
                   {field.label}
                   {field.required && <span className="text-red-500 ml-1">*</span>}
                 </label>
@@ -232,14 +232,14 @@ export default function ClassroomAdminPanel() {
                     onChange={e => handleFieldChange(field.name, e.target.value)}
                     required={field.required}
                     rows={4}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
                   />
                 ) : field.type === 'select' ? (
                   <select
                     value={formData[field.name] || ''}
                     onChange={e => handleFieldChange(field.name, e.target.value)}
                     required={field.required}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
                   >
                     <option value="">Select...</option>
                     {field.options?.map(option => (
@@ -254,14 +254,14 @@ export default function ClassroomAdminPanel() {
                     value={formData[field.name] || ''}
                     onChange={e => handleFieldChange(field.name, e.target.value)}
                     required={field.required}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
                   />
                 )}
               </div>
             ))}
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-brand-text mb-1">
                 Priority (1-10, higher = more urgent)
               </label>
               <input
@@ -270,7 +270,7 @@ export default function ClassroomAdminPanel() {
                 max="10"
                 value={priority}
                 onChange={e => setPriority(parseInt(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
               />
             </div>
 
@@ -289,7 +289,7 @@ export default function ClassroomAdminPanel() {
                   setFormData({});
                   setMessage(null);
                 }}
-                className="px-6 py-3 border border-gray-300 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+                className="px-6 py-3 border border-brand-border-dark rounded-lg font-semibold hover:bg-brand-surface transition-colors"
               >
                 Cancel
               </button>

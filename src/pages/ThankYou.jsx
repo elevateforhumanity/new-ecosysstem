@@ -17,7 +17,7 @@ export default function ThankYou() {
           Thank You!
         </h1>
         
-        <p style={{ fontSize: 18, color: "#666", marginBottom: 32, lineHeight: 1.6 }}>
+        <p style={{ fontSize: 18, color: "var(--brand-text-muted)", marginBottom: 32, lineHeight: 1.6 }}>
           Your purchase was successful. We've sent a confirmation email with your order details and receipt.
         </p>
 
@@ -47,7 +47,7 @@ export default function ThankYou() {
             to="/courses"
             style={{
               padding: "14px 28px",
-              backgroundColor: "#007bff",
+              backgroundColor: "var(--brand-info)",
               color: "#fff",
               borderRadius: 6,
               fontSize: 16,
@@ -63,8 +63,8 @@ export default function ThankYou() {
             style={{
               padding: "14px 28px",
               backgroundColor: "#fff",
-              color: "#007bff",
-              border: "1px solid #007bff",
+              color: "var(--brand-info)",
+              border: "1px solid var(--brand-info)",
               borderRadius: 6,
               fontSize: 16,
               fontWeight: 600,
@@ -79,16 +79,16 @@ export default function ThankYou() {
         <div
           style={{
             paddingTop: 32,
-            borderTop: "1px solid #e0e0e0",
+            borderTop: "1px solid var(--brand-border)",
           }}
         >
-          <p style={{ fontSize: 14, color: "#666", marginBottom: 16 }}>
+          <p style={{ fontSize: 14, color: "var(--brand-text-muted)", marginBottom: 16 }}>
             Need help? Our support team is here for you.
           </p>
           <Link
             to="/support"
             style={{
-              color: "#007bff",
+              color: "var(--brand-info)",
               textDecoration: "none",
               fontSize: 14,
               fontWeight: 500,

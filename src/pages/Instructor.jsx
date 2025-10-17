@@ -20,7 +20,7 @@ export default function Instructor() {
           <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--brand-info)' }}>
             Instructor Portal
           </h1>
-          <p style={{ fontSize: '1.25rem', color: '#64748b', maxWidth: '800px', margin: '0 auto' }}>
+          <p style={{ fontSize: '1.25rem', color: 'var(--brand-text-muted)', maxWidth: '800px', margin: '0 auto' }}>
             Welcome to the Elevate for Humanity Instructor Portal. Manage your courses, track student progress, 
             and access teaching resources all in one place.
           </p>
@@ -56,7 +56,7 @@ export default function Instructor() {
         {/* Resources Section */}
         <section style={{ marginBottom: '3rem' }}>
           <h2 style={{ fontSize: '1.75rem', marginBottom: '1.5rem', color: 'var(--brand-text)' }}>Teaching Resources</h2>
-          <div style={{ background: 'var(--brand-surface)', padding: '2rem', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+          <div style={{ background: 'var(--brand-surface)', padding: '2rem', borderRadius: '8px', border: '1px solid var(--brand-border)' }}>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               <ResourceItem 
                 title="Instructor Handbook"
@@ -81,7 +81,7 @@ export default function Instructor() {
         {/* Support Section */}
         <section style={{ textAlign: 'center', background: 'var(--brand-surface)', padding: '2rem', borderRadius: '8px' }}>
           <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--brand-info)' }}>Need Help?</h2>
-          <p style={{ marginBottom: '1.5rem', color: '#64748b' }}>
+          <p style={{ marginBottom: '1.5rem', color: 'var(--brand-text-muted)' }}>
             Our support team is here to assist you with any questions or technical issues.
           </p>
           <Link 
@@ -112,7 +112,7 @@ function ActionCard({ title, description, link }) {
         display: 'block',
         padding: '1.5rem',
         background: 'white',
-        border: '1px solid #e2e8f0',
+        border: '1px solid var(--brand-border)',
         borderRadius: '8px',
         textDecoration: 'none',
         transition: 'all 0.2s',
@@ -123,12 +123,12 @@ function ActionCard({ title, description, link }) {
         e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = '#e2e8f0';
+        e.currentTarget.style.borderColor = 'var(--brand-border)';
         e.currentTarget.style.boxShadow = 'none';
       }}
     >
       <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', color: 'var(--brand-text)' }}>{title}</h3>
-      <p style={{ color: '#64748b', margin: 0 }}>{description}</p>
+      <p style={{ color: 'var(--brand-text-muted)', margin: 0 }}>{description}</p>
     </Link>
   );
 }
@@ -137,11 +137,11 @@ function ResourceItem({ title, description }) {
   return (
     <li style={{ 
       padding: '1rem 0', 
-      borderBottom: '1px solid #e2e8f0',
+      borderBottom: '1px solid var(--brand-border)',
       ':last-child': { borderBottom: 'none' }
     }}>
       <h4 style={{ fontSize: '1.125rem', marginBottom: '0.25rem', color: 'var(--brand-text)' }}>{title}</h4>
-      <p style={{ color: '#64748b', margin: 0, fontSize: '0.875rem' }}>{description}</p>
+      <p style={{ color: 'var(--brand-text-muted)', margin: 0, fontSize: '0.875rem' }}>{description}</p>
     </li>
   );
 }

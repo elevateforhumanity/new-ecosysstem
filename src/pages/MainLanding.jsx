@@ -746,7 +746,7 @@ export default function MainLanding() {
               fontSize: '1.4rem', 
               textAlign: 'center', 
               marginBottom: '4rem',
-              color: '#e2e8f0',
+              color: 'var(--brand-border)',
               maxWidth: '900px',
               margin: '0 auto 4rem'
             }}>
@@ -927,7 +927,7 @@ export default function MainLanding() {
         {/* Enterprise Testimonials Section */}
         <section style={{ 
           padding: '5rem 2rem', 
-          background: 'linear-gradient(135deg, var(--brand-surface) 0%, #e2e8f0 100%)',
+          background: 'linear-gradient(135deg, var(--brand-surface) 0%, var(--brand-border) 100%)',
           position: 'relative'
         }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -1184,7 +1184,7 @@ export default function MainLanding() {
                 backgroundColor: '#f7fafc', 
                 borderRadius: '50px',
                 padding: '0.5rem',
-                border: '1px solid #e2e8f0'
+                border: '1px solid var(--brand-border)'
               }}>
                 <button
                   onClick={() => setBillingCycle('monthly')}
@@ -1246,7 +1246,7 @@ export default function MainLanding() {
                     padding: '3rem',
                     backgroundColor: plan.popular ? '#f7fafc' : 'white',
                     borderRadius: '20px',
-                    border: plan.popular ? '3px solid #667eea' : '1px solid #e2e8f0',
+                    border: plan.popular ? '3px solid #667eea' : '1px solid var(--brand-border)',
                     position: 'relative',
                     transform: plan.popular ? 'scale(1.05)' : 'scale(1)',
                     boxShadow: plan.popular 

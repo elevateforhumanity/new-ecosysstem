@@ -90,7 +90,7 @@ export default function CourseCreationForm() {
       <div className="bg-white rounded-lg shadow-lg p-8">
         <div className="mb-6">
           <h1 className="text-3xl font-bold mb-2">Create New Course</h1>
-          <p className="text-gray-600">
+          <p className="text-brand-text-muted">
             Create a new Google Classroom course. The course will be created automatically by the autopilot system.
           </p>
         </div>
@@ -110,7 +110,7 @@ export default function CourseCreationForm() {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Course Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-brand-text mb-2">
               Course Name <span className="text-red-500">*</span>
             </label>
             <input
@@ -119,16 +119,16 @@ export default function CourseCreationForm() {
               onChange={e => handleChange('name', e.target.value)}
               placeholder="e.g., CNA Training Fall 2025"
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
             />
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-brand-text-light">
               The name of the course (e.g., "CNA Training Fall 2025")
             </p>
           </div>
 
           {/* Section */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-brand-text mb-2">
               Section
             </label>
             <input
@@ -136,16 +136,16 @@ export default function CourseCreationForm() {
               value={formData.section}
               onChange={e => handleChange('section', e.target.value)}
               placeholder="e.g., Section A, Morning Class"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
             />
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-brand-text-light">
               Optional section identifier (e.g., "Section A", "Morning Class")
             </p>
           </div>
 
           {/* Room */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-brand-text mb-2">
               Room
             </label>
             <input
@@ -153,16 +153,16 @@ export default function CourseCreationForm() {
               value={formData.room}
               onChange={e => handleChange('room', e.target.value)}
               placeholder="e.g., Room 301, Building A"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
             />
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-brand-text-light">
               Optional room location (e.g., "Room 301", "Building A")
             </p>
           </div>
 
           {/* Description Heading */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-brand-text mb-2">
               Description Heading
             </label>
             <input
@@ -170,16 +170,16 @@ export default function CourseCreationForm() {
               value={formData.descriptionHeading}
               onChange={e => handleChange('descriptionHeading', e.target.value)}
               placeholder="e.g., Course Description, About This Course"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
             />
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-brand-text-light">
               Heading for the course description section
             </p>
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-brand-text mb-2">
               Course Description
             </label>
             <textarea
@@ -187,29 +187,29 @@ export default function CourseCreationForm() {
               onChange={e => handleChange('description', e.target.value)}
               placeholder="Enter a detailed description of the course, including objectives, requirements, and expectations..."
               rows={6}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
             />
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-brand-text-light">
               Detailed description of the course content and objectives
             </p>
           </div>
 
           {/* Course State */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-brand-text mb-2">
               Course State
             </label>
             <select
               value={formData.courseState}
               onChange={e => handleChange('courseState', e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
             >
               <option value="PROVISIONED">Provisioned (Draft)</option>
               <option value="ACTIVE">Active (Published)</option>
               <option value="ARCHIVED">Archived</option>
               <option value="DECLINED">Declined</option>
             </select>
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-brand-text-light">
               <strong>Active:</strong> Course is published and visible to students<br />
               <strong>Provisioned:</strong> Course is in draft mode
             </p>
@@ -247,7 +247,7 @@ export default function CourseCreationForm() {
                 });
                 setMessage(null);
               }}
-              className="px-6 py-3 border border-gray-300 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+              className="px-6 py-3 border border-brand-border-dark rounded-lg font-semibold hover:bg-brand-surface transition-colors"
             >
               Clear Form
             </button>

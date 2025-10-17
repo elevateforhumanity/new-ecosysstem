@@ -93,8 +93,8 @@ h4 { font-size: 1.25rem; font-weight: 600; line-height: 1.5; margin-bottom: 0.5r
 .bg-primary { background: var(--brand-info); }
 .bg-secondary { background: var(--brand-success); }
 .bg-white { background: white; }
-.bg-gray-50 { background: var(--brand-surface); }
-.bg-gray-100 { background: #f3f4f6; }
+.bg-brand-surface { background: var(--brand-surface); }
+.bg-brand-surface-dark { background: #f3f4f6; }
 
 /* Spacing */
 .py-20 { padding: 5rem 0; }

@@ -112,7 +112,7 @@ export default function Support() {
           <h1 style={{ fontSize: 36, fontWeight: 700, marginBottom: 12 }}>
             How can we help you?
           </h1>
-          <p style={{ fontSize: 18, color: "#666", marginBottom: 32 }}>
+          <p style={{ fontSize: 18, color: "var(--brand-text-muted)", marginBottom: 32 }}>
             Search our knowledge base or contact our support team
           </p>
 
@@ -127,12 +127,12 @@ export default function Support() {
                 width: "100%",
                 padding: "16px 20px",
                 fontSize: 16,
-                border: "2px solid #e0e0e0",
+                border: "2px solid var(--brand-border)",
                 borderRadius: 8,
                 outline: "none",
               }}
-              onFocus={(e) => (e.target.style.borderColor = "#007bff")}
-              onBlur={(e) => (e.target.style.borderColor = "#e0e0e0")}
+              onFocus={(e) => (e.target.style.borderColor = "var(--brand-info)")}
+              onBlur={(e) => (e.target.style.borderColor = "var(--brand-border)")}
             />
           </div>
         </div>
@@ -152,7 +152,7 @@ export default function Support() {
               backgroundColor: "#fff",
               padding: 24,
               borderRadius: 8,
-              border: "1px solid #e0e0e0",
+              border: "1px solid var(--brand-border)",
               textDecoration: "none",
               color: "inherit",
               transition: "transform 0.2s, box-shadow 0.2s",
@@ -170,7 +170,7 @@ export default function Support() {
             <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
               Student Handbook
             </h3>
-            <p style={{ fontSize: 14, color: "#666" }}>
+            <p style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
               Complete guide to using the platform
             </p>
           </Link>
@@ -181,7 +181,7 @@ export default function Support() {
               backgroundColor: "#fff",
               padding: 24,
               borderRadius: 8,
-              border: "1px solid #e0e0e0",
+              border: "1px solid var(--brand-border)",
               textDecoration: "none",
               color: "inherit",
               transition: "transform 0.2s, box-shadow 0.2s",
@@ -199,7 +199,7 @@ export default function Support() {
             <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
               Course Catalog
             </h3>
-            <p style={{ fontSize: 14, color: "#666" }}>
+            <p style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
               Browse all available courses
             </p>
           </Link>
@@ -209,7 +209,7 @@ export default function Support() {
               backgroundColor: "#fff",
               padding: 24,
               borderRadius: 8,
-              border: "1px solid #e0e0e0",
+              border: "1px solid var(--brand-border)",
               cursor: "pointer",
               transition: "transform 0.2s, box-shadow 0.2s",
             }}
@@ -226,7 +226,7 @@ export default function Support() {
             <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
               Live Chat
             </h3>
-            <p style={{ fontSize: 14, color: "#666" }}>
+            <p style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
               Chat with our support team
             </p>
           </div>
@@ -237,7 +237,7 @@ export default function Support() {
               backgroundColor: "#fff",
               padding: 24,
               borderRadius: 8,
-              border: "1px solid #e0e0e0",
+              border: "1px solid var(--brand-border)",
               textDecoration: "none",
               color: "inherit",
               transition: "transform 0.2s, box-shadow 0.2s",
@@ -255,7 +255,7 @@ export default function Support() {
             <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
               Email Support
             </h3>
-            <p style={{ fontSize: 14, color: "#666" }}>
+            <p style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
               support@elevateforhumanity.org
             </p>
           </a>
@@ -282,9 +282,9 @@ export default function Support() {
                 onClick={() => setSelectedCategory(category)}
                 style={{
                   padding: "8px 16px",
-                  backgroundColor: selectedCategory === category ? "#007bff" : "#fff",
+                  backgroundColor: selectedCategory === category ? "var(--brand-info)" : "#fff",
                   color: selectedCategory === category ? "#fff" : "#333",
-                  border: "1px solid #e0e0e0",
+                  border: "1px solid var(--brand-border)",
                   borderRadius: 20,
                   fontSize: 14,
                   fontWeight: 500,
@@ -304,7 +304,7 @@ export default function Support() {
                 key={faq.id}
                 style={{
                   backgroundColor: "#fff",
-                  border: "1px solid #e0e0e0",
+                  border: "1px solid var(--brand-border)",
                   borderRadius: 8,
                   padding: 20,
                 }}
@@ -321,7 +321,7 @@ export default function Support() {
                   }}
                 >
                   {faq.question}
-                  <span style={{ fontSize: 20, color: "#007bff" }}>+</span>
+                  <span style={{ fontSize: 20, color: "var(--brand-info)" }}>+</span>
                 </summary>
                 <div
                   style={{
@@ -329,7 +329,7 @@ export default function Support() {
                     paddingTop: 16,
                     borderTop: "1px solid #f0f0f0",
                     fontSize: 14,
-                    color: "#666",
+                    color: "var(--brand-text-muted)",
                     lineHeight: 1.6,
                   }}
                 >
@@ -348,7 +348,7 @@ export default function Support() {
                 borderRadius: 8,
               }}
             >
-              <p style={{ fontSize: 16, color: "#666" }}>
+              <p style={{ fontSize: 16, color: "var(--brand-text-muted)" }}>
                 No results found. Try a different search term or category.
               </p>
             </div>
@@ -359,7 +359,7 @@ export default function Support() {
         <div
           style={{
             backgroundColor: "#fff",
-            border: "1px solid #e0e0e0",
+            border: "1px solid var(--brand-border)",
             borderRadius: 8,
             padding: 32,
           }}
@@ -367,7 +367,7 @@ export default function Support() {
           <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>
             Still need help?
           </h2>
-          <p style={{ fontSize: 14, color: "#666", marginBottom: 24 }}>
+          <p style={{ fontSize: 14, color: "var(--brand-text-muted)", marginBottom: 24 }}>
             Send us a message and we'll get back to you within 24 hours.
           </p>
 
@@ -415,7 +415,7 @@ export default function Support() {
                   style={{
                     width: "100%",
                     padding: "10px 12px",
-                    border: "1px solid #ddd",
+                    border: "1px solid var(--brand-border)",
                     borderRadius: 6,
                     fontSize: 14,
                   }}
@@ -442,7 +442,7 @@ export default function Support() {
                   style={{
                     width: "100%",
                     padding: "10px 12px",
-                    border: "1px solid #ddd",
+                    border: "1px solid var(--brand-border)",
                     borderRadius: 6,
                     fontSize: 14,
                   }}
@@ -470,7 +470,7 @@ export default function Support() {
                 style={{
                   width: "100%",
                   padding: "10px 12px",
-                  border: "1px solid #ddd",
+                  border: "1px solid var(--brand-border)",
                   borderRadius: 6,
                   fontSize: 14,
                 }}
@@ -497,7 +497,7 @@ export default function Support() {
                 style={{
                   width: "100%",
                   padding: "10px 12px",
-                  border: "1px solid #ddd",
+                  border: "1px solid var(--brand-border)",
                   borderRadius: 6,
                   fontSize: 14,
                   fontFamily: "inherit",
@@ -510,7 +510,7 @@ export default function Support() {
               type="submit"
               style={{
                 padding: "12px 32px",
-                backgroundColor: "#007bff",
+                backgroundColor: "var(--brand-info)",
                 color: "#fff",
                 border: "none",
                 borderRadius: 6,
@@ -537,10 +537,10 @@ export default function Support() {
           <h3 style={{ fontSize: 20, fontWeight: 600, marginBottom: 12 }}>
             Support Hours
           </h3>
-          <p style={{ fontSize: 14, color: "#666", marginBottom: 8 }}>
+          <p style={{ fontSize: 14, color: "var(--brand-text-muted)", marginBottom: 8 }}>
             Monday - Friday: 9:00 AM - 6:00 PM EST
           </p>
-          <p style={{ fontSize: 14, color: "#666" }}>
+          <p style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
             Saturday - Sunday: 10:00 AM - 4:00 PM EST
           </p>
         </div>

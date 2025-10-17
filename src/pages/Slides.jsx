@@ -51,7 +51,7 @@ export function Slides() {
               height: 60,
               fontSize: 24,
               textAlign: 'center',
-              color: '#666666'
+              color: 'var(--brand-text-muted)666'
             }
           ]
         }

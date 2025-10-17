@@ -38,20 +38,20 @@ export default function DurableFeatures() {
     <div className="min-h-screen bg-white py-16">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-5xl font-bold text-brand-text mb-4">
             Platform Features
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-brand-text-muted max-w-2xl mx-auto">
             Everything you need to succeed in your learning journey
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <div key={index} className="p-8 border-2 border-gray-200 rounded-xl hover:border-indigo-500 transition">
+            <div key={index} className="p-8 border-2 border-brand-border rounded-xl hover:border-indigo-500 transition">
               <div className="text-5xl mb-4">{feature.icon}</div>
               <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
+              <p className="text-brand-text-muted">{feature.description}</p>
             </div>
           ))}
         </div>

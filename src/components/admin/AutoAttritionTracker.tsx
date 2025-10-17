@@ -248,8 +248,8 @@ export function AutoAttritionTracker() {
     switch (riskLevel) {
       case 'high': return 'text-red-600 bg-brand-surface';
       case 'medium': return 'text-yellow-600 bg-yellow-100';
-      case 'low': return 'text-green-600 bg-brand-surface';
-      default: return 'text-gray-600 bg-gray-100';
+      case 'low': return 'text-brand-success bg-brand-surface';
+      default: return 'text-brand-text-muted bg-brand-surface-dark';
     }
   };
 
@@ -264,11 +264,11 @@ export function AutoAttritionTracker() {
 
   const getInterventionStatusColor = (status: string) => {
     switch (status) {
-      case 'completed': return 'text-green-600 bg-brand-surface';
-      case 'in_progress': return 'text-blue-600 bg-brand-surface';
+      case 'completed': return 'text-brand-success bg-brand-surface';
+      case 'in_progress': return 'text-brand-info bg-brand-surface';
       case 'scheduled': return 'text-yellow-600 bg-yellow-100';
-      case 'none': return 'text-gray-600 bg-gray-100';
-      default: return 'text-gray-600 bg-gray-100';
+      case 'none': return 'text-brand-text-muted bg-brand-surface-dark';
+      default: return 'text-brand-text-muted bg-brand-surface-dark';
     }
   };
 
@@ -276,7 +276,7 @@ export function AutoAttritionTracker() {
     return (
       <div className="text-center py-8">
         <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-        <p className="mt-4 text-gray-600">Loading attrition tracking data...</p>
+        <p className="mt-4 text-brand-text-muted">Loading attrition tracking data...</p>
       </div>
     );
   }
@@ -285,11 +285,11 @@ export function AutoAttritionTracker() {
     <div className="auto-attrition-tracker">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">📊 Automated Attrition & Retention Tracker</h2>
-          <p className="text-gray-600">Real-time monitoring with predictive analytics and auto-interventions</p>
+          <h2 className="text-2xl font-bold text-brand-text">📊 Automated Attrition & Retention Tracker</h2>
+          <p className="text-brand-text-muted">Real-time monitoring with predictive analytics and auto-interventions</p>
         </div>
         <div className="flex items-center space-x-4">
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-brand-text-light">
             Last updated: {lastUpdate.toLocaleTimeString()}
           </div>
           <label className="flex items-center">
@@ -299,7 +299,7 @@ export function AutoAttritionTracker() {
               onChange={(e) => setIsTracking(e.target.checked)}
               className="mr-2"
             />
-            <span className="text-sm text-gray-700">Real-time Tracking</span>
+            <span className="text-sm text-brand-text">Real-time Tracking</span>
           </label>
         </div>
       </div>
@@ -309,8 +309,8 @@ export function AutoAttritionTracker() {
         <div className="bg-white border rounded-lg p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Total Students</p>
-              <p className="text-3xl font-bold text-gray-900">{metrics.overall.totalStudents}</p>
+              <p className="text-sm font-medium text-brand-text-muted">Total Students</p>
+              <p className="text-3xl font-bold text-brand-text">{metrics.overall.totalStudents}</p>
             </div>
             <div className="text-2xl">👥</div>
           </div>
@@ -319,8 +319,8 @@ export function AutoAttritionTracker() {
         <div className="bg-white border rounded-lg p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Retention Rate</p>
-              <p className="text-3xl font-bold text-green-600">{metrics.overall.retentionRate.toFixed(1)}%</p>
+              <p className="text-sm font-medium text-brand-text-muted">Retention Rate</p>
+              <p className="text-3xl font-bold text-brand-success">{metrics.overall.retentionRate.toFixed(1)}%</p>
             </div>
             <div className="text-2xl">{getTrendIcon(metrics.overall.trend)}</div>
           </div>
@@ -328,7 +328,7 @@ export function AutoAttritionTracker() {
             <span className={`text-xs px-2 py-1 rounded-full ${
               metrics.overall.trend === 'improving' ? 'bg-brand-surface text-brand-success' :
               metrics.overall.trend === 'declining' ? 'bg-brand-surface text-red-800' :
-              'bg-gray-100 text-gray-800'
+              'bg-brand-surface-dark text-brand-text'
             }`}>
               {metrics.overall.trend}
             </span>
@@ -338,12 +338,12 @@ export function AutoAttritionTracker() {
         <div className="bg-white border rounded-lg p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Attrition Rate</p>
+              <p className="text-sm font-medium text-brand-text-muted">Attrition Rate</p>
               <p className="text-3xl font-bold text-red-600">{metrics.overall.attritionRate.toFixed(1)}%</p>
             </div>
             <div className="text-2xl">⚠️</div>
           </div>
-          <div className="mt-2 text-xs text-gray-500">
+          <div className="mt-2 text-xs text-brand-text-light">
             {metrics.overall.droppedStudents} students dropped
           </div>
         </div>
@@ -351,12 +351,12 @@ export function AutoAttritionTracker() {
         <div className="bg-white border rounded-lg p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">At-Risk Students</p>
+              <p className="text-sm font-medium text-brand-text-muted">At-Risk Students</p>
               <p className="text-3xl font-bold text-orange-600">{atRiskStudents.length}</p>
             </div>
             <div className="text-2xl">🚨</div>
           </div>
-          <div className="mt-2 text-xs text-gray-500">
+          <div className="mt-2 text-xs text-brand-text-light">
             Requiring intervention
           </div>
         </div>
@@ -364,27 +364,27 @@ export function AutoAttritionTracker() {
 
       {/* Program-Specific Metrics */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">📚 Program Performance</h3>
+        <h3 className="text-lg font-semibold text-brand-text mb-4">📚 Program Performance</h3>
         <div className="bg-white border rounded-lg overflow-hidden">
           <table className="min-w-full">
-            <thead className="bg-gray-50">
+            <thead className="bg-brand-surface">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Program</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Enrolled</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Retention</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Completion</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Risk Level</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Program</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Enrolled</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Retention</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Completion</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Risk Level</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
               {metrics.byProgram.map((program, index) => (
                 <tr key={index}>
-                  <td className="px-6 py-4 font-medium text-gray-900">{program.program}</td>
-                  <td className="px-6 py-4 text-sm text-gray-600">{program.enrolled}</td>
+                  <td className="px-6 py-4 font-medium text-brand-text">{program.program}</td>
+                  <td className="px-6 py-4 text-sm text-brand-text-muted">{program.enrolled}</td>
                   <td className="px-6 py-4">
                     <div className="flex items-center">
-                      <div className="w-16 bg-gray-200 rounded-full h-2 mr-2">
+                      <div className="w-16 bg-brand-border rounded-full h-2 mr-2">
                         <div 
                           className="bg-green-500 h-2 rounded-full"
                           style={{ width: `${program.retentionRate}%` }}
@@ -402,7 +402,7 @@ export function AutoAttritionTracker() {
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    <button className="text-xs bg-brand-surface text-blue-700 px-2 py-1 rounded hover:bg-blue-200">
+                    <button className="text-xs bg-brand-surface text-brand-info px-2 py-1 rounded hover:bg-blue-200">
                       📊 View Details
                     </button>
                   </td>
@@ -415,24 +415,24 @@ export function AutoAttritionTracker() {
 
       {/* At-Risk Students */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">🚨 Students Requiring Immediate Attention</h3>
+        <h3 className="text-lg font-semibold text-brand-text mb-4">🚨 Students Requiring Immediate Attention</h3>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {atRiskStudents.map((student) => (
             <div key={student.id} className="bg-white border rounded-lg p-6">
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h4 className="font-semibold text-gray-900">{student.name}</h4>
-                  <p className="text-sm text-gray-600">{student.program}</p>
-                  <p className="text-xs text-gray-500">Last activity: {student.lastActivity}</p>
+                  <h4 className="font-semibold text-brand-text">{student.name}</h4>
+                  <p className="text-sm text-brand-text-muted">{student.program}</p>
+                  <p className="text-xs text-brand-text-light">Last activity: {student.lastActivity}</p>
                 </div>
                 <div className="text-right">
                   <div className="text-2xl font-bold text-red-600">{student.riskScore}%</div>
-                  <div className="text-xs text-gray-500">Risk Score</div>
+                  <div className="text-xs text-brand-text-light">Risk Score</div>
                 </div>
               </div>
 
               <div className="mb-4">
-                <div className="text-sm font-medium text-gray-700 mb-2">Risk Factors:</div>
+                <div className="text-sm font-medium text-brand-text mb-2">Risk Factors:</div>
                 <div className="flex flex-wrap gap-1">
                   {student.riskFactors.map((factor, index) => (
                     <span key={index} className="text-xs bg-brand-surface text-red-700 px-2 py-1 rounded">
@@ -444,7 +444,7 @@ export function AutoAttritionTracker() {
 
               <div className="mb-4">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-gray-700">Intervention Status:</span>
+                  <span className="text-sm font-medium text-brand-text">Intervention Status:</span>
                   <span className={`text-xs px-2 py-1 rounded-full ${getInterventionStatusColor(student.interventionStatus)}`}>
                     {student.interventionStatus.replace('_', ' ').toUpperCase()}
                   </span>
@@ -452,10 +452,10 @@ export function AutoAttritionTracker() {
               </div>
 
               <div className="mb-4">
-                <div className="text-sm font-medium text-gray-700 mb-2">🤖 Auto Actions Taken:</div>
+                <div className="text-sm font-medium text-brand-text mb-2">🤖 Auto Actions Taken:</div>
                 <div className="space-y-1">
                   {student.autoActions.map((action, index) => (
-                    <div key={index} className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded">
+                    <div key={index} className="text-xs bg-blue-50 text-brand-info px-2 py-1 rounded">
                       ✅ {action}
                     </div>
                   ))}
@@ -466,7 +466,7 @@ export function AutoAttritionTracker() {
                 <button className="text-xs bg-brand-success text-white px-3 py-1 rounded hover:bg-brand-success-hover">
                   📞 Contact Student
                 </button>
-                <button className="text-xs bg-brand-surface text-blue-700 px-3 py-1 rounded hover:bg-blue-200">
+                <button className="text-xs bg-brand-surface text-brand-info px-3 py-1 rounded hover:bg-blue-200">
                   📝 Add Note
                 </button>
               </div>
@@ -477,16 +477,16 @@ export function AutoAttritionTracker() {
 
       {/* Risk Factors Analysis */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">🔍 Risk Factor Analysis</h3>
+        <h3 className="text-lg font-semibold text-brand-text mb-4">🔍 Risk Factor Analysis</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {metrics.riskFactors.map((factor, index) => (
             <div key={index} className="bg-white border rounded-lg p-6">
               <div className="flex items-start justify-between mb-3">
-                <h4 className="font-semibold text-gray-900">{factor.factor}</h4>
+                <h4 className="font-semibold text-brand-text">{factor.factor}</h4>
                 <span className="text-lg font-bold text-red-600">{factor.impact}%</span>
               </div>
-              <p className="text-sm text-gray-600 mb-3">{factor.description}</p>
-              <div className="text-sm text-gray-700 mb-3">
+              <p className="text-sm text-brand-text-muted mb-3">{factor.description}</p>
+              <div className="text-sm text-brand-text mb-3">
                 <strong>Affected Students:</strong> {factor.affectedStudents}
               </div>
               <div className="bg-green-50 border border-green-200 rounded p-3">
@@ -500,29 +500,29 @@ export function AutoAttritionTracker() {
 
       {/* Intervention Results */}
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">🎯 Intervention Effectiveness</h3>
+        <h3 className="text-lg font-semibold text-brand-text mb-4">🎯 Intervention Effectiveness</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {metrics.interventions.map((intervention, index) => (
             <div key={index} className="bg-white border rounded-lg p-6">
-              <h4 className="font-semibold text-gray-900 mb-2">{intervention.type}</h4>
-              <p className="text-sm text-gray-600 mb-4">{intervention.description}</p>
+              <h4 className="font-semibold text-brand-text mb-2">{intervention.type}</h4>
+              <p className="text-sm text-brand-text-muted mb-4">{intervention.description}</p>
               
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Success Rate:</span>
-                  <span className="font-bold text-green-600">{intervention.successRate}%</span>
+                  <span className="text-brand-text-muted">Success Rate:</span>
+                  <span className="font-bold text-brand-success">{intervention.successRate}%</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Students Helped:</span>
+                  <span className="text-brand-text-muted">Students Helped:</span>
                   <span className="font-medium">{intervention.studentsTargeted}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Cost Savings:</span>
-                  <span className="font-bold text-blue-600">${intervention.costSavings.toLocaleString()}</span>
+                  <span className="text-brand-text-muted">Cost Savings:</span>
+                  <span className="font-bold text-brand-info">${intervention.costSavings.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Deployed:</span>
-                  <span className="text-gray-500">{intervention.deployed}</span>
+                  <span className="text-brand-text-muted">Deployed:</span>
+                  <span className="text-brand-text-light">{intervention.deployed}</span>
                 </div>
               </div>
             </div>

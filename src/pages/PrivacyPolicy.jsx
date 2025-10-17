@@ -14,7 +14,7 @@ export default function PrivacyPolicy() {
         <h1 style={{ fontSize: 36, fontWeight: 700, marginBottom: 8 }}>
           Privacy Policy
         </h1>
-        <p style={{ fontSize: 14, color: "#666", marginBottom: 32 }}>
+        <p style={{ fontSize: 14, color: "var(--brand-text-muted)", marginBottom: 32 }}>
           Last updated: January 1, 2025
         </p>
 
@@ -210,7 +210,7 @@ export default function PrivacyPolicy() {
           style={{
             marginTop: 48,
             paddingTop: 32,
-            borderTop: "1px solid #e0e0e0",
+            borderTop: "1px solid var(--brand-border)",
             display: "flex",
             gap: 24,
             justifyContent: "center",
@@ -219,7 +219,7 @@ export default function PrivacyPolicy() {
           <Link
             to="/terms-of-service"
             style={{
-              color: "#007bff",
+              color: "var(--brand-info)",
               textDecoration: "none",
               fontSize: 14,
               fontWeight: 500,
@@ -230,7 +230,7 @@ export default function PrivacyPolicy() {
           <Link
             to="/refund-policy"
             style={{
-              color: "#007bff",
+              color: "var(--brand-info)",
               textDecoration: "none",
               fontSize: 14,
               fontWeight: 500,
@@ -241,7 +241,7 @@ export default function PrivacyPolicy() {
           <Link
             to="/support"
             style={{
-              color: "#007bff",
+              color: "var(--brand-info)",
               textDecoration: "none",
               fontSize: 14,
               fontWeight: 500,

@@ -123,20 +123,20 @@ export default function Connect() {
       {/* Community Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         <div className="bg-white p-6 rounded-lg shadow text-center">
-          <div className="text-2xl font-bold text-blue-600">{communityStats.totalMembers.toLocaleString()}</div>
-          <div className="text-gray-600 text-sm">Total Members</div>
+          <div className="text-2xl font-bold text-brand-info">{communityStats.totalMembers.toLocaleString()}</div>
+          <div className="text-brand-text-muted text-sm">Total Members</div>
         </div>
         <div className="bg-white p-6 rounded-lg shadow text-center">
-          <div className="text-2xl font-bold text-green-600">{communityStats.activeToday}</div>
-          <div className="text-gray-600 text-sm">Active Today</div>
+          <div className="text-2xl font-bold text-brand-success">{communityStats.activeToday}</div>
+          <div className="text-brand-text-muted text-sm">Active Today</div>
         </div>
         <div className="bg-white p-6 rounded-lg shadow text-center">
           <div className="text-2xl font-bold text-purple-600">{communityStats.jobPlacements.toLocaleString()}</div>
-          <div className="text-gray-600 text-sm">Job Placements</div>
+          <div className="text-brand-text-muted text-sm">Job Placements</div>
         </div>
         <div className="bg-white p-6 rounded-lg shadow text-center">
           <div className="text-2xl font-bold text-orange-600">{communityStats.mentorSessions}</div>
-          <div className="text-gray-600 text-sm">Mentor Sessions</div>
+          <div className="text-brand-text-muted text-sm">Mentor Sessions</div>
         </div>
       </div>
 
@@ -146,10 +146,10 @@ export default function Connect() {
           onClick={() => setActiveTab("jobs")}
           className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow text-left"
         >
-          <Briefcase className="h-8 w-8 text-blue-600 mb-3" />
-          <h3 className="font-medium text-gray-900 mb-2">Find Jobs</h3>
-          <p className="text-gray-600 text-sm">Browse matched job opportunities from our partner employers</p>
-          <div className="mt-3 text-blue-600 text-sm font-medium flex items-center">
+          <Briefcase className="h-8 w-8 text-brand-info mb-3" />
+          <h3 className="font-medium text-brand-text mb-2">Find Jobs</h3>
+          <p className="text-brand-text-muted text-sm">Browse matched job opportunities from our partner employers</p>
+          <div className="mt-3 text-brand-info text-sm font-medium flex items-center">
             View Jobs <ChevronRight className="h-4 w-4 ml-1" />
           </div>
         </button>
@@ -158,10 +158,10 @@ export default function Connect() {
           onClick={() => setActiveTab("events")}
           className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow text-left"
         >
-          <Calendar className="h-8 w-8 text-green-600 mb-3" />
-          <h3 className="font-medium text-gray-900 mb-2">Attend Events</h3>
-          <p className="text-gray-600 text-sm">Join career fairs, networking events, and skill workshops</p>
-          <div className="mt-3 text-green-600 text-sm font-medium flex items-center">
+          <Calendar className="h-8 w-8 text-brand-success mb-3" />
+          <h3 className="font-medium text-brand-text mb-2">Attend Events</h3>
+          <p className="text-brand-text-muted text-sm">Join career fairs, networking events, and skill workshops</p>
+          <div className="mt-3 text-brand-success text-sm font-medium flex items-center">
             View Events <ChevronRight className="h-4 w-4 ml-1" />
           </div>
         </button>
@@ -171,8 +171,8 @@ export default function Connect() {
           className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow text-left"
         >
           <Users className="h-8 w-8 text-purple-600 mb-3" />
-          <h3 className="font-medium text-gray-900 mb-2">Get Mentorship</h3>
-          <p className="text-gray-600 text-sm">Connect with industry experts for career guidance</p>
+          <h3 className="font-medium text-brand-text mb-2">Get Mentorship</h3>
+          <p className="text-brand-text-muted text-sm">Connect with industry experts for career guidance</p>
           <div className="mt-3 text-purple-600 text-sm font-medium flex items-center">
             Find Mentors <ChevronRight className="h-4 w-4 ml-1" />
           </div>
@@ -182,32 +182,32 @@ export default function Connect() {
       {/* Featured Content */}
       <div className="grid md:grid-cols-2 gap-8">
         <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Upcoming Events</h3>
+          <h3 className="text-lg font-medium text-brand-text mb-4">Upcoming Events</h3>
           <div className="space-y-4">
             {upcomingEvents.slice(0, 3).map((event) => (
               <div key={event.id} className="border-l-4 border-blue-500 pl-4">
-                <h4 className="font-medium text-gray-900">{event.title}</h4>
-                <p className="text-sm text-gray-600">{new Date(event.date).toLocaleDateString()} • {event.time}</p>
-                <p className="text-sm text-gray-500">{event.attendees} attending</p>
+                <h4 className="font-medium text-brand-text">{event.title}</h4>
+                <p className="text-sm text-brand-text-muted">{new Date(event.date).toLocaleDateString()} • {event.time}</p>
+                <p className="text-sm text-brand-text-light">{event.attendees} attending</p>
               </div>
             ))}
           </div>
           <button 
             onClick={() => setActiveTab("events")}
-            className="mt-4 text-blue-600 hover:text-blue-700 text-sm font-medium"
+            className="mt-4 text-brand-info hover:text-brand-info text-sm font-medium"
           >
             View All Events →
           </button>
         </div>
 
         <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Top Job Matches</h3>
+          <h3 className="text-lg font-medium text-brand-text mb-4">Top Job Matches</h3>
           <div className="space-y-4">
             {jobOpportunities.filter(job => job.matched).slice(0, 2).map((job) => (
-              <div key={job.id} className="border border-gray-200 rounded-lg p-4">
-                <h4 className="font-medium text-gray-900">{job.title}</h4>
-                <p className="text-sm text-gray-600">{job.company} • {job.location}</p>
-                <p className="text-sm text-green-600 font-medium">{job.salary}</p>
+              <div key={job.id} className="border border-brand-border rounded-lg p-4">
+                <h4 className="font-medium text-brand-text">{job.title}</h4>
+                <p className="text-sm text-brand-text-muted">{job.company} • {job.location}</p>
+                <p className="text-sm text-brand-success font-medium">{job.salary}</p>
                 <div className="flex flex-wrap gap-1 mt-2">
                   {job.skills.slice(0, 3).map((skill, index) => (
                     <span key={index} className="bg-brand-surface text-brand-info text-xs px-2 py-1 rounded">
@@ -220,7 +220,7 @@ export default function Connect() {
           </div>
           <button 
             onClick={() => setActiveTab("jobs")}
-            className="mt-4 text-blue-600 hover:text-blue-700 text-sm font-medium"
+            className="mt-4 text-brand-info hover:text-brand-info text-sm font-medium"
           >
             View All Jobs →
           </button>
@@ -233,23 +233,23 @@ export default function Connect() {
     <div className="space-y-6">
       <div className="bg-white rounded-lg shadow">
         <div className="p-6 border-b">
-          <h2 className="text-xl font-bold text-gray-900">Upcoming Events</h2>
-          <p className="text-gray-600">Connect with employers, peers, and industry experts</p>
+          <h2 className="text-xl font-bold text-brand-text">Upcoming Events</h2>
+          <p className="text-brand-text-muted">Connect with employers, peers, and industry experts</p>
         </div>
         <div className="p-6">
           <div className="space-y-6">
             {upcomingEvents.map((event) => (
-              <div key={event.id} className="border border-gray-200 rounded-lg p-6">
+              <div key={event.id} className="border border-brand-border rounded-lg p-6">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-2">
-                      <h3 className="text-lg font-medium text-gray-900">{event.title}</h3>
+                      <h3 className="text-lg font-medium text-brand-text">{event.title}</h3>
                       <span className="bg-brand-surface text-brand-info text-sm px-2 py-1 rounded">
                         {event.type}
                       </span>
                     </div>
-                    <p className="text-gray-600 mb-3">{event.description}</p>
-                    <div className="flex items-center space-x-6 text-sm text-gray-500">
+                    <p className="text-brand-text-muted mb-3">{event.description}</p>
+                    <div className="flex items-center space-x-6 text-sm text-brand-text-light">
                       <div className="flex items-center">
                         <Calendar className="h-4 w-4 mr-1" />
                         {new Date(event.date).toLocaleDateString()} • {event.time}
@@ -280,32 +280,32 @@ export default function Connect() {
     <div className="space-y-6">
       <div className="bg-white rounded-lg shadow">
         <div className="p-6 border-b">
-          <h2 className="text-xl font-bold text-gray-900">Job Opportunities</h2>
-          <p className="text-gray-600">Positions from our verified employer partners</p>
+          <h2 className="text-xl font-bold text-brand-text">Job Opportunities</h2>
+          <p className="text-brand-text-muted">Positions from our verified employer partners</p>
         </div>
         <div className="p-6">
           <div className="space-y-6">
             {jobOpportunities.map((job) => (
               <div key={job.id} className={`border rounded-lg p-6 ${
-                job.matched ? 'border-green-200 bg-green-50' : 'border-gray-200'
+                job.matched ? 'border-green-200 bg-green-50' : 'border-brand-border'
               }`}>
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-2">
-                      <h3 className="text-lg font-medium text-gray-900">{job.title}</h3>
+                      <h3 className="text-lg font-medium text-brand-text">{job.title}</h3>
                       {job.matched && (
                         <span className="bg-brand-surface text-brand-success text-sm px-2 py-1 rounded">
                           Great Match
                         </span>
                       )}
-                      <span className="bg-gray-100 text-gray-800 text-sm px-2 py-1 rounded">
+                      <span className="bg-brand-surface-dark text-brand-text text-sm px-2 py-1 rounded">
                         {job.type}
                       </span>
                     </div>
-                    <div className="flex items-center space-x-4 text-sm text-gray-600 mb-3">
+                    <div className="flex items-center space-x-4 text-sm text-brand-text-muted mb-3">
                       <span className="font-medium">{job.company}</span>
                       <span>{job.location}</span>
-                      <span className="text-green-600 font-medium">{job.salary}</span>
+                      <span className="text-brand-success font-medium">{job.salary}</span>
                     </div>
                     <div className="flex flex-wrap gap-2 mb-3">
                       {job.skills.map((skill, index) => (
@@ -314,10 +314,10 @@ export default function Connect() {
                         </span>
                       ))}
                     </div>
-                    <p className="text-sm text-gray-500">Posted {job.posted}</p>
+                    <p className="text-sm text-brand-text-light">Posted {job.posted}</p>
                   </div>
                   <div className="space-x-2">
-                    <button className="bg-white text-blue-600 border border-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors">
+                    <button className="bg-white text-brand-info border border-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors">
                       Learn More
                     </button>
                     <button className="bg-brand-info text-white px-4 py-2 rounded-lg hover:bg-brand-info-hover transition-colors">
@@ -337,32 +337,32 @@ export default function Connect() {
     <div className="space-y-6">
       <div className="bg-white rounded-lg shadow">
         <div className="p-6 border-b">
-          <h2 className="text-xl font-bold text-gray-900">Industry Mentors</h2>
-          <p className="text-gray-600">Connect with experienced professionals for career guidance</p>
+          <h2 className="text-xl font-bold text-brand-text">Industry Mentors</h2>
+          <p className="text-brand-text-muted">Connect with experienced professionals for career guidance</p>
         </div>
         <div className="p-6">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {mentors.map((mentor) => (
-              <div key={mentor.id} className="border border-gray-200 rounded-lg p-6">
+              <div key={mentor.id} className="border border-brand-border rounded-lg p-6">
                 <div className="text-center mb-4">
                   <div className="w-16 h-16 bg-gray-300 rounded-full mx-auto mb-3"></div>
-                  <h3 className="font-medium text-gray-900">{mentor.name}</h3>
-                  <p className="text-sm text-gray-600">{mentor.title}</p>
-                  <p className="text-sm text-gray-500">{mentor.company}</p>
+                  <h3 className="font-medium text-brand-text">{mentor.name}</h3>
+                  <p className="text-sm text-brand-text-muted">{mentor.title}</p>
+                  <p className="text-sm text-brand-text-light">{mentor.company}</p>
                 </div>
                 
                 <div className="flex items-center justify-center space-x-4 mb-4">
                   <div className="flex items-center">
                     <Star className="h-4 w-4 text-yellow-500 mr-1" />
-                    <span className="text-sm text-gray-600">{mentor.rating}</span>
+                    <span className="text-sm text-brand-text-muted">{mentor.rating}</span>
                   </div>
-                  <div className="text-sm text-gray-500">
+                  <div className="text-sm text-brand-text-light">
                     {mentor.sessions} sessions
                   </div>
                 </div>
 
                 <div className="mb-4">
-                  <p className="text-sm text-gray-600 mb-2">Expertise:</p>
+                  <p className="text-sm text-brand-text-muted mb-2">Expertise:</p>
                   <div className="flex flex-wrap gap-1">
                     {mentor.expertise.map((skill, index) => (
                       <span key={index} className="bg-brand-surface text-brand-secondary text-xs px-2 py-1 rounded">
@@ -376,7 +376,7 @@ export default function Connect() {
                   className={`w-full py-2 px-4 rounded-lg transition-colors ${
                     mentor.available 
                       ? 'bg-brand-secondary text-white hover:bg-brand-secondary-hover' 
-                      : 'bg-gray-100 text-gray-500 cursor-not-allowed'
+                      : 'bg-brand-surface-dark text-brand-text-light cursor-not-allowed'
                   }`}
                   disabled={!mentor.available}
                 >
@@ -398,14 +398,14 @@ export default function Connect() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-brand-surface">
       {/* Header */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Connect Community</h1>
-              <p className="text-gray-600 mt-1">Network with peers, find opportunities, and advance your career</p>
+              <h1 className="text-3xl font-bold text-brand-text">Connect Community</h1>
+              <p className="text-brand-text-muted mt-1">Network with peers, find opportunities, and advance your career</p>
             </div>
             <div className="flex items-center space-x-4">
               <div className="bg-brand-surface text-brand-success px-3 py-1 rounded-full text-sm">
@@ -426,8 +426,8 @@ export default function Connect() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center space-x-2 py-4 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === tab.id
-                    ? "border-blue-500 text-blue-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                    ? "border-blue-500 text-brand-info"
+                    : "border-transparent text-brand-text-light hover:text-brand-text hover:border-brand-border-dark"
                 }`}
               >
                 <tab.icon className="h-4 w-4" />

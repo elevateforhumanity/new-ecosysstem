@@ -38,9 +38,9 @@ export default function StudentDashboard() {
   );
 
   const quickActions = [
-    { icon: BookOpen, label: "My Courses", href: "/course-catalog", color: "text-blue-600" },
+    { icon: BookOpen, label: "My Courses", href: "/course-catalog", color: "text-brand-info" },
     { icon: Video, label: "Live Classes", href: "/meet", color: "text-purple-600" },
-    { icon: FileText, label: "Assignments", href: "/assignment", color: "text-green-600" },
+    { icon: FileText, label: "Assignments", href: "/assignment", color: "text-brand-success" },
     { icon: Award, label: "Certificates", href: "/certificates", color: "text-yellow-600" },
   ];
 
@@ -75,7 +75,7 @@ export default function StudentDashboard() {
                     <p className="text-sm text-muted-foreground">Enrolled Courses</p>
                     <p className="text-3xl font-bold">{courses.length}</p>
                   </div>
-                  <BookOpen className="h-8 w-8 text-blue-600" />
+                  <BookOpen className="h-8 w-8 text-brand-info" />
                 </div>
               </CardContent>
             </Card>
@@ -86,7 +86,7 @@ export default function StudentDashboard() {
                     <p className="text-sm text-muted-foreground">Average Progress</p>
                     <p className="text-3xl font-bold">{avgProgress}%</p>
                   </div>
-                  <TrendingUp className="h-8 w-8 text-green-600" />
+                  <TrendingUp className="h-8 w-8 text-brand-success" />
                 </div>
               </CardContent>
             </Card>
@@ -179,7 +179,7 @@ export default function StudentDashboard() {
                 <CardContent className="space-y-4">
                   {upcomingEvents.map((event, idx) => (
                     <div key={idx} className="flex items-start gap-3 p-3 border rounded-lg">
-                      <Calendar className="h-5 w-5 text-blue-600 mt-0.5" />
+                      <Calendar className="h-5 w-5 text-brand-info mt-0.5" />
                       <div className="flex-1">
                         <p className="font-medium text-sm">{event.title}</p>
                         <p className="text-xs text-muted-foreground">{event.date}</p>

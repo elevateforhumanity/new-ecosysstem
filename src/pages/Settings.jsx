@@ -48,7 +48,7 @@ export default function Settings() {
           <h1 style={{ fontSize: 32, fontWeight: 700, marginBottom: 8 }}>
             Settings
           </h1>
-          <p style={{ color: "#666", fontSize: 16 }}>
+          <p style={{ color: "var(--brand-text-muted)", fontSize: 16 }}>
             Manage your account preferences and application settings
           </p>
         </div>
@@ -76,7 +76,7 @@ export default function Settings() {
               padding: 24,
               borderRadius: 8,
               marginBottom: 24,
-              border: "1px solid #e0e0e0",
+              border: "1px solid var(--brand-border)",
             }}
           >
             <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 20 }}>
@@ -97,7 +97,7 @@ export default function Settings() {
                   <div style={{ fontWeight: 500, marginBottom: 4 }}>
                     Email Notifications
                   </div>
-                  <div style={{ fontSize: 14, color: "#666" }}>
+                  <div style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
                     Receive email notifications for important updates
                   </div>
                 </div>
@@ -116,7 +116,7 @@ export default function Settings() {
                       left: 0,
                       right: 0,
                       bottom: 0,
-                      backgroundColor: settings.emailNotifications ? "#007bff" : "#ccc",
+                      backgroundColor: settings.emailNotifications ? "var(--brand-info)" : "#ccc",
                       borderRadius: 24,
                       transition: "0.3s",
                     }}
@@ -151,7 +151,7 @@ export default function Settings() {
                   <div style={{ fontWeight: 500, marginBottom: 4 }}>
                     Course Updates
                   </div>
-                  <div style={{ fontSize: 14, color: "#666" }}>
+                  <div style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
                     Get notified when courses you're enrolled in are updated
                   </div>
                 </div>
@@ -170,7 +170,7 @@ export default function Settings() {
                       left: 0,
                       right: 0,
                       bottom: 0,
-                      backgroundColor: settings.courseUpdates ? "#007bff" : "#ccc",
+                      backgroundColor: settings.courseUpdates ? "var(--brand-info)" : "#ccc",
                       borderRadius: 24,
                       transition: "0.3s",
                     }}
@@ -205,7 +205,7 @@ export default function Settings() {
                   <div style={{ fontWeight: 500, marginBottom: 4 }}>
                     Weekly Digest
                   </div>
-                  <div style={{ fontSize: 14, color: "#666" }}>
+                  <div style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
                     Receive a weekly summary of your learning progress
                   </div>
                 </div>
@@ -224,7 +224,7 @@ export default function Settings() {
                       left: 0,
                       right: 0,
                       bottom: 0,
-                      backgroundColor: settings.weeklyDigest ? "#007bff" : "#ccc",
+                      backgroundColor: settings.weeklyDigest ? "var(--brand-info)" : "#ccc",
                       borderRadius: 24,
                       transition: "0.3s",
                     }}
@@ -257,7 +257,7 @@ export default function Settings() {
                   <div style={{ fontWeight: 500, marginBottom: 4 }}>
                     Marketing Emails
                   </div>
-                  <div style={{ fontSize: 14, color: "#666" }}>
+                  <div style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
                     Receive promotional content and special offers
                   </div>
                 </div>
@@ -276,7 +276,7 @@ export default function Settings() {
                       left: 0,
                       right: 0,
                       bottom: 0,
-                      backgroundColor: settings.marketingEmails ? "#007bff" : "#ccc",
+                      backgroundColor: settings.marketingEmails ? "var(--brand-info)" : "#ccc",
                       borderRadius: 24,
                       transition: "0.3s",
                     }}
@@ -307,7 +307,7 @@ export default function Settings() {
               padding: 24,
               borderRadius: 8,
               marginBottom: 24,
-              border: "1px solid #e0e0e0",
+              border: "1px solid var(--brand-border)",
             }}
           >
             <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 20 }}>
@@ -333,7 +333,7 @@ export default function Settings() {
                   style={{
                     width: "100%",
                     padding: "10px 12px",
-                    border: "1px solid #ddd",
+                    border: "1px solid var(--brand-border)",
                     borderRadius: 6,
                     fontSize: 14,
                   }}
@@ -364,7 +364,7 @@ export default function Settings() {
                   style={{
                     width: "100%",
                     padding: "10px 12px",
-                    border: "1px solid #ddd",
+                    border: "1px solid var(--brand-border)",
                     borderRadius: 6,
                     fontSize: 14,
                   }}
@@ -397,7 +397,7 @@ export default function Settings() {
                   style={{
                     width: "100%",
                     padding: "10px 12px",
-                    border: "1px solid #ddd",
+                    border: "1px solid var(--brand-border)",
                     borderRadius: 6,
                     fontSize: 14,
                   }}
@@ -417,7 +417,7 @@ export default function Settings() {
               padding: 24,
               borderRadius: 8,
               marginBottom: 24,
-              border: "1px solid #e0e0e0",
+              border: "1px solid var(--brand-border)",
             }}
           >
             <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 20 }}>
@@ -438,7 +438,7 @@ export default function Settings() {
                   <div style={{ fontWeight: 500, marginBottom: 4 }}>
                     Autoplay Next Video
                   </div>
-                  <div style={{ fontSize: 14, color: "#666" }}>
+                  <div style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
                     Automatically play the next video in a course
                   </div>
                 </div>
@@ -457,7 +457,7 @@ export default function Settings() {
                       left: 0,
                       right: 0,
                       bottom: 0,
-                      backgroundColor: settings.autoplay ? "#007bff" : "#ccc",
+                      backgroundColor: settings.autoplay ? "var(--brand-info)" : "#ccc",
                       borderRadius: 24,
                       transition: "0.3s",
                     }}
@@ -492,7 +492,7 @@ export default function Settings() {
                   <div style={{ fontWeight: 500, marginBottom: 4 }}>
                     Subtitles
                   </div>
-                  <div style={{ fontSize: 14, color: "#666" }}>
+                  <div style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
                     Show subtitles by default when available
                   </div>
                 </div>
@@ -511,7 +511,7 @@ export default function Settings() {
                       left: 0,
                       right: 0,
                       bottom: 0,
-                      backgroundColor: settings.subtitles ? "#007bff" : "#ccc",
+                      backgroundColor: settings.subtitles ? "var(--brand-info)" : "#ccc",
                       borderRadius: 24,
                       transition: "0.3s",
                     }}
@@ -551,7 +551,7 @@ export default function Settings() {
                   style={{
                     width: "100%",
                     padding: "10px 12px",
-                    border: "1px solid #ddd",
+                    border: "1px solid var(--brand-border)",
                     borderRadius: 6,
                     fontSize: 14,
                   }}
@@ -574,7 +574,7 @@ export default function Settings() {
               padding: 24,
               borderRadius: 8,
               marginBottom: 24,
-              border: "1px solid #e0e0e0",
+              border: "1px solid var(--brand-border)",
             }}
           >
             <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 20 }}>
@@ -595,7 +595,7 @@ export default function Settings() {
                   <div style={{ fontWeight: 500, marginBottom: 4 }}>
                     Two-Factor Authentication
                   </div>
-                  <div style={{ fontSize: 14, color: "#666" }}>
+                  <div style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
                     Add an extra layer of security to your account
                   </div>
                 </div>
@@ -614,7 +614,7 @@ export default function Settings() {
                       left: 0,
                       right: 0,
                       bottom: 0,
-                      backgroundColor: settings.twoFactorAuth ? "#007bff" : "#ccc",
+                      backgroundColor: settings.twoFactorAuth ? "var(--brand-info)" : "#ccc",
                       borderRadius: 24,
                       transition: "0.3s",
                     }}
@@ -649,7 +649,7 @@ export default function Settings() {
                   <div style={{ fontWeight: 500, marginBottom: 4 }}>
                     Public Profile
                   </div>
-                  <div style={{ fontSize: 14, color: "#666" }}>
+                  <div style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
                     Make your profile visible to other users
                   </div>
                 </div>
@@ -668,7 +668,7 @@ export default function Settings() {
                       left: 0,
                       right: 0,
                       bottom: 0,
-                      backgroundColor: settings.publicProfile ? "#007bff" : "#ccc",
+                      backgroundColor: settings.publicProfile ? "var(--brand-info)" : "#ccc",
                       borderRadius: 24,
                       transition: "0.3s",
                     }}
@@ -703,7 +703,7 @@ export default function Settings() {
                   <div style={{ fontWeight: 500, marginBottom: 4 }}>
                     Show Learning Progress
                   </div>
-                  <div style={{ fontSize: 14, color: "#666" }}>
+                  <div style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
                     Display your course progress on your profile
                   </div>
                 </div>
@@ -722,7 +722,7 @@ export default function Settings() {
                       left: 0,
                       right: 0,
                       bottom: 0,
-                      backgroundColor: settings.showProgress ? "#007bff" : "#ccc",
+                      backgroundColor: settings.showProgress ? "var(--brand-info)" : "#ccc",
                       borderRadius: 24,
                       transition: "0.3s",
                     }}
@@ -762,7 +762,7 @@ export default function Settings() {
                   style={{
                     width: "100%",
                     padding: "10px 12px",
-                    border: "1px solid #ddd",
+                    border: "1px solid var(--brand-border)",
                     borderRadius: 6,
                     fontSize: 14,
                   }}
@@ -807,7 +807,7 @@ export default function Settings() {
               type="submit"
               style={{
                 padding: "12px 24px",
-                backgroundColor: "#007bff",
+                backgroundColor: "var(--brand-info)",
                 color: "#fff",
                 border: "none",
                 borderRadius: 6,

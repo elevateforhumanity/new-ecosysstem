@@ -57,10 +57,10 @@ export default function EnrollmentCheckout({ program, onSuccess, onCancel }) {
     <div className="bg-white rounded-xl shadow-lg p-6 max-w-md mx-auto">
       {/* Program Info */}
       <div className="mb-6">
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+        <h3 className="text-2xl font-bold text-brand-text mb-2">
           {program.title}
         </h3>
-        <p className="text-gray-600 mb-4">
+        <p className="text-brand-text-muted mb-4">
           {program.description}
         </p>
         
@@ -68,19 +68,19 @@ export default function EnrollmentCheckout({ program, onSuccess, onCancel }) {
         <div className="space-y-2 text-sm">
           {program.duration && (
             <div className="flex justify-between">
-              <span className="text-gray-600">Duration:</span>
+              <span className="text-brand-text-muted">Duration:</span>
               <span className="font-semibold">{program.duration}</span>
             </div>
           )}
           {program.format && (
             <div className="flex justify-between">
-              <span className="text-gray-600">Format:</span>
+              <span className="text-brand-text-muted">Format:</span>
               <span className="font-semibold">{program.format}</span>
             </div>
           )}
           {program.certification && (
             <div className="flex justify-between">
-              <span className="text-gray-600">Certification:</span>
+              <span className="text-brand-text-muted">Certification:</span>
               <span className="font-semibold">{program.certification}</span>
             </div>
           )}
@@ -90,13 +90,13 @@ export default function EnrollmentCheckout({ program, onSuccess, onCancel }) {
       {/* Price */}
       <div className="bg-blue-50 rounded-lg p-4 mb-6">
         <div className="flex justify-between items-center">
-          <span className="text-gray-700 font-medium">Total:</span>
-          <span className="text-3xl font-bold text-blue-600">
+          <span className="text-brand-text font-medium">Total:</span>
+          <span className="text-3xl font-bold text-brand-info">
             {isFree ? 'FREE' : `$${program.price}`}
           </span>
         </div>
         {isFree && (
-          <p className="text-sm text-gray-600 mt-2">
+          <p className="text-sm text-brand-text-muted mt-2">
             100% FREE through WIOA funding
           </p>
         )}
@@ -104,19 +104,19 @@ export default function EnrollmentCheckout({ program, onSuccess, onCancel }) {
 
       {/* Features */}
       <div className="mb-6 space-y-2">
-        <div className="flex items-center gap-2 text-sm text-gray-700">
+        <div className="flex items-center gap-2 text-sm text-brand-text">
           <CheckCircle className="w-4 h-4 text-green-500" />
           <span>Lifetime access to course materials</span>
         </div>
-        <div className="flex items-center gap-2 text-sm text-gray-700">
+        <div className="flex items-center gap-2 text-sm text-brand-text">
           <CheckCircle className="w-4 h-4 text-green-500" />
           <span>Industry-recognized certification</span>
         </div>
-        <div className="flex items-center gap-2 text-sm text-gray-700">
+        <div className="flex items-center gap-2 text-sm text-brand-text">
           <CheckCircle className="w-4 h-4 text-green-500" />
           <span>Job placement assistance</span>
         </div>
-        <div className="flex items-center gap-2 text-sm text-gray-700">
+        <div className="flex items-center gap-2 text-sm text-brand-text">
           <CheckCircle className="w-4 h-4 text-green-500" />
           <span>Instructor support</span>
         </div>
@@ -162,7 +162,7 @@ export default function EnrollmentCheckout({ program, onSuccess, onCancel }) {
           <button
             onClick={onCancel}
             disabled={loading}
-            className="w-full px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 disabled:opacity-50 transition-colors"
+            className="w-full px-6 py-3 border-2 border-brand-border-dark text-brand-text rounded-lg font-semibold hover:bg-brand-surface disabled:opacity-50 transition-colors"
           >
             Cancel
           </button>
@@ -171,7 +171,7 @@ export default function EnrollmentCheckout({ program, onSuccess, onCancel }) {
 
       {/* Security Badge */}
       {!isFree && (
-        <div className="mt-4 flex items-center justify-center gap-2 text-xs text-gray-500">
+        <div className="mt-4 flex items-center justify-center gap-2 text-xs text-brand-text-light">
           <Lock className="w-3 h-3" />
           <span>Secure payment powered by Stripe</span>
         </div>

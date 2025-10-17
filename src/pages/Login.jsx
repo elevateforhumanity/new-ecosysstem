@@ -82,10 +82,10 @@ export default function Login() {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl mb-4 shadow-lg">
             <span className="text-3xl font-bold text-white">E</span>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl font-bold text-brand-text mb-2">
             Elevate for Humanity
           </h1>
-          <p className="text-gray-600">
+          <p className="text-brand-text-muted">
             Sign in to continue your learning journey
           </p>
         </div>
@@ -150,13 +150,13 @@ export default function Login() {
                     name="rememberMe"
                     checked={formData.rememberMe}
                     onChange={handleChange}
-                    className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    className="w-4 h-4 rounded border-brand-border-dark text-brand-info focus:ring-brand-focus"
                   />
-                  <span className="text-gray-700">Remember me</span>
+                  <span className="text-brand-text">Remember me</span>
                 </label>
                 <Link
                   to="/forgot-password"
-                  className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+                  className="text-sm text-brand-info hover:text-brand-info font-medium"
                 >
                   Forgot password?
                 </Link>
@@ -198,22 +198,22 @@ export default function Login() {
             </Button>
           </CardContent>
           <CardFooter className="flex flex-col space-y-4">
-            <div className="text-sm text-center text-gray-600">
+            <div className="text-sm text-center text-brand-text-muted">
               Don't have an account?{" "}
               <Link
                 to="/get-started"
-                className="text-blue-600 hover:text-blue-700 font-semibold"
+                className="text-brand-info hover:text-brand-info font-semibold"
               >
                 Sign up for free
               </Link>
             </div>
-            <div className="text-xs text-center text-gray-500">
+            <div className="text-xs text-center text-brand-text-light">
               By signing in, you agree to our{" "}
-              <Link to="/terms-of-service" className="underline hover:text-gray-700">
+              <Link to="/terms-of-service" className="underline hover:text-brand-text">
                 Terms of Service
               </Link>{" "}
               and{" "}
-              <Link to="/privacy-policy" className="underline hover:text-gray-700">
+              <Link to="/privacy-policy" className="underline hover:text-brand-text">
                 Privacy Policy
               </Link>
             </div>
@@ -222,9 +222,9 @@ export default function Login() {
 
         {/* Help Text */}
         <div className="mt-8 text-center">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-brand-text-muted">
             Need help?{" "}
-            <Link to="/support" className="text-blue-600 hover:text-blue-700 font-medium">
+            <Link to="/support" className="text-brand-info hover:text-brand-info font-medium">
               Contact Support
             </Link>
           </p>

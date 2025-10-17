@@ -80,7 +80,7 @@ export default function Partners() {
           <h1 style={{ fontSize: 36, fontWeight: 700, marginBottom: 12 }}>
             Our Partners
           </h1>
-          <p style={{ fontSize: 18, color: "#666", maxWidth: 800 }}>
+          <p style={{ fontSize: 18, color: "var(--brand-text-muted)", maxWidth: 800 }}>
             We collaborate with leading organizations worldwide to expand our impact and reach more communities in need.
           </p>
         </div>
@@ -99,14 +99,14 @@ export default function Partners() {
               backgroundColor: "#fff",
               padding: 24,
               borderRadius: 8,
-              border: "1px solid #e0e0e0",
+              border: "1px solid var(--brand-border)",
               textAlign: "center",
             }}
           >
-            <div style={{ fontSize: 32, fontWeight: 700, color: "#007bff", marginBottom: 8 }}>
+            <div style={{ fontSize: 32, fontWeight: 700, color: "var(--brand-info)", marginBottom: 8 }}>
               50+
             </div>
-            <div style={{ fontSize: 14, color: "#666" }}>Partner Organizations</div>
+            <div style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>Partner Organizations</div>
           </div>
 
           <div
@@ -114,14 +114,14 @@ export default function Partners() {
               backgroundColor: "#fff",
               padding: 24,
               borderRadius: 8,
-              border: "1px solid #e0e0e0",
+              border: "1px solid var(--brand-border)",
               textAlign: "center",
             }}
           >
             <div style={{ fontSize: 32, fontWeight: 700, color: "var(--brand-success)", marginBottom: 8 }}>
               120+
             </div>
-            <div style={{ fontSize: 14, color: "#666" }}>Countries Reached</div>
+            <div style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>Countries Reached</div>
           </div>
 
           <div
@@ -129,14 +129,14 @@ export default function Partners() {
               backgroundColor: "#fff",
               padding: 24,
               borderRadius: 8,
-              border: "1px solid #e0e0e0",
+              border: "1px solid var(--brand-border)",
               textAlign: "center",
             }}
           >
             <div style={{ fontSize: 32, fontWeight: 700, color: "var(--brand-warning)", marginBottom: 8 }}>
               2M+
             </div>
-            <div style={{ fontSize: 14, color: "#666" }}>Lives Impacted</div>
+            <div style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>Lives Impacted</div>
           </div>
 
           <div
@@ -144,14 +144,14 @@ export default function Partners() {
               backgroundColor: "#fff",
               padding: 24,
               borderRadius: 8,
-              border: "1px solid #e0e0e0",
+              border: "1px solid var(--brand-border)",
               textAlign: "center",
             }}
           >
             <div style={{ fontSize: 32, fontWeight: 700, color: "var(--brand-danger)", marginBottom: 8 }}>
               500+
             </div>
-            <div style={{ fontSize: 14, color: "#666" }}>Active Projects</div>
+            <div style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>Active Projects</div>
           </div>
         </div>
 
@@ -170,9 +170,9 @@ export default function Partners() {
               onClick={() => setSelectedCategory(category)}
               style={{
                 padding: "8px 16px",
-                backgroundColor: selectedCategory === category ? "#007bff" : "#fff",
+                backgroundColor: selectedCategory === category ? "var(--brand-info)" : "#fff",
                 color: selectedCategory === category ? "#fff" : "#333",
-                border: "1px solid #e0e0e0",
+                border: "1px solid var(--brand-border)",
                 borderRadius: 20,
                 fontSize: 14,
                 fontWeight: 500,
@@ -199,7 +199,7 @@ export default function Partners() {
               key={partner.id}
               style={{
                 backgroundColor: "#fff",
-                border: "1px solid #e0e0e0",
+                border: "1px solid var(--brand-border)",
                 borderRadius: 8,
                 padding: 24,
                 transition: "transform 0.2s, box-shadow 0.2s",
@@ -235,7 +235,7 @@ export default function Partners() {
                       backgroundColor: "#f0f0f0",
                       borderRadius: 12,
                       fontSize: 12,
-                      color: "#666",
+                      color: "var(--brand-text-muted)",
                       marginBottom: 8,
                     }}
                   >
@@ -244,7 +244,7 @@ export default function Partners() {
                 </div>
               </div>
 
-              <p style={{ fontSize: 14, color: "#666", lineHeight: 1.6, marginBottom: 16 }}>
+              <p style={{ fontSize: 14, color: "var(--brand-text-muted)", lineHeight: 1.6, marginBottom: 16 }}>
                 {partner.description}
               </p>
 
@@ -265,7 +265,7 @@ export default function Partners() {
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
-                    color: "#007bff",
+                    color: "var(--brand-info)",
                     textDecoration: "none",
                     fontSize: 14,
                     fontWeight: 500,
@@ -281,7 +281,7 @@ export default function Partners() {
         {/* Become a Partner CTA */}
         <div
           style={{
-            backgroundColor: "#007bff",
+            backgroundColor: "var(--brand-info)",
             color: "#fff",
             padding: 48,
             borderRadius: 12,
@@ -301,7 +301,7 @@ export default function Partners() {
               style={{
                 padding: "12px 32px",
                 backgroundColor: "#fff",
-                color: "#007bff",
+                color: "var(--brand-info)",
                 border: "none",
                 borderRadius: 6,
                 fontSize: 16,
@@ -349,7 +349,7 @@ export default function Partners() {
               <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
                 Collaborative Impact
               </h3>
-              <p style={{ fontSize: 14, color: "#666", lineHeight: 1.6 }}>
+              <p style={{ fontSize: 14, color: "var(--brand-text-muted)", lineHeight: 1.6 }}>
                 Work together on projects that amplify your organization's mission and reach.
               </p>
             </div>
@@ -359,7 +359,7 @@ export default function Partners() {
               <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
                 Global Network
               </h3>
-              <p style={{ fontSize: 14, color: "#666", lineHeight: 1.6 }}>
+              <p style={{ fontSize: 14, color: "var(--brand-text-muted)", lineHeight: 1.6 }}>
                 Access our worldwide network of partners, resources, and expertise.
               </p>
             </div>
@@ -369,7 +369,7 @@ export default function Partners() {
               <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
                 Shared Resources
               </h3>
-              <p style={{ fontSize: 14, color: "#666", lineHeight: 1.6 }}>
+              <p style={{ fontSize: 14, color: "var(--brand-text-muted)", lineHeight: 1.6 }}>
                 Leverage shared tools, platforms, and best practices for greater efficiency.
               </p>
             </div>
@@ -379,7 +379,7 @@ export default function Partners() {
               <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
                 Measurable Results
               </h3>
-              <p style={{ fontSize: 14, color: "#666", lineHeight: 1.6 }}>
+              <p style={{ fontSize: 14, color: "var(--brand-text-muted)", lineHeight: 1.6 }}>
                 Track and report on the collective impact of our partnership initiatives.
               </p>
             </div>

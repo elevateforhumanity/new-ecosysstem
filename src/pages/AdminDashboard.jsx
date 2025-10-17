@@ -184,7 +184,7 @@ export default function AdminDashboard() {
           <Link to="/settings" style={{ backgroundColor: 'var(--color-card-bg)', padding: 24, borderRadius: 8, border: '1px solid var(--color-border)', textDecoration: "none", color: "inherit" }}>
             <div style={{ fontSize: 32, marginBottom: 12 }}>⚙️</div>
             <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Platform Settings</h3>
-            <p style={{ fontSize: 14, color: "#666" }}>Configure platform settings</p>
+            <p style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>Configure platform settings</p>
           </Link>
         </div>
       </div>

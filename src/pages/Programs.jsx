@@ -54,7 +54,7 @@ export default function Programs() {
       placement: '92%',
       students: 189,
       level: 'Beginner',
-      color: 'text-blue-600',
+      color: 'text-brand-info',
       bg: 'bg-blue-50',
       featured: true
     },
@@ -69,7 +69,7 @@ export default function Programs() {
       placement: '98%',
       students: 312,
       level: 'Beginner',
-      color: 'text-green-600',
+      color: 'text-brand-success',
       bg: 'bg-green-50',
       featured: true
     },
@@ -193,8 +193,8 @@ export default function Programs() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12 animate-fade-in-up">
             <div className="flex items-center justify-center gap-3 mb-4">
-              <TrendingUp className="h-8 w-8 text-blue-600" />
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">Featured Programs</h2>
+              <TrendingUp className="h-8 w-8 text-brand-info" />
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-text">Featured Programs</h2>
             </div>
             <p className="text-xl text-brand-text-muted">Our most popular career training programs</p>
           </div>
@@ -216,7 +216,7 @@ export default function Programs() {
                       {program.placement} Placement
                     </Badge>
                   </div>
-                  <CardTitle className="text-2xl group-hover:text-blue-600 transition-colors">
+                  <CardTitle className="text-2xl group-hover:text-brand-info transition-colors">
                     {program.title}
                   </CardTitle>
                   <CardDescription className="text-base leading-relaxed">
@@ -256,7 +256,7 @@ export default function Programs() {
       <section className="py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12 animate-fade-in-up">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-brand-text mb-4">
               All Training Programs
             </h2>
             <p className="text-xl text-brand-text-muted">
@@ -291,7 +291,7 @@ export default function Programs() {
                           {program.placement}
                         </Badge>
                       </div>
-                      <CardTitle className="text-xl group-hover:text-blue-600 transition-colors">
+                      <CardTitle className="text-xl group-hover:text-brand-info transition-colors">
                         {program.title}
                       </CardTitle>
                       <CardDescription className="line-clamp-2">
@@ -330,10 +330,10 @@ export default function Programs() {
         <div className="max-w-4xl mx-auto text-center">
           <div className="animate-fade-in-up">
             <DollarSign className="h-16 w-16 text-yellow-600 mx-auto mb-6" />
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-brand-text mb-6">
               100% Funded Programs
             </h2>
-            <p className="text-xl text-gray-700 mb-8">
+            <p className="text-xl text-brand-text mb-8">
               Programs funded by: <strong>WIOA • WRG • OJT • WEX • JRI • DOL • State Grants</strong>
             </p>
             <div className="inline-block bg-yellow-900 text-yellow-100 px-12 py-6 rounded-full font-bold text-2xl shadow-xl">
@@ -355,7 +355,7 @@ export default function Programs() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style={{ animationDelay: '200ms' }}>
             <Link to="/get-started">
-              <Button size="lg" className="bg-white text-blue-700 hover:bg-gray-100 text-lg px-10 py-6 rounded-full shadow-2xl">
+              <Button size="lg" className="bg-white text-brand-info hover:bg-brand-surface-dark text-lg px-10 py-6 rounded-full shadow-2xl">
                 Apply Now <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>

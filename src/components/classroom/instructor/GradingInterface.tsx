@@ -236,7 +236,7 @@ export default function GradingInterface() {
       case 'RETURNED':
         return 'bg-brand-surface text-brand-success';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-brand-surface-dark text-brand-text';
     }
   };
 
@@ -244,7 +244,7 @@ export default function GradingInterface() {
     <div className="max-w-7xl mx-auto p-6">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Grading Interface</h1>
-        <p className="text-gray-600">Grade student submissions for your courses</p>
+        <p className="text-brand-text-muted">Grade student submissions for your courses</p>
       </div>
 
       {message && (
@@ -263,13 +263,13 @@ export default function GradingInterface() {
       <div className="bg-white rounded-lg shadow p-6 mb-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-brand-text mb-2">
               Select Course
             </label>
             <select
               value={selectedCourse}
               onChange={e => setSelectedCourse(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
             >
               <option value="">Choose a course...</option>
               {courses.map(course => (
@@ -281,14 +281,14 @@ export default function GradingInterface() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-brand-text mb-2">
               Select Assignment
             </label>
             <select
               value={selectedCoursework}
               onChange={e => setSelectedCoursework(e.target.value)}
               disabled={!selectedCourse}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+              className="w-full px-4 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent disabled:bg-brand-surface-dark"
             >
               <option value="">Choose an assignment...</option>
               {courseworks.map(cw => (
@@ -305,16 +305,16 @@ export default function GradingInterface() {
       {loading ? (
         <div className="text-center py-12">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          <p className="mt-4 text-gray-600">Loading submissions...</p>
+          <p className="mt-4 text-brand-text-muted">Loading submissions...</p>
         </div>
       ) : submissions.length > 0 ? (
         <div className="bg-white rounded-lg shadow overflow-hidden">
-          <div className="p-6 border-b border-gray-200 flex justify-between items-center">
+          <div className="p-6 border-b border-brand-border flex justify-between items-center">
             <div>
               <h2 className="text-xl font-semibold">
                 {submissions.length} Submission{submissions.length !== 1 ? 's' : ''}
               </h2>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-brand-text-muted mt-1">
                 {submissions.filter(s => !s.assigned_grade).length} ungraded
               </p>
             </div>
@@ -328,34 +328,34 @@ export default function GradingInterface() {
 
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50">
+              <thead className="bg-brand-surface">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                     Student
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                     Submitted
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                     Grade
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {submissions.map(submission => (
-                  <tr key={submission.id} className="hover:bg-gray-50">
+                  <tr key={submission.id} className="hover:bg-brand-surface">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
-                        <div className="font-medium text-gray-900">
+                        <div className="font-medium text-brand-text">
                           {submission.student_name}
                         </div>
-                        <div className="text-sm text-gray-500">{submission.student_email}</div>
+                        <div className="text-sm text-brand-text-light">{submission.student_email}</div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -372,7 +372,7 @@ export default function GradingInterface() {
                         </span>
                       )}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-brand-text-light">
                       {new Date(submission.submission_time).toLocaleString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -385,12 +385,12 @@ export default function GradingInterface() {
                           onChange={e =>
                             handleGradeChange(submission.id, parseFloat(e.target.value))
                           }
-                          className="w-20 px-2 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-20 px-2 py-1 border border-brand-border-dark rounded focus:ring-2 focus:ring-brand-focus focus:border-transparent"
                         />
-                        <span className="text-gray-500">/ {submission.max_points}</span>
+                        <span className="text-brand-text-light">/ {submission.max_points}</span>
                       </div>
                       {submission.assigned_grade !== null && (
-                        <div className="text-xs text-green-600 mt-1">
+                        <div className="text-xs text-brand-success mt-1">
                           Current: {submission.assigned_grade}
                         </div>
                       )}
@@ -407,7 +407,7 @@ export default function GradingInterface() {
                           href={submission.alternate_link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-50 transition-colors"
+                          className="px-3 py-1 border border-brand-border-dark rounded hover:bg-brand-surface transition-colors"
                         >
                           View
                         </a>
@@ -421,11 +421,11 @@ export default function GradingInterface() {
         </div>
       ) : selectedCoursework ? (
         <div className="text-center py-12 bg-white rounded-lg shadow">
-          <p className="text-gray-600">No submissions found for this assignment</p>
+          <p className="text-brand-text-muted">No submissions found for this assignment</p>
         </div>
       ) : (
         <div className="text-center py-12 bg-white rounded-lg shadow">
-          <p className="text-gray-600">Select a course and assignment to view submissions</p>
+          <p className="text-brand-text-muted">Select a course and assignment to view submissions</p>
         </div>
       )}
     </div>

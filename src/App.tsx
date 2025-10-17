@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
 import './styles/brand.css';
+import StudentPortalLMS from './pages/StudentPortalLMS';
 
 /*
   EFH Router App (React + Tailwind)
@@ -823,10 +824,12 @@ export default function App() {
     <BrowserRouter>
   <Shell>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<StudentPortalLMS />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/hub" element={<Hub />} />
           <Route path="/programs" element={<Programs />} />
           <Route path="/lms" element={<LMS />} />
+          <Route path="/student-portal" element={<StudentPortalLMS />} />
           <Route path="/connect" element={<Connect />} />
           <Route path="/pay" element={<Pay />} />
           <Route path="/compliance" element={<Compliance />} />

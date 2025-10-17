@@ -12,7 +12,7 @@ export default function StudentPortalLMS() {
   return (
     <div className="min-h-screen bg-brand-surface">
       {/* Portal Header */}
-      <div className="bg-gradient-to-r from-blue-800 to-blue-600 text-white py-8 text-center">
+      <div className="bg-gradient-to-r from-brand-primary to-brand-secondary text-white py-8 text-center">
         <div className="max-w-7xl mx-auto px-8">
           <h1 className="text-4xl font-bold mb-2">🎓 Student Portal</h1>
           <p className="text-lg">Elevate for Humanity Career & Training Institute</p>
@@ -27,7 +27,7 @@ export default function StudentPortalLMS() {
               onClick={() => setActiveTab('enrollment')}
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 activeTab === 'enrollment' 
-                  ? 'bg-blue-800 text-white' 
+                  ? 'bg-brand-info text-white' 
                   : 'bg-brand-surface-dark text-brand-text hover:bg-brand-info hover:text-white'
               }`}
             >
@@ -37,7 +37,7 @@ export default function StudentPortalLMS() {
               onClick={() => setActiveTab('dashboard')}
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 activeTab === 'dashboard' 
-                  ? 'bg-blue-800 text-white' 
+                  ? 'bg-brand-info text-white' 
                   : 'bg-brand-surface-dark text-brand-text hover:bg-brand-info hover:text-white'
               }`}
             >
@@ -47,7 +47,7 @@ export default function StudentPortalLMS() {
               onClick={() => setActiveTab('courses')}
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 activeTab === 'courses' 
-                  ? 'bg-blue-800 text-white' 
+                  ? 'bg-brand-info text-white' 
                   : 'bg-brand-surface-dark text-brand-text hover:bg-brand-info hover:text-white'
               }`}
             >
@@ -57,7 +57,7 @@ export default function StudentPortalLMS() {
               onClick={() => setActiveTab('certificates')}
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 activeTab === 'certificates' 
-                  ? 'bg-blue-800 text-white' 
+                  ? 'bg-brand-info text-white' 
                   : 'bg-brand-surface-dark text-brand-text hover:bg-brand-info hover:text-white'
               }`}
             >
@@ -67,7 +67,7 @@ export default function StudentPortalLMS() {
               onClick={() => setActiveTab('profile')}
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 activeTab === 'profile' 
-                  ? 'bg-blue-800 text-white' 
+                  ? 'bg-brand-info text-white' 
                   : 'bg-brand-surface-dark text-brand-text hover:bg-brand-info hover:text-white'
               }`}
             >
@@ -77,7 +77,7 @@ export default function StudentPortalLMS() {
               onClick={() => setActiveTab('support')}
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 activeTab === 'support' 
-                  ? 'bg-blue-800 text-white' 
+                  ? 'bg-brand-info text-white' 
                   : 'bg-brand-surface-dark text-brand-text hover:bg-brand-info hover:text-white'
               }`}
             >
@@ -155,7 +155,7 @@ export default function StudentPortalLMS() {
                 </select>
               </div>
               
-              <button type="submit" className="w-full bg-blue-800 hover:bg-blue-900 text-white px-8 py-4 rounded-lg font-semibold transition">
+              <button type="submit" className="w-full bg-brand-info hover:bg-blue-900 text-white px-8 py-4 rounded-lg font-semibold transition">
                 Submit Enrollment Application
               </button>
             </form>
@@ -230,7 +230,7 @@ export default function StudentPortalLMS() {
               <p className="text-brand-text mb-2"><strong>Progress:</strong> 75% Complete</p>
               <p className="text-brand-text mb-2"><strong>Next Module:</strong> PowerPoint Advanced Features</p>
               <p className="text-brand-text mb-4"><strong>Due Date:</strong> March 15, 2024</p>
-              <button className="bg-blue-800 hover:bg-blue-900 text-white px-6 py-2 rounded-lg font-semibold transition">
+              <button className="bg-brand-info hover:bg-blue-900 text-white px-6 py-2 rounded-lg font-semibold transition">
                 Continue Course
               </button>
             </div>
@@ -246,7 +246,7 @@ export default function StudentPortalLMS() {
               <p className="text-brand-text mb-2"><strong>Progress:</strong> 30% Complete</p>
               <p className="text-brand-text mb-2"><strong>Next Module:</strong> Hazard Recognition</p>
               <p className="text-brand-text mb-4"><strong>Due Date:</strong> March 30, 2024</p>
-              <button className="bg-blue-800 hover:bg-blue-900 text-white px-6 py-2 rounded-lg font-semibold transition">
+              <button className="bg-brand-info hover:bg-blue-900 text-white px-6 py-2 rounded-lg font-semibold transition">
                 Continue Course
               </button>
             </div>
@@ -292,7 +292,7 @@ export default function StudentPortalLMS() {
                 <label className="block mb-2 font-semibold text-brand-text">Phone</label>
                 <input type="tel" defaultValue="(555) 123-4567" className="w-full p-3 border border-brand-border-dark rounded-lg" />
               </div>
-              <button className="bg-blue-800 hover:bg-blue-900 text-white px-8 py-3 rounded-lg font-semibold transition">
+              <button className="bg-brand-info hover:bg-blue-900 text-white px-8 py-3 rounded-lg font-semibold transition">
                 Update Profile
               </button>
             </div>
@@ -322,7 +322,7 @@ export default function StudentPortalLMS() {
                     <label className="block mb-2 font-semibold text-brand-text">Message</label>
                     <textarea rows="5" className="w-full p-3 border border-brand-border-dark rounded-lg"></textarea>
                   </div>
-                  <button className="bg-blue-800 hover:bg-blue-900 text-white px-8 py-3 rounded-lg font-semibold transition">
+                  <button className="bg-brand-info hover:bg-blue-900 text-white px-8 py-3 rounded-lg font-semibold transition">
                     Submit Ticket
                   </button>
                 </form>

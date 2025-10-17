@@ -77,6 +77,9 @@
     "lint:brand:all": "node scripts/reviewer.js",
     "fix:brand": "node scripts/fix-brand-colors.js src",
     "fix:brand:dry": "node scripts/fix-brand-colors.js src --dry-run",
+    "brand:guard": "node tools/brand-guard.cjs",
+    "polish:check": "npm run lint:brand && npm run brand:guard",
+    "polish:fix": "npm run fix:brand",
     "clean": "rimraf dist coverage .cache"
   }
 }

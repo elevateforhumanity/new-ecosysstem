@@ -27,8 +27,8 @@ export default function StudentPortalLMS() {
               onClick={() => setActiveTab('enrollment')}
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 activeTab === 'enrollment' 
-                  ? 'bg-brand-info text-white' 
-                  : 'bg-brand-surface-dark text-brand-text hover:bg-brand-info hover:text-white'
+                  ? 'bg-brand-primary text-white' 
+                  : 'bg-gray-200 text-brand-text hover:bg-brand-primary hover:text-white'
               }`}
             >
               📝 Enrollment
@@ -37,8 +37,8 @@ export default function StudentPortalLMS() {
               onClick={() => setActiveTab('dashboard')}
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 activeTab === 'dashboard' 
-                  ? 'bg-brand-info text-white' 
-                  : 'bg-brand-surface-dark text-brand-text hover:bg-brand-info hover:text-white'
+                  ? 'bg-brand-primary text-white' 
+                  : 'bg-gray-200 text-brand-text hover:bg-brand-primary hover:text-white'
               }`}
             >
               📊 Dashboard
@@ -47,8 +47,8 @@ export default function StudentPortalLMS() {
               onClick={() => setActiveTab('courses')}
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 activeTab === 'courses' 
-                  ? 'bg-brand-info text-white' 
-                  : 'bg-brand-surface-dark text-brand-text hover:bg-brand-info hover:text-white'
+                  ? 'bg-brand-primary text-white' 
+                  : 'bg-gray-200 text-brand-text hover:bg-brand-primary hover:text-white'
               }`}
             >
               📚 My Courses
@@ -57,8 +57,8 @@ export default function StudentPortalLMS() {
               onClick={() => setActiveTab('certificates')}
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 activeTab === 'certificates' 
-                  ? 'bg-brand-info text-white' 
-                  : 'bg-brand-surface-dark text-brand-text hover:bg-brand-info hover:text-white'
+                  ? 'bg-brand-primary text-white' 
+                  : 'bg-gray-200 text-brand-text hover:bg-brand-primary hover:text-white'
               }`}
             >
               🏆 Certificates
@@ -67,8 +67,8 @@ export default function StudentPortalLMS() {
               onClick={() => setActiveTab('profile')}
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 activeTab === 'profile' 
-                  ? 'bg-brand-info text-white' 
-                  : 'bg-brand-surface-dark text-brand-text hover:bg-brand-info hover:text-white'
+                  ? 'bg-brand-primary text-white' 
+                  : 'bg-gray-200 text-brand-text hover:bg-brand-primary hover:text-white'
               }`}
             >
               👤 Profile
@@ -77,8 +77,8 @@ export default function StudentPortalLMS() {
               onClick={() => setActiveTab('support')}
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 activeTab === 'support' 
-                  ? 'bg-brand-info text-white' 
-                  : 'bg-brand-surface-dark text-brand-text hover:bg-brand-info hover:text-white'
+                  ? 'bg-brand-primary text-white' 
+                  : 'bg-gray-200 text-brand-text hover:bg-brand-primary hover:text-white'
               }`}
             >
               💬 Support

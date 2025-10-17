@@ -822,7 +822,7 @@ const NotFound = () => (
 export default function App() {
   return (
     <BrowserRouter>
-  <Shell>
+      <Shell>
         <Routes>
           <Route path="/" element={<StudentPortalLMS />} />
           <Route path="/home" element={<Home />} />

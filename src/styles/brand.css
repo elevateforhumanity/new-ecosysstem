@@ -1,0 +1,226 @@
+/**
+ * Elevate for Humanity Brand Tokens
+ * Single source of truth for all colors, spacing, and design tokens
+ * 
+ * Usage:
+ * - Tailwind: bg-brand-primary, text-brand-text, ring-brand
+ * - CSS: var(--brand-primary), var(--brand-secondary)
+ */
+
+:root {
+  /* === EFH Primary Brand Colors === */
+  --brand-primary: #4D4B37;      /* Olive/Brown - Main brand color */
+  --brand-secondary: #6B6847;    /* Lighter Olive - Secondary actions */
+  --brand-accent: #f59e0b;       /* Amber - Highlights & badges */
+  --brand-muted: #6b7280;        /* Gray - Meta text & disabled states */
+  
+  /* === Background Colors === */
+  --brand-bg: #ffffff;           /* White - Main background */
+  --brand-surface: #f8fafc;      /* Off-white - Cards & panels */
+  --brand-surface-dark: #f1f5f9; /* Slightly darker surface */
+  
+  /* === Semantic Colors === */
+  --brand-success: #059669;      /* Green - Success states */
+  --brand-info: #1e40af;         /* Blue - Info & links */
+  --brand-warning: #f59e0b;      /* Amber - Warnings */
+  --brand-danger: #ef4444;       /* Red - Errors & destructive actions */
+  
+  /* === Text Colors === */
+  --brand-text: #000000;         /* Black - Primary text */
+  --brand-text-muted: #6b7280;   /* Gray - Secondary text */
+  --brand-text-light: #9ca3af;   /* Light gray - Tertiary text */
+  
+  /* === Interactive States === */
+  --brand-hover: #3a3629;        /* Darker olive - Hover state */
+  --brand-active: #2d2a1f;       /* Even darker - Active/pressed state */
+  --brand-focus: #4D4B37;        /* Primary - Focus ring */
+  
+  /* === Borders === */
+  --brand-border: #e5e7eb;       /* Light gray - Default borders */
+  --brand-border-dark: #d1d5db;  /* Medium gray - Emphasized borders */
+  
+  /* === Gradients === */
+  --brand-gradient-primary: linear-gradient(135deg, #4D4B37 0%, #6B6847 100%);
+  --brand-gradient-success: linear-gradient(90deg, #059669, #10b981);
+  --brand-gradient-info: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  
+  /* === Shadows === */
+  --brand-shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --brand-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --brand-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+  
+  /* === Spacing (for consistency) === */
+  --brand-radius: 8px;           /* Default border radius */
+  --brand-radius-lg: 12px;       /* Large border radius */
+  --brand-radius-full: 9999px;   /* Fully rounded (pills) */
+  
+  /* === Typography === */
+  --brand-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --brand-font-weight-normal: 400;
+  --brand-font-weight-medium: 500;
+  --brand-font-weight-semibold: 600;
+  --brand-font-weight-bold: 700;
+}
+
+/* === Utility Classes === */
+
+/* Focus ring for accessibility */
+.u-focus-ring {
+  outline: 2px solid var(--brand-focus);
+  outline-offset: 2px;
+}
+
+.u-focus-ring:focus {
+  outline: 2px solid var(--brand-focus);
+  outline-offset: 2px;
+}
+
+/* Brand gradient backgrounds */
+.u-gradient-primary {
+  background: var(--brand-gradient-primary);
+}
+
+.u-gradient-success {
+  background: var(--brand-gradient-success);
+}
+
+.u-gradient-info {
+  background: var(--brand-gradient-info);
+}
+
+/* Shadow utilities */
+.u-shadow-brand-sm {
+  box-shadow: var(--brand-shadow-sm);
+}
+
+.u-shadow-brand-md {
+  box-shadow: var(--brand-shadow-md);
+}
+
+.u-shadow-brand-lg {
+  box-shadow: var(--brand-shadow-lg);
+}
+
+/* === Base Styles === */
+
+/* High-contrast defaults for accessibility */
+body {
+  color: var(--brand-text);
+  background: var(--brand-bg);
+  font-family: var(--brand-font-family);
+  font-weight: var(--brand-font-weight-normal);
+}
+
+/* Ensure all interactive elements have focus styles */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+[role="button"]:focus {
+  outline: 2px solid var(--brand-focus);
+  outline-offset: 2px;
+}
+
+/* Remove default focus outline only if we're providing our own */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--brand-focus);
+  outline-offset: 2px;
+}
+
+/* === Component Patterns === */
+
+/* Brand buttons */
+.btn-brand-primary {
+  background: var(--brand-primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--brand-radius);
+  font-weight: var(--brand-font-weight-semibold);
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-brand-primary:hover {
+  background: var(--brand-hover);
+}
+
+.btn-brand-primary:active {
+  background: var(--brand-active);
+}
+
+.btn-brand-secondary {
+  background: var(--brand-secondary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--brand-radius);
+  font-weight: var(--brand-font-weight-semibold);
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-brand-success {
+  background: var(--brand-success);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--brand-radius);
+  font-weight: var(--brand-font-weight-semibold);
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+/* Brand cards */
+.card-brand {
+  background: white;
+  border-radius: var(--brand-radius-lg);
+  box-shadow: var(--brand-shadow-md);
+  padding: 2rem;
+}
+
+/* Brand inputs */
+.input-brand {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--brand-border);
+  border-radius: var(--brand-radius);
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.input-brand:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px rgba(77, 75, 55, 0.1);
+}
+
+/* === Dark Mode Support (Optional) === */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Uncomment and adjust if you want dark mode support */
+    /* --brand-bg: #0b1220; */
+    /* --brand-surface: #1a202c; */
+    /* --brand-text: #ffffff; */
+    /* --brand-text-muted: #9ca3af; */
+  }
+}
+
+/* === Print Styles === */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .u-gradient-primary,
+  .u-gradient-success,
+  .u-gradient-info {
+    background: white !important;
+    color: black !important;
+  }
+}

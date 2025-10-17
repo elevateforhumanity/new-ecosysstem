@@ -73,6 +73,8 @@
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:brand": "node scripts/reviewer.js src",
+    "lint:brand:all": "node scripts/reviewer.js",
     "clean": "rimraf dist coverage .cache"
   }
 }

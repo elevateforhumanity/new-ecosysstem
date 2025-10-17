@@ -1,17 +1,37 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SiteLayout from "./layouts/SiteLayout";
 import Hero from "./components/Hero";
+import TrustStrip from "./components/TrustStrip";
+import ProgramsGrid from "./components/ProgramsGrid";
+import Testimonials from "./components/Testimonials";
 
-function HomePage(){
+function HomePage() {
   return (
     <>
-      <Hero/>
+      <Hero />
+      <TrustStrip />
+      <ProgramsGrid />
       <section className="section">
         <div className="container">
-          <h2 className="text-2xl font-semibold">Featured Programs</h2>
-          <p className="mt-2 text-slate-600">Healthcare • Construction • Beauty • Business • Tech</p>
+          <div className="card p-6 md:p-8 bg-gradient-to-br from-brand-50 to-white">
+            <h3 className="text-2xl font-semibold">
+              Ready to start a new career?
+            </h3>
+            <p className="mt-2 text-slate-600">
+              ETPL scholarships, WRG/WEX/JRI stacking, and employer pathways.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <a href="/apply" className="btn">
+                Apply Now
+              </a>
+              <a href="/partners" className="btn-outline">
+                Partner With Us
+              </a>
+            </div>
+          </div>
         </div>
       </section>
+      <Testimonials />
     </>
   );
 }

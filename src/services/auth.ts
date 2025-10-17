@@ -1,0 +1,88 @@
+import { supa } from "./supa";
+
+export type User = {
+  id: string;
+  email: string;
+  role?: string;
+};
+
+export async function signUp(email: string, password: string) {
+  const { data, error } = await supa.auth.signUp({
+    email,
+    password,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function signIn(email: string, password: string) {
+  const { data, error } = await supa.auth.signInWithPassword({
+    email,
+    password,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function signInWithMagicLink(email: string) {
+  const { data, error } = await supa.auth.signInWithOtp({
+    email,
+    options: {
+      emailRedirectTo: `${window.location.origin}/lms`,
+    },
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function signOut() {
+  const { error } = await supa.auth.signOut();
+  if (error) throw error;
+}
+
+export async function resetPassword(email: string) {
+  const { data, error } = await supa.auth.resetPasswordForEmail(email, {
+    redirectTo: `${window.location.origin}/auth/reset-password`,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function updatePassword(newPassword: string) {
+  const { data, error } = await supa.auth.updateUser({
+    password: newPassword,
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function getCurrentUser(): Promise<User | null> {
+  const {
+    data: { user },
+  } = await supa.auth.getUser();
+  if (!user) return null;
+
+  // Get user role from profiles table
+  const { data: profile } = await supa
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+
+  return {
+    id: user.id,
+    email: user.email!,
+    role: profile?.role || "student",
+  };
+}
+
+export function onAuthStateChange(callback: (user: User | null) => void) {
+  return supa.auth.onAuthStateChange(async (event, session) => {
+    if (session?.user) {
+      const user = await getCurrentUser();
+      callback(user);
+    } else {
+      callback(null);
+    }
+  });
+}

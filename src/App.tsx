@@ -10,6 +10,16 @@ import Dashboard from "./pages/lms/Dashboard";
 import CoursesIndex from "./pages/lms/CoursesIndex";
 import CoursePage from "./pages/lms/CoursePage";
 import LessonPage from "./pages/lms/LessonPage";
+import Login from "./pages/auth/Login";
+import Signup from "./pages/auth/Signup";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import InstructorDashboard from "./pages/instructor/InstructorDashboard";
+import CourseEditor from "./pages/instructor/CourseEditor";
+import LessonManager from "./pages/instructor/LessonManager";
+import CertificatePage from "./pages/CertificatePage";
+import MyCertificates from "./pages/MyCertificates";
+import VerifyCertificate from "./pages/VerifyCertificate";
 
 function HomePage() {
   return (
@@ -61,10 +71,30 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/programs" element={<ProgramsIndex />} />
           <Route path="/programs/:slug" element={<ProgramPage />} />
-          <Route path="/lms" element={<Dashboard />} />
+          
+          {/* Auth Routes */}
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/signup" element={<Signup />} />
+          <Route path="/auth/forgot-password" element={<ForgotPassword />} />
+          
+          {/* LMS Routes (Protected) */}
+          <Route path="/lms" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/lms/courses" element={<CoursesIndex />} />
           <Route path="/lms/course/:courseId" element={<CoursePage />} />
-          <Route path="/lms/lesson/:lessonId" element={<LessonPage />} />
+          <Route path="/lms/lesson/:lessonId" element={<ProtectedRoute><LessonPage /></ProtectedRoute>} />
+          
+          {/* Instructor Routes (Protected - Instructor Role) */}
+          <Route path="/instructor" element={<ProtectedRoute requireRole="instructor"><InstructorDashboard /></ProtectedRoute>} />
+          <Route path="/instructor/course/:courseId/edit" element={<ProtectedRoute requireRole="instructor"><CourseEditor /></ProtectedRoute>} />
+          <Route path="/instructor/course/:courseId/lessons" element={<ProtectedRoute requireRole="instructor"><LessonManager /></ProtectedRoute>} />
+          
+          {/* Certificate Routes */}
+          <Route path="/certificates" element={<ProtectedRoute><MyCertificates /></ProtectedRoute>} />
+          <Route path="/certificate/:certificateId" element={<CertificatePage />} />
+          <Route path="/verify" element={<VerifyCertificate />} />
+          <Route path="/verify/:certNumber" element={<VerifyCertificate />} />
+          
+          {/* Other Routes */}
           <Route path="/partners" element={<SimplePage title="Partners" />} />
           <Route path="/apply" element={<SimplePage title="Apply Now" />} />
           <Route path="*" element={<SimplePage title="Not Found" />} />

@@ -3,6 +3,7 @@
 ## The Problem We Solved
 
 Before this system, our codebase had **4,788 different color references** scattered across 257 files. Imagine trying to:
+
 - Change your brand color from blue to green → you'd need to find and update hundreds of files
 - Ensure accessibility compliance → impossible to audit thousands of hardcoded colors
 - Maintain visual consistency → every developer picking their own shade of blue
@@ -14,17 +15,19 @@ Before this system, our codebase had **4,788 different color references** scatte
 
 A centralized brand system that gives you:
 
-### 1. **One Source of Truth** 
+### 1. **One Source of Truth**
+
 All colors live in `src/styles/brand.css`. Change it once, update everywhere instantly.
 
 ```css
 /* Change this ONE line */
---brand-primary: #4D4B37;  /* EFH olive/brown */
+--brand-primary: #4d4b37; /* EFH olive/brown */
 
 /* And it updates EVERYWHERE in your app */
 ```
 
 ### 2. **Automated Enforcement**
+
 Tools that catch mistakes before they reach production:
 
 ```bash
@@ -36,6 +39,7 @@ npm run fix:brand:dry     # Preview fixes without changing files
 ### 3. **Developer-Friendly Utilities**
 
 **In Tailwind (HTML/JSX):**
+
 ```jsx
 // ❌ Before: Hardcoded, inconsistent
 <button className="bg-indigo-600 hover:bg-indigo-700">
@@ -45,15 +49,21 @@ npm run fix:brand:dry     # Preview fixes without changing files
 ```
 
 **In CSS:**
+
 ```css
 /* ❌ Before: Hardcoded */
-.card { background: #f8fafc; }
+.card {
+  background: #f8fafc;
+}
 
 /* ✅ After: Brand token */
-.card { background: var(--brand-surface); }
+.card {
+  background: var(--brand-surface);
+}
 ```
 
 **In inline styles:**
+
 ```jsx
 // ❌ Before
 <div style={{ color: '#6b7280' }}>
@@ -65,21 +75,25 @@ npm run fix:brand:dry     # Preview fixes without changing files
 ## Real-World Benefits
 
 ### For Designers 🎨
+
 - **Rebrand in minutes, not months** - Change colors in one file
 - **Consistent visual language** - No more "50 shades of gray"
 - **Accessibility built-in** - High contrast ratios guaranteed
 
 ### For Developers 💻
+
 - **No more guessing** - Clear semantic names (primary, success, danger)
 - **Faster development** - Pre-built utilities and components
 - **Fewer bugs** - Automated checks catch color mistakes
 
 ### For Product Managers 📊
+
 - **Faster iterations** - Test new brand colors instantly
 - **Lower maintenance costs** - 33% fewer color violations already
 - **Better compliance** - Automated accessibility auditing
 
 ### For Users ♿
+
 - **Better readability** - Consistent, high-contrast text
 - **Accessible by default** - WCAG-compliant color combinations
 - **Professional appearance** - Cohesive brand experience
@@ -87,48 +101,54 @@ npm run fix:brand:dry     # Preview fixes without changing files
 ## What We Automated
 
 ### Phase 1: Foundation ✅
+
 - Created brand color system with EFH palette
 - Integrated with Tailwind CSS
 - Built automated reviewer tool
 - Added stylelint configuration
 
 ### Phase 2: Migration ✅
+
 - **Automatically fixed 1,605 violations** across 102 files
 - Reduced total violations by 33% (4,788 → 3,208)
 - Verified all changes - build successful, app functional
 - Zero manual edits required
 
 ### Phase 3: Remaining Work 🚧
+
 The 3,208 remaining violations are mostly:
+
 - **Gray shades** (text-gray-600, text-gray-900) - 1,000+ instances
-- **Generic blues** (#007bff, text-blue-600) - 200+ instances  
+- **Generic blues** (#007bff, text-blue-600) - 200+ instances
 - **Borders/shadows** (border-gray-300, rgba) - 150+ instances
 - **Custom colors** needing design decisions
 
 ## The Numbers
 
-| Metric | Before | After | Improvement |
-|--------|--------|-------|-------------|
-| Color violations | 4,788 | 3,208 | **-33%** |
-| Files with violations | 257 | 155 | **-40%** |
-| Automated fixes | 0 | 1,605 | **∞%** |
-| Time to rebrand | Days | Minutes | **99%** |
-| Developer confusion | High | Low | **Priceless** |
+| Metric                | Before | After   | Improvement   |
+| --------------------- | ------ | ------- | ------------- |
+| Color violations      | 4,788  | 3,208   | **-33%**      |
+| Files with violations | 257    | 155     | **-40%**      |
+| Automated fixes       | 0      | 1,605   | **∞%**        |
+| Time to rebrand       | Days   | Minutes | **99%**       |
+| Developer confusion   | High   | Low     | **Priceless** |
 
 ## How It Works
 
 ### 1. Brand Tokens (The Foundation)
+
 ```css
 :root {
   /* Semantic names that make sense */
-  --brand-primary: #4D4B37;      /* Main brand color */
-  --brand-success: #059669;      /* Success states */
-  --brand-danger: #ef4444;       /* Errors */
-  --brand-text-muted: #6b7280;   /* Secondary text */
+  --brand-primary: #4d4b37; /* Main brand color */
+  --brand-success: #059669; /* Success states */
+  --brand-danger: #ef4444; /* Errors */
+  --brand-text-muted: #6b7280; /* Secondary text */
 }
 ```
 
 ### 2. Tailwind Integration (The Interface)
+
 ```javascript
 // tailwind.config.js
 colors: {
@@ -143,6 +163,7 @@ colors: {
 ### 3. Automated Tools (The Enforcement)
 
 **Reviewer** - Finds violations:
+
 ```bash
 npm run lint:brand
 # 🎨 Brand Color Review Report
@@ -151,6 +172,7 @@ npm run lint:brand
 ```
 
 **Auto-Fixer** - Fixes violations:
+
 ```bash
 npm run fix:brand
 # 🔧 Fixing brand color violations
@@ -163,6 +185,7 @@ npm run fix:brand
 ### Using Brand Colors
 
 **1. In React/JSX components:**
+
 ```jsx
 // Backgrounds
 <div className="bg-brand-primary">
@@ -180,6 +203,7 @@ npm run fix:brand
 ```
 
 **2. In CSS files:**
+
 ```css
 .my-component {
   background: var(--brand-primary);
@@ -193,8 +217,9 @@ npm run fix:brand
 ```
 
 **3. In inline styles:**
+
 ```jsx
-<div style={{ 
+<div style={{
   color: 'var(--brand-text)',
   background: 'var(--brand-surface)'
 }}>
@@ -203,6 +228,7 @@ npm run fix:brand
 ### Available Tokens
 
 **Colors:**
+
 - `brand-primary` - Main brand color (olive/brown)
 - `brand-secondary` - Secondary actions
 - `brand-success` - Success states (green)
@@ -211,21 +237,25 @@ npm run fix:brand
 - `brand-danger` - Errors (red)
 
 **Text:**
+
 - `brand-text` - Primary text (black)
 - `brand-text-muted` - Secondary text (gray)
 - `brand-text-light` - Tertiary text (light gray)
 
 **Backgrounds:**
+
 - `brand-bg` - Main background (white)
 - `brand-surface` - Cards/panels (off-white)
 - `brand-surface-dark` - Darker surface
 
 **Interactive:**
+
 - `brand-hover` - Hover states
 - `brand-active` - Active/pressed states
 - `brand-focus` - Focus rings
 
 **Borders:**
+
 - `brand-border` - Default borders
 - `brand-border-dark` - Emphasized borders
 
@@ -234,6 +264,7 @@ npm run fix:brand
 ### Example 1: Button Component
 
 **Before:**
+
 ```jsx
 <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded">
   Click Me
@@ -241,6 +272,7 @@ npm run fix:brand
 ```
 
 **After:**
+
 ```jsx
 <button className="bg-brand-primary hover:bg-brand-primary-hover text-white px-4 py-2 rounded">
   Click Me
@@ -252,24 +284,30 @@ npm run fix:brand
 ### Example 2: Card Component
 
 **Before:**
+
 ```jsx
-<div style={{
-  background: '#f8fafc',
-  border: '1px solid #e5e7eb',
-  color: '#1f2937'
-}}>
+<div
+  style={{
+    background: '#f8fafc',
+    border: '1px solid #e5e7eb',
+    color: '#1f2937',
+  }}
+>
   <h3 style={{ color: '#1e40af' }}>Title</h3>
   <p style={{ color: '#6b7280' }}>Description</p>
 </div>
 ```
 
 **After:**
+
 ```jsx
-<div style={{
-  background: 'var(--brand-surface)',
-  border: '1px solid var(--brand-border)',
-  color: 'var(--brand-text)'
-}}>
+<div
+  style={{
+    background: 'var(--brand-surface)',
+    border: '1px solid var(--brand-border)',
+    color: 'var(--brand-text)',
+  }}
+>
   <h3 style={{ color: 'var(--brand-info)' }}>Title</h3>
   <p style={{ color: 'var(--brand-text-muted)' }}>Description</p>
 </div>
@@ -280,6 +318,7 @@ npm run fix:brand
 ### Example 3: Status Badge
 
 **Before:**
+
 ```jsx
 // Different developers used different greens
 <span className="bg-green-100 text-green-800">Active</span>
@@ -288,6 +327,7 @@ npm run fix:brand
 ```
 
 **After:**
+
 ```jsx
 // Everyone uses the same success color
 <span className="bg-brand-surface text-brand-success">Active</span>
@@ -298,23 +338,27 @@ npm run fix:brand
 ## Migration Strategy
 
 ### Phase 1: Foundation (✅ Complete)
+
 - [x] Create brand.css with EFH colors
 - [x] Integrate with Tailwind
 - [x] Build automation tools
 - [x] Add npm scripts
 
 ### Phase 2: Automated Fixes (✅ Complete)
+
 - [x] Auto-fix common patterns (1,605 fixes)
 - [x] Verify builds and functionality
 - [x] Commit and deploy changes
 
 ### Phase 3: Remaining Violations (🚧 In Progress)
+
 - [ ] Add gray scale mappings to auto-fixer
 - [ ] Map generic blues to brand-info
 - [ ] Handle border/shadow utilities
 - [ ] Manual review of custom colors
 
 ### Phase 4: Enforcement (📋 Planned)
+
 - [ ] Add pre-commit hooks
 - [ ] CI/CD integration
 - [ ] Documentation for new developers
@@ -343,6 +387,7 @@ A: It handles ~33% automatically. The rest needs design decisions or additional 
 ## Next Steps
 
 1. **Review remaining violations:**
+
    ```bash
    npm run lint:brand > violations.txt
    ```
@@ -373,6 +418,7 @@ A: It handles ~33% automatically. The rest needs design decisions or additional 
 ## Success Metrics
 
 Track these over time:
+
 - Total violations (goal: < 500)
 - Files with violations (goal: < 50)
 - Time to rebrand (goal: < 1 hour)
@@ -382,4 +428,4 @@ Track these over time:
 
 **Built with ❤️ by the EFH team**
 
-*Making brand consistency effortless, one token at a time.*
+_Making brand consistency effortless, one token at a time._

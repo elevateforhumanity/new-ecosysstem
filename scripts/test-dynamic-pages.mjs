@@ -9,8 +9,8 @@ const PAGES_DIR = 'src/pages';
 
 // Get all page files
 const pageFiles = readdirSync(PAGES_DIR)
-  .filter(f => f.endsWith('.jsx') || f.endsWith('.tsx'))
-  .map(f => join(PAGES_DIR, f));
+  .filter((f) => f.endsWith('.jsx') || f.endsWith('.tsx'))
+  .map((f) => join(PAGES_DIR, f));
 
 console.log(`📄 Found ${pageFiles.length} page files\n`);
 
@@ -59,17 +59,20 @@ const results = {
 };
 
 // Analyze each page
-pageFiles.forEach(filePath => {
+pageFiles.forEach((filePath) => {
   const fileName = filePath.split('/').pop();
   const content = readFileSync(filePath, 'utf8');
-  
+
   // Count buttons
   const buttonMatches = content.match(patterns.buttons.onClick) || [];
   if (buttonMatches.length > 0) {
     results.totalButtons += buttonMatches.length;
-    results.pagesWithButtons.push({ file: fileName, count: buttonMatches.length });
+    results.pagesWithButtons.push({
+      file: fileName,
+      count: buttonMatches.length,
+    });
   }
-  
+
   // Count links
   const linkMatches = [
     ...(content.match(patterns.links.reactRouterLink) || []),
@@ -79,14 +82,14 @@ pageFiles.forEach(filePath => {
     results.totalLinks += linkMatches.length;
     results.pagesWithLinks.push({ file: fileName, count: linkMatches.length });
   }
-  
+
   // Count forms
   const formMatches = content.match(patterns.forms.onSubmit) || [];
   if (formMatches.length > 0) {
     results.totalForms += formMatches.length;
     results.pagesWithForms.push({ file: fileName, count: formMatches.length });
   }
-  
+
   // Count state hooks
   const stateMatches = [
     ...(content.match(patterns.state.useState) || []),
@@ -96,7 +99,7 @@ pageFiles.forEach(filePath => {
     results.totalStateHooks += stateMatches.length;
     results.pagesWithState.push({ file: fileName, count: stateMatches.length });
   }
-  
+
   // Count API calls
   const apiMatches = [
     ...(content.match(patterns.api.fetch) || []),
@@ -106,18 +109,21 @@ pageFiles.forEach(filePath => {
     results.totalApiCalls += apiMatches.length;
     results.pagesWithApi.push({ file: fileName, count: apiMatches.length });
   }
-  
+
   // Check for common issues
-  
+
   // Issue: onClick without handler
-  if (content.includes('onClick={}') || content.includes('onClick={() => {}}')) {
+  if (
+    content.includes('onClick={}') ||
+    content.includes('onClick={() => {}}')
+  ) {
     results.issues.push({
       file: fileName,
       type: 'Empty onClick handler',
       severity: 'warning',
     });
   }
-  
+
   // Issue: Link without to prop
   if (content.includes('<Link>') && !content.includes('<Link to=')) {
     results.issues.push({
@@ -126,7 +132,7 @@ pageFiles.forEach(filePath => {
       severity: 'error',
     });
   }
-  
+
   // Issue: Form without onSubmit
   if (content.includes('<form') && !content.includes('onSubmit')) {
     results.issues.push({
@@ -135,9 +141,13 @@ pageFiles.forEach(filePath => {
       severity: 'warning',
     });
   }
-  
+
   // Issue: Async function without error handling
-  if (content.includes('async ') && !content.includes('try') && !content.includes('catch')) {
+  if (
+    content.includes('async ') &&
+    !content.includes('try') &&
+    !content.includes('catch')
+  ) {
     results.issues.push({
       file: fileName,
       type: 'Async function without error handling',
@@ -186,17 +196,17 @@ results.pagesWithApi
 // Display issues
 if (results.issues.length > 0) {
   console.log('\n⚠️  Potential Issues Found:\n');
-  
-  const errors = results.issues.filter(i => i.severity === 'error');
-  const warnings = results.issues.filter(i => i.severity === 'warning');
-  
+
+  const errors = results.issues.filter((i) => i.severity === 'error');
+  const warnings = results.issues.filter((i) => i.severity === 'warning');
+
   if (errors.length > 0) {
     console.log('   ❌ Errors:');
     errors.forEach(({ file, type }) => {
       console.log(`      ${file}: ${type}`);
     });
   }
-  
+
   if (warnings.length > 0) {
     console.log('\n   ⚠️  Warnings:');
     warnings.forEach(({ file, type }) => {

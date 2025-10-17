@@ -5,14 +5,14 @@ const zlib = require('zlib');
 
 const logDir = path.join(process.cwd(), 'logs');
 const retentionDays = parseInt(process.env.LOG_RETENTION_DAYS || '7', 10);
-const today = new Date().toISOString().slice(0,10);
+const today = new Date().toISOString().slice(0, 10);
 
 if (!fs.existsSync(logDir)) {
   console.log('[log-rotate] no logs dir');
   process.exit(0);
 }
 
-function ageDays(f){
+function ageDays(f) {
   const stat = fs.statSync(f);
   return (Date.now() - stat.mtimeMs) / 86400000;
 }

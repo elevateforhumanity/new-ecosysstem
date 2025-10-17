@@ -1,7 +1,7 @@
 /**
  * LearnWorlds-Superior Feature Set
  * Complete feature parity + advanced capabilities that exceed LearnWorlds
- * 
+ *
  * Features that surpass LearnWorlds:
  * - Advanced website builder with AI design
  * - Superior mobile app builder
@@ -13,7 +13,7 @@
  * - Advanced integrations
  * - Superior course player
  * - Advanced user management
- * 
+ *
  * Copyright (c) 2024 Elevate for Humanity
  * Licensed Use Only - Unauthorized use prohibited
  */
@@ -63,31 +63,35 @@ class LearnWorldsSuperiorFeatures {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${this.openaiApiKey}`,
-        'Content-Type': 'application/json'
+        Authorization: `Bearer ${this.openaiApiKey}`,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         model: 'gpt-4-turbo-preview',
         messages: [
           {
             role: 'system',
-            content: 'You are an expert web designer and UX specialist creating world-class educational websites that convert visitors to students.'
+            content:
+              'You are an expert web designer and UX specialist creating world-class educational websites that convert visitors to students.',
           },
           {
             role: 'user',
-            content: websitePrompt
-          }
+            content: websitePrompt,
+          },
         ],
         temperature: 0.7,
-        max_tokens: 4000
-      })
+        max_tokens: 4000,
+      }),
     });
 
     const result = await response.json();
     const websiteDesign = JSON.parse(result.choices[0].message.content);
 
     // Generate actual website files
-    const websiteFiles = await this.generateWebsiteFiles(websiteDesign, schoolConfig);
+    const websiteFiles = await this.generateWebsiteFiles(
+      websiteDesign,
+      schoolConfig
+    );
 
     // Save to database
     const { data: website } = await this.supabase
@@ -98,7 +102,7 @@ class LearnWorldsSuperiorFeatures {
         files: websiteFiles,
         domain: schoolConfig.domain,
         status: 'active',
-        created_at: new Date()
+        created_at: new Date(),
       })
       .select()
       .single();
@@ -119,7 +123,7 @@ class LearnWorldsSuperiorFeatures {
         fileUpload: true,
         socialSharing: true,
         deepLinking: true,
-        backgroundSync: true
+        backgroundSync: true,
       },
       learningFeatures: {
         videoPlayer: 'advanced',
@@ -131,7 +135,7 @@ class LearnWorldsSuperiorFeatures {
         calendar: true,
         notes: true,
         bookmarks: true,
-        downloadContent: true
+        downloadContent: true,
       },
       customization: {
         branding: appConfig.branding,
@@ -139,18 +143,21 @@ class LearnWorldsSuperiorFeatures {
         logo: appConfig.logo,
         splashScreen: appConfig.splashScreen,
         appIcon: appConfig.appIcon,
-        customPages: appConfig.customPages
+        customPages: appConfig.customPages,
       },
       monetization: {
         inAppPurchases: true,
         subscriptions: true,
         freemium: true,
-        ads: appConfig.enableAds || false
-      }
+        ads: appConfig.enableAds || false,
+      },
     };
 
     // Generate React Native app code
-    const appCode = await this.generateMobileAppCode(mobileAppFeatures, schoolConfig);
+    const appCode = await this.generateMobileAppCode(
+      mobileAppFeatures,
+      schoolConfig
+    );
 
     // Save mobile app configuration
     const { data: mobileApp } = await this.supabase
@@ -162,7 +169,7 @@ class LearnWorldsSuperiorFeatures {
         app_store_config: appConfig.appStore,
         play_store_config: appConfig.playStore,
         status: 'development',
-        created_at: new Date()
+        created_at: new Date(),
       })
       .select()
       .single();
@@ -181,14 +188,14 @@ class LearnWorldsSuperiorFeatures {
           autoModeration: true,
           aiContentFilter: true,
           reportingSystem: true,
-          moderatorTools: true
+          moderatorTools: true,
         },
         gamification: {
           reputation: true,
           badges: true,
           leaderboards: true,
-          achievements: true
-        }
+          achievements: true,
+        },
       },
       socialFeatures: {
         userProfiles: {
@@ -196,37 +203,37 @@ class LearnWorldsSuperiorFeatures {
           skillBadges: true,
           learningProgress: true,
           achievements: true,
-          connections: true
+          connections: true,
         },
         messaging: {
           directMessages: true,
           groupChats: true,
           videoChat: true,
           fileSharing: true,
-          voiceMessages: true
+          voiceMessages: true,
         },
         collaboration: {
           studyGroups: true,
           projectTeams: true,
           peerReview: true,
           mentorship: true,
-          tutoring: true
-        }
+          tutoring: true,
+        },
       },
       contentSharing: {
         userGeneratedContent: true,
         resourceLibrary: true,
         noteSharing: true,
         studyGuides: true,
-        flashcards: true
+        flashcards: true,
       },
       events: {
         virtualEvents: true,
         webinars: true,
         studySessions: true,
         networking: true,
-        calendar: true
-      }
+        calendar: true,
+      },
     };
 
     // Create community database structure
@@ -239,7 +246,7 @@ class LearnWorldsSuperiorFeatures {
         school_id: schoolId,
         features: communityFeatures,
         config: communityConfig,
-        created_at: new Date()
+        created_at: new Date(),
       })
       .select()
       .single();
@@ -260,20 +267,20 @@ class LearnWorldsSuperiorFeatures {
           completionCelebration: true,
           winBackCampaigns: true,
           upsellSequences: true,
-          referralPrograms: true
+          referralPrograms: true,
         },
         segmentation: {
           behaviorBased: true,
           progressBased: true,
           engagementBased: true,
-          demographicBased: true
+          demographicBased: true,
         },
         personalization: {
           dynamicContent: true,
           aiOptimization: true,
           sendTimeOptimization: true,
-          subjectLineOptimization: true
-        }
+          subjectLineOptimization: true,
+        },
       },
       salesFunnels: {
         landingPages: await this.createLandingPages(marketingConfig),
@@ -281,29 +288,29 @@ class LearnWorldsSuperiorFeatures {
         salesPages: await this.createSalesPages(marketingConfig),
         checkoutOptimization: true,
         abandonedCartRecovery: true,
-        upsellDownsell: true
+        upsellDownsell: true,
       },
       socialMediaMarketing: {
         contentCalendar: true,
         autoPosting: true,
         socialProof: true,
         influencerTracking: true,
-        socialListening: true
+        socialListening: true,
       },
       affiliateProgram: {
         commissionTracking: true,
         affiliatePortal: true,
         marketingMaterials: true,
         performanceAnalytics: true,
-        payoutAutomation: true
+        payoutAutomation: true,
       },
       seoOptimization: {
         contentOptimization: true,
         keywordTracking: true,
         backlinksMonitoring: true,
         technicalSEO: true,
-        localSEO: true
-      }
+        localSEO: true,
+      },
     };
 
     // Save marketing automation
@@ -313,7 +320,7 @@ class LearnWorldsSuperiorFeatures {
         school_id: schoolId,
         features: marketingFeatures,
         config: marketingConfig,
-        created_at: new Date()
+        created_at: new Date(),
       })
       .select()
       .single();
@@ -341,39 +348,40 @@ class LearnWorldsSuperiorFeatures {
         video: true,
         audio: true,
         drawing: true,
-        fileUpload: true
+        fileUpload: true,
       },
       adaptiveAssessments: {
         difficultyAdjustment: true,
         branchingLogic: true,
         personalizedFeedback: true,
-        competencyMapping: true
+        competencyMapping: true,
       },
       proctoring: {
         aiProctoring: true,
         browserLockdown: true,
         identityVerification: true,
         environmentMonitoring: true,
-        behaviorAnalysis: true
+        behaviorAnalysis: true,
       },
       analytics: {
         itemAnalysis: true,
         learningAnalytics: true,
         predictiveScoring: true,
         cheatDetection: true,
-        performanceInsights: true
+        performanceInsights: true,
       },
       accessibility: {
         screenReader: true,
         keyboardNavigation: true,
         highContrast: true,
         textToSpeech: true,
-        languageSupport: true
-      }
+        languageSupport: true,
+      },
     };
 
     // Generate assessment templates
-    const assessmentTemplates = await this.generateAssessmentTemplates(assessmentConfig);
+    const assessmentTemplates =
+      await this.generateAssessmentTemplates(assessmentConfig);
 
     // Save assessment engine
     const { data: assessmentEngine } = await this.supabase
@@ -383,7 +391,7 @@ class LearnWorldsSuperiorFeatures {
         features: assessmentFeatures,
         templates: assessmentTemplates,
         config: assessmentConfig,
-        created_at: new Date()
+        created_at: new Date(),
       })
       .select()
       .single();
@@ -404,7 +412,7 @@ class LearnWorldsSuperiorFeatures {
         customCSS: true,
         customFavicon: true,
         customEmailTemplates: true,
-        customCertificates: true
+        customCertificates: true,
       },
       features: {
         removeBranding: true,
@@ -412,25 +420,28 @@ class LearnWorldsSuperiorFeatures {
         customHeader: true,
         customLoginPage: true,
         customDashboard: true,
-        customMobileApp: true
+        customMobileApp: true,
       },
       integrations: {
         sso: true,
         customAPI: true,
         webhooks: true,
         zapier: true,
-        customIntegrations: true
+        customIntegrations: true,
       },
       support: {
         dedicatedSupport: true,
         customDocumentation: true,
         trainingProgram: true,
-        implementationSupport: true
-      }
+        implementationSupport: true,
+      },
     };
 
     // Create white-label instance
-    const whiteLabelInstance = await this.createWhiteLabelInstance(clientConfig, whiteLabelFeatures);
+    const whiteLabelInstance = await this.createWhiteLabelInstance(
+      clientConfig,
+      whiteLabelFeatures
+    );
 
     // Save white-label configuration
     const { data: whiteLabel } = await this.supabase
@@ -441,7 +452,7 @@ class LearnWorldsSuperiorFeatures {
         instance_config: whiteLabelInstance,
         domain: clientConfig.domain,
         status: 'active',
-        created_at: new Date()
+        created_at: new Date(),
       })
       .select()
       .single();
@@ -466,7 +477,7 @@ class LearnWorldsSuperiorFeatures {
         videoAnalytics: true,
         interactiveElements: true,
         overlays: true,
-        callToActions: true
+        callToActions: true,
       },
       interactivity: {
         quizzes: true,
@@ -476,7 +487,7 @@ class LearnWorldsSuperiorFeatures {
         assignments: true,
         downloads: true,
         links: true,
-        hotspots: true
+        hotspots: true,
       },
       accessibility: {
         keyboardNavigation: true,
@@ -484,26 +495,29 @@ class LearnWorldsSuperiorFeatures {
         closedCaptions: true,
         audioDescriptions: true,
         highContrast: true,
-        textSize: true
+        textSize: true,
       },
       security: {
         drmProtection: true,
         watermarking: true,
         domainRestriction: true,
         downloadPrevention: true,
-        screenshotPrevention: true
+        screenshotPrevention: true,
       },
       analytics: {
         watchTime: true,
         engagement: true,
         dropoffPoints: true,
         interactionTracking: true,
-        heatmaps: true
-      }
+        heatmaps: true,
+      },
     };
 
     // Generate player code
-    const playerCode = await this.generateCoursePlayerCode(playerFeatures, playerConfig);
+    const playerCode = await this.generateCoursePlayerCode(
+      playerFeatures,
+      playerConfig
+    );
 
     // Save course player
     const { data: coursePlayer } = await this.supabase
@@ -513,7 +527,7 @@ class LearnWorldsSuperiorFeatures {
         features: playerFeatures,
         player_code: playerCode,
         config: playerConfig,
-        created_at: new Date()
+        created_at: new Date(),
       })
       .select()
       .single();
@@ -528,20 +542,29 @@ class LearnWorldsSuperiorFeatures {
     const userManagementFeatures = {
       userRoles: {
         admin: {
-          permissions: ['all']
+          permissions: ['all'],
         },
         instructor: {
-          permissions: ['course_management', 'student_management', 'analytics', 'content_creation']
+          permissions: [
+            'course_management',
+            'student_management',
+            'analytics',
+            'content_creation',
+          ],
         },
         student: {
-          permissions: ['course_access', 'community_participation', 'profile_management']
+          permissions: [
+            'course_access',
+            'community_participation',
+            'profile_management',
+          ],
         },
         moderator: {
-          permissions: ['community_moderation', 'content_moderation']
+          permissions: ['community_moderation', 'content_moderation'],
         },
         affiliate: {
-          permissions: ['affiliate_dashboard', 'marketing_materials']
-        }
+          permissions: ['affiliate_dashboard', 'marketing_materials'],
+        },
       },
       bulkOperations: {
         bulkEnrollment: true,
@@ -549,7 +572,7 @@ class LearnWorldsSuperiorFeatures {
         bulkEmailSend: true,
         bulkRoleAssignment: true,
         bulkDataExport: true,
-        bulkDataImport: true
+        bulkDataImport: true,
       },
       userSegmentation: {
         behaviorBased: true,
@@ -557,7 +580,7 @@ class LearnWorldsSuperiorFeatures {
         engagementBased: true,
         customFields: true,
         tags: true,
-        automatedSegments: true
+        automatedSegments: true,
       },
       userProfiles: {
         customFields: true,
@@ -567,15 +590,15 @@ class LearnWorldsSuperiorFeatures {
         skills: true,
         achievements: true,
         certificates: true,
-        learningPath: true
+        learningPath: true,
       },
       authentication: {
         sso: true,
         socialLogin: true,
         twoFactor: true,
         biometric: true,
-        passwordless: true
-      }
+        passwordless: true,
+      },
     };
 
     // Save user management configuration
@@ -585,7 +608,7 @@ class LearnWorldsSuperiorFeatures {
         school_id: schoolId,
         features: userManagementFeatures,
         config: userConfig,
-        created_at: new Date()
+        created_at: new Date(),
       })
       .select()
       .single();
@@ -605,7 +628,7 @@ class LearnWorldsSuperiorFeatures {
         razorpay: true,
         paddle: true,
         braintree: true,
-        authorize: true
+        authorize: true,
       },
       emailMarketing: {
         mailchimp: true,
@@ -614,14 +637,14 @@ class LearnWorldsSuperiorFeatures {
         convertkit: true,
         activeCampaign: true,
         hubspot: true,
-        salesforce: true
+        salesforce: true,
       },
       webinars: {
         zoom: true,
         webex: true,
         gotoWebinar: true,
         bigBlueButton: true,
-        jitsi: true
+        jitsi: true,
       },
       analytics: {
         googleAnalytics: true,
@@ -629,21 +652,21 @@ class LearnWorldsSuperiorFeatures {
         hotjar: true,
         mixpanel: true,
         amplitude: true,
-        segment: true
+        segment: true,
       },
       crm: {
         salesforce: true,
         hubspot: true,
         pipedrive: true,
         zoho: true,
-        freshworks: true
+        freshworks: true,
       },
       automation: {
         zapier: true,
         integromat: true,
         automate: true,
         customWebhooks: true,
-        apiAccess: true
+        apiAccess: true,
       },
       socialMedia: {
         facebook: true,
@@ -651,19 +674,22 @@ class LearnWorldsSuperiorFeatures {
         linkedin: true,
         instagram: true,
         youtube: true,
-        tiktok: true
+        tiktok: true,
       },
       lms: {
         scorm: true,
         xapi: true,
         lti: true,
         qti: true,
-        aicc: true
-      }
+        aicc: true,
+      },
     };
 
     // Create integration endpoints
-    const integrationEndpoints = await this.createIntegrationEndpoints(integrations, schoolId);
+    const integrationEndpoints = await this.createIntegrationEndpoints(
+      integrations,
+      schoolId
+    );
 
     // Save integrations hub
     const { data: integrationsHub } = await this.supabase
@@ -673,7 +699,7 @@ class LearnWorldsSuperiorFeatures {
         integrations: integrations,
         endpoints: integrationEndpoints,
         config: integrationConfig,
-        created_at: new Date()
+        created_at: new Date(),
       })
       .select()
       .single();
@@ -693,7 +719,7 @@ class LearnWorldsSuperiorFeatures {
         timeSpent: true,
         learningPaths: true,
         skillDevelopment: true,
-        predictiveAnalytics: true
+        predictiveAnalytics: true,
       },
       businessAnalytics: {
         revenue: true,
@@ -702,33 +728,36 @@ class LearnWorldsSuperiorFeatures {
         ltv: true,
         cohortAnalysis: true,
         funnelAnalysis: true,
-        attributionModeling: true
+        attributionModeling: true,
       },
       contentAnalytics: {
         contentPerformance: true,
         engagementHeatmaps: true,
         dropoffAnalysis: true,
         contentOptimization: true,
-        aiInsights: true
+        aiInsights: true,
       },
       userAnalytics: {
         userBehavior: true,
         segmentAnalysis: true,
         pathAnalysis: true,
         retentionAnalysis: true,
-        satisfactionScores: true
+        satisfactionScores: true,
       },
       customReports: {
         reportBuilder: true,
         scheduledReports: true,
         dashboardCustomization: true,
         dataExport: true,
-        apiAccess: true
-      }
+        apiAccess: true,
+      },
     };
 
     // Generate analytics dashboard
-    const analyticsDashboard = await this.generateAnalyticsDashboard(analyticsFeatures, analyticsConfig);
+    const analyticsDashboard = await this.generateAnalyticsDashboard(
+      analyticsFeatures,
+      analyticsConfig
+    );
 
     // Save analytics configuration
     const { data: analytics } = await this.supabase
@@ -738,7 +767,7 @@ class LearnWorldsSuperiorFeatures {
         features: analyticsFeatures,
         dashboard: analyticsDashboard,
         config: analyticsConfig,
-        created_at: new Date()
+        created_at: new Date(),
       })
       .select()
       .single();
@@ -758,16 +787,16 @@ class LearnWorldsSuperiorFeatures {
         'courses.html': await this.generateCourseCatalog(design, config),
         'about.html': await this.generateAboutPage(design, config),
         'contact.html': await this.generateContactPage(design, config),
-        'blog.html': await this.generateBlogPage(design, config)
+        'blog.html': await this.generateBlogPage(design, config),
       },
       css: {
         'main.css': await this.generateMainCSS(design, config),
-        'responsive.css': await this.generateResponsiveCSS(design, config)
+        'responsive.css': await this.generateResponsiveCSS(design, config),
       },
       js: {
         'main.js': await this.generateMainJS(design, config),
-        'analytics.js': await this.generateAnalyticsJS(design, config)
-      }
+        'analytics.js': await this.generateAnalyticsJS(design, config),
+      },
     };
   }
 
@@ -780,15 +809,41 @@ class LearnWorldsSuperiorFeatures {
 
       // Create all core components
       const website = await this.createAIWebsiteBuilder(schoolConfig);
-      const mobileApp = await this.createMobileAppBuilder(schoolConfig, schoolConfig.mobileApp);
-      const community = await this.createSocialLearningCommunity(schoolConfig.schoolId, schoolConfig.community);
-      const marketing = await this.createMarketingAutomation(schoolConfig.schoolId, schoolConfig.marketing);
-      const assessments = await this.createAdvancedAssessmentEngine(schoolConfig.courseId, schoolConfig.assessments);
-      const whiteLabel = await this.createWhiteLabelSolution(schoolConfig.whiteLabel);
-      const coursePlayer = await this.createAdvancedCoursePlayer(schoolConfig.courseId, schoolConfig.player);
-      const userManagement = await this.createAdvancedUserManagement(schoolConfig.schoolId, schoolConfig.users);
-      const integrations = await this.createIntegrationsHub(schoolConfig.schoolId, schoolConfig.integrations);
-      const analytics = await this.createAdvancedAnalytics(schoolConfig.schoolId, schoolConfig.analytics);
+      const mobileApp = await this.createMobileAppBuilder(
+        schoolConfig,
+        schoolConfig.mobileApp
+      );
+      const community = await this.createSocialLearningCommunity(
+        schoolConfig.schoolId,
+        schoolConfig.community
+      );
+      const marketing = await this.createMarketingAutomation(
+        schoolConfig.schoolId,
+        schoolConfig.marketing
+      );
+      const assessments = await this.createAdvancedAssessmentEngine(
+        schoolConfig.courseId,
+        schoolConfig.assessments
+      );
+      const whiteLabel = await this.createWhiteLabelSolution(
+        schoolConfig.whiteLabel
+      );
+      const coursePlayer = await this.createAdvancedCoursePlayer(
+        schoolConfig.courseId,
+        schoolConfig.player
+      );
+      const userManagement = await this.createAdvancedUserManagement(
+        schoolConfig.schoolId,
+        schoolConfig.users
+      );
+      const integrations = await this.createIntegrationsHub(
+        schoolConfig.schoolId,
+        schoolConfig.integrations
+      );
+      const analytics = await this.createAdvancedAnalytics(
+        schoolConfig.schoolId,
+        schoolConfig.analytics
+      );
 
       // Save complete LMS configuration
       const { data: completeLMS } = await this.supabase
@@ -806,14 +861,13 @@ class LearnWorldsSuperiorFeatures {
           integrations_hub_id: integrations.id,
           analytics_id: analytics.id,
           status: 'active',
-          created_at: new Date()
+          created_at: new Date(),
         })
         .select()
         .single();
 
       console.log('✅ Complete LMS initialized successfully!');
       return completeLMS;
-
     } catch (error) {
       console.error('❌ LMS initialization failed:', error);
       throw error;

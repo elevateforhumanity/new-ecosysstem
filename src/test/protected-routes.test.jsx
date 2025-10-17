@@ -7,7 +7,10 @@ import { ProtectedRoute } from '../components/ProtectedRoute';
 const TestComponent = ({ text }) => <div>{text}</div>;
 const LoginPage = () => <div>Login Page</div>;
 
-const renderProtectedRoute = (component, { route = '/', requiredRole } = {}) => {
+const renderProtectedRoute = (
+  component,
+  { route = '/', requiredRole } = {}
+) => {
   return render(
     <HelmetProvider>
       <MemoryRouter initialEntries={[route]}>
@@ -44,40 +47,33 @@ describe('Protected Routes', () => {
 
   describe('Role-Based Access', () => {
     it('allows admin access to admin routes', () => {
-      renderProtectedRoute(
-        <TestComponent text="Admin Dashboard" />,
-        { requiredRole: 'admin' }
-      );
+      renderProtectedRoute(<TestComponent text="Admin Dashboard" />, {
+        requiredRole: 'admin',
+      });
       expect(screen.getByText('Admin Dashboard')).toBeInTheDocument();
     });
 
     it('allows instructor access to instructor routes', () => {
-      renderProtectedRoute(
-        <TestComponent text="Instructor Portal" />,
-        { requiredRole: 'instructor' }
-      );
+      renderProtectedRoute(<TestComponent text="Instructor Portal" />, {
+        requiredRole: 'instructor',
+      });
       expect(screen.getByText('Instructor Portal')).toBeInTheDocument();
     });
 
     it('allows admin access to instructor routes', () => {
       // Admins should have access to all routes
-      renderProtectedRoute(
-        <TestComponent text="Instructor Content" />,
-        { requiredRole: 'instructor' }
-      );
+      renderProtectedRoute(<TestComponent text="Instructor Content" />, {
+        requiredRole: 'instructor',
+      });
       expect(screen.getByText('Instructor Content')).toBeInTheDocument();
     });
   });
 
   describe('Route Protection', () => {
     it('protects admin routes', () => {
-      const routes = [
-        '/admin-console',
-        '/admin-dashboard',
-        '/user-management'
-      ];
-      
-      routes.forEach(route => {
+      const routes = ['/admin-console', '/admin-dashboard', '/user-management'];
+
+      routes.forEach((route) => {
         expect(route).toMatch(/^\/admin/);
       });
     });
@@ -87,10 +83,10 @@ describe('Protected Routes', () => {
         '/instructor',
         '/instructor-edit',
         '/instructor-new',
-        '/course-builder'
+        '/course-builder',
       ];
-      
-      routes.forEach(route => {
+
+      routes.forEach((route) => {
         expect(route).toMatch(/^\/instructor|course-builder/);
       });
     });

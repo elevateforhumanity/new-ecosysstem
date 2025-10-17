@@ -27,51 +27,55 @@ const pages = [
   { url: '/partners', priority: 0.9, changefreq: 'weekly' },
   { url: '/about', priority: 0.8, changefreq: 'monthly' },
   { url: '/apply', priority: 0.9, changefreq: 'daily' },
-  
+
   // Program pages
-  { url: '/programs/clinical-informatics', priority: 0.8, changefreq: 'weekly' },
+  {
+    url: '/programs/clinical-informatics',
+    priority: 0.8,
+    changefreq: 'weekly',
+  },
   { url: '/programs/cybersecurity', priority: 0.8, changefreq: 'weekly' },
   { url: '/programs/cloud-computing', priority: 0.8, changefreq: 'weekly' },
   { url: '/programs/healthcare-it', priority: 0.8, changefreq: 'weekly' },
   { url: '/programs/apprenticeships', priority: 0.8, changefreq: 'weekly' },
   { url: '/programs/workkeys', priority: 0.8, changefreq: 'weekly' },
-  
+
   // Government contracting
   { url: '/government/federal-contracts', priority: 0.8, changefreq: 'weekly' },
   { url: '/government/state-contracts', priority: 0.8, changefreq: 'weekly' },
   { url: '/government/sam-gov', priority: 0.8, changefreq: 'weekly' },
   { url: '/government/etpl', priority: 0.8, changefreq: 'weekly' },
-  
+
   // Philanthropy
   { url: '/philanthropy/grants', priority: 0.8, changefreq: 'weekly' },
   { url: '/philanthropy/impact', priority: 0.7, changefreq: 'monthly' },
   { url: '/philanthropy/nonprofit', priority: 0.8, changefreq: 'monthly' },
-  
+
   // Student resources
   { url: '/student', priority: 0.7, changefreq: 'weekly' },
   { url: '/lms', priority: 0.7, changefreq: 'daily' },
   { url: '/hub', priority: 0.7, changefreq: 'daily' },
   { url: '/connect', priority: 0.7, changefreq: 'daily' },
-  
+
   // Support pages
   { url: '/support', priority: 0.6, changefreq: 'monthly' },
   { url: '/faq', priority: 0.6, changefreq: 'monthly' },
   { url: '/contact', priority: 0.7, changefreq: 'monthly' },
-  
+
   // Legal pages
   { url: '/compliance', priority: 0.5, changefreq: 'monthly' },
   { url: '/accessibility', priority: 0.5, changefreq: 'monthly' },
   { url: '/privacy-policy', priority: 0.5, changefreq: 'monthly' },
   { url: '/terms-of-service', priority: 0.5, changefreq: 'monthly' },
-  
+
   // Payment and donations
   { url: '/pay', priority: 0.7, changefreq: 'monthly' },
   { url: '/donate', priority: 0.8, changefreq: 'monthly' },
-  
+
   // Blog and resources
   { url: '/blog', priority: 0.7, changefreq: 'daily' },
   { url: '/resources', priority: 0.6, changefreq: 'weekly' },
-  { url: '/calendar', priority: 0.6, changefreq: 'daily' }
+  { url: '/calendar', priority: 0.6, changefreq: 'daily' },
 ];
 
 function generateSitemapXML(urls, filename) {
@@ -80,12 +84,16 @@ function generateSitemapXML(urls, filename) {
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-${urls.map(page => `  <url>
+${urls
+  .map(
+    (page) => `  <url>
     <loc>${DOMAIN}${page.url}</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
-  </url>`).join('\n')}
+  </url>`
+  )
+  .join('\n')}
 </urlset>`;
 
   fs.writeFileSync(path.join(SITEMAP_DIR, filename), xml);
@@ -98,15 +106,19 @@ function generateSitemapIndex() {
     'sitemap-programs.xml',
     'sitemap-government.xml',
     'sitemap-philanthropy.xml',
-    'sitemap-blog.xml'
+    'sitemap-blog.xml',
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${sitemaps.map(sitemap => `  <sitemap>
+${sitemaps
+  .map(
+    (sitemap) => `  <sitemap>
     <loc>${DOMAIN}/sitemaps/${sitemap}</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-  </sitemap>`).join('\n')}
+  </sitemap>`
+  )
+  .join('\n')}
 </sitemapindex>`;
 
   fs.writeFileSync(path.join(OUTPUT_DIR, 'sitemap.xml'), xml);
@@ -155,28 +167,32 @@ Allow: /
 console.log('🗺️  Generating sitemaps...\n');
 
 // Main sitemap
-const mainPages = pages.filter(p => 
-  !p.url.includes('/programs/') && 
-  !p.url.includes('/government/') && 
-  !p.url.includes('/philanthropy/') &&
-  !p.url.includes('/blog/')
+const mainPages = pages.filter(
+  (p) =>
+    !p.url.includes('/programs/') &&
+    !p.url.includes('/government/') &&
+    !p.url.includes('/philanthropy/') &&
+    !p.url.includes('/blog/')
 );
 generateSitemapXML(mainPages, 'sitemap-main.xml');
 
 // Programs sitemap
-const programPages = pages.filter(p => p.url.includes('/programs/'));
+const programPages = pages.filter((p) => p.url.includes('/programs/'));
 generateSitemapXML(programPages, 'sitemap-programs.xml');
 
 // Government sitemap
-const govPages = pages.filter(p => p.url.includes('/government/'));
+const govPages = pages.filter((p) => p.url.includes('/government/'));
 generateSitemapXML(govPages, 'sitemap-government.xml');
 
 // Philanthropy sitemap
-const philPages = pages.filter(p => p.url.includes('/philanthropy/'));
+const philPages = pages.filter((p) => p.url.includes('/philanthropy/'));
 generateSitemapXML(philPages, 'sitemap-philanthropy.xml');
 
 // Blog sitemap (placeholder - will be populated by blog system)
-generateSitemapXML([{ url: '/blog', priority: 0.7, changefreq: 'daily' }], 'sitemap-blog.xml');
+generateSitemapXML(
+  [{ url: '/blog', priority: 0.7, changefreq: 'daily' }],
+  'sitemap-blog.xml'
+);
 
 // Generate sitemap index
 generateSitemapIndex();

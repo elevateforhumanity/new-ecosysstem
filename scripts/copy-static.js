@@ -19,7 +19,7 @@ const includeGlobs = [
   'ui/**',
   'app/**',
   // Styles
-  '**/*.css'
+  '**/*.css',
 ];
 
 const excludeDirs = new Set([
@@ -27,13 +27,13 @@ const excludeDirs = new Set([
   '.git',
   '.github',
   'dist',
-  'client/dist'
+  'client/dist',
 ]);
 
 function isExcluded(filePath) {
   const rel = path.relative(ROOT, filePath);
   const segments = rel.split(path.sep);
-  return segments.some(seg => excludeDirs.has(seg));
+  return segments.some((seg) => excludeDirs.has(seg));
 }
 
 async function ensureDir(dir) {
@@ -48,7 +48,7 @@ async function copyFile(src, dest) {
 function match(globs, relPath) {
   // very small glob matcher for our patterns
   // supports **/*suffix and dir/** and exact file extensions
-  return globs.some(g => {
+  return globs.some((g) => {
     if (g === '**/*.html') return relPath.endsWith('.html');
     if (g === '**/*.css') return relPath.endsWith('.css');
     if (g.endsWith('/**')) return relPath.startsWith(g.slice(0, -3));
@@ -80,7 +80,7 @@ async function walkAndCopy() {
   console.log(`[copy-static] Copied ${copied} files into dist`);
 }
 
-walkAndCopy().catch(err => {
+walkAndCopy().catch((err) => {
   console.error('[copy-static] Failed:', err);
   process.exit(1);
 });

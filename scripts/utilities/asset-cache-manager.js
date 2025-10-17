@@ -16,7 +16,6 @@
   See LICENSE file for details.
 */
 
-
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
@@ -40,10 +39,10 @@ class AssetCacheManager {
     const results = {
       cached: 0,
       spaceSaved: 0,
-      manifest: {}
+      manifest: {},
     };
 
-    heavyAssets.forEach(asset => {
+    heavyAssets.forEach((asset) => {
       const cached = this.cacheAsset(asset);
       if (cached) {
         results.cached++;
@@ -58,28 +57,23 @@ class AssetCacheManager {
 
   findHeavyAssets() {
     const heavyAssets = [];
-    const searchDirs = [
-      'attached_assets',
-      'scripts',
-      'tools',
-      'branding'
-    ];
+    const searchDirs = ['attached_assets', 'scripts', 'tools', 'branding'];
 
-    searchDirs.forEach(dir => {
+    searchDirs.forEach((dir) => {
       if (fs.existsSync(dir)) {
         this.scanDirectory(dir, heavyAssets);
       }
     });
 
-    return heavyAssets.filter(asset => asset.size > 100 * 1024); // >100KB
+    return heavyAssets.filter((asset) => asset.size > 100 * 1024); // >100KB
   }
 
   scanDirectory(dir, assets) {
     const items = fs.readdirSync(dir, { withFileTypes: true });
-    
-    items.forEach(item => {
+
+    items.forEach((item) => {
       const fullPath = path.join(dir, item.name);
-      
+
       if (item.isDirectory()) {
         this.scanDirectory(fullPath, assets);
       } else if (this.shouldCache(item.name)) {
@@ -88,15 +82,23 @@ class AssetCacheManager {
           path: fullPath,
           name: item.name,
           size: stats.size,
-          type: this.getAssetType(item.name)
+          type: this.getAssetType(item.name),
         });
       }
     });
   }
 
   shouldCache(filename) {
-    const cacheableExts = ['.js', '.css', '.json', '.html', '.png', '.jpg', '.jpeg'];
-    return cacheableExts.some(ext => filename.toLowerCase().endsWith(ext));
+    const cacheableExts = [
+      '.js',
+      '.css',
+      '.json',
+      '.html',
+      '.png',
+      '.jpg',
+      '.jpeg',
+    ];
+    return cacheableExts.some((ext) => filename.toLowerCase().endsWith(ext));
   }
 
   getAssetType(filename) {
@@ -108,7 +110,7 @@ class AssetCacheManager {
       '.html': 'page',
       '.png': 'image',
       '.jpg': 'image',
-      '.jpeg': 'image'
+      '.jpeg': 'image',
     };
     return typeMap[ext] || 'other';
   }
@@ -116,13 +118,17 @@ class AssetCacheManager {
   cacheAsset(asset) {
     try {
       const content = fs.readFileSync(asset.path);
-      const hash = crypto.createHash('md5').update(content).digest('hex').substring(0, 8);
+      const hash = crypto
+        .createHash('md5')
+        .update(content)
+        .digest('hex')
+        .substring(0, 8);
       const cachedName = `${hash}-${asset.name}`;
       const cachedPath = path.join(this.cacheDir, cachedName);
 
       // Create optimized version based on type
       let optimizedContent = content;
-      
+
       if (asset.type === 'script' || asset.type === 'style') {
         optimizedContent = this.minifyContent(content, asset.type);
       } else if (asset.type === 'data') {
@@ -130,9 +136,12 @@ class AssetCacheManager {
       }
 
       fs.writeFileSync(cachedPath, optimizedContent);
-      
+
       const newStats = fs.statSync(cachedPath);
-      const compressionRatio = ((asset.size - newStats.size) / asset.size * 100).toFixed(1);
+      const compressionRatio = (
+        ((asset.size - newStats.size) / asset.size) *
+        100
+      ).toFixed(1);
 
       console.log(`✅ Cached: ${asset.name} - ${compressionRatio}% smaller`);
 
@@ -143,7 +152,7 @@ class AssetCacheManager {
         originalSize: asset.size,
         newSize: newStats.size,
         compressionRatio: compressionRatio,
-        type: asset.type
+        type: asset.type,
       };
     } catch (error) {
       console.error(`❌ Failed to cache ${asset.name}:`, error.message);
@@ -153,7 +162,7 @@ class AssetCacheManager {
 
   minifyContent(content, type) {
     const text = content.toString();
-    
+
     if (type === 'script') {
       // Basic JS minification
       return text
@@ -169,7 +178,7 @@ class AssetCacheManager {
         .replace(/;\s*}/g, '}') // Remove unnecessary semicolons
         .trim();
     }
-    
+
     return content;
   }
 
@@ -187,7 +196,7 @@ class AssetCacheManager {
       generated: new Date().toISOString(),
       cachedAssets: manifest,
       totalAssets: Object.keys(manifest).length,
-      cacheDirectory: this.cacheDir
+      cacheDirectory: this.cacheDir,
     };
 
     fs.writeFileSync(this.manifestPath, JSON.stringify(manifestData, null, 2));
@@ -197,11 +206,11 @@ class AssetCacheManager {
   serveCachedAsset(originalPath) {
     const manifest = this.loadManifest();
     const cached = manifest.cachedAssets[originalPath];
-    
+
     if (cached && fs.existsSync(cached.cachedPath)) {
       return fs.readFileSync(cached.cachedPath);
     }
-    
+
     return null; // Fall back to original
   }
 
@@ -220,7 +229,9 @@ const results = cacheManager.optimizeAssets();
 
 console.log('\n🎯 Asset Caching Complete:');
 console.log(`   • Assets cached: ${results.cached}`);
-console.log(`   • Space saved: ~${Math.round(results.spaceSaved / 1024 / 1024)}MB`);
+console.log(
+  `   • Space saved: ~${Math.round(results.spaceSaved / 1024 / 1024)}MB`
+);
 console.log(`   • Cache directory: cached-assets/`);
 
 module.exports = AssetCacheManager;

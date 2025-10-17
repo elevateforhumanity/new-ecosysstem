@@ -27,27 +27,49 @@ import { createClient } from '@supabase/supabase-js';
 import { incrementCouponUsage } from './pay-coupon-routes.js';
 import { markPaidInSupabase } from './pay-backend-integration.js';
 
-let _stripe; let _supa;
+let _stripe;
+let _supa;
 function getStripe() {
   if (_stripe) return _stripe;
   if (!process.env.STRIPE_SECRET_KEY) {
     // minimal stub for tests
     _stripe = {
-      prices: { retrieve: async () => ({ unit_amount: 1000, product: 'prod_test' }), create: async (p) => ({ id: 'price_test', ...p }) },
+      prices: {
+        retrieve: async () => ({ unit_amount: 1000, product: 'prod_test' }),
+        create: async (p) => ({ id: 'price_test', ...p }),
+      },
       products: { create: async (p) => ({ id: 'prod_dynamic', ...p }) },
-      checkout: { sessions: { create: async () => ({ id: 'cs_test', url: 'https://example.com/checkout' }) } }
+      checkout: {
+        sessions: {
+          create: async () => ({
+            id: 'cs_test',
+            url: 'https://example.com/checkout',
+          }),
+        },
+      },
     };
   } else {
-    _stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' });
+    _stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2024-06-20',
+    });
   }
   return _stripe;
 }
 function getSupa() {
   if (_supa) return _supa;
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_KEY) {
-    _supa = { from: () => ({ select: () => ({ eq: () => ({ single: async () => ({ data: null }) }) }) }) };
+    _supa = {
+      from: () => ({
+        select: () => ({
+          eq: () => ({ single: async () => ({ data: null }) }),
+        }),
+      }),
+    };
   } else {
-    _supa = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
+    _supa = createClient(
+      process.env.SUPABASE_URL,
+      process.env.SUPABASE_SERVICE_KEY
+    );
   }
   return _supa;
 }
@@ -58,38 +80,44 @@ export const enhancedCheckout = Router();
 
 enhancedCheckout.post('/api/checkout', async (req, res, next) => {
   try {
-    const { 
-      priceId, 
-      productName, 
-      unitAmount, 
-      quantity = 1, 
-      currency = 'usd', 
-      metadata = {} 
+    const {
+      priceId,
+      productName,
+      unitAmount,
+      quantity = 1,
+      currency = 'usd',
+      metadata = {},
     } = req.body || {};
-    
+
     const { coupon: couponCode, program_slug } = metadata || {};
 
     // Helper to compute discount if coupon present
-  // eslint-disable-next-line no-inner-declarations
-  async function getDiscountedCents(listCents) {
+    // eslint-disable-next-line no-inner-declarations
+    async function getDiscountedCents(listCents) {
       if (!couponCode) return null;
-      
-  const { data: c } = await getSupa()
+
+      const { data: c } = await getSupa()
         .from('coupons')
         .select('*')
         .eq('code', couponCode.toUpperCase())
         .single();
-      
+
       if (!c) return null;
-      
+
       const now = new Date();
-      
+
       // Validate coupon
       if (!c.active) return null;
       if (c.starts_at && now < new Date(c.starts_at)) return null;
       if (c.ends_at && now > new Date(c.ends_at)) return null;
-      if (c.max_redemptions && c.redeemed_count >= c.max_redemptions) return null;
-      if (Array.isArray(c.allowed_programs) && c.allowed_programs.length && program_slug && !c.allowed_programs.includes(program_slug)) {
+      if (c.max_redemptions && c.redeemed_count >= c.max_redemptions)
+        return null;
+      if (
+        Array.isArray(c.allowed_programs) &&
+        c.allowed_programs.length &&
+        program_slug &&
+        !c.allowed_programs.includes(program_slug)
+      ) {
         return null;
       }
 
@@ -97,7 +125,7 @@ enhancedCheckout.post('/api/checkout', async (req, res, next) => {
         return Math.max(0, listCents - c.value);
       }
       if (c.type === 'percent') {
-        return Math.round(listCents * (1 - c.value/100));
+        return Math.round(listCents * (1 - c.value / 100));
       }
       return null;
     }
@@ -107,19 +135,22 @@ enhancedCheckout.post('/api/checkout', async (req, res, next) => {
     if (priceId) {
       // If a fixed priceId is given, create a one-off discounted price if coupon applies
       let effectivePriceId = priceId;
-      
+
       if (couponCode) {
         // Look up original price to get amount
         const price = await getStripe().prices.retrieve(priceId);
         const baseAmount = price.unit_amount;
         const discountedAmount = await getDiscountedCents(baseAmount);
 
-        if (typeof discountedAmount === 'number' && discountedAmount !== baseAmount) {
+        if (
+          typeof discountedAmount === 'number' &&
+          discountedAmount !== baseAmount
+        ) {
           // Create temporary discounted price
           const tempPrice = await getStripe().prices.create({
             currency,
             unit_amount: discountedAmount,
-            product: price.product
+            product: price.product,
           });
           effectivePriceId = tempPrice.id;
           metadata.original_price_cents = baseAmount;
@@ -132,30 +163,31 @@ enhancedCheckout.post('/api/checkout', async (req, res, next) => {
     } else {
       // Dynamic product pricing
       if (!productName || !Number.isInteger(unitAmount)) {
-        return res.status(400).json({ 
-          error: 'Provide priceId OR (productName & unitAmount in cents).' 
+        return res.status(400).json({
+          error: 'Provide priceId OR (productName & unitAmount in cents).',
         });
       }
-      
+
       const discountedAmount = await getDiscountedCents(unitAmount);
-      const finalAmount = typeof discountedAmount === 'number' ? discountedAmount : unitAmount;
-      
+      const finalAmount =
+        typeof discountedAmount === 'number' ? discountedAmount : unitAmount;
+
       // Add discount info to metadata if coupon was applied
       if (discountedAmount !== null && discountedAmount !== unitAmount) {
         metadata.original_price_cents = unitAmount;
         metadata.discounted_price_cents = discountedAmount;
         metadata.discount_amount_cents = unitAmount - discountedAmount;
       }
-      
+
       const product = await getStripe().products.create({
         name: productName,
-        metadata: { program_slug: program_slug || productName }
+        metadata: { program_slug: program_slug || productName },
       });
 
       const price = await getStripe().prices.create({
         product: product.id,
         unit_amount: finalAmount,
-        currency
+        currency,
       });
 
       line_items.push({ price: price.id, quantity });
@@ -165,23 +197,26 @@ enhancedCheckout.post('/api/checkout', async (req, res, next) => {
     const session = await getStripe().checkout.sessions.create({
       mode: 'payment',
       line_items,
-      success_url: process.env.STRIPE_SUCCESS_URL + '?session_id={CHECKOUT_SESSION_ID}',
+      success_url:
+        process.env.STRIPE_SUCCESS_URL + '?session_id={CHECKOUT_SESSION_ID}',
       cancel_url: process.env.STRIPE_CANCEL_URL,
       metadata,
-      customer_email: metadata.customer_email || undefined
+      customer_email: metadata.customer_email || undefined,
     });
 
-    res.json({ 
-      id: session.id, 
+    res.json({
+      id: session.id,
       url: session.url,
       metadata: {
         coupon_applied: !!couponCode,
-        discount_preview: metadata.discount_amount_cents ? {
-          original: metadata.original_price_cents,
-          discounted: metadata.discounted_price_cents,
-          savings: metadata.discount_amount_cents
-        } : null
-      }
+        discount_preview: metadata.discount_amount_cents
+          ? {
+              original: metadata.original_price_cents,
+              discounted: metadata.discounted_price_cents,
+              savings: metadata.discount_amount_cents,
+            }
+          : null,
+      },
     });
   } catch (e) {
     console.error('Enhanced checkout error:', e);
@@ -204,16 +239,16 @@ function efhApplyCoupon(code) {
 
 export async function handleSuccessfulPayment(session) {
   const { metadata } = session;
-  
+
   // Mark enrollment as paid in Supabase
   await markPaidInSupabase({
     email: session.customer_details?.email,
     program_slug: metadata?.program_slug,
     stripe_customer_id: session.customer || null,
     session_id: session.id,
-    funding_metadata: extractFundingMetadata(metadata)
+    funding_metadata: extractFundingMetadata(metadata),
   });
-  
+
   // Increment coupon usage count
   if (metadata?.coupon) {
     await incrementCouponUsage(metadata.coupon);
@@ -223,8 +258,10 @@ export async function handleSuccessfulPayment(session) {
 function extractFundingMetadata(metadata) {
   const fundingMeta = {};
   if (metadata?.voucher_id) fundingMeta.voucher_id = metadata.voucher_id;
-  if (metadata?.case_manager_email) fundingMeta.case_manager_email = metadata.case_manager_email;
-  if (metadata?.funding_source) fundingMeta.funding_source = metadata.funding_source;
+  if (metadata?.case_manager_email)
+    fundingMeta.case_manager_email = metadata.case_manager_email;
+  if (metadata?.funding_source)
+    fundingMeta.funding_source = metadata.funding_source;
   if (metadata?.coupon) fundingMeta.coupon = metadata.coupon;
   return fundingMeta;
 }
@@ -233,7 +270,7 @@ function extractFundingMetadata(metadata) {
 export { enhancedCheckout };
 // export helper for testing
 // test helper
-export { };
+export {};
 // Guard against undefined window in Node context
 if (typeof window !== 'undefined') {
   window.efhPreviewCoupon = efhPreviewCoupon;

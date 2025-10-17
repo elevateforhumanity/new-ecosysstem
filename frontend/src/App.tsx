@@ -34,7 +34,10 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/courses" element={<CoursesPage />} />
             <Route path="/courses/:slug" element={<CourseDetailPage />} />
-            <Route path="/certificates/:certificateId" element={<CertificatePage />} />
+            <Route
+              path="/certificates/:certificateId"
+              element={<CertificatePage />}
+            />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
@@ -44,8 +47,14 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route element={<DashboardLayout />}>
               <Route path="/dashboard" element={<StudentDashboard />} />
-              <Route path="/dashboard/instructor" element={<InstructorDashboard />} />
-              <Route path="/dashboard/instructor/create" element={<CreateCoursePage />} />
+              <Route
+                path="/dashboard/instructor"
+                element={<InstructorDashboard />}
+              />
+              <Route
+                path="/dashboard/instructor/create"
+                element={<CreateCoursePage />}
+              />
               <Route path="/dashboard/admin" element={<AdminDashboard />} />
               <Route path="/profile" element={<ProfilePage />} />
             </Route>

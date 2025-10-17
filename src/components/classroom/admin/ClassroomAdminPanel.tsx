@@ -26,7 +26,12 @@ const TASK_TEMPLATES: TaskTemplate[] = [
     fields: [
       { name: 'name', label: 'Course Name', type: 'text', required: true },
       { name: 'section', label: 'Section', type: 'text', required: false },
-      { name: 'description', label: 'Description', type: 'textarea', required: false },
+      {
+        name: 'description',
+        label: 'Description',
+        type: 'textarea',
+        required: false,
+      },
       { name: 'room', label: 'Room', type: 'text', required: false },
     ],
   },
@@ -49,8 +54,18 @@ const TASK_TEMPLATES: TaskTemplate[] = [
     icon: '📝',
     fields: [
       { name: 'courseId', label: 'Course ID', type: 'text', required: true },
-      { name: 'title', label: 'Assignment Title', type: 'text', required: true },
-      { name: 'description', label: 'Description', type: 'textarea', required: false },
+      {
+        name: 'title',
+        label: 'Assignment Title',
+        type: 'text',
+        required: true,
+      },
+      {
+        name: 'description',
+        label: 'Description',
+        type: 'textarea',
+        required: false,
+      },
       { name: 'dueDate', label: 'Due Date', type: 'date', required: false },
       { name: 'maxPoints', label: 'Max Points', type: 'text', required: false },
     ],
@@ -63,7 +78,12 @@ const TASK_TEMPLATES: TaskTemplate[] = [
     icon: '📢',
     fields: [
       { name: 'courseId', label: 'Course ID', type: 'text', required: true },
-      { name: 'text', label: 'Announcement Text', type: 'textarea', required: true },
+      {
+        name: 'text',
+        label: 'Announcement Text',
+        type: 'textarea',
+        required: true,
+      },
     ],
   },
   {
@@ -89,14 +109,19 @@ const TASK_TEMPLATES: TaskTemplate[] = [
 ];
 
 export default function ClassroomAdminPanel() {
-  const [selectedTemplate, setSelectedTemplate] = useState<TaskTemplate | null>(null);
+  const [selectedTemplate, setSelectedTemplate] = useState<TaskTemplate | null>(
+    null
+  );
   const [formData, setFormData] = useState<Record<string, string>>({});
   const [priority, setPriority] = useState(5);
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [message, setMessage] = useState<{
+    type: 'success' | 'error';
+    text: string;
+  } | null>(null);
 
   const handleFieldChange = (fieldName: string, value: string) => {
-    setFormData(prev => ({ ...prev, [fieldName]: value }));
+    setFormData((prev) => ({ ...prev, [fieldName]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -109,14 +134,14 @@ export default function ClassroomAdminPanel() {
     try {
       // Build payload
       const payload: Record<string, any> = {};
-      
-      selectedTemplate.fields.forEach(field => {
+
+      selectedTemplate.fields.forEach((field) => {
         const value = formData[field.name];
-        
+
         if (field.required && !value) {
           throw new Error(`${field.label} is required`);
         }
-        
+
         if (value) {
           // Handle date fields
           if (field.type === 'date') {
@@ -167,8 +192,12 @@ export default function ClassroomAdminPanel() {
   return (
     <div className="max-w-6xl mx-auto p-6">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Google Classroom Admin Panel</h1>
-        <p className="text-brand-text-muted">Queue tasks for Google Classroom autopilot</p>
+        <h1 className="text-3xl font-bold mb-2">
+          Google Classroom Admin Panel
+        </h1>
+        <p className="text-brand-text-muted">
+          Queue tasks for Google Classroom autopilot
+        </p>
       </div>
 
       {message && (
@@ -185,7 +214,7 @@ export default function ClassroomAdminPanel() {
 
       {!selectedTemplate ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {TASK_TEMPLATES.map(template => (
+          {TASK_TEMPLATES.map((template) => (
             <button
               key={template.id}
               onClick={() => setSelectedTemplate(template)}
@@ -193,7 +222,9 @@ export default function ClassroomAdminPanel() {
             >
               <div className="text-4xl mb-3">{template.icon}</div>
               <h3 className="text-lg font-semibold mb-2">{template.name}</h3>
-              <p className="text-sm text-brand-text-muted">{template.description}</p>
+              <p className="text-sm text-brand-text-muted">
+                {template.description}
+              </p>
             </button>
           ))}
         </div>
@@ -204,7 +235,9 @@ export default function ClassroomAdminPanel() {
               <span className="text-4xl">{selectedTemplate.icon}</span>
               <div>
                 <h2 className="text-2xl font-bold">{selectedTemplate.name}</h2>
-                <p className="text-brand-text-muted">{selectedTemplate.description}</p>
+                <p className="text-brand-text-muted">
+                  {selectedTemplate.description}
+                </p>
               </div>
             </div>
             <button
@@ -220,16 +253,20 @@ export default function ClassroomAdminPanel() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            {selectedTemplate.fields.map(field => (
+            {selectedTemplate.fields.map((field) => (
               <div key={field.name}>
                 <label className="block text-sm font-medium text-brand-text mb-1">
                   {field.label}
-                  {field.required && <span className="text-red-500 ml-1">*</span>}
+                  {field.required && (
+                    <span className="text-red-500 ml-1">*</span>
+                  )}
                 </label>
                 {field.type === 'textarea' ? (
                   <textarea
                     value={formData[field.name] || ''}
-                    onChange={e => handleFieldChange(field.name, e.target.value)}
+                    onChange={(e) =>
+                      handleFieldChange(field.name, e.target.value)
+                    }
                     required={field.required}
                     rows={4}
                     className="w-full px-3 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
@@ -237,12 +274,14 @@ export default function ClassroomAdminPanel() {
                 ) : field.type === 'select' ? (
                   <select
                     value={formData[field.name] || ''}
-                    onChange={e => handleFieldChange(field.name, e.target.value)}
+                    onChange={(e) =>
+                      handleFieldChange(field.name, e.target.value)
+                    }
                     required={field.required}
                     className="w-full px-3 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
                   >
                     <option value="">Select...</option>
-                    {field.options?.map(option => (
+                    {field.options?.map((option) => (
                       <option key={option} value={option}>
                         {option}
                       </option>
@@ -252,7 +291,9 @@ export default function ClassroomAdminPanel() {
                   <input
                     type={field.type}
                     value={formData[field.name] || ''}
-                    onChange={e => handleFieldChange(field.name, e.target.value)}
+                    onChange={(e) =>
+                      handleFieldChange(field.name, e.target.value)
+                    }
                     required={field.required}
                     className="w-full px-3 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
                   />
@@ -269,7 +310,7 @@ export default function ClassroomAdminPanel() {
                 min="1"
                 max="10"
                 value={priority}
-                onChange={e => setPriority(parseInt(e.target.value))}
+                onChange={(e) => setPriority(parseInt(e.target.value))}
                 className="w-full px-3 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
               />
             </div>

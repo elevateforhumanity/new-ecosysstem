@@ -16,7 +16,6 @@
   See LICENSE file for details.
 */
 
-
 // Demo Mode Protection for EFH Sister Sites
 const DEMO_CONFIG = require('./config/demo-config.json');
 
@@ -37,24 +36,25 @@ class DemoProtection {
 
   static addDemoWatermark(html) {
     if (!this.isDemoMode()) return html;
-    
+
     const watermark = `
       <div style="position: fixed; top: 10px; right: 10px; background: rgba(255,0,0,0.8); 
                   color: white; padding: 8px; border-radius: 4px; z-index: 9999; font-size: 12px;">
         ${DEMO_CONFIG.watermark}
       </div>
     `;
-    
+
     return html.replace('</body>', watermark + '</body>');
   }
 
   static restrictPayments() {
     if (!this.isDemoMode()) return false;
-    
+
     console.log('🚫 Demo Mode: Payment processing disabled');
     return {
-      error: 'Demo Mode: Contact licensing@elevateforhumanity.org for full access',
-      demo_contact: DEMO_CONFIG.contact_info
+      error:
+        'Demo Mode: Contact licensing@elevateforhumanity.org for full access',
+      demo_contact: DEMO_CONFIG.contact_info,
     };
   }
 }

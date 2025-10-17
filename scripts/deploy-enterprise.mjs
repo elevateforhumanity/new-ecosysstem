@@ -5,14 +5,14 @@
  * Generates enterprise assets and deploys immediately
  */
 
-import fs from "fs";
-import path from "path";
+import fs from 'fs';
+import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const OUT = "sites/marketing";
-const SM_DIR = path.join(OUT, "sitemaps");
-const BASE = "https://www.elevateforhumanity.org";
+const OUT = 'sites/marketing';
+const SM_DIR = path.join(OUT, 'sitemaps');
+const BASE = 'https://www.elevateforhumanity.org';
 const NOW = new Date();
 const ISO = NOW.toISOString().slice(0, 10);
 
@@ -33,47 +33,65 @@ const sampleUrls = [
   { url: `${BASE}/programs/construction/`, lastmod: ISO },
   { url: `${BASE}/programs/beauty-wellness/`, lastmod: ISO },
   { url: `${BASE}/blog/`, lastmod: ISO },
-  { url: `${BASE}/employers/`, lastmod: ISO }
+  { url: `${BASE}/employers/`, lastmod: ISO },
 ];
 
 // Generate ultra-tiny sitemap
 const generateSitemap = (urls, filename) => {
-  const urlEntries = urls.map(u => 
-    `  <url>\n    <loc>${u.url}</loc>\n    <lastmod>${u.lastmod}</lastmod>\n  </url>`
-  ).join('\n');
-  
+  const urlEntries = urls
+    .map(
+      (u) =>
+        `  <url>\n    <loc>${u.url}</loc>\n    <lastmod>${u.lastmod}</lastmod>\n  </url>`
+    )
+    .join('\n');
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urlEntries}
 </urlset>`;
-  
+
   fs.writeFileSync(path.join(SM_DIR, filename), xml);
   return `${BASE}/sitemaps/${filename}`;
 };
 
 // Generate marketing sitemap
-const marketingUrls = sampleUrls.filter(u => 
-  u.url.includes('/about') || u.url.includes('/contact') || u.url === `${BASE}/`
+const marketingUrls = sampleUrls.filter(
+  (u) =>
+    u.url.includes('/about') ||
+    u.url.includes('/contact') ||
+    u.url === `${BASE}/`
 );
-const marketingSitemap = generateSitemap(marketingUrls, 'sitemap-marketing-2025-09-1.xml');
+const marketingSitemap = generateSitemap(
+  marketingUrls,
+  'sitemap-marketing-2025-09-1.xml'
+);
 
 // Generate programs sitemap
-const programUrls = sampleUrls.filter(u => u.url.includes('/programs'));
-const programsSitemap = generateSitemap(programUrls, 'sitemap-programs-2025-09-1.xml');
+const programUrls = sampleUrls.filter((u) => u.url.includes('/programs'));
+const programsSitemap = generateSitemap(
+  programUrls,
+  'sitemap-programs-2025-09-1.xml'
+);
 
 // Generate latest sitemap
-const latestSitemap = generateSitemap(sampleUrls.slice(0, 5), 'sitemap-latest.xml');
+const latestSitemap = generateSitemap(
+  sampleUrls.slice(0, 5),
+  'sitemap-latest.xml'
+);
 
 // Generate master sitemap index
 const masterSitemaps = [marketingSitemap, programsSitemap, latestSitemap];
 const indexXml = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${masterSitemaps.map(url => 
-  `  <sitemap>\n    <loc>${url}</loc>\n    <lastmod>${ISO}</lastmod>\n  </sitemap>`
-).join('\n')}
+${masterSitemaps
+  .map(
+    (url) =>
+      `  <sitemap>\n    <loc>${url}</loc>\n    <lastmod>${ISO}</lastmod>\n  </sitemap>`
+  )
+  .join('\n')}
 </sitemapindex>`;
 
-fs.writeFileSync(path.join(OUT, "sitemap_index.xml"), indexXml);
+fs.writeFileSync(path.join(OUT, 'sitemap_index.xml'), indexXml);
 
 // Generate enterprise robots.txt
 const robotsContent = `User-agent: *
@@ -86,33 +104,39 @@ Sitemap: ${BASE}/sitemap_index.xml
 Crawl-delay: 1
 `;
 
-fs.writeFileSync(path.join(OUT, "robots.txt"), robotsContent);
+fs.writeFileSync(path.join(OUT, 'robots.txt'), robotsContent);
 
 // Generate enterprise schema
 const schema = {
-  "@context": "https://schema.org",
-  "@type": "EducationalOrganization",
-  "name": "Elevate for Humanity Career & Training Institute",
-  "url": BASE,
-  "sameAs": [
-    "https://www.facebook.com/elevateforhumanity",
-    "https://www.linkedin.com/company/elevateforhumanity"
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: 'Elevate for Humanity Career & Training Institute',
+  url: BASE,
+  sameAs: [
+    'https://www.facebook.com/elevateforhumanity',
+    'https://www.linkedin.com/company/elevateforhumanity',
   ],
-  "contactPoint": [{
-    "@type": "ContactPoint",
-    "telephone": "+1-317-555-1234",
-    "contactType": "customer service"
-  }],
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Indianapolis",
-    "addressRegion": "IN",
-    "addressCountry": "US"
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: '+1-317-555-1234',
+      contactType: 'customer service',
+    },
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Indianapolis',
+    addressRegion: 'IN',
+    addressCountry: 'US',
   },
-  "description": "Enterprise-grade career training and workforce development programs"
+  description:
+    'Enterprise-grade career training and workforce development programs',
 };
 
-fs.writeFileSync(path.join(OUT, "schema.json"), JSON.stringify(schema, null, 2));
+fs.writeFileSync(
+  path.join(OUT, 'schema.json'),
+  JSON.stringify(schema, null, 2)
+);
 
 // Update _redirects with enterprise rules
 const redirects = `# Enterprise redirects
@@ -137,30 +161,33 @@ const redirects = `# Enterprise redirects
   X-Content-Type-Options: nosniff
 `;
 
-fs.writeFileSync(path.join(OUT, "_redirects"), redirects);
+fs.writeFileSync(path.join(OUT, '_redirects'), redirects);
 
 // Generate deployment summary
 const summary = {
   timestamp: new Date().toISOString(),
-  engine: "EFH-Enterprise-Quick-Deploy/1.0",
+  engine: 'EFH-Enterprise-Quick-Deploy/1.0',
   features: [
-    "Ultra-tiny sitemaps generated",
-    "Enterprise schema markup",
-    "Netlify redirects configured",
-    "SEO-optimized robots.txt"
+    'Ultra-tiny sitemaps generated',
+    'Enterprise schema markup',
+    'Netlify redirects configured',
+    'SEO-optimized robots.txt',
   ],
   files: [
-    "sitemap_index.xml",
-    "sitemaps/sitemap-marketing-2025-09-1.xml",
-    "sitemaps/sitemap-programs-2025-09-1.xml", 
-    "sitemaps/sitemap-latest.xml",
-    "robots.txt",
-    "schema.json",
-    "_redirects"
-  ]
+    'sitemap_index.xml',
+    'sitemaps/sitemap-marketing-2025-09-1.xml',
+    'sitemaps/sitemap-programs-2025-09-1.xml',
+    'sitemaps/sitemap-latest.xml',
+    'robots.txt',
+    'schema.json',
+    '_redirects',
+  ],
 };
 
-fs.writeFileSync(path.join(OUT, "deployment-summary.json"), JSON.stringify(summary, null, 2));
+fs.writeFileSync(
+  path.join(OUT, 'deployment-summary.json'),
+  JSON.stringify(summary, null, 2)
+);
 
 console.log('✅ Enterprise assets generated:');
 console.log(`   • Master sitemap: sitemap_index.xml`);

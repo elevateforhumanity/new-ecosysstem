@@ -3,7 +3,12 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const helmet = require('helmet');
-const { authenticate, authorize, authRateLimiter, apiRateLimiter } = require('./middleware/auth');
+const {
+  authenticate,
+  authorize,
+  authRateLimiter,
+  apiRateLimiter,
+} = require('./middleware/auth');
 const { validate, schemas } = require('./middleware/validation');
 const { notFoundHandler, errorHandler } = require('./middleware/errorHandler');
 const { auditLog } = require('./backend/dist/middleware/audit');
@@ -29,14 +34,21 @@ const JWT_SECRET = process.env.JWT_SECRET;
 app.use(helmet());
 
 // CORS configuration - environment-aware
-const allowedOrigins = process.env.NODE_ENV === 'production'
-  ? ['https://elevateforhumanity.com', 'https://elevateforhumanity.org']
-  : ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:3001'];
+const allowedOrigins =
+  process.env.NODE_ENV === 'production'
+    ? ['https://elevateforhumanity.com', 'https://elevateforhumanity.org']
+    : [
+        'http://localhost:3000',
+        'http://localhost:5173',
+        'http://localhost:3001',
+      ];
 
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
@@ -51,87 +63,118 @@ const users = new Map();
 const sessions = new Map();
 
 // Auth routes - with rate limiting and validation
-app.post('/api/auth/register', authRateLimiter, validate(schemas.register), async (req, res) => {
-  try {
-    const { email, password, name, role } = req.body;
-    
-    if (users.has(email)) {
-      return res.status(400).json({ 
+app.post(
+  '/api/auth/register',
+  authRateLimiter,
+  validate(schemas.register),
+  async (req, res) => {
+    try {
+      const { email, password, name, role } = req.body;
+
+      if (users.has(email)) {
+        return res.status(400).json({
+          success: false,
+          error: { code: 'USER_EXISTS', message: 'User already exists' },
+        });
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const user = {
+        id: `user_${Date.now()}`,
+        email,
+        password: hashedPassword,
+        name,
+        role: role || 'student',
+        createdAt: new Date(),
+      };
+
+      users.set(email, user);
+
+      const token = jwt.sign(
+        { id: user.id, email: user.email, role: user.role },
+        JWT_SECRET,
+        { expiresIn: '7d' }
+      );
+
+      res.json({
+        success: true,
+        data: {
+          token,
+          user: {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            role: user.role,
+          },
+        },
+      });
+    } catch (error) {
+      res.status(500).json({
         success: false,
-        error: { code: 'USER_EXISTS', message: 'User already exists' }
+        error: { code: 'SERVER_ERROR', message: error.message },
       });
     }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = {
-      id: `user_${Date.now()}`,
-      email,
-      password: hashedPassword,
-      name,
-      role: role || 'student',
-      createdAt: new Date()
-    };
-
-    users.set(email, user);
-    
-    const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '7d' });
-    
-    res.json({ 
-      success: true,
-      data: {
-        token,
-        user: { id: user.id, email: user.email, name: user.name, role: user.role }
-      }
-    });
-  } catch (error) {
-    res.status(500).json({ 
-      success: false,
-      error: { code: 'SERVER_ERROR', message: error.message }
-    });
   }
-});
+);
 
-app.post('/api/auth/login', authRateLimiter, validate(schemas.login), async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const user = users.get(email);
+app.post(
+  '/api/auth/login',
+  authRateLimiter,
+  validate(schemas.login),
+  async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      const user = users.get(email);
 
-    if (!user || !(await bcrypt.compare(password, user.password))) {
-      return res.status(401).json({ 
+      if (!user || !(await bcrypt.compare(password, user.password))) {
+        return res.status(401).json({
+          success: false,
+          error: {
+            code: 'INVALID_CREDENTIALS',
+            message: 'Invalid credentials',
+          },
+        });
+      }
+
+      const token = jwt.sign(
+        { id: user.id, email: user.email, role: user.role },
+        JWT_SECRET,
+        { expiresIn: '7d' }
+      );
+
+      res.json({
+        success: true,
+        data: {
+          token,
+          user: {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            role: user.role,
+          },
+        },
+      });
+    } catch (error) {
+      res.status(500).json({
         success: false,
-        error: { code: 'INVALID_CREDENTIALS', message: 'Invalid credentials' }
+        error: { code: 'SERVER_ERROR', message: error.message },
       });
     }
-
-    const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '7d' });
-    
-    res.json({ 
-      success: true,
-      data: {
-        token,
-        user: { id: user.id, email: user.email, name: user.name, role: user.role }
-      }
-    });
-  } catch (error) {
-    res.status(500).json({ 
-      success: false,
-      error: { code: 'SERVER_ERROR', message: error.message }
-    });
   }
-});
+);
 
 app.get('/api/auth/me', authenticate, (req, res) => {
   const user = users.get(req.user.email);
   if (!user) {
-    return res.status(404).json({ 
+    return res.status(404).json({
       success: false,
-      error: { code: 'USER_NOT_FOUND', message: 'User not found' }
+      error: { code: 'USER_NOT_FOUND', message: 'User not found' },
     });
   }
-  
-  res.json({ 
+
+  res.json({
     success: true,
-    data: { id: user.id, email: user.email, name: user.name, role: user.role }
+    data: { id: user.id, email: user.email, name: user.name, role: user.role },
   });
 });
 
@@ -141,27 +184,32 @@ app.get('/api/email/inbox', authenticate, async (req, res) => {
     const inbox = await emailService.getInbox(req.user.id);
     res.json({ success: true, data: inbox });
   } catch (error) {
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: { code: 'SERVER_ERROR', message: error.message }
+      error: { code: 'SERVER_ERROR', message: error.message },
     });
   }
 });
 
-app.post('/api/email/send', authenticate, validate(schemas.sendEmail), async (req, res) => {
-  try {
-    const result = await emailService.sendEmail({
-      from: req.user.email,
-      ...req.body
-    });
-    res.json({ success: true, data: result });
-  } catch (error) {
-    res.status(500).json({ 
-      success: false,
-      error: { code: 'SERVER_ERROR', message: error.message }
-    });
+app.post(
+  '/api/email/send',
+  authenticate,
+  validate(schemas.sendEmail),
+  async (req, res) => {
+    try {
+      const result = await emailService.sendEmail({
+        from: req.user.email,
+        ...req.body,
+      });
+      res.json({ success: true, data: result });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        error: { code: 'SERVER_ERROR', message: error.message },
+      });
+    }
   }
-});
+);
 
 // Calendar API
 app.get('/api/calendar/events', authenticate, async (req, res) => {
@@ -169,27 +217,32 @@ app.get('/api/calendar/events', authenticate, async (req, res) => {
     const events = await calendarService.getEvents(req.user.id);
     res.json({ success: true, data: events });
   } catch (error) {
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: { code: 'SERVER_ERROR', message: error.message }
+      error: { code: 'SERVER_ERROR', message: error.message },
     });
   }
 });
 
-app.post('/api/calendar/events', authenticate, validate(schemas.createEvent), async (req, res) => {
-  try {
-    const event = await calendarService.createEvent({
-      userId: req.user.id,
-      ...req.body
-    });
-    res.json({ success: true, data: event });
-  } catch (error) {
-    res.status(500).json({ 
-      success: false,
-      error: { code: 'SERVER_ERROR', message: error.message }
-    });
+app.post(
+  '/api/calendar/events',
+  authenticate,
+  validate(schemas.createEvent),
+  async (req, res) => {
+    try {
+      const event = await calendarService.createEvent({
+        userId: req.user.id,
+        ...req.body,
+      });
+      res.json({ success: true, data: event });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        error: { code: 'SERVER_ERROR', message: error.message },
+      });
+    }
   }
-});
+);
 
 // File Storage API
 app.get('/api/files', authenticate, (req, res) => {
@@ -206,72 +259,88 @@ app.get('/api/lms/courses', authenticate, async (req, res) => {
     const courses = await lmsService.getCourses();
     res.json({ success: true, data: courses });
   } catch (error) {
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: { code: 'SERVER_ERROR', message: error.message }
+      error: { code: 'SERVER_ERROR', message: error.message },
     });
   }
 });
 
 // Only instructors and admins can create courses
-app.post('/api/lms/courses', authenticate, authorize('instructor', 'admin'), validate(schemas.createCourse), async (req, res) => {
-  try {
-    const course = await lmsService.createCourse({
-      instructorId: req.user.id,
-      ...req.body
-    });
-    res.json({ success: true, data: course });
-  } catch (error) {
-    res.status(500).json({ 
-      success: false,
-      error: { code: 'SERVER_ERROR', message: error.message }
-    });
+app.post(
+  '/api/lms/courses',
+  authenticate,
+  authorize('instructor', 'admin'),
+  validate(schemas.createCourse),
+  async (req, res) => {
+    try {
+      const course = await lmsService.createCourse({
+        instructorId: req.user.id,
+        ...req.body,
+      });
+      res.json({ success: true, data: course });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        error: { code: 'SERVER_ERROR', message: error.message },
+      });
+    }
   }
-});
+);
 
 // AI Tutor API
-app.post('/api/ai-tutor/chat', authenticate, validate(schemas.chatMessage), async (req, res) => {
-  try {
-    const result = await aiTutorService.chat({
-      userId: req.user.id,
-      ...req.body
-    });
-    res.json({ success: true, data: result });
-  } catch (error) {
-    res.status(500).json({ 
-      success: false,
-      error: { code: 'SERVER_ERROR', message: error.message }
-    });
+app.post(
+  '/api/ai-tutor/chat',
+  authenticate,
+  validate(schemas.chatMessage),
+  async (req, res) => {
+    try {
+      const result = await aiTutorService.chat({
+        userId: req.user.id,
+        ...req.body,
+      });
+      res.json({ success: true, data: result });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        error: { code: 'SERVER_ERROR', message: error.message },
+      });
+    }
   }
-});
+);
 
-app.post('/api/ai-tutor/grade-essay', authenticate, validate(schemas.gradeEssay), async (req, res) => {
-  try {
-    const result = await aiTutorService.gradeEssay({
-      userId: req.user.id,
-      ...req.body
-    });
-    res.json({ success: true, data: result });
-  } catch (error) {
-    res.status(500).json({ 
-      success: false,
-      error: { code: 'SERVER_ERROR', message: error.message }
-    });
+app.post(
+  '/api/ai-tutor/grade-essay',
+  authenticate,
+  validate(schemas.gradeEssay),
+  async (req, res) => {
+    try {
+      const result = await aiTutorService.gradeEssay({
+        userId: req.user.id,
+        ...req.body,
+      });
+      res.json({ success: true, data: result });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        error: { code: 'SERVER_ERROR', message: error.message },
+      });
+    }
   }
-});
+);
 
 // NotebookLM API
 app.post('/api/notebook-lm/notebooks', authenticate, async (req, res) => {
   try {
     const notebook = await notebookLMService.createNotebook({
       userId: req.user.id,
-      ...req.body
+      ...req.body,
     });
     res.json({ success: true, data: notebook });
   } catch (error) {
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: { code: 'SERVER_ERROR', message: error.message }
+      error: { code: 'SERVER_ERROR', message: error.message },
     });
   }
 });
@@ -280,13 +349,13 @@ app.post('/api/notebook-lm/sources', authenticate, async (req, res) => {
   try {
     const source = await notebookLMService.addSource({
       userId: req.user.id,
-      ...req.body
+      ...req.body,
     });
     res.json({ success: true, data: source });
   } catch (error) {
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: { code: 'SERVER_ERROR', message: error.message }
+      error: { code: 'SERVER_ERROR', message: error.message },
     });
   }
 });
@@ -295,13 +364,13 @@ app.post('/api/notebook-lm/ask', authenticate, async (req, res) => {
   try {
     const result = await notebookLMService.ask({
       userId: req.user.id,
-      ...req.body
+      ...req.body,
     });
     res.json({ success: true, data: result });
   } catch (error) {
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: { code: 'SERVER_ERROR', message: error.message }
+      error: { code: 'SERVER_ERROR', message: error.message },
     });
   }
 });
@@ -314,23 +383,23 @@ app.get('/api/admin/stats', authenticate, authorize('admin'), (req, res) => {
       totalUsers: users.size,
       activeUsers: users.size,
       storage: 2.4,
-      revenue: 15420
-    }
+      revenue: 15420,
+    },
   });
 });
 
 app.get('/api/admin/users', authenticate, authorize('admin'), (req, res) => {
-  const userList = Array.from(users.values()).map(u => ({
+  const userList = Array.from(users.values()).map((u) => ({
     id: u.id,
     email: u.email,
     name: u.name,
     role: u.role,
-    createdAt: u.createdAt
+    createdAt: u.createdAt,
   }));
-  
-  res.json({ 
+
+  res.json({
     success: true,
-    data: { users: userList }
+    data: { users: userList },
   });
 });
 

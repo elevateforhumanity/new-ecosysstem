@@ -1,125 +1,200 @@
-import { useState, useEffect } from "react";
-import { Building, Clock, DollarSign, Users, Award, ChevronRight } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
-import { addBreadcrumbSchema } from "../utils/addCourseSchema";
+import { useState, useEffect } from 'react';
+import {
+  Building,
+  Clock,
+  DollarSign,
+  Users,
+  Award,
+  ChevronRight,
+} from 'lucide-react';
+import { Link, useParams } from 'react-router-dom';
+import { addBreadcrumbSchema } from '../utils/addCourseSchema';
 
 export default function Programs() {
   const params = useParams();
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
   // Add breadcrumb schema for SEO
   useEffect(() => {
     addBreadcrumbSchema([
-      { name: "Home", url: "https://elevateforhumanity.pages.dev/" },
-      { name: "Programs", url: "https://elevateforhumanity.pages.dev/programs" }
+      { name: 'Home', url: 'https://elevateforhumanity.pages.dev/' },
+      {
+        name: 'Programs',
+        url: 'https://elevateforhumanity.pages.dev/programs',
+      },
     ]);
   }, []);
 
   const programCategories = [
-    { id: "all", name: "All Programs", count: 50 },
-    { id: "wio", name: "WIO (Workforce Innovation)", count: 12 },
-    { id: "wex", name: "WEX (Work Experience)", count: 8 },
-    { id: "wrg", name: "WRG (Workforce Readiness)", count: 15 },
-    { id: "ojt", name: "OJT (On-the-Job Training)", count: 10 },
-    { id: "etpl", name: "ETPL (Eligible Training Provider)", count: 5 }
+    { id: 'all', name: 'All Programs', count: 50 },
+    { id: 'wio', name: 'WIO (Workforce Innovation)', count: 12 },
+    { id: 'wex', name: 'WEX (Work Experience)', count: 8 },
+    { id: 'wrg', name: 'WRG (Workforce Readiness)', count: 15 },
+    { id: 'ojt', name: 'OJT (On-the-Job Training)', count: 10 },
+    { id: 'etpl', name: 'ETPL (Eligible Training Provider)', count: 5 },
   ];
 
   const featuredPrograms = [
     {
-      id: "ai-fundamentals",
-      title: "AI Fundamentals & Machine Learning",
-      category: "wio",
-      duration: "12 weeks",
-      cost: "$1,997",
+      id: 'ai-fundamentals',
+      title: 'AI Fundamentals & Machine Learning',
+      category: 'wio',
+      duration: '12 weeks',
+      cost: '$1,997',
       participants: 24,
-      description: "Master artificial intelligence and machine learning foundations with hands-on projects and industry certifications.",
-      features: ["Python Programming", "TensorFlow & PyTorch", "Data Science", "Neural Networks", "Real-world Projects"],
-      certifications: ["CompTIA AI+", "Google Cloud ML", "Microsoft Azure AI"],
+      description:
+        'Master artificial intelligence and machine learning foundations with hands-on projects and industry certifications.',
+      features: [
+        'Python Programming',
+        'TensorFlow & PyTorch',
+        'Data Science',
+        'Neural Networks',
+        'Real-world Projects',
+      ],
+      certifications: ['CompTIA AI+', 'Google Cloud ML', 'Microsoft Azure AI'],
       jobPlacementRate: 89,
-      averageSalary: "$75,000",
+      averageSalary: '$75,000',
       federalFunding: true,
-      image: "/api/placeholder/400/200"
+      image: '/api/placeholder/400/200',
     },
     {
-      id: "data-science-bootcamp",
-      title: "Data Science & Analytics Bootcamp",
-      category: "wex",
-      duration: "16 weeks",
-      cost: "$4,950",
+      id: 'data-science-bootcamp',
+      title: 'Data Science & Analytics Bootcamp',
+      category: 'wex',
+      duration: '16 weeks',
+      cost: '$4,950',
       participants: 18,
-      description: "Comprehensive data science training covering statistics, machine learning, and big data technologies.",
-      features: ["Statistical Analysis", "Python & R", "SQL & Databases", "Machine Learning", "Data Visualization"],
-      certifications: ["IBM Data Science", "Microsoft Azure Data Scientist", "Tableau Certified"],
+      description:
+        'Comprehensive data science training covering statistics, machine learning, and big data technologies.',
+      features: [
+        'Statistical Analysis',
+        'Python & R',
+        'SQL & Databases',
+        'Machine Learning',
+        'Data Visualization',
+      ],
+      certifications: [
+        'IBM Data Science',
+        'Microsoft Azure Data Scientist',
+        'Tableau Certified',
+      ],
       jobPlacementRate: 92,
-      averageSalary: "$85,000",
+      averageSalary: '$85,000',
       federalFunding: true,
-      image: "/api/placeholder/400/200"
+      image: '/api/placeholder/400/200',
     },
     {
-      id: "cybersecurity-specialist",
-      title: "Cybersecurity Specialist Certification",
-      category: "wrg",
-      duration: "20 weeks",
-      cost: "$3,495",
+      id: 'cybersecurity-specialist',
+      title: 'Cybersecurity Specialist Certification',
+      category: 'wrg',
+      duration: '20 weeks',
+      cost: '$3,495',
       participants: 20,
-      description: "Intensive cybersecurity training covering network security, ethical hacking, and compliance frameworks.",
-      features: ["Network Security", "Ethical Hacking", "Risk Assessment", "Incident Response", "Compliance"],
-      certifications: ["CompTIA Security+", "Certified Ethical Hacker", "CISSP"],
+      description:
+        'Intensive cybersecurity training covering network security, ethical hacking, and compliance frameworks.',
+      features: [
+        'Network Security',
+        'Ethical Hacking',
+        'Risk Assessment',
+        'Incident Response',
+        'Compliance',
+      ],
+      certifications: [
+        'CompTIA Security+',
+        'Certified Ethical Hacker',
+        'CISSP',
+      ],
       jobPlacementRate: 95,
-      averageSalary: "$95,000",
+      averageSalary: '$95,000',
       federalFunding: true,
-      image: "/api/placeholder/400/200"
+      image: '/api/placeholder/400/200',
     },
     {
-      id: "advanced-manufacturing",
-      title: "Advanced Manufacturing & Automation",
-      category: "ojt",
-      duration: "14 weeks",
-      cost: "$2,750",
+      id: 'advanced-manufacturing',
+      title: 'Advanced Manufacturing & Automation',
+      category: 'ojt',
+      duration: '14 weeks',
+      cost: '$2,750',
       participants: 16,
-      description: "Learn cutting-edge manufacturing technologies including robotics, CNC programming, and quality control.",
-      features: ["CNC Programming", "Robotics", "Quality Control", "Lean Manufacturing", "Safety Protocols"],
-      certifications: ["NIMS Machining", "FANUC Robotics", "Six Sigma Green Belt"],
+      description:
+        'Learn cutting-edge manufacturing technologies including robotics, CNC programming, and quality control.',
+      features: [
+        'CNC Programming',
+        'Robotics',
+        'Quality Control',
+        'Lean Manufacturing',
+        'Safety Protocols',
+      ],
+      certifications: [
+        'NIMS Machining',
+        'FANUC Robotics',
+        'Six Sigma Green Belt',
+      ],
       jobPlacementRate: 88,
-      averageSalary: "$65,000",
+      averageSalary: '$65,000',
       federalFunding: true,
-      image: "/api/placeholder/400/200"
+      image: '/api/placeholder/400/200',
     },
     {
-      id: "healthcare-administration",
-      title: "Healthcare Administration & Management",
-      category: "etpl",
-      duration: "18 weeks",
-      cost: "$3,200",
+      id: 'healthcare-administration',
+      title: 'Healthcare Administration & Management',
+      category: 'etpl',
+      duration: '18 weeks',
+      cost: '$3,200',
       participants: 22,
-      description: "Comprehensive healthcare administration training covering medical billing, coding, and practice management.",
-      features: ["Medical Billing", "ICD-10 Coding", "HIPAA Compliance", "Practice Management", "Electronic Health Records"],
-      certifications: ["CPC (Certified Professional Coder)", "CMA (Certified Medical Assistant)", "RHIA"],
+      description:
+        'Comprehensive healthcare administration training covering medical billing, coding, and practice management.',
+      features: [
+        'Medical Billing',
+        'ICD-10 Coding',
+        'HIPAA Compliance',
+        'Practice Management',
+        'Electronic Health Records',
+      ],
+      certifications: [
+        'CPC (Certified Professional Coder)',
+        'CMA (Certified Medical Assistant)',
+        'RHIA',
+      ],
       jobPlacementRate: 90,
-      averageSalary: "$55,000",
+      averageSalary: '$55,000',
       federalFunding: true,
-      image: "/api/placeholder/400/200"
+      image: '/api/placeholder/400/200',
     },
     {
-      id: "digital-marketing",
-      title: "Digital Marketing & E-commerce",
-      category: "wio",
-      duration: "10 weeks",
-      cost: "$1,495",
+      id: 'digital-marketing',
+      title: 'Digital Marketing & E-commerce',
+      category: 'wio',
+      duration: '10 weeks',
+      cost: '$1,495',
       participants: 28,
-      description: "Master digital marketing strategies including SEO, social media, PPC advertising, and analytics.",
-      features: ["SEO & SEM", "Social Media Marketing", "Google Ads", "Analytics", "E-commerce Platforms"],
-      certifications: ["Google Ads Certified", "Facebook Blueprint", "HubSpot Content Marketing"],
+      description:
+        'Master digital marketing strategies including SEO, social media, PPC advertising, and analytics.',
+      features: [
+        'SEO & SEM',
+        'Social Media Marketing',
+        'Google Ads',
+        'Analytics',
+        'E-commerce Platforms',
+      ],
+      certifications: [
+        'Google Ads Certified',
+        'Facebook Blueprint',
+        'HubSpot Content Marketing',
+      ],
       jobPlacementRate: 85,
-      averageSalary: "$50,000",
+      averageSalary: '$50,000',
       federalFunding: true,
-      image: "/api/placeholder/400/200"
-    }
+      image: '/api/placeholder/400/200',
+    },
   ];
 
-  const filteredPrograms = selectedCategory === "all" 
-    ? featuredPrograms 
-    : featuredPrograms.filter(program => program.category === selectedCategory);
+  const filteredPrograms =
+    selectedCategory === 'all'
+      ? featuredPrograms
+      : featuredPrograms.filter(
+          (program) => program.category === selectedCategory
+        );
 
   return (
     <div className="min-h-screen bg-brand-surface">
@@ -128,8 +203,13 @@ export default function Programs() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-brand-text">Elevate Learn2Earn Workforce Programs</h1>
-              <p className="text-brand-text-muted mt-2">Federal DOL/DWD compliant training programs with guaranteed job placement support</p>
+              <h1 className="text-3xl font-bold text-brand-text">
+                Elevate Learn2Earn Workforce Programs
+              </h1>
+              <p className="text-brand-text-muted mt-2">
+                Federal DOL/DWD compliant training programs with guaranteed job
+                placement support
+              </p>
             </div>
             <div className="bg-brand-surface text-brand-success px-4 py-2 rounded-full text-sm font-medium">
               💰 Federal Funding Available
@@ -148,8 +228,8 @@ export default function Programs() {
                 onClick={() => setSelectedCategory(category.id)}
                 className={`whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   selectedCategory === category.id
-                    ? "bg-brand-info text-white"
-                    : "bg-brand-surface-dark text-brand-text hover:bg-brand-border"
+                    ? 'bg-brand-info text-white'
+                    : 'bg-brand-surface-dark text-brand-text hover:bg-brand-border'
                 }`}
               >
                 {category.name} ({category.count})
@@ -163,12 +243,17 @@ export default function Programs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredPrograms.map((program) => (
-            <div key={program.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+            <div
+              key={program.id}
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+            >
               {/* Program Image */}
               <div className="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
                 <div className="text-white text-center">
                   <Building className="h-12 w-12 mx-auto mb-2" />
-                  <div className="text-sm font-medium">{program.category.toUpperCase()}</div>
+                  <div className="text-sm font-medium">
+                    {program.category.toUpperCase()}
+                  </div>
                 </div>
               </div>
 
@@ -185,8 +270,12 @@ export default function Programs() {
                   )}
                 </div>
 
-                <h3 className="text-xl font-bold text-brand-text mb-2">{program.title}</h3>
-                <p className="text-brand-text-muted text-sm mb-4">{program.description}</p>
+                <h3 className="text-xl font-bold text-brand-text mb-2">
+                  {program.title}
+                </h3>
+                <p className="text-brand-text-muted text-sm mb-4">
+                  {program.description}
+                </p>
 
                 {/* Program Stats */}
                 <div className="grid grid-cols-2 gap-4 mb-4">
@@ -210,10 +299,15 @@ export default function Programs() {
 
                 {/* Key Features */}
                 <div className="mb-4">
-                  <h4 className="text-sm font-semibold text-brand-text mb-2">Key Features:</h4>
+                  <h4 className="text-sm font-semibold text-brand-text mb-2">
+                    Key Features:
+                  </h4>
                   <div className="space-y-1">
                     {program.features.slice(0, 3).map((feature, index) => (
-                      <div key={index} className="flex items-center text-sm text-brand-text-muted">
+                      <div
+                        key={index}
+                        className="flex items-center text-sm text-brand-text-muted"
+                      >
                         <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
                         {feature}
                       </div>
@@ -225,25 +319,33 @@ export default function Programs() {
                 <div className="bg-brand-surface rounded-lg p-4 mb-4">
                   <div className="grid grid-cols-2 gap-4 text-center">
                     <div>
-                      <div className="text-2xl font-bold text-brand-success">{program.jobPlacementRate}%</div>
-                      <div className="text-xs text-brand-text-muted">Job Placement</div>
+                      <div className="text-2xl font-bold text-brand-success">
+                        {program.jobPlacementRate}%
+                      </div>
+                      <div className="text-xs text-brand-text-muted">
+                        Job Placement
+                      </div>
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-brand-info">{program.averageSalary}</div>
-                      <div className="text-xs text-brand-text-muted">Avg. Salary</div>
+                      <div className="text-2xl font-bold text-brand-info">
+                        {program.averageSalary}
+                      </div>
+                      <div className="text-xs text-brand-text-muted">
+                        Avg. Salary
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Actions */}
                 <div className="space-y-2">
-                  <Link 
+                  <Link
                     href={`/programs/${program.id}`}
                     className="w-full bg-brand-info text-white py-2 px-4 rounded-lg hover:bg-brand-info-hover transition-colors text-center block"
                   >
                     View Program Details
                   </Link>
-                  <Link 
+                  <Link
                     href={`/pay?program=${program.id}`}
                     className="w-full bg-white text-brand-info border border-blue-600 py-2 px-4 rounded-lg hover:bg-blue-50 transition-colors text-center block"
                   >
@@ -268,12 +370,13 @@ export default function Programs() {
                 100% Federal DOL/DWD Compliance
               </h3>
               <p className="text-orange-700">
-                All programs meet federal Elevate Learn2Earn Workforce standards with complete eligibility verification, 
-                Individual Employment Plans (IEP), PIRL reporting, and performance tracking systems.
+                All programs meet federal Elevate Learn2Earn Workforce standards
+                with complete eligibility verification, Individual Employment
+                Plans (IEP), PIRL reporting, and performance tracking systems.
               </p>
             </div>
             <div className="ml-auto">
-              <Link 
+              <Link
                 href="/compliance"
                 className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors"
               >

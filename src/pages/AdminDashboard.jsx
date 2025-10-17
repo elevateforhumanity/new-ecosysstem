@@ -3,12 +3,12 @@
   Commercial License. No resale, sublicensing, or redistribution allowed.
   See LICENSE file for details.
 */
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import AppLayout from "../layouts/AppLayout";
-import { StatCard, LineChart, BarChart, PieChart } from "../components/Chart";
-import { api } from "../lib/api";
-import { LoadingSpinner } from "../components/LoadingSpinner";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import AppLayout from '../layouts/AppLayout';
+import { StatCard, LineChart, BarChart, PieChart } from '../components/Chart';
+import { api } from '../lib/api';
+import { LoadingSpinner } from '../components/LoadingSpinner';
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState(null);
@@ -71,7 +71,14 @@ export default function AdminDashboard() {
   if (isLoading) {
     return (
       <AppLayout>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 400 }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: 400,
+          }}
+        >
           <LoadingSpinner size="large" />
         </div>
       </AppLayout>
@@ -82,9 +89,18 @@ export default function AdminDashboard() {
 
   return (
     <AppLayout>
-      <div style={{ maxWidth: 1400, margin: "0 auto", padding: 32 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 }}>
-          <h1 style={{ fontSize: 32, fontWeight: 700 }}>Admin Analytics Dashboard</h1>
+      <div style={{ maxWidth: 1400, margin: '0 auto', padding: 32 }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: 32,
+          }}
+        >
+          <h1 style={{ fontSize: 32, fontWeight: 700 }}>
+            Admin Analytics Dashboard
+          </h1>
           <button
             onClick={fetchDashboardData}
             style={{
@@ -102,7 +118,14 @@ export default function AdminDashboard() {
         </div>
 
         {/* Overview Stats */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20, marginBottom: 40 }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gap: 20,
+            marginBottom: 40,
+          }}
+        >
           <StatCard
             title="Total Users"
             value={data.overview.totalUsers.value.toLocaleString()}
@@ -134,57 +157,179 @@ export default function AdminDashboard() {
         </div>
 
         {/* Charts Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', gap: 24, marginBottom: 40 }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))',
+            gap: 24,
+            marginBottom: 40,
+          }}
+        >
           {/* User Growth */}
-          <div style={{ backgroundColor: 'var(--color-card-bg)', padding: 24, borderRadius: 8, border: '1px solid var(--color-border)' }}>
-            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 20 }}>User Growth</h3>
-            <LineChart data={data.userGrowth} width={500} height={300} color="var(--color-primary)" />
+          <div
+            style={{
+              backgroundColor: 'var(--color-card-bg)',
+              padding: 24,
+              borderRadius: 8,
+              border: '1px solid var(--color-border)',
+            }}
+          >
+            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 20 }}>
+              User Growth
+            </h3>
+            <LineChart
+              data={data.userGrowth}
+              width={500}
+              height={300}
+              color="var(--color-primary)"
+            />
           </div>
 
           {/* Revenue Trend */}
-          <div style={{ backgroundColor: 'var(--color-card-bg)', padding: 24, borderRadius: 8, border: '1px solid var(--color-border)' }}>
-            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 20 }}>Revenue Trend</h3>
-            <LineChart data={data.revenueByMonth} width={500} height={300} color="var(--color-success)" />
+          <div
+            style={{
+              backgroundColor: 'var(--color-card-bg)',
+              padding: 24,
+              borderRadius: 8,
+              border: '1px solid var(--color-border)',
+            }}
+          >
+            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 20 }}>
+              Revenue Trend
+            </h3>
+            <LineChart
+              data={data.revenueByMonth}
+              width={500}
+              height={300}
+              color="var(--color-success)"
+            />
           </div>
 
           {/* Course Enrollments */}
-          <div style={{ backgroundColor: 'var(--color-card-bg)', padding: 24, borderRadius: 8, border: '1px solid var(--color-border)' }}>
-            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 20 }}>Top Courses by Enrollment</h3>
-            <BarChart data={data.courseEnrollments} width={500} height={300} color="var(--color-info)" />
+          <div
+            style={{
+              backgroundColor: 'var(--color-card-bg)',
+              padding: 24,
+              borderRadius: 8,
+              border: '1px solid var(--color-border)',
+            }}
+          >
+            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 20 }}>
+              Top Courses by Enrollment
+            </h3>
+            <BarChart
+              data={data.courseEnrollments}
+              width={500}
+              height={300}
+              color="var(--color-info)"
+            />
           </div>
 
           {/* Users by Role */}
-          <div style={{ backgroundColor: 'var(--color-card-bg)', padding: 24, borderRadius: 8, border: '1px solid var(--color-border)' }}>
-            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 20 }}>Users by Role</h3>
+          <div
+            style={{
+              backgroundColor: 'var(--color-card-bg)',
+              padding: 24,
+              borderRadius: 8,
+              border: '1px solid var(--color-border)',
+            }}
+          >
+            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 20 }}>
+              Users by Role
+            </h3>
             <PieChart data={data.usersByRole} width={500} height={300} />
           </div>
         </div>
 
         {/* Quick Actions */}
-        <h2 style={{ fontSize: 24, fontWeight: 600, marginBottom: 20 }}>Quick Actions</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24 }}>
-          <Link to="/user-management" style={{ backgroundColor: 'var(--color-card-bg)', padding: 24, borderRadius: 8, border: '1px solid var(--color-border)', textDecoration: "none", color: "inherit" }}>
+        <h2 style={{ fontSize: 24, fontWeight: 600, marginBottom: 20 }}>
+          Quick Actions
+        </h2>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: 24,
+          }}
+        >
+          <Link
+            to="/user-management"
+            style={{
+              backgroundColor: 'var(--color-card-bg)',
+              padding: 24,
+              borderRadius: 8,
+              border: '1px solid var(--color-border)',
+              textDecoration: 'none',
+              color: 'inherit',
+            }}
+          >
             <div style={{ fontSize: 32, marginBottom: 12 }}>👥</div>
-            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>User Management</h3>
-            <p style={{ fontSize: 14, color: 'var(--color-text-secondary)' }}>Manage users, roles, and permissions</p>
+            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
+              User Management
+            </h3>
+            <p style={{ fontSize: 14, color: 'var(--color-text-secondary)' }}>
+              Manage users, roles, and permissions
+            </p>
           </Link>
 
-          <Link to="/course-builder" style={{ backgroundColor: 'var(--color-card-bg)', padding: 24, borderRadius: 8, border: '1px solid var(--color-border)', textDecoration: "none", color: "inherit" }}>
+          <Link
+            to="/course-builder"
+            style={{
+              backgroundColor: 'var(--color-card-bg)',
+              padding: 24,
+              borderRadius: 8,
+              border: '1px solid var(--color-border)',
+              textDecoration: 'none',
+              color: 'inherit',
+            }}
+          >
             <div style={{ fontSize: 32, marginBottom: 12 }}>📚</div>
-            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Course Management</h3>
-            <p style={{ fontSize: 14, color: 'var(--color-text-secondary)' }}>Review and manage all courses</p>
+            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
+              Course Management
+            </h3>
+            <p style={{ fontSize: 14, color: 'var(--color-text-secondary)' }}>
+              Review and manage all courses
+            </p>
           </Link>
 
-          <Link to="/analytics" style={{ backgroundColor: 'var(--color-card-bg)', padding: 24, borderRadius: 8, border: '1px solid var(--color-border)', textDecoration: "none", color: "inherit" }}>
+          <Link
+            to="/analytics"
+            style={{
+              backgroundColor: 'var(--color-card-bg)',
+              padding: 24,
+              borderRadius: 8,
+              border: '1px solid var(--color-border)',
+              textDecoration: 'none',
+              color: 'inherit',
+            }}
+          >
             <div style={{ fontSize: 32, marginBottom: 12 }}>📊</div>
-            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Detailed Analytics</h3>
-            <p style={{ fontSize: 14, color: 'var(--color-text-secondary)' }}>View platform analytics and reports</p>
+            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
+              Detailed Analytics
+            </h3>
+            <p style={{ fontSize: 14, color: 'var(--color-text-secondary)' }}>
+              View platform analytics and reports
+            </p>
           </Link>
 
-          <Link to="/settings" style={{ backgroundColor: 'var(--color-card-bg)', padding: 24, borderRadius: 8, border: '1px solid var(--color-border)', textDecoration: "none", color: "inherit" }}>
+          <Link
+            to="/settings"
+            style={{
+              backgroundColor: 'var(--color-card-bg)',
+              padding: 24,
+              borderRadius: 8,
+              border: '1px solid var(--color-border)',
+              textDecoration: 'none',
+              color: 'inherit',
+            }}
+          >
             <div style={{ fontSize: 32, marginBottom: 12 }}>⚙️</div>
-            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>Platform Settings</h3>
-            <p style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>Configure platform settings</p>
+            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
+              Platform Settings
+            </h3>
+            <p style={{ fontSize: 14, color: 'var(--brand-text-muted)' }}>
+              Configure platform settings
+            </p>
           </Link>
         </div>
       </div>

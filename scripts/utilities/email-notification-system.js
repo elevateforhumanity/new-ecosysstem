@@ -16,7 +16,6 @@
   See LICENSE file for details.
 */
 
-
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const path = require('path');
@@ -31,20 +30,20 @@ class EFHNotificationSystem {
         dailySummary: true,
         viewMilestones: true,
         systemAlerts: true,
-        phoneAlerts: true
+        phoneAlerts: true,
       },
       milestones: {
         views: [100, 500, 1000, 5000],
-        revenue: [1000, 5000, 10000, 25000]
-      }
+        revenue: [1000, 5000, 10000, 25000],
+      },
     };
 
     this.transporter = nodemailer.createTransporter({
       service: 'gmail',
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-      }
+        pass: process.env.EMAIL_PASS,
+      },
     });
 
     // Initialize Twilio for SMS notifications
@@ -66,8 +65,8 @@ class EFHNotificationSystem {
         flippa: { revenue: 0, views: 0, sales: 0 },
         bizbuysell: { revenue: 0, views: 0, sales: 0 },
         gumroad: { revenue: 0, views: 0, sales: 0 },
-        github: { revenue: 0, views: 0, sales: 0 }
-      }
+        github: { revenue: 0, views: 0, sales: 0 },
+      },
     };
 
     this.initializeTracking();
@@ -95,7 +94,7 @@ class EFHNotificationSystem {
       amount: parseFloat(amount),
       program: programName,
       student: studentInfo,
-      id: this.generateSaleId()
+      id: this.generateSaleId(),
     };
 
     // Update revenue tracking
@@ -118,11 +117,15 @@ class EFHNotificationSystem {
     }
 
     // Send instant alert for any sale
-    await this.sendInstantAlert('SALE', `New $${saleData.amount} sale via ${platform}`, {
-      amount: saleData.amount,
-      platform: platform,
-      details: `${programName} - ${studentInfo.name || 'Student'}`
-    });
+    await this.sendInstantAlert(
+      'SALE',
+      `New $${saleData.amount} sale via ${platform}`,
+      {
+        amount: saleData.amount,
+        platform: platform,
+        details: `${programName} - ${studentInfo.name || 'Student'}`,
+      }
+    );
 
     // Check milestones
     await this.checkRevenueMilestones();
@@ -137,7 +140,7 @@ class EFHNotificationSystem {
       program: programName,
       student: studentInfo,
       amount: parseFloat(amount),
-      id: this.generateEnrollmentId()
+      id: this.generateEnrollmentId(),
     };
 
     // Update tracking
@@ -176,7 +179,7 @@ class EFHNotificationSystem {
       licenseType,
       amount: parseFloat(amount),
       buyer: buyerInfo,
-      id: this.generateLicenseId()
+      id: this.generateLicenseId(),
     };
 
     // Update tracking
@@ -207,7 +210,10 @@ class EFHNotificationSystem {
     }
 
     // Send SMS notification
-    if (this.notificationSettings.enabledNotifications.phoneAlerts && this.notificationSettings.phone) {
+    if (
+      this.notificationSettings.enabledNotifications.phoneAlerts &&
+      this.notificationSettings.phone
+    ) {
       await this.sendSMSNotification(
         `🎉 NEW SALE! $${saleData.amount} - ${saleData.program} via ${saleData.platform}. Daily total: $${this.revenueData.daily.revenue}`
       );
@@ -286,7 +292,11 @@ class EFHNotificationSystem {
   }
 
   async sendDailySummary() {
-    if (!this.notificationSettings.email || !this.notificationSettings.enabledNotifications.dailySummary) return;
+    if (
+      !this.notificationSettings.email ||
+      !this.notificationSettings.enabledNotifications.dailySummary
+    )
+      return;
 
     const subject = `📊 EFH Daily Summary - $${this.revenueData.daily.revenue.toLocaleString()} Revenue`;
     const html = `
@@ -318,7 +328,7 @@ class EFHNotificationSystem {
     `;
 
     await this.sendEmail(subject, html);
-    
+
     // Reset daily counters
     this.revenueData.daily = { revenue: 0, enrollments: 0, sales: 0 };
     this.saveRevenueData();
@@ -342,10 +352,17 @@ class EFHNotificationSystem {
 
   async checkRevenueMilestones() {
     const currentRevenue = this.revenueData.monthly.revenue;
-    
+
     for (const milestone of this.notificationSettings.milestones.revenue) {
-      if (currentRevenue >= milestone && !this.hasReachedMilestone('revenue', milestone)) {
-        await this.sendMilestoneNotification('revenue', milestone, currentRevenue);
+      if (
+        currentRevenue >= milestone &&
+        !this.hasReachedMilestone('revenue', milestone)
+      ) {
+        await this.sendMilestoneNotification(
+          'revenue',
+          milestone,
+          currentRevenue
+        );
         this.markMilestoneReached('revenue', milestone);
       }
     }
@@ -353,21 +370,33 @@ class EFHNotificationSystem {
 
   async checkViewMilestones(platform) {
     const currentViews = this.revenueData.marketplace[platform]?.views || 0;
-    
+
     for (const milestone of this.notificationSettings.milestones.views) {
-      if (currentViews >= milestone && !this.hasReachedMilestone(`${platform}_views`, milestone)) {
-        await this.sendMilestoneNotification('views', milestone, currentViews, platform);
+      if (
+        currentViews >= milestone &&
+        !this.hasReachedMilestone(`${platform}_views`, milestone)
+      ) {
+        await this.sendMilestoneNotification(
+          'views',
+          milestone,
+          currentViews,
+          platform
+        );
         this.markMilestoneReached(`${platform}_views`, milestone);
       }
     }
   }
 
   async sendMilestoneNotification(type, milestone, current, platform = '') {
-    if (!this.notificationSettings.email || !this.notificationSettings.enabledNotifications.viewMilestones) return;
+    if (
+      !this.notificationSettings.email ||
+      !this.notificationSettings.enabledNotifications.viewMilestones
+    )
+      return;
 
     const isViews = type === 'views';
     const subject = `🎯 Milestone Reached: ${milestone.toLocaleString()} ${type.toUpperCase()}${platform ? ` on ${platform}` : ''}`;
-    
+
     const html = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f8f9fa; border-radius: 10px;">
         <div style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); color: #333; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
@@ -410,13 +439,13 @@ class EFHNotificationSystem {
     const now = new Date();
     const scheduledTime = new Date();
     scheduledTime.setHours(20, 0, 0, 0);
-    
+
     if (scheduledTime <= now) {
       scheduledTime.setDate(scheduledTime.getDate() + 1);
     }
-    
+
     const timeUntilScheduled = scheduledTime.getTime() - now.getTime();
-    
+
     setTimeout(() => {
       this.sendDailySummary();
       // Schedule for next day
@@ -430,7 +459,7 @@ class EFHNotificationSystem {
         from: `"EFH Revenue Tracker" <${process.env.EMAIL_USER}>`,
         to: this.notificationSettings.email,
         subject,
-        html
+        html,
       });
       console.log(`✅ Email sent: ${subject}`);
     } catch (error) {
@@ -469,9 +498,11 @@ class EFHNotificationSystem {
       await this.twilioClient.messages.create({
         body: message,
         from: process.env.TWILIO_PHONE_NUMBER,
-        to: `+1${this.notificationSettings.phone}`
+        to: `+1${this.notificationSettings.phone}`,
       });
-      console.log(`📱 SMS sent to ${this.notificationSettings.phone}: ${message.substring(0, 50)}...`);
+      console.log(
+        `📱 SMS sent to ${this.notificationSettings.phone}: ${message.substring(0, 50)}...`
+      );
     } catch (error) {
       console.error('❌ SMS send failed:', error.message);
       // Fallback: log to console for debugging
@@ -481,15 +512,20 @@ class EFHNotificationSystem {
 
   async sendInstantAlert(type, message, data = {}) {
     const alertMessage = `🚨 ${type.toUpperCase()}: ${message}`;
-    
+
     // Always send SMS for instant alerts
     if (this.notificationSettings.phone) {
       await this.sendSMSNotification(alertMessage);
     }
 
     // Also send email for high priority alerts
-    if (this.notificationSettings.email && ['SALE', 'ERROR', 'MILESTONE'].includes(type)) {
-      await this.sendEmail(`🚨 EFH Alert: ${type}`, `
+    if (
+      this.notificationSettings.email &&
+      ['SALE', 'ERROR', 'MILESTONE'].includes(type)
+    ) {
+      await this.sendEmail(
+        `🚨 EFH Alert: ${type}`,
+        `
         <div style="font-family: Arial, sans-serif; background: #fff3cd; padding: 20px; border-left: 4px solid #ffc107; border-radius: 5px;">
           <h2 style="color: #856404; margin: 0 0 10px 0;">${alertMessage}</h2>
           <div style="color: #856404;">
@@ -499,7 +535,8 @@ class EFHNotificationSystem {
             ${data.details ? `<p><strong>Details:</strong> ${data.details}</p>` : ''}
           </div>
         </div>
-      `);
+      `
+      );
     }
   }
 
@@ -518,7 +555,12 @@ class EFHNotificationSystem {
     app.post('/api/track/enrollment', async (req, res) => {
       try {
         const { platform, program, student, amount } = req.body;
-        const enrollmentId = await this.trackEnrollment(platform, program, student, amount);
+        const enrollmentId = await this.trackEnrollment(
+          platform,
+          program,
+          student,
+          amount
+        );
         res.json({ success: true, enrollmentId });
       } catch (error) {
         res.status(500).json({ error: error.message });
@@ -538,7 +580,12 @@ class EFHNotificationSystem {
     app.post('/api/track/license', async (req, res) => {
       try {
         const { platform, licenseType, amount, buyer } = req.body;
-        const licenseId = await this.trackLicenseSale(platform, licenseType, amount, buyer);
+        const licenseId = await this.trackLicenseSale(
+          platform,
+          licenseType,
+          amount,
+          buyer
+        );
         res.json({ success: true, licenseId });
       } catch (error) {
         res.status(500).json({ error: error.message });
@@ -551,7 +598,10 @@ class EFHNotificationSystem {
 
     app.post('/api/notifications/settings', (req, res) => {
       try {
-        this.notificationSettings = { ...this.notificationSettings, ...req.body };
+        this.notificationSettings = {
+          ...this.notificationSettings,
+          ...req.body,
+        };
         res.json({ success: true });
       } catch (error) {
         res.status(500).json({ error: error.message });
@@ -560,7 +610,9 @@ class EFHNotificationSystem {
 
     app.post('/api/test-sms', async (req, res) => {
       try {
-        await this.sendSMSNotification('🧪 Test SMS from EFH - Phone alerts are working!');
+        await this.sendSMSNotification(
+          '🧪 Test SMS from EFH - Phone alerts are working!'
+        );
         res.json({ success: true, message: 'Test SMS sent!' });
       } catch (error) {
         res.status(500).json({ error: error.message });

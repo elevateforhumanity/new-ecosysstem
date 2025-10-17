@@ -65,12 +65,12 @@ class BrandReviewer {
   }
 
   shouldIgnore(filePath) {
-    return IGNORE_PATTERNS.some(pattern => filePath.includes(pattern));
+    return IGNORE_PATTERNS.some((pattern) => filePath.includes(pattern));
   }
 
   checkFile(filePath) {
     if (this.shouldIgnore(filePath)) return;
-    if (!EXTENSIONS.some(ext => filePath.endsWith(ext))) return;
+    if (!EXTENSIONS.some((ext) => filePath.endsWith(ext))) return;
 
     try {
       const content = fs.readFileSync(filePath, 'utf8');
@@ -80,15 +80,19 @@ class BrandReviewer {
 
       lines.forEach((line, index) => {
         // Skip comments
-        if (line.trim().startsWith('//') || line.trim().startsWith('/*') || line.trim().startsWith('*')) {
+        if (
+          line.trim().startsWith('//') ||
+          line.trim().startsWith('/*') ||
+          line.trim().startsWith('*')
+        ) {
           return;
         }
 
-        COLOR_PATTERNS.forEach(pattern => {
+        COLOR_PATTERNS.forEach((pattern) => {
           const matches = line.matchAll(pattern);
           for (const match of matches) {
             const color = match[0];
-            
+
             // Skip if it's a brand color variable reference
             if (color.includes('--brand-') || color.includes('var(')) {
               continue;
@@ -100,7 +104,17 @@ class BrandReviewer {
             }
 
             // Skip common utility colors
-            if (['#fff', '#ffffff', '#000', '#000000', 'transparent', 'currentColor', 'inherit'].includes(color.toLowerCase())) {
+            if (
+              [
+                '#fff',
+                '#ffffff',
+                '#000',
+                '#000000',
+                'transparent',
+                'currentColor',
+                'inherit',
+              ].includes(color.toLowerCase())
+            ) {
               continue;
             }
 
@@ -152,7 +166,7 @@ class BrandReviewer {
 
     // Group violations by file
     const violationsByFile = {};
-    this.violations.forEach(v => {
+    this.violations.forEach((v) => {
       if (!violationsByFile[v.file]) {
         violationsByFile[v.file] = [];
       }
@@ -161,15 +175,19 @@ class BrandReviewer {
 
     Object.entries(violationsByFile).forEach(([file, violations]) => {
       console.log(`\n📄 ${file}`);
-      violations.forEach(v => {
+      violations.forEach((v) => {
         console.log(`  Line ${v.line}: ${v.color}`);
         console.log(`    ${v.context}`);
       });
     });
 
     console.log('\n💡 Suggestions:');
-    console.log('  - Use brand color variables: var(--brand-primary), var(--brand-success), etc.');
-    console.log('  - Use Tailwind brand classes: bg-brand-primary, text-brand-success, etc.');
+    console.log(
+      '  - Use brand color variables: var(--brand-primary), var(--brand-success), etc.'
+    );
+    console.log(
+      '  - Use Tailwind brand classes: bg-brand-primary, text-brand-success, etc.'
+    );
     console.log('  - See src/styles/brand.css for available brand colors\n');
 
     return 1;
@@ -177,7 +195,7 @@ class BrandReviewer {
 
   run(targetPath) {
     const rootPath = path.resolve(targetPath || process.cwd());
-    
+
     console.log(`🔍 Scanning for brand color violations in: ${rootPath}\n`);
 
     const stats = fs.statSync(rootPath);

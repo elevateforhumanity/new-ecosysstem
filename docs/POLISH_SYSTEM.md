@@ -18,7 +18,7 @@ Automatically enforces brand consistency, accessibility, and code quality across
 ✅ **Contrast checking** - WCAG AA/AAA compliance guaranteed  
 ✅ **Visual regression** - Catch unintended UI changes  
 ✅ **Performance audits** - Lighthouse CI on every build  
-✅ **Pre-commit hooks** - Quality checks before code lands  
+✅ **Pre-commit hooks** - Quality checks before code lands
 
 ---
 
@@ -31,6 +31,7 @@ bash polish-styling.sh
 ```
 
 This installs:
+
 - Prettier (code formatting)
 - ESLint (JavaScript linting)
 - Stylelint (CSS linting)
@@ -73,12 +74,14 @@ Add to your `.github/workflows/ci.yml`:
 ## Available Commands
 
 ### Formatting
+
 ```bash
 npm run format           # Auto-format all code
 npm run format:check     # Check formatting (CI)
 ```
 
 ### Linting
+
 ```bash
 npm run lint:js          # Lint JavaScript/TypeScript
 npm run lint:css         # Lint CSS files
@@ -87,6 +90,7 @@ npm run lint:all         # Run all linters
 ```
 
 ### Brand Enforcement
+
 ```bash
 npm run brand:guard      # Check WCAG contrast
 npm run fix:brand        # Auto-fix colors
@@ -94,17 +98,20 @@ npm run fix:brand:dry    # Preview fixes
 ```
 
 ### Testing
+
 ```bash
 npm run test:ui          # Visual regression tests
 npm run test:ui:update   # Update snapshots
 ```
 
 ### Audits
+
 ```bash
 npm run audit:lighthouse # Performance & accessibility
 ```
 
 ### Combined
+
 ```bash
 npm run polish:check     # All checks
 npm run polish:fix       # All auto-fixes
@@ -127,6 +134,7 @@ npm run brand:guard
 ```
 
 Output:
+
 ```
 🎨 Brand Contrast Guard
 
@@ -139,11 +147,13 @@ Output:
 ```
 
 **What it checks:**
+
 - Text on backgrounds
 - Button text on button colors
 - All semantic color pairs (success, info, warning, danger)
 
 **Thresholds:**
+
 - WCAG AA: 4.5:1 (minimum for body text)
 - WCAG AAA: 7.0:1 (enhanced contrast)
 
@@ -153,20 +163,24 @@ Output:
 
 ```javascript
 // ❌ This will fail linting
-const button = <div style={{ color: '#3b82f6' }}>Click</div>
+const button = <div style={{ color: '#3b82f6' }}>Click</div>;
 
 // ✅ This passes
-const button = <div className="text-brand-primary">Click</div>
+const button = <div className="text-brand-primary">Click</div>;
 ```
 
 **Blocks hardcoded colors in CSS:**
 
 ```css
 /* ❌ This will fail linting */
-.button { background: #3b82f6; }
+.button {
+  background: #3b82f6;
+}
 
 /* ✅ This passes */
-.button { background: var(--brand-primary); }
+.button {
+  background: var(--brand-primary);
+}
 ```
 
 ### 3. Visual Regression (Playwright)
@@ -180,12 +194,14 @@ npm run test:ui
 ```
 
 **What it does:**
+
 - Screenshots home, programs, LMS, apply pages
 - Compares to baseline snapshots
 - Fails if differences exceed threshold (200 pixels)
 - Catches unintended visual changes
 
 **Update snapshots:**
+
 ```bash
 npm run test:ui:update
 ```
@@ -201,6 +217,7 @@ npm run audit:lighthouse
 ```
 
 **Checks:**
+
 - Performance ≥ 85
 - Accessibility ≥ 90
 - Best Practices ≥ 85
@@ -219,6 +236,7 @@ npm run lint:css
 ```
 
 **Blocks commits that:**
+
 - Have contrast violations
 - Use hardcoded colors
 - Have linting errors
@@ -254,9 +272,9 @@ Blocks hardcoded colors in JavaScript:
 rules: {
   "no-restricted-syntax": [
     "error",
-    { 
-      "selector": "Literal[value=/^#([0-9a-fA-F]{3,8})$/]", 
-      "message": "Use brand tokens instead" 
+    {
+      "selector": "Literal[value=/^#([0-9a-fA-F]{3,8})$/]",
+      "message": "Use brand tokens instead"
     }
   ]
 }
@@ -283,9 +301,7 @@ rules: {
 Safelist ensures brand classes aren't purged:
 
 ```javascript
-safelist: [
-  { pattern: /(bg|text|border)-(brand)-(primary|secondary|success)/ }
-]
+safelist: [{ pattern: /(bg|text|border)-(brand)-(primary|secondary|success)/ }];
 ```
 
 ---
@@ -353,8 +369,8 @@ Update `tools/brand-guard.cjs`:
 ```javascript
 const pairs = [
   // ... existing pairs
-  { bg: 'myNewColor', text: 'onMyNewColor', name: 'Text on my new color' }
-]
+  { bg: 'myNewColor', text: 'onMyNewColor', name: 'Text on my new color' },
+];
 ```
 
 ### Adjust Contrast Thresholds
@@ -364,8 +380,8 @@ Edit `autopilot-brand.json`:
 ```json
 {
   "contrast": {
-    "minAA": 4.5,   // Stricter: 4.5, Looser: 3.0
-    "minAAA": 7.0   // Stricter: 7.0, Looser: 4.5
+    "minAA": 4.5, // Stricter: 4.5, Looser: 3.0
+    "minAAA": 7.0 // Stricter: 7.0, Looser: 4.5
   }
 }
 ```
@@ -377,8 +393,8 @@ Edit `tests/ui.spec.ts`:
 ```typescript
 const pages = [
   { route: '/', name: 'home' },
-  { route: '/my-new-page', name: 'my-new-page' }
-]
+  { route: '/my-new-page', name: 'my-new-page' },
+];
 ```
 
 ### Customize Lighthouse Thresholds
@@ -402,6 +418,7 @@ Edit `.lighthouserc.json`:
 **Problem:** Contrast ratio below 4.5:1
 
 **Solution:**
+
 1. Check `autopilot-brand.json` for the failing pair
 2. Adjust colors to increase contrast
 3. Use a contrast checker: https://webaim.org/resources/contrastchecker/
@@ -412,6 +429,7 @@ Edit `.lighthouserc.json`:
 **Problem:** `Use brand tokens instead of #3b82f6`
 
 **Solution:**
+
 ```javascript
 // ❌ Before
 <div style={{ color: '#3b82f6' }}>
@@ -427,6 +445,7 @@ Edit `.lighthouserc.json`:
 **Problem:** Screenshot differs from baseline
 
 **Solution:**
+
 1. Review the diff in `test-results/`
 2. If change is intentional: `npm run test:ui:update`
 3. If change is unintended: fix the code
@@ -436,6 +455,7 @@ Edit `.lighthouserc.json`:
 **Problem:** Performance score below 85
 
 **Solution:**
+
 1. Check Lighthouse report in `lighthouseci/`
 2. Optimize images, reduce bundle size
 3. Lazy load components
@@ -486,7 +506,7 @@ If you must use a hardcoded color, document why:
 ```javascript
 // Exception: Third-party library requires specific color
 // eslint-disable-next-line no-restricted-syntax
-const color = '#3b82f6'
+const color = '#3b82f6';
 ```
 
 ---
@@ -494,18 +514,22 @@ const color = '#3b82f6'
 ## Metrics to Track
 
 ### Brand Consistency
+
 - Hardcoded color violations: **Target < 100**
 - Brand token usage: **Target > 95%**
 
 ### Accessibility
+
 - WCAG AA compliance: **Target 100%**
 - WCAG AAA compliance: **Target > 80%**
 
 ### Performance
+
 - Lighthouse Performance: **Target ≥ 90**
 - Lighthouse Accessibility: **Target ≥ 95**
 
 ### Quality
+
 - ESLint errors: **Target 0**
 - Stylelint errors: **Target 0**
 - Visual regression failures: **Target 0**
@@ -530,7 +554,7 @@ The Polish & Enforcement System:
 ✅ **Guarantees** WCAG accessibility compliance  
 ✅ **Catches** visual regressions automatically  
 ✅ **Maintains** performance standards  
-✅ **Enforces** quality before code lands  
+✅ **Enforces** quality before code lands
 
 **Result:** Consistent, accessible, high-quality UI across all pages.
 

@@ -24,51 +24,52 @@ class MarketplaceAutomation {
   constructor() {
     this.listings = {
       replit: {
-        title: "Complete Workforce Development LMS with Federal Partnerships",
+        title: 'Complete Workforce Development LMS with Federal Partnerships',
         description: this.getListingDescription('replit'),
         price: 1500, // cycles
         tags: ['education', 'lms', 'workforce', 'nodejs', 'react'],
-        status: 'draft'
+        status: 'draft',
       },
       flippa: {
-        title: "Federal Partnership Education Platform - $50K+/Month Potential",
+        title: 'Federal Partnership Education Platform - $50K+/Month Potential',
         description: this.getListingDescription('flippa'),
         price: 15000,
         category: 'starter-site',
-        status: 'draft'
+        status: 'draft',
       },
       bizbuysell: {
-        title: "Turnkey Workforce Development Business - Federal Partnerships Included",
+        title:
+          'Turnkey Workforce Development Business - Federal Partnerships Included',
         description: this.getListingDescription('bizbuysell'),
         price: 25000,
         category: 'technology',
-        status: 'draft'
+        status: 'draft',
       },
       gumroad: {
         packages: [
           {
-            title: "EFH Code-Only License",
-            description: "Complete source code with documentation",
-            price: 2500
+            title: 'EFH Code-Only License',
+            description: 'Complete source code with documentation',
+            price: 2500,
           },
           {
-            title: "EFH Business-in-a-Box",
-            description: "Code + partner access + revenue sharing",
-            price: 5000
+            title: 'EFH Business-in-a-Box',
+            description: 'Code + partner access + revenue sharing',
+            price: 5000,
           },
           {
-            title: "EFH Full Partnership Access",
-            description: "Everything + live partner introductions",
-            price: 7500
-          }
-        ]
+            title: 'EFH Full Partnership Access',
+            description: 'Everything + live partner introductions',
+            price: 7500,
+          },
+        ],
       },
       github: {
-        title: "Workforce Development LMS Starter Kit",
+        title: 'Workforce Development LMS Starter Kit',
         description: this.getListingDescription('github'),
         price: 500,
-        category: 'educational-tools'
-      }
+        category: 'educational-tools',
+      },
     };
   }
 
@@ -337,7 +338,7 @@ class MarketplaceAutomation {
         ---
 
         **Ready to launch your workforce development platform?** This starter kit gets you from zero to revenue in days, not months.
-      `
+      `,
     };
 
     return descriptions[platform] || '';
@@ -357,15 +358,15 @@ class MarketplaceAutomation {
         'Documentation and setup guides',
         'Partner network access credentials',
         'Federal compliance documentation',
-        '30-day support period'
+        '30-day support period',
       ],
       timeline: '1-3 days',
       requirements: [
         'Must preserve all federal partnership agreements',
         'Buyer must agree to revenue sharing terms',
         'No resale without seller permission',
-        'Attribution to original creator required'
-      ]
+        'Attribution to original creator required',
+      ],
     };
 
     // Save template for manual posting
@@ -391,12 +392,12 @@ class MarketplaceAutomation {
       revenue_proof: 'Partner Agreements & Federal Documentation Available',
       included_assets: [
         'Complete source code',
-        'Federal partnership agreements', 
+        'Federal partnership agreements',
         'Student management system',
         'Payment processing setup',
         'Marketing materials',
-        '90-day support'
-      ]
+        '90-day support',
+      ],
     };
 
     fs.writeFileSync(
@@ -404,7 +405,9 @@ class MarketplaceAutomation {
       this.formatFlippaTemplate(flippaListing)
     );
 
-    console.log('✅ Flippa listing template created: flippa-listing-template.md');
+    console.log(
+      '✅ Flippa listing template created: flippa-listing-template.md'
+    );
     return flippaListing;
   }
 
@@ -421,7 +424,7 @@ class MarketplaceAutomation {
         content_type: 'digital',
         tags: ['education', 'business', 'workforce', 'lms', 'startup'],
         preview_url: process.env.DEMO_URL || 'https://your-demo.replit.app',
-        download_url: 'Will be provided after purchase'
+        download_url: 'Will be provided after purchase',
       };
 
       products.push(product);
@@ -432,7 +435,9 @@ class MarketplaceAutomation {
       JSON.stringify(products, null, 2)
     );
 
-    console.log('✅ Gumroad products template created: gumroad-products-template.json');
+    console.log(
+      '✅ Gumroad products template created: gumroad-products-template.json'
+    );
     return products;
   }
 
@@ -487,7 +492,7 @@ class MarketplaceAutomation {
 
         Best,
         [Your Name]
-      `
+      `,
     };
 
     fs.writeFileSync(
@@ -495,7 +500,9 @@ class MarketplaceAutomation {
       JSON.stringify(templates, null, 2)
     );
 
-    console.log('✅ LinkedIn outreach templates created: linkedin-outreach-templates.json');
+    console.log(
+      '✅ LinkedIn outreach templates created: linkedin-outreach-templates.json'
+    );
     return templates;
   }
 
@@ -597,7 +604,7 @@ class MarketplaceAutomation {
         Looking for $15K-25K for the complete package. Includes code, partnerships, support, training.
 
         Anyone interested in buying or want to know more about the build process?
-      `
+      `,
     };
 
     fs.writeFileSync(
@@ -605,7 +612,9 @@ class MarketplaceAutomation {
       JSON.stringify(posts, null, 2)
     );
 
-    console.log('✅ Reddit post templates created: reddit-posts-templates.json');
+    console.log(
+      '✅ Reddit post templates created: reddit-posts-templates.json'
+    );
     return posts;
   }
 
@@ -623,11 +632,11 @@ ${bounty.description}
 
 ## Deliverables
 
-${bounty.deliverables.map(item => `- ${item}`).join('\n')}
+${bounty.deliverables.map((item) => `- ${item}`).join('\n')}
 
 ## Requirements
 
-${bounty.requirements.map(item => `- ${item}`).join('\n')}
+${bounty.requirements.map((item) => `- ${item}`).join('\n')}
 
 ## How to Apply
 
@@ -656,7 +665,7 @@ ${listing.description}
 
 ## Included Assets
 
-${listing.included_assets.map(asset => `- ${asset}`).join('\n')}
+${listing.included_assets.map((asset) => `- ${asset}`).join('\n')}
 
 ## Revenue Information
 
@@ -684,10 +693,10 @@ Please include your background and acquisition experience in your inquiry.
 
     const results = await Promise.all([
       this.createReplitBounty(),
-      this.createFlippaListing(), 
+      this.createFlippaListing(),
       this.createGumroadProducts(),
       this.createLinkedInOutreach(),
-      this.createRedditPosts()
+      this.createRedditPosts(),
     ]);
 
     console.log('✅ All marketplace listings generated!');
@@ -707,42 +716,42 @@ Please include your background and acquisition experience in your inquiry.
       platforms: {
         reddit: {
           sideproject: 'https://reddit.com/r/SideProject',
-          entrepreneur: 'https://reddit.com/r/entrepreneur', 
+          entrepreneur: 'https://reddit.com/r/entrepreneur',
           startups: 'https://reddit.com/r/startups',
           flipping: 'https://reddit.com/r/flipping',
-          expected_hits: '1000-5000 in first 24 hours'
+          expected_hits: '1000-5000 in first 24 hours',
         },
         twitter: {
           hashtags: '#entrepreneur #startup #business #edtech #workforcedev',
-          expected_engagement: '500-2000 impressions per post'
+          expected_engagement: '500-2000 impressions per post',
         },
         linkedin: {
           groups: 'Entrepreneur groups, workforce development professionals',
-          expected_reach: '2000-10000 professionals'
+          expected_reach: '2000-10000 professionals',
         },
         replit: {
           bounties: 'Active developer community',
-          expected_views: '200-800 qualified developers'
+          expected_views: '200-800 qualified developers',
         },
         indiehackers: {
           community: 'Serious entrepreneurs and SaaS builders',
-          expected_quality: 'High-value inquiries, 50-200 views'
+          expected_quality: 'High-value inquiries, 50-200 views',
         },
         gumroad: {
           marketplace: 'Ready buyers for digital products',
-          conversion_rate: '2-5% typical for business tools'
-        }
+          conversion_rate: '2-5% typical for business tools',
+        },
       },
       traffic_sources: [
         'Direct social media posts',
-        'Community group shares', 
+        'Community group shares',
         'Influencer retweets/shares',
         'Cross-platform promotion',
-        'Email newsletter mentions'
+        'Email newsletter mentions',
       ],
       expected_total_reach: '10,000-50,000 impressions in first week',
       conversion_expectations: '50-200 serious inquiries, 5-20 buyers',
-      created_at: new Date().toISOString()
+      created_at: new Date().toISOString(),
     };
 
     fs.writeFileSync(
@@ -761,18 +770,18 @@ Please include your background and acquisition experience in your inquiry.
       alerts: {
         immediate: [
           'Payment received',
-          'New demo site visitor', 
+          'New demo site visitor',
           'Enrollment completed',
           'High traffic spike (100+ hits/hour)',
-          'Emergency sale inquiry'
+          'Emergency sale inquiry',
         ],
         daily_summary: [
           'Total revenue',
           'New leads count',
-          'Top performing platforms'
-        ]
+          'Top performing platforms',
+        ],
       },
-      webhook_url: '/api/sms-alert'
+      webhook_url: '/api/sms-alert',
     };
 
     // Add SMS webhook handler
@@ -830,13 +839,15 @@ module.exports = { sendSMSAlert, trackDemoVisit, alertPaymentReceived };
   }
 
   async setupEmailNotifications() {
-    console.log('📧 Setting up email notifications for marketplace activity...');
+    console.log(
+      '📧 Setting up email notifications for marketplace activity...'
+    );
 
     // This would integrate with your email service
     const notificationConfig = {
       email: 'your-email@domain.com',
       events: ['new_inquiry', 'sale_completed', 'high_traffic'],
-      frequency: 'immediate'
+      frequency: 'immediate',
     };
 
     return notificationConfig;

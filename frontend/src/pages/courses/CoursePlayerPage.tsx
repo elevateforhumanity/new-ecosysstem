@@ -33,7 +33,9 @@ const CoursePlayerPage = () => {
     try {
       const [lessonsRes, progressRes] = await Promise.all([
         api.get(`/courses/${courseId}/lessons`),
-        api.get(`/progress?courseId=${courseId}`).catch(() => ({ data: { progress: [] } })),
+        api
+          .get(`/progress?courseId=${courseId}`)
+          .catch(() => ({ data: { progress: [] } })),
       ]);
 
       setLessons(lessonsRes.data.lessons || []);
@@ -48,7 +50,7 @@ const CoursePlayerPage = () => {
   const currentLesson = lessons[currentLessonIndex];
 
   const isLessonCompleted = (lessonId: string) => {
-    return progress.some(p => p.lessonId === lessonId && p.completed);
+    return progress.some((p) => p.lessonId === lessonId && p.completed);
   };
 
   const markLessonComplete = async () => {
@@ -61,8 +63,8 @@ const CoursePlayerPage = () => {
         timeSpent: currentLesson.duration || 0,
       });
 
-      setProgress(prev => [
-        ...prev.filter(p => p.lessonId !== currentLesson.id),
+      setProgress((prev) => [
+        ...prev.filter((p) => p.lessonId !== currentLesson.id),
         { lessonId: currentLesson.id, completed: true },
       ]);
     } catch (error) {
@@ -101,15 +103,17 @@ const CoursePlayerPage = () => {
     );
   }
 
-  const completedCount = lessons.filter(l => isLessonCompleted(l.id)).length;
+  const completedCount = lessons.filter((l) => isLessonCompleted(l.id)).length;
   const progressPercentage = (completedCount / lessons.length) * 100;
 
   return (
     <div className="h-screen flex">
       {/* Sidebar */}
-      <div className={`${sidebarOpen ? 'w-80' : 'w-0'} bg-white border-r transition-all duration-300 overflow-hidden`}>
+      <div
+        className={`${sidebarOpen ? 'w-80' : 'w-0'} bg-white border-r transition-all duration-300 overflow-hidden`}
+      >
         <div className="p-4 border-b">
-          <button 
+          <button
             onClick={() => navigate('/dashboard')}
             className="text-primary-600 hover:text-primary-700 mb-4 flex items-center gap-2"
           >
@@ -120,34 +124,40 @@ const CoursePlayerPage = () => {
             {completedCount} of {lessons.length} lessons completed
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
-            <div 
-              className="bg-green-600 h-2 rounded-full transition-all" 
+            <div
+              className="bg-green-600 h-2 rounded-full transition-all"
               style={{ width: `${progressPercentage}%` }}
             ></div>
           </div>
         </div>
-        
+
         <div className="overflow-y-auto h-[calc(100vh-140px)]">
           {lessons.map((lesson, index) => (
             <button
               key={lesson.id}
               onClick={() => setCurrentLessonIndex(index)}
               className={`w-full text-left p-4 border-b hover:bg-gray-50 transition-colors ${
-                index === currentLessonIndex ? 'bg-primary-50 border-l-4 border-l-primary-600' : ''
+                index === currentLessonIndex
+                  ? 'bg-primary-50 border-l-4 border-l-primary-600'
+                  : ''
               }`}
             >
               <div className="flex items-start gap-3">
-                <div className={`mt-1 w-6 h-6 rounded-full flex items-center justify-center text-xs ${
-                  isLessonCompleted(lesson.id) 
-                    ? 'bg-green-500 text-white' 
-                    : 'bg-gray-200 text-gray-600'
-                }`}>
+                <div
+                  className={`mt-1 w-6 h-6 rounded-full flex items-center justify-center text-xs ${
+                    isLessonCompleted(lesson.id)
+                      ? 'bg-green-500 text-white'
+                      : 'bg-gray-200 text-gray-600'
+                  }`}
+                >
                   {isLessonCompleted(lesson.id) ? '✓' : index + 1}
                 </div>
                 <div className="flex-1">
                   <div className="font-medium">{lesson.title}</div>
                   {lesson.duration && (
-                    <div className="text-sm text-gray-500">{lesson.duration} min</div>
+                    <div className="text-sm text-gray-500">
+                      {lesson.duration} min
+                    </div>
                   )}
                 </div>
               </div>
@@ -169,9 +179,9 @@ const CoursePlayerPage = () => {
         {/* Video/Content Area */}
         <div className="flex-1 bg-black flex items-center justify-center relative">
           {currentLesson?.videoUrl ? (
-            <video 
+            <video
               key={currentLesson.id}
-              controls 
+              controls
               className="w-full h-full"
               src={currentLesson.videoUrl}
             >
@@ -179,11 +189,15 @@ const CoursePlayerPage = () => {
             </video>
           ) : (
             <div className="text-white text-center p-8">
-              <h2 className="text-3xl font-bold mb-4">{currentLesson?.title}</h2>
+              <h2 className="text-3xl font-bold mb-4">
+                {currentLesson?.title}
+              </h2>
               <div className="max-w-3xl mx-auto text-left bg-gray-900 p-8 rounded-lg">
-                <div 
+                <div
                   className="prose prose-invert max-w-none"
-                  dangerouslySetInnerHTML={{ __html: currentLesson?.content || '' }}
+                  dangerouslySetInnerHTML={{
+                    __html: currentLesson?.content || '',
+                  }}
                 />
               </div>
             </div>
@@ -207,16 +221,13 @@ const CoursePlayerPage = () => {
               >
                 ← Previous
               </button>
-              
+
               {!isLessonCompleted(currentLesson?.id) && (
-                <button
-                  onClick={markLessonComplete}
-                  className="btn-primary"
-                >
+                <button onClick={markLessonComplete} className="btn-primary">
                   Mark Complete
                 </button>
               )}
-              
+
               <button
                 onClick={goToNextLesson}
                 disabled={currentLessonIndex === lessons.length - 1}

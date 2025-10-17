@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 
-import { readdirSync, writeFileSync, statSync, existsSync, mkdirSync } from 'node:fs';
+import {
+  readdirSync,
+  writeFileSync,
+  statSync,
+  existsSync,
+  mkdirSync,
+} from 'node:fs';
 import { join, relative } from 'node:path';
 
 const SITE_URL = process.env.VITE_SITE_URL || 'https://elevateforhumanity.org';
@@ -24,7 +30,9 @@ function getAllHtmlFiles(dir, baseDir = dir) {
 
     if (stat.isDirectory()) {
       // Skip certain directories
-      if (['assets', 'client', 'server', '_next', 'node_modules'].includes(item)) {
+      if (
+        ['assets', 'client', 'server', '_next', 'node_modules'].includes(item)
+      ) {
         continue;
       }
       files.push(...getAllHtmlFiles(fullPath, baseDir));
@@ -39,24 +47,24 @@ function getAllHtmlFiles(dir, baseDir = dir) {
 // Convert file path to URL
 function filePathToUrl(filePath, baseDir) {
   let relativePath = relative(baseDir, filePath);
-  
+
   // Remove index.html
   relativePath = relativePath.replace(/index\.html$/, '');
-  
+
   // Remove .html extension
   relativePath = relativePath.replace(/\.html$/, '');
-  
+
   // Convert to URL path
   let urlPath = '/' + relativePath.replace(/\\/g, '/');
-  
+
   // Clean up double slashes
   urlPath = urlPath.replace(/\/+/g, '/');
-  
+
   // Remove trailing slash except for root
   if (urlPath !== '/' && urlPath.endsWith('/')) {
     urlPath = urlPath.slice(0, -1);
   }
-  
+
   return urlPath;
 }
 
@@ -80,19 +88,21 @@ function getChangeFreq(url) {
 
 // Generate sitemap XML for a group of URLs
 function generateSitemapXml(urls) {
-  const urlEntries = urls.map(url => {
-    const fullUrl = `${SITE_URL}${url}`;
-    const priority = getPriority(url);
-    const changefreq = getChangeFreq(url);
-    const lastmod = new Date().toISOString().split('T')[0];
-    
-    return `  <url>
+  const urlEntries = urls
+    .map((url) => {
+      const fullUrl = `${SITE_URL}${url}`;
+      const priority = getPriority(url);
+      const changefreq = getChangeFreq(url);
+      const lastmod = new Date().toISOString().split('T')[0];
+
+      return `  <url>
     <loc>${fullUrl}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
   </url>`;
-  }).join('\n');
+    })
+    .join('\n');
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -106,13 +116,15 @@ ${urlEntries}
 // Generate sitemap index
 function generateSitemapIndex(sitemapFiles) {
   const lastmod = new Date().toISOString().split('T')[0];
-  
-  const sitemapEntries = sitemapFiles.map(filename => {
-    return `  <sitemap>
+
+  const sitemapEntries = sitemapFiles
+    .map((filename) => {
+      return `  <sitemap>
     <loc>${SITE_URL}/sitemaps/${filename}</loc>
     <lastmod>${lastmod}</lastmod>
   </sitemap>`;
-  }).join('\n');
+    })
+    .join('\n');
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -132,7 +144,9 @@ function generateSitemaps() {
   console.log(`📄 Found ${htmlFiles.length} HTML files`);
 
   // Convert to URLs and remove duplicates
-  const urls = [...new Set(htmlFiles.map(file => filePathToUrl(file, DIST_DIR)))];
+  const urls = [
+    ...new Set(htmlFiles.map((file) => filePathToUrl(file, DIST_DIR))),
+  ];
   console.log(`🔗 Generated ${urls.length} unique URLs`);
 
   // Sort URLs for consistent output
@@ -144,7 +158,9 @@ function generateSitemaps() {
     urlGroups.push(urls.slice(i, i + URLS_PER_SITEMAP));
   }
 
-  console.log(`📦 Split into ${urlGroups.length} sitemap files (${URLS_PER_SITEMAP} URLs each)\n`);
+  console.log(
+    `📦 Split into ${urlGroups.length} sitemap files (${URLS_PER_SITEMAP} URLs each)\n`
+  );
 
   // Generate individual sitemaps
   const sitemapFiles = [];
@@ -152,10 +168,10 @@ function generateSitemaps() {
     const filename = `sitemap-${index + 1}.xml`;
     const xml = generateSitemapXml(group);
     const filepath = join(SITEMAPS_DIR, filename);
-    
+
     writeFileSync(filepath, xml);
     sitemapFiles.push(filename);
-    
+
     console.log(`✅ ${filename} (${group.length} URLs)`);
   });
 

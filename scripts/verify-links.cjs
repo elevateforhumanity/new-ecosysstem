@@ -14,12 +14,12 @@ const broken = [];
 
 function findPages(dir) {
   if (!fs.existsSync(dir)) return;
-  
+
   const items = fs.readdirSync(dir);
-  items.forEach(item => {
+  items.forEach((item) => {
     const fullPath = path.join(dir, item);
     const stat = fs.statSync(fullPath);
-    
+
     if (stat.isDirectory() && !item.includes('node_modules')) {
       findPages(fullPath);
     } else if (item.endsWith('.html')) {
@@ -33,31 +33,35 @@ function extractLinks(filePath) {
   const content = fs.readFileSync(filePath, 'utf8');
   const hrefRegex = /href=["']([^"']+)["']/g;
   let match;
-  
+
   while ((match = hrefRegex.exec(content)) !== null) {
     const link = match[1];
-    if (!link.startsWith('http') && !link.startsWith('#') && !link.startsWith('mailto:')) {
+    if (
+      !link.startsWith('http') &&
+      !link.startsWith('#') &&
+      !link.startsWith('mailto:')
+    ) {
       links.add(link);
     }
   }
 }
 
-['public', 'sites', 'pages'].forEach(dir => findPages(dir));
+['public', 'sites', 'pages'].forEach((dir) => findPages(dir));
 
 console.log(`✅ Found ${pages.size} pages`);
 console.log(`✅ Found ${links.size} internal links`);
 
 // Check for broken links
-links.forEach(link => {
+links.forEach((link) => {
   const cleanLink = link.replace(/^\//, '');
   let found = false;
-  
-  pages.forEach(page => {
+
+  pages.forEach((page) => {
     if (page.includes(cleanLink)) {
       found = true;
     }
   });
-  
+
   if (!found && !link.includes('?') && !link.includes('api')) {
     broken.push(link);
   }
@@ -65,7 +69,7 @@ links.forEach(link => {
 
 if (broken.length > 0) {
   console.log(`\n⚠️  Found ${broken.length} potentially broken links:`);
-  broken.slice(0, 10).forEach(link => console.log(`   - ${link}`));
+  broken.slice(0, 10).forEach((link) => console.log(`   - ${link}`));
 } else {
   console.log('\n✅ All links verified!');
 }

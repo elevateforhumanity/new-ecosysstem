@@ -11,7 +11,7 @@ export const EnvSchema = z.object({
   SUPABASE_SERVICE_KEY: z.string().optional(),
   LOG_LEVEL: z.string().optional(),
   // Frontend API base (optional; can be relative or absolute). Kept loose intentionally.
-  VITE_API_BASE_URL: z.string().optional()
+  VITE_API_BASE_URL: z.string().optional(),
 });
 
 export type AppEnv = z.infer<typeof EnvSchema>;
@@ -23,7 +23,9 @@ export function loadEnv(): AppEnv {
   const parsed = EnvSchema.safeParse(process.env);
   if (!parsed.success) {
     // Aggregate errors
-    const issues = parsed.error.issues.map(i => `${i.path.join('.')}: ${i.message}`).join('\n');
+    const issues = parsed.error.issues
+      .map((i) => `${i.path.join('.')}: ${i.message}`)
+      .join('\n');
     // eslint-disable-next-line no-console
     console.error('\nEnvironment validation failed:\n' + issues + '\n');
     process.exit(1);
@@ -33,7 +35,11 @@ export function loadEnv(): AppEnv {
 }
 
 // Allow running standalone via: npm run env:check
-if (typeof require !== 'undefined' && typeof module !== 'undefined' && require.main === module) {
+if (
+  typeof require !== 'undefined' &&
+  typeof module !== 'undefined' &&
+  require.main === module
+) {
   loadEnv();
   // eslint-disable-next-line no-console
   console.log('✅ Environment variables validated');

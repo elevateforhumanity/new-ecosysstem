@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ export class ErrorBoundary extends React.Component {
   }
   componentDidCatch(error, info) {
     // eslint-disable-next-line no-console
-    console.error("ErrorBoundary caught:", error, info);
+    console.error('ErrorBoundary caught:', error, info);
   }
   render() {
     if (this.state.hasError) {

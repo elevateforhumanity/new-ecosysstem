@@ -28,16 +28,16 @@ class SocialMediaIntegration {
   setupRoutes() {
     // Get social media configuration
     this.router.get('/api/social/config', this.getConfig.bind(this));
-    
+
     // Post to social media platforms
     this.router.post('/api/social/post', this.postToSocial.bind(this));
-    
+
     // Schedule social media posts
     this.router.post('/api/social/schedule', this.schedulePost.bind(this));
-    
+
     // Get social media analytics
     this.router.get('/api/social/analytics', this.getAnalytics.bind(this));
-    
+
     // Test social media connections
     this.router.post('/api/social/test', this.testConnections.bind(this));
   }
@@ -48,27 +48,34 @@ class SocialMediaIntegration {
         platforms: {
           twitter: {
             enabled: !!process.env.TWITTER_API_KEY,
-            configured: !!(process.env.TWITTER_API_KEY && process.env.TWITTER_API_SECRET)
+            configured: !!(
+              process.env.TWITTER_API_KEY && process.env.TWITTER_API_SECRET
+            ),
           },
           facebook: {
             enabled: !!process.env.FACEBOOK_APP_ID,
-            configured: !!(process.env.FACEBOOK_APP_ID && process.env.FACEBOOK_APP_SECRET)
+            configured: !!(
+              process.env.FACEBOOK_APP_ID && process.env.FACEBOOK_APP_SECRET
+            ),
           },
           linkedin: {
             enabled: !!process.env.LINKEDIN_CLIENT_ID,
-            configured: !!(process.env.LINKEDIN_CLIENT_ID && process.env.LINKEDIN_CLIENT_SECRET)
+            configured: !!(
+              process.env.LINKEDIN_CLIENT_ID &&
+              process.env.LINKEDIN_CLIENT_SECRET
+            ),
           },
           instagram: {
             enabled: !!process.env.INSTAGRAM_ACCESS_TOKEN,
-            configured: !!process.env.INSTAGRAM_ACCESS_TOKEN
-          }
+            configured: !!process.env.INSTAGRAM_ACCESS_TOKEN,
+          },
         },
         templates: this.socialPosts,
         analytics: {
           totalPosts: 0,
           engagement: 0,
-          reach: 0
-        }
+          reach: 0,
+        },
       };
 
       res.json(config);
@@ -80,10 +87,10 @@ class SocialMediaIntegration {
   async postToSocial(req, res) {
     try {
       const { platforms, message, templateId } = req.body;
-      
+
       let content = message;
       if (templateId) {
-        const template = this.socialPosts.find(p => p.id === templateId);
+        const template = this.socialPosts.find((p) => p.id === templateId);
         content = template ? template.template : message;
       }
 
@@ -105,16 +112,18 @@ class SocialMediaIntegration {
       }
 
       // Instagram posting
-      if (platforms.includes('instagram') && process.env.INSTAGRAM_ACCESS_TOKEN) {
+      if (
+        platforms.includes('instagram') &&
+        process.env.INSTAGRAM_ACCESS_TOKEN
+      ) {
         results.instagram = await this.postToInstagram(content);
       }
 
       res.json({
         success: true,
         results,
-        message: 'Posts scheduled/published successfully'
+        message: 'Posts scheduled/published successfully',
       });
-
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -129,13 +138,13 @@ class SocialMediaIntegration {
     try {
       // Simulate Twitter posting for now
       console.log('📱 Twitter post:', content.substring(0, 100) + '...');
-      
+
       return {
         status: 'success',
         platform: 'twitter',
         postId: 'tw_' + Date.now(),
         url: 'https://twitter.com/elevateforhumanity/status/' + Date.now(),
-        message: 'Posted to Twitter successfully'
+        message: 'Posted to Twitter successfully',
       };
     } catch (error) {
       return { status: 'error', error: error.message };
@@ -149,13 +158,13 @@ class SocialMediaIntegration {
 
     try {
       console.log('📘 Facebook post:', content.substring(0, 100) + '...');
-      
+
       return {
         status: 'success',
         platform: 'facebook',
         postId: 'fb_' + Date.now(),
         url: 'https://facebook.com/elevateforhumanity/posts/' + Date.now(),
-        message: 'Posted to Facebook successfully'
+        message: 'Posted to Facebook successfully',
       };
     } catch (error) {
       return { status: 'error', error: error.message };
@@ -169,13 +178,14 @@ class SocialMediaIntegration {
 
     try {
       console.log('💼 LinkedIn post:', content.substring(0, 100) + '...');
-      
+
       return {
         status: 'success',
         platform: 'linkedin',
         postId: 'li_' + Date.now(),
-        url: 'https://linkedin.com/company/elevateforhumanity/posts/' + Date.now(),
-        message: 'Posted to LinkedIn successfully'
+        url:
+          'https://linkedin.com/company/elevateforhumanity/posts/' + Date.now(),
+        message: 'Posted to LinkedIn successfully',
       };
     } catch (error) {
       return { status: 'error', error: error.message };
@@ -189,13 +199,13 @@ class SocialMediaIntegration {
 
     try {
       console.log('📸 Instagram post:', content.substring(0, 100) + '...');
-      
+
       return {
         status: 'success',
         platform: 'instagram',
         postId: 'ig_' + Date.now(),
         url: 'https://instagram.com/elevateforhumanity/p/' + Date.now(),
-        message: 'Posted to Instagram successfully'
+        message: 'Posted to Instagram successfully',
       };
     } catch (error) {
       return { status: 'error', error: error.message };
@@ -205,7 +215,7 @@ class SocialMediaIntegration {
   async schedulePost(req, res) {
     try {
       const { platforms, message, scheduleTime, templateId } = req.body;
-      
+
       // Store scheduled post (in production, use database)
       const scheduledPost = {
         id: 'sched_' + Date.now(),
@@ -214,7 +224,7 @@ class SocialMediaIntegration {
         templateId,
         scheduleTime: new Date(scheduleTime),
         status: 'scheduled',
-        createdAt: new Date()
+        createdAt: new Date(),
       };
 
       console.log('📅 Post scheduled:', scheduledPost);
@@ -222,9 +232,8 @@ class SocialMediaIntegration {
       res.json({
         success: true,
         scheduledPost,
-        message: 'Post scheduled successfully'
+        message: 'Post scheduled successfully',
       });
-
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -238,27 +247,27 @@ class SocialMediaIntegration {
           totalPosts: 47,
           totalEngagement: 2340,
           totalReach: 15600,
-          averageEngagement: 49.8
+          averageEngagement: 49.8,
         },
         platforms: {
           twitter: {
             posts: 15,
             followers: 1200,
             engagement: 890,
-            reach: 5400
+            reach: 5400,
           },
           facebook: {
             posts: 12,
             followers: 800,
             engagement: 650,
-            reach: 4200
+            reach: 4200,
           },
           linkedin: {
             posts: 20,
             followers: 2100,
             engagement: 800,
-            reach: 6000
-          }
+            reach: 6000,
+          },
         },
         topPosts: [
           {
@@ -266,16 +275,16 @@ class SocialMediaIntegration {
             content: 'AI & Data Science careers are booming...',
             engagement: 156,
             reach: 2400,
-            date: '2025-09-10'
+            date: '2025-09-10',
           },
           {
             platform: 'twitter',
             content: 'Federal funding available for workforce development...',
             engagement: 89,
             reach: 1800,
-            date: '2025-09-12'
-          }
-        ]
+            date: '2025-09-12',
+          },
+        ],
       };
 
       res.json(analytics);
@@ -290,15 +299,14 @@ class SocialMediaIntegration {
         twitter: await this.testTwitterConnection(),
         facebook: await this.testFacebookConnection(),
         linkedin: await this.testLinkedInConnection(),
-        instagram: await this.testInstagramConnection()
+        instagram: await this.testInstagramConnection(),
       };
 
       res.json({
         success: true,
         tests,
-        message: 'Connection tests completed'
+        message: 'Connection tests completed',
       });
-
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

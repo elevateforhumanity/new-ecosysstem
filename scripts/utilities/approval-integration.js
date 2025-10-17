@@ -15,17 +15,22 @@ const crypto = require('crypto');
 function createSupabaseClient() {
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY;
-  
+
   if (!supabaseUrl || !supabaseServiceKey) {
-    console.warn('Supabase credentials not configured - approval system will be disabled');
+    console.warn(
+      'Supabase credentials not configured - approval system will be disabled'
+    );
     return null;
   }
-  
+
   return createClient(supabaseUrl, supabaseServiceKey);
 }
 
 const supa = createSupabaseClient();
-const SECRET = process.env.APPROVAL_SECRET || process.env.JWT_SECRET || 'efh-default-secret-change-in-production';
+const SECRET =
+  process.env.APPROVAL_SECRET ||
+  process.env.JWT_SECRET ||
+  'efh-default-secret-change-in-production';
 const BASE = process.env.APPROVAL_BASE_URL || 'http://localhost:5000/approvals';
 
 /**
@@ -34,7 +39,9 @@ const BASE = process.env.APPROVAL_BASE_URL || 'http://localhost:5000/approvals';
 async function handleDecision(req, res, decision) {
   try {
     if (!supa) {
-      return res.status(500).send('Approval system not configured - missing Supabase credentials');
+      return res
+        .status(500)
+        .send('Approval system not configured - missing Supabase credentials');
     }
 
     const token = String(req.query.token || '');
@@ -54,14 +61,17 @@ async function handleDecision(req, res, decision) {
       .single();
 
     if (!rec) {
-      return res.status(400).send('This approval link is invalid or already used.');
+      return res
+        .status(400)
+        .send('This approval link is invalid or already used.');
     }
 
     // Mark decided
-    await supa.from('case_manager_approvals')
-      .update({ 
-        status: decision, 
-        decided_at: new Date().toISOString() 
+    await supa
+      .from('case_manager_approvals')
+      .update({
+        status: decision,
+        decided_at: new Date().toISOString(),
       })
       .eq('id', rec.id);
 
@@ -69,24 +79,24 @@ async function handleDecision(req, res, decision) {
       // Mark enrollment active in Supabase (no payment required)
       await markEnrollmentActive({
         student_email: payload.student_email,
-        program_slug: payload.program_slug
+        program_slug: payload.program_slug,
       });
-      
+
       // Add funding note
       await addFundingNote(payload.student_email, {
         voucher_id: payload.voucher_id || null,
         funding_source: payload.funding_source || null,
         approved_by: payload.case_manager_email,
-        approval_method: 'case_manager_email'
+        approval_method: 'case_manager_email',
       });
-      
+
       return res.send(`
         <h1>✅ Enrollment Approved</h1>
         <p>Student <strong>${payload.student_email}</strong> has been activated for <strong>${payload.program_slug}</strong>.</p>
         <p>They can now access the course materials.</p>
       `);
     }
-    
+
     return res.send(`
       <h1>❌ Enrollment Declined</h1>
       <p>The request for <strong>${payload.student_email}</strong> to join <strong>${payload.program_slug}</strong> has been declined.</p>
@@ -106,22 +116,27 @@ async function markEnrollmentActive({ student_email, program_slug }) {
       .select('id')
       .eq('email', student_email)
       .single();
-    
+
     if (!appUser) {
       console.log(`User not found for email: ${student_email}`);
       return;
     }
 
-    await supa.from('enrollments').upsert({
-      user_id: appUser.id,
-      program_slug,
-      status: 'active',
-      started_at: new Date().toISOString()
-    }, { 
-      onConflict: 'user_id,program_slug' 
-    });
-    
-    console.log(`✅ Enrollment activated via approval: ${program_slug} for ${student_email}`);
+    await supa.from('enrollments').upsert(
+      {
+        user_id: appUser.id,
+        program_slug,
+        status: 'active',
+        started_at: new Date().toISOString(),
+      },
+      {
+        onConflict: 'user_id,program_slug',
+      }
+    );
+
+    console.log(
+      `✅ Enrollment activated via approval: ${program_slug} for ${student_email}`
+    );
   } catch (e) {
     console.error('Failed to mark enrollment active:', e);
   }
@@ -136,13 +151,13 @@ async function addFundingNote(student_email, noteData) {
       .select('id')
       .eq('email', student_email)
       .single();
-    
+
     if (appUser) {
       await supa.from('notes').insert({
         user_id: appUser.id,
         type: 'funding',
         content: `Case manager approval: ${JSON.stringify(noteData, null, 2)}`,
-        created_at: new Date().toISOString()
+        created_at: new Date().toISOString(),
       });
     }
   } catch (e) {
@@ -154,9 +169,17 @@ async function addFundingNote(student_email, noteData) {
  * Send email to case manager with approve/decline links
  * Currently logs to console - replace with actual email provider
  */
-async function sendCaseManagerEmail({ to, student_email, program_slug, voucher_id, funding_source, approveUrl, declineUrl }) {
+async function sendCaseManagerEmail({
+  to,
+  student_email,
+  program_slug,
+  voucher_id,
+  funding_source,
+  approveUrl,
+  declineUrl,
+}) {
   const subject = `Student Enrollment Approval: ${student_email} → ${program_slug}`;
-  
+
   const body = `
     <h2>Student Enrollment Request</h2>
     <p><strong>Student:</strong> ${student_email}</p>
@@ -200,19 +223,43 @@ function registerApprovalRoutes(app) {
   app.post('/api/approvals/request', async (req, res) => {
     try {
       if (!supa) {
-        return res.status(500).json({ ok: false, error: 'Approval system not configured' });
+        return res
+          .status(500)
+          .json({ ok: false, error: 'Approval system not configured' });
       }
 
-      const { student_email, program_slug, voucher_id, case_manager_email, funding_source } = req.body || {};
-      
+      const {
+        student_email,
+        program_slug,
+        voucher_id,
+        case_manager_email,
+        funding_source,
+      } = req.body || {};
+
       if (!student_email || !program_slug || !case_manager_email) {
-        return res.status(400).json({ ok: false, error: 'Missing required fields: student_email, program_slug, case_manager_email' });
+        return res.status(400).json({
+          ok: false,
+          error:
+            'Missing required fields: student_email, program_slug, case_manager_email',
+        });
       }
 
       // Create one-time token (JWT) with short expiry (72h)
-      const payload = { student_email, program_slug, voucher_id, case_manager_email, funding_source };
-      const token = jwt.sign(payload, SECRET, { algorithm: 'HS256', expiresIn: '72h' });
-      const token_hash = crypto.createHash('sha256').update(token).digest('hex');
+      const payload = {
+        student_email,
+        program_slug,
+        voucher_id,
+        case_manager_email,
+        funding_source,
+      };
+      const token = jwt.sign(payload, SECRET, {
+        algorithm: 'HS256',
+        expiresIn: '72h',
+      });
+      const token_hash = crypto
+        .createHash('sha256')
+        .update(token)
+        .digest('hex');
 
       // Find or create app_user
       let user_id = null;
@@ -221,7 +268,7 @@ function registerApprovalRoutes(app) {
         .select('id')
         .eq('email', student_email)
         .maybeSingle();
-      
+
       if (existingUser) {
         user_id = existingUser.id;
       } else {
@@ -236,13 +283,13 @@ function registerApprovalRoutes(app) {
 
       await supa.from('case_manager_approvals').insert({
         user_id,
-        student_email, 
-        program_slug, 
-        voucher_id, 
-        case_manager_email, 
-        funding_source, 
-        token_hash, 
-        status: 'pending'
+        student_email,
+        program_slug,
+        voucher_id,
+        case_manager_email,
+        funding_source,
+        token_hash,
+        status: 'pending',
       });
 
       const approveUrl = `${BASE}/accept?token=${encodeURIComponent(token)}`;
@@ -251,12 +298,12 @@ function registerApprovalRoutes(app) {
       // Send email to case manager
       await sendCaseManagerEmail({
         to: case_manager_email,
-        student_email, 
-        program_slug, 
-        voucher_id, 
+        student_email,
+        program_slug,
+        voucher_id,
         funding_source,
-        approveUrl, 
-        declineUrl
+        approveUrl,
+        declineUrl,
       });
 
       res.json({ ok: true, message: 'Approval request sent to case manager' });
@@ -279,36 +326,40 @@ function registerApprovalRoutes(app) {
   app.get('/api/approvals/list', async (req, res) => {
     try {
       if (!supa) {
-        return res.status(500).json({ error: 'Approval system not configured' });
+        return res
+          .status(500)
+          .json({ error: 'Approval system not configured' });
       }
 
       const { q = '', status = '' } = req.query;
-      
+
       let qb = supa
         .from('case_manager_approvals')
         .select('*')
         .order('created_at', { ascending: false });
-      
+
       if (status) {
         qb = qb.eq('status', status);
       }
-      
+
       const { data, error } = await qb;
-      
+
       if (error) {
         return res.status(500).json({ error: error.message });
       }
-      
+
       // Client-side filtering for search
       const needle = q.toLowerCase();
       const filtered = needle
-        ? (data || []).filter(r =>
-            (r.student_email || '').toLowerCase().includes(needle) ||
-            (r.program_slug || '').toLowerCase().includes(needle) ||
-            (r.voucher_id || '').toLowerCase().includes(needle) ||
-            (r.case_manager_email || '').toLowerCase().includes(needle))
+        ? (data || []).filter(
+            (r) =>
+              (r.student_email || '').toLowerCase().includes(needle) ||
+              (r.program_slug || '').toLowerCase().includes(needle) ||
+              (r.voucher_id || '').toLowerCase().includes(needle) ||
+              (r.case_manager_email || '').toLowerCase().includes(needle)
+          )
         : data;
-      
+
       res.json(filtered || []);
     } catch (e) {
       console.error('List approvals error:', e);
@@ -324,13 +375,17 @@ function registerApprovalRoutes(app) {
   app.post('/api/approvals/admin_decide', async (req, res) => {
     try {
       if (!supa) {
-        return res.status(500).json({ error: 'Approval system not configured' });
+        return res
+          .status(500)
+          .json({ error: 'Approval system not configured' });
       }
 
       const { id, decision } = req.body || {};
-      
+
       if (!id || !['approved', 'declined'].includes(decision)) {
-        return res.status(400).json({ error: 'Invalid request - need id and decision (approved|declined)' });
+        return res.status(400).json({
+          error: 'Invalid request - need id and decision (approved|declined)',
+        });
       }
 
       // Load record
@@ -339,20 +394,21 @@ function registerApprovalRoutes(app) {
         .select('*')
         .eq('id', id)
         .single();
-      
+
       if (error || !rec) {
         return res.status(404).json({ error: 'Approval not found' });
       }
-      
+
       if (rec.status !== 'pending') {
         return res.status(400).json({ error: 'Already decided' });
       }
 
       // Update status
-      await supa.from('case_manager_approvals')
-        .update({ 
-          status: decision, 
-          decided_at: new Date().toISOString() 
+      await supa
+        .from('case_manager_approvals')
+        .update({
+          status: decision,
+          decided_at: new Date().toISOString(),
         })
         .eq('id', id);
 
@@ -363,32 +419,35 @@ function registerApprovalRoutes(app) {
           .select('id')
           .eq('email', rec.student_email)
           .single();
-        
+
         if (appUser) {
-          await supa.from('enrollments').upsert({
-            user_id: appUser.id, 
-            program_slug: rec.program_slug, 
-            status: 'active', 
-            started_at: new Date().toISOString()
-          }, { 
-            onConflict: 'user_id,program_slug' 
-          });
-          
+          await supa.from('enrollments').upsert(
+            {
+              user_id: appUser.id,
+              program_slug: rec.program_slug,
+              status: 'active',
+              started_at: new Date().toISOString(),
+            },
+            {
+              onConflict: 'user_id,program_slug',
+            }
+          );
+
           await supa.from('notes').insert({
-            user_id: appUser.id, 
+            user_id: appUser.id,
             type: 'admin',
-            content: JSON.stringify({ 
+            content: JSON.stringify({
               action: 'admin_approval',
-              voucher_id: rec.voucher_id, 
+              voucher_id: rec.voucher_id,
               funding_source: rec.funding_source,
               case_manager: rec.case_manager_email,
-              decided_by: 'admin_dashboard'
+              decided_by: 'admin_dashboard',
             }),
-            created_at: new Date().toISOString()
+            created_at: new Date().toISOString(),
           });
         }
       }
-      
+
       res.json({ ok: true, decision });
     } catch (e) {
       console.error('Admin decision error:', e);
@@ -403,23 +462,25 @@ function registerApprovalRoutes(app) {
   app.get('/api/approvals/stats', async (req, res) => {
     try {
       if (!supa) {
-        return res.status(500).json({ error: 'Approval system not configured' });
+        return res
+          .status(500)
+          .json({ error: 'Approval system not configured' });
       }
 
       const { data } = await supa
         .from('case_manager_approvals')
         .select('status');
-      
+
       const counts = (data || []).reduce((acc, r) => {
         acc[r.status] = (acc[r.status] || 0) + 1;
         return acc;
       }, {});
-      
+
       res.json({
         pending: counts.pending || 0,
         approved: counts.approved || 0,
         declined: counts.declined || 0,
-        total: data?.length || 0
+        total: data?.length || 0,
       });
     } catch (e) {
       console.error('Stats error:', e);

@@ -5,48 +5,48 @@ import path from 'path';
 
 // Priority URLs for the site
 const priorityUrls = [
-    'https://elevateforhumanity.org/',
-    'https://elevateforhumanity.org/programs/',
-    'https://elevateforhumanity.org/programs/cybersecurity/',
-    'https://elevateforhumanity.org/programs/cloud-computing/',
-    'https://elevateforhumanity.org/programs/healthcare-cna/',
-    'https://elevateforhumanity.org/programs/electrical-trades/',
-    'https://elevateforhumanity.org/programs/construction/',
-    'https://elevateforhumanity.org/programs/beauty-wellness/',
-    'https://elevateforhumanity.org/about/',
-    'https://elevateforhumanity.org/employers/',
-    'https://elevateforhumanity.org/contact/',
-    'https://elevateforhumanity.org/blog/',
-    'https://elevateforhumanity.org/privacy/',
-    'https://elevateforhumanity.org/terms/',
-    'https://elevateforhumanity.org/accessibility/',
-    'https://elevateforhumanity.org/faq/'
+  'https://elevateforhumanity.org/',
+  'https://elevateforhumanity.org/programs/',
+  'https://elevateforhumanity.org/programs/cybersecurity/',
+  'https://elevateforhumanity.org/programs/cloud-computing/',
+  'https://elevateforhumanity.org/programs/healthcare-cna/',
+  'https://elevateforhumanity.org/programs/electrical-trades/',
+  'https://elevateforhumanity.org/programs/construction/',
+  'https://elevateforhumanity.org/programs/beauty-wellness/',
+  'https://elevateforhumanity.org/about/',
+  'https://elevateforhumanity.org/employers/',
+  'https://elevateforhumanity.org/contact/',
+  'https://elevateforhumanity.org/blog/',
+  'https://elevateforhumanity.org/privacy/',
+  'https://elevateforhumanity.org/terms/',
+  'https://elevateforhumanity.org/accessibility/',
+  'https://elevateforhumanity.org/faq/',
 ];
 
 // Additional URLs (can be loaded from file or generated)
 const additionalUrls = [
-    // Blog posts
-    'https://elevateforhumanity.org/blog/cybersecurity-career-guide/',
-    'https://elevateforhumanity.org/blog/cloud-computing-trends/',
-    'https://elevateforhumanity.org/blog/healthcare-job-outlook/',
-    'https://elevateforhumanity.org/blog/skilled-trades-opportunities/',
-    'https://elevateforhumanity.org/blog/wioa-funding-guide/',
-    
-    // Program variations
-    'https://elevateforhumanity.org/programs/cybersecurity/curriculum/',
-    'https://elevateforhumanity.org/programs/cybersecurity/schedule/',
-    'https://elevateforhumanity.org/programs/cloud-computing/curriculum/',
-    'https://elevateforhumanity.org/programs/cloud-computing/schedule/',
-    
-    // Location pages (if applicable)
-    'https://elevateforhumanity.org/locations/',
-    'https://elevateforhumanity.org/locations/main-campus/',
-    
-    // Resources
-    'https://elevateforhumanity.org/resources/',
-    'https://elevateforhumanity.org/resources/student-handbook/',
-    'https://elevateforhumanity.org/resources/career-services/',
-    'https://elevateforhumanity.org/resources/financial-aid/'
+  // Blog posts
+  'https://elevateforhumanity.org/blog/cybersecurity-career-guide/',
+  'https://elevateforhumanity.org/blog/cloud-computing-trends/',
+  'https://elevateforhumanity.org/blog/healthcare-job-outlook/',
+  'https://elevateforhumanity.org/blog/skilled-trades-opportunities/',
+  'https://elevateforhumanity.org/blog/wioa-funding-guide/',
+
+  // Program variations
+  'https://elevateforhumanity.org/programs/cybersecurity/curriculum/',
+  'https://elevateforhumanity.org/programs/cybersecurity/schedule/',
+  'https://elevateforhumanity.org/programs/cloud-computing/curriculum/',
+  'https://elevateforhumanity.org/programs/cloud-computing/schedule/',
+
+  // Location pages (if applicable)
+  'https://elevateforhumanity.org/locations/',
+  'https://elevateforhumanity.org/locations/main-campus/',
+
+  // Resources
+  'https://elevateforhumanity.org/resources/',
+  'https://elevateforhumanity.org/resources/student-handbook/',
+  'https://elevateforhumanity.org/resources/career-services/',
+  'https://elevateforhumanity.org/resources/financial-aid/',
 ];
 
 // Combine all URLs
@@ -59,66 +59,74 @@ const SITEMAPS_DIR = 'sitemaps';
 
 // Ensure sitemaps directory exists
 if (!fs.existsSync(SITEMAPS_DIR)) {
-    fs.mkdirSync(SITEMAPS_DIR, { recursive: true });
+  fs.mkdirSync(SITEMAPS_DIR, { recursive: true });
 }
 
 // Generate sitemap chunks
 const sitemapFiles = [];
 for (let i = 0; i < allUrls.length; i += CHUNK_SIZE) {
-    const chunk = allUrls.slice(i, i + CHUNK_SIZE);
-    const chunkNumber = Math.floor(i / CHUNK_SIZE) + 1;
-    const filename = `sitemap-${chunkNumber}.xml`;
-    
-    // Generate XML for this chunk
-    const urlEntries = chunk.map(url => {
-        const lastmod = new Date().toISOString().split('T')[0]; // Today's date
-        let priority = '0.5';
-        let changefreq = 'monthly';
-        
-        // Set priority based on URL importance
-        if (url === BASE_URL + '/') {
-            priority = '1.0';
-            changefreq = 'weekly';
-        } else if (url.includes('/programs/')) {
-            priority = '0.9';
-            changefreq = 'weekly';
-        } else if (url.includes('/about/') || url.includes('/employers/') || url.includes('/contact/')) {
-            priority = '0.8';
-            changefreq = 'monthly';
-        } else if (url.includes('/blog/')) {
-            priority = '0.7';
-            changefreq = 'weekly';
-        }
-        
-        return `  <url>
+  const chunk = allUrls.slice(i, i + CHUNK_SIZE);
+  const chunkNumber = Math.floor(i / CHUNK_SIZE) + 1;
+  const filename = `sitemap-${chunkNumber}.xml`;
+
+  // Generate XML for this chunk
+  const urlEntries = chunk
+    .map((url) => {
+      const lastmod = new Date().toISOString().split('T')[0]; // Today's date
+      let priority = '0.5';
+      let changefreq = 'monthly';
+
+      // Set priority based on URL importance
+      if (url === BASE_URL + '/') {
+        priority = '1.0';
+        changefreq = 'weekly';
+      } else if (url.includes('/programs/')) {
+        priority = '0.9';
+        changefreq = 'weekly';
+      } else if (
+        url.includes('/about/') ||
+        url.includes('/employers/') ||
+        url.includes('/contact/')
+      ) {
+        priority = '0.8';
+        changefreq = 'monthly';
+      } else if (url.includes('/blog/')) {
+        priority = '0.7';
+        changefreq = 'weekly';
+      }
+
+      return `  <url>
     <loc>${url}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
   </url>`;
-    }).join('\n');
-    
-    const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+    })
+    .join('\n');
+
+  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urlEntries}
 </urlset>`;
-    
-    // Write sitemap file
-    const filepath = path.join(SITEMAPS_DIR, filename);
-    fs.writeFileSync(filepath, sitemapXml);
-    sitemapFiles.push(filename);
-    
-    console.log(`Generated ${filename} with ${chunk.length} URLs`);
+
+  // Write sitemap file
+  const filepath = path.join(SITEMAPS_DIR, filename);
+  fs.writeFileSync(filepath, sitemapXml);
+  sitemapFiles.push(filename);
+
+  console.log(`Generated ${filename} with ${chunk.length} URLs`);
 }
 
 // Generate sitemap index
-const sitemapIndexEntries = sitemapFiles.map(filename => {
+const sitemapIndexEntries = sitemapFiles
+  .map((filename) => {
     const lastmod = new Date().toISOString().split('T')[0];
     return `  <sitemap>
     <loc>${BASE_URL}/sitemaps/${filename}</loc>
     <lastmod>${lastmod}</lastmod>
   </sitemap>`;
-}).join('\n');
+  })
+  .join('\n');
 
 const sitemapIndexXml = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -128,11 +136,13 @@ ${sitemapIndexEntries}
 // Write sitemap index
 fs.writeFileSync('sitemap_index.xml', sitemapIndexXml);
 
-console.log(`\nGenerated sitemap_index.xml with ${sitemapFiles.length} sitemap files`);
+console.log(
+  `\nGenerated sitemap_index.xml with ${sitemapFiles.length} sitemap files`
+);
 console.log(`Total URLs: ${allUrls.length}`);
 console.log('\nFiles created:');
 console.log('- sitemap_index.xml');
-sitemapFiles.forEach(file => console.log(`- sitemaps/${file}`));
+sitemapFiles.forEach((file) => console.log(`- sitemaps/${file}`));
 
 // Generate human-readable sitemap
 const humanSitemapHtml = `<!DOCTYPE html>
@@ -189,9 +199,12 @@ const humanSitemapHtml = `<!DOCTYPE html>
             <p class="text-gray-600 mb-4">For search engines and automated tools:</p>
             <ul class="space-y-2">
                 <li><a href="/sitemap_index.xml" class="text-blue-600 hover:underline">sitemap_index.xml</a> - Main sitemap index</li>
-                ${sitemapFiles.map(file => 
-                    `<li><a href="/sitemaps/${file}" class="text-blue-600 hover:underline">${file}</a></li>`
-                ).join('\n                ')}
+                ${sitemapFiles
+                  .map(
+                    (file) =>
+                      `<li><a href="/sitemaps/${file}" class="text-blue-600 hover:underline">${file}</a></li>`
+                  )
+                  .join('\n                ')}
             </ul>
         </div>
     </div>

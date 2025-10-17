@@ -1,16 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: 'class',
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: '2rem',
       screens: {
-        "2xl": "1400px",
+        '2xl': '1400px',
       },
     },
     extend: {
@@ -60,7 +57,8 @@ export default {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-conic':
+          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'gradient-brand': 'linear-gradient(90deg, #22d3ee, #60a5fa, #a78bfa)',
       },
       backdropBlur: {
@@ -71,7 +69,7 @@ export default {
         'slide-up': 'slideUp 0.5s ease-out',
         'slide-down': 'slideDown 0.5s ease-out',
         'scale-in': 'scaleIn 0.3s ease-out',
-        'float': 'float 3s ease-in-out infinite',
+        float: 'float 3s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -98,4 +96,4 @@ export default {
     },
   },
   plugins: [],
-}
+};

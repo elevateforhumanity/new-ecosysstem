@@ -30,17 +30,17 @@ app.use(express.static('.'));
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
-  res.json({ 
+  res.json({
     status: 'healthy',
     timestamp: new Date().toISOString(),
     message: 'EFH Multi-Site Ecosystem Running',
-    securityStatus: 'XSS vulnerability fixed - using DOMParser'
+    securityStatus: 'XSS vulnerability fixed - using DOMParser',
   });
 });
 
 // Sister site routes
 const routes = ['hub', 'programs', 'lms', 'connect', 'compliance'];
-routes.forEach(route => {
+routes.forEach((route) => {
   app.get(`/${route}`, (req, res) => {
     res.sendFile(path.join(__dirname, `${route}.html`));
   });
@@ -52,7 +52,9 @@ app.get('/', (req, res) => {
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 EFH Ecosystem running on http://localhost:${PORT}`);
-  console.log('🔒 Security Status: XSS vulnerability fixed in all universal scripts');
+  console.log(
+    '🔒 Security Status: XSS vulnerability fixed in all universal scripts'
+  );
   console.log('📄 Sister Sites: /hub /programs /lms /connect /compliance');
 });
 

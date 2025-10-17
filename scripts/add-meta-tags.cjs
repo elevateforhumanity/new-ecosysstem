@@ -32,33 +32,37 @@ const metaTags = `
 
 function addMetaTags(filePath) {
   let content = fs.readFileSync(filePath, 'utf8');
-  
+
   // Check if already has meta tags
   if (content.includes('G-EFHWORKFORCE01')) {
     return false;
   }
-  
+
   // Add after <head> tag
   if (content.includes('<head>')) {
     content = content.replace('<head>', '<head>' + metaTags);
     fs.writeFileSync(filePath, content);
     return true;
   }
-  
+
   return false;
 }
 
 function processDirectory(dir) {
   let count = 0;
-  
+
   function scan(directory) {
     const items = fs.readdirSync(directory);
-    
-    items.forEach(item => {
+
+    items.forEach((item) => {
       const fullPath = path.join(directory, item);
       const stat = fs.statSync(fullPath);
-      
-      if (stat.isDirectory() && !item.includes('node_modules') && !item.includes('.git')) {
+
+      if (
+        stat.isDirectory() &&
+        !item.includes('node_modules') &&
+        !item.includes('.git')
+      ) {
         scan(fullPath);
       } else if (item.endsWith('.html')) {
         if (addMetaTags(fullPath)) {
@@ -68,18 +72,18 @@ function processDirectory(dir) {
       }
     });
   }
-  
+
   if (fs.existsSync(dir)) {
     scan(dir);
   }
-  
+
   return count;
 }
 
 console.log('🚀 Adding meta tags to all pages...\n');
 
 let total = 0;
-['public', 'sites', 'pages', 'docs'].forEach(dir => {
+['public', 'sites', 'pages', 'docs'].forEach((dir) => {
   const count = processDirectory(dir);
   total += count;
 });

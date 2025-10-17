@@ -12,7 +12,11 @@ router.post('/api/renew-license', (req, res) => {
 
   const { email, productId } = validation;
   const renewed = generateLicense(email, productId, 365);
-  res.json({ success: true, newLicense: renewed.licenseKey, expiresAt: renewed.expiresAt });
+  res.json({
+    success: true,
+    newLicense: renewed.licenseKey,
+    expiresAt: renewed.expiresAt,
+  });
 });
 
 module.exports = router;

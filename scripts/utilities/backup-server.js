@@ -16,7 +16,6 @@
   See LICENSE file for details.
 */
 
-
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -52,7 +51,11 @@ app.get('/lms', (req, res) => {
 
 // Health check
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', server: 'backup', timestamp: new Date().toISOString() });
+  res.json({
+    status: 'ok',
+    server: 'backup',
+    timestamp: new Date().toISOString(),
+  });
 });
 
 // Catch all

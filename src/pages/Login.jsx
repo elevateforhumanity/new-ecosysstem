@@ -3,50 +3,58 @@
   Commercial License. No resale, sublicensing, or redistribution allowed.
   See LICENSE file for details.
 */
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
-import { Separator } from "../components/ui/separator";
-import { AlertCircle, Mail, Lock, Chrome } from "lucide-react";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '../components/ui/card';
+import { Separator } from '../components/ui/separator';
+import { AlertCircle, Mail, Lock, Chrome } from 'lucide-react';
 
 export default function Login() {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
     rememberMe: false,
   });
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    const value =
+      e.target.type === 'checkbox' ? e.target.checked : e.target.value;
     setFormData({ ...formData, [e.target.name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setError('');
     setLoading(true);
-    
+
     if (!formData.email || !formData.password) {
-      setError("Please enter both email and password");
+      setError('Please enter both email and password');
       setLoading(false);
       return;
     }
-    
+
     try {
       const { supabase } = await import('../supabaseClient');
       const { data, error } = await supabase.auth.signInWithPassword({
         email: formData.email,
         password: formData.password,
       });
-      
+
       if (error) throw error;
-      
+
       // Redirect to dashboard on success
       window.location.href = '/lms/dashboard';
     } catch (err) {
@@ -65,8 +73,8 @@ export default function Login() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/lms/dashboard`
-        }
+          redirectTo: `${window.location.origin}/lms/dashboard`,
+        },
       });
       if (error) throw error;
     } catch (err) {
@@ -169,7 +177,7 @@ export default function Login() {
                 size="lg"
                 disabled={loading}
               >
-                {loading ? "Signing in..." : "Sign In"}
+                {loading ? 'Signing in...' : 'Sign In'}
               </Button>
             </form>
 
@@ -199,7 +207,7 @@ export default function Login() {
           </CardContent>
           <CardFooter className="flex flex-col space-y-4">
             <div className="text-sm text-center text-brand-text-muted">
-              Don't have an account?{" "}
+              Don't have an account?{' '}
               <Link
                 to="/get-started"
                 className="text-brand-info hover:text-brand-info font-semibold"
@@ -208,12 +216,18 @@ export default function Login() {
               </Link>
             </div>
             <div className="text-xs text-center text-brand-text-light">
-              By signing in, you agree to our{" "}
-              <Link to="/terms-of-service" className="underline hover:text-brand-text">
+              By signing in, you agree to our{' '}
+              <Link
+                to="/terms-of-service"
+                className="underline hover:text-brand-text"
+              >
                 Terms of Service
-              </Link>{" "}
-              and{" "}
-              <Link to="/privacy-policy" className="underline hover:text-brand-text">
+              </Link>{' '}
+              and{' '}
+              <Link
+                to="/privacy-policy"
+                className="underline hover:text-brand-text"
+              >
                 Privacy Policy
               </Link>
             </div>
@@ -223,8 +237,11 @@ export default function Login() {
         {/* Help Text */}
         <div className="mt-8 text-center">
           <p className="text-sm text-brand-text-muted">
-            Need help?{" "}
-            <Link to="/support" className="text-brand-info hover:text-brand-info font-medium">
+            Need help?{' '}
+            <Link
+              to="/support"
+              className="text-brand-info hover:text-brand-info font-medium"
+            >
               Contact Support
             </Link>
           </p>

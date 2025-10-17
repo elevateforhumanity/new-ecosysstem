@@ -15,7 +15,7 @@ fs.mkdirSync(distDir, { recursive: true });
 // Essential HTML files for the ecosystem
 const essentialFiles = [
   'index.html',
-  'hub.html', 
+  'hub.html',
   'programs.html',
   'lms.html',
   'connect.html',
@@ -25,15 +25,15 @@ const essentialFiles = [
   'account.html',
   'student-portal.html',
   '404.html',
-  '410.html'
+  '410.html',
 ];
 
 // Copy essential HTML files
 console.log('📄 Copying essential HTML files...');
-essentialFiles.forEach(file => {
+essentialFiles.forEach((file) => {
   const srcPath = path.join(__dirname, '..', file);
   const destPath = path.join(distDir, file);
-  
+
   if (fs.existsSync(srcPath)) {
     fs.copyFileSync(srcPath, destPath);
     console.log(`✅ Copied ${file}`);
@@ -43,12 +43,18 @@ essentialFiles.forEach(file => {
 });
 
 // Copy configuration files
-const configFiles = ['_redirects', '_headers', 'robots.txt', 'sitemap.xml', 'sitemap-index.xml'];
+const configFiles = [
+  '_redirects',
+  '_headers',
+  'robots.txt',
+  'sitemap.xml',
+  'sitemap-index.xml',
+];
 console.log('⚙️  Copying configuration files...');
-configFiles.forEach(file => {
+configFiles.forEach((file) => {
   const srcPath = path.join(__dirname, '..', file);
   const destPath = path.join(distDir, file);
-  
+
   if (fs.existsSync(srcPath)) {
     fs.copyFileSync(srcPath, destPath);
     console.log(`✅ Copied ${file}`);
@@ -62,24 +68,26 @@ const distImagesDir = path.join(distDir, 'images');
 if (fs.existsSync(imagesDir)) {
   console.log('🖼️  Copying optimized images...');
   fs.mkdirSync(distImagesDir, { recursive: true });
-  
+
   const imageFiles = fs.readdirSync(imagesDir);
   let copiedCount = 0;
-  
-  imageFiles.forEach(file => {
+
+  imageFiles.forEach((file) => {
     const srcPath = path.join(imagesDir, file);
     const destPath = path.join(distImagesDir, file);
     const stats = fs.statSync(srcPath);
-    
+
     // Only copy images under 5MB to avoid build issues
     if (stats.size < 5 * 1024 * 1024) {
       fs.copyFileSync(srcPath, destPath);
       copiedCount++;
     } else {
-      console.log(`⚠️  Skipped large image: ${file} (${Math.round(stats.size / 1024 / 1024)}MB)`);
+      console.log(
+        `⚠️  Skipped large image: ${file} (${Math.round(stats.size / 1024 / 1024)}MB)`
+      );
     }
   });
-  
+
   console.log(`✅ Copied ${copiedCount} optimized images`);
 }
 
@@ -89,13 +97,13 @@ fs.mkdirSync(apiDir, { recursive: true });
 
 // Create basic API endpoints as static files for static hosting
 const apiEndpoints = {
-  'readiness': { status: 'ok', message: 'Site is ready' },
-  'metrics': { 
-    students: 2500, 
-    completion_rate: 94, 
+  readiness: { status: 'ok', message: 'Site is ready' },
+  metrics: {
+    students: 2500,
+    completion_rate: 94,
     job_placement: 89,
-    avg_salary: 85000 
-  }
+    avg_salary: 85000,
+  },
 };
 
 Object.entries(apiEndpoints).forEach(([endpoint, data]) => {
@@ -108,23 +116,23 @@ Object.entries(apiEndpoints).forEach(([endpoint, data]) => {
 const getFolderSize = (folderPath) => {
   let totalSize = 0;
   const files = fs.readdirSync(folderPath);
-  
-  files.forEach(file => {
+
+  files.forEach((file) => {
     const filePath = path.join(folderPath, file);
     const stats = fs.statSync(filePath);
-    
+
     if (stats.isDirectory()) {
       totalSize += getFolderSize(filePath);
     } else {
       totalSize += stats.size;
     }
   });
-  
+
   return totalSize;
 };
 
 const finalSize = getFolderSize(distDir);
-const finalSizeMB = Math.round(finalSize / 1024 / 1024 * 100) / 100;
+const finalSizeMB = Math.round((finalSize / 1024 / 1024) * 100) / 100;
 
 console.log('');
 console.log('🎉 Build complete!');
@@ -133,7 +141,9 @@ console.log(`📁 Output directory: ${distDir}`);
 console.log('');
 
 if (finalSizeMB > 100) {
-  console.log('⚠️  Warning: Package is still large. Consider further optimization.');
+  console.log(
+    '⚠️  Warning: Package is still large. Consider further optimization.'
+  );
 } else {
   console.log('✅ Package size is optimized for deployment!');
 }

@@ -1,4 +1,4 @@
-import { SEO } from "../lib/seo/SEO";
+import { SEO } from '../lib/seo/SEO';
 
 export default function DonatePage() {
   return (

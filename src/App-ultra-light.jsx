@@ -1,132 +1,209 @@
 // Ultra-lightweight React app - no external dependencies
-import React from "react";
+import React from 'react';
 
 export default function App() {
   return (
-    <div style={{
-      margin: 0,
-      padding: '1rem',
-      fontFamily: 'system-ui, sans-serif',
-      lineHeight: 1.6,
-      maxWidth: '1200px',
-      marginLeft: 'auto',
-      marginRight: 'auto'
-    }}>
+    <div
+      style={{
+        margin: 0,
+        padding: '1rem',
+        fontFamily: 'system-ui, sans-serif',
+        lineHeight: 1.6,
+        maxWidth: '1200px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      }}
+    >
       {/* Header */}
       <header style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <h1 style={{ 
-          fontSize: '2.5rem', 
-          color: 'var(--brand-info)', 
-          margin: '0 0 0.5rem 0' 
-        }}>
+        <h1
+          style={{
+            fontSize: '2.5rem',
+            color: 'var(--brand-info)',
+            margin: '0 0 0.5rem 0',
+          }}
+        >
           🚀 Elevate for Humanity
         </h1>
-        <p style={{ 
-          fontSize: '1.2rem', 
-          color: 'var(--brand-text-muted)',
-          margin: 0
-        }}>
-          <strong>Government Contracting • Philanthropy • Elevate Learn2Earn Workforce</strong>
+        <p
+          style={{
+            fontSize: '1.2rem',
+            color: 'var(--brand-text-muted)',
+            margin: 0,
+          }}
+        >
+          <strong>
+            Government Contracting • Philanthropy • Elevate Learn2Earn Workforce
+          </strong>
         </p>
       </header>
 
       {/* Services Grid */}
       <section style={{ marginBottom: '2rem' }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '1rem'
-        }}>
-          <div style={{
-            padding: '1.5rem',
-            border: '1px solid var(--brand-border)',
-            borderRadius: '8px',
-            backgroundColor: 'var(--brand-surface)'
-          }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '1rem',
+          }}
+        >
+          <div
+            style={{
+              padding: '1.5rem',
+              border: '1px solid var(--brand-border)',
+              borderRadius: '8px',
+              backgroundColor: 'var(--brand-surface)',
+            }}
+          >
             <h3 style={{ color: 'var(--brand-info)', margin: '0 0 1rem 0' }}>
               🏛️ Government Contracting
             </h3>
             <p style={{ margin: 0, color: 'var(--brand-text)' }}>
-              Veteran-Owned Small Business providing Elevate Learn2Earn Workforce and educational services to government agencies.
+              Veteran-Owned Small Business providing Elevate Learn2Earn
+              Workforce and educational services to government agencies.
             </p>
           </div>
 
-          <div style={{
-            padding: '1.5rem',
-            border: '1px solid var(--brand-border)',
-            borderRadius: '8px',
-            backgroundColor: 'var(--brand-surface)'
-          }}>
-            <h3 style={{ color: 'var(--brand-secondary)', margin: '0 0 1rem 0' }}>
+          <div
+            style={{
+              padding: '1.5rem',
+              border: '1px solid var(--brand-border)',
+              borderRadius: '8px',
+              backgroundColor: 'var(--brand-surface)',
+            }}
+          >
+            <h3
+              style={{ color: 'var(--brand-secondary)', margin: '0 0 1rem 0' }}
+            >
               💜 Philanthropy & Grants
             </h3>
             <p style={{ margin: 0, color: 'var(--brand-text)' }}>
-              Elizabeth L. Greene Foundation creating pathways to prosperity through strategic giving.
+              Elizabeth L. Greene Foundation creating pathways to prosperity
+              through strategic giving.
             </p>
           </div>
 
-          <div style={{
-            padding: '1.5rem',
-            border: '1px solid var(--brand-border)',
-            borderRadius: '8px',
-            backgroundColor: 'var(--brand-surface)'
-          }}>
+          <div
+            style={{
+              padding: '1.5rem',
+              border: '1px solid var(--brand-border)',
+              borderRadius: '8px',
+              backgroundColor: 'var(--brand-surface)',
+            }}
+          >
             <h3 style={{ color: 'var(--brand-success)', margin: '0 0 1rem 0' }}>
               ♿ Accessibility & Compliance
             </h3>
             <p style={{ margin: 0, color: 'var(--brand-text)' }}>
-              WCAG 2.1 AA Compliance with comprehensive accessibility features for all users.
+              WCAG 2.1 AA Compliance with comprehensive accessibility features
+              for all users.
             </p>
           </div>
         </div>
       </section>
 
       {/* Stats */}
-      <section style={{
-        backgroundColor: 'var(--brand-surface)',
-        padding: '1.5rem',
-        borderRadius: '8px',
-        marginBottom: '2rem'
-      }}>
-        <h2 style={{ 
-          textAlign: 'center', 
-          color: 'var(--brand-info)',
-          margin: '0 0 1rem 0'
-        }}>
+      <section
+        style={{
+          backgroundColor: 'var(--brand-surface)',
+          padding: '1.5rem',
+          borderRadius: '8px',
+          marginBottom: '2rem',
+        }}
+      >
+        <h2
+          style={{
+            textAlign: 'center',
+            color: 'var(--brand-info)',
+            margin: '0 0 1rem 0',
+          }}
+        >
           Our Impact
         </h2>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
-          gap: '1rem',
-          textAlign: 'center'
-        }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+            gap: '1rem',
+            textAlign: 'center',
+          }}
+        >
           <div>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--brand-info)' }}>1,247</div>
-            <div style={{ color: 'var(--brand-text-muted)', fontSize: '0.9rem' }}>Learners</div>
+            <div
+              style={{
+                fontSize: '2rem',
+                fontWeight: 'bold',
+                color: 'var(--brand-info)',
+              }}
+            >
+              1,247
+            </div>
+            <div
+              style={{ color: 'var(--brand-text-muted)', fontSize: '0.9rem' }}
+            >
+              Learners
+            </div>
           </div>
           <div>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--brand-success)' }}>87%</div>
-            <div style={{ color: 'var(--brand-text-muted)', fontSize: '0.9rem' }}>Graduation</div>
+            <div
+              style={{
+                fontSize: '2rem',
+                fontWeight: 'bold',
+                color: 'var(--brand-success)',
+              }}
+            >
+              87%
+            </div>
+            <div
+              style={{ color: 'var(--brand-text-muted)', fontSize: '0.9rem' }}
+            >
+              Graduation
+            </div>
           </div>
           <div>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--brand-secondary)' }}>$2.85M</div>
-            <div style={{ color: 'var(--brand-text-muted)', fontSize: '0.9rem' }}>Funding</div>
+            <div
+              style={{
+                fontSize: '2rem',
+                fontWeight: 'bold',
+                color: 'var(--brand-secondary)',
+              }}
+            >
+              $2.85M
+            </div>
+            <div
+              style={{ color: 'var(--brand-text-muted)', fontSize: '0.9rem' }}
+            >
+              Funding
+            </div>
           </div>
           <div>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--brand-danger)' }}>82%</div>
-            <div style={{ color: 'var(--brand-text-muted)', fontSize: '0.9rem' }}>Job Placement</div>
+            <div
+              style={{
+                fontSize: '2rem',
+                fontWeight: 'bold',
+                color: 'var(--brand-danger)',
+              }}
+            >
+              82%
+            </div>
+            <div
+              style={{ color: 'var(--brand-text-muted)', fontSize: '0.9rem' }}
+            >
+              Job Placement
+            </div>
           </div>
         </div>
       </section>
 
       {/* Contact */}
-      <section style={{
-        border: '1px solid var(--brand-border)',
-        borderRadius: '8px',
-        padding: '1.5rem',
-        textAlign: 'center'
-      }}>
+      <section
+        style={{
+          border: '1px solid var(--brand-border)',
+          borderRadius: '8px',
+          padding: '1.5rem',
+          textAlign: 'center',
+        }}
+      >
         <h2 style={{ color: 'var(--brand-text)', margin: '0 0 1rem 0' }}>
           Ready to Partner?
         </h2>
@@ -138,7 +215,8 @@ export default function App() {
             💜 <strong>Philanthropy:</strong> grants@elevateforhumanity.org
           </div>
           <div>
-            ♿ <strong>Accessibility:</strong> accessibility@elevateforhumanity.org
+            ♿ <strong>Accessibility:</strong>{' '}
+            accessibility@elevateforhumanity.org
           </div>
         </div>
         <div style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)' }}>

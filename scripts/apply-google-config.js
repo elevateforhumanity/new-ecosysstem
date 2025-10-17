@@ -15,7 +15,7 @@ function loadEnvFile() {
   const envPath = path.join(ROOT, '.env.local');
   if (fs.existsSync(envPath)) {
     const envContent = fs.readFileSync(envPath, 'utf8');
-    envContent.split('\n').forEach(line => {
+    envContent.split('\n').forEach((line) => {
       const trimmed = line.trim();
       if (trimmed && !trimmed.startsWith('#') && trimmed.includes('=')) {
         const [key, ...valueParts] = trimmed.split('=');
@@ -32,24 +32,26 @@ function loadEnvFile() {
 loadEnvFile();
 
 // Get environment variables with fallbacks
-const GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS_ID || process.env.VITE_ANALYTICS_ID;
+const GOOGLE_ANALYTICS_ID =
+  process.env.GOOGLE_ANALYTICS_ID || process.env.VITE_ANALYTICS_ID;
 const GOOGLE_SITE_VERIFICATION = process.env.GOOGLE_SITE_VERIFICATION;
 
 // Placeholder patterns to replace
 const PLACEHOLDERS = {
-  'GA_MEASUREMENT_ID': GOOGLE_ANALYTICS_ID,
-  'GOOGLE_VERIFICATION_CODE_HERE': GOOGLE_SITE_VERIFICATION,
-  'YOUR_GOOGLE_ANALYTICS_ID': GOOGLE_ANALYTICS_ID,
-  'YOUR_GOOGLE_SITE_VERIFICATION': GOOGLE_SITE_VERIFICATION
+  GA_MEASUREMENT_ID: GOOGLE_ANALYTICS_ID,
+  GOOGLE_VERIFICATION_CODE_HERE: GOOGLE_SITE_VERIFICATION,
+  YOUR_GOOGLE_ANALYTICS_ID: GOOGLE_ANALYTICS_ID,
+  YOUR_GOOGLE_SITE_VERIFICATION: GOOGLE_SITE_VERIFICATION,
 };
 
 /**
  * Get all HTML files in the root directory
  */
 function getHtmlFiles() {
-  return fs.readdirSync(ROOT)
-    .filter(file => file.endsWith('.html'))
-    .map(file => path.join(ROOT, file));
+  return fs
+    .readdirSync(ROOT)
+    .filter((file) => file.endsWith('.html'))
+    .map((file) => path.join(ROOT, file));
 }
 
 /**
@@ -65,7 +67,9 @@ function replacePlaceholders(content) {
       const matches = (updatedContent.match(regex) || []).length;
       updatedContent = updatedContent.replace(regex, value);
       replacementsMade += matches;
-      console.log(`  ✓ Replaced ${matches} occurrence(s) of "${placeholder}" with "${value}"`);
+      console.log(
+        `  ✓ Replaced ${matches} occurrence(s) of "${placeholder}" with "${value}"`
+      );
     }
   });
 
@@ -78,18 +82,23 @@ function replacePlaceholders(content) {
 function processFile(filePath) {
   try {
     const content = fs.readFileSync(filePath, 'utf8');
-    const { content: updatedContent, replacementsMade } = replacePlaceholders(content);
+    const { content: updatedContent, replacementsMade } =
+      replacePlaceholders(content);
 
     if (replacementsMade > 0) {
       fs.writeFileSync(filePath, updatedContent, 'utf8');
-      console.log(`✅ Updated ${path.basename(filePath)} (${replacementsMade} replacements)`);
+      console.log(
+        `✅ Updated ${path.basename(filePath)} (${replacementsMade} replacements)`
+      );
       return true;
     } else {
       console.log(`ℹ️  No changes needed for ${path.basename(filePath)}`);
       return false;
     }
   } catch (error) {
-    console.error(`❌ Error processing ${path.basename(filePath)}: ${error.message}`);
+    console.error(
+      `❌ Error processing ${path.basename(filePath)}: ${error.message}`
+    );
     return false;
   }
 }
@@ -104,7 +113,9 @@ function main() {
   // Check if we have the required environment variables
   if (!GOOGLE_ANALYTICS_ID && !GOOGLE_SITE_VERIFICATION) {
     console.log('⚠️  No Google configuration found in environment variables.');
-    console.log('Set GOOGLE_ANALYTICS_ID and/or GOOGLE_SITE_VERIFICATION to apply configurations.\n');
+    console.log(
+      'Set GOOGLE_ANALYTICS_ID and/or GOOGLE_SITE_VERIFICATION to apply configurations.\n'
+    );
     console.log('Example:');
     console.log('  export GOOGLE_ANALYTICS_ID="G-XXXXXXXXXX"');
     console.log('  export GOOGLE_SITE_VERIFICATION="your-verification-code"');
@@ -114,13 +125,15 @@ function main() {
 
   console.log('Configuration values:');
   console.log(`  Google Analytics ID: ${GOOGLE_ANALYTICS_ID || 'Not set'}`);
-  console.log(`  Google Site Verification: ${GOOGLE_SITE_VERIFICATION || 'Not set'}\n`);
+  console.log(
+    `  Google Site Verification: ${GOOGLE_SITE_VERIFICATION || 'Not set'}\n`
+  );
 
   const htmlFiles = getHtmlFiles();
   console.log(`Found ${htmlFiles.length} HTML files to process:\n`);
 
   let totalFilesUpdated = 0;
-  htmlFiles.forEach(file => {
+  htmlFiles.forEach((file) => {
     if (processFile(file)) {
       totalFilesUpdated++;
     }

@@ -24,38 +24,48 @@ const routes = JSON.parse(fs.readFileSync(ROUTES_FILE, 'utf-8'));
 fs.mkdirSync(OUT_DIR, { recursive: true });
 
 // Simple static server to let us request the built files as a browser would.
-const serve = () => new Promise(resolve => {
-  const server = http.createServer((req, res) => {
-    const urlPath = req.url.split('?')[0];
-    let filePath = path.join(DIST_DIR, urlPath === '/' ? 'index.html' : urlPath);
-    if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
-      filePath = path.join(filePath, 'index.html');
-    }
-    if (!fs.existsSync(filePath)) {
-      // Fallback to SPA index
-      filePath = path.join(DIST_DIR, 'index.html');
-    }
-    fs.readFile(filePath, (err, data) => {
-      if (err) {
-        res.statusCode = 500;
-        res.end('Error');
-      } else {
-        res.setHeader('Content-Type', 'text/html; charset=utf-8');
-        res.end(data);
-      }
-    });
-  }).listen(4173, () => resolve(server)); // Vite preview default port
-});
-
-const fetchHtml = (route) => new Promise((resolve, reject) => {
-  const req = http.request({ hostname: 'localhost', port: 4173, path: route, method: 'GET' }, res => {
-    let body = '';
-    res.on('data', c => body += c);
-    res.on('end', () => resolve(body));
+const serve = () =>
+  new Promise((resolve) => {
+    const server = http
+      .createServer((req, res) => {
+        const urlPath = req.url.split('?')[0];
+        let filePath = path.join(
+          DIST_DIR,
+          urlPath === '/' ? 'index.html' : urlPath
+        );
+        if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+          filePath = path.join(filePath, 'index.html');
+        }
+        if (!fs.existsSync(filePath)) {
+          // Fallback to SPA index
+          filePath = path.join(DIST_DIR, 'index.html');
+        }
+        fs.readFile(filePath, (err, data) => {
+          if (err) {
+            res.statusCode = 500;
+            res.end('Error');
+          } else {
+            res.setHeader('Content-Type', 'text/html; charset=utf-8');
+            res.end(data);
+          }
+        });
+      })
+      .listen(4173, () => resolve(server)); // Vite preview default port
   });
-  req.on('error', reject);
-  req.end();
-});
+
+const fetchHtml = (route) =>
+  new Promise((resolve, reject) => {
+    const req = http.request(
+      { hostname: 'localhost', port: 4173, path: route, method: 'GET' },
+      (res) => {
+        let body = '';
+        res.on('data', (c) => (body += c));
+        res.on('end', () => resolve(body));
+      }
+    );
+    req.on('error', reject);
+    req.end();
+  });
 
 (async () => {
   const server = await serve();
@@ -65,7 +75,12 @@ const fetchHtml = (route) => new Promise((resolve, reject) => {
       const safe = route === '/' ? 'index' : route.replace(/\//g, '_');
       const outFile = path.join(OUT_DIR, `${safe}.html`);
       fs.writeFileSync(outFile, html, 'utf-8');
-      console.log('Prerendered', route, '->', path.relative(process.cwd(), outFile));
+      console.log(
+        'Prerendered',
+        route,
+        '->',
+        path.relative(process.cwd(), outFile)
+      );
     }
     console.log('Prerender complete. Files in dist/prerender');
   } catch (e) {

@@ -6,7 +6,14 @@
  */
 
 import { execSync } from 'child_process';
-import { existsSync, unlinkSync, statSync, readdirSync, writeFileSync, readFileSync } from 'fs';
+import {
+  existsSync,
+  unlinkSync,
+  statSync,
+  readdirSync,
+  writeFileSync,
+  readFileSync,
+} from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -15,9 +22,9 @@ const ROOT = join(__dirname, '..');
 
 // Memory thresholds (in MB)
 const THRESHOLDS = {
-  CRITICAL: 800,    // Critical cleanup needed
-  WARNING: 600,     // Start cleanup
-  TARGET: 400       // Target size after cleanup
+  CRITICAL: 800, // Critical cleanup needed
+  WARNING: 600, // Start cleanup
+  TARGET: 400, // Target size after cleanup
 };
 
 // Files/patterns to clean up
@@ -26,22 +33,37 @@ const CLEANUP_TARGETS = [
   { pattern: /^core\.\d+$/, priority: 1, description: 'Core dumps' },
   { pattern: /\.dump$/, priority: 1, description: 'Dump files' },
   { pattern: /\.crash$/, priority: 1, description: 'Crash files' },
-  
+
   // Temporary files
   { pattern: /\.tmp$/, priority: 2, description: 'Temp files' },
   { pattern: /\.temp$/, priority: 2, description: 'Temp files' },
   { pattern: /~$/, priority: 2, description: 'Backup files' },
-  
+
   // Log files (keep recent, archive old)
   { pattern: /\.log$/, priority: 3, description: 'Log files', archive: true },
-  
+
   // Large exports (move to cloud)
-  { pattern: /complete-project-export\.txt$/, priority: 4, description: 'Project exports', cloud: true },
-  { pattern: /-export\.txt$/, priority: 4, description: 'Export files', cloud: true },
-  
+  {
+    pattern: /complete-project-export\.txt$/,
+    priority: 4,
+    description: 'Project exports',
+    cloud: true,
+  },
+  {
+    pattern: /-export\.txt$/,
+    priority: 4,
+    description: 'Export files',
+    cloud: true,
+  },
+
   // Cache directories
-  { pattern: /\.cache$/, priority: 5, description: 'Cache directories', isDir: true },
-  { pattern: /\.npm$/, priority: 5, description: 'NPM cache', isDir: true }
+  {
+    pattern: /\.cache$/,
+    priority: 5,
+    description: 'Cache directories',
+    isDir: true,
+  },
+  { pattern: /\.npm$/, priority: 5, description: 'NPM cache', isDir: true },
 ];
 
 class MemoryManager {
@@ -50,7 +72,7 @@ class MemoryManager {
       cleaned: 0,
       archived: 0,
       cloudUploaded: 0,
-      spaceSaved: 0
+      spaceSaved: 0,
     };
   }
 
@@ -70,14 +92,14 @@ class MemoryManager {
     try {
       const output = execSync('free -m', { encoding: 'utf8' });
       const lines = output.split('\n');
-      const memLine = lines.find(line => line.startsWith('Mem:'));
+      const memLine = lines.find((line) => line.startsWith('Mem:'));
       if (memLine) {
         const parts = memLine.split(/\s+/);
         return {
           total: parseInt(parts[1]),
           used: parseInt(parts[2]),
           free: parseInt(parts[3]),
-          available: parseInt(parts[6])
+          available: parseInt(parts[6]),
         };
       }
     } catch (error) {
@@ -89,19 +111,19 @@ class MemoryManager {
   // Find files matching cleanup patterns
   findCleanupTargets() {
     const targets = [];
-    
+
     const scanDirectory = (dir, depth = 0) => {
       if (depth > 3) return; // Limit recursion depth
-      
+
       try {
         const items = readdirSync(dir);
-        
+
         for (const item of items) {
           if (item.startsWith('.git') || item === 'node_modules') continue;
-          
+
           const fullPath = join(dir, item);
           const stat = statSync(fullPath);
-          
+
           for (const target of CLEANUP_TARGETS) {
             if (target.pattern.test(item)) {
               const sizeKB = Math.round(stat.size / 1024);
@@ -109,14 +131,18 @@ class MemoryManager {
                 path: fullPath,
                 size: sizeKB,
                 isDir: stat.isDirectory(),
-                ...target
+                ...target,
               });
               break;
             }
           }
-          
+
           // Recurse into directories (except node_modules)
-          if (stat.isDirectory() && item !== 'node_modules' && !item.startsWith('.')) {
+          if (
+            stat.isDirectory() &&
+            item !== 'node_modules' &&
+            !item.startsWith('.')
+          ) {
             scanDirectory(fullPath, depth + 1);
           }
         }
@@ -124,9 +150,9 @@ class MemoryManager {
         // Skip directories we can't read
       }
     };
-    
+
     scanDirectory(ROOT);
-    
+
     // Sort by priority (lower number = higher priority)
     return targets.sort((a, b) => a.priority - b.priority);
   }
@@ -152,22 +178,29 @@ class MemoryManager {
       if (!existsSync(cloudDir)) {
         execSync(`mkdir -p "${cloudDir}"`);
       }
-      
+
       const fileName = filePath.split('/').pop();
       const cloudPath = join(cloudDir, `${fileName}.cloud.gz`);
-      
+
       execSync(`gzip -c "${filePath}" > "${cloudPath}"`);
       unlinkSync(filePath);
-      
+
       // Create cloud reference file
       const refPath = `${filePath}.cloud-ref`;
-      writeFileSync(refPath, JSON.stringify({
-        originalPath: filePath,
-        cloudPath: cloudPath,
-        uploadedAt: new Date().toISOString(),
-        size: statSync(cloudPath).size
-      }, null, 2));
-      
+      writeFileSync(
+        refPath,
+        JSON.stringify(
+          {
+            originalPath: filePath,
+            cloudPath: cloudPath,
+            uploadedAt: new Date().toISOString(),
+            size: statSync(cloudPath).size,
+          },
+          null,
+          2
+        )
+      );
+
       this.stats.cloudUploaded++;
       return true;
     } catch (error) {
@@ -180,7 +213,7 @@ class MemoryManager {
   cleanupTarget(target) {
     try {
       const sizeBefore = target.size;
-      
+
       if (target.cloud) {
         if (this.moveToCloud(target.path)) {
           this.stats.spaceSaved += sizeBefore;
@@ -212,49 +245,57 @@ class MemoryManager {
   performCleanup() {
     const currentUsage = this.getCurrentUsage();
     const memory = this.getMemoryUsage();
-    
+
     console.log(`📊 Current Usage: ${currentUsage}MB`);
     if (memory) {
-      console.log(`💾 Memory: ${memory.used}MB used, ${memory.available}MB available`);
+      console.log(
+        `💾 Memory: ${memory.used}MB used, ${memory.available}MB available`
+      );
     }
-    
+
     if (currentUsage < THRESHOLDS.WARNING) {
       console.log('✅ Memory usage is within acceptable limits');
       return false;
     }
-    
-    console.log(`⚠️  Memory usage above ${THRESHOLDS.WARNING}MB threshold - starting cleanup...`);
-    
+
+    console.log(
+      `⚠️  Memory usage above ${THRESHOLDS.WARNING}MB threshold - starting cleanup...`
+    );
+
     const targets = this.findCleanupTargets();
     console.log(`🎯 Found ${targets.length} cleanup targets`);
-    
+
     let cleaned = 0;
     for (const target of targets) {
       if (this.getCurrentUsage() < THRESHOLDS.TARGET) {
         console.log(`✅ Reached target usage of ${THRESHOLDS.TARGET}MB`);
         break;
       }
-      
-      console.log(`🧹 Cleaning: ${target.path} (${target.size}KB) - ${target.description}`);
+
+      console.log(
+        `🧹 Cleaning: ${target.path} (${target.size}KB) - ${target.description}`
+      );
       if (this.cleanupTarget(target)) {
         cleaned++;
       }
-      
+
       // Check if we're in critical territory
       if (this.getCurrentUsage() > THRESHOLDS.CRITICAL) {
         console.log('🚨 CRITICAL: Aggressive cleanup mode');
         // In critical mode, clean everything we can
       }
     }
-    
+
     const finalUsage = this.getCurrentUsage();
     console.log(`\n📈 Cleanup Summary:`);
     console.log(`   Files cleaned: ${this.stats.cleaned}`);
     console.log(`   Files archived: ${this.stats.archived}`);
     console.log(`   Files moved to cloud: ${this.stats.cloudUploaded}`);
-    console.log(`   Space saved: ${Math.round(this.stats.spaceSaved / 1024)}MB`);
+    console.log(
+      `   Space saved: ${Math.round(this.stats.spaceSaved / 1024)}MB`
+    );
     console.log(`   Usage: ${currentUsage}MB → ${finalUsage}MB`);
-    
+
     return cleaned > 0;
   }
 
@@ -280,16 +321,16 @@ fi
   // Set up automated cleanup
   setupAutomation() {
     this.createMonitoringScript();
-    
+
     // Add to package.json scripts
     const pkgPath = join(ROOT, 'package.json');
     const pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
-    
+
     pkg.scripts = pkg.scripts || {};
     pkg.scripts['memory:check'] = 'node scripts/memory-manager.mjs';
     pkg.scripts['memory:cleanup'] = 'node scripts/memory-manager.mjs --cleanup';
     pkg.scripts['memory:monitor'] = './scripts/memory-monitor.sh';
-    
+
     writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
     console.log('✅ Added memory management scripts to package.json');
   }
@@ -306,7 +347,7 @@ if (args.includes('--cleanup') || args.includes('--auto-cleanup')) {
 } else if (args.includes('--monitor')) {
   const usage = manager.getCurrentUsage();
   const memory = manager.getMemoryUsage();
-  
+
   console.log('📊 Memory Status:');
   console.log(`   Disk usage: ${usage}MB`);
   if (memory) {
@@ -315,7 +356,7 @@ if (args.includes('--cleanup') || args.includes('--auto-cleanup')) {
   }
   console.log(`   Warning threshold: ${THRESHOLDS.WARNING}MB`);
   console.log(`   Critical threshold: ${THRESHOLDS.CRITICAL}MB`);
-  
+
   if (usage > THRESHOLDS.WARNING) {
     console.log('⚠️  Above warning threshold - cleanup recommended');
     process.exit(1);

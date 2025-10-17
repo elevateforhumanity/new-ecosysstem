@@ -16,9 +16,10 @@
   See LICENSE file for details.
 */
 
-
 const express = require('express');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY || 'sk_test_dummy');
+const stripe = require('stripe')(
+  process.env.STRIPE_SECRET_KEY || 'sk_test_dummy'
+);
 const fs = require('fs');
 const path = require('path');
 
@@ -30,17 +31,27 @@ class StripePaymentSystem {
 
   setupRoutes() {
     // Create Stripe products and prices
-    this.router.post('/api/stripe/setup-products', this.createProducts.bind(this));
-    
+    this.router.post(
+      '/api/stripe/setup-products',
+      this.createProducts.bind(this)
+    );
+
     // Create checkout session
-    this.router.post('/api/stripe/create-checkout', this.createCheckout.bind(this));
-    
+    this.router.post(
+      '/api/stripe/create-checkout',
+      this.createCheckout.bind(this)
+    );
+
     // Webhook handler
-    this.router.post('/api/stripe/webhook', express.raw({type: 'application/json'}), this.handleWebhook.bind(this));
-    
+    this.router.post(
+      '/api/stripe/webhook',
+      express.raw({ type: 'application/json' }),
+      this.handleWebhook.bind(this)
+    );
+
     // Get Stripe config
     this.router.get('/api/stripe/config', this.getConfig.bind(this));
-    
+
     // Test payment system
     this.router.post('/api/stripe/test', this.testPayments.bind(this));
   }
@@ -53,21 +64,24 @@ class StripePaymentSystem {
         {
           name: 'Google Data Analytics Certificate - EMERGENCY SALE',
           price: 29900, // $299.00
-          description: 'Complete Google Data Analytics Professional Certificate program with federal funding support',
-          slug: 'google-data-analytics-emergency'
+          description:
+            'Complete Google Data Analytics Professional Certificate program with federal funding support',
+          slug: 'google-data-analytics-emergency',
         },
         {
-          name: 'CompTIA A+ Certification - EMERGENCY SALE', 
+          name: 'CompTIA A+ Certification - EMERGENCY SALE',
           price: 59900, // $599.00
-          description: 'CompTIA A+ certification training and exam prep with job placement assistance',
-          slug: 'comptia-a-plus-emergency'
+          description:
+            'CompTIA A+ certification training and exam prep with job placement assistance',
+          slug: 'comptia-a-plus-emergency',
         },
         {
           name: 'FULL PLATFORM ACCESS - 72 HOUR EMERGENCY SALE',
           price: 99900, // $999.00
-          description: 'Complete EFH platform with all federal partnerships, revenue streams, and 33+ programs',
-          slug: 'full-platform-emergency'
-        }
+          description:
+            'Complete EFH platform with all federal partnerships, revenue streams, and 33+ programs',
+          slug: 'full-platform-emergency',
+        },
       ];
 
       const createdProducts = [];
@@ -80,8 +94,8 @@ class StripePaymentSystem {
           metadata: {
             slug: productData.slug,
             emergency_sale: 'true',
-            created_at: new Date().toISOString()
-          }
+            created_at: new Date().toISOString(),
+          },
         });
 
         // Create price
@@ -91,8 +105,8 @@ class StripePaymentSystem {
           product: product.id,
           metadata: {
             slug: productData.slug,
-            emergency_sale: 'true'
-          }
+            emergency_sale: 'true',
+          },
         });
 
         createdProducts.push({
@@ -100,10 +114,12 @@ class StripePaymentSystem {
           price_id: price.id,
           name: productData.name,
           amount: productData.price,
-          slug: productData.slug
+          slug: productData.slug,
         });
 
-        console.log(`✅ Created: ${productData.name} - $${(productData.price / 100).toFixed(2)}`);
+        console.log(
+          `✅ Created: ${productData.name} - $${(productData.price / 100).toFixed(2)}`
+        );
       }
 
       // Save product configuration
@@ -115,51 +131,64 @@ class StripePaymentSystem {
       res.json({
         success: true,
         products: createdProducts,
-        message: 'Emergency sale products created successfully!'
+        message: 'Emergency sale products created successfully!',
       });
-
     } catch (error) {
       console.error('❌ Failed to create Stripe products:', error);
-      res.status(500).json({ 
-        success: false, 
-        error: error.message 
+      res.status(500).json({
+        success: false,
+        error: error.message,
       });
     }
   }
 
   async createCheckout(req, res) {
     try {
-      const { price_id, product_name, success_url, cancel_url, metadata = {} } = req.body;
+      const {
+        price_id,
+        product_name,
+        success_url,
+        cancel_url,
+        metadata = {},
+      } = req.body;
 
       if (!price_id) {
-        return res.status(400).json({ 
-          success: false, 
-          error: 'price_id is required' 
+        return res.status(400).json({
+          success: false,
+          error: 'price_id is required',
         });
       }
 
-      console.log(`💳 Creating checkout session for: ${product_name || price_id}`);
+      console.log(
+        `💳 Creating checkout session for: ${product_name || price_id}`
+      );
 
       const session = await stripe.checkout.sessions.create({
         mode: 'payment',
-        line_items: [{
-          price: price_id,
-          quantity: 1,
-        }],
-        success_url: success_url || `${req.protocol}://${req.get('host')}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: cancel_url || `${req.protocol}://${req.get('host')}/payment-cancelled`,
+        line_items: [
+          {
+            price: price_id,
+            quantity: 1,
+          },
+        ],
+        success_url:
+          success_url ||
+          `${req.protocol}://${req.get('host')}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url:
+          cancel_url ||
+          `${req.protocol}://${req.get('host')}/payment-cancelled`,
         metadata: {
           ...metadata,
           phone_alerts: '3177607908',
           emergency_sale: 'true',
-          created_at: new Date().toISOString()
+          created_at: new Date().toISOString(),
         },
         payment_intent_data: {
           metadata: {
             ...metadata,
-            phone_alerts: '3177607908'
-          }
-        }
+            phone_alerts: '3177607908',
+          },
+        },
       });
 
       console.log(`✅ Checkout session created: ${session.id}`);
@@ -168,14 +197,13 @@ class StripePaymentSystem {
         success: true,
         session_id: session.id,
         checkout_url: session.url,
-        expires_at: session.expires_at
+        expires_at: session.expires_at,
       });
-
     } catch (error) {
       console.error('❌ Checkout creation failed:', error);
-      res.status(500).json({ 
-        success: false, 
-        error: error.message 
+      res.status(500).json({
+        success: false,
+        error: error.message,
       });
     }
   }
@@ -198,7 +226,7 @@ class StripePaymentSystem {
 
       if (event.type === 'checkout.session.completed') {
         const session = event.data.object;
-        
+
         console.log('💰 PAYMENT SUCCESSFUL!');
         console.log(`💵 Amount: $${(session.amount_total / 100).toFixed(2)}`);
         console.log(`📧 Customer: ${session.customer_details?.email}`);
@@ -209,7 +237,7 @@ class StripePaymentSystem {
           amount: session.amount_total / 100,
           email: session.customer_details?.email,
           session_id: session.id,
-          phone: '3177607908'
+          phone: '3177607908',
         });
 
         // Process successful payment
@@ -217,7 +245,6 @@ class StripePaymentSystem {
       }
 
       res.json({ received: true });
-
     } catch (error) {
       console.error('❌ Webhook error:', error);
       res.status(400).json({ error: error.message });
@@ -227,13 +254,13 @@ class StripePaymentSystem {
   async sendPaymentAlert({ amount, email, session_id, phone }) {
     try {
       const message = `🎉 PAYMENT RECEIVED! $${amount.toFixed(2)} from ${email}. Session: ${session_id}`;
-      
+
       // Log the SMS that would be sent
       console.log(`📱 SMS Alert to ${phone}: ${message}`);
-      
+
       // In production, you'd use Twilio or similar service here
       // For now, just log it
-      
+
       return true;
     } catch (error) {
       console.error('SMS alert failed:', error);
@@ -250,23 +277,23 @@ class StripePaymentSystem {
         amount_paid: session.amount_total / 100,
         payment_status: 'completed',
         enrolled_at: new Date().toISOString(),
-        metadata: session.metadata
+        metadata: session.metadata,
       };
 
       // Save enrollment record
       const enrollmentLog = path.join(__dirname, 'successful-enrollments.json');
       let enrollments = [];
-      
+
       if (fs.existsSync(enrollmentLog)) {
         enrollments = JSON.parse(fs.readFileSync(enrollmentLog, 'utf8'));
       }
-      
+
       enrollments.push(enrollmentData);
-      
+
       fs.writeFileSync(enrollmentLog, JSON.stringify(enrollments, null, 2));
 
       console.log('✅ Enrollment processed and logged');
-      
+
       return true;
     } catch (error) {
       console.error('Enrollment processing failed:', error);
@@ -279,7 +306,7 @@ class StripePaymentSystem {
       // Try to load existing products
       let products = [];
       const productsFile = path.join(__dirname, 'stripe-products.json');
-      
+
       if (fs.existsSync(productsFile)) {
         products = JSON.parse(fs.readFileSync(productsFile, 'utf8'));
       }
@@ -288,15 +315,16 @@ class StripePaymentSystem {
         success: true,
         products,
         webhook_endpoint: '/api/stripe/webhook',
-        test_mode: !process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY.includes('test'),
+        test_mode:
+          !process.env.STRIPE_SECRET_KEY ||
+          process.env.STRIPE_SECRET_KEY.includes('test'),
         emergency_sale_active: true,
-        phone_alerts: '3177607908'
+        phone_alerts: '3177607908',
       });
-
     } catch (error) {
-      res.status(500).json({ 
-        success: false, 
-        error: error.message 
+      res.status(500).json({
+        success: false,
+        error: error.message,
       });
     }
   }
@@ -309,7 +337,7 @@ class StripePaymentSystem {
         stripe_connection: false,
         products_created: false,
         checkout_creation: false,
-        webhook_ready: false
+        webhook_ready: false,
       };
 
       // Test 1: Stripe connection
@@ -341,28 +369,31 @@ class StripePaymentSystem {
       tests.webhook_ready = true;
       console.log('✅ Webhook endpoint ready');
 
-      const allPassed = Object.values(tests).every(test => test === true);
+      const allPassed = Object.values(tests).every((test) => test === true);
 
       res.json({
         success: allPassed,
         tests,
-        status: allPassed ? 'ALL SYSTEMS GO! 🚀' : 'Some systems need attention ⚠️',
-        next_steps: allPassed ? [
-          'Products are created and ready',
-          'Checkout system is functional', 
-          'Payment alerts will go to 3177607908',
-          'Ready to accept payments immediately!'
-        ] : [
-          'Run POST /api/stripe/setup-products to create products',
-          'Set STRIPE_SECRET_KEY environment variable',
-          'Test checkout creation'
-        ]
+        status: allPassed
+          ? 'ALL SYSTEMS GO! 🚀'
+          : 'Some systems need attention ⚠️',
+        next_steps: allPassed
+          ? [
+              'Products are created and ready',
+              'Checkout system is functional',
+              'Payment alerts will go to 3177607908',
+              'Ready to accept payments immediately!',
+            ]
+          : [
+              'Run POST /api/stripe/setup-products to create products',
+              'Set STRIPE_SECRET_KEY environment variable',
+              'Test checkout creation',
+            ],
       });
-
     } catch (error) {
-      res.status(500).json({ 
-        success: false, 
-        error: error.message 
+      res.status(500).json({
+        success: false,
+        error: error.message,
       });
     }
   }

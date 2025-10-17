@@ -9,7 +9,9 @@ const crypto = require('crypto');
 // Require encryption key from environment
 if (!process.env.ENCRYPTION_KEY) {
   console.error('FATAL: ENCRYPTION_KEY environment variable is required');
-  console.error('Generate a key with: node -e "console.log(crypto.randomBytes(32).toString(\'hex\'))"');
+  console.error(
+    'Generate a key with: node -e "console.log(crypto.randomBytes(32).toString(\'hex\'))"'
+  );
   process.exit(1);
 }
 
@@ -25,16 +27,16 @@ const AUTH_TAG_LENGTH = 16;
  */
 function encrypt(text) {
   if (!text) return null;
-  
+
   try {
     const iv = crypto.randomBytes(IV_LENGTH);
     const cipher = crypto.createCipheriv(ALGORITHM, ENCRYPTION_KEY, iv);
-    
+
     let encrypted = cipher.update(text, 'utf8', 'hex');
     encrypted += cipher.final('hex');
-    
+
     const authTag = cipher.getAuthTag();
-    
+
     // Return format: iv:authTag:encrypted
     return `${iv.toString('hex')}:${authTag.toString('hex')}:${encrypted}`;
   } catch (error) {
@@ -50,23 +52,23 @@ function encrypt(text) {
  */
 function decrypt(encryptedData) {
   if (!encryptedData) return null;
-  
+
   try {
     const parts = encryptedData.split(':');
     if (parts.length !== 3) {
       throw new Error('Invalid encrypted data format');
     }
-    
+
     const [ivHex, authTagHex, encrypted] = parts;
     const iv = Buffer.from(ivHex, 'hex');
     const authTag = Buffer.from(authTagHex, 'hex');
-    
+
     const decipher = crypto.createDecipheriv(ALGORITHM, ENCRYPTION_KEY, iv);
     decipher.setAuthTag(authTag);
-    
+
     let decrypted = decipher.update(encrypted, 'hex', 'utf8');
     decrypted += decipher.final('utf8');
-    
+
     return decrypted;
   } catch (error) {
     console.error('Decryption error:', error);
@@ -81,11 +83,8 @@ function decrypt(encryptedData) {
  */
 function hash(text) {
   if (!text) return null;
-  
-  return crypto
-    .createHash('sha256')
-    .update(text)
-    .digest('hex');
+
+  return crypto.createHash('sha256').update(text).digest('hex');
 }
 
 /**
@@ -96,13 +95,13 @@ function hash(text) {
  */
 function encryptFields(obj, fields) {
   const encrypted = { ...obj };
-  
+
   for (const field of fields) {
     if (encrypted[field]) {
       encrypted[field] = encrypt(encrypted[field]);
     }
   }
-  
+
   return encrypted;
 }
 
@@ -114,7 +113,7 @@ function encryptFields(obj, fields) {
  */
 function decryptFields(obj, fields) {
   const decrypted = { ...obj };
-  
+
   for (const field of fields) {
     if (decrypted[field]) {
       try {
@@ -125,7 +124,7 @@ function decryptFields(obj, fields) {
       }
     }
   }
-  
+
   return decrypted;
 }
 
@@ -134,5 +133,5 @@ module.exports = {
   decrypt,
   hash,
   encryptFields,
-  decryptFields
+  decryptFields,
 };

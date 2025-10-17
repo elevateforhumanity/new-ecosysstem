@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 export default function MentorSignup() {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    expertise: "",
-    bio: ""
+    name: '',
+    email: '',
+    expertise: '',
+    bio: '',
   });
 
   function handleChange(e) {
@@ -19,7 +19,7 @@ export default function MentorSignup() {
   }
 
   return (
-    <main style={{ padding: 32, maxWidth: 600, margin: "0 auto" }}>
+    <main style={{ padding: 32, maxWidth: 600, margin: '0 auto' }}>
       <h1>Mentor Signup</h1>
       {!submitted ? (
         <form onSubmit={handleSubmit}>
@@ -30,7 +30,7 @@ export default function MentorSignup() {
               value={form.name}
               onChange={handleChange}
               required
-              style={{ width: "100%", marginBottom: 12, padding: 8 }}
+              style={{ width: '100%', marginBottom: 12, padding: 8 }}
             />
           </label>
           <label>
@@ -41,7 +41,7 @@ export default function MentorSignup() {
               value={form.email}
               onChange={handleChange}
               required
-              style={{ width: "100%", marginBottom: 12, padding: 8 }}
+              style={{ width: '100%', marginBottom: 12, padding: 8 }}
             />
           </label>
           <label>
@@ -51,7 +51,7 @@ export default function MentorSignup() {
               value={form.expertise}
               onChange={handleChange}
               required
-              style={{ width: "100%", marginBottom: 12, padding: 8 }}
+              style={{ width: '100%', marginBottom: 12, padding: 8 }}
             />
           </label>
           <label>
@@ -61,15 +61,24 @@ export default function MentorSignup() {
               value={form.bio}
               onChange={handleChange}
               rows={4}
-              style={{ width: "100%", marginBottom: 12, padding: 8 }}
+              style={{ width: '100%', marginBottom: 12, padding: 8 }}
             />
           </label>
-          <button type="submit" style={{ padding: "10px 24px", background: "#1976d2", color: "#fff", border: "none", borderRadius: 6 }}>
+          <button
+            type="submit"
+            style={{
+              padding: '10px 24px',
+              background: '#1976d2',
+              color: '#fff',
+              border: 'none',
+              borderRadius: 6,
+            }}
+          >
             Submit
           </button>
         </form>
       ) : (
-        <div style={{ marginTop: 24, color: "#388e3c", fontWeight: "bold" }}>
+        <div style={{ marginTop: 24, color: '#388e3c', fontWeight: 'bold' }}>
           Thank you for signing up as a mentor! We will contact you soon.
         </div>
       )}

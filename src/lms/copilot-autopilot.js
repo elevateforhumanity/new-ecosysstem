@@ -1,7 +1,7 @@
 /**
  * Advanced LMS Copilot & Autopilot System
  * NO OpenAI - Uses Supabase for configuration management
- * 
+ *
  * Copyright (c) 2025 Elevate for Humanity
  * Licensed Use Only - Unauthorized use prohibited
  */
@@ -11,11 +11,15 @@ import { createClient } from '@supabase/supabase-js';
 class AdvancedLMSCopilot {
   constructor() {
     // Use environment variables for Supabase configuration
-    const supabaseUrl = process.env.VITE_SUPABASE_URL || 'https://cuxzzpsyufcewtmicszk.supabase.co';
-    const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1eHp6cHN5dWZjZXd0bWljc3prIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjEwNDcsImV4cCI6MjA3MzczNzA0N30.DyFtzoKha_tuhKiSIPoQlKonIpaoSYrlhzntCUvLUnA';
-    
+    const supabaseUrl =
+      process.env.VITE_SUPABASE_URL ||
+      'https://cuxzzpsyufcewtmicszk.supabase.co';
+    const supabaseKey =
+      process.env.VITE_SUPABASE_ANON_KEY ||
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1eHp6cHN5dWZjZXd0bWljc3prIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjEwNDcsImV4cCI6MjA3MzczNzA0N30.DyFtzoKha_tuhKiSIPoQlKonIpaoSYrlhzntCUvLUnA';
+
     this.supabase = createClient(supabaseUrl, supabaseKey);
-    
+
     this.isAutopilotEnabled = false;
     this.subscriptionTier = 'autopilot'; // Always enabled
     this.configCache = null;
@@ -60,7 +64,7 @@ class AdvancedLMSCopilot {
       cloudflare_account_id: process.env.CLOUDFLARE_ACCOUNT_ID || '',
       cloudflare_api_token: process.env.CLOUDFLARE_API_TOKEN || '',
       contact_phone: '317-314-3757',
-      contact_email: 'info@elevateforhumanity.org'
+      contact_email: 'info@elevateforhumanity.org',
     };
   }
 
@@ -74,7 +78,7 @@ class AdvancedLMSCopilot {
         .upsert({
           id: 1,
           ...keys,
-          updated_at: new Date().toISOString()
+          updated_at: new Date().toISOString(),
         });
 
       if (error) throw error;
@@ -92,9 +96,13 @@ class AdvancedLMSCopilot {
    */
   async copilotAssist(userQuery, context = {}) {
     const query = userQuery.toLowerCase();
-    
+
     // Rule-based responses
-    if (query.includes('key') || query.includes('api') || query.includes('configuration')) {
+    if (
+      query.includes('key') ||
+      query.includes('api') ||
+      query.includes('configuration')
+    ) {
       const keys = await this.getAllKeys();
       return {
         response: 'I can help you manage your API keys and configuration.',
@@ -102,13 +110,13 @@ class AdvancedLMSCopilot {
           'View all configured keys',
           'Update Stripe keys',
           'Update Cloudflare credentials',
-          'Update Google Analytics ID'
+          'Update Google Analytics ID',
         ],
         quickActions: [
           { action: 'view_keys', label: 'View Keys' },
-          { action: 'update_keys', label: 'Update Keys' }
+          { action: 'update_keys', label: 'Update Keys' },
         ],
-        keys: keys
+        keys: keys,
       };
     }
 
@@ -119,12 +127,12 @@ class AdvancedLMSCopilot {
           'Create new course',
           'Generate course content',
           'Analyze course performance',
-          'Optimize student engagement'
+          'Optimize student engagement',
         ],
         quickActions: [
           { action: 'create_course', label: 'Create Course' },
-          { action: 'analyze_performance', label: 'Analyze Performance' }
-        ]
+          { action: 'analyze_performance', label: 'Analyze Performance' },
+        ],
       };
     }
 
@@ -135,12 +143,12 @@ class AdvancedLMSCopilot {
           'View student progress',
           'Send engagement messages',
           'Generate reports',
-          'Manage enrollments'
+          'Manage enrollments',
         ],
         quickActions: [
           { action: 'view_students', label: 'View Students' },
-          { action: 'send_message', label: 'Send Message' }
-        ]
+          { action: 'send_message', label: 'Send Message' },
+        ],
       };
     }
 
@@ -152,32 +160,33 @@ class AdvancedLMSCopilot {
           'View Stripe configuration',
           'Test payment flow',
           'View transactions',
-          'Update webhook settings'
+          'Update webhook settings',
         ],
         quickActions: [
           { action: 'view_stripe', label: 'View Stripe Config' },
-          { action: 'test_payment', label: 'Test Payment' }
+          { action: 'test_payment', label: 'Test Payment' },
         ],
         stripe: {
           publishable_key: keys.stripe_publishable_key,
-          webhook_configured: !!keys.stripe_webhook_secret
-        }
+          webhook_configured: !!keys.stripe_webhook_secret,
+        },
       };
     }
 
     // Default response
     return {
-      response: 'I can help you with courses, students, payments, and system configuration.',
+      response:
+        'I can help you with courses, students, payments, and system configuration.',
       suggestions: [
         'Manage API keys',
         'Create courses',
         'View student progress',
-        'Configure payments'
+        'Configure payments',
       ],
       quickActions: [
         { action: 'dashboard', label: 'Go to Dashboard' },
-        { action: 'help', label: 'Get Help' }
-      ]
+        { action: 'help', label: 'Get Help' },
+      ],
     };
   }
 
@@ -186,25 +195,23 @@ class AdvancedLMSCopilot {
    */
   async enableAutopilot(courseId, autopilotSettings = {}) {
     this.isAutopilotEnabled = true;
-    
+
     const settings = {
       autoContentGeneration: true,
       autoStudentEngagement: true,
       autoPerformanceOptimization: true,
       autoAssessmentCreation: true,
       autoMarketingOptimization: true,
-      ...autopilotSettings
+      ...autopilotSettings,
     };
 
     // Save autopilot settings
-    await this.supabase
-      .from('autopilot_settings')
-      .upsert({
-        course_id: courseId,
-        settings: settings,
-        enabled: true,
-        last_updated: new Date()
-      });
+    await this.supabase.from('autopilot_settings').upsert({
+      course_id: courseId,
+      settings: settings,
+      enabled: true,
+      last_updated: new Date(),
+    });
 
     // Start autopilot processes
     await this.startAutopilotProcesses(courseId, settings);
@@ -212,7 +219,7 @@ class AdvancedLMSCopilot {
     return {
       status: 'enabled',
       message: 'Autopilot is now managing your course automatically',
-      features: Object.keys(settings).filter(key => settings[key])
+      features: Object.keys(settings).filter((key) => settings[key]),
     };
   }
 
@@ -267,9 +274,8 @@ class AdvancedLMSCopilot {
 
       await this.logAutopilotAction(courseId, 'content_generation', {
         gaps_found: contentGaps.length,
-        content_generated: contentGaps.length
+        content_generated: contentGaps.length,
       });
-
     } catch (error) {
       console.error('Auto content generation failed:', error);
     }
@@ -283,20 +289,20 @@ class AdvancedLMSCopilot {
 
     for (const module of course.modules || []) {
       // Check for missing introduction
-      if (!module.lessons?.find(l => l.type === 'introduction')) {
+      if (!module.lessons?.find((l) => l.type === 'introduction')) {
         gaps.push({
           type: 'introduction',
           module_id: module.id,
-          module_name: module.name
+          module_name: module.name,
         });
       }
 
       // Check for missing summary
-      if (!module.lessons?.find(l => l.type === 'summary')) {
+      if (!module.lessons?.find((l) => l.type === 'summary')) {
         gaps.push({
           type: 'summary',
           module_id: module.id,
-          module_name: module.name
+          module_name: module.name,
         });
       }
 
@@ -305,7 +311,7 @@ class AdvancedLMSCopilot {
         gaps.push({
           type: 'assessment',
           module_id: module.id,
-          module_name: module.name
+          module_name: module.name,
         });
       }
     }
@@ -322,39 +328,35 @@ class AdvancedLMSCopilot {
         title: `Introduction to ${gap.module_name}`,
         content: `Welcome to ${gap.module_name}. In this module, you will learn key concepts and practical skills.`,
         type: 'introduction',
-        duration: 5
+        duration: 5,
       },
       summary: {
         title: `${gap.module_name} Summary`,
         content: `Congratulations on completing ${gap.module_name}! Let's review what you've learned.`,
         type: 'summary',
-        duration: 5
+        duration: 5,
       },
       assessment: {
         title: `${gap.module_name} Assessment`,
         type: 'quiz',
         passing_score: 70,
-        questions: []
-      }
+        questions: [],
+      },
     };
 
     const template = templates[gap.type];
     if (!template) return;
 
     if (gap.type === 'assessment') {
-      await this.supabase
-        .from('assessments')
-        .insert({
-          module_id: gap.module_id,
-          ...template
-        });
+      await this.supabase.from('assessments').insert({
+        module_id: gap.module_id,
+        ...template,
+      });
     } else {
-      await this.supabase
-        .from('lessons')
-        .insert({
-          module_id: gap.module_id,
-          ...template
-        });
+      await this.supabase.from('lessons').insert({
+        module_id: gap.module_id,
+        ...template,
+      });
     }
   }
 
@@ -364,7 +366,9 @@ class AdvancedLMSCopilot {
   async autoStudentEngagement(courseId) {
     try {
       const engagement = await this.getEngagementMetrics(courseId);
-      const lowEngagementLessons = engagement.lessons.filter(l => l.completionRate < 0.7);
+      const lowEngagementLessons = engagement.lessons.filter(
+        (l) => l.completionRate < 0.7
+      );
 
       for (const lesson of lowEngagementLessons) {
         await this.improveEngagement(lesson, courseId);
@@ -374,9 +378,8 @@ class AdvancedLMSCopilot {
 
       await this.logAutopilotAction(courseId, 'student_engagement', {
         lessons_improved: lowEngagementLessons.length,
-        messages_sent: engagement.strugglingStudents
+        messages_sent: engagement.strugglingStudents,
       });
-
     } catch (error) {
       console.error('Auto student engagement failed:', error);
     }
@@ -398,12 +401,15 @@ class AdvancedLMSCopilot {
 
     return {
       totalStudents: enrollments?.length || 0,
-      strugglingStudents: enrollments?.filter(e => e.progress < 0.3).length || 0,
-      lessons: lessons?.map(l => ({
-        id: l.id,
-        name: l.title,
-        completionRate: (l.completions?.length || 0) / (enrollments?.length || 1)
-      })) || []
+      strugglingStudents:
+        enrollments?.filter((e) => e.progress < 0.3).length || 0,
+      lessons:
+        lessons?.map((l) => ({
+          id: l.id,
+          name: l.title,
+          completionRate:
+            (l.completions?.length || 0) / (enrollments?.length || 1),
+        })) || [],
     };
   }
 
@@ -412,17 +418,15 @@ class AdvancedLMSCopilot {
    */
   async improveEngagement(lesson, courseId) {
     // Add engagement elements
-    await this.supabase
-      .from('lesson_enhancements')
-      .insert({
-        lesson_id: lesson.id,
-        type: 'engagement_boost',
-        enhancements: {
-          add_quiz: true,
-          add_discussion: true,
-          add_resources: true
-        }
-      });
+    await this.supabase.from('lesson_enhancements').insert({
+      lesson_id: lesson.id,
+      type: 'engagement_boost',
+      enhancements: {
+        add_quiz: true,
+        add_discussion: true,
+        add_resources: true,
+      },
+    });
   }
 
   /**
@@ -436,15 +440,13 @@ class AdvancedLMSCopilot {
       .lt('progress', 0.3);
 
     for (const enrollment of strugglingStudents || []) {
-      await this.supabase
-        .from('notifications')
-        .insert({
-          user_id: enrollment.user_id,
-          type: 'encouragement',
-          title: 'Keep Going!',
-          message: `You're doing great! Keep up the momentum in your course.`,
-          course_id: courseId
-        });
+      await this.supabase.from('notifications').insert({
+        user_id: enrollment.user_id,
+        type: 'encouragement',
+        title: 'Keep Going!',
+        message: `You're doing great! Keep up the momentum in your course.`,
+        course_id: courseId,
+      });
     }
   }
 
@@ -469,9 +471,8 @@ class AdvancedLMSCopilot {
       }
 
       await this.logAutopilotAction(courseId, 'performance_optimization', {
-        optimizations_applied: optimizations.length
+        optimizations_applied: optimizations.length,
       });
-
     } catch (error) {
       console.error('Auto performance optimization failed:', error);
     }
@@ -487,25 +488,25 @@ class AdvancedLMSCopilot {
       .eq('course_id', courseId)
       .single();
 
-    return metrics || {
-      videoLoadTime: 0,
-      dropoffRate: 0,
-      assessmentFailRate: 0
-    };
+    return (
+      metrics || {
+        videoLoadTime: 0,
+        dropoffRate: 0,
+        assessmentFailRate: 0,
+      }
+    );
   }
 
   /**
    * Log autopilot action
    */
   async logAutopilotAction(courseId, action, data) {
-    await this.supabase
-      .from('autopilot_logs')
-      .insert({
-        course_id: courseId,
-        action: action,
-        data: data,
-        timestamp: new Date()
-      });
+    await this.supabase.from('autopilot_logs').insert({
+      course_id: courseId,
+      action: action,
+      data: data,
+      timestamp: new Date(),
+    });
   }
 
   /**
@@ -528,7 +529,7 @@ class AdvancedLMSCopilot {
     return {
       enabled: settings?.enabled || false,
       settings: settings?.settings || {},
-      recentActions: logs || []
+      recentActions: logs || [],
     };
   }
 }

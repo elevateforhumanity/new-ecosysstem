@@ -16,7 +16,11 @@ const Sidebar = () => {
   const instructorLinks = [
     { path: '/dashboard/instructor', label: 'Dashboard', icon: '📊' },
     { path: '/dashboard/instructor/courses', label: 'My Courses', icon: '📚' },
-    { path: '/dashboard/instructor/create', label: 'Create Course', icon: '➕' },
+    {
+      path: '/dashboard/instructor/create',
+      label: 'Create Course',
+      icon: '➕',
+    },
   ];
 
   const adminLinks = [
@@ -25,7 +29,12 @@ const Sidebar = () => {
     { path: '/dashboard/admin/courses', label: 'Courses', icon: '📚' },
   ];
 
-  const links = user?.role === 'admin' ? adminLinks : user?.role === 'instructor' ? instructorLinks : studentLinks;
+  const links =
+    user?.role === 'admin'
+      ? adminLinks
+      : user?.role === 'instructor'
+        ? instructorLinks
+        : studentLinks;
 
   return (
     <aside className="w-64 bg-white shadow-sm min-h-screen p-4">

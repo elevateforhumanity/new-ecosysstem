@@ -24,7 +24,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'supabase': ['@supabase/supabase-js'],
+          supabase: ['@supabase/supabase-js'],
         },
       },
     },
@@ -34,20 +34,12 @@ export default defineConfig({
     port: 5173,
     host: '0.0.0.0',
     strictPort: true,
-    allowedHosts: [
-      '.gitpod.dev',
-      '.gitpod.io',
-      'localhost',
-    ],
+    allowedHosts: ['.gitpod.dev', '.gitpod.io', 'localhost'],
   },
   preview: {
     port: 8080,
     host: '0.0.0.0',
     strictPort: false,
-    allowedHosts: [
-      '.gitpod.dev',
-      '.gitpod.io',
-      'localhost',
-    ],
+    allowedHosts: ['.gitpod.dev', '.gitpod.io', 'localhost'],
   },
 });

@@ -4,7 +4,12 @@ import React, { useEffect, useRef, useState } from 'react';
  * MeetingRoom Component - Jitsi Meet Integration
  * Provides video conferencing with screen sharing, recording, and chat
  */
-export function MeetingRoom({ meetingCode, userName, isModerator = false, onLeave }) {
+export function MeetingRoom({
+  meetingCode,
+  userName,
+  isModerator = false,
+  onLeave,
+}) {
   const jitsiContainerRef = useRef(null);
   const [api, setApi] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
@@ -28,7 +33,7 @@ export function MeetingRoom({ meetingCode, userName, isModerator = false, onLeav
 
     const initializeJitsi = () => {
       const domain = process.env.REACT_APP_JITSI_DOMAIN || 'meet.jit.si';
-      
+
       const options = {
         roomName: meetingCode,
         width: '100%',
@@ -36,7 +41,7 @@ export function MeetingRoom({ meetingCode, userName, isModerator = false, onLeav
         parentNode: jitsiContainerRef.current,
         userInfo: {
           displayName: userName,
-          email: '' // Optional
+          email: '', // Optional
         },
         configOverwrite: {
           startWithAudioMuted: false,
@@ -71,8 +76,8 @@ export function MeetingRoom({ meetingCode, userName, isModerator = false, onLeav
             'download',
             'help',
             'mute-everyone',
-            'security'
-          ]
+            'security',
+          ],
         },
         interfaceConfigOverwrite: {
           SHOW_JITSI_WATERMARK: false,
@@ -85,12 +90,12 @@ export function MeetingRoom({ meetingCode, userName, isModerator = false, onLeav
           APP_NAME: 'Elevate Meet',
           NATIVE_APP_NAME: 'Elevate Meet',
           PROVIDER_NAME: 'Elevate for Humanity',
-          MOBILE_APP_PROMO: false
-        }
+          MOBILE_APP_PROMO: false,
+        },
       };
 
       const jitsiApi = new window.JitsiMeetExternalAPI(domain, options);
-      
+
       // Event listeners
       jitsiApi.addEventListener('videoConferenceJoined', (event) => {
         console.log('Joined meeting:', event);
@@ -137,7 +142,7 @@ export function MeetingRoom({ meetingCode, userName, isModerator = false, onLeav
   const handleStartRecording = () => {
     if (api && isModerator) {
       api.executeCommand('startRecording', {
-        mode: 'file' // or 'stream' for live streaming
+        mode: 'file', // or 'stream' for live streaming
       });
     }
   };
@@ -173,96 +178,115 @@ export function MeetingRoom({ meetingCode, userName, isModerator = false, onLeav
   };
 
   return (
-    <div style={{ 
-      width: '100%', 
-      height: '100vh', 
-      display: 'flex', 
-      flexDirection: 'column',
-      backgroundColor: '#000'
-    }}>
+    <div
+      style={{
+        width: '100%',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: '#000',
+      }}
+    >
       {/* Loading indicator */}
       {isLoading && (
-        <div style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          color: '#fff',
-          fontSize: '1.5rem',
-          zIndex: 1000
-        }}>
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            color: '#fff',
+            fontSize: '1.5rem',
+            zIndex: 1000,
+          }}
+        >
           Joining meeting...
         </div>
       )}
 
       {/* Meeting info bar */}
-      <div style={{
-        padding: '1rem',
-        backgroundColor: '#1a1a1a',
-        color: '#fff',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}>
+      <div
+        style={{
+          padding: '1rem',
+          backgroundColor: '#1a1a1a',
+          color: '#fff',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
         <div>
           <h3 style={{ margin: 0 }}>Elevate Meet</h3>
-          <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.875rem', opacity: 0.7 }}>
+          <p
+            style={{
+              margin: '0.25rem 0 0 0',
+              fontSize: '0.875rem',
+              opacity: 0.7,
+            }}
+          >
             Meeting Code: {meetingCode}
           </p>
         </div>
-        
+
         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
           {isRecording && (
-            <span style={{
-              padding: '0.25rem 0.75rem',
-              backgroundColor: 'var(--brand-danger)',
-              borderRadius: '0.25rem',
-              fontSize: '0.875rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem'
-            }}>
-              <span style={{
-                width: '8px',
-                height: '8px',
-                backgroundColor: '#fff',
-                borderRadius: '50%',
-                animation: 'pulse 2s infinite'
-              }} />
+            <span
+              style={{
+                padding: '0.25rem 0.75rem',
+                backgroundColor: 'var(--brand-danger)',
+                borderRadius: '0.25rem',
+                fontSize: '0.875rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+              }}
+            >
+              <span
+                style={{
+                  width: '8px',
+                  height: '8px',
+                  backgroundColor: '#fff',
+                  borderRadius: '50%',
+                  animation: 'pulse 2s infinite',
+                }}
+              />
               Recording
             </span>
           )}
-          
+
           <span style={{ fontSize: '0.875rem' }}>
-            {participants.length} participant{participants.length !== 1 ? 's' : ''}
+            {participants.length} participant
+            {participants.length !== 1 ? 's' : ''}
           </span>
         </div>
       </div>
 
       {/* Jitsi Meet container */}
-      <div 
-        ref={jitsiContainerRef} 
-        style={{ 
+      <div
+        ref={jitsiContainerRef}
+        style={{
           flex: 1,
           width: '100%',
-          height: '100%'
-        }} 
+          height: '100%',
+        }}
       />
 
       {/* Custom controls (optional - Jitsi has built-in controls) */}
       {isModerator && (
-        <div style={{
-          position: 'absolute',
-          bottom: '2rem',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          gap: '1rem',
-          padding: '1rem',
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-          borderRadius: '0.5rem',
-          zIndex: 100
-        }}>
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '2rem',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            display: 'flex',
+            gap: '1rem',
+            padding: '1rem',
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            borderRadius: '0.5rem',
+            zIndex: 100,
+          }}
+        >
           {!isRecording ? (
             <button
               onClick={handleStartRecording}
@@ -273,7 +297,7 @@ export function MeetingRoom({ meetingCode, userName, isModerator = false, onLeav
                 border: 'none',
                 borderRadius: '0.25rem',
                 cursor: 'pointer',
-                fontSize: '0.875rem'
+                fontSize: '0.875rem',
               }}
             >
               Start Recording
@@ -288,7 +312,7 @@ export function MeetingRoom({ meetingCode, userName, isModerator = false, onLeav
                 border: 'none',
                 borderRadius: '0.25rem',
                 cursor: 'pointer',
-                fontSize: '0.875rem'
+                fontSize: '0.875rem',
               }}
             >
               Stop Recording

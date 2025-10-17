@@ -16,17 +16,17 @@ const CLEANUP_PATHS = [
   '.cache',
   'tmp',
   '*.log',
-  '.autopilot-cache'
+  '.autopilot-cache',
 ];
 
 async function cleanup() {
   console.log('🧹 Starting autopilot cleanup...\n');
-  
+
   for (const cleanPath of CLEANUP_PATHS) {
     try {
       const fullPath = path.resolve(process.cwd(), cleanPath);
       const stats = await fs.stat(fullPath).catch(() => null);
-      
+
       if (stats) {
         if (stats.isDirectory()) {
           await fs.rm(fullPath, { recursive: true, force: true });
@@ -42,11 +42,11 @@ async function cleanup() {
       }
     }
   }
-  
+
   console.log('\n✨ Cleanup complete!');
 }
 
-cleanup().catch(error => {
+cleanup().catch((error) => {
   console.error('❌ Cleanup failed:', error);
   process.exit(1);
 });

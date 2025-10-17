@@ -16,7 +16,6 @@
   See LICENSE file for details.
 */
 
-
 import express from 'express';
 import fetch from 'node-fetch';
 
@@ -32,24 +31,26 @@ class VideoGenerator {
       const response = await fetch(`${this.baseUrl}/chat/completions`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
-          'Content-Type': 'application/json'
+          Authorization: `Bearer ${this.apiKey}`,
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           model: 'gpt-3.5-turbo',
-          messages: [{
-            role: 'user',
-            content: `Create a ${duration}-second video script about ${topic} for educational purposes.`
-          }],
-          max_tokens: 1000
-        })
+          messages: [
+            {
+              role: 'user',
+              content: `Create a ${duration}-second video script about ${topic} for educational purposes.`,
+            },
+          ],
+          max_tokens: 1000,
+        }),
       });
 
       const data = await response.json();
       return {
         success: true,
         script: data.choices[0].message.content,
-        duration: duration
+        duration: duration,
       };
     } catch (error) {
       console.error('Script generation error:', error);
@@ -63,20 +64,20 @@ class VideoGenerator {
       const response = await fetch(`${this.baseUrl}/images/generations`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
-          'Content-Type': 'application/json'
+          Authorization: `Bearer ${this.apiKey}`,
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           prompt: `Educational video thumbnail for: ${title}`,
           n: 1,
-          size: "1024x1024"
-        })
+          size: '1024x1024',
+        }),
       });
 
       const data = await response.json();
       return {
         success: true,
-        thumbnailUrl: data.data[0].url
+        thumbnailUrl: data.data[0].url,
       };
     } catch (error) {
       console.error('Thumbnail generation error:', error);
@@ -93,7 +94,7 @@ class VideoGenerator {
       thumbnail: thumbnailUrl,
       duration: this.estimateDuration(script),
       createdAt: new Date().toISOString(),
-      status: 'generated'
+      status: 'generated',
     };
   }
 

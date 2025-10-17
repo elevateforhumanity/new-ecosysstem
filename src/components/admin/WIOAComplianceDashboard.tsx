@@ -81,7 +81,7 @@ export function WIOAComplianceDashboard() {
 
   useEffect(() => {
     loadWIOAMetrics();
-    
+
     if (realTimeMode) {
       const interval = setInterval(loadWIOAMetrics, 60000); // Update every minute
       return () => clearInterval(interval);
@@ -90,7 +90,7 @@ export function WIOAComplianceDashboard() {
 
   const loadWIOAMetrics = async () => {
     // Simulate loading WIOA compliance data
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const mockMetrics: WIOAMetrics = {
       performanceIndicators: [
@@ -100,7 +100,7 @@ export function WIOAComplianceDashboard() {
           actual: 78.5,
           status: 'exceeds',
           trend: 'improving',
-          lastUpdated: new Date().toISOString()
+          lastUpdated: new Date().toISOString(),
         },
         {
           indicator: 'Employment Rate (4th Quarter)',
@@ -108,7 +108,7 @@ export function WIOAComplianceDashboard() {
           actual: 72.3,
           status: 'exceeds',
           trend: 'stable',
-          lastUpdated: new Date().toISOString()
+          lastUpdated: new Date().toISOString(),
         },
         {
           indicator: 'Median Earnings (2nd Quarter)',
@@ -116,7 +116,7 @@ export function WIOAComplianceDashboard() {
           actual: 6200,
           status: 'exceeds',
           trend: 'improving',
-          lastUpdated: new Date().toISOString()
+          lastUpdated: new Date().toISOString(),
         },
         {
           indicator: 'Credential Attainment Rate',
@@ -124,7 +124,7 @@ export function WIOAComplianceDashboard() {
           actual: 67.8,
           status: 'exceeds',
           trend: 'improving',
-          lastUpdated: new Date().toISOString()
+          lastUpdated: new Date().toISOString(),
         },
         {
           indicator: 'Measurable Skill Gains',
@@ -132,8 +132,8 @@ export function WIOAComplianceDashboard() {
           actual: 58.2,
           status: 'exceeds',
           trend: 'stable',
-          lastUpdated: new Date().toISOString()
-        }
+          lastUpdated: new Date().toISOString(),
+        },
       ],
       participantData: {
         totalParticipants: 1247,
@@ -142,15 +142,40 @@ export function WIOAComplianceDashboard() {
           dislocatedWorkers: 298,
           lowIncome: 456,
           youth: 123,
-          individuals: 183
+          individuals: 183,
         },
         byProgram: [
-          { program: 'Medical Assistant', participants: 342, completions: 298, placements: 276 },
-          { program: 'IT Support', participants: 287, completions: 251, placements: 231 },
-          { program: 'HVAC Technician', participants: 298, completions: 267, placements: 248 },
-          { program: 'Business Administration', participants: 189, completions: 165, placements: 152 },
-          { program: 'Network Infrastructure', participants: 131, completions: 118, placements: 112 }
-        ]
+          {
+            program: 'Medical Assistant',
+            participants: 342,
+            completions: 298,
+            placements: 276,
+          },
+          {
+            program: 'IT Support',
+            participants: 287,
+            completions: 251,
+            placements: 231,
+          },
+          {
+            program: 'HVAC Technician',
+            participants: 298,
+            completions: 267,
+            placements: 248,
+          },
+          {
+            program: 'Business Administration',
+            participants: 189,
+            completions: 165,
+            placements: 152,
+          },
+          {
+            program: 'Network Infrastructure',
+            participants: 131,
+            completions: 118,
+            placements: 112,
+          },
+        ],
       },
       employmentOutcomes: [
         {
@@ -159,7 +184,7 @@ export function WIOAComplianceDashboard() {
           medianEarnings: 5980,
           credentialRate: 65.4,
           retentionRate: 82.1,
-          measurableSkillGains: 56.8
+          measurableSkillGains: 56.8,
         },
         {
           quarter: 'Q2 2024',
@@ -167,7 +192,7 @@ export function WIOAComplianceDashboard() {
           medianEarnings: 6200,
           credentialRate: 67.8,
           retentionRate: 84.3,
-          measurableSkillGains: 58.2
+          measurableSkillGains: 58.2,
         },
         {
           quarter: 'Q3 2024',
@@ -175,8 +200,8 @@ export function WIOAComplianceDashboard() {
           medianEarnings: 6350,
           credentialRate: 69.2,
           retentionRate: 85.7,
-          measurableSkillGains: 59.6
-        }
+          measurableSkillGains: 59.6,
+        },
       ],
       complianceStatus: {
         overallScore: 94,
@@ -186,37 +211,37 @@ export function WIOAComplianceDashboard() {
             score: 96,
             status: 'compliant',
             lastAudit: '2024-08-15',
-            nextReview: '2025-02-15'
+            nextReview: '2025-02-15',
           },
           {
             area: 'Financial Management',
             score: 92,
             status: 'compliant',
             lastAudit: '2024-07-20',
-            nextReview: '2025-01-20'
+            nextReview: '2025-01-20',
           },
           {
             area: 'Participant Eligibility',
             score: 95,
             status: 'compliant',
             lastAudit: '2024-09-01',
-            nextReview: '2025-03-01'
+            nextReview: '2025-03-01',
           },
           {
             area: 'Equal Opportunity',
             score: 98,
             status: 'compliant',
             lastAudit: '2024-08-30',
-            nextReview: '2025-02-28'
+            nextReview: '2025-02-28',
           },
           {
             area: 'Data Validation',
             score: 89,
             status: 'warning',
             lastAudit: '2024-09-10',
-            nextReview: '2024-12-10'
-          }
-        ]
+            nextReview: '2024-12-10',
+          },
+        ],
       },
       reportingSchedule: [
         {
@@ -224,32 +249,34 @@ export function WIOAComplianceDashboard() {
           dueDate: '2024-10-30',
           status: 'in_progress',
           autoGenerated: true,
-          submissionMethod: 'WIOA Portal'
+          submissionMethod: 'WIOA Portal',
         },
         {
           reportType: 'Annual Financial Report',
           dueDate: '2024-12-31',
           status: 'upcoming',
           autoGenerated: true,
-          submissionMethod: 'Federal Reporting System'
+          submissionMethod: 'Federal Reporting System',
         },
         {
           reportType: 'Equal Opportunity Data',
           dueDate: '2024-11-15',
           status: 'upcoming',
           autoGenerated: true,
-          submissionMethod: 'DOL EO Portal'
-        }
+          submissionMethod: 'DOL EO Portal',
+        },
       ],
       realTimeAlerts: [
         {
           id: 'alert_001',
           type: 'performance',
           severity: 'medium',
-          message: 'IT Support program placement rate dropped to 68% this month',
-          actionRequired: 'Review job placement strategies and employer partnerships',
+          message:
+            'IT Support program placement rate dropped to 68% this month',
+          actionRequired:
+            'Review job placement strategies and employer partnerships',
           deadline: '2024-10-25',
-          autoResolution: false
+          autoResolution: false,
         },
         {
           id: 'alert_002',
@@ -258,9 +285,9 @@ export function WIOAComplianceDashboard() {
           message: 'Quarterly report due in 5 days',
           actionRequired: 'Review and submit Q3 performance data',
           deadline: '2024-10-30',
-          autoResolution: true
-        }
-      ]
+          autoResolution: true,
+        },
+      ],
     };
 
     setMetrics(mockMetrics);
@@ -289,11 +316,16 @@ export function WIOAComplianceDashboard() {
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
-      case 'critical': return 'text-red-600 bg-brand-surface border-red-200';
-      case 'high': return 'text-orange-600 bg-brand-surface border-orange-200';
-      case 'medium': return 'text-yellow-600 bg-yellow-100 border-yellow-200';
-      case 'low': return 'text-brand-info bg-brand-surface border-blue-200';
-      default: return 'text-brand-text-muted bg-brand-surface-dark border-brand-border';
+      case 'critical':
+        return 'text-red-600 bg-brand-surface border-red-200';
+      case 'high':
+        return 'text-orange-600 bg-brand-surface border-orange-200';
+      case 'medium':
+        return 'text-yellow-600 bg-yellow-100 border-yellow-200';
+      case 'low':
+        return 'text-brand-info bg-brand-surface border-blue-200';
+      default:
+        return 'text-brand-text-muted bg-brand-surface-dark border-brand-border';
     }
   };
 
@@ -301,7 +333,9 @@ export function WIOAComplianceDashboard() {
     return (
       <div className="text-center py-8">
         <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-        <p className="mt-4 text-brand-text-muted">Loading WIOA compliance data...</p>
+        <p className="mt-4 text-brand-text-muted">
+          Loading WIOA compliance data...
+        </p>
       </div>
     );
   }
@@ -310,8 +344,12 @@ export function WIOAComplianceDashboard() {
     <div className="wioa-compliance-dashboard">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-brand-text">📊 WIOA Compliance Dashboard</h2>
-          <p className="text-brand-text-muted">Real-time performance monitoring and automated reporting</p>
+          <h2 className="text-2xl font-bold text-brand-text">
+            📊 WIOA Compliance Dashboard
+          </h2>
+          <p className="text-brand-text-muted">
+            Real-time performance monitoring and automated reporting
+          </p>
         </div>
         <div className="flex items-center space-x-4">
           <select
@@ -349,12 +387,20 @@ export function WIOAComplianceDashboard() {
       <div className="bg-white border rounded-lg p-6 mb-6">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-semibold text-brand-text">Overall Compliance Score</h3>
-            <p className="text-brand-text-muted">Based on all WIOA performance indicators</p>
+            <h3 className="text-lg font-semibold text-brand-text">
+              Overall Compliance Score
+            </h3>
+            <p className="text-brand-text-muted">
+              Based on all WIOA performance indicators
+            </p>
           </div>
           <div className="text-right">
-            <div className="text-4xl font-bold text-brand-success">{metrics.complianceStatus.overallScore}%</div>
-            <div className="text-sm text-brand-text-light">Excellent Standing</div>
+            <div className="text-4xl font-bold text-brand-success">
+              {metrics.complianceStatus.overallScore}%
+            </div>
+            <div className="text-sm text-brand-text-light">
+              Excellent Standing
+            </div>
           </div>
         </div>
       </div>
@@ -362,10 +408,15 @@ export function WIOAComplianceDashboard() {
       {/* Real-time Alerts */}
       {metrics.realTimeAlerts.length > 0 && (
         <div className="mb-6">
-          <h3 className="text-lg font-semibold text-brand-text mb-4">🚨 Active Alerts</h3>
+          <h3 className="text-lg font-semibold text-brand-text mb-4">
+            🚨 Active Alerts
+          </h3>
           <div className="space-y-3">
             {metrics.realTimeAlerts.map((alert) => (
-              <div key={alert.id} className={`border rounded-lg p-4 ${getSeverityColor(alert.severity)}`}>
+              <div
+                key={alert.id}
+                className={`border rounded-lg p-4 ${getSeverityColor(alert.severity)}`}
+              >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="font-medium mb-1">{alert.message}</div>
@@ -374,7 +425,9 @@ export function WIOAComplianceDashboard() {
                   </div>
                   <div className="flex items-center space-x-2">
                     {alert.autoResolution && (
-                      <span className="text-xs bg-brand-surface text-brand-info px-2 py-1 rounded">🤖 Auto-resolving</span>
+                      <span className="text-xs bg-brand-surface text-brand-info px-2 py-1 rounded">
+                        🤖 Auto-resolving
+                      </span>
                     )}
                     <button className="text-xs bg-white px-3 py-1 rounded border hover:bg-brand-surface">
                       Resolve
@@ -389,25 +442,34 @@ export function WIOAComplianceDashboard() {
 
       {/* Performance Indicators */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold text-brand-text mb-4">📈 WIOA Performance Indicators</h3>
+        <h3 className="text-lg font-semibold text-brand-text mb-4">
+          📈 WIOA Performance Indicators
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {metrics.performanceIndicators.map((indicator, index) => (
             <div key={index} className="bg-white border rounded-lg p-6">
               <div className="flex items-start justify-between mb-4">
-                <h4 className="font-medium text-brand-text text-sm">{indicator.indicator}</h4>
-                <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(indicator.status)}`}>
+                <h4 className="font-medium text-brand-text text-sm">
+                  {indicator.indicator}
+                </h4>
+                <span
+                  className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(indicator.status)}`}
+                >
                   {indicator.status.toUpperCase()}
                 </span>
               </div>
-              
+
               <div className="mb-4">
                 <div className="flex items-baseline space-x-2">
                   <span className="text-2xl font-bold text-brand-text">
-                    {indicator.indicator.includes('Earnings') ? '$' : ''}{indicator.actual}
+                    {indicator.indicator.includes('Earnings') ? '$' : ''}
+                    {indicator.actual}
                     {!indicator.indicator.includes('Earnings') ? '%' : ''}
                   </span>
                   <span className="text-sm text-brand-text-light">
-                    Target: {indicator.indicator.includes('Earnings') ? '$' : ''}{indicator.target}
+                    Target:{' '}
+                    {indicator.indicator.includes('Earnings') ? '$' : ''}
+                    {indicator.target}
                     {!indicator.indicator.includes('Earnings') ? '%' : ''}
                   </span>
                 </div>
@@ -415,21 +477,32 @@ export function WIOAComplianceDashboard() {
 
               <div className="mb-4">
                 <div className="w-full bg-brand-border rounded-full h-2">
-                  <div 
+                  <div
                     className={`h-2 rounded-full ${
-                      indicator.actual >= indicator.target ? 'bg-green-500' : 'bg-yellow-500'
+                      indicator.actual >= indicator.target
+                        ? 'bg-green-500'
+                        : 'bg-yellow-500'
                     }`}
-                    style={{ width: `${Math.min((indicator.actual / indicator.target) * 100, 100)}%` }}
+                    style={{
+                      width: `${Math.min((indicator.actual / indicator.target) * 100, 100)}%`,
+                    }}
                   ></div>
                 </div>
               </div>
 
               <div className="flex items-center justify-between text-xs text-brand-text-light">
                 <span>
-                  {indicator.trend === 'improving' ? '📈' : 
-                   indicator.trend === 'declining' ? '📉' : '➡️'} {indicator.trend}
+                  {indicator.trend === 'improving'
+                    ? '📈'
+                    : indicator.trend === 'declining'
+                      ? '📉'
+                      : '➡️'}{' '}
+                  {indicator.trend}
                 </span>
-                <span>Updated: {new Date(indicator.lastUpdated).toLocaleDateString()}</span>
+                <span>
+                  Updated:{' '}
+                  {new Date(indicator.lastUpdated).toLocaleDateString()}
+                </span>
               </div>
             </div>
           ))}
@@ -439,44 +512,72 @@ export function WIOAComplianceDashboard() {
       {/* Participant Demographics */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <div className="bg-white border rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-brand-text mb-4">👥 Participant Demographics</h3>
+          <h3 className="text-lg font-semibold text-brand-text mb-4">
+            👥 Participant Demographics
+          </h3>
           <div className="space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-brand-text-muted">Total Participants</span>
-              <span className="font-bold text-brand-text">{metrics.participantData.totalParticipants}</span>
+              <span className="font-bold text-brand-text">
+                {metrics.participantData.totalParticipants}
+              </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-brand-text-muted">Veterans</span>
-              <span className="font-medium">{metrics.participantData.demographics.veterans}</span>
+              <span className="font-medium">
+                {metrics.participantData.demographics.veterans}
+              </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-brand-text-muted">Dislocated Workers</span>
-              <span className="font-medium">{metrics.participantData.demographics.dislocatedWorkers}</span>
+              <span className="font-medium">
+                {metrics.participantData.demographics.dislocatedWorkers}
+              </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-brand-text-muted">Low Income</span>
-              <span className="font-medium">{metrics.participantData.demographics.lowIncome}</span>
+              <span className="font-medium">
+                {metrics.participantData.demographics.lowIncome}
+              </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-brand-text-muted">Youth (14-24)</span>
-              <span className="font-medium">{metrics.participantData.demographics.youth}</span>
+              <span className="font-medium">
+                {metrics.participantData.demographics.youth}
+              </span>
             </div>
           </div>
         </div>
 
         <div className="bg-white border rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-brand-text mb-4">📚 Program Performance</h3>
+          <h3 className="text-lg font-semibold text-brand-text mb-4">
+            📚 Program Performance
+          </h3>
           <div className="space-y-3">
             {metrics.participantData.byProgram.map((program, index) => (
-              <div key={index} className="border-b border-brand-border last:border-b-0 pb-2 last:pb-0">
+              <div
+                key={index}
+                className="border-b border-brand-border last:border-b-0 pb-2 last:pb-0"
+              >
                 <div className="flex justify-between items-center mb-1">
-                  <span className="font-medium text-brand-text">{program.program}</span>
-                  <span className="text-sm text-brand-text-light">{program.participants} enrolled</span>
+                  <span className="font-medium text-brand-text">
+                    {program.program}
+                  </span>
+                  <span className="text-sm text-brand-text-light">
+                    {program.participants} enrolled
+                  </span>
                 </div>
                 <div className="flex justify-between text-sm text-brand-text-muted">
                   <span>Completions: {program.completions}</span>
                   <span>Placements: {program.placements}</span>
-                  <span>Rate: {((program.placements / program.participants) * 100).toFixed(1)}%</span>
+                  <span>
+                    Rate:{' '}
+                    {(
+                      (program.placements / program.participants) *
+                      100
+                    ).toFixed(1)}
+                    %
+                  </span>
                 </div>
               </div>
             ))}
@@ -486,33 +587,55 @@ export function WIOAComplianceDashboard() {
 
       {/* Reporting Schedule */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold text-brand-text mb-4">📅 Reporting Schedule</h3>
+        <h3 className="text-lg font-semibold text-brand-text mb-4">
+          📅 Reporting Schedule
+        </h3>
         <div className="bg-white border rounded-lg overflow-hidden">
           <table className="min-w-full">
             <thead className="bg-brand-surface">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Report Type</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Due Date</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Status</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Auto-Generated</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">Actions</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">
+                  Report Type
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">
+                  Due Date
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">
+                  Status
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">
+                  Auto-Generated
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-brand-text-light uppercase">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
               {metrics.reportingSchedule.map((report, index) => (
                 <tr key={index}>
-                  <td className="px-6 py-4 font-medium text-brand-text">{report.reportType}</td>
-                  <td className="px-6 py-4 text-sm text-brand-text-muted">{report.dueDate}</td>
+                  <td className="px-6 py-4 font-medium text-brand-text">
+                    {report.reportType}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-brand-text-muted">
+                    {report.dueDate}
+                  </td>
                   <td className="px-6 py-4">
-                    <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(report.status)}`}>
+                    <span
+                      className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(report.status)}`}
+                    >
                       {report.status.replace('_', ' ').toUpperCase()}
                     </span>
                   </td>
                   <td className="px-6 py-4">
                     {report.autoGenerated ? (
-                      <span className="text-xs bg-brand-surface text-green-700 px-2 py-1 rounded">🤖 Yes</span>
+                      <span className="text-xs bg-brand-surface text-green-700 px-2 py-1 rounded">
+                        🤖 Yes
+                      </span>
                     ) : (
-                      <span className="text-xs bg-brand-surface-dark text-brand-text px-2 py-1 rounded">Manual</span>
+                      <span className="text-xs bg-brand-surface-dark text-brand-text px-2 py-1 rounded">
+                        Manual
+                      </span>
                     )}
                   </td>
                   <td className="px-6 py-4">
@@ -529,24 +652,33 @@ export function WIOAComplianceDashboard() {
 
       {/* Compliance Areas */}
       <div>
-        <h3 className="text-lg font-semibold text-brand-text mb-4">✅ Compliance Areas</h3>
+        <h3 className="text-lg font-semibold text-brand-text mb-4">
+          ✅ Compliance Areas
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {metrics.complianceStatus.areas.map((area, index) => (
             <div key={index} className="bg-white border rounded-lg p-6">
               <div className="flex items-start justify-between mb-4">
                 <h4 className="font-medium text-brand-text">{area.area}</h4>
-                <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(area.status)}`}>
+                <span
+                  className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(area.status)}`}
+                >
                   {area.status.replace('_', ' ').toUpperCase()}
                 </span>
               </div>
-              
+
               <div className="mb-4">
-                <div className="text-2xl font-bold text-brand-text mb-1">{area.score}%</div>
+                <div className="text-2xl font-bold text-brand-text mb-1">
+                  {area.score}%
+                </div>
                 <div className="w-full bg-brand-border rounded-full h-2">
-                  <div 
+                  <div
                     className={`h-2 rounded-full ${
-                      area.score >= 90 ? 'bg-green-500' : 
-                      area.score >= 80 ? 'bg-yellow-500' : 'bg-red-500'
+                      area.score >= 90
+                        ? 'bg-green-500'
+                        : area.score >= 80
+                          ? 'bg-yellow-500'
+                          : 'bg-red-500'
                     }`}
                     style={{ width: `${area.score}%` }}
                   ></div>

@@ -25,17 +25,17 @@ class DownloadTracker {
       referrer: document.referrer,
       pageUrl: window.location.href,
       screenResolution: `${screen.width}x${screen.height}`,
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     };
 
     try {
       const response = await fetch(`${this.apiBase}/api/log-download`, {
         method: 'POST',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
-          'X-Session-ID': this.sessionId
+          'X-Session-ID': this.sessionId,
         },
-        body: JSON.stringify(trackingData)
+        body: JSON.stringify(trackingData),
       });
 
       if (response.ok) {
@@ -53,7 +53,13 @@ class DownloadTracker {
   }
 
   // Track download completion
-  async trackDownloadComplete(email, productId, licenseKey, fileName, success = true) {
+  async trackDownloadComplete(
+    email,
+    productId,
+    licenseKey,
+    fileName,
+    success = true
+  ) {
     const completionData = {
       email,
       productId,
@@ -63,17 +69,17 @@ class DownloadTracker {
       timestamp: new Date().toISOString(),
       success,
       duration: Date.now() - this.startTime,
-      action: 'DOWNLOAD_COMPLETED'
+      action: 'DOWNLOAD_COMPLETED',
     };
 
     try {
       await fetch(`${this.apiBase}/api/log-download-complete`, {
         method: 'POST',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
-          'X-Session-ID': this.sessionId
+          'X-Session-ID': this.sessionId,
         },
-        body: JSON.stringify(completionData)
+        body: JSON.stringify(completionData),
       });
 
       if (success) {
@@ -85,7 +91,13 @@ class DownloadTracker {
   }
 
   // Track download errors
-  async trackDownloadError(email, productId, licenseKey, error, fileName = null) {
+  async trackDownloadError(
+    email,
+    productId,
+    licenseKey,
+    error,
+    fileName = null
+  ) {
     const errorData = {
       email,
       productId,
@@ -94,17 +106,17 @@ class DownloadTracker {
       sessionId: this.sessionId,
       timestamp: new Date().toISOString(),
       error: error.message || error,
-      action: 'DOWNLOAD_ERROR'
+      action: 'DOWNLOAD_ERROR',
     };
 
     try {
       await fetch(`${this.apiBase}/api/log-download-error`, {
         method: 'POST',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
-          'X-Session-ID': this.sessionId
+          'X-Session-ID': this.sessionId,
         },
-        body: JSON.stringify(errorData)
+        body: JSON.stringify(errorData),
       });
 
       this.showTrackingNotification('Download error reported', 'error');
@@ -116,12 +128,15 @@ class DownloadTracker {
   // Validate license before download
   async validateLicense(licenseKey) {
     try {
-      const response = await fetch(`${this.apiBase}/api/validate-license/${licenseKey}`, {
-        method: 'GET',
-        headers: {
-          'X-Session-ID': this.sessionId
+      const response = await fetch(
+        `${this.apiBase}/api/validate-license/${licenseKey}`,
+        {
+          method: 'GET',
+          headers: {
+            'X-Session-ID': this.sessionId,
+          },
         }
-      });
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -189,9 +204,9 @@ class DownloadTracker {
 
       // Create progress indicator
       const progressContainer = this.createProgressIndicator(fileName);
-      
+
       const response = await fetch(url);
-      
+
       if (!response.ok) {
         throw new Error(`Download failed: ${response.statusText}`);
       }
@@ -205,12 +220,12 @@ class DownloadTracker {
 
       while (true) {
         const { done, value } = await reader.read();
-        
+
         if (done) break;
-        
+
         chunks.push(value);
         loaded += value.length;
-        
+
         // Update progress
         if (total) {
           const progress = (loaded / total) * 100;
@@ -221,7 +236,7 @@ class DownloadTracker {
       // Create blob and download
       const blob = new Blob(chunks);
       const downloadUrl = URL.createObjectURL(blob);
-      
+
       const a = document.createElement('a');
       a.href = downloadUrl;
       a.download = fileName;
@@ -231,13 +246,24 @@ class DownloadTracker {
       URL.revokeObjectURL(downloadUrl);
 
       // Track completion
-      await this.trackDownloadComplete(email, productId, licenseKey, fileName, true);
-      
+      await this.trackDownloadComplete(
+        email,
+        productId,
+        licenseKey,
+        fileName,
+        true
+      );
+
       // Remove progress indicator
       setTimeout(() => progressContainer.remove(), 2000);
-
     } catch (error) {
-      await this.trackDownloadError(email, productId, licenseKey, error, fileName);
+      await this.trackDownloadError(
+        email,
+        productId,
+        licenseKey,
+        error,
+        fileName
+      );
       throw error;
     }
   }
@@ -276,7 +302,7 @@ class DownloadTracker {
         <div class="progress-text">Preparing download...</div>
       </div>
     `;
-    
+
     document.body.appendChild(container);
     return container;
   }
@@ -284,11 +310,11 @@ class DownloadTracker {
   updateProgress(container, progress) {
     const progressBar = container.querySelector('.progress-bar');
     const progressText = container.querySelector('.progress-text');
-    
+
     if (progressBar) {
       progressBar.style.width = `${progress}%`;
     }
-    
+
     if (progressText) {
       progressText.textContent = `${Math.round(progress)}% complete`;
     }
@@ -300,7 +326,12 @@ window.downloadTracker = new DownloadTracker();
 
 // Convenience functions for backward compatibility
 window.trackDownload = (email, productId, licenseKey, fileName) => {
-  return window.downloadTracker.trackDownload(email, productId, licenseKey, fileName);
+  return window.downloadTracker.trackDownload(
+    email,
+    productId,
+    licenseKey,
+    fileName
+  );
 };
 
 window.validateLicense = (licenseKey) => {
@@ -308,11 +339,20 @@ window.validateLicense = (licenseKey) => {
 };
 
 window.downloadWithProgress = (url, fileName, licenseKey, email, productId) => {
-  return window.downloadTracker.downloadWithProgress(url, fileName, licenseKey, email, productId);
+  return window.downloadTracker.downloadWithProgress(
+    url,
+    fileName,
+    licenseKey,
+    email,
+    productId
+  );
 };
 
 // Auto-track page views for license-related pages
-if (window.location.pathname.includes('/download') || window.location.pathname.includes('/license')) {
+if (
+  window.location.pathname.includes('/download') ||
+  window.location.pathname.includes('/license')
+) {
   // Track page view
   fetch('/api/log-page-view', {
     method: 'POST',
@@ -321,7 +361,7 @@ if (window.location.pathname.includes('/download') || window.location.pathname.i
       page: window.location.pathname,
       timestamp: new Date().toISOString(),
       sessionId: window.downloadTracker.sessionId,
-      referrer: document.referrer
-    })
+      referrer: document.referrer,
+    }),
   }).catch(console.error);
 }

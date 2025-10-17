@@ -41,7 +41,7 @@ const dynamicPages = {
   ],
   partners: [
     // These would come from API: /api/partners
-  ]
+  ],
 };
 
 function generateSitemapXML(pages, filename) {
@@ -50,12 +50,16 @@ function generateSitemapXML(pages, filename) {
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-${pages.map(page => `  <url>
+${pages
+  .map(
+    (page) => `  <url>
     <loc>${BASE_URL}${page.url}</loc>
     <lastmod>${page.lastmod || new Date().toISOString().split('T')[0]}</lastmod>
     <changefreq>${page.changefreq || 'weekly'}</changefreq>
     <priority>${page.priority || 0.5}</priority>
-  </url>`).join('\n')}
+  </url>`
+  )
+  .join('\n')}
 </urlset>`;
 
   fs.writeFileSync(path.join(OUTPUT_DIR, filename), xml);

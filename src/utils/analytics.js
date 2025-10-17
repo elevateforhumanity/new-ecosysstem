@@ -6,7 +6,7 @@
 // Initialize Google Analytics
 export const initGA = () => {
   const gaId = import.meta.env.VITE_GOOGLE_ANALYTICS_ID;
-  
+
   if (!gaId) {
     console.log('[Analytics] Google Analytics ID not set');
     return;

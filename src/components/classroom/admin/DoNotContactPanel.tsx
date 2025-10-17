@@ -21,7 +21,10 @@ export default function DoNotContactPanel() {
     reason_details: '',
     expires_at: '',
   });
-  const [alertMessage, setAlertMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [alertMessage, setAlertMessage] = useState<{
+    type: 'success' | 'error';
+    text: string;
+  } | null>(null);
 
   useEffect(() => {
     loadEntries();
@@ -35,7 +38,10 @@ export default function DoNotContactPanel() {
       .order('created_at', { ascending: false });
 
     if (error) {
-      setAlertMessage({ type: 'error', text: `Failed to load entries: ${error.message}` });
+      setAlertMessage({
+        type: 'error',
+        text: `Failed to load entries: ${error.message}`,
+      });
     } else {
       setEntries(data || []);
     }
@@ -44,7 +50,7 @@ export default function DoNotContactPanel() {
 
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const { data, error } = await supabase.rpc('add_to_do_not_contact', {
       p_email: newEntry.email,
       p_reason: newEntry.reason,
@@ -53,10 +59,21 @@ export default function DoNotContactPanel() {
     });
 
     if (error) {
-      setAlertMessage({ type: 'error', text: `Failed to add entry: ${error.message}` });
+      setAlertMessage({
+        type: 'error',
+        text: `Failed to add entry: ${error.message}`,
+      });
     } else {
-      setAlertMessage({ type: 'success', text: `Added ${newEntry.email} to Do Not Contact list` });
-      setNewEntry({ email: '', reason: 'user_request', reason_details: '', expires_at: '' });
+      setAlertMessage({
+        type: 'success',
+        text: `Added ${newEntry.email} to Do Not Contact list`,
+      });
+      setNewEntry({
+        email: '',
+        reason: 'user_request',
+        reason_details: '',
+        expires_at: '',
+      });
       setShowAddForm(false);
       loadEntries();
     }
@@ -72,9 +89,15 @@ export default function DoNotContactPanel() {
     });
 
     if (error) {
-      setAlertMessage({ type: 'error', text: `Failed to remove entry: ${error.message}` });
+      setAlertMessage({
+        type: 'error',
+        text: `Failed to remove entry: ${error.message}`,
+      });
     } else {
-      setAlertMessage({ type: 'success', text: `Removed ${email} from Do Not Contact list` });
+      setAlertMessage({
+        type: 'success',
+        text: `Removed ${email} from Do Not Contact list`,
+      });
       loadEntries();
     }
   };
@@ -115,7 +138,9 @@ export default function DoNotContactPanel() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold mb-2">Do Not Contact List</h1>
-            <p className="text-brand-text-muted">Manage email addresses that should not receive communications</p>
+            <p className="text-brand-text-muted">
+              Manage email addresses that should not receive communications
+            </p>
           </div>
           <button
             onClick={() => setShowAddForm(!showAddForm)}
@@ -128,11 +153,17 @@ export default function DoNotContactPanel() {
 
       {/* Alert Message */}
       {alertMessage && (
-        <div className={`mb-6 p-4 rounded-lg ${alertMessage.type === 'success' ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`}>
+        <div
+          className={`mb-6 p-4 rounded-lg ${alertMessage.type === 'success' ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`}
+        >
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <span className="text-lg mr-2">{alertMessage.type === 'success' ? '✅' : '❌'}</span>
-              <p className={`text-sm font-medium ${alertMessage.type === 'success' ? 'text-brand-success' : 'text-red-800'}`}>
+              <span className="text-lg mr-2">
+                {alertMessage.type === 'success' ? '✅' : '❌'}
+              </span>
+              <p
+                className={`text-sm font-medium ${alertMessage.type === 'success' ? 'text-brand-success' : 'text-red-800'}`}
+              >
                 {alertMessage.text}
               </p>
             </div>
@@ -152,22 +183,30 @@ export default function DoNotContactPanel() {
           <h2 className="text-xl font-semibold mb-4">Add to Do Not Contact</h2>
           <form onSubmit={handleAdd} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-brand-text mb-2">Email Address</label>
+              <label className="block text-sm font-medium text-brand-text mb-2">
+                Email Address
+              </label>
               <input
                 type="email"
                 required
                 value={newEntry.email}
-                onChange={(e) => setNewEntry({ ...newEntry, email: e.target.value })}
+                onChange={(e) =>
+                  setNewEntry({ ...newEntry, email: e.target.value })
+                }
                 className="w-full px-4 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
                 placeholder="user@example.com"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-brand-text mb-2">Reason</label>
+              <label className="block text-sm font-medium text-brand-text mb-2">
+                Reason
+              </label>
               <select
                 value={newEntry.reason}
-                onChange={(e) => setNewEntry({ ...newEntry, reason: e.target.value })}
+                onChange={(e) =>
+                  setNewEntry({ ...newEntry, reason: e.target.value })
+                }
                 className="w-full px-4 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
               >
                 <option value="user_request">User Request</option>
@@ -179,10 +218,14 @@ export default function DoNotContactPanel() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-brand-text mb-2">Details (Optional)</label>
+              <label className="block text-sm font-medium text-brand-text mb-2">
+                Details (Optional)
+              </label>
               <textarea
                 value={newEntry.reason_details}
-                onChange={(e) => setNewEntry({ ...newEntry, reason_details: e.target.value })}
+                onChange={(e) =>
+                  setNewEntry({ ...newEntry, reason_details: e.target.value })
+                }
                 className="w-full px-4 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
                 rows={3}
                 placeholder="Additional context..."
@@ -190,14 +233,20 @@ export default function DoNotContactPanel() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-brand-text mb-2">Expiration Date (Optional)</label>
+              <label className="block text-sm font-medium text-brand-text mb-2">
+                Expiration Date (Optional)
+              </label>
               <input
                 type="datetime-local"
                 value={newEntry.expires_at}
-                onChange={(e) => setNewEntry({ ...newEntry, expires_at: e.target.value })}
+                onChange={(e) =>
+                  setNewEntry({ ...newEntry, expires_at: e.target.value })
+                }
                 className="w-full px-4 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
               />
-              <p className="text-xs text-brand-text-light mt-1">Leave empty for permanent block</p>
+              <p className="text-xs text-brand-text-light mt-1">
+                Leave empty for permanent block
+              </p>
             </div>
 
             <div className="flex gap-3">
@@ -222,18 +271,28 @@ export default function DoNotContactPanel() {
       {/* Statistics */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <div className="bg-white rounded-lg shadow p-6">
-          <div className="text-3xl font-bold text-brand-text">{entries.length}</div>
+          <div className="text-3xl font-bold text-brand-text">
+            {entries.length}
+          </div>
           <div className="text-sm text-brand-text-muted">Total Blocked</div>
         </div>
         <div className="bg-white rounded-lg shadow p-6">
           <div className="text-3xl font-bold text-brand-text">
-            {entries.filter(e => e.expires_at && new Date(e.expires_at) > new Date()).length}
+            {
+              entries.filter(
+                (e) => e.expires_at && new Date(e.expires_at) > new Date()
+              ).length
+            }
           </div>
           <div className="text-sm text-brand-text-muted">Temporary Blocks</div>
         </div>
         <div className="bg-white rounded-lg shadow p-6">
           <div className="text-3xl font-bold text-brand-text">
-            {entries.filter(e => !e.expires_at || new Date(e.expires_at) <= new Date()).length}
+            {
+              entries.filter(
+                (e) => !e.expires_at || new Date(e.expires_at) <= new Date()
+              ).length
+            }
           </div>
           <div className="text-sm text-brand-text-muted">Permanent Blocks</div>
         </div>
@@ -275,7 +334,9 @@ export default function DoNotContactPanel() {
                     {entry.email}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 py-1 text-xs font-semibold rounded-full ${getReasonColor(entry.reason)}`}>
+                    <span
+                      className={`px-2 py-1 text-xs font-semibold rounded-full ${getReasonColor(entry.reason)}`}
+                    >
                       {getReasonLabel(entry.reason)}
                     </span>
                   </td>
@@ -290,7 +351,13 @@ export default function DoNotContactPanel() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-brand-text-light">
                     {entry.expires_at ? (
-                      <span className={new Date(entry.expires_at) > new Date() ? 'text-orange-600' : 'text-gray-400'}>
+                      <span
+                        className={
+                          new Date(entry.expires_at) > new Date()
+                            ? 'text-orange-600'
+                            : 'text-gray-400'
+                        }
+                      >
                         {new Date(entry.expires_at).toLocaleDateString()}
                       </span>
                     ) : (
@@ -313,7 +380,9 @@ export default function DoNotContactPanel() {
 
         {entries.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-brand-text-light">No entries in Do Not Contact list</p>
+            <p className="text-brand-text-light">
+              No entries in Do Not Contact list
+            </p>
           </div>
         )}
       </div>

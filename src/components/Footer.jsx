@@ -18,13 +18,34 @@ const Footer = () => {
         </div>
         <div className="footer-section">
           <h4>Connect</h4>
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">YouTube</a>
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Facebook
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="https://youtube.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            YouTube
+          </a>
         </div>
       </div>
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} Elevate for Humanity. All rights reserved.</p>
+        <p>
+          &copy; {new Date().getFullYear()} Elevate for Humanity. All rights
+          reserved.
+        </p>
       </div>
     </footer>
   );

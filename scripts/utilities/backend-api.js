@@ -27,19 +27,21 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Security and CORS
-app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'https://workforce.elevateforhumanity.com',
-    'https://*.replit.app'
-  ],
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: [
+      'http://localhost:3000',
+      'https://workforce.elevateforhumanity.com',
+      'https://*.replit.app',
+    ],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
 // Connect to database
-db.connect().catch(err => {
+db.connect().catch((err) => {
   console.error('Database connection failed:', err);
   process.exit(1);
 });
@@ -54,10 +56,10 @@ app.get('/api/health', async (req, res) => {
     port: PORT,
     database: dbHealth,
     services: {
-      'authentication': 'active',
-      'database': dbHealth.status,
-      'api': 'ready'
-    }
+      authentication: 'active',
+      database: dbHealth.status,
+      api: 'ready',
+    },
   });
 });
 
@@ -65,11 +67,11 @@ app.get('/api/health', async (req, res) => {
 app.post('/api/auth/login', async (req, res) => {
   try {
     const { email, auth_id } = req.body;
-    
+
     if (!email || !auth_id) {
       return res.status(400).json({
         error: 'Missing required fields',
-        message: 'Email and auth_id are required'
+        message: 'Email and auth_id are required',
       });
     }
 
@@ -79,7 +81,7 @@ app.post('/api/auth/login', async (req, res) => {
     console.error('Login error:', error);
     res.status(500).json({
       error: 'Login failed',
-      message: error.message
+      message: error.message,
     });
   }
 });
@@ -92,7 +94,7 @@ app.post('/api/auth/validate', async (req, res) => {
   } catch (error) {
     res.status(500).json({
       error: 'Validation failed',
-      message: error.message
+      message: error.message,
     });
   }
 });
@@ -108,7 +110,7 @@ app.get('/api/users/profile', requireAuth, async (req, res) => {
   } catch (error) {
     res.status(500).json({
       error: 'Failed to fetch profile',
-      message: error.message
+      message: error.message,
     });
   }
 });
@@ -121,7 +123,7 @@ app.get('/api/enrollments', requireAuth, async (req, res) => {
   } catch (error) {
     res.status(500).json({
       error: 'Failed to fetch enrollments',
-      message: error.message
+      message: error.message,
     });
   }
 });
@@ -131,7 +133,7 @@ app.post('/api/enrollments', requireAuth, async (req, res) => {
     const enrollmentData = {
       user_id: req.user.id,
       program_slug: req.body.program_slug,
-      status: 'pending'
+      status: 'pending',
     };
 
     const enrollment = await db.createEnrollment(enrollmentData);
@@ -139,7 +141,7 @@ app.post('/api/enrollments', requireAuth, async (req, res) => {
   } catch (error) {
     res.status(500).json({
       error: 'Failed to create enrollment',
-      message: error.message
+      message: error.message,
     });
   }
 });
@@ -150,32 +152,35 @@ app.get('/api/programs', (req, res) => {
     {
       slug: 'ai-fundamentals',
       name: 'AI Fundamentals',
-      description: 'Master artificial intelligence and machine learning foundations',
+      description:
+        'Master artificial intelligence and machine learning foundations',
       price: 199700,
       currency: 'usd',
       duration: '12 weeks',
-      level: 'beginner'
+      level: 'beginner',
     },
     {
       slug: 'data-science-bootcamp',
       name: 'Data Science Bootcamp',
-      description: 'Comprehensive data science training with real-world projects',
+      description:
+        'Comprehensive data science training with real-world projects',
       price: 495000,
       currency: 'usd',
       duration: '16 weeks',
-      level: 'intermediate'
+      level: 'intermediate',
     },
     {
       slug: 'advanced-ai-specialization',
       name: 'Advanced AI Specialization',
-      description: 'Expert-level AI training with deep learning and neural networks',
+      description:
+        'Expert-level AI training with deep learning and neural networks',
       price: 749500,
       currency: 'usd',
       duration: '20 weeks',
-      level: 'advanced'
-    }
+      level: 'advanced',
+    },
   ];
-  
+
   res.json(programs);
 });
 
@@ -185,7 +190,7 @@ app.use((error, req, res, next) => {
   res.status(500).json({
     error: 'Internal server error',
     message: error.message,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 });
 
@@ -194,7 +199,7 @@ app.use('*', (req, res) => {
   res.status(404).json({
     error: 'Endpoint not found',
     path: req.originalUrl,
-    method: req.method
+    method: req.method,
   });
 });
 

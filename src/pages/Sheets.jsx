@@ -20,15 +20,17 @@ export function Sheets() {
       id: 'sheet_1',
       title: 'Untitled Spreadsheet',
       sheets: ['sheet1'],
-      sheetsData: [{
-        id: 'sheet1',
-        name: 'Sheet1',
-        rows: 100,
-        cols: 26,
-        cells: {}
-      }]
+      sheetsData: [
+        {
+          id: 'sheet1',
+          name: 'Sheet1',
+          rows: 100,
+          cols: 26,
+          cells: {},
+        },
+      ],
     };
-    
+
     setSpreadsheet(mockSpreadsheet);
     setActiveSheet(mockSpreadsheet.sheetsData[0]);
   };
@@ -55,22 +57,22 @@ export function Sheets() {
 
   const handleCellSubmit = async () => {
     if (!activeSheet) return;
-    
+
     const cellKey = `${selectedCell.row},${selectedCell.col}`;
     const isFormula = cellValue.startsWith('=');
-    
+
     // Update cell
     const newCell = {
       row: selectedCell.row,
       col: selectedCell.col,
       value: cellValue,
       formula: isFormula ? cellValue : null,
-      displayValue: cellValue
+      displayValue: cellValue,
     };
-    
+
     activeSheet.cells[cellKey] = newCell;
     setIsEditing(false);
-    
+
     // In production, save to backend
     console.log('Cell updated:', newCell);
   };
@@ -97,16 +99,25 @@ export function Sheets() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', backgroundColor: 'var(--brand-surface)' }}>
-      {/* Toolbar */}
-      <div style={{
-        backgroundColor: '#fff',
-        borderBottom: '1px solid var(--brand-border)',
-        padding: '0.75rem 1rem',
+    <div
+      style={{
         display: 'flex',
-        gap: '1rem',
-        alignItems: 'center'
-      }}>
+        flexDirection: 'column',
+        height: '100vh',
+        backgroundColor: 'var(--brand-surface)',
+      }}
+    >
+      {/* Toolbar */}
+      <div
+        style={{
+          backgroundColor: '#fff',
+          borderBottom: '1px solid var(--brand-border)',
+          padding: '0.75rem 1rem',
+          display: 'flex',
+          gap: '1rem',
+          alignItems: 'center',
+        }}
+      >
         <input
           type="text"
           value={spreadsheet?.title || 'Untitled Spreadsheet'}
@@ -115,52 +126,61 @@ export function Sheets() {
             fontSize: '1.125rem',
             fontWeight: '500',
             outline: 'none',
-            width: '300px'
+            width: '300px',
           }}
         />
 
         <div style={{ flex: 1 }} />
 
-        <button style={{
-          padding: '0.5rem 1rem',
-          backgroundColor: '#fff',
-          border: '1px solid var(--brand-border-dark)',
-          borderRadius: '0.375rem',
-          cursor: 'pointer'
-        }}>
+        <button
+          style={{
+            padding: '0.5rem 1rem',
+            backgroundColor: '#fff',
+            border: '1px solid var(--brand-border-dark)',
+            borderRadius: '0.375rem',
+            cursor: 'pointer',
+          }}
+        >
           💾 Save
         </button>
 
-        <button style={{
-          padding: '0.5rem 1rem',
-          backgroundColor: 'var(--brand-info)',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '0.375rem',
-          cursor: 'pointer'
-        }}>
+        <button
+          style={{
+            padding: '0.5rem 1rem',
+            backgroundColor: 'var(--brand-info)',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '0.375rem',
+            cursor: 'pointer',
+          }}
+        >
           Share
         </button>
       </div>
 
       {/* Formula bar */}
-      <div style={{
-        backgroundColor: '#fff',
-        borderBottom: '1px solid var(--brand-border)',
-        padding: '0.5rem 1rem',
-        display: 'flex',
-        gap: '1rem',
-        alignItems: 'center'
-      }}>
-        <div style={{
-          padding: '0.5rem',
-          backgroundColor: '#f3f4f6',
-          borderRadius: '0.25rem',
-          minWidth: '60px',
-          textAlign: 'center',
-          fontWeight: '600'
-        }}>
-          {columnToLetter(selectedCell.col)}{selectedCell.row + 1}
+      <div
+        style={{
+          backgroundColor: '#fff',
+          borderBottom: '1px solid var(--brand-border)',
+          padding: '0.5rem 1rem',
+          display: 'flex',
+          gap: '1rem',
+          alignItems: 'center',
+        }}
+      >
+        <div
+          style={{
+            padding: '0.5rem',
+            backgroundColor: '#f3f4f6',
+            borderRadius: '0.25rem',
+            minWidth: '60px',
+            textAlign: 'center',
+            fontWeight: '600',
+          }}
+        >
+          {columnToLetter(selectedCell.col)}
+          {selectedCell.row + 1}
         </div>
 
         <input
@@ -176,29 +196,33 @@ export function Sheets() {
             padding: '0.5rem',
             border: '1px solid var(--brand-border-dark)',
             borderRadius: '0.375rem',
-            fontSize: '0.875rem'
+            fontSize: '0.875rem',
           }}
         />
       </div>
 
       {/* Spreadsheet grid */}
       <div style={{ flex: 1, overflow: 'auto', backgroundColor: '#fff' }}>
-        <table style={{
-          borderCollapse: 'collapse',
-          width: '100%',
-          tableLayout: 'fixed'
-        }}>
+        <table
+          style={{
+            borderCollapse: 'collapse',
+            width: '100%',
+            tableLayout: 'fixed',
+          }}
+        >
           <thead>
             <tr>
-              <th style={{
-                width: '40px',
-                backgroundColor: '#f3f4f6',
-                border: '1px solid var(--brand-border)',
-                position: 'sticky',
-                top: 0,
-                left: 0,
-                zIndex: 3
-              }} />
+              <th
+                style={{
+                  width: '40px',
+                  backgroundColor: '#f3f4f6',
+                  border: '1px solid var(--brand-border)',
+                  position: 'sticky',
+                  top: 0,
+                  left: 0,
+                  zIndex: 3,
+                }}
+              />
               {Array.from({ length: activeSheet?.cols || 26 }, (_, col) => (
                 <th
                   key={col}
@@ -211,7 +235,7 @@ export function Sheets() {
                     fontWeight: '600',
                     position: 'sticky',
                     top: 0,
-                    zIndex: 2
+                    zIndex: 2,
                   }}
                 >
                   {columnToLetter(col)}
@@ -222,18 +246,20 @@ export function Sheets() {
           <tbody>
             {Array.from({ length: activeSheet?.rows || 100 }, (_, row) => (
               <tr key={row}>
-                <td style={{
-                  width: '40px',
-                  backgroundColor: '#f3f4f6',
-                  border: '1px solid var(--brand-border)',
-                  padding: '0.5rem',
-                  textAlign: 'center',
-                  fontSize: '0.875rem',
-                  fontWeight: '600',
-                  position: 'sticky',
-                  left: 0,
-                  zIndex: 1
-                }}>
+                <td
+                  style={{
+                    width: '40px',
+                    backgroundColor: '#f3f4f6',
+                    border: '1px solid var(--brand-border)',
+                    padding: '0.5rem',
+                    textAlign: 'center',
+                    fontSize: '0.875rem',
+                    fontWeight: '600',
+                    position: 'sticky',
+                    left: 0,
+                    zIndex: 1,
+                  }}
+                >
                   {row + 1}
                 </td>
                 {Array.from({ length: activeSheet?.cols || 26 }, (_, col) => (
@@ -245,9 +271,13 @@ export function Sheets() {
                       border: '1px solid var(--brand-border)',
                       padding: '0.5rem',
                       cursor: 'cell',
-                      backgroundColor: isCellSelected(row, col) ? '#dbeafe' : '#fff',
-                      outline: isCellSelected(row, col) ? '2px solid var(--brand-info)' : 'none',
-                      position: 'relative'
+                      backgroundColor: isCellSelected(row, col)
+                        ? '#dbeafe'
+                        : '#fff',
+                      outline: isCellSelected(row, col)
+                        ? '2px solid var(--brand-info)'
+                        : 'none',
+                      position: 'relative',
                     }}
                   >
                     {isEditing && isCellSelected(row, col) ? (
@@ -265,7 +295,7 @@ export function Sheets() {
                           border: 'none',
                           outline: 'none',
                           padding: 0,
-                          backgroundColor: 'transparent'
+                          backgroundColor: 'transparent',
                         }}
                       />
                     ) : (
@@ -280,36 +310,41 @@ export function Sheets() {
       </div>
 
       {/* Sheet tabs */}
-      <div style={{
-        backgroundColor: '#fff',
-        borderTop: '1px solid var(--brand-border)',
-        padding: '0.5rem 1rem',
-        display: 'flex',
-        gap: '0.5rem'
-      }}>
+      <div
+        style={{
+          backgroundColor: '#fff',
+          borderTop: '1px solid var(--brand-border)',
+          padding: '0.5rem 1rem',
+          display: 'flex',
+          gap: '0.5rem',
+        }}
+      >
         {spreadsheet?.sheetsData?.map((sheet) => (
           <button
             key={sheet.id}
             onClick={() => setActiveSheet(sheet)}
             style={{
               padding: '0.5rem 1rem',
-              backgroundColor: activeSheet?.id === sheet.id ? '#e0e7ff' : 'transparent',
+              backgroundColor:
+                activeSheet?.id === sheet.id ? '#e0e7ff' : 'transparent',
               border: 'none',
               borderRadius: '0.375rem',
               cursor: 'pointer',
-              fontWeight: activeSheet?.id === sheet.id ? '600' : '400'
+              fontWeight: activeSheet?.id === sheet.id ? '600' : '400',
             }}
           >
             {sheet.name}
           </button>
         ))}
-        <button style={{
-          padding: '0.5rem 1rem',
-          backgroundColor: 'transparent',
-          border: 'none',
-          cursor: 'pointer',
-          fontSize: '1.25rem'
-        }}>
+        <button
+          style={{
+            padding: '0.5rem 1rem',
+            backgroundColor: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            fontSize: '1.25rem',
+          }}
+        >
           +
         </button>
       </div>

@@ -24,7 +24,7 @@ const cacheVersion = `v${Date.now()}`;
 function addCacheVersionToHTML(filePath) {
   try {
     let content = fs.readFileSync(filePath, 'utf8');
-    
+
     // Skip if cache version already exists
     if (content.includes('name="cache-version"')) {
       // Update existing cache version
@@ -35,15 +35,15 @@ function addCacheVersionToHTML(filePath) {
       fs.writeFileSync(filePath, content, 'utf8');
       return 'updated';
     }
-    
+
     // Add new cache version meta tag
     const charsetRegex = /<meta charset="[^"]*"[^>]*>/i;
     const match = content.match(charsetRegex);
-    
+
     if (match) {
       const cacheVersionTag = `\n    <meta name="cache-version" content="${cacheVersion}">`;
       content = content.replace(charsetRegex, match[0] + cacheVersionTag);
-      
+
       fs.writeFileSync(filePath, content, 'utf8');
       return 'added';
     }
@@ -58,18 +58,18 @@ function addCacheVersionToHTML(filePath) {
 function addCacheBusterScript(filePath) {
   try {
     let content = fs.readFileSync(filePath, 'utf8');
-    
+
     // Skip if already added
     if (content.includes('<script src="/cache-buster.js"></script>')) {
       return 'exists';
     }
-    
+
     // Add script before closing body tag
     content = content.replace(
       '</body>',
       '  <script src="/cache-buster.js"></script>\n</body>'
     );
-    
+
     fs.writeFileSync(filePath, content, 'utf8');
     return 'added';
   } catch (error) {
@@ -85,7 +85,7 @@ const keyFiles = [
   './dist/programs.html',
   './dist/demo-site.html',
   './dist/apply.html',
-  './dist/employers.html'
+  './dist/employers.html',
 ];
 
 console.log(`🔄 Adding cache version ${cacheVersion} to key HTML files...`);
@@ -96,15 +96,17 @@ for (const file of keyFiles) {
   if (fs.existsSync(file)) {
     const cacheResult = addCacheVersionToHTML(file);
     const scriptResult = addCacheBusterScript(file);
-    
+
     if (cacheResult === 'added' || cacheResult === 'updated') {
       cacheVersionUpdated++;
     }
     if (scriptResult === 'added') {
       cacheBusterAdded++;
     }
-    
-    console.log(`✅ Processed ${path.basename(file)}: cache ${cacheResult}, script ${scriptResult}`);
+
+    console.log(
+      `✅ Processed ${path.basename(file)}: cache ${cacheResult}, script ${scriptResult}`
+    );
   } else {
     console.log(`⚠️  File not found: ${file}`);
   }

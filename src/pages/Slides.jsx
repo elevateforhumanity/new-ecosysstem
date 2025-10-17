@@ -21,7 +21,7 @@ export function Slides() {
       theme: {
         primaryColor: '#4285f4',
         backgroundColor: '#ffffff',
-        fontFamily: 'Arial'
+        fontFamily: 'Arial',
       },
       slidesData: [
         {
@@ -39,7 +39,7 @@ export function Slides() {
               fontSize: 48,
               fontWeight: 'bold',
               textAlign: 'center',
-              color: '#000000'
+              color: '#000000',
             },
             {
               id: 'subtitle',
@@ -51,13 +51,13 @@ export function Slides() {
               height: 60,
               fontSize: 24,
               textAlign: 'center',
-              color: 'var(--brand-text-muted)666'
-            }
-          ]
-        }
-      ]
+              color: 'var(--brand-text-muted)666',
+            },
+          ],
+        },
+      ],
     };
-    
+
     setPresentation(mockPresentation);
   };
 
@@ -75,14 +75,14 @@ export function Slides() {
           width: 700,
           height: 60,
           fontSize: 36,
-          fontWeight: 'bold'
-        }
-      ]
+          fontWeight: 'bold',
+        },
+      ],
     };
-    
+
     setPresentation({
       ...presentation,
-      slidesData: [...presentation.slidesData, newSlide]
+      slidesData: [...presentation.slidesData, newSlide],
     });
     setCurrentSlide(presentation.slidesData.length);
   };
@@ -91,7 +91,7 @@ export function Slides() {
     const newSlides = presentation.slidesData.filter((_, i) => i !== index);
     setPresentation({
       ...presentation,
-      slidesData: newSlides
+      slidesData: newSlides,
     });
     if (currentSlide >= newSlides.length) {
       setCurrentSlide(Math.max(0, newSlides.length - 1));
@@ -101,7 +101,7 @@ export function Slides() {
   const updateElement = (elementId, updates) => {
     const newSlides = [...presentation.slidesData];
     const slide = newSlides[currentSlide];
-    const element = slide.elements.find(e => e.id === elementId);
+    const element = slide.elements.find((e) => e.id === elementId);
     if (element) {
       Object.assign(element, updates);
       setPresentation({ ...presentation, slidesData: newSlides });
@@ -110,7 +110,7 @@ export function Slides() {
 
   const renderElement = (element) => {
     const isSelected = selectedElement === element.id;
-    
+
     const style = {
       position: 'absolute',
       left: `${element.x}px`,
@@ -124,7 +124,7 @@ export function Slides() {
       border: isSelected ? '2px solid var(--brand-info)' : 'none',
       cursor: 'pointer',
       padding: '0.5rem',
-      outline: 'none'
+      outline: 'none',
     };
 
     if (element.type === 'text') {
@@ -135,7 +135,9 @@ export function Slides() {
           onClick={() => setSelectedElement(element.id)}
           contentEditable
           suppressContentEditableWarning
-          onBlur={(e) => updateElement(element.id, { content: e.target.textContent })}
+          onBlur={(e) =>
+            updateElement(element.id, { content: e.target.textContent })
+          }
         >
           {element.content}
         </div>
@@ -161,37 +163,43 @@ export function Slides() {
 
   if (isPresentMode) {
     return (
-      <div style={{
-        width: '100vw',
-        height: '100vh',
-        backgroundColor: '#000',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative'
-      }}>
-        <div style={{
-          width: '800px',
-          height: '600px',
-          backgroundColor: presentation?.theme.backgroundColor || '#fff',
+      <div
+        style={{
+          width: '100vw',
+          height: '100vh',
+          backgroundColor: '#000',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           position: 'relative',
-          boxShadow: '0 10px 40px rgba(0,0,0,0.3)'
-        }}>
+        }}
+      >
+        <div
+          style={{
+            width: '800px',
+            height: '600px',
+            backgroundColor: presentation?.theme.backgroundColor || '#fff',
+            position: 'relative',
+            boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
+          }}
+        >
           {currentSlideData?.elements.map(renderElement)}
         </div>
 
         {/* Navigation */}
-        <div style={{
-          position: 'absolute',
-          bottom: '2rem',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          gap: '1rem',
-          backgroundColor: 'rgba(0,0,0,0.7)',
-          padding: '1rem',
-          borderRadius: '0.5rem'
-        }}>
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '2rem',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            display: 'flex',
+            gap: '1rem',
+            backgroundColor: 'rgba(0,0,0,0.7)',
+            padding: '1rem',
+            borderRadius: '0.5rem',
+          }}
+        >
           <button
             onClick={() => setCurrentSlide(Math.max(0, currentSlide - 1))}
             disabled={currentSlide === 0}
@@ -200,7 +208,7 @@ export function Slides() {
               backgroundColor: '#fff',
               border: 'none',
               borderRadius: '0.375rem',
-              cursor: 'pointer'
+              cursor: 'pointer',
             }}
           >
             ← Previous
@@ -209,14 +217,18 @@ export function Slides() {
             {currentSlide + 1} / {presentation?.slidesData.length}
           </span>
           <button
-            onClick={() => setCurrentSlide(Math.min(presentation.slidesData.length - 1, currentSlide + 1))}
+            onClick={() =>
+              setCurrentSlide(
+                Math.min(presentation.slidesData.length - 1, currentSlide + 1)
+              )
+            }
             disabled={currentSlide === presentation.slidesData.length - 1}
             style={{
               padding: '0.5rem 1rem',
               backgroundColor: '#fff',
               border: 'none',
               borderRadius: '0.375rem',
-              cursor: 'pointer'
+              cursor: 'pointer',
             }}
           >
             Next →
@@ -229,7 +241,7 @@ export function Slides() {
               color: '#fff',
               border: 'none',
               borderRadius: '0.375rem',
-              cursor: 'pointer'
+              cursor: 'pointer',
             }}
           >
             Exit
@@ -240,44 +252,64 @@ export function Slides() {
   }
 
   return (
-    <div style={{ display: 'flex', height: '100vh', backgroundColor: 'var(--brand-surface)' }}>
+    <div
+      style={{
+        display: 'flex',
+        height: '100vh',
+        backgroundColor: 'var(--brand-surface)',
+      }}
+    >
       {/* Sidebar - Slide thumbnails */}
-      <div style={{
-        width: '200px',
-        backgroundColor: '#fff',
-        borderRight: '1px solid var(--brand-border)',
-        overflowY: 'auto',
-        padding: '1rem'
-      }}>
-        <h3 style={{ marginBottom: '1rem', fontSize: '0.875rem', fontWeight: '600' }}>
+      <div
+        style={{
+          width: '200px',
+          backgroundColor: '#fff',
+          borderRight: '1px solid var(--brand-border)',
+          overflowY: 'auto',
+          padding: '1rem',
+        }}
+      >
+        <h3
+          style={{
+            marginBottom: '1rem',
+            fontSize: '0.875rem',
+            fontWeight: '600',
+          }}
+        >
           Slides
         </h3>
-        
+
         {presentation?.slidesData.map((slide, index) => (
           <div
             key={slide.id}
             onClick={() => setCurrentSlide(index)}
             style={{
               marginBottom: '0.75rem',
-              border: currentSlide === index ? '2px solid var(--brand-info)' : '1px solid var(--brand-border)',
+              border:
+                currentSlide === index
+                  ? '2px solid var(--brand-info)'
+                  : '1px solid var(--brand-border)',
               borderRadius: '0.375rem',
               padding: '0.5rem',
               cursor: 'pointer',
-              backgroundColor: currentSlide === index ? 'var(--brand-surface)' : '#fff',
-              position: 'relative'
+              backgroundColor:
+                currentSlide === index ? 'var(--brand-surface)' : '#fff',
+              position: 'relative',
             }}
           >
-            <div style={{
-              width: '100%',
-              height: '80px',
-              backgroundColor: '#f3f4f6',
-              borderRadius: '0.25rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '0.75rem',
-              color: 'var(--brand-text-muted)'
-            }}>
+            <div
+              style={{
+                width: '100%',
+                height: '80px',
+                backgroundColor: '#f3f4f6',
+                borderRadius: '0.25rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '0.75rem',
+                color: 'var(--brand-text-muted)',
+              }}
+            >
               Slide {index + 1}
             </div>
             <button
@@ -295,14 +327,14 @@ export function Slides() {
                 border: 'none',
                 borderRadius: '0.25rem',
                 cursor: 'pointer',
-                fontSize: '0.75rem'
+                fontSize: '0.75rem',
               }}
             >
               ×
             </button>
           </div>
         ))}
-        
+
         <button
           onClick={addSlide}
           style={{
@@ -314,7 +346,7 @@ export function Slides() {
             borderRadius: '0.375rem',
             cursor: 'pointer',
             fontSize: '0.875rem',
-            fontWeight: '600'
+            fontWeight: '600',
           }}
         >
           + New Slide
@@ -324,14 +356,16 @@ export function Slides() {
       {/* Main editor */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         {/* Toolbar */}
-        <div style={{
-          backgroundColor: '#fff',
-          borderBottom: '1px solid var(--brand-border)',
-          padding: '0.75rem 1rem',
-          display: 'flex',
-          gap: '1rem',
-          alignItems: 'center'
-        }}>
+        <div
+          style={{
+            backgroundColor: '#fff',
+            borderBottom: '1px solid var(--brand-border)',
+            padding: '0.75rem 1rem',
+            display: 'flex',
+            gap: '1rem',
+            alignItems: 'center',
+          }}
+        >
           <input
             type="text"
             value={presentation?.title || 'Untitled Presentation'}
@@ -340,19 +374,21 @@ export function Slides() {
               fontSize: '1.125rem',
               fontWeight: '500',
               outline: 'none',
-              width: '300px'
+              width: '300px',
             }}
           />
 
           <div style={{ flex: 1 }} />
 
-          <button style={{
-            padding: '0.5rem 1rem',
-            backgroundColor: '#fff',
-            border: '1px solid var(--brand-border-dark)',
-            borderRadius: '0.375rem',
-            cursor: 'pointer'
-          }}>
+          <button
+            style={{
+              padding: '0.5rem 1rem',
+              backgroundColor: '#fff',
+              border: '1px solid var(--brand-border-dark)',
+              borderRadius: '0.375rem',
+              cursor: 'pointer',
+            }}
+          >
             💾 Save
           </button>
 
@@ -365,7 +401,7 @@ export function Slides() {
               border: 'none',
               borderRadius: '0.375rem',
               cursor: 'pointer',
-              fontWeight: '600'
+              fontWeight: '600',
             }}
           >
             ▶ Present
@@ -373,21 +409,25 @@ export function Slides() {
         </div>
 
         {/* Canvas */}
-        <div style={{
-          flex: 1,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '2rem',
-          overflow: 'auto'
-        }}>
-          <div style={{
-            width: '800px',
-            height: '600px',
-            backgroundColor: presentation?.theme.backgroundColor || '#fff',
-            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-            position: 'relative'
-          }}>
+        <div
+          style={{
+            flex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '2rem',
+            overflow: 'auto',
+          }}
+        >
+          <div
+            style={{
+              width: '800px',
+              height: '600px',
+              backgroundColor: presentation?.theme.backgroundColor || '#fff',
+              boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+              position: 'relative',
+            }}
+          >
             {currentSlideData?.elements.map(renderElement)}
           </div>
         </div>

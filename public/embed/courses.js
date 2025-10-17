@@ -3,34 +3,34 @@
  * Embed this on your Durable site to show courses
  */
 
-(function() {
+(function () {
   'use strict';
-  
+
   const EFH = window.EFH || {};
-  
+
   EFH.Courses = {
     apiBase: 'https://api.elevateforhumanity.org',
     lmsBase: 'https://lms.elevateforhumanity.org',
-    
-    init: function(options) {
+
+    init: function (options) {
       const config = {
         container: options.container || '#efh-courses',
         limit: options.limit || 6,
         showEnroll: options.showEnroll !== false,
         category: options.category || null,
-        ...options
+        ...options,
       };
-      
+
       this.render(config);
     },
-    
+
     async fetchCourses(config) {
       try {
         let url = `${this.apiBase}/api/courses?limit=${config.limit}`;
         if (config.category) {
           url += `&category=${config.category}`;
         }
-        
+
         const response = await fetch(url);
         const data = await response.json();
         return data.data || [];
@@ -39,29 +39,30 @@
         return [];
       }
     },
-    
+
     async render(config) {
       const container = document.querySelector(config.container);
       if (!container) {
         console.error('Container not found:', config.container);
         return;
       }
-      
+
       // Show loading
       container.innerHTML = '<div class="efh-loading">Loading courses...</div>';
-      
+
       // Fetch courses
       const courses = await this.fetchCourses(config);
-      
+
       if (courses.length === 0) {
-        container.innerHTML = '<div class="efh-empty">No courses available</div>';
+        container.innerHTML =
+          '<div class="efh-empty">No courses available</div>';
         return;
       }
-      
+
       // Render courses
       const html = `
         <div class="efh-courses-grid">
-          ${courses.map(course => this.renderCourse(course, config)).join('')}
+          ${courses.map((course) => this.renderCourse(course, config)).join('')}
         </div>
         <style>
           .efh-courses-grid {
@@ -146,15 +147,19 @@
           }
         </style>
       `;
-      
+
       container.innerHTML = html;
     },
-    
+
     renderCourse(course, config) {
-      const imageUrl = course.thumbnail_url || 'https://via.placeholder.com/400x200?text=Course';
-      const duration = course.duration ? `${Math.floor(course.duration / 60)} hours` : 'Self-paced';
+      const imageUrl =
+        course.thumbnail_url ||
+        'https://via.placeholder.com/400x200?text=Course';
+      const duration = course.duration
+        ? `${Math.floor(course.duration / 60)} hours`
+        : 'Self-paced';
       const enrollUrl = `${this.lmsBase}/courses/${course.id}`;
-      
+
       return `
         <div class="efh-course-card">
           <img src="${imageUrl}" alt="${course.title}" class="efh-course-image" onerror="this.src='https://via.placeholder.com/400x200?text=Course'">
@@ -168,8 +173,8 @@
           </div>
         </div>
       `;
-    }
+    },
   };
-  
+
   window.EFH = EFH;
 })();

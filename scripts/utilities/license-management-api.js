@@ -1,10 +1,10 @@
 const express = require('express');
-const { 
-  generateTieredLicense, 
-  validateTieredLicense, 
-  checkFeatureAccess, 
+const {
+  generateTieredLicense,
+  validateTieredLicense,
+  checkFeatureAccess,
   usageTracker,
-  LICENSE_TIERS 
+  LICENSE_TIERS,
 } = require('./tiered-license-system');
 const generateLicensePDF = require('./generate-certificate');
 
@@ -16,22 +16,27 @@ app.use(express.static('.'));
 app.post('/api/generate-tiered-license', async (req, res) => {
   try {
     const { email, packageId, licenseType, expiresInDays = 365 } = req.body;
-    
+
     if (!email || !packageId || !licenseType) {
-      return res.status(400).json({ 
-        error: 'Email, packageId, and licenseType are required' 
+      return res.status(400).json({
+        error: 'Email, packageId, and licenseType are required',
       });
     }
 
     if (!LICENSE_TIERS[licenseType]) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: 'Invalid license type',
-        availableTypes: Object.keys(LICENSE_TIERS)
+        availableTypes: Object.keys(LICENSE_TIERS),
       });
     }
 
-    const license = generateTieredLicense(email, packageId, licenseType, expiresInDays);
-    
+    const license = generateTieredLicense(
+      email,
+      packageId,
+      licenseType,
+      expiresInDays
+    );
+
     // Generate PDF certificate
     const certificatePath = await generateLicensePDF(
       email,
@@ -49,11 +54,10 @@ app.post('/api/generate-tiered-license', async (req, res) => {
         restrictions: license.restrictions,
         expiresAt: license.expiresAt,
         maxDeployments: license.maxDeployments,
-        downloadLimits: license.downloadLimits
+        downloadLimits: license.downloadLimits,
       },
-      certificatePath
+      certificatePath,
     });
-
   } catch (error) {
     console.error('License generation error:', error);
     res.status(500).json({ error: 'Failed to generate license' });
@@ -64,14 +68,13 @@ app.post('/api/generate-tiered-license', async (req, res) => {
 app.post('/api/validate-tiered-license', (req, res) => {
   try {
     const { licenseKey, requestedFeature } = req.body;
-    
+
     if (!licenseKey) {
       return res.status(400).json({ error: 'License key is required' });
     }
 
     const validation = validateTieredLicense(licenseKey, requestedFeature);
     res.json(validation);
-
   } catch (error) {
     console.error('License validation error:', error);
     res.status(500).json({ error: 'Failed to validate license' });
@@ -82,16 +85,15 @@ app.post('/api/validate-tiered-license', (req, res) => {
 app.post('/api/check-feature-access', (req, res) => {
   try {
     const { licenseKey, feature } = req.body;
-    
+
     if (!licenseKey || !feature) {
-      return res.status(400).json({ 
-        error: 'License key and feature are required' 
+      return res.status(400).json({
+        error: 'License key and feature are required',
       });
     }
 
     const access = checkFeatureAccess(licenseKey, feature);
     res.json(access);
-
   } catch (error) {
     console.error('Feature access check error:', error);
     res.status(500).json({ error: 'Failed to check feature access' });
@@ -102,21 +104,20 @@ app.post('/api/check-feature-access', (req, res) => {
 app.post('/api/track-download', (req, res) => {
   try {
     const { licenseKey, fileType, userIP } = req.body;
-    
+
     if (!licenseKey || !fileType) {
-      return res.status(400).json({ 
-        error: 'License key and file type are required' 
+      return res.status(400).json({
+        error: 'License key and file type are required',
       });
     }
 
     const result = usageTracker.trackDownload(
-      licenseKey, 
-      fileType, 
+      licenseKey,
+      fileType,
       userIP || req.ip
     );
-    
-    res.json(result);
 
+    res.json(result);
   } catch (error) {
     console.error('Download tracking error:', error);
     res.status(500).json({ error: 'Failed to track download' });
@@ -127,16 +128,15 @@ app.post('/api/track-download', (req, res) => {
 app.post('/api/register-deployment', (req, res) => {
   try {
     const { licenseKey, domain } = req.body;
-    
+
     if (!licenseKey || !domain) {
-      return res.status(400).json({ 
-        error: 'License key and domain are required' 
+      return res.status(400).json({
+        error: 'License key and domain are required',
       });
     }
 
     const result = usageTracker.trackDeployment(licenseKey, domain);
     res.json(result);
-
   } catch (error) {
     console.error('Deployment registration error:', error);
     res.status(500).json({ error: 'Failed to register deployment' });
@@ -147,14 +147,13 @@ app.post('/api/register-deployment', (req, res) => {
 app.post('/api/license-usage-stats', (req, res) => {
   try {
     const { licenseKey } = req.body;
-    
+
     if (!licenseKey) {
       return res.status(400).json({ error: 'License key is required' });
     }
 
     const stats = usageTracker.getUsageStats(licenseKey);
     res.json(stats);
-
   } catch (error) {
     console.error('Usage stats error:', error);
     res.status(500).json({ error: 'Failed to get usage statistics' });
@@ -165,26 +164,26 @@ app.post('/api/license-usage-stats', (req, res) => {
 app.post('/api/upgrade-license', async (req, res) => {
   try {
     const { currentLicenseKey, newTier } = req.body;
-    
+
     if (!currentLicenseKey || !newTier) {
-      return res.status(400).json({ 
-        error: 'Current license key and new tier are required' 
+      return res.status(400).json({
+        error: 'Current license key and new tier are required',
       });
     }
 
     // Validate current license
     const currentValidation = validateTieredLicense(currentLicenseKey);
     if (!currentValidation.valid) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: 'Invalid current license',
-        reason: currentValidation.reason 
+        reason: currentValidation.reason,
       });
     }
 
     if (!LICENSE_TIERS[newTier]) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: 'Invalid new tier',
-        availableTiers: Object.keys(LICENSE_TIERS)
+        availableTiers: Object.keys(LICENSE_TIERS),
       });
     }
 
@@ -193,7 +192,10 @@ app.post('/api/upgrade-license', async (req, res) => {
       currentValidation.email,
       `upgraded_${currentValidation.productId}`,
       newTier,
-      Math.ceil((new Date(currentValidation.expiresAt) - new Date()) / (1000 * 60 * 60 * 24))
+      Math.ceil(
+        (new Date(currentValidation.expiresAt) - new Date()) /
+          (1000 * 60 * 60 * 24)
+      )
     );
 
     // Generate new certificate
@@ -213,11 +215,10 @@ app.post('/api/upgrade-license', async (req, res) => {
         tier: upgradedLicense.tierName,
         features: upgradedLicense.features,
         restrictions: upgradedLicense.restrictions,
-        expiresAt: upgradedLicense.expiresAt
+        expiresAt: upgradedLicense.expiresAt,
       },
-      certificatePath
+      certificatePath,
     });
-
   } catch (error) {
     console.error('License upgrade error:', error);
     res.status(500).json({ error: 'Failed to upgrade license' });
@@ -232,7 +233,7 @@ app.get('/api/license-tiers', (req, res) => {
     maxDeployments: tier.maxDeployments,
     features: tier.features,
     restrictions: tier.restrictions,
-    downloadLimits: tier.downloadLimits
+    downloadLimits: tier.downloadLimits,
   }));
 
   res.json({
@@ -240,8 +241,8 @@ app.get('/api/license-tiers', (req, res) => {
     upgradeMatrix: {
       starter: ['business', 'enterprise'],
       business: ['enterprise'],
-      enterprise: []
-    }
+      enterprise: [],
+    },
   });
 });
 
@@ -249,16 +250,16 @@ app.get('/api/license-tiers', (req, res) => {
 app.post('/api/generate-bulk-licenses', async (req, res) => {
   try {
     const { emails, packageId, licenseType, expiresInDays = 365 } = req.body;
-    
+
     if (!emails || !Array.isArray(emails) || emails.length === 0) {
-      return res.status(400).json({ 
-        error: 'Emails array is required and must not be empty' 
+      return res.status(400).json({
+        error: 'Emails array is required and must not be empty',
       });
     }
 
     if (emails.length > 100) {
-      return res.status(400).json({ 
-        error: 'Maximum 100 licenses can be generated at once' 
+      return res.status(400).json({
+        error: 'Maximum 100 licenses can be generated at once',
       });
     }
 
@@ -267,12 +268,17 @@ app.post('/api/generate-bulk-licenses', async (req, res) => {
 
     for (const email of emails) {
       try {
-        const license = generateTieredLicense(email, packageId, licenseType, expiresInDays);
+        const license = generateTieredLicense(
+          email,
+          packageId,
+          licenseType,
+          expiresInDays
+        );
         licenses.push({
           email,
           licenseKey: license.licenseKey,
           tier: license.tierName,
-          expiresAt: license.expiresAt
+          expiresAt: license.expiresAt,
         });
       } catch (error) {
         errors.push({ email, error: error.message });
@@ -284,9 +290,8 @@ app.post('/api/generate-bulk-licenses', async (req, res) => {
       generated: licenses.length,
       errors: errors.length,
       licenses,
-      errors
+      errors,
     });
-
   } catch (error) {
     console.error('Bulk license generation error:', error);
     res.status(500).json({ error: 'Failed to generate bulk licenses' });

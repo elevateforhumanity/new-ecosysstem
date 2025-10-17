@@ -5,8 +5,8 @@
  * Generates enterprise assets for all tenants and deploys immediately
  */
 
-import fs from "fs";
-import path from "path";
+import fs from 'fs';
+import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -23,14 +23,14 @@ const results = [];
 
 for (const tenant of tenants) {
   console.log(`\n=== Processing tenant: ${tenant.slug} ===`);
-  
+
   const BASE = tenant.base;
   const OUT = tenant.out;
-  const SM_DIR = path.join(OUT, "sitemaps");
-  
+  const SM_DIR = path.join(OUT, 'sitemaps');
+
   // Ensure directories exist
   fs.mkdirSync(SM_DIR, { recursive: true });
-  
+
   console.log(`   Base URL: ${BASE}`);
   console.log(`   Output: ${OUT}`);
   console.log(`   Chunk size: ${tenant.chunk} URLs`);
@@ -47,45 +47,63 @@ for (const tenant of tenants) {
     { url: `${BASE}/programs/construction/`, lastmod: ISO },
     { url: `${BASE}/programs/beauty-wellness/`, lastmod: ISO },
     { url: `${BASE}/blog/`, lastmod: ISO },
-    { url: `${BASE}/employers/`, lastmod: ISO }
+    { url: `${BASE}/employers/`, lastmod: ISO },
   ];
 
   // Generate ultra-tiny sitemap
   const generateSitemap = (urls, filename) => {
-    const urlEntries = urls.map(u => 
-      `  <url>\n    <loc>${u.url}</loc>\n    <lastmod>${u.lastmod}</lastmod>\n  </url>`
-    ).join('\n');
-    
+    const urlEntries = urls
+      .map(
+        (u) =>
+          `  <url>\n    <loc>${u.url}</loc>\n    <lastmod>${u.lastmod}</lastmod>\n  </url>`
+      )
+      .join('\n');
+
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urlEntries}
 </urlset>`;
-    
+
     fs.writeFileSync(path.join(SM_DIR, filename), xml);
     return `${BASE}/sitemaps/${filename}`;
   };
 
   // Generate section-based sitemaps
-  const marketingUrls = sampleUrls.filter(u => 
-    u.url.includes('/about') || u.url.includes('/contact') || u.url === `${BASE}/`
+  const marketingUrls = sampleUrls.filter(
+    (u) =>
+      u.url.includes('/about') ||
+      u.url.includes('/contact') ||
+      u.url === `${BASE}/`
   );
-  const marketingSitemap = generateSitemap(marketingUrls, 'sitemap-marketing-2025-09-1.xml');
+  const marketingSitemap = generateSitemap(
+    marketingUrls,
+    'sitemap-marketing-2025-09-1.xml'
+  );
 
-  const programUrls = sampleUrls.filter(u => u.url.includes('/programs'));
-  const programsSitemap = generateSitemap(programUrls, 'sitemap-programs-2025-09-1.xml');
+  const programUrls = sampleUrls.filter((u) => u.url.includes('/programs'));
+  const programsSitemap = generateSitemap(
+    programUrls,
+    'sitemap-programs-2025-09-1.xml'
+  );
 
-  const latestSitemap = generateSitemap(sampleUrls.slice(0, 5), 'sitemap-latest.xml');
+  const latestSitemap = generateSitemap(
+    sampleUrls.slice(0, 5),
+    'sitemap-latest.xml'
+  );
 
   // Generate master sitemap index
   const masterSitemaps = [marketingSitemap, programsSitemap, latestSitemap];
   const indexXml = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${masterSitemaps.map(url => 
-  `  <sitemap>\n    <loc>${url}</loc>\n    <lastmod>${ISO}</lastmod>\n  </sitemap>`
-).join('\n')}
+${masterSitemaps
+  .map(
+    (url) =>
+      `  <sitemap>\n    <loc>${url}</loc>\n    <lastmod>${ISO}</lastmod>\n  </sitemap>`
+  )
+  .join('\n')}
 </sitemapindex>`;
 
-  fs.writeFileSync(path.join(OUT, "sitemap_index.xml"), indexXml);
+  fs.writeFileSync(path.join(OUT, 'sitemap_index.xml'), indexXml);
 
   // Generate enterprise robots.txt
   const robotsContent = `User-agent: *
@@ -100,39 +118,45 @@ Crawl-delay: 1
 # Tenant: ${tenant.slug}
 `;
 
-  fs.writeFileSync(path.join(OUT, "robots.txt"), robotsContent);
+  fs.writeFileSync(path.join(OUT, 'robots.txt'), robotsContent);
 
   // Generate tenant-specific schema
   const schema = {
-    "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    "name": "Elevate for Humanity Career & Training Institute",
-    "url": BASE,
-    "sameAs": [
-      "https://www.facebook.com/elevateforhumanity",
-      "https://www.linkedin.com/company/elevateforhumanity"
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOrganization',
+    name: 'Elevate for Humanity Career & Training Institute',
+    url: BASE,
+    sameAs: [
+      'https://www.facebook.com/elevateforhumanity',
+      'https://www.linkedin.com/company/elevateforhumanity',
     ],
-    "contactPoint": [{
-      "@type": "ContactPoint",
-      "telephone": "+1-317-555-1234",
-      "contactType": "customer service"
-    }],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Indianapolis",
-      "addressRegion": "IN",
-      "addressCountry": "US"
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        telephone: '+1-317-555-1234',
+        contactType: 'customer service',
+      },
+    ],
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Indianapolis',
+      addressRegion: 'IN',
+      addressCountry: 'US',
     },
-    "description": "Multi-tenant enterprise-grade career training and workforce development programs",
-    "tenant": {
-      "slug": tenant.slug,
-      "base": tenant.base,
-      "chunkSize": tenant.chunk,
-      "generated": new Date().toISOString()
-    }
+    description:
+      'Multi-tenant enterprise-grade career training and workforce development programs',
+    tenant: {
+      slug: tenant.slug,
+      base: tenant.base,
+      chunkSize: tenant.chunk,
+      generated: new Date().toISOString(),
+    },
   };
 
-  fs.writeFileSync(path.join(OUT, "schema.json"), JSON.stringify(schema, null, 2));
+  fs.writeFileSync(
+    path.join(OUT, 'schema.json'),
+    JSON.stringify(schema, null, 2)
+  );
 
   // Generate tenant-specific redirects
   const redirects = `# Multi-tenant enterprise redirects for ${tenant.slug}
@@ -158,11 +182,14 @@ Crawl-delay: 1
   X-Tenant: ${tenant.slug}
 `;
 
-  fs.writeFileSync(path.join(OUT, "_redirects"), redirects);
+  fs.writeFileSync(path.join(OUT, '_redirects'), redirects);
 
   // Generate IndexNow key file if configured
   if (tenant.indexnowKey) {
-    fs.writeFileSync(path.join(OUT, `${tenant.indexnowKey}.txt`), tenant.indexnowKey);
+    fs.writeFileSync(
+      path.join(OUT, `${tenant.indexnowKey}.txt`),
+      tenant.indexnowKey
+    );
   }
 
   const result = {
@@ -172,44 +199,48 @@ Crawl-delay: 1
     pages: sampleUrls.length,
     sitemaps: masterSitemaps.length,
     chunkSize: tenant.chunk,
-    generated: new Date().toISOString()
+    generated: new Date().toISOString(),
   };
 
   results.push(result);
 
   console.log(`   ✅ Generated ${masterSitemaps.length} ultra-tiny sitemaps`);
   console.log(`   📊 ${sampleUrls.length} pages processed`);
-  console.log(`   🗂️  Files: sitemap_index.xml, robots.txt, schema.json, _redirects`);
+  console.log(
+    `   🗂️  Files: sitemap_index.xml, robots.txt, schema.json, _redirects`
+  );
 }
 
 // Generate tenant manifest
 const manifest = {
   generated: new Date().toISOString(),
-  engine: "EFH-Multi-Tenant-Deploy/1.0",
+  engine: 'EFH-Multi-Tenant-Deploy/1.0',
   tenants: results,
   summary: {
     totalTenants: results.length,
     totalPages: results.reduce((sum, r) => sum + r.pages, 0),
-    totalSitemaps: results.reduce((sum, r) => sum + r.sitemaps, 0)
+    totalSitemaps: results.reduce((sum, r) => sum + r.sitemaps, 0),
   },
   revenueModel: {
-    singleTenant: "$5,000",
-    multiTenant: "$25,000",
-    enterpriseSaaS: "$50,000",
-    whiteLabel: "$100,000"
-  }
+    singleTenant: '$5,000',
+    multiTenant: '$25,000',
+    enterpriseSaaS: '$50,000',
+    whiteLabel: '$100,000',
+  },
 };
 
-fs.writeFileSync("tenant-manifest.json", JSON.stringify(manifest, null, 2));
+fs.writeFileSync('tenant-manifest.json', JSON.stringify(manifest, null, 2));
 
 console.log('\n🎯 Multi-Tenant Enterprise Deploy Complete!');
 console.log('📊 Summary:');
-console.table(results.map(r => ({ 
-  tenant: r.slug, 
-  pages: r.pages, 
-  sitemaps: r.sitemaps, 
-  output: r.out 
-})));
+console.table(
+  results.map((r) => ({
+    tenant: r.slug,
+    pages: r.pages,
+    sitemaps: r.sitemaps,
+    output: r.out,
+  }))
+);
 
 console.log('\n💰 Multi-Tenant Revenue Features:');
 console.log('   • Ultra-tiny sitemaps (1k chunks) per tenant');

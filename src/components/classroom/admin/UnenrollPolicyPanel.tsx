@@ -28,7 +28,10 @@ export default function UnenrollPolicyPanel() {
   const [policy, setPolicy] = useState<UnenrollPolicy | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [message, setMessage] = useState<{
+    type: 'success' | 'error';
+    text: string;
+  } | null>(null);
   const [candidates, setCandidates] = useState<UnenrollCandidate[]>([]);
   const [showCandidates, setShowCandidates] = useState(false);
 
@@ -64,7 +67,10 @@ export default function UnenrollPolicyPanel() {
         setDryRunMode(data.dry_run_mode);
       }
     } catch (error: any) {
-      setMessage({ type: 'error', text: `Failed to load policy: ${error.message}` });
+      setMessage({
+        type: 'error',
+        text: `Failed to load policy: ${error.message}`,
+      });
     } finally {
       setLoading(false);
     }
@@ -82,7 +88,10 @@ export default function UnenrollPolicyPanel() {
       setCandidates(data || []);
       setShowCandidates(true);
     } catch (error: any) {
-      setMessage({ type: 'error', text: `Failed to load candidates: ${error.message}` });
+      setMessage({
+        type: 'error',
+        text: `Failed to load candidates: ${error.message}`,
+      });
     }
   };
 
@@ -98,8 +107,10 @@ export default function UnenrollPolicyPanel() {
         .update({
           auto_unenroll: autoUnenroll,
           grace_period_days: gracePeriodDays,
-          protected_domains: protectedDomains.split('\n').filter(d => d.trim()),
-          protected_emails: protectedEmails.split('\n').filter(e => e.trim()),
+          protected_domains: protectedDomains
+            .split('\n')
+            .filter((d) => d.trim()),
+          protected_emails: protectedEmails.split('\n').filter((e) => e.trim()),
           dry_run_mode: dryRunMode,
           updated_at: new Date().toISOString(),
         })
@@ -144,10 +155,19 @@ export default function UnenrollPolicyPanel() {
       )}
 
       {/* Policy Form */}
-      <div style={{ marginBottom: '2rem', padding: '1.5rem', background: '#f5f5f5', borderRadius: '8px' }}>
+      <div
+        style={{
+          marginBottom: '2rem',
+          padding: '1.5rem',
+          background: '#f5f5f5',
+          borderRadius: '8px',
+        }}
+      >
         {/* Master Switch */}
         <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+          <label
+            style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+          >
             <input
               type="checkbox"
               checked={autoUnenroll}
@@ -158,32 +178,53 @@ export default function UnenrollPolicyPanel() {
               Enable Auto-Unenroll
             </span>
           </label>
-          <p style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)', marginTop: '0.5rem', marginLeft: '28px' }}>
+          <p
+            style={{
+              fontSize: '0.9rem',
+              color: 'var(--brand-text-muted)',
+              marginTop: '0.5rem',
+              marginLeft: '28px',
+            }}
+          >
             Master switch to enable/disable automatic unenrollment
           </p>
         </div>
 
         {/* Dry Run Mode */}
         <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+          <label
+            style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+          >
             <input
               type="checkbox"
               checked={dryRunMode}
               onChange={(e) => setDryRunMode(e.target.checked)}
               style={{ marginRight: '0.5rem', width: '20px', height: '20px' }}
             />
-            <span style={{ fontWeight: 'bold' }}>
-              Dry Run Mode
-            </span>
+            <span style={{ fontWeight: 'bold' }}>Dry Run Mode</span>
           </label>
-          <p style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)', marginTop: '0.5rem', marginLeft: '28px' }}>
-            Log unenroll actions without executing them (recommended for testing)
+          <p
+            style={{
+              fontSize: '0.9rem',
+              color: 'var(--brand-text-muted)',
+              marginTop: '0.5rem',
+              marginLeft: '28px',
+            }}
+          >
+            Log unenroll actions without executing them (recommended for
+            testing)
           </p>
         </div>
 
         {/* Grace Period */}
         <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '0.5rem' }}>
+          <label
+            style={{
+              display: 'block',
+              fontWeight: 'bold',
+              marginBottom: '0.5rem',
+            }}
+          >
             Grace Period (days)
           </label>
           <input
@@ -192,16 +233,33 @@ export default function UnenrollPolicyPanel() {
             max="365"
             value={gracePeriodDays}
             onChange={(e) => setGracePeriodDays(parseInt(e.target.value))}
-            style={{ padding: '0.5rem', width: '100px', border: '1px solid #ccc', borderRadius: '4px' }}
+            style={{
+              padding: '0.5rem',
+              width: '100px',
+              border: '1px solid #ccc',
+              borderRadius: '4px',
+            }}
           />
-          <p style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)', marginTop: '0.5rem' }}>
+          <p
+            style={{
+              fontSize: '0.9rem',
+              color: 'var(--brand-text-muted)',
+              marginTop: '0.5rem',
+            }}
+          >
             Days of inactivity before unenrolling a user
           </p>
         </div>
 
         {/* Protected Domains */}
         <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '0.5rem' }}>
+          <label
+            style={{
+              display: 'block',
+              fontWeight: 'bold',
+              marginBottom: '0.5rem',
+            }}
+          >
             Protected Domains
           </label>
           <textarea
@@ -218,14 +276,26 @@ export default function UnenrollPolicyPanel() {
               fontSize: '0.9rem',
             }}
           />
-          <p style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)', marginTop: '0.5rem' }}>
+          <p
+            style={{
+              fontSize: '0.9rem',
+              color: 'var(--brand-text-muted)',
+              marginTop: '0.5rem',
+            }}
+          >
             Email domains that should never be auto-unenrolled (one per line)
           </p>
         </div>
 
         {/* Protected Emails */}
         <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '0.5rem' }}>
+          <label
+            style={{
+              display: 'block',
+              fontWeight: 'bold',
+              marginBottom: '0.5rem',
+            }}
+          >
             Protected Emails
           </label>
           <textarea
@@ -242,7 +312,13 @@ export default function UnenrollPolicyPanel() {
               fontSize: '0.9rem',
             }}
           />
-          <p style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)', marginTop: '0.5rem' }}>
+          <p
+            style={{
+              fontSize: '0.9rem',
+              color: 'var(--brand-text-muted)',
+              marginTop: '0.5rem',
+            }}
+          >
             Specific emails that should never be auto-unenrolled (one per line)
           </p>
         </div>
@@ -287,27 +363,50 @@ export default function UnenrollPolicyPanel() {
           <div>
             <h3>Unenroll Candidates ({candidates.length})</h3>
             {candidates.length === 0 ? (
-              <p style={{ color: 'var(--brand-text-muted)' }}>No users eligible for unenroll</p>
+              <p style={{ color: 'var(--brand-text-muted)' }}>
+                No users eligible for unenroll
+              </p>
             ) : (
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
                   <tr style={{ background: '#f0f0f0' }}>
-                    <th style={{ padding: '0.75rem', textAlign: 'left' }}>Email</th>
-                    <th style={{ padding: '0.75rem', textAlign: 'left' }}>LMS Source</th>
-                    <th style={{ padding: '0.75rem', textAlign: 'left' }}>Course ID</th>
-                    <th style={{ padding: '0.75rem', textAlign: 'right' }}>Days Inactive</th>
-                    <th style={{ padding: '0.75rem', textAlign: 'center' }}>Protected</th>
+                    <th style={{ padding: '0.75rem', textAlign: 'left' }}>
+                      Email
+                    </th>
+                    <th style={{ padding: '0.75rem', textAlign: 'left' }}>
+                      LMS Source
+                    </th>
+                    <th style={{ padding: '0.75rem', textAlign: 'left' }}>
+                      Course ID
+                    </th>
+                    <th style={{ padding: '0.75rem', textAlign: 'right' }}>
+                      Days Inactive
+                    </th>
+                    <th style={{ padding: '0.75rem', textAlign: 'center' }}>
+                      Protected
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {candidates.slice(0, 50).map((c, idx) => (
-                    <tr key={idx} style={{ borderBottom: '1px solid var(--brand-border)' }}>
+                    <tr
+                      key={idx}
+                      style={{ borderBottom: '1px solid var(--brand-border)' }}
+                    >
                       <td style={{ padding: '0.75rem' }}>{c.google_email}</td>
                       <td style={{ padding: '0.75rem' }}>{c.lms_source}</td>
-                      <td style={{ padding: '0.75rem', fontFamily: 'monospace', fontSize: '0.85rem' }}>
+                      <td
+                        style={{
+                          padding: '0.75rem',
+                          fontFamily: 'monospace',
+                          fontSize: '0.85rem',
+                        }}
+                      >
                         {c.lms_course_id}
                       </td>
-                      <td style={{ padding: '0.75rem', textAlign: 'right' }}>{c.days_inactive}</td>
+                      <td style={{ padding: '0.75rem', textAlign: 'right' }}>
+                        {c.days_inactive}
+                      </td>
                       <td style={{ padding: '0.75rem', textAlign: 'center' }}>
                         {c.is_protected ? '🛡️' : ''}
                       </td>
@@ -317,7 +416,13 @@ export default function UnenrollPolicyPanel() {
               </table>
             )}
             {candidates.length > 50 && (
-              <p style={{ marginTop: '1rem', color: 'var(--brand-text-muted)', fontSize: '0.9rem' }}>
+              <p
+                style={{
+                  marginTop: '1rem',
+                  color: 'var(--brand-text-muted)',
+                  fontSize: '0.9rem',
+                }}
+              >
                 Showing first 50 of {candidates.length} candidates
               </p>
             )}
@@ -327,15 +432,38 @@ export default function UnenrollPolicyPanel() {
 
       {/* Current Status */}
       {policy && (
-        <div style={{ padding: '1rem', background: '#e7f3ff', borderRadius: '4px', border: '1px solid #b3d9ff' }}>
+        <div
+          style={{
+            padding: '1rem',
+            background: '#e7f3ff',
+            borderRadius: '4px',
+            border: '1px solid #b3d9ff',
+          }}
+        >
           <h4 style={{ marginTop: 0 }}>Current Status</h4>
           <ul style={{ marginBottom: 0 }}>
-            <li>Auto-Unenroll: <strong>{policy.auto_unenroll ? 'Enabled' : 'Disabled'}</strong></li>
-            <li>Mode: <strong>{policy.dry_run_mode ? 'Dry Run' : 'Live'}</strong></li>
-            <li>Grace Period: <strong>{policy.grace_period_days} days</strong></li>
-            <li>Protected Domains: <strong>{policy.protected_domains?.length || 0}</strong></li>
-            <li>Protected Emails: <strong>{policy.protected_emails?.length || 0}</strong></li>
-            <li>Last Updated: <strong>{new Date(policy.updated_at).toLocaleString()}</strong></li>
+            <li>
+              Auto-Unenroll:{' '}
+              <strong>{policy.auto_unenroll ? 'Enabled' : 'Disabled'}</strong>
+            </li>
+            <li>
+              Mode: <strong>{policy.dry_run_mode ? 'Dry Run' : 'Live'}</strong>
+            </li>
+            <li>
+              Grace Period: <strong>{policy.grace_period_days} days</strong>
+            </li>
+            <li>
+              Protected Domains:{' '}
+              <strong>{policy.protected_domains?.length || 0}</strong>
+            </li>
+            <li>
+              Protected Emails:{' '}
+              <strong>{policy.protected_emails?.length || 0}</strong>
+            </li>
+            <li>
+              Last Updated:{' '}
+              <strong>{new Date(policy.updated_at).toLocaleString()}</strong>
+            </li>
           </ul>
         </div>
       )}

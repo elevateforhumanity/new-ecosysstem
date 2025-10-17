@@ -235,7 +235,7 @@ img:not([alt]) {
   * {
     border-color: currentColor;
   }
-  
+
   button,
   input,
   select,
@@ -249,13 +249,13 @@ img:not([alt]) {
   .no-print {
     display: none !important;
   }
-  
+
   a[href]:after {
-    content: " (" attr(href) ")";
+    content: ' (' attr(href) ')';
   }
-  
+
   abbr[title]:after {
-    content: " (" attr(title) ")";
+    content: ' (' attr(title) ')';
   }
 }
 
@@ -269,7 +269,7 @@ img:not([alt]) {
     min-height: 48px;
     min-width: 48px;
   }
-  
+
   .large-text button {
     min-height: 56px;
   }

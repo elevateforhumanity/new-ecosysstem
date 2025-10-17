@@ -8,14 +8,14 @@ class PerformanceOptimizer {
       videos: [],
       images: [],
       css: [],
-      js: []
+      js: [],
     };
   }
 
   // Optimize HTML for better rendering
   optimizeHTML(filePath) {
     let content = fs.readFileSync(filePath, 'utf8');
-    
+
     // Add preload hints for critical resources
     const preloadHints = `
     <!-- Critical Resource Preloads -->
@@ -31,16 +31,16 @@ class PerformanceOptimizer {
       .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
       .hero-content { max-width: 900px; text-align: center; color: white; z-index: 3; position: relative; }
     </style>`;
-    
+
     // Insert preload hints after <head>
     content = content.replace('<head>', '<head>' + preloadHints);
-    
+
     // Add lazy loading to videos
     content = content.replace(
-      /<video([^>]*?)>/g, 
+      /<video([^>]*?)>/g,
       '<video$1 loading="lazy" preload="metadata">'
     );
-    
+
     // Add intersection observer for video loading
     const videoOptimizationScript = `
     <script>
@@ -65,10 +65,10 @@ class PerformanceOptimizer {
         });
       });
     </script>`;
-    
+
     // Insert before closing body tag
     content = content.replace('</body>', videoOptimizationScript + '</body>');
-    
+
     return content;
   }
 
@@ -152,68 +152,72 @@ class PerformanceOptimizer {
   // Generate structured data for rich snippets
   generateStructuredData() {
     return {
-      "@context": "https://schema.org",
-      "@type": "EducationalOrganization",
-      "name": "Elevate for Humanity",
-      "alternateName": "Rise Forward Foundation",
-      "description": "Transforming lives through technology education, AI training, and workforce development programs.",
-      "url": "https://elevateforhumanity.org",
-      "logo": "https://elevateforhumanity.org/images/logo.png",
-      "sameAs": [
-        "https://www.linkedin.com/company/elevate-for-humanity",
-        "https://www.facebook.com/elevateforhumanity"
+      '@context': 'https://schema.org',
+      '@type': 'EducationalOrganization',
+      name: 'Elevate for Humanity',
+      alternateName: 'Rise Forward Foundation',
+      description:
+        'Transforming lives through technology education, AI training, and workforce development programs.',
+      url: 'https://elevateforhumanity.org',
+      logo: 'https://elevateforhumanity.org/images/logo.png',
+      sameAs: [
+        'https://www.linkedin.com/company/elevate-for-humanity',
+        'https://www.facebook.com/elevateforhumanity',
       ],
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "US",
-        "addressRegion": "IN"
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'US',
+        addressRegion: 'IN',
       },
-      "offers": [
+      offers: [
         {
-          "@type": "Course",
-          "name": "AI & Data Science Bootcamp",
-          "description": "Comprehensive AI and machine learning training program",
-          "provider": {
-            "@type": "Organization",
-            "name": "Elevate for Humanity"
+          '@type': 'Course',
+          name: 'AI & Data Science Bootcamp',
+          description: 'Comprehensive AI and machine learning training program',
+          provider: {
+            '@type': 'Organization',
+            name: 'Elevate for Humanity',
           },
-          "courseMode": "blended",
-          "educationalCredentialAwarded": "Professional Certificate"
+          courseMode: 'blended',
+          educationalCredentialAwarded: 'Professional Certificate',
         },
         {
-          "@type": "Course", 
-          "name": "WIOA Workforce Development",
-          "description": "Federally-funded workforce training programs",
-          "provider": {
-            "@type": "Organization",
-            "name": "Elevate for Humanity"
+          '@type': 'Course',
+          name: 'WIOA Workforce Development',
+          description: 'Federally-funded workforce training programs',
+          provider: {
+            '@type': 'Organization',
+            name: 'Elevate for Humanity',
           },
-          "courseMode": "blended",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          }
-        }
+          courseMode: 'blended',
+          offers: {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'USD',
+          },
+        },
       ],
-      "video": [
+      video: [
         {
-          "@type": "VideoObject",
-          "name": "Transformation Stories - Seeds of Change",
-          "description": "Real student success stories and career transformations",
-          "thumbnailUrl": "https://elevateforhumanity.org/images/video-thumbnails/transformation-stories.jpg",
-          "uploadDate": "2025-09-16",
-          "duration": "PT2M30S"
+          '@type': 'VideoObject',
+          name: 'Transformation Stories - Seeds of Change',
+          description:
+            'Real student success stories and career transformations',
+          thumbnailUrl:
+            'https://elevateforhumanity.org/images/video-thumbnails/transformation-stories.jpg',
+          uploadDate: '2025-09-16',
+          duration: 'PT2M30S',
         },
         {
-          "@type": "VideoObject",
-          "name": "AI Lab in Action - Laboratory of Dreams",
-          "description": "Tour of our state-of-the-art AI development facilities",
-          "thumbnailUrl": "https://elevateforhumanity.org/images/video-thumbnails/ai-lab-tour.jpg",
-          "uploadDate": "2025-09-16",
-          "duration": "PT1M30S"
-        }
-      ]
+          '@type': 'VideoObject',
+          name: 'AI Lab in Action - Laboratory of Dreams',
+          description: 'Tour of our state-of-the-art AI development facilities',
+          thumbnailUrl:
+            'https://elevateforhumanity.org/images/video-thumbnails/ai-lab-tour.jpg',
+          uploadDate: '2025-09-16',
+          duration: 'PT1M30S',
+        },
+      ],
     };
   }
 
@@ -285,35 +289,35 @@ class PerformanceOptimizer {
   // Optimize all files
   optimizeAll() {
     console.log('🚀 Starting performance optimization...');
-    
+
     // Optimize main HTML file
     if (fs.existsSync('index.html')) {
       const optimizedHTML = this.optimizeHTML('index.html');
-      
+
       // Add structured data
       const structuredData = this.generateStructuredData();
       const structuredDataScript = `
       <script type="application/ld+json">
       ${JSON.stringify(structuredData, null, 2)}
       </script>`;
-      
+
       // Add performance monitoring
       const performanceScript = this.createPerformanceMonitoring();
-      
+
       // Insert before closing head tag
       const finalHTML = optimizedHTML
         .replace('</head>', structuredDataScript + '</head>')
         .replace('</body>', performanceScript + '</body>');
-      
+
       fs.writeFileSync('index-optimized.html', finalHTML);
       console.log('✅ HTML optimization complete');
     }
-    
+
     // Create video loading strategy file
     const videoStrategy = this.createVideoLoadingStrategy();
     fs.writeFileSync('video-loading-strategy.html', videoStrategy);
     console.log('✅ Video loading strategy created');
-    
+
     console.log('🎉 Performance optimization complete!');
     console.log('📊 Optimizations applied:');
     console.log('   - Video lazy loading with intersection observer');

@@ -9,20 +9,21 @@ const securityChecks = {
     checks: [
       {
         name: 'JWT_SECRET configured',
-        test: () => process.env.JWT_SECRET && process.env.JWT_SECRET.length >= 16,
-        severity: 'critical'
+        test: () =>
+          process.env.JWT_SECRET && process.env.JWT_SECRET.length >= 16,
+        severity: 'critical',
       },
       {
         name: 'NODE_ENV set to production',
         test: () => process.env.NODE_ENV === 'production',
-        severity: 'medium'
+        severity: 'medium',
       },
       {
         name: 'No hardcoded secrets in env',
         test: () => !process.env.JWT_SECRET?.includes('dev-secret'),
-        severity: 'critical'
-      }
-    ]
+        severity: 'critical',
+      },
+    ],
   },
   server: {
     name: 'Server Security Configuration',
@@ -34,9 +35,11 @@ const securityChecks = {
             const fs = require('fs');
             const serverFile = fs.readFileSync('./simple-server.cjs', 'utf8');
             return serverFile.includes('app.use(helmet())');
-          } catch { return false; }
+          } catch {
+            return false;
+          }
         },
-        severity: 'critical'
+        severity: 'critical',
       },
       {
         name: 'Rate limiting implemented',
@@ -44,10 +47,14 @@ const securityChecks = {
           try {
             const fs = require('fs');
             const serverFile = fs.readFileSync('./simple-server.cjs', 'utf8');
-            return serverFile.includes('app.use') && serverFile.includes('rateLimit');
-          } catch { return false; }
+            return (
+              serverFile.includes('app.use') && serverFile.includes('rateLimit')
+            );
+          } catch {
+            return false;
+          }
         },
-        severity: 'medium'
+        severity: 'medium',
       },
       {
         name: 'Compression enabled',
@@ -56,9 +63,11 @@ const securityChecks = {
             const fs = require('fs');
             const serverFile = fs.readFileSync('./simple-server.cjs', 'utf8');
             return serverFile.includes('app.use(compression())');
-          } catch { return false; }
+          } catch {
+            return false;
+          }
         },
-        severity: 'low'
+        severity: 'low',
       },
       {
         name: 'Proper error handling',
@@ -67,11 +76,13 @@ const securityChecks = {
             const fs = require('fs');
             const serverFile = fs.readFileSync('./simple-server.cjs', 'utf8');
             return serverFile.includes('app.use((err, req, res, _next)');
-          } catch { return false; }
+          } catch {
+            return false;
+          }
         },
-        severity: 'medium'
-      }
-    ]
+        severity: 'medium',
+      },
+    ],
   },
   dependencies: {
     name: 'Dependencies & Vulnerabilities',
@@ -82,10 +93,15 @@ const securityChecks = {
           try {
             const fs = require('fs');
             const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
-            return !!(pkg.dependencies?.helmet && pkg.dependencies?.['express-rate-limit']);
-          } catch { return false; }
+            return !!(
+              pkg.dependencies?.helmet &&
+              pkg.dependencies?.['express-rate-limit']
+            );
+          } catch {
+            return false;
+          }
         },
-        severity: 'medium'
+        severity: 'medium',
       },
       {
         name: 'No high-severity vulnerabilities',
@@ -93,9 +109,9 @@ const securityChecks = {
           // This would need actual npm audit parsing, simplified for demo
           return true; // Placeholder - would need real audit check
         },
-        severity: 'critical'
-      }
-    ]
+        severity: 'critical',
+      },
+    ],
   },
   logging: {
     name: 'Logging & Monitoring',
@@ -106,10 +122,14 @@ const securityChecks = {
           try {
             const fs = require('fs');
             const serverFile = fs.readFileSync('./simple-server.cjs', 'utf8');
-            return serverFile.includes('pino(') && serverFile.includes('pinoHttp');
-          } catch { return false; }
+            return (
+              serverFile.includes('pino(') && serverFile.includes('pinoHttp')
+            );
+          } catch {
+            return false;
+          }
         },
-        severity: 'medium'
+        severity: 'medium',
       },
       {
         name: 'Request ID tracking',
@@ -117,13 +137,18 @@ const securityChecks = {
           try {
             const fs = require('fs');
             const serverFile = fs.readFileSync('./simple-server.cjs', 'utf8');
-            return serverFile.includes('req.id') && serverFile.includes('X-Request-ID');
-          } catch { return false; }
+            return (
+              serverFile.includes('req.id') &&
+              serverFile.includes('X-Request-ID')
+            );
+          } catch {
+            return false;
+          }
         },
-        severity: 'low'
-      }
-    ]
-  }
+        severity: 'low',
+      },
+    ],
+  },
 };
 
 let totalChecks = 0;
@@ -136,19 +161,23 @@ let lowIssues = 0;
 for (const [category, config] of Object.entries(securityChecks)) {
   console.log(`\n📋 ${config.name}`);
   console.log('─'.repeat(50));
-  
+
   for (const check of config.checks) {
     totalChecks++;
     const passed = check.test();
-    
+
     if (passed) {
       console.log(`✅ ${check.name}`);
       passedChecks++;
     } else {
-      const icon = check.severity === 'critical' ? '🚨' : 
-                   check.severity === 'medium' ? '⚠️' : '💡';
+      const icon =
+        check.severity === 'critical'
+          ? '🚨'
+          : check.severity === 'medium'
+            ? '⚠️'
+            : '💡';
       console.log(`${icon} ${check.name} (${check.severity})`);
-      
+
       if (check.severity === 'critical') criticalIssues++;
       else if (check.severity === 'medium') mediumIssues++;
       else lowIssues++;
@@ -162,7 +191,9 @@ console.log('🔒 SECURITY ASSESSMENT SUMMARY');
 console.log('='.repeat(60));
 
 console.log(`Total Checks: ${totalChecks}`);
-console.log(`Passed: ${passedChecks} (${Math.round(passedChecks/totalChecks*100)}%)`);
+console.log(
+  `Passed: ${passedChecks} (${Math.round((passedChecks / totalChecks) * 100)}%)`
+);
 console.log(`Failed: ${totalChecks - passedChecks}`);
 
 if (criticalIssues > 0) {
@@ -177,9 +208,11 @@ if (lowIssues > 0) {
 
 // Production readiness assessment
 const productionReady = criticalIssues === 0 && mediumIssues <= 2;
-const securityScore = Math.round(passedChecks/totalChecks*100);
+const securityScore = Math.round((passedChecks / totalChecks) * 100);
 
-console.log(`\n🎯 PRODUCTION READINESS: ${productionReady ? '✅ READY' : '❌ NOT READY'}`);
+console.log(
+  `\n🎯 PRODUCTION READINESS: ${productionReady ? '✅ READY' : '❌ NOT READY'}`
+);
 console.log(`📊 SECURITY SCORE: ${securityScore}%`);
 
 if (!productionReady) {

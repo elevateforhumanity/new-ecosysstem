@@ -1,17 +1,17 @@
-import { cpSync, rmSync } from 'node:fs'
-import { join } from 'node:path'
+import { cpSync, rmSync } from 'node:fs';
+import { join } from 'node:path';
 
 // Remove old HTML files from dist root (keep other assets)
-const filesToRemove = ['index.html', 'about', 'contact', 'lms', 'programs']
-filesToRemove.forEach(file => {
+const filesToRemove = ['index.html', 'about', 'contact', 'lms', 'programs'];
+filesToRemove.forEach((file) => {
   try {
-    rmSync(join('dist', file), { recursive: true, force: true })
+    rmSync(join('dist', file), { recursive: true, force: true });
   } catch (e) {
     // Ignore if doesn't exist
   }
-})
+});
 
 // Copy all files from dist/client to dist root
-cpSync('dist/client', 'dist', { recursive: true, force: true })
+cpSync('dist/client', 'dist', { recursive: true, force: true });
 
-console.log('✅ Copied dist/client contents to dist root for Cloudflare Pages')
+console.log('✅ Copied dist/client contents to dist root for Cloudflare Pages');

@@ -22,7 +22,7 @@ function parseSitemap(content) {
 const sitemapFiles = ['sitemap-1.xml', 'sitemap-2.xml', 'sitemap-3.xml'];
 let allUrls = [];
 
-sitemapFiles.forEach(file => {
+sitemapFiles.forEach((file) => {
   try {
     const content = readFileSync(join(SITEMAPS_DIR, file), 'utf8');
     const urls = parseSitemap(content);
@@ -40,11 +40,11 @@ const robotsContent = readFileSync(join(DIST_DIR, 'robots.txt'), 'utf8');
 
 const disallowRules = robotsContent
   .split('\n')
-  .filter(line => line.trim().startsWith('Disallow:'))
-  .map(line => line.split(':')[1].trim());
+  .filter((line) => line.trim().startsWith('Disallow:'))
+  .map((line) => line.split(':')[1].trim());
 
 console.log(`   Found ${disallowRules.length} Disallow rules:`);
-disallowRules.forEach(rule => {
+disallowRules.forEach((rule) => {
   console.log(`   - ${rule}`);
 });
 
@@ -52,15 +52,15 @@ disallowRules.forEach(rule => {
 console.log('\n🚫 Checking for blocked URLs:');
 let blockedCount = 0;
 
-allUrls.forEach(url => {
+allUrls.forEach((url) => {
   const path = new URL(url).pathname;
-  const isBlocked = disallowRules.some(rule => {
+  const isBlocked = disallowRules.some((rule) => {
     if (rule.endsWith('*')) {
       return path.startsWith(rule.slice(0, -1));
     }
     return path.startsWith(rule);
   });
-  
+
   if (isBlocked) {
     console.log(`   ❌ ${path} (blocked by robots.txt)`);
     blockedCount++;
@@ -79,7 +79,9 @@ console.log('\n🔍 SEO Checks:');
 // Check for duplicate URLs
 const uniqueUrls = new Set(allUrls);
 if (uniqueUrls.size < allUrls.length) {
-  console.log(`   ⚠️  Found ${allUrls.length - uniqueUrls.size} duplicate URLs`);
+  console.log(
+    `   ⚠️  Found ${allUrls.length - uniqueUrls.size} duplicate URLs`
+  );
 } else {
   console.log('   ✅ No duplicate URLs');
 }
@@ -92,7 +94,7 @@ const issues = {
   notHttps: [],
 };
 
-allUrls.forEach(url => {
+allUrls.forEach((url) => {
   if (url.length > 100) issues.tooLong.push(url);
   if (url.includes('?')) issues.hasQuery.push(url);
   if (url.includes('#')) issues.hasFragment.push(url);
@@ -100,7 +102,9 @@ allUrls.forEach(url => {
 });
 
 if (issues.tooLong.length > 0) {
-  console.log(`   ⚠️  ${issues.tooLong.length} URLs are very long (>100 chars)`);
+  console.log(
+    `   ⚠️  ${issues.tooLong.length} URLs are very long (>100 chars)`
+  );
 }
 if (issues.hasQuery.length > 0) {
   console.log(`   ⚠️  ${issues.hasQuery.length} URLs contain query parameters`);
@@ -114,8 +118,11 @@ if (issues.notHttps.length > 0) {
   console.log('   ✅ All URLs use HTTPS');
 }
 
-if (issues.tooLong.length === 0 && issues.hasQuery.length === 0 && 
-    issues.hasFragment.length === 0) {
+if (
+  issues.tooLong.length === 0 &&
+  issues.hasQuery.length === 0 &&
+  issues.hasFragment.length === 0
+) {
   console.log('   ✅ All URLs have clean structure');
 }
 
@@ -123,17 +130,19 @@ if (issues.tooLong.length === 0 && issues.hasQuery.length === 0 &&
 console.log('\n📊 Priority Distribution:');
 const priorities = {
   '1.0': 0,
-  '0.9': 0,
-  '0.8': 0,
-  '0.7': 0,
-  '0.5': 0,
+  0.9: 0,
+  0.8: 0,
+  0.7: 0,
+  0.5: 0,
 };
 
-sitemapFiles.forEach(file => {
+sitemapFiles.forEach((file) => {
   try {
     const content = readFileSync(join(SITEMAPS_DIR, file), 'utf8');
-    Object.keys(priorities).forEach(priority => {
-      const matches = content.match(new RegExp(`<priority>${priority}</priority>`, 'g'));
+    Object.keys(priorities).forEach((priority) => {
+      const matches = content.match(
+        new RegExp(`<priority>${priority}</priority>`, 'g')
+      );
       if (matches) priorities[priority] += matches.length;
     });
   } catch (error) {}

@@ -193,7 +193,9 @@ export default function PageManager() {
     <div className="max-w-7xl mx-auto p-6">
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-red-600 mb-2">Page Manager</h1>
-        <p className="text-brand-text-muted">Manage, edit, and publish your AI-generated pages</p>
+        <p className="text-brand-text-muted">
+          Manage, edit, and publish your AI-generated pages
+        </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -201,7 +203,9 @@ export default function PageManager() {
         <div className="lg:col-span-1">
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             <div className="bg-gradient-to-r from-red-600 to-orange-500 px-4 py-3">
-              <h2 className="text-lg font-semibold text-white">All Pages ({pages.length})</h2>
+              <h2 className="text-lg font-semibold text-white">
+                All Pages ({pages.length})
+              </h2>
             </div>
 
             <div className="divide-y divide-gray-200">
@@ -219,15 +223,23 @@ export default function PageManager() {
                     onClick={() => setSelectedPage(page)}
                   >
                     <div className="flex items-start justify-between mb-2">
-                      <h3 className="font-semibold text-brand-text">{page.name}</h3>
-                      <span className={`px-2 py-1 rounded text-xs ${getStatusColor(page.status)}`}>
+                      <h3 className="font-semibold text-brand-text">
+                        {page.name}
+                      </h3>
+                      <span
+                        className={`px-2 py-1 rounded text-xs ${getStatusColor(page.status)}`}
+                      >
                         {page.status}
                       </span>
                     </div>
-                    <p className="text-sm text-brand-text-muted mb-2">/{page.slug}</p>
+                    <p className="text-sm text-brand-text-muted mb-2">
+                      /{page.slug}
+                    </p>
                     <div className="flex items-center text-xs text-brand-text-light">
                       <span className="mr-3">v{page.version}</span>
-                      <span>{new Date(page.created_at).toLocaleDateString()}</span>
+                      <span>
+                        {new Date(page.created_at).toLocaleDateString()}
+                      </span>
                     </div>
                   </div>
                 ))
@@ -244,10 +256,16 @@ export default function PageManager() {
               <div className="bg-white rounded-lg shadow-md p-6">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h2 className="text-2xl font-bold text-brand-text">{selectedPage.name}</h2>
-                    <p className="text-brand-text-muted">/{selectedPage.slug}</p>
+                    <h2 className="text-2xl font-bold text-brand-text">
+                      {selectedPage.name}
+                    </h2>
+                    <p className="text-brand-text-muted">
+                      /{selectedPage.slug}
+                    </p>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(selectedPage.status)}`}>
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(selectedPage.status)}`}
+                  >
                     {selectedPage.status}
                   </span>
                 </div>
@@ -255,7 +273,9 @@ export default function PageManager() {
                 <div className="flex flex-wrap gap-3">
                   {selectedPage.status === 'draft' && (
                     <button
-                      onClick={() => updatePageStatus(selectedPage.id, 'published')}
+                      onClick={() =>
+                        updatePageStatus(selectedPage.id, 'published')
+                      }
                       className="bg-brand-success hover:bg-brand-success-hover text-white px-4 py-2 rounded-lg transition-colors"
                     >
                       Publish
@@ -276,7 +296,9 @@ export default function PageManager() {
                     {editMode ? 'Cancel Edit' : 'Edit HTML'}
                   </button>
                   <button
-                    onClick={() => updatePageStatus(selectedPage.id, 'archived')}
+                    onClick={() =>
+                      updatePageStatus(selectedPage.id, 'archived')
+                    }
                     className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors"
                   >
                     Archive
@@ -291,7 +313,8 @@ export default function PageManager() {
 
                 {selectedPage.published_at && (
                   <div className="mt-4 text-sm text-brand-text-muted">
-                    Published: {new Date(selectedPage.published_at).toLocaleString()}
+                    Published:{' '}
+                    {new Date(selectedPage.published_at).toLocaleString()}
                   </div>
                 )}
               </div>
@@ -299,7 +322,9 @@ export default function PageManager() {
               {/* Edit Mode */}
               {editMode ? (
                 <div className="bg-white rounded-lg shadow-md p-6">
-                  <h3 className="text-lg font-semibold text-brand-text mb-4">Edit HTML</h3>
+                  <h3 className="text-lg font-semibold text-brand-text mb-4">
+                    Edit HTML
+                  </h3>
                   <textarea
                     className="w-full border border-brand-border-dark rounded-lg px-4 py-2 font-mono text-sm"
                     rows={20}
@@ -328,7 +353,9 @@ export default function PageManager() {
                 /* Preview */
                 <div className="bg-white rounded-lg shadow-md overflow-hidden">
                   <div className="bg-brand-surface-dark px-6 py-3 border-b border-brand-border">
-                    <h3 className="text-lg font-semibold text-brand-text">Preview</h3>
+                    <h3 className="text-lg font-semibold text-brand-text">
+                      Preview
+                    </h3>
                   </div>
                   <div
                     className="p-6 overflow-auto"
@@ -351,7 +378,9 @@ export default function PageManager() {
                         className="flex items-center justify-between p-3 bg-brand-surface rounded-lg"
                       >
                         <div>
-                          <span className="font-medium text-brand-text">Version {version.version}</span>
+                          <span className="font-medium text-brand-text">
+                            Version {version.version}
+                          </span>
                           <span className="text-sm text-brand-text-muted ml-3">
                             {new Date(version.created_at).toLocaleString()}
                           </span>
@@ -383,8 +412,12 @@ export default function PageManager() {
                   d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                 />
               </svg>
-              <h3 className="text-lg font-medium text-brand-text mb-2">No Page Selected</h3>
-              <p className="text-brand-text-light">Select a page from the list to view and manage it</p>
+              <h3 className="text-lg font-medium text-brand-text mb-2">
+                No Page Selected
+              </h3>
+              <p className="text-brand-text-light">
+                Select a page from the list to view and manage it
+              </p>
             </div>
           )}
         </div>

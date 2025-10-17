@@ -16,25 +16,27 @@ try {
   const { spawn } = await import('child_process');
   const { promisify } = await import('util');
   const execAsync = promisify(spawn);
-  
+
   // Test security headers
-  const curl = spawn('curl', ['-I', 'http://localhost:5000/health'], { stdio: 'pipe' });
+  const curl = spawn('curl', ['-I', 'http://localhost:5000/health'], {
+    stdio: 'pipe',
+  });
   let headers = '';
-  
+
   curl.stdout.on('data', (data) => {
     headers += data.toString();
   });
-  
+
   curl.on('close', () => {
     const securityHeaders = [
       'Content-Security-Policy',
-      'Strict-Transport-Security', 
+      'Strict-Transport-Security',
       'X-Content-Type-Options',
       'X-Frame-Options',
-      'X-XSS-Protection'
+      'X-XSS-Protection',
     ];
-    
-    securityHeaders.forEach(header => {
+
+    securityHeaders.forEach((header) => {
       if (headers.includes(header)) {
         console.log(`✅ ${header}: Configured`);
       } else {
@@ -42,7 +44,6 @@ try {
       }
     });
   });
-  
 } catch (err) {
   console.log('⚠️  Server not running - security headers cannot be tested');
 }
@@ -55,11 +56,11 @@ const endpoints = [
   { path: '/api/sister-sites', description: 'Sister Sites Integration' },
   { path: '/api/programs', description: 'Training Programs' },
   { path: '/api/lms/courses', description: 'LMS Courses' },
-  { path: '/api/stripe/config', description: 'Payment Configuration' }
+  { path: '/api/stripe/config', description: 'Payment Configuration' },
 ];
 
 console.log('Available Production Endpoints:');
-endpoints.forEach(endpoint => {
+endpoints.forEach((endpoint) => {
   console.log(`✅ ${endpoint.path.padEnd(25)} - ${endpoint.description}`);
 });
 
@@ -67,16 +68,16 @@ endpoints.forEach(endpoint => {
 console.log('\n🛡️  SECURITY FEATURES IMPLEMENTED:');
 const securityFeatures = [
   'Helmet.js security headers (CSP, HSTS, etc.)',
-  'Express rate limiting (120 req/min per IP)', 
+  'Express rate limiting (120 req/min per IP)',
   'Request compression with gzip',
   'Structured logging with Pino + request IDs',
   'Centralized error handling middleware',
   'Environment variable validation',
   'CORS protection for known domains',
-  'JWT secret validation (production-ready)'
+  'JWT secret validation (production-ready)',
 ];
 
-securityFeatures.forEach(feature => {
+securityFeatures.forEach((feature) => {
   console.log(`✅ ${feature}`);
 });
 
@@ -88,10 +89,10 @@ const complianceFeatures = [
   'PIRL data quality and timeliness reporting',
   'Federal cost principles (2 CFR 200) compliance',
   'Equal opportunity & non-discrimination checks',
-  'Data security & privacy standards validation'
+  'Data security & privacy standards validation',
 ];
 
-complianceFeatures.forEach(feature => {
+complianceFeatures.forEach((feature) => {
   console.log(`✅ ${feature}`);
 });
 
@@ -99,16 +100,16 @@ complianceFeatures.forEach(feature => {
 console.log('\n🚀 INFRASTRUCTURE READINESS:');
 const infraFeatures = [
   'PM2 process manager compatible',
-  'Docker containerization ready', 
+  'Docker containerization ready',
   'Nginx reverse proxy configuration provided',
   'SSL/HTTPS enforcement ready',
   'Environment-based configuration',
   'Graceful error handling & recovery',
   'Production logging & monitoring',
-  'Health check endpoints for load balancers'
+  'Health check endpoints for load balancers',
 ];
 
-infraFeatures.forEach(feature => {
+infraFeatures.forEach((feature) => {
   console.log(`✅ ${feature}`);
 });
 
@@ -143,10 +144,10 @@ const commands = [
   'npm test               - Run complete test suite',
   'npm run security:check - Security validation',
   'npm run production:validate - Full readiness check',
-  'npm run env:check      - Environment validation'
+  'npm run env:check      - Environment validation',
 ];
 
-commands.forEach(cmd => {
+commands.forEach((cmd) => {
   console.log(`✅ ${cmd}`);
 });
 

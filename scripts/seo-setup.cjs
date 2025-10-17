@@ -22,28 +22,28 @@ console.log('🚀 Starting Advanced SEO Setup...\n');
 function findAllPages() {
   const pages = [];
   const dirs = ['public', 'sites', 'pages', 'docs'];
-  
-  dirs.forEach(dir => {
+
+  dirs.forEach((dir) => {
     if (fs.existsSync(dir)) {
       const files = getAllFiles(dir, '.html');
       pages.push(...files);
     }
   });
-  
+
   console.log(`✅ Found ${pages.length} HTML pages\n`);
   return pages;
 }
 
 function getAllFiles(dir, ext) {
   const files = [];
-  
+
   function scan(directory) {
     const items = fs.readdirSync(directory);
-    
-    items.forEach(item => {
+
+    items.forEach((item) => {
       const fullPath = path.join(directory, item);
       const stat = fs.statSync(fullPath);
-      
+
       if (stat.isDirectory()) {
         scan(fullPath);
       } else if (item.endsWith(ext)) {
@@ -51,7 +51,7 @@ function getAllFiles(dir, ext) {
       }
     });
   }
-  
+
   scan(dir);
   return files;
 }
@@ -60,15 +60,15 @@ function getAllFiles(dir, ext) {
 function generateSitemaps(pages) {
   const sitemaps = [];
   const chunks = chunkArray(pages, MAX_URLS_PER_SITEMAP);
-  
+
   chunks.forEach((chunk, index) => {
     const sitemapNum = index + 1;
     const filename = `sitemap-${sitemapNum}.xml`;
-    
+
     let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-    
-    chunk.forEach(page => {
+
+    chunk.forEach((page) => {
       const url = pageToUrl(page);
       xml += '  <url>\n';
       xml += `    <loc>${url}</loc>\n`;
@@ -77,14 +77,14 @@ function generateSitemaps(pages) {
       xml += '    <priority>0.8</priority>\n';
       xml += '  </url>\n';
     });
-    
+
     xml += '</urlset>';
-    
+
     fs.writeFileSync(filename, xml);
     sitemaps.push(filename);
     console.log(`✅ Created ${filename} (${chunk.length} URLs)`);
   });
-  
+
   return sitemaps;
 }
 
@@ -101,7 +101,7 @@ function pageToUrl(filePath) {
     .replace(/^(public|sites|pages|docs)\//, '')
     .replace(/index\.html$/, '')
     .replace(/\.html$/, '');
-  
+
   return `${DOMAIN}/${url}`;
 }
 
@@ -109,16 +109,16 @@ function pageToUrl(filePath) {
 function generateSitemapIndex(sitemaps) {
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-  
-  sitemaps.forEach(sitemap => {
+
+  sitemaps.forEach((sitemap) => {
     xml += '  <sitemap>\n';
     xml += `    <loc>${DOMAIN}/${sitemap}</loc>\n`;
     xml += `    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n`;
     xml += '  </sitemap>\n';
   });
-  
+
   xml += '</sitemapindex>';
-  
+
   fs.writeFileSync('sitemap-index.xml', xml);
   console.log(`\n✅ Created sitemap-index.xml (${sitemaps.length} sitemaps)`);
 }
@@ -196,7 +196,7 @@ Disallow: /admin/
 Disallow: /api/
 Disallow: /*.json$
 `;
-  
+
   fs.writeFileSync('robots.txt', content);
   console.log('\n✅ Created robots.txt');
 }

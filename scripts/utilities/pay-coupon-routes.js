@@ -22,7 +22,10 @@
 import { Router } from 'express';
 import { createClient } from '@supabase/supabase-js';
 
-const supa = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
+const supa = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_KEY
+);
 export const coupons = Router();
 
 /**
@@ -35,7 +38,9 @@ coupons.post('/api/coupons/validate', async (req, res) => {
   try {
     const { code = '', program_slug = '', list_price_cents } = req.body || {};
     if (!code || !program_slug) {
-      return res.status(400).json({ valid: false, reason: 'Missing code or program_slug' });
+      return res
+        .status(400)
+        .json({ valid: false, reason: 'Missing code or program_slug' });
     }
 
     const { data: c } = await supa
@@ -49,12 +54,12 @@ coupons.post('/api/coupons/validate', async (req, res) => {
     }
 
     const now = new Date();
-    
+
     // Check if coupon is active
     if (!c.active) {
       return res.json({ valid: false, reason: 'Inactive' });
     }
-    
+
     // Check date range
     if (c.starts_at && now < new Date(c.starts_at)) {
       return res.json({ valid: false, reason: 'Not started' });
@@ -62,15 +67,22 @@ coupons.post('/api/coupons/validate', async (req, res) => {
     if (c.ends_at && now > new Date(c.ends_at)) {
       return res.json({ valid: false, reason: 'Expired' });
     }
-    
+
     // Check redemption limit
     if (c.max_redemptions && c.redeemed_count >= c.max_redemptions) {
       return res.json({ valid: false, reason: 'Redemption limit reached' });
     }
-    
+
     // Check program eligibility
-    if (Array.isArray(c.allowed_programs) && c.allowed_programs.length && !c.allowed_programs.includes(program_slug)) {
-      return res.json({ valid: false, reason: 'Not eligible for this program' });
+    if (
+      Array.isArray(c.allowed_programs) &&
+      c.allowed_programs.length &&
+      !c.allowed_programs.includes(program_slug)
+    ) {
+      return res.json({
+        valid: false,
+        reason: 'Not eligible for this program',
+      });
     }
 
     let discounted_cents = undefined;
@@ -78,15 +90,15 @@ coupons.post('/api/coupons/validate', async (req, res) => {
       if (c.type === 'amount') {
         discounted_cents = Math.max(0, list_price_cents - c.value);
       } else if (c.type === 'percent') {
-        discounted_cents = Math.round(list_price_cents * (1 - c.value/100));
+        discounted_cents = Math.round(list_price_cents * (1 - c.value / 100));
       }
     }
 
-    res.json({ 
-      valid: true, 
-      type: c.type, 
-      value: c.value, 
-      discounted_cents 
+    res.json({
+      valid: true,
+      type: c.type,
+      value: c.value,
+      discounted_cents,
     });
   } catch (e) {
     console.error('Coupon validation error:', e);
@@ -101,13 +113,13 @@ coupons.post('/api/coupons/validate', async (req, res) => {
 export async function incrementCouponUsage(couponCode) {
   try {
     if (!couponCode) return;
-    
+
     const { data: coupon } = await supa
       .from('coupons')
       .select('id, redeemed_count')
       .eq('code', couponCode.toUpperCase())
       .single();
-    
+
     if (coupon) {
       await supa
         .from('coupons')

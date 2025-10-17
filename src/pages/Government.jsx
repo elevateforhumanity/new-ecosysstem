@@ -18,13 +18,13 @@ export default function Government() {
         const [contractRes, complianceRes, veteranRes] = await Promise.all([
           fetch('/api/government/contracts'),
           fetch('/api/government/compliance'),
-          fetch('/api/government/veterans')
+          fetch('/api/government/veterans'),
         ]);
 
         const [contracts, compliance, veterans] = await Promise.all([
           contractRes.json(),
           complianceRes.json(),
-          veteranRes.json()
+          veteranRes.json(),
         ]);
 
         setContractData(contracts);
@@ -49,39 +49,83 @@ export default function Government() {
   }
 
   return (
-    <main id="main-content" style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
+    <main
+      id="main-content"
+      style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}
+    >
       <header style={{ marginBottom: '3rem', textAlign: 'center' }}>
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--brand-info)' }}>
+        <h1
+          style={{
+            fontSize: '2.5rem',
+            marginBottom: '1rem',
+            color: 'var(--brand-info)',
+          }}
+        >
           Government Partnerships
         </h1>
-        <p style={{ fontSize: '1.2rem', color: 'var(--brand-text-muted)', maxWidth: '800px', margin: '0 auto' }}>
-          Elevate for Humanity partners with federal, state, and local government agencies to deliver 
-          Elevate Learn2Earn Workforce, education, and training programs that meet the highest standards of 
+        <p
+          style={{
+            fontSize: '1.2rem',
+            color: 'var(--brand-text-muted)',
+            maxWidth: '800px',
+            margin: '0 auto',
+          }}
+        >
+          Elevate for Humanity partners with federal, state, and local
+          government agencies to deliver Elevate Learn2Earn Workforce,
+          education, and training programs that meet the highest standards of
           compliance and effectiveness.
         </p>
       </header>
 
       {/* Contract Capabilities */}
       <section style={{ marginBottom: '3rem' }}>
-        <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--brand-text)' }}>
+        <h2
+          style={{
+            fontSize: '2rem',
+            marginBottom: '1.5rem',
+            color: 'var(--brand-text)',
+          }}
+        >
           Government Contract Capabilities
         </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '1.5rem',
+          }}
+        >
           {contractData?.capabilities?.map((capability, index) => (
-            <div key={index} style={{
-              padding: '1.5rem',
-              border: '1px solid var(--brand-border)',
-              borderRadius: '8px',
-              backgroundColor: 'var(--brand-surface)'
-            }}>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', color: 'var(--brand-text)' }}>
+            <div
+              key={index}
+              style={{
+                padding: '1.5rem',
+                border: '1px solid var(--brand-border)',
+                borderRadius: '8px',
+                backgroundColor: 'var(--brand-surface)',
+              }}
+            >
+              <h3
+                style={{
+                  fontSize: '1.25rem',
+                  marginBottom: '0.5rem',
+                  color: 'var(--brand-text)',
+                }}
+              >
                 {capability.title}
               </h3>
-              <p style={{ color: 'var(--brand-text-muted)', marginBottom: '1rem' }}>
+              <p
+                style={{
+                  color: 'var(--brand-text-muted)',
+                  marginBottom: '1rem',
+                }}
+              >
                 {capability.description}
               </p>
               <div style={{ fontSize: '0.875rem', color: 'var(--brand-text)' }}>
-                <strong>Contract Types:</strong> {capability.contractTypes.join(', ')}
+                <strong>Contract Types:</strong>{' '}
+                {capability.contractTypes.join(', ')}
               </div>
             </div>
           ))}
@@ -90,29 +134,61 @@ export default function Government() {
 
       {/* Compliance Standards */}
       <section style={{ marginBottom: '3rem' }}>
-        <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--brand-text)' }}>
+        <h2
+          style={{
+            fontSize: '2rem',
+            marginBottom: '1.5rem',
+            color: 'var(--brand-text)',
+          }}
+        >
           Compliance & Standards
         </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gap: '1rem',
+          }}
+        >
           {complianceData?.standards?.map((standard, index) => (
-            <div key={index} style={{
-              padding: '1rem',
-              border: '1px solid var(--brand-border-dark)',
-              borderRadius: '6px',
-              backgroundColor: '#ffffff',
-              textAlign: 'center'
-            }}>
+            <div
+              key={index}
+              style={{
+                padding: '1rem',
+                border: '1px solid var(--brand-border-dark)',
+                borderRadius: '6px',
+                backgroundColor: '#ffffff',
+                textAlign: 'center',
+              }}
+            >
               <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
                 {standard.certified ? '✅' : '🔄'}
               </div>
-              <h4 style={{ fontSize: '1rem', marginBottom: '0.25rem', color: 'var(--brand-text)' }}>
+              <h4
+                style={{
+                  fontSize: '1rem',
+                  marginBottom: '0.25rem',
+                  color: 'var(--brand-text)',
+                }}
+              >
                 {standard.name}
               </h4>
-              <p style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>
+              <p
+                style={{
+                  fontSize: '0.875rem',
+                  color: 'var(--brand-text-muted)',
+                }}
+              >
                 {standard.description}
               </p>
               {standard.certificationDate && (
-                <div style={{ fontSize: '0.75rem', color: 'var(--brand-success)', marginTop: '0.5rem' }}>
+                <div
+                  style={{
+                    fontSize: '0.75rem',
+                    color: 'var(--brand-success)',
+                    marginTop: '0.5rem',
+                  }}
+                >
                   Certified: {standard.certificationDate}
                 </div>
               )}
@@ -123,40 +199,83 @@ export default function Government() {
 
       {/* Veteran Services */}
       <section style={{ marginBottom: '3rem' }}>
-        <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--brand-text)' }}>
+        <h2
+          style={{
+            fontSize: '2rem',
+            marginBottom: '1.5rem',
+            color: 'var(--brand-text)',
+          }}
+        >
           Veteran & Military Services
         </h2>
-        <div style={{ backgroundColor: '#fef3c7', padding: '1.5rem', borderRadius: '8px', marginBottom: '1.5rem' }}>
-          <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', color: '#92400e' }}>
+        <div
+          style={{
+            backgroundColor: '#fef3c7',
+            padding: '1.5rem',
+            borderRadius: '8px',
+            marginBottom: '1.5rem',
+          }}
+        >
+          <h3
+            style={{
+              fontSize: '1.25rem',
+              marginBottom: '0.5rem',
+              color: '#92400e',
+            }}
+          >
             🎖️ Veteran-Owned Small Business (VOSB)
           </h3>
           <p style={{ color: '#92400e' }}>
-            Elevate for Humanity is a certified Veteran-Owned Small Business, providing priority access 
-            to federal contracting opportunities and specialized support for veteran entrepreneurs.
+            Elevate for Humanity is a certified Veteran-Owned Small Business,
+            providing priority access to federal contracting opportunities and
+            specialized support for veteran entrepreneurs.
           </p>
         </div>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '1.5rem',
+          }}
+        >
           {veteranData?.services?.map((service, index) => (
-            <div key={index} style={{
-              padding: '1.5rem',
-              border: '1px solid var(--brand-border)',
-              borderRadius: '8px',
-              backgroundColor: '#ffffff'
-            }}>
-              <h4 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', color: 'var(--brand-text)' }}>
+            <div
+              key={index}
+              style={{
+                padding: '1.5rem',
+                border: '1px solid var(--brand-border)',
+                borderRadius: '8px',
+                backgroundColor: '#ffffff',
+              }}
+            >
+              <h4
+                style={{
+                  fontSize: '1.25rem',
+                  marginBottom: '0.5rem',
+                  color: 'var(--brand-text)',
+                }}
+              >
                 {service.title}
               </h4>
-              <p style={{ color: 'var(--brand-text-muted)', marginBottom: '1rem' }}>
+              <p
+                style={{
+                  color: 'var(--brand-text-muted)',
+                  marginBottom: '1rem',
+                }}
+              >
                 {service.description}
               </p>
               <ul style={{ listStyle: 'none', padding: 0 }}>
                 {service.features.map((feature, idx) => (
-                  <li key={idx} style={{ 
-                    padding: '0.25rem 0', 
-                    color: 'var(--brand-text)',
-                    fontSize: '0.875rem'
-                  }}>
+                  <li
+                    key={idx}
+                    style={{
+                      padding: '0.25rem 0',
+                      color: 'var(--brand-text)',
+                      fontSize: '0.875rem',
+                    }}
+                  >
                     ✓ {feature}
                   </li>
                 ))}
@@ -168,25 +287,59 @@ export default function Government() {
 
       {/* Performance Metrics */}
       <section style={{ marginBottom: '3rem' }}>
-        <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--brand-text)' }}>
+        <h2
+          style={{
+            fontSize: '2rem',
+            marginBottom: '1.5rem',
+            color: 'var(--brand-text)',
+          }}
+        >
           Performance Metrics
         </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '1rem',
+          }}
+        >
           {contractData?.metrics?.map((metric, index) => (
-            <div key={index} style={{
-              padding: '1.5rem',
-              backgroundColor: 'var(--brand-surface)',
-              borderRadius: '8px',
-              textAlign: 'center',
-              border: '1px solid #bfdbfe'
-            }}>
-              <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--brand-info)', marginBottom: '0.5rem' }}>
+            <div
+              key={index}
+              style={{
+                padding: '1.5rem',
+                backgroundColor: 'var(--brand-surface)',
+                borderRadius: '8px',
+                textAlign: 'center',
+                border: '1px solid #bfdbfe',
+              }}
+            >
+              <div
+                style={{
+                  fontSize: '2rem',
+                  fontWeight: 'bold',
+                  color: 'var(--brand-info)',
+                  marginBottom: '0.5rem',
+                }}
+              >
                 {metric.value}
               </div>
-              <div style={{ fontSize: '0.875rem', color: 'var(--brand-text)', fontWeight: '500' }}>
+              <div
+                style={{
+                  fontSize: '0.875rem',
+                  color: 'var(--brand-text)',
+                  fontWeight: '500',
+                }}
+              >
                 {metric.label}
               </div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--brand-text-muted)', marginTop: '0.25rem' }}>
+              <div
+                style={{
+                  fontSize: '0.75rem',
+                  color: 'var(--brand-text-muted)',
+                  marginTop: '0.25rem',
+                }}
+              >
                 {metric.period}
               </div>
             </div>
@@ -195,44 +348,77 @@ export default function Government() {
       </section>
 
       {/* Contact Information */}
-      <section style={{
-        backgroundColor: '#f3f4f6',
-        padding: '2rem',
-        borderRadius: '8px',
-        textAlign: 'center'
-      }}>
-        <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--brand-text)' }}>
+      <section
+        style={{
+          backgroundColor: '#f3f4f6',
+          padding: '2rem',
+          borderRadius: '8px',
+          textAlign: 'center',
+        }}
+      >
+        <h2
+          style={{
+            fontSize: '1.5rem',
+            marginBottom: '1rem',
+            color: 'var(--brand-text)',
+          }}
+        >
           Ready to Partner?
         </h2>
-        <p style={{ color: 'var(--brand-text-muted)', marginBottom: '1.5rem', maxWidth: '600px', margin: '0 auto 1.5rem' }}>
-          Contact our government relations team to discuss partnership opportunities, 
-          contract capabilities, and how we can support your agency's mission.
+        <p
+          style={{
+            color: 'var(--brand-text-muted)',
+            marginBottom: '1.5rem',
+            maxWidth: '600px',
+            margin: '0 auto 1.5rem',
+          }}
+        >
+          Contact our government relations team to discuss partnership
+          opportunities, contract capabilities, and how we can support your
+          agency's mission.
         </p>
-        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <button style={{
-            padding: '0.75rem 1.5rem',
-            backgroundColor: 'var(--brand-info)',
-            color: 'white',
-            border: 'none',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            fontSize: '1rem'
-          }}>
+        <div
+          style={{
+            display: 'flex',
+            gap: '1rem',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+          }}
+        >
+          <button
+            style={{
+              padding: '0.75rem 1.5rem',
+              backgroundColor: 'var(--brand-info)',
+              color: 'white',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '1rem',
+            }}
+          >
             Request Capabilities Statement
           </button>
-          <button style={{
-            padding: '0.75rem 1.5rem',
-            backgroundColor: 'white',
-            color: 'var(--brand-info)',
-            border: '2px solid var(--brand-info)',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            fontSize: '1rem'
-          }}>
+          <button
+            style={{
+              padding: '0.75rem 1.5rem',
+              backgroundColor: 'white',
+              color: 'var(--brand-info)',
+              border: '2px solid var(--brand-info)',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '1rem',
+            }}
+          >
             Schedule Consultation
           </button>
         </div>
-        <div style={{ marginTop: '1.5rem', fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>
+        <div
+          style={{
+            marginTop: '1.5rem',
+            fontSize: '0.875rem',
+            color: 'var(--brand-text-muted)',
+          }}
+        >
           <div>📧 government@elevateforhumanity.org</div>
           <div>📞 (555) 123-4567</div>
           <div>🏢 CAGE Code: 9ABC1 | DUNS: 123456789</div>

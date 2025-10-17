@@ -2,7 +2,7 @@
  * AI-Powered Course Creator - Superior to LearnWorlds
  * Automatically generates complete courses from uploaded documents
  * Features: Drip content, video generation, auto-tests, course covers
- * 
+ *
  * Copyright (c) 2024 Elevate for Humanity
  * Licensed Use Only - Unauthorized use prohibited
  */
@@ -27,40 +27,52 @@ class AICourseCreator {
   async createCourseFromDocument(documentFile, courseSettings = {}) {
     try {
       console.log('🚀 Starting AI course creation...');
-      
+
       // Step 1: Extract and analyze document content
       const documentContent = await this.extractDocumentContent(documentFile);
-      
+
       // Step 2: Generate course structure with AI
-      const courseStructure = await this.generateCourseStructure(documentContent, courseSettings);
-      
+      const courseStructure = await this.generateCourseStructure(
+        documentContent,
+        courseSettings
+      );
+
       // Step 3: Create course cover with AI
-      const courseCover = await this.generateCourseCover(courseStructure.title, courseStructure.description);
-      
+      const courseCover = await this.generateCourseCover(
+        courseStructure.title,
+        courseStructure.description
+      );
+
       // Step 4: Generate video scripts for each lesson
-      const videoScripts = await this.generateVideoScripts(courseStructure.modules);
-      
+      const videoScripts = await this.generateVideoScripts(
+        courseStructure.modules
+      );
+
       // Step 5: Create videos from scripts using AI
       const videos = await this.generateVideosFromScripts(videoScripts);
-      
+
       // Step 6: Generate automatic tests and quizzes
-      const assessments = await this.generateAssessments(courseStructure.modules);
-      
+      const assessments = await this.generateAssessments(
+        courseStructure.modules
+      );
+
       // Step 7: Set up drip content schedule
-      const dripSchedule = await this.createDripSchedule(courseStructure.modules, courseSettings.dripSettings);
-      
+      const dripSchedule = await this.createDripSchedule(
+        courseStructure.modules,
+        courseSettings.dripSettings
+      );
+
       // Step 8: Save everything to Supabase
       const course = await this.saveCourseToDatabase({
         ...courseStructure,
         cover: courseCover,
         videos,
         assessments,
-        dripSchedule
+        dripSchedule,
       });
-      
+
       console.log('✅ Course created successfully!');
       return course;
-      
     } catch (error) {
       console.error('❌ Course creation failed:', error);
       throw error;
@@ -73,17 +85,17 @@ class AICourseCreator {
   async extractDocumentContent(file) {
     const formData = new FormData();
     formData.append('file', file);
-    
+
     // Use Cloudflare Workers for document processing
     const response = await fetch('/api/extract-document', {
       method: 'POST',
-      body: formData
+      body: formData,
     });
-    
+
     if (!response.ok) {
       throw new Error('Failed to extract document content');
     }
-    
+
     return await response.json();
   }
 
@@ -146,24 +158,25 @@ class AICourseCreator {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${this.openaiApiKey}`,
-        'Content-Type': 'application/json'
+        Authorization: `Bearer ${this.openaiApiKey}`,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         model: 'gpt-4-turbo-preview',
         messages: [
           {
             role: 'system',
-            content: 'You are an expert instructional designer creating world-class online courses. Generate comprehensive, engaging course structures that exceed industry standards.'
+            content:
+              'You are an expert instructional designer creating world-class online courses. Generate comprehensive, engaging course structures that exceed industry standards.',
           },
           {
             role: 'user',
-            content: prompt
-          }
+            content: prompt,
+          },
         ],
         temperature: 0.7,
-        max_tokens: 4000
-      })
+        max_tokens: 4000,
+      }),
     });
 
     const result = await response.json();
@@ -183,30 +196,36 @@ class AICourseCreator {
     Text: "${title}" in bold, modern font
     `;
 
-    const response = await fetch('https://api.openai.com/v1/images/generations', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${this.openaiApiKey}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: 'dall-e-3',
-        prompt: prompt,
-        size: '1792x1024',
-        quality: 'hd',
-        style: 'natural'
-      })
-    });
+    const response = await fetch(
+      'https://api.openai.com/v1/images/generations',
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${this.openaiApiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'dall-e-3',
+          prompt: prompt,
+          size: '1792x1024',
+          quality: 'hd',
+          style: 'natural',
+        }),
+      }
+    );
 
     const result = await response.json();
-    
+
     // Upload to Cloudflare Images for optimization
-    const imageUrl = await this.uploadToCloudflareImages(result.data[0].url, `course-cover-${Date.now()}`);
-    
+    const imageUrl = await this.uploadToCloudflareImages(
+      result.data[0].url,
+      `course-cover-${Date.now()}`
+    );
+
     return {
       url: imageUrl,
       alt: `Course cover for ${title}`,
-      prompt: prompt
+      prompt: prompt,
     };
   }
 
@@ -215,7 +234,7 @@ class AICourseCreator {
    */
   async generateVideoScripts(modules) {
     const scripts = [];
-    
+
     for (const module of modules) {
       for (const lesson of module.lessons) {
         if (lesson.type === 'video') {
@@ -224,12 +243,12 @@ class AICourseCreator {
             lessonId: lesson.id,
             moduleId: module.id,
             script: script,
-            estimatedDuration: lesson.estimatedMinutes
+            estimatedDuration: lesson.estimatedMinutes,
           });
         }
       }
     }
-    
+
     return scripts;
   }
 
@@ -266,24 +285,25 @@ class AICourseCreator {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${this.openaiApiKey}`,
-        'Content-Type': 'application/json'
+        Authorization: `Bearer ${this.openaiApiKey}`,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         model: 'gpt-4-turbo-preview',
         messages: [
           {
             role: 'system',
-            content: 'You are a professional video script writer specializing in educational content. Create engaging, clear, and well-structured scripts.'
+            content:
+              'You are a professional video script writer specializing in educational content. Create engaging, clear, and well-structured scripts.',
           },
           {
             role: 'user',
-            content: prompt
-          }
+            content: prompt,
+          },
         ],
         temperature: 0.7,
-        max_tokens: 2000
-      })
+        max_tokens: 2000,
+      }),
     });
 
     const result = await response.json();
@@ -295,7 +315,7 @@ class AICourseCreator {
    */
   async generateVideosFromScripts(scripts) {
     const videos = [];
-    
+
     for (const scriptData of scripts) {
       try {
         // Use Cloudflare Stream for video generation and hosting
@@ -306,13 +326,16 @@ class AICourseCreator {
           videoUrl: video.url,
           thumbnailUrl: video.thumbnail,
           duration: video.duration,
-          script: scriptData.script
+          script: scriptData.script,
         });
       } catch (error) {
-        console.error(`Failed to generate video for lesson ${scriptData.lessonId}:`, error);
+        console.error(
+          `Failed to generate video for lesson ${scriptData.lessonId}:`,
+          error
+        );
       }
     }
-    
+
     return videos;
   }
 
@@ -322,37 +345,40 @@ class AICourseCreator {
   async generateVideoFromScript(scriptData) {
     // For now, create a placeholder that would integrate with video generation APIs
     // In production, this would use services like Synthesia, D-ID, or similar
-    
+
     const videoData = {
       script: scriptData.script,
       duration: scriptData.estimatedDuration,
       style: 'professional',
       voice: 'natural',
-      background: 'educational'
+      background: 'educational',
     };
 
     // Upload to Cloudflare Stream
-    const response = await fetch(`https://api.cloudflare.com/client/v4/accounts/${this.cloudflareAccountId}/stream`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${this.cloudflareApiToken}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        meta: {
-          name: `Lesson ${scriptData.lessonId} - Module ${scriptData.moduleId}`,
-          script: scriptData.script
-        }
-      })
-    });
+    const response = await fetch(
+      `https://api.cloudflare.com/client/v4/accounts/${this.cloudflareAccountId}/stream`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${this.cloudflareApiToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          meta: {
+            name: `Lesson ${scriptData.lessonId} - Module ${scriptData.moduleId}`,
+            script: scriptData.script,
+          },
+        }),
+      }
+    );
 
     const result = await response.json();
-    
+
     return {
       url: `https://videodelivery.net/${result.result.uid}`,
       thumbnail: `https://videodelivery.net/${result.result.uid}/thumbnails/thumbnail.jpg`,
       duration: scriptData.estimatedDuration,
-      uid: result.result.uid
+      uid: result.result.uid,
     };
   }
 
@@ -361,15 +387,15 @@ class AICourseCreator {
    */
   async generateAssessments(modules) {
     const assessments = [];
-    
+
     for (const module of modules) {
       const assessment = await this.generateModuleAssessment(module);
       assessments.push({
         moduleId: module.id,
-        ...assessment
+        ...assessment,
       });
     }
-    
+
     return assessments;
   }
 
@@ -382,7 +408,7 @@ class AICourseCreator {
     
     Module: ${module.title}
     Description: ${module.description}
-    Lessons: ${module.lessons.map(l => l.title).join(', ')}
+    Lessons: ${module.lessons.map((l) => l.title).join(', ')}
     
     Generate:
     1. 10 multiple choice questions (4 options each)
@@ -429,24 +455,25 @@ class AICourseCreator {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${this.openaiApiKey}`,
-        'Content-Type': 'application/json'
+        Authorization: `Bearer ${this.openaiApiKey}`,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         model: 'gpt-4-turbo-preview',
         messages: [
           {
             role: 'system',
-            content: 'You are an expert assessment designer creating comprehensive, fair, and engaging evaluations for online courses.'
+            content:
+              'You are an expert assessment designer creating comprehensive, fair, and engaging evaluations for online courses.',
           },
           {
             role: 'user',
-            content: prompt
-          }
+            content: prompt,
+          },
         ],
         temperature: 0.5,
-        max_tokens: 3000
-      })
+        max_tokens: 3000,
+      }),
     });
 
     const result = await response.json();
@@ -460,7 +487,7 @@ class AICourseCreator {
     const {
       startDate = new Date(),
       interval = 'weekly', // daily, weekly, biweekly
-      customSchedule = null
+      customSchedule = null,
     } = dripSettings;
 
     const schedule = [];
@@ -468,12 +495,12 @@ class AICourseCreator {
 
     for (let i = 0; i < modules.length; i++) {
       const module = modules[i];
-      
+
       schedule.push({
         moduleId: module.id,
         releaseDate: new Date(currentDate),
         isAvailable: i === 0, // First module available immediately
-        prerequisites: i > 0 ? [modules[i-1].id] : []
+        prerequisites: i > 0 ? [modules[i - 1].id] : [],
       });
 
       // Calculate next release date
@@ -499,17 +526,20 @@ class AICourseCreator {
   async uploadToCloudflareImages(imageUrl, filename) {
     const imageResponse = await fetch(imageUrl);
     const imageBuffer = await imageResponse.arrayBuffer();
-    
+
     const formData = new FormData();
     formData.append('file', new Blob([imageBuffer]), filename);
-    
-    const response = await fetch(`https://api.cloudflare.com/client/v4/accounts/${this.cloudflareAccountId}/images/v1`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${this.cloudflareApiToken}`
-      },
-      body: formData
-    });
+
+    const response = await fetch(
+      `https://api.cloudflare.com/client/v4/accounts/${this.cloudflareAccountId}/images/v1`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${this.cloudflareApiToken}`,
+        },
+        body: formData,
+      }
+    );
 
     const result = await response.json();
     return result.result.variants[0]; // Return optimized URL
@@ -533,7 +563,7 @@ class AICourseCreator {
           difficulty: courseData.difficulty,
           estimated_hours: courseData.estimatedHours,
           created_by: 'ai-system',
-          status: 'draft'
+          status: 'draft',
         })
         .select()
         .single();
@@ -549,7 +579,7 @@ class AICourseCreator {
             title: moduleData.title,
             description: moduleData.description,
             order_index: moduleData.id,
-            estimated_hours: moduleData.estimatedHours
+            estimated_hours: moduleData.estimatedHours,
           })
           .select()
           .single();
@@ -558,8 +588,10 @@ class AICourseCreator {
 
         // Insert lessons
         for (const lessonData of moduleData.lessons) {
-          const video = courseData.videos.find(v => v.lessonId === lessonData.id && v.moduleId === moduleData.id);
-          
+          const video = courseData.videos.find(
+            (v) => v.lessonId === lessonData.id && v.moduleId === moduleData.id
+          );
+
           const { error: lessonError } = await this.supabase
             .from('lessons')
             .insert({
@@ -572,14 +604,16 @@ class AICourseCreator {
               video_url: video?.videoUrl,
               video_thumbnail: video?.thumbnailUrl,
               key_points: lessonData.keyPoints,
-              practical_exercise: lessonData.practicalExercise
+              practical_exercise: lessonData.practicalExercise,
             });
 
           if (lessonError) throw lessonError;
         }
 
         // Insert assessment
-        const assessment = courseData.assessments.find(a => a.moduleId === moduleData.id);
+        const assessment = courseData.assessments.find(
+          (a) => a.moduleId === moduleData.id
+        );
         if (assessment) {
           const { error: assessmentError } = await this.supabase
             .from('assessments')
@@ -591,7 +625,7 @@ class AICourseCreator {
               total_points: assessment.totalPoints,
               passing_score: assessment.passingScore,
               questions: assessment.questions,
-              practical_exercise: assessment.practicalExercise
+              practical_exercise: assessment.practicalExercise,
             });
 
           if (assessmentError) throw assessmentError;
@@ -607,14 +641,13 @@ class AICourseCreator {
             module_id: scheduleItem.moduleId,
             release_date: scheduleItem.releaseDate,
             is_available: scheduleItem.isAvailable,
-            prerequisites: scheduleItem.prerequisites
+            prerequisites: scheduleItem.prerequisites,
           });
 
         if (scheduleError) throw scheduleError;
       }
 
       return course;
-
     } catch (error) {
       console.error('Error saving course to database:', error);
       throw error;

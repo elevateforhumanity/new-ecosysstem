@@ -36,7 +36,10 @@ export default function GradingInterface() {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(false);
   const [grading, setGrading] = useState<Record<string, number>>({});
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [message, setMessage] = useState<{
+    type: 'success' | 'error';
+    text: string;
+  } | null>(null);
 
   // Load courses
   useEffect(() => {
@@ -93,11 +96,13 @@ export default function GradingInterface() {
 
     const { data, error } = await supabase
       .from('classroom_submissions')
-      .select(`
+      .select(
+        `
         *,
         student:classroom_students!inner(name, email),
         coursework:classroom_coursework!inner(title, max_points)
-      `)
+      `
+      )
       .eq('coursework_id', courseworkId)
       .in('state', ['TURNED_IN', 'RETURNED'])
       .order('submission_time', { ascending: true });
@@ -129,14 +134,14 @@ export default function GradingInterface() {
 
     // Initialize grading state
     const initialGrades: Record<string, number> = {};
-    formatted.forEach(sub => {
+    formatted.forEach((sub) => {
       initialGrades[sub.id] = sub.assigned_grade || sub.draft_grade || 0;
     });
     setGrading(initialGrades);
   };
 
   const handleGradeChange = (submissionId: string, grade: number) => {
-    setGrading(prev => ({ ...prev, [submissionId]: grade }));
+    setGrading((prev) => ({ ...prev, [submissionId]: grade }));
   };
 
   const handleGradeSubmit = async (submission: Submission) => {
@@ -173,8 +178,8 @@ export default function GradingInterface() {
       });
 
       // Update local state
-      setSubmissions(prev =>
-        prev.map(sub =>
+      setSubmissions((prev) =>
+        prev.map((sub) =>
           sub.id === submission.id ? { ...sub, draft_grade: grade } : sub
         )
       );
@@ -188,7 +193,7 @@ export default function GradingInterface() {
 
   const handleBulkGrade = async () => {
     const ungradedSubmissions = submissions.filter(
-      sub => !sub.assigned_grade && grading[sub.id] !== undefined
+      (sub) => !sub.assigned_grade && grading[sub.id] !== undefined
     );
 
     if (ungradedSubmissions.length === 0) {
@@ -200,7 +205,7 @@ export default function GradingInterface() {
     }
 
     try {
-      const tasks = ungradedSubmissions.map(sub => ({
+      const tasks = ungradedSubmissions.map((sub) => ({
         kind: 'gc_grade_submission',
         payload: {
           courseId: selectedCourse,
@@ -244,7 +249,9 @@ export default function GradingInterface() {
     <div className="max-w-7xl mx-auto p-6">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Grading Interface</h1>
-        <p className="text-brand-text-muted">Grade student submissions for your courses</p>
+        <p className="text-brand-text-muted">
+          Grade student submissions for your courses
+        </p>
       </div>
 
       {message && (
@@ -268,11 +275,11 @@ export default function GradingInterface() {
             </label>
             <select
               value={selectedCourse}
-              onChange={e => setSelectedCourse(e.target.value)}
+              onChange={(e) => setSelectedCourse(e.target.value)}
               className="w-full px-4 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
             >
               <option value="">Choose a course...</option>
-              {courses.map(course => (
+              {courses.map((course) => (
                 <option key={course.id} value={course.id}>
                   {course.name}
                 </option>
@@ -286,12 +293,12 @@ export default function GradingInterface() {
             </label>
             <select
               value={selectedCoursework}
-              onChange={e => setSelectedCoursework(e.target.value)}
+              onChange={(e) => setSelectedCoursework(e.target.value)}
               disabled={!selectedCourse}
               className="w-full px-4 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent disabled:bg-brand-surface-dark"
             >
               <option value="">Choose an assignment...</option>
-              {courseworks.map(cw => (
+              {courseworks.map((cw) => (
                 <option key={cw.id} value={cw.id}>
                   {cw.title} ({cw.max_points} points)
                 </option>
@@ -312,10 +319,11 @@ export default function GradingInterface() {
           <div className="p-6 border-b border-brand-border flex justify-between items-center">
             <div>
               <h2 className="text-xl font-semibold">
-                {submissions.length} Submission{submissions.length !== 1 ? 's' : ''}
+                {submissions.length} Submission
+                {submissions.length !== 1 ? 's' : ''}
               </h2>
               <p className="text-sm text-brand-text-muted mt-1">
-                {submissions.filter(s => !s.assigned_grade).length} ungraded
+                {submissions.filter((s) => !s.assigned_grade).length} ungraded
               </p>
             </div>
             <button
@@ -348,14 +356,16 @@ export default function GradingInterface() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {submissions.map(submission => (
+                {submissions.map((submission) => (
                   <tr key={submission.id} className="hover:bg-brand-surface">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
                         <div className="font-medium text-brand-text">
                           {submission.student_name}
                         </div>
-                        <div className="text-sm text-brand-text-light">{submission.student_email}</div>
+                        <div className="text-sm text-brand-text-light">
+                          {submission.student_email}
+                        </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -382,12 +392,17 @@ export default function GradingInterface() {
                           min="0"
                           max={submission.max_points}
                           value={grading[submission.id] || 0}
-                          onChange={e =>
-                            handleGradeChange(submission.id, parseFloat(e.target.value))
+                          onChange={(e) =>
+                            handleGradeChange(
+                              submission.id,
+                              parseFloat(e.target.value)
+                            )
                           }
                           className="w-20 px-2 py-1 border border-brand-border-dark rounded focus:ring-2 focus:ring-brand-focus focus:border-transparent"
                         />
-                        <span className="text-brand-text-light">/ {submission.max_points}</span>
+                        <span className="text-brand-text-light">
+                          / {submission.max_points}
+                        </span>
                       </div>
                       {submission.assigned_grade !== null && (
                         <div className="text-xs text-brand-success mt-1">
@@ -421,11 +436,15 @@ export default function GradingInterface() {
         </div>
       ) : selectedCoursework ? (
         <div className="text-center py-12 bg-white rounded-lg shadow">
-          <p className="text-brand-text-muted">No submissions found for this assignment</p>
+          <p className="text-brand-text-muted">
+            No submissions found for this assignment
+          </p>
         </div>
       ) : (
         <div className="text-center py-12 bg-white rounded-lg shadow">
-          <p className="text-brand-text-muted">Select a course and assignment to view submissions</p>
+          <p className="text-brand-text-muted">
+            Select a course and assignment to view submissions
+          </p>
         </div>
       )}
     </div>

@@ -54,14 +54,14 @@ export function VideoMeeting() {
     fetch(`/api/meetings/${meetingCode}/join`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userName })
+      body: JSON.stringify({ userName }),
     }).catch(console.error);
   };
 
   const handleLeaveMeeting = () => {
     // In production, call API to unregister participant
     fetch(`/api/meetings/${meetingCode}/leave`, {
-      method: 'POST'
+      method: 'POST',
     }).catch(console.error);
 
     navigate('/dashboard');
@@ -69,23 +69,27 @@ export function VideoMeeting() {
 
   if (isLoading) {
     return (
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        backgroundColor: '#f3f4f6'
-      }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+          backgroundColor: '#f3f4f6',
+        }}
+      >
         <div style={{ textAlign: 'center' }}>
-          <div style={{
-            width: '48px',
-            height: '48px',
-            border: '4px solid var(--brand-border)',
-            borderTopColor: 'var(--brand-info)',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite',
-            margin: '0 auto 1rem'
-          }} />
+          <div
+            style={{
+              width: '48px',
+              height: '48px',
+              border: '4px solid var(--brand-border)',
+              borderTopColor: 'var(--brand-info)',
+              borderRadius: '50%',
+              animation: 'spin 1s linear infinite',
+              margin: '0 auto 1rem',
+            }}
+          />
           <p style={{ color: 'var(--brand-text-muted)' }}>Loading meeting...</p>
         </div>
         <style>{`
@@ -99,19 +103,21 @@ export function VideoMeeting() {
 
   if (!meetingCode) {
     return (
-      <div style={{
-        maxWidth: '600px',
-        margin: '4rem auto',
-        padding: '2rem',
-        backgroundColor: '#fff',
-        borderRadius: '0.5rem',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
-      }}>
+      <div
+        style={{
+          maxWidth: '600px',
+          margin: '4rem auto',
+          padding: '2rem',
+          backgroundColor: '#fff',
+          borderRadius: '0.5rem',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+        }}
+      >
         <h1 style={{ marginBottom: '1rem' }}>Join a Meeting</h1>
         <p style={{ color: 'var(--brand-text-muted)', marginBottom: '2rem' }}>
           Enter a meeting code to join
         </p>
-        
+
         <input
           type="text"
           placeholder="Meeting code"
@@ -121,7 +127,7 @@ export function VideoMeeting() {
             border: '1px solid var(--brand-border-dark)',
             borderRadius: '0.375rem',
             fontSize: '1rem',
-            marginBottom: '1rem'
+            marginBottom: '1rem',
           }}
           onKeyPress={(e) => {
             if (e.key === 'Enter' && e.target.value) {
@@ -129,7 +135,7 @@ export function VideoMeeting() {
             }
           }}
         />
-        
+
         <button
           onClick={() => {
             const code = document.querySelector('input').value;
@@ -144,7 +150,7 @@ export function VideoMeeting() {
             borderRadius: '0.375rem',
             fontSize: '1rem',
             cursor: 'pointer',
-            fontWeight: '500'
+            fontWeight: '500',
           }}
         >
           Join Meeting
@@ -155,14 +161,16 @@ export function VideoMeeting() {
 
   if (!hasJoined) {
     return (
-      <div style={{
-        maxWidth: '600px',
-        margin: '4rem auto',
-        padding: '2rem',
-        backgroundColor: '#fff',
-        borderRadius: '0.5rem',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
-      }}>
+      <div
+        style={{
+          maxWidth: '600px',
+          margin: '4rem auto',
+          padding: '2rem',
+          backgroundColor: '#fff',
+          borderRadius: '0.5rem',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+        }}
+      >
         <h1 style={{ marginBottom: '0.5rem' }}>
           {meeting?.title || 'Join Meeting'}
         </h1>
@@ -171,17 +179,20 @@ export function VideoMeeting() {
         </p>
 
         {meeting && (
-          <div style={{
-            padding: '1rem',
-            backgroundColor: '#f3f4f6',
-            borderRadius: '0.375rem',
-            marginBottom: '2rem'
-          }}>
+          <div
+            style={{
+              padding: '1rem',
+              backgroundColor: '#f3f4f6',
+              borderRadius: '0.375rem',
+              marginBottom: '2rem',
+            }}
+          >
             <p style={{ margin: '0.25rem 0', fontSize: '0.875rem' }}>
               <strong>Host:</strong> {meeting.hostName || 'Unknown'}
             </p>
             <p style={{ margin: '0.25rem 0', fontSize: '0.875rem' }}>
-              <strong>Scheduled:</strong> {new Date(meeting.scheduledAt).toLocaleString()}
+              <strong>Scheduled:</strong>{' '}
+              {new Date(meeting.scheduledAt).toLocaleString()}
             </p>
             <p style={{ margin: '0.25rem 0', fontSize: '0.875rem' }}>
               <strong>Duration:</strong> {meeting.duration} minutes
@@ -190,12 +201,14 @@ export function VideoMeeting() {
         )}
 
         <div style={{ marginBottom: '1rem' }}>
-          <label style={{
-            display: 'block',
-            marginBottom: '0.5rem',
-            fontWeight: '500',
-            color: 'var(--brand-text)'
-          }}>
+          <label
+            style={{
+              display: 'block',
+              marginBottom: '0.5rem',
+              fontWeight: '500',
+              color: 'var(--brand-text)',
+            }}
+          >
             Your Name
           </label>
           <input
@@ -208,7 +221,7 @@ export function VideoMeeting() {
               padding: '0.75rem',
               border: '1px solid var(--brand-border-dark)',
               borderRadius: '0.375rem',
-              fontSize: '1rem'
+              fontSize: '1rem',
             }}
             onKeyPress={(e) => {
               if (e.key === 'Enter') handleJoinMeeting();
@@ -216,26 +229,32 @@ export function VideoMeeting() {
           />
         </div>
 
-        <div style={{
-          display: 'flex',
-          gap: '1rem',
-          marginBottom: '1rem'
-        }}>
-          <label style={{
+        <div
+          style={{
             display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            cursor: 'pointer'
-          }}>
+            gap: '1rem',
+            marginBottom: '1rem',
+          }}
+        >
+          <label
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              cursor: 'pointer',
+            }}
+          >
             <input type="checkbox" defaultChecked />
             <span style={{ fontSize: '0.875rem' }}>Camera on</span>
           </label>
-          <label style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            cursor: 'pointer'
-          }}>
+          <label
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              cursor: 'pointer',
+            }}
+          >
             <input type="checkbox" defaultChecked />
             <span style={{ fontSize: '0.875rem' }}>Microphone on</span>
           </label>
@@ -252,7 +271,7 @@ export function VideoMeeting() {
             borderRadius: '0.375rem',
             fontSize: '1rem',
             cursor: 'pointer',
-            fontWeight: '500'
+            fontWeight: '500',
           }}
         >
           Join Meeting
@@ -269,7 +288,7 @@ export function VideoMeeting() {
             borderRadius: '0.375rem',
             fontSize: '0.875rem',
             cursor: 'pointer',
-            marginTop: '0.5rem'
+            marginTop: '0.5rem',
           }}
         >
           Cancel

@@ -188,6 +188,7 @@
 <body>
 
 <!-- Google Tag Manager (noscript) -->
+
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
@@ -624,6 +625,7 @@ Industry-recognized certifications available through our training programs. All 
 **🌟 Learn from home with CPR training kits shipped directly to you!**
 
 All CPR courses include:
+
 - ✅ 100% Online training
 - ✅ Training manikin shipped to your home
 - ✅ Practice materials included
@@ -735,11 +737,12 @@ All CPR courses include:
 
 **DOL-Approved Programs on Indiana ETPL**
 
-*Checking DOL Apprenticeship database and Indiana ETPL for 2Exclusive LLC programs...*
+_Checking DOL Apprenticeship database and Indiana ETPL for 2Exclusive LLC programs..._
 
 **Note:** This section will be populated with all DOL-registered apprenticeship programs for 2Exclusive LLC and programs currently listed on the Indiana Eligible Training Provider List (ETPL).
 
 To complete this section, I need to:
+
 1. Search the DOL Apprenticeship Finder for 2Exclusive LLC
 2. Check Indiana's ETPL database for approved programs
 3. List all registered apprenticeship occupations with:
@@ -814,6 +817,7 @@ To complete this section, I need to:
   - [Enroll FREE](#)
 
 **To verify and complete this section, please provide:**
+
 - DOL Apprenticeship Sponsor ID for 2Exclusive LLC
 - Link to Indiana ETPL listing
 - Complete list of registered apprenticeship programs
@@ -825,12 +829,14 @@ To complete this section, I need to:
 ### Government-Funded Programs (100% FREE)
 
 **Eligibility Requirements:**
+
 - Indiana resident
 - 18+ years old
 - High school diploma or GED
 - Meet income guidelines OR receive public assistance OR unemployed/underemployed
 
 **What's Covered (100% FREE):**
+
 - Training courses
 - Study materials
 - Practice exams
@@ -845,6 +851,7 @@ To complete this section, I need to:
 **All self-pay programs include 50% markup on base training costs.**
 
 **Payment Methods Available:**
+
 - ✅ Credit/Debit Card (Stripe)
 - ✅ Buy Now, Pay Later (Affirm, Afterpay, Klarna)
 - ✅ Payment Plans (3, 6, or 12 months)
@@ -855,21 +862,25 @@ All payments processed securely through Stripe with SSL encryption.
 **Buy Now, Pay Later Options:**
 
 **Affirm**
+
 - Split into 3, 6, or 12 monthly payments
 - 0% APR available for qualified buyers
 - Instant approval
 
 **Afterpay**
+
 - Pay in 4 interest-free installments
 - Automatic payments every 2 weeks
 - No interest
 
 **Klarna**
+
 - Flexible payment plans
 - Pay in 30 days or split into installments
 - No interest on 4-payment plans
 
 **Example: $1,200 Certification**
+
 - **Affirm (12 months)**: $100/month
 - **Afterpay (4 payments)**: $300 every 2 weeks
 - **Klarna (4 payments)**: $300/month
@@ -944,7 +955,7 @@ All payments processed securely through Stripe with SSL encryption.
 
 ---
 
-*Empowering careers through industry-recognized credentials.*
+_Empowering careers through industry-recognized credentials._
 
 **Ready to get certified? Enroll today!**
 
@@ -988,11 +999,13 @@ All payments processed securely through Stripe with SSL encryption.
 <script type="IN/Share" data-url="https://indianaconnect.com/credentialing-programs"></script>
 
 <!-- Twitter Share -->
+
 <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" 
   data-text="Check out 106+ FREE certification programs!" 
   data-url="https://indianaconnect.com/credentialing-programs" 
   data-hashtags="Certifications,Training,CareerDevelopment" 
   data-show-count="true">Tweet</a>
+
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 ---
@@ -1002,11 +1015,13 @@ All payments processed securely through Stripe with SSL encryption.
 ### Automated Blog Posts (3x Daily)
 
 **Posting Schedule:**
+
 - Morning Post: 8:00 AM EST
-- Afternoon Post: 1:00 PM EST  
+- Afternoon Post: 1:00 PM EST
 - Evening Post: 6:00 PM EST
 
 **Content Topics Rotation:**
+
 1. Success stories from program graduates
 2. New certification program announcements
 3. Industry trends and job market insights
@@ -1036,15 +1051,15 @@ const blogSchedule = {
     'career-guides',
     'funding-updates',
     'program-updates',
-    'partnership-news'
+    'partnership-news',
   ],
   autoPost: true,
   crossPost: {
     facebook: true,
     linkedin: true,
     youtube: true, // video content
-    twitter: true
-  }
+    twitter: true,
+  },
 };
 ```
 
@@ -1052,6 +1067,7 @@ const blogSchedule = {
 Subscribe to our blog: [https://indianaconnect.com/blog/rss.xml](https://indianaconnect.com/blog/rss.xml)
 
 **Blog Categories:**
+
 - Healthcare Certifications
 - IT Certifications
 - Business & Professional Development
@@ -1097,6 +1113,7 @@ Subscribe to our blog: [https://indianaconnect.com/blog/rss.xml](https://indiana
 ### Crawl Budget Optimization
 
 **Incremental Crawling (50 URLs per batch):**
+
 - Batch 1: Main program pages (50 URLs)
 - Batch 2: Individual certification pages (50 URLs)
 - Batch 3: Blog posts (50 URLs)
@@ -1125,6 +1142,7 @@ Sitemap: https://indianaconnect.com/blog-sitemap.xml
 ### Search Console Integration
 
 **Google Search Console:**
+
 - Property verified
 - Sitemap submitted
 - Mobile usability checked
@@ -1132,6 +1150,7 @@ Sitemap: https://indianaconnect.com/blog-sitemap.xml
 - Index coverage tracked
 
 **Bing Webmaster Tools:**
+
 - Site verified
 - Sitemap submitted
 - SEO analyzer enabled
@@ -1142,30 +1161,30 @@ Sitemap: https://indianaconnect.com/blog-sitemap.xml
 ```javascript
 // Track enrollment button clicks
 gtag('event', 'enrollment_click', {
-  'event_category': 'Enrollment',
-  'event_label': 'Program Name',
-  'value': 0
+  event_category: 'Enrollment',
+  event_label: 'Program Name',
+  value: 0,
 });
 
 // Track payment button clicks
 gtag('event', 'payment_click', {
-  'event_category': 'Payment',
-  'event_label': 'Program Name',
-  'value': 1200
+  event_category: 'Payment',
+  event_label: 'Program Name',
+  value: 1200,
 });
 
 // Track form submissions
 gtag('event', 'form_submit', {
-  'event_category': 'Forms',
-  'event_label': 'Enrollment Form',
-  'value': 1
+  event_category: 'Forms',
+  event_label: 'Enrollment Form',
+  value: 1,
 });
 
 // Track phone number clicks
 gtag('event', 'phone_click', {
-  'event_category': 'Contact',
-  'event_label': '317-314-3757',
-  'value': 1
+  event_category: 'Contact',
+  event_label: '317-314-3757',
+  value: 1,
 });
 ```
 
@@ -1174,6 +1193,7 @@ gtag('event', 'phone_click', {
 ## Performance Monitoring
 
 ### Page Speed Optimization
+
 - Target: < 2 seconds load time
 - Image optimization: WebP format
 - Lazy loading enabled
@@ -1181,12 +1201,14 @@ gtag('event', 'phone_click', {
 - Minified CSS/JS
 
 ### Mobile Optimization
+
 - Responsive design
 - Touch-friendly buttons
 - Mobile-first indexing ready
 - AMP pages available
 
 ### Accessibility
+
 - WCAG 2.1 Level AA compliant
 - Screen reader compatible
 - Keyboard navigation enabled

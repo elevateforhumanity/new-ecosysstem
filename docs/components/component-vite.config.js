@@ -4,19 +4,24 @@
   See LICENSE file for details.
 */
 
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import { visualizer } from "rollup-plugin-visualizer";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
   plugins: [
     react(),
     // Generates dist/stats.html on build (treemap visualization)
-    visualizer({ filename: "dist/stats.html", gzipSize: true, brotliSize: true, template: "treemap" })
+    visualizer({
+      filename: 'dist/stats.html',
+      gzipSize: true,
+      brotliSize: true,
+      template: 'treemap',
+    }),
   ],
   base: '/',
   build: {
     outDir: 'dist',
-    sourcemap: true
-  }
+    sourcemap: true,
+  },
 });

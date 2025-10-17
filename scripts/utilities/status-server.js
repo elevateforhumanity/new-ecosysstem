@@ -13,18 +13,18 @@ app.get('/api/ecosystem/status', async (req, res) => {
   try {
     const statusChecker = new EcosystemStatusChecker();
     const status = await statusChecker.runAllChecks();
-    
+
     res.json({
       success: true,
       ...status,
-      message: "Real-time ecosystem health assessment"
+      message: 'Real-time ecosystem health assessment',
     });
   } catch (error) {
     console.error('Ecosystem status check failed:', error);
     res.status(500).json({
       success: false,
       error: 'Failed to perform ecosystem status check',
-      message: error.message
+      message: error.message,
     });
   }
 });

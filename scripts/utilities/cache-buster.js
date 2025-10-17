@@ -16,26 +16,27 @@
   See LICENSE file for details.
 */
 
-
 // Cache Buster for EFH Development
 console.log('🔄 Cache Buster loaded');
 
 // Force reload assets if cache version changes
 function checkCacheVersion() {
-  const currentVersion = document.querySelector('meta[name="cache-version"]')?.content;
+  const currentVersion = document.querySelector(
+    'meta[name="cache-version"]'
+  )?.content;
   const storedVersion = localStorage.getItem('efh-cache-version');
-  
+
   if (storedVersion && storedVersion !== currentVersion) {
     console.log('🔄 Cache version changed, clearing cache');
     if ('caches' in window) {
-      caches.keys().then(names => {
-        names.forEach(name => caches.delete(name));
+      caches.keys().then((names) => {
+        names.forEach((name) => caches.delete(name));
       });
     }
     localStorage.clear();
     location.reload(true);
   }
-  
+
   if (currentVersion) {
     localStorage.setItem('efh-cache-version', currentVersion);
   }
@@ -48,10 +49,12 @@ checkCacheVersion();
 if (window.location.search.includes('dev=1')) {
   setInterval(() => {
     fetch('/health')
-      .then(r => r.json())
-      .then(data => {
+      .then((r) => r.json())
+      .then((data) => {
         const newVersion = data.cacheVersion;
-        const currentVersion = document.querySelector('meta[name="cache-version"]')?.content;
+        const currentVersion = document.querySelector(
+          'meta[name="cache-version"]'
+        )?.content;
         if (newVersion && currentVersion && newVersion !== currentVersion) {
           location.reload();
         }

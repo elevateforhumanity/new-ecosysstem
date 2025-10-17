@@ -7,7 +7,7 @@ class ProgressiveLoader {
       critical: 1,
       important: 2,
       normal: 3,
-      lazy: 4
+      lazy: 4,
     };
   }
 
@@ -17,7 +17,7 @@ class ProgressiveLoader {
       element,
       priority: this.priorityLevels[priority],
       callback,
-      loaded: false
+      loaded: false,
     });
   }
 
@@ -29,21 +29,20 @@ class ProgressiveLoader {
   // Load resources progressively
   async loadResources() {
     this.sortQueue();
-    
+
     for (const resource of this.loadingQueue) {
       if (resource.loaded) continue;
-      
+
       try {
         await this.loadResource(resource);
         resource.loaded = true;
-        
+
         if (resource.callback) {
           resource.callback();
         }
-        
+
         // Small delay between loads to prevent blocking
         await this.delay(50);
-        
       } catch (error) {
         console.warn('Failed to load resource:', error);
       }
@@ -54,7 +53,7 @@ class ProgressiveLoader {
   loadResource(resource) {
     return new Promise((resolve, reject) => {
       const element = resource.element;
-      
+
       if (element.tagName === 'VIDEO') {
         this.loadVideo(element).then(resolve).catch(reject);
       } else if (element.tagName === 'IMG') {
@@ -81,7 +80,7 @@ class ProgressiveLoader {
         this.loadedResources.add(source.dataset.src);
         resolve();
       };
-      
+
       tempVideo.onerror = reject;
       tempVideo.src = source.dataset.src;
     });
@@ -102,20 +101,21 @@ class ProgressiveLoader {
 
   // Utility delay function
   delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   // Initialize progressive loading
   init() {
     // Find all videos and add to queue
-    document.querySelectorAll('video').forEach(video => {
-      const isAboveFold = video.getBoundingClientRect().top < window.innerHeight;
+    document.querySelectorAll('video').forEach((video) => {
+      const isAboveFold =
+        video.getBoundingClientRect().top < window.innerHeight;
       const priority = isAboveFold ? 'critical' : 'lazy';
       this.addResource(video, priority);
     });
 
     // Find all images with data-src and add to queue
-    document.querySelectorAll('img[data-src]').forEach(img => {
+    document.querySelectorAll('img[data-src]').forEach((img) => {
       const isAboveFold = img.getBoundingClientRect().top < window.innerHeight;
       const priority = isAboveFold ? 'important' : 'normal';
       this.addResource(img, priority);

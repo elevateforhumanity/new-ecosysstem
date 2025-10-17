@@ -16,65 +16,73 @@
   See LICENSE file for details.
 */
 
-
 const fs = require('fs');
 
 // Enhanced Meta Tags for All Pages
 const siteConfig = {
-    domain: 'https://stripe-integrate-curvaturebodysc.replit.app',
-    siteName: 'Elevate for Humanity',
-    defaultImage: '/images/Social_media_open_graph_2ded65c5.png',
-    googleVerification: 'EFH-workforce-development-2025',
-    bingVerification: 'YOUR_BING_VERIFICATION_CODE',
-    gaId: 'GA_MEASUREMENT_ID'
+  domain: 'https://stripe-integrate-curvaturebodysc.replit.app',
+  siteName: 'Elevate for Humanity',
+  defaultImage: '/images/Social_media_open_graph_2ded65c5.png',
+  googleVerification: 'EFH-workforce-development-2025',
+  bingVerification: 'YOUR_BING_VERIFICATION_CODE',
+  gaId: 'GA_MEASUREMENT_ID',
 };
 
 const pageConfigs = {
-    'index.html': {
-        title: 'Launch Your AI & Data Science Career | Elevate for Humanity',
-        description: 'Transform your career with federally-funded AI and Data Science training. WIOA-approved programs, 89% job placement rate, and employer partnerships. Start your tech career today.',
-        keywords: 'AI training, data science bootcamp, workforce development, WIOA funding, career training, federal grants, job placement, python programming, machine learning certification',
-        structuredData: {
-            "@context": "https://schema.org",
-            "@type": "EducationalOrganization",
-            "name": "Elevate for Humanity",
-            "description": "Federally-funded AI and Data Science training programs with 89% job placement rate"
-        }
+  'index.html': {
+    title: 'Launch Your AI & Data Science Career | Elevate for Humanity',
+    description:
+      'Transform your career with federally-funded AI and Data Science training. WIOA-approved programs, 89% job placement rate, and employer partnerships. Start your tech career today.',
+    keywords:
+      'AI training, data science bootcamp, workforce development, WIOA funding, career training, federal grants, job placement, python programming, machine learning certification',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'EducationalOrganization',
+      name: 'Elevate for Humanity',
+      description:
+        'Federally-funded AI and Data Science training programs with 89% job placement rate',
     },
-    'programs.html': {
-        title: 'AI Courses & Data Science Programs | Best Online Bootcamp 2024',
-        description: 'Explore top-rated AI courses and data science programs. Python programming, machine learning certification, data analysis training with job guarantee.',
-        keywords: 'AI courses, data science programs, python programming course, machine learning certification, data analysis training, online bootcamp, coding courses, programming bootcamp',
-        structuredData: {
-            "@context": "https://schema.org",
-            "@type": "Course",
-            "name": "AI & Data Science Training Programs"
-        }
+  },
+  'programs.html': {
+    title: 'AI Courses & Data Science Programs | Best Online Bootcamp 2024',
+    description:
+      'Explore top-rated AI courses and data science programs. Python programming, machine learning certification, data analysis training with job guarantee.',
+    keywords:
+      'AI courses, data science programs, python programming course, machine learning certification, data analysis training, online bootcamp, coding courses, programming bootcamp',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'Course',
+      name: 'AI & Data Science Training Programs',
     },
-    'hub.html': {
-        title: 'Workforce Development Hub | Federal Training Programs',
-        description: 'Access federal workforce development resources, WIOA funding information, and career advancement tools. Connect with employers and training partners.',
-        keywords: 'workforce development, federal training programs, WIOA resources, career advancement, employer partnerships, job training hub',
-        structuredData: {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "Workforce Development Hub"
-        }
+  },
+  'hub.html': {
+    title: 'Workforce Development Hub | Federal Training Programs',
+    description:
+      'Access federal workforce development resources, WIOA funding information, and career advancement tools. Connect with employers and training partners.',
+    keywords:
+      'workforce development, federal training programs, WIOA resources, career advancement, employer partnerships, job training hub',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Workforce Development Hub',
     },
-    'pay.html': {
-        title: 'Enroll Now | Federally-Funded Training Programs',
-        description: 'Start your AI or Data Science career today. Check funding eligibility, apply for WIOA grants, and enroll in certification programs with job placement guarantee.',
-        keywords: 'enroll AI training, data science enrollment, WIOA application, federal funding eligibility, career training enrollment, job placement program',
-        structuredData: {
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "name": "Career Training Enrollment"
-        }
-    }
+  },
+  'pay.html': {
+    title: 'Enroll Now | Federally-Funded Training Programs',
+    description:
+      'Start your AI or Data Science career today. Check funding eligibility, apply for WIOA grants, and enroll in certification programs with job placement guarantee.',
+    keywords:
+      'enroll AI training, data science enrollment, WIOA application, federal funding eligibility, career training enrollment, job placement program',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: 'Career Training Enrollment',
+    },
+  },
 };
 
 function generateMetaTags(config, pageConfig) {
-    return `<!DOCTYPE html>
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -148,31 +156,33 @@ function generateMetaTags(config, pageConfig) {
 
 // Update meta tags for all configured pages
 Object.entries(pageConfigs).forEach(([filename, pageConfig]) => {
-    try {
-        let content = fs.readFileSync(filename, 'utf8');
-        
-        // Find the closing </head> tag and insert before it
-        const headCloseIndex = content.indexOf('</head>');
-        if (headCloseIndex !== -1) {
-            // Extract existing body content
-            const bodyStart = content.indexOf('<body');
-            const bodyContent = content.substring(bodyStart);
-            
-            // Generate new head with enhanced meta tags
-            const newHead = generateMetaTags(siteConfig, pageConfig);
-            const newContent = newHead + '\n</head>\n' + bodyContent;
-            
-            fs.writeFileSync(filename, newContent);
-            console.log(`✅ Enhanced meta tags added to ${filename}`);
-        }
-    } catch (error) {
-        console.log(`❌ Error updating ${filename}: ${error.message}`);
+  try {
+    let content = fs.readFileSync(filename, 'utf8');
+
+    // Find the closing </head> tag and insert before it
+    const headCloseIndex = content.indexOf('</head>');
+    if (headCloseIndex !== -1) {
+      // Extract existing body content
+      const bodyStart = content.indexOf('<body');
+      const bodyContent = content.substring(bodyStart);
+
+      // Generate new head with enhanced meta tags
+      const newHead = generateMetaTags(siteConfig, pageConfig);
+      const newContent = newHead + '\n</head>\n' + bodyContent;
+
+      fs.writeFileSync(filename, newContent);
+      console.log(`✅ Enhanced meta tags added to ${filename}`);
     }
+  } catch (error) {
+    console.log(`❌ Error updating ${filename}: ${error.message}`);
+  }
 });
 
 console.log('\n🎉 Meta tags update complete!');
 console.log('\n📋 Next Steps:');
 console.log('1. Replace GA_MEASUREMENT_ID with your Google Analytics ID');
-console.log('2. Replace YOUR_BING_VERIFICATION_CODE with Bing verification code');
+console.log(
+  '2. Replace YOUR_BING_VERIFICATION_CODE with Bing verification code'
+);
 console.log('3. Submit updated sitemap to Google Search Console');
 console.log('4. Verify meta tags with Google Rich Results Test');

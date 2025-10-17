@@ -11,7 +11,13 @@ const path = require('path');
 require('dotenv').config();
 
 // Import license system modules
-const { generateTieredLicense, validateTieredLicense, checkFeatureAccess, usageTracker, LICENSE_TIERS } = require('./tiered-license-system');
+const {
+  generateTieredLicense,
+  validateTieredLicense,
+  checkFeatureAccess,
+  usageTracker,
+  LICENSE_TIERS,
+} = require('./tiered-license-system');
 const generateLicensePDF = require('./generate-certificate');
 const { urgencyManager } = require('./urgency-scarcity-system');
 
@@ -28,16 +34,16 @@ app.use('/certificates', express.static('certificates'));
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'healthy', 
+  res.json({
+    status: 'healthy',
     timestamp: new Date().toISOString(),
     version: '1.0.0',
     services: {
       licenseGeneration: 'operational',
       pdfCertificates: 'operational',
       urgencySystem: 'operational',
-      stripeIntegration: 'operational'
-    }
+      stripeIntegration: 'operational',
+    },
   });
 });
 
@@ -45,22 +51,27 @@ app.get('/health', (req, res) => {
 app.post('/api/generate-license', async (req, res) => {
   try {
     const { email, packageId, licenseType, expiresInDays = 365 } = req.body;
-    
+
     if (!email || !packageId || !licenseType) {
-      return res.status(400).json({ 
-        error: 'Email, packageId, and licenseType are required' 
+      return res.status(400).json({
+        error: 'Email, packageId, and licenseType are required',
       });
     }
 
     if (!LICENSE_TIERS[licenseType]) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: 'Invalid license type',
-        availableTypes: Object.keys(LICENSE_TIERS)
+        availableTypes: Object.keys(LICENSE_TIERS),
       });
     }
 
-    const license = generateTieredLicense(email, packageId, licenseType, expiresInDays);
-    
+    const license = generateTieredLicense(
+      email,
+      packageId,
+      licenseType,
+      expiresInDays
+    );
+
     // Generate PDF certificate
     const certificatePath = await generateLicensePDF(
       email,
@@ -78,11 +89,13 @@ app.post('/api/generate-license', async (req, res) => {
         restrictions: license.restrictions,
         expiresAt: license.expiresAt,
         maxDeployments: license.maxDeployments,
-        downloadLimits: license.downloadLimits
+        downloadLimits: license.downloadLimits,
       },
-      certificatePath: certificatePath.replace('./certificates/', '/certificates/')
+      certificatePath: certificatePath.replace(
+        './certificates/',
+        '/certificates/'
+      ),
     });
-
   } catch (error) {
     console.error('License generation error:', error);
     res.status(500).json({ error: 'Failed to generate license' });
@@ -92,14 +105,13 @@ app.post('/api/generate-license', async (req, res) => {
 app.post('/api/validate-license', (req, res) => {
   try {
     const { licenseKey, requestedFeature } = req.body;
-    
+
     if (!licenseKey) {
       return res.status(400).json({ error: 'License key is required' });
     }
 
     const validation = validateTieredLicense(licenseKey, requestedFeature);
     res.json(validation);
-
   } catch (error) {
     console.error('License validation error:', error);
     res.status(500).json({ error: 'Failed to validate license' });
@@ -111,10 +123,9 @@ app.get('/api/urgency/:packageId', (req, res) => {
   try {
     const { packageId } = req.params;
     const visitorId = req.headers['x-visitor-id'] || req.ip;
-    
+
     const urgencyData = urgencyManager.getUrgencyData(packageId, visitorId);
     res.json(urgencyData);
-    
   } catch (error) {
     console.error('Urgency data error:', error);
     res.status(500).json({ error: 'Failed to get urgency data' });
@@ -126,7 +137,6 @@ app.get('/api/sales-dashboard', (req, res) => {
   try {
     const dashboard = urgencyManager.getSalesDashboard();
     res.json(dashboard);
-    
   } catch (error) {
     console.error('Sales dashboard error:', error);
     res.status(500).json({ error: 'Failed to get sales dashboard' });
@@ -161,7 +171,7 @@ app.listen(PORT, () => {
   console.log(`🔐 Enterprise license management operational`);
   console.log(`📊 Dashboard: http://localhost:${PORT}`);
   console.log(`🏥 Health check: http://localhost:${PORT}/health`);
-  
+
   // Ensure certificates directory exists
   const fs = require('fs');
   if (!fs.existsSync('./certificates')) {

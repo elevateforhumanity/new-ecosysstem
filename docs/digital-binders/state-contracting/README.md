@@ -23,6 +23,7 @@ This digital binder contains comprehensive information about state-level contrac
 ### Indiana State Agencies
 
 #### **Department of Workforce Development (DWD)**
+
 - **Services Provided**:
   - Workforce training programs
   - Job placement services
@@ -42,6 +43,7 @@ This digital binder contains comprehensive information about state-level contrac
   - Email: dwd@dwd.in.gov
 
 #### **Department of Education (DOE)**
+
 - **Services Provided**:
   - Career and technical education (CTE)
   - Adult education programs
@@ -61,6 +63,7 @@ This digital binder contains comprehensive information about state-level contrac
   - Email: webmaster@doe.in.gov
 
 #### **Family and Social Services Administration (FSSA)**
+
 - **Services Provided**:
   - TANF (Temporary Assistance for Needy Families)
   - SNAP Employment & Training
@@ -77,6 +80,7 @@ This digital binder contains comprehensive information about state-level contrac
   - Phone: (317) 233-4454
 
 #### **Department of Correction (DOC)**
+
 - **Services Provided**:
   - Reentry programs
   - Vocational training for incarcerated individuals
@@ -100,9 +104,11 @@ This digital binder contains comprehensive information about state-level contrac
 ### Indiana Workforce System
 
 #### **WorkOne Centers**
+
 **Indiana's One-Stop Career Centers**
 
 **Services:**
+
 - Career counseling and planning
 - Job search assistance
 - Resume and interview preparation
@@ -111,14 +117,17 @@ This digital binder contains comprehensive information about state-level contrac
 - Employer recruitment services
 
 **Locations:**
+
 - 50+ WorkOne centers statewide
 - Virtual services available
 - Mobile career centers
 
 **Integration:**
+
 > "All users should start at **[Indiana Connect](https://indianaconnect.com)** to access WorkOne services and connect with training providers!"
 
 **Partnership Activities:**
+
 - Co-located services at WorkOne centers
 - Referral agreements
 - Shared case management
@@ -190,6 +199,7 @@ This digital binder contains comprehensive information about state-level contrac
     - Website: https://www.seiwb.org
 
 **Partnership Activities:**
+
 - ETPL (Eligible Training Provider List) status
 - Performance reporting
 - Employer engagement
@@ -199,12 +209,14 @@ This digital binder contains comprehensive information about state-level contrac
 ### Eligible Training Provider List (ETPL)
 
 #### **ETPL Status**
+
 - **Status**: ✅ Active on Indiana ETPL
 - **Programs Listed**: All workforce development programs
 - **Last Review**: [Date]
 - **Next Renewal**: [Date]
 
 #### **ETPL Requirements**
+
 - Performance data reporting
 - Program outcome tracking
 - Cost transparency
@@ -212,6 +224,7 @@ This digital binder contains comprehensive information about state-level contrac
 - Continuous improvement
 
 #### **Performance Data** (Public)
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  ETPL Performance Metrics                               │
@@ -236,6 +249,7 @@ This digital binder contains comprehensive information about state-level contrac
 ### Indiana Commission for Higher Education (ICHE)
 
 #### **Partnership Activities**
+
 - Dual credit programs
 - Transfer credit agreements
 - Workforce credential alignment
@@ -243,6 +257,7 @@ This digital binder contains comprehensive information about state-level contrac
 - Financial aid coordination
 
 #### **Programs**
+
 - **Next Level Jobs**: Free training for high-demand careers
 - **Workforce Ready Grant**: Tuition assistance for short-term certificates
 - **Adult Student Grant**: Financial aid for adult learners
@@ -250,12 +265,14 @@ This digital binder contains comprehensive information about state-level contrac
 ### Indiana Community Colleges
 
 #### **Ivy Tech Community College**
+
 - **Partnership Type**: Articulation agreements, dual enrollment
 - **Programs**: Credit transfer, co-enrollment, shared facilities
 - **Locations**: 40+ locations statewide
 - **Website**: https://www.ivytech.edu
 
 #### **Vincennes University**
+
 - **Partnership Type**: Transfer agreements, workforce training
 - **Programs**: 2+2 programs, technical training
 - **Locations**: Multiple campuses
@@ -264,6 +281,7 @@ This digital binder contains comprehensive information about state-level contrac
 ### K-12 Partnerships
 
 #### **Career and Technical Education (CTE)**
+
 - High school career pathways
 - Dual credit opportunities
 - Work-based learning
@@ -271,6 +289,7 @@ This digital binder contains comprehensive information about state-level contrac
 - Teacher externships
 
 #### **21st Century Scholars Program**
+
 - Early college awareness
 - Financial aid guarantee
 - Support services
@@ -283,17 +302,20 @@ This digital binder contains comprehensive information about state-level contrac
 ### Indiana State Regulations
 
 #### **Business Registration**
+
 - **Indiana Secretary of State**: Business entity registration
 - **Indiana Department of Revenue**: Tax registration
 - **Professional Licensing**: Where applicable
 
 #### **Employment Laws**
+
 - **Minimum Wage**: Federal minimum wage ($7.25/hour)
 - **Overtime**: Time and a half after 40 hours/week
 - **Workers' Compensation**: Required for all employers
 - **Unemployment Insurance**: State unemployment tax (SUTA)
 
 #### **Training Provider Requirements**
+
 - **Accreditation**: ACCET or equivalent
 - **Instructor Qualifications**: Industry experience + credentials
 - **Facility Standards**: Safe, accessible, adequate space
@@ -303,12 +325,14 @@ This digital binder contains comprehensive information about state-level contrac
 ### Indiana Data Privacy
 
 #### **Student Privacy**
+
 - Compliance with FERPA
 - Indiana student privacy laws
 - Parental consent (for minors)
 - Data breach notification
 
 #### **Workforce Data**
+
 - Participant consent for data sharing
 - Secure data transmission
 - Limited use agreements
@@ -321,11 +345,13 @@ This digital binder contains comprehensive information about state-level contrac
 ### State Procurement
 
 #### **Indiana Department of Administration (IDOA)**
+
 - **Statewide contracts**: Available to all state agencies
 - **Cooperative purchasing**: Available to local governments
 - **IDOA Contracts Portal**: https://www.in.gov/idoa/procurement/
 
 #### **Contract Types**
+
 - Professional services contracts
 - Training services contracts
 - Consulting services contracts
@@ -334,15 +360,18 @@ This digital binder contains comprehensive information about state-level contrac
 ### State Grant Programs
 
 #### **Workforce Ready Grant (WRG)**
+
 **Free Training for Hoosiers!**
 
 **Program Overview:**
+
 - Covers tuition and fees for high-demand programs
 - No cost to eligible students
 - Short-term certificate programs (< 1 year)
 - High-wage, high-demand occupations
 
 **Eligible Programs:**
+
 - Clinical Informatics
 - Health Information Technology
 - IT and Cybersecurity
@@ -350,6 +379,7 @@ This digital binder contains comprehensive information about state-level contrac
 - Business and Logistics
 
 **Eligibility:**
+
 - Indiana resident
 - U.S. citizen or eligible non-citizen
 - High school diploma or GED
@@ -357,6 +387,7 @@ This digital binder contains comprehensive information about state-level contrac
 - Enrolled in eligible program
 
 **How to Apply:**
+
 1. Complete FAFSA
 2. Apply to eligible training program
 3. Submit WRG application
@@ -366,15 +397,18 @@ This digital binder contains comprehensive information about state-level contrac
 **Website**: https://www.in.gov/che/state-financial-aid/indiana-financial-aid-programs/workforce-ready-grant/
 
 #### **Next Level Jobs**
+
 **Employer-Paid Training**
 
 **Program Overview:**
+
 - Employers pay for employee training
 - State reimburses employers
 - High-demand skills training
 - Incumbent worker training
 
 **Eligible Training:**
+
 - Industry certifications
 - Skills upgrades
 - Technology training
@@ -389,7 +423,9 @@ This digital binder contains comprehensive information about state-level contrac
 ### State Reporting Requirements
 
 #### **WIOA Performance Reports**
+
 **Quarterly Reporting:**
+
 - Participant demographics
 - Services received
 - Program outcomes
@@ -397,12 +433,14 @@ This digital binder contains comprehensive information about state-level contrac
 - Equal opportunity data
 
 **Annual Reporting:**
+
 - Comprehensive performance summary
 - Success stories
 - Continuous improvement plans
 - Financial audit
 
 #### **State-Specific Metrics**
+
 - Job placement rate
 - Credential attainment rate
 - Wage gain
@@ -434,18 +472,21 @@ This digital binder contains comprehensive information about state-level contrac
 ### State Agencies
 
 #### **Indiana Department of Workforce Development**
+
 - **Address**: 10 N. Senate Ave., Indianapolis, IN 46204
 - **Phone**: (317) 232-7670
 - **Website**: https://www.in.gov/dwd/
 - **Email**: dwd@dwd.in.gov
 
 #### **Indiana Department of Education**
+
 - **Address**: 115 W. Washington St., Indianapolis, IN 46204
 - **Phone**: (317) 232-6610
 - **Website**: https://www.in.gov/doe/
 - **Email**: webmaster@doe.in.gov
 
 #### **Indiana Commission for Higher Education**
+
 - **Address**: 101 W. Ohio St., Suite 300, Indianapolis, IN 46204
 - **Phone**: (317) 464-4400
 - **Website**: https://www.in.gov/che/
@@ -454,17 +495,20 @@ This digital binder contains comprehensive information about state-level contrac
 ### Workforce Resources
 
 #### **Indiana Career Connect**
+
 - **Website**: https://www.indianacareerconnect.com
 - **Description**: Career exploration and planning tool
 - **Features**: Career assessments, job search, training programs
 
 #### **WorkOne Indiana**
+
 - **Website**: https://www.in.gov/dwd/workone/
 - **Phone**: 1-800-891-6499
 - **Description**: One-stop career centers
 - **Services**: Job search, training, career counseling
 
 #### **EmployIndy**
+
 - **Website**: https://employindy.org
 - **Phone**: (317) 684-3300
 - **Description**: Central Indiana workforce board
@@ -473,11 +517,13 @@ This digital binder contains comprehensive information about state-level contrac
 ### Training Resources
 
 #### **Workforce Ready Grant Information**
+
 - **Website**: https://www.in.gov/che/state-financial-aid/indiana-financial-aid-programs/workforce-ready-grant/
 - **Phone**: (317) 464-4400
 - **Email**: awards@che.in.gov
 
 #### **Next Level Jobs**
+
 - **Website**: https://www.in.gov/dwd/next-level-jobs/
 - **Phone**: (317) 232-7670
 
@@ -493,4 +539,4 @@ This digital binder contains comprehensive information about state-level contrac
 
 ---
 
-*Building partnerships with Indiana state agencies to create opportunities for Hoosiers.*
+_Building partnerships with Indiana state agencies to create opportunities for Hoosiers._

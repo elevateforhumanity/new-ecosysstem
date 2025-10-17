@@ -8,14 +8,26 @@ import tsParser from '@typescript-eslint/parser';
 
 export default [
   // Ignore large script/tool directories & build output to keep lint signal focused
-  { ignores: [
-    'dist/**','build/**','coverage/**','node_modules/**','tools/**','**/.vercel/**','**/.next/**',
-    '.migration_temp_*/**'
-  ] },
+  {
+    ignores: [
+      'dist/**',
+      'build/**',
+      'coverage/**',
+      'node_modules/**',
+      'tools/**',
+      '**/.vercel/**',
+      '**/.next/**',
+      '.migration_temp_*/**',
+    ],
+  },
   js.configs.recommended,
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
-    plugins: { react: reactPlugin, 'react-hooks': reactHooks, '@typescript-eslint': tsPlugin },
+    plugins: {
+      react: reactPlugin,
+      'react-hooks': reactHooks,
+      '@typescript-eslint': tsPlugin,
+    },
     languageOptions: {
       ecmaVersion: 2023,
       sourceType: 'module',
@@ -23,25 +35,43 @@ export default [
       parserOptions: { ecmaFeatures: { jsx: true } },
       globals: {
         // Common browser globals
-        window: 'readonly', document: 'readonly', navigator: 'readonly', location: 'readonly',
-        localStorage: 'readonly', caches: 'readonly', alert: 'readonly',
+        window: 'readonly',
+        document: 'readonly',
+        navigator: 'readonly',
+        location: 'readonly',
+        localStorage: 'readonly',
+        caches: 'readonly',
+        alert: 'readonly',
         PerformanceObserver: 'readonly',
         // Timers / async
-        setTimeout: 'readonly', clearTimeout: 'readonly', setInterval: 'readonly', clearInterval: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly',
         // Node / universal
-        console: 'readonly', module: 'writable', require: 'readonly', __dirname: 'readonly', process: 'readonly',
-        fetch: 'readonly', AbortController: 'readonly', Buffer: 'readonly', global: 'readonly'
-      }
+        console: 'readonly',
+        module: 'writable',
+        require: 'readonly',
+        __dirname: 'readonly',
+        process: 'readonly',
+        fetch: 'readonly',
+        AbortController: 'readonly',
+        Buffer: 'readonly',
+        global: 'readonly',
+      },
     },
     settings: { react: { version: 'detect' } },
     rules: {
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
       'react/no-unescaped-entities': 'off',
-  'no-unused-vars': 'off', // handled by TS rule below to avoid duplicate reports
-  '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+      'no-unused-vars': 'off', // handled by TS rule below to avoid duplicate reports
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
       '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-var-requires': 'off'
-    }
-  }
+      '@typescript-eslint/no-var-requires': 'off',
+    },
+  },
 ];

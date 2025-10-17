@@ -5,7 +5,12 @@ import 'quill/dist/quill.snow.css';
 /**
  * DocumentEditor Component - Google Docs alternative with real-time collaboration
  */
-export function DocumentEditor({ documentId, userId, userName, canEdit = true }) {
+export function DocumentEditor({
+  documentId,
+  userId,
+  userName,
+  canEdit = true,
+}) {
   const editorRef = useRef(null);
   const quillRef = useRef(null);
   const [collaborators, setCollaborators] = useState([]);
@@ -22,16 +27,18 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
       theme: 'snow',
       readOnly: !canEdit,
       modules: {
-        toolbar: canEdit ? [
-          [{ 'header': [1, 2, 3, false] }],
-          ['bold', 'italic', 'underline', 'strike'],
-          [{ 'color': [] }, { 'background': [] }],
-          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-          [{ 'align': [] }],
-          ['link', 'image'],
-          ['clean']
-        ] : false
-      }
+        toolbar: canEdit
+          ? [
+              [{ header: [1, 2, 3, false] }],
+              ['bold', 'italic', 'underline', 'strike'],
+              [{ color: [] }, { background: [] }],
+              [{ list: 'ordered' }, { list: 'bullet' }],
+              [{ align: [] }],
+              ['link', 'image'],
+              ['clean'],
+            ]
+          : false,
+      },
     });
 
     quillRef.current = quill;
@@ -72,11 +79,11 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
     try {
       const response = await fetch(`/api/documents/${documentId}`);
       const doc = await response.json();
-      
+
       if (quillRef.current && doc.content) {
         quillRef.current.setContents(JSON.parse(doc.content));
       }
-      
+
       setCollaborators(doc.collaborators || []);
       setComments(doc.comments || []);
     } catch (error) {
@@ -88,16 +95,16 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
     if (!quillRef.current || !canEdit) return;
 
     setIsSaving(true);
-    
+
     try {
       const content = JSON.stringify(quillRef.current.getContents());
-      
+
       await fetch(`/api/documents/${documentId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content })
+        body: JSON.stringify({ content }),
       });
-      
+
       setLastSaved(new Date());
     } catch (error) {
       console.error('Failed to save document:', error);
@@ -122,7 +129,7 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
       text,
       selection: range,
       userName,
-      createdAt: new Date()
+      createdAt: new Date(),
     };
 
     // In production, save to backend
@@ -131,7 +138,9 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
 
   const exportDocument = async (format) => {
     try {
-      const response = await fetch(`/api/documents/${documentId}/export/${format}`);
+      const response = await fetch(
+        `/api/documents/${documentId}/export/${format}`
+      );
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -144,25 +153,47 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
   };
 
   return (
-    <div style={{ display: 'flex', height: '100vh', backgroundColor: 'var(--brand-surface)' }}>
+    <div
+      style={{
+        display: 'flex',
+        height: '100vh',
+        backgroundColor: 'var(--brand-surface)',
+      }}
+    >
       {/* Main editor area */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         {/* Toolbar */}
-        <div style={{
-          backgroundColor: '#fff',
-          borderBottom: '1px solid var(--brand-border)',
-          padding: '0.75rem 1.5rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center'
-        }}>
+        <div
+          style={{
+            backgroundColor: '#fff',
+            borderBottom: '1px solid var(--brand-border)',
+            padding: '0.75rem 1.5rem',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-            <h2 style={{ margin: 0, fontSize: '1.125rem' }}>Untitled Document</h2>
-            
+            <h2 style={{ margin: 0, fontSize: '1.125rem' }}>
+              Untitled Document
+            </h2>
+
             {isSaving ? (
-              <span style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>Saving...</span>
+              <span
+                style={{
+                  fontSize: '0.875rem',
+                  color: 'var(--brand-text-muted)',
+                }}
+              >
+                Saving...
+              </span>
             ) : lastSaved ? (
-              <span style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>
+              <span
+                style={{
+                  fontSize: '0.875rem',
+                  color: 'var(--brand-text-muted)',
+                }}
+              >
                 Saved {lastSaved.toLocaleTimeString()}
               </span>
             ) : null}
@@ -170,7 +201,9 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
 
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
             {/* Collaborators */}
-            <div style={{ display: 'flex', gap: '0.25rem', marginRight: '1rem' }}>
+            <div
+              style={{ display: 'flex', gap: '0.25rem', marginRight: '1rem' }}
+            >
               {collaborators.slice(0, 3).map((collab, i) => (
                 <div
                   key={i}
@@ -184,7 +217,7 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontSize: '0.75rem',
-                    fontWeight: '600'
+                    fontWeight: '600',
                   }}
                   title={collab.userName}
                 >
@@ -192,17 +225,19 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
                 </div>
               ))}
               {collaborators.length > 3 && (
-                <div style={{
-                  width: '32px',
-                  height: '32px',
-                  borderRadius: '50%',
-                  backgroundColor: 'var(--brand-border)',
-                  color: 'var(--brand-text)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '0.75rem'
-                }}>
+                <div
+                  style={{
+                    width: '32px',
+                    height: '32px',
+                    borderRadius: '50%',
+                    backgroundColor: 'var(--brand-border)',
+                    color: 'var(--brand-text)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '0.75rem',
+                  }}
+                >
                   +{collaborators.length - 3}
                 </div>
               )}
@@ -218,7 +253,7 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
                     border: '1px solid var(--brand-border-dark)',
                     borderRadius: '0.375rem',
                     cursor: 'pointer',
-                    fontSize: '0.875rem'
+                    fontSize: '0.875rem',
                   }}
                 >
                   💬 Comment
@@ -233,7 +268,7 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
                     border: 'none',
                     borderRadius: '0.375rem',
                     cursor: 'pointer',
-                    fontSize: '0.875rem'
+                    fontSize: '0.875rem',
                   }}
                 >
                   Save
@@ -248,7 +283,7 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
                   backgroundColor: '#fff',
                   border: '1px solid var(--brand-border-dark)',
                   borderRadius: '0.375rem',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
                 }}
               >
                 ⋮
@@ -259,25 +294,29 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
         </div>
 
         {/* Editor */}
-        <div style={{
-          flex: 1,
-          overflow: 'auto',
-          padding: '2rem',
-          display: 'flex',
-          justifyContent: 'center'
-        }}>
-          <div style={{
-            width: '100%',
-            maxWidth: '800px',
-            backgroundColor: '#fff',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-            minHeight: '100%'
-          }}>
+        <div
+          style={{
+            flex: 1,
+            overflow: 'auto',
+            padding: '2rem',
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <div
+            style={{
+              width: '100%',
+              maxWidth: '800px',
+              backgroundColor: '#fff',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+              minHeight: '100%',
+            }}
+          >
             <div
               ref={editorRef}
               style={{
                 minHeight: '500px',
-                padding: '2rem'
+                padding: '2rem',
               }}
             />
           </div>
@@ -286,17 +325,21 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
 
       {/* Comments sidebar */}
       {showComments && (
-        <div style={{
-          width: '300px',
-          backgroundColor: '#fff',
-          borderLeft: '1px solid var(--brand-border)',
-          padding: '1rem',
-          overflowY: 'auto'
-        }}>
+        <div
+          style={{
+            width: '300px',
+            backgroundColor: '#fff',
+            borderLeft: '1px solid var(--brand-border)',
+            padding: '1rem',
+            overflowY: 'auto',
+          }}
+        >
           <h3 style={{ marginBottom: '1rem' }}>Comments</h3>
-          
+
           {comments.length === 0 ? (
-            <p style={{ color: 'var(--brand-text-muted)', fontSize: '0.875rem' }}>
+            <p
+              style={{ color: 'var(--brand-text-muted)', fontSize: '0.875rem' }}
+            >
               No comments yet
             </p>
           ) : (
@@ -307,20 +350,27 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
                   padding: '0.75rem',
                   backgroundColor: 'var(--brand-surface)',
                   borderRadius: '0.375rem',
-                  marginBottom: '0.75rem'
+                  marginBottom: '0.75rem',
                 }}
               >
-                <div style={{
-                  fontWeight: '600',
-                  fontSize: '0.875rem',
-                  marginBottom: '0.25rem'
-                }}>
+                <div
+                  style={{
+                    fontWeight: '600',
+                    fontSize: '0.875rem',
+                    marginBottom: '0.25rem',
+                  }}
+                >
                   {comment.userName}
                 </div>
                 <div style={{ fontSize: '0.875rem', marginBottom: '0.25rem' }}>
                   {comment.text}
                 </div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--brand-text-muted)' }}>
+                <div
+                  style={{
+                    fontSize: '0.75rem',
+                    color: 'var(--brand-text-muted)',
+                  }}
+                >
                   {new Date(comment.createdAt).toLocaleString()}
                 </div>
               </div>

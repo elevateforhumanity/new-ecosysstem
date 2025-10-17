@@ -24,7 +24,10 @@ interface IdentitySummary {
 export default function IdentityMappingPanel() {
   const [uploading, setUploading] = useState(false);
   const [applying, setApplying] = useState(false);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [message, setMessage] = useState<{
+    type: 'success' | 'error';
+    text: string;
+  } | null>(null);
   const [batches, setBatches] = useState<ImportBatch[]>([]);
   const [summary, setSummary] = useState<IdentitySummary[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -73,7 +76,9 @@ export default function IdentityMappingPanel() {
     }
   };
 
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -85,7 +90,9 @@ export default function IdentityMappingPanel() {
       const lines = text.trim().split('\n');
 
       if (lines.length < 2) {
-        throw new Error('CSV file must have at least a header and one data row');
+        throw new Error(
+          'CSV file must have at least a header and one data row'
+        );
       }
 
       // Parse CSV
@@ -96,7 +103,7 @@ export default function IdentityMappingPanel() {
         const line = lines[i].trim();
         if (!line) continue;
 
-        const parts = line.split(',').map(p => p.trim());
+        const parts = line.split(',').map((p) => p.trim());
         if (parts.length < 3) {
           console.error(`Skipping invalid line ${i + 1}: ${line}`);
           continue;
@@ -186,9 +193,22 @@ export default function IdentityMappingPanel() {
       </p>
 
       {/* Upload Section */}
-      <div style={{ marginBottom: '2rem', padding: '1.5rem', background: '#f5f5f5', borderRadius: '8px' }}>
+      <div
+        style={{
+          marginBottom: '2rem',
+          padding: '1.5rem',
+          background: '#f5f5f5',
+          borderRadius: '8px',
+        }}
+      >
         <h3>Upload CSV</h3>
-        <p style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)', marginBottom: '1rem' }}>
+        <p
+          style={{
+            fontSize: '0.9rem',
+            color: 'var(--brand-text-muted)',
+            marginBottom: '1rem',
+          }}
+        >
           Format: <code>lms_source,lms_user_id,google_email,full_name</code>
         </p>
         <input
@@ -225,21 +245,42 @@ export default function IdentityMappingPanel() {
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ background: '#f0f0f0' }}>
-                <th style={{ padding: '0.75rem', textAlign: 'left' }}>Batch ID</th>
-                <th style={{ padding: '0.75rem', textAlign: 'left' }}>LMS Source</th>
-                <th style={{ padding: '0.75rem', textAlign: 'right' }}>Records</th>
-                <th style={{ padding: '0.75rem', textAlign: 'left' }}>Imported At</th>
-                <th style={{ padding: '0.75rem', textAlign: 'center' }}>Action</th>
+                <th style={{ padding: '0.75rem', textAlign: 'left' }}>
+                  Batch ID
+                </th>
+                <th style={{ padding: '0.75rem', textAlign: 'left' }}>
+                  LMS Source
+                </th>
+                <th style={{ padding: '0.75rem', textAlign: 'right' }}>
+                  Records
+                </th>
+                <th style={{ padding: '0.75rem', textAlign: 'left' }}>
+                  Imported At
+                </th>
+                <th style={{ padding: '0.75rem', textAlign: 'center' }}>
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
               {batches.map((batch) => (
-                <tr key={batch.import_batch_id} style={{ borderBottom: '1px solid var(--brand-border)' }}>
-                  <td style={{ padding: '0.75rem', fontFamily: 'monospace', fontSize: '0.85rem' }}>
+                <tr
+                  key={batch.import_batch_id}
+                  style={{ borderBottom: '1px solid var(--brand-border)' }}
+                >
+                  <td
+                    style={{
+                      padding: '0.75rem',
+                      fontFamily: 'monospace',
+                      fontSize: '0.85rem',
+                    }}
+                  >
                     {batch.import_batch_id.substring(0, 8)}...
                   </td>
                   <td style={{ padding: '0.75rem' }}>{batch.lms_source}</td>
-                  <td style={{ padding: '0.75rem', textAlign: 'right' }}>{batch.record_count}</td>
+                  <td style={{ padding: '0.75rem', textAlign: 'right' }}>
+                    {batch.record_count}
+                  </td>
                   <td style={{ padding: '0.75rem' }}>
                     {new Date(batch.imported_at).toLocaleString()}
                   </td>
@@ -273,18 +314,33 @@ export default function IdentityMappingPanel() {
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ background: '#f0f0f0' }}>
-                <th style={{ padding: '0.75rem', textAlign: 'left' }}>LMS Source</th>
-                <th style={{ padding: '0.75rem', textAlign: 'right' }}>Total Mappings</th>
-                <th style={{ padding: '0.75rem', textAlign: 'right' }}>Unique Emails</th>
-                <th style={{ padding: '0.75rem', textAlign: 'left' }}>Last Updated</th>
+                <th style={{ padding: '0.75rem', textAlign: 'left' }}>
+                  LMS Source
+                </th>
+                <th style={{ padding: '0.75rem', textAlign: 'right' }}>
+                  Total Mappings
+                </th>
+                <th style={{ padding: '0.75rem', textAlign: 'right' }}>
+                  Unique Emails
+                </th>
+                <th style={{ padding: '0.75rem', textAlign: 'left' }}>
+                  Last Updated
+                </th>
               </tr>
             </thead>
             <tbody>
               {summary.map((s) => (
-                <tr key={s.lms_source} style={{ borderBottom: '1px solid var(--brand-border)' }}>
+                <tr
+                  key={s.lms_source}
+                  style={{ borderBottom: '1px solid var(--brand-border)' }}
+                >
                   <td style={{ padding: '0.75rem' }}>{s.lms_source}</td>
-                  <td style={{ padding: '0.75rem', textAlign: 'right' }}>{s.total_mappings}</td>
-                  <td style={{ padding: '0.75rem', textAlign: 'right' }}>{s.unique_emails}</td>
+                  <td style={{ padding: '0.75rem', textAlign: 'right' }}>
+                    {s.total_mappings}
+                  </td>
+                  <td style={{ padding: '0.75rem', textAlign: 'right' }}>
+                    {s.unique_emails}
+                  </td>
                   <td style={{ padding: '0.75rem' }}>
                     {new Date(s.last_updated).toLocaleString()}
                   </td>

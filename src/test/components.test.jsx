@@ -8,9 +8,7 @@ import AppLayout from '../layouts/AppLayout';
 const renderWithProviders = (component) => {
   return render(
     <HelmetProvider>
-      <MemoryRouter>
-        {component}
-      </MemoryRouter>
+      <MemoryRouter>{component}</MemoryRouter>
     </HelmetProvider>
   );
 };
@@ -23,7 +21,7 @@ describe('Component Tests', () => {
           <div>Content</div>
         </AppLayout>
       );
-      
+
       expect(screen.getByText('Home')).toBeInTheDocument();
       expect(screen.getByText('Courses')).toBeInTheDocument();
       expect(screen.getByText('Account')).toBeInTheDocument();
@@ -37,7 +35,7 @@ describe('Component Tests', () => {
           <div>Content</div>
         </AppLayout>
       );
-      
+
       expect(screen.getByText('Privacy Policy')).toBeInTheDocument();
       expect(screen.getByText('Terms of Service')).toBeInTheDocument();
       expect(screen.getByText('Refund Policy')).toBeInTheDocument();
@@ -49,7 +47,7 @@ describe('Component Tests', () => {
           <div>Test Content</div>
         </AppLayout>
       );
-      
+
       expect(screen.getByText('Test Content')).toBeInTheDocument();
     });
 
@@ -59,7 +57,7 @@ describe('Component Tests', () => {
           <div>Content</div>
         </AppLayout>
       );
-      
+
       // Helmet updates document.title asynchronously
       setTimeout(() => {
         expect(document.title).toContain('Custom Title');
@@ -74,7 +72,7 @@ describe('Component Tests', () => {
           <div>Protected Content</div>
         </ProtectedRoute>
       );
-      
+
       expect(screen.getByText('Protected Content')).toBeInTheDocument();
     });
 
@@ -84,7 +82,7 @@ describe('Component Tests', () => {
           <div>Admin Content</div>
         </ProtectedRoute>
       );
-      
+
       expect(screen.getByText('Admin Content')).toBeInTheDocument();
     });
 
@@ -94,7 +92,7 @@ describe('Component Tests', () => {
           <div>Instructor Content</div>
         </ProtectedRoute>
       );
-      
+
       expect(screen.getByText('Instructor Content')).toBeInTheDocument();
     });
   });

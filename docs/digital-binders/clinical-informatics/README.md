@@ -53,6 +53,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 ### Entry-Level Positions
 
 #### **Health Information Technician**
+
 - **Salary Range**: $35,000 - $50,000/year
 - **Education**: Certificate or Associate Degree
 - **Credentials**: RHIT, CCA
@@ -64,6 +65,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
   - Generate reports and statistics
 
 #### **Medical Coder**
+
 - **Salary Range**: $40,000 - $55,000/year
 - **Education**: Certificate
 - **Credentials**: CCA, CCS, CPC
@@ -75,6 +77,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
   - Maintain coding accuracy
 
 #### **EHR Specialist**
+
 - **Salary Range**: $42,000 - $58,000/year
 - **Education**: Certificate or Associate Degree
 - **Credentials**: Epic, Cerner certification
@@ -88,6 +91,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 ### Mid-Level Positions
 
 #### **Clinical Informatics Specialist**
+
 - **Salary Range**: $50,000 - $70,000/year
 - **Education**: Associate or Bachelor's Degree
 - **Credentials**: RHIA, CPHIMS
@@ -99,6 +103,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
   - Lead improvement projects
 
 #### **Healthcare Data Analyst**
+
 - **Salary Range**: $55,000 - $75,000/year
 - **Education**: Bachelor's Degree
 - **Credentials**: RHIA, CHDA
@@ -110,6 +115,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
   - Present findings to stakeholders
 
 #### **Clinical Systems Analyst**
+
 - **Salary Range**: $60,000 - $80,000/year
 - **Education**: Bachelor's Degree
 - **Credentials**: Epic, Cerner, CPHIMS
@@ -123,6 +129,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 ### Advanced Positions
 
 #### **Clinical Informatics Manager**
+
 - **Salary Range**: $70,000 - $95,000/year
 - **Education**: Bachelor's or Master's Degree
 - **Credentials**: RHIA, CPHIMS, PMP
@@ -134,6 +141,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
   - Budget and resource management
 
 #### **Chief Medical Information Officer (CMIO)**
+
 - **Salary Range**: $150,000 - $300,000+/year
 - **Education**: MD/DO + Informatics training
 - **Credentials**: Board certification, CMIO certification
@@ -151,6 +159,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 ### Clinical Informatics Certificate
 
 #### **Program Overview**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  Clinical Informatics Certificate Program 🎓            │
@@ -185,6 +194,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 #### **Curriculum Modules**
 
 **Module 1: Healthcare Foundations** (4 weeks)
+
 - Healthcare delivery systems
 - Medical terminology
 - Anatomy and physiology basics
@@ -192,6 +202,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 - Professional ethics
 
 **Module 2: Health Information Management** (4 weeks)
+
 - Health data standards
 - Data governance and quality
 - Privacy and security (HIPAA)
@@ -199,6 +210,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 - Health information systems
 
 **Module 3: Electronic Health Records** (6 weeks)
+
 - EHR systems overview
 - Epic training and certification
 - Cerner training and certification
@@ -206,6 +218,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 - EHR optimization
 
 **Module 4: Medical Coding** (6 weeks)
+
 - ICD-10-CM/PCS coding
 - CPT coding
 - Reimbursement methodologies
@@ -213,6 +226,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 - Coding software and tools
 
 **Module 5: Healthcare Data Analytics** (4 weeks)
+
 - Data analysis fundamentals
 - Healthcare metrics and KPIs
 - Business intelligence tools
@@ -220,6 +234,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 - Data visualization
 
 **Module 6: Clinical Informatics** (4 weeks)
+
 - Clinical decision support
 - Health information exchange
 - Telehealth and remote monitoring
@@ -227,6 +242,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 - Population health management
 
 **Module 7: Capstone Project** (2 weeks)
+
 - Real-world project
 - Portfolio development
 - Certification exam preparation
@@ -236,6 +252,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 ### Earn-to-Learn Options
 
 #### **On-the-Job Training (OJT)**
+
 - Get paid while you learn!
 - Starting wage: $18-22/hour
 - 6-month training period
@@ -244,6 +261,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 - [Learn More About OJT](../government-contracting/earn-to-learn-programs.md)
 
 #### **Internships**
+
 - Paid internships available
 - 15-20 hours/week
 - $16-20/hour
@@ -257,6 +275,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 ### AHIMA Certifications
 
 #### **RHIT (Registered Health Information Technician)**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  RHIT Certification 📜                                  │
@@ -290,18 +309,21 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 ```
 
 #### **RHIA (Registered Health Information Administrator)**
+
 - **Level**: Advanced
 - **Exam Cost**: $299 (We cover this!)
 - **Salary Range**: $55,000 - $75,000/year
 - **Requirements**: Bachelor's degree or equivalent experience
 
 #### **CCA (Certified Coding Associate)**
+
 - **Level**: Entry
 - **Exam Cost**: $199 (We cover this!)
 - **Salary Range**: $40,000 - $55,000/year
 - **Focus**: Medical coding fundamentals
 
 #### **CCS (Certified Coding Specialist)**
+
 - **Level**: Advanced
 - **Exam Cost**: $299 (We cover this!)
 - **Salary Range**: $50,000 - $70,000/year
@@ -310,6 +332,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 ### HIMSS Certifications
 
 #### **CPHIMS (Certified Professional in Healthcare Information and Management Systems)**
+
 - **Issuer**: HIMSS
 - **Exam Cost**: $395 (We cover this!)
 - **Salary Range**: $65,000 - $90,000/year
@@ -318,12 +341,14 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 ### EHR Certifications
 
 #### **Epic Certifications**
+
 - **Cost**: $500-1,000 per module (We cover this!)
 - **Modules**: Various (Ambulatory, Inpatient, Revenue Cycle, etc.)
 - **Salary Impact**: +$10,000-15,000/year
 - **Employer Demand**: Very high
 
 #### **Cerner Certifications**
+
 - **Cost**: $400 (We cover this!)
 - **Focus**: Cerner EHR system
 - **Salary Impact**: +$8,000-12,000/year
@@ -336,6 +361,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 ### Technical Skills
 
 #### **Core Technical Skills**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  Technical Skills You'll Master 💻                      │
@@ -372,6 +398,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 ### Professional Skills
 
 #### **Essential Soft Skills**
+
 - Communication (clinical and technical audiences)
 - Problem-solving and critical thinking
 - Attention to detail
@@ -388,6 +415,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 ### Current Openings
 
 #### **Featured Positions**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  Clinical Informatics Jobs Available Now! 💼            │
@@ -419,6 +447,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 ### Employer Partners
 
 #### **Healthcare Systems**
+
 - Indiana University Health
 - Community Health Network
 - Franciscan Health
@@ -428,6 +457,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 - Parkview Health System
 
 #### **Health IT Companies**
+
 - Epic Systems
 - Cerner/Oracle Health
 - Optum
@@ -442,12 +472,14 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 ### Credentialing Partners
 
 #### **AHIMA (American Health Information Management Association)**
+
 - Industry-leading HIM certifications
 - Professional development resources
 - Networking opportunities
 - **Website**: https://www.ahima.org
 
 #### **HIMSS (Healthcare Information and Management Systems Society)**
+
 - Health IT certifications
 - Industry conferences and events
 - Professional community
@@ -456,12 +488,14 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 ### EHR Vendors
 
 #### **Epic Systems**
+
 - Epic certification training
 - Hands-on system access
 - Industry-recognized credentials
 - **Website**: https://www.epic.com
 
 #### **Cerner/Oracle Health**
+
 - Cerner certification training
 - Real-world system experience
 - Career pathways
@@ -474,6 +508,7 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 ### Real Graduates, Real Success
 
 #### **Jessica's Story**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  "From Retail to Healthcare IT in 6 Months!" 🎉        │
@@ -552,4 +587,4 @@ Clinical Informatics is the intersection of healthcare, information technology, 
 
 ---
 
-*Transform healthcare through technology. Start your Clinical Informatics career today!*
+_Transform healthcare through technology. Start your Clinical Informatics career today!_

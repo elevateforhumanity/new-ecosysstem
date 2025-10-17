@@ -39,10 +39,14 @@ const CourseDetailPage = () => {
     try {
       const [courseRes, lessonsRes, reviewsRes] = await Promise.all([
         api.get(`/courses/${slug}`),
-        api.get(`/courses/${slug}/lessons`).catch(() => ({ data: { lessons: [] } })),
-        api.get(`/courses/${slug}/reviews`).catch(() => ({ data: { reviews: [] } })),
+        api
+          .get(`/courses/${slug}/lessons`)
+          .catch(() => ({ data: { lessons: [] } })),
+        api
+          .get(`/courses/${slug}/reviews`)
+          .catch(() => ({ data: { reviews: [] } })),
       ]);
-      
+
       setCourse(courseRes.data);
       setLessons(lessonsRes.data.lessons || []);
       setReviews(reviewsRes.data.reviews || []);
@@ -100,10 +104,10 @@ const CourseDetailPage = () => {
           {/* Course Header */}
           <div>
             {course.thumbnailUrl && (
-              <img 
-                src={course.thumbnailUrl} 
-                alt={course.title} 
-                className="w-full h-64 object-cover rounded-lg mb-6" 
+              <img
+                src={course.thumbnailUrl}
+                alt={course.title}
+                className="w-full h-64 object-cover rounded-lg mb-6"
               />
             )}
             <div className="flex items-center gap-2 mb-4">
@@ -116,7 +120,7 @@ const CourseDetailPage = () => {
             </div>
             <h1 className="text-4xl font-bold mb-4">{course.title}</h1>
             <p className="text-xl text-gray-600 mb-4">{course.description}</p>
-            
+
             {/* Stats */}
             <div className="flex items-center gap-6 text-sm text-gray-600">
               <div className="flex items-center gap-1">
@@ -128,7 +132,8 @@ const CourseDetailPage = () => {
                 <span className="font-semibold">{totalStudents}</span> students
               </div>
               <div>
-                Created by <span className="font-semibold">{course.instructor.name}</span>
+                Created by{' '}
+                <span className="font-semibold">{course.instructor.name}</span>
               </div>
             </div>
           </div>
@@ -141,16 +146,20 @@ const CourseDetailPage = () => {
             ) : (
               <div className="space-y-2">
                 {lessons.map((lesson, index) => (
-                  <div 
-                    key={lesson.id} 
+                  <div
+                    key={lesson.id}
                     className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50"
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-gray-400 font-medium">{index + 1}</span>
+                      <span className="text-gray-400 font-medium">
+                        {index + 1}
+                      </span>
                       <span>{lesson.title}</span>
                     </div>
                     {lesson.duration && (
-                      <span className="text-sm text-gray-500">{lesson.duration} min</span>
+                      <span className="text-sm text-gray-500">
+                        {lesson.duration} min
+                      </span>
                     )}
                   </div>
                 ))}
@@ -166,12 +175,22 @@ const CourseDetailPage = () => {
             ) : (
               <div className="space-y-4">
                 {reviews.map((review) => (
-                  <div key={review.id} className="border-b border-gray-200 pb-4 last:border-0">
+                  <div
+                    key={review.id}
+                    className="border-b border-gray-200 pb-4 last:border-0"
+                  >
                     <div className="flex items-center gap-2 mb-2">
                       <span className="font-semibold">{review.user.name}</span>
                       <div className="flex">
                         {[...Array(5)].map((_, i) => (
-                          <span key={i} className={i < review.rating ? 'text-yellow-500' : 'text-gray-300'}>
+                          <span
+                            key={i}
+                            className={
+                              i < review.rating
+                                ? 'text-yellow-500'
+                                : 'text-gray-300'
+                            }
+                          >
                             ★
                           </span>
                         ))}
@@ -180,7 +199,9 @@ const CourseDetailPage = () => {
                         {new Date(review.createdAt).toLocaleDateString()}
                       </span>
                     </div>
-                    {review.comment && <p className="text-gray-600">{review.comment}</p>}
+                    {review.comment && (
+                      <p className="text-gray-600">{review.comment}</p>
+                    )}
                   </div>
                 ))}
               </div>
@@ -194,8 +215,8 @@ const CourseDetailPage = () => {
             <div className="text-3xl font-bold text-primary-600 mb-4">
               ${course.price}
             </div>
-            <button 
-              onClick={handleEnroll} 
+            <button
+              onClick={handleEnroll}
               disabled={enrolling}
               className="w-full btn-primary mb-4 disabled:opacity-50"
             >

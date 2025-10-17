@@ -16,7 +16,10 @@ interface TimelineViewProps {
   entityId: string;
 }
 
-export default function TimelineView({ entityType, entityId }: TimelineViewProps) {
+export default function TimelineView({
+  entityType,
+  entityId,
+}: TimelineViewProps) {
   const [events, setEvents] = useState<TimelineEvent[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>('all');
@@ -65,7 +68,8 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
               id: `task-completed-${task.id}`,
               timestamp: task.completed_at,
               type: 'task',
-              action: task.status === 'completed' ? 'Task Completed' : 'Task Failed',
+              action:
+                task.status === 'completed' ? 'Task Completed' : 'Task Failed',
               details: task.error_message || 'Task completed successfully',
               status: task.status,
             });
@@ -80,7 +84,7 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
           .order('created_at', { ascending: false });
 
         if (auditLogs) {
-          auditLogs.forEach(log => {
+          auditLogs.forEach((log) => {
             allEvents.push({
               id: `audit-${log.id}`,
               timestamp: log.created_at,
@@ -100,7 +104,7 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
           .order('created_at', { ascending: false });
 
         if (emails) {
-          emails.forEach(email => {
+          emails.forEach((email) => {
             allEvents.push({
               id: `email-${email.id}`,
               timestamp: email.created_at,
@@ -172,7 +176,7 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
           .order('created_at', { ascending: false });
 
         if (emails) {
-          emails.forEach(email => {
+          emails.forEach((email) => {
             allEvents.push({
               id: `email-${email.id}`,
               timestamp: email.created_at,
@@ -198,7 +202,7 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
           .limit(50);
 
         if (tasks) {
-          tasks.forEach(task => {
+          tasks.forEach((task) => {
             allEvents.push({
               id: `task-${task.id}`,
               timestamp: task.created_at,
@@ -235,8 +239,13 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
               id: `sync-completed-${syncRun.id}`,
               timestamp: syncRun.completed_at,
               type: 'status',
-              action: syncRun.status === 'completed' ? 'Sync Completed' : 'Sync Failed',
-              details: syncRun.error_message || `Processed ${syncRun.records_processed} records`,
+              action:
+                syncRun.status === 'completed'
+                  ? 'Sync Completed'
+                  : 'Sync Failed',
+              details:
+                syncRun.error_message ||
+                `Processed ${syncRun.records_processed} records`,
               status: syncRun.status,
               metadata: {
                 recordsProcessed: syncRun.records_processed,
@@ -255,7 +264,7 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
           .order('created_at', { ascending: false });
 
         if (emails) {
-          emails.forEach(email => {
+          emails.forEach((email) => {
             allEvents.push({
               id: `email-${email.id}`,
               timestamp: email.created_at,
@@ -269,7 +278,10 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
       }
 
       // Sort all events by timestamp
-      allEvents.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+      allEvents.sort(
+        (a, b) =>
+          new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+      );
 
       setEvents(allEvents);
     } catch (error) {
@@ -299,7 +311,11 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
   };
 
   const getEventColor = (type: string, status?: string) => {
-    if (status === 'completed' || status === 'delivered' || status === 'opened') {
+    if (
+      status === 'completed' ||
+      status === 'delivered' ||
+      status === 'opened'
+    ) {
       return 'text-brand-success bg-green-50';
     }
     if (status === 'failed' || status === 'bounced') {
@@ -311,7 +327,7 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
     return 'text-brand-text-muted bg-brand-surface';
   };
 
-  const filteredEvents = events.filter(event => {
+  const filteredEvents = events.filter((event) => {
     if (filter === 'all') return true;
     return event.type === filter;
   });
@@ -323,7 +339,7 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
           <h2 className="text-xl font-semibold">Timeline</h2>
           <select
             value={filter}
-            onChange={e => setFilter(e.target.value)}
+            onChange={(e) => setFilter(e.target.value)}
             className="px-4 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
           >
             <option value="all">All Events</option>
@@ -353,7 +369,9 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
                       event.status
                     )}`}
                   >
-                    <span className="text-lg">{getEventIcon(event.type, event.status)}</span>
+                    <span className="text-lg">
+                      {getEventIcon(event.type, event.status)}
+                    </span>
                   </div>
                   {index < filteredEvents.length - 1 && (
                     <div className="w-0.5 h-full bg-brand-border flex-1 mt-2"></div>
@@ -364,18 +382,23 @@ export default function TimelineView({ entityType, entityId }: TimelineViewProps
                 <div className="flex-1 pb-8">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="font-semibold text-brand-text">{event.action}</h3>
-                      <p className="text-sm text-brand-text-muted mt-1">{event.details}</p>
-                      {event.metadata && Object.keys(event.metadata).length > 0 && (
-                        <details className="mt-2">
-                          <summary className="text-xs text-brand-info cursor-pointer">
-                            View details
-                          </summary>
-                          <pre className="mt-2 text-xs bg-brand-surface p-2 rounded overflow-x-auto">
-                            {JSON.stringify(event.metadata, null, 2)}
-                          </pre>
-                        </details>
-                      )}
+                      <h3 className="font-semibold text-brand-text">
+                        {event.action}
+                      </h3>
+                      <p className="text-sm text-brand-text-muted mt-1">
+                        {event.details}
+                      </p>
+                      {event.metadata &&
+                        Object.keys(event.metadata).length > 0 && (
+                          <details className="mt-2">
+                            <summary className="text-xs text-brand-info cursor-pointer">
+                              View details
+                            </summary>
+                            <pre className="mt-2 text-xs bg-brand-surface p-2 rounded overflow-x-auto">
+                              {JSON.stringify(event.metadata, null, 2)}
+                            </pre>
+                          </details>
+                        )}
                     </div>
                     <span className="text-xs text-brand-text-light whitespace-nowrap ml-4">
                       {new Date(event.timestamp).toLocaleString()}

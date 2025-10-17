@@ -7,7 +7,9 @@ import FileUpload from '../components/files/FileUpload';
 export function FileManager() {
   const [files, setFiles] = useState([]);
   const [currentFolder, setCurrentFolder] = useState(null);
-  const [breadcrumbs, setBreadcrumbs] = useState([{ id: null, name: 'My Drive' }]);
+  const [breadcrumbs, setBreadcrumbs] = useState([
+    { id: null, name: 'My Drive' },
+  ]);
   const [view, setView] = useState('grid'); // 'grid' or 'list'
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [showUpload, setShowUpload] = useState(false);
@@ -20,7 +22,9 @@ export function FileManager() {
 
   const loadFiles = async () => {
     try {
-      const response = await fetch(`/api/files?folderId=${currentFolder || ''}`);
+      const response = await fetch(
+        `/api/files?folderId=${currentFolder || ''}`
+      );
       const data = await response.json();
       setFiles(data);
     } catch (error) {
@@ -62,7 +66,7 @@ export function FileManager() {
       const response = await fetch('/api/files/folder', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, parentFolderId: currentFolder })
+        body: JSON.stringify({ name, parentFolderId: currentFolder }),
       });
 
       if (response.ok) {
@@ -84,11 +88,11 @@ export function FileManager() {
 
     try {
       const response = await fetch(`/api/files/${fileId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
       });
 
       if (response.ok) {
-        setFiles(files.filter(f => f.id !== fileId));
+        setFiles(files.filter((f) => f.id !== fileId));
         loadStorageQuota();
       }
     } catch (error) {
@@ -104,7 +108,7 @@ export function FileManager() {
       const response = await fetch(`/api/files/${fileId}/share`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, permission: 'read' })
+        body: JSON.stringify({ email, permission: 'read' }),
       });
 
       if (response.ok) {
@@ -120,14 +124,14 @@ export function FileManager() {
     const k = 1024;
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+    return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i];
   };
 
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
-      day: 'numeric'
+      day: 'numeric',
     });
   };
 
@@ -144,28 +148,43 @@ export function FileManager() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: 'var(--brand-surface)' }}>
+    <div
+      style={{ minHeight: '100vh', backgroundColor: 'var(--brand-surface)' }}
+    >
       {/* Header */}
-      <div style={{
-        backgroundColor: '#fff',
-        borderBottom: '1px solid var(--brand-border)',
-        padding: '1rem 2rem'
-      }}>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          maxWidth: '1400px',
-          margin: '0 auto'
-        }}>
+      <div
+        style={{
+          backgroundColor: '#fff',
+          borderBottom: '1px solid var(--brand-border)',
+          padding: '1rem 2rem',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            maxWidth: '1400px',
+            margin: '0 auto',
+          }}
+        >
           <h1 style={{ fontSize: '1.5rem', fontWeight: '600', margin: 0 }}>
             Elevate Drive
           </h1>
 
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
             {storageQuota && (
-              <div style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>
-                {formatBytes(storageQuota.used)} of {storageQuota.total === -1 ? 'Unlimited' : formatBytes(storageQuota.total)} used
+              <div
+                style={{
+                  fontSize: '0.875rem',
+                  color: 'var(--brand-text-muted)',
+                }}
+              >
+                {formatBytes(storageQuota.used)} of{' '}
+                {storageQuota.total === -1
+                  ? 'Unlimited'
+                  : formatBytes(storageQuota.total)}{' '}
+                used
               </div>
             )}
 
@@ -178,7 +197,7 @@ export function FileManager() {
                 border: 'none',
                 borderRadius: '0.375rem',
                 cursor: 'pointer',
-                fontWeight: '500'
+                fontWeight: '500',
               }}
             >
               + Upload
@@ -192,7 +211,7 @@ export function FileManager() {
                 color: 'var(--brand-text)',
                 border: '1px solid var(--brand-border-dark)',
                 borderRadius: '0.375rem',
-                cursor: 'pointer'
+                cursor: 'pointer',
               }}
             >
               + New Folder
@@ -203,13 +222,15 @@ export function FileManager() {
 
       <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '2rem' }}>
         {/* Breadcrumbs */}
-        <div style={{
-          display: 'flex',
-          gap: '0.5rem',
-          alignItems: 'center',
-          marginBottom: '1.5rem',
-          fontSize: '0.875rem'
-        }}>
+        <div
+          style={{
+            display: 'flex',
+            gap: '0.5rem',
+            alignItems: 'center',
+            marginBottom: '1.5rem',
+            fontSize: '0.875rem',
+          }}
+        >
           {breadcrumbs.map((crumb, index) => (
             <React.Fragment key={crumb.id || 'root'}>
               <button
@@ -217,14 +238,19 @@ export function FileManager() {
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: index === breadcrumbs.length - 1 ? 'var(--brand-text)' : 'var(--brand-info)',
+                  color:
+                    index === breadcrumbs.length - 1
+                      ? 'var(--brand-text)'
+                      : 'var(--brand-info)',
                   cursor: 'pointer',
-                  fontWeight: index === breadcrumbs.length - 1 ? '600' : '400'
+                  fontWeight: index === breadcrumbs.length - 1 ? '600' : '400',
                 }}
               >
                 {crumb.name}
               </button>
-              {index < breadcrumbs.length - 1 && <span style={{ color: 'var(--brand-text-light)' }}>/</span>}
+              {index < breadcrumbs.length - 1 && (
+                <span style={{ color: 'var(--brand-text-light)' }}>/</span>
+              )}
             </React.Fragment>
           ))}
         </div>
@@ -241,46 +267,59 @@ export function FileManager() {
 
         {/* Storage quota bar */}
         {storageQuota && storageQuota.total !== -1 && (
-          <div style={{
-            marginBottom: '1.5rem',
-            padding: '1rem',
-            backgroundColor: '#fff',
-            borderRadius: '0.5rem',
-            border: '1px solid var(--brand-border)'
-          }}>
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              marginBottom: '0.5rem',
-              fontSize: '0.875rem'
-            }}>
+          <div
+            style={{
+              marginBottom: '1.5rem',
+              padding: '1rem',
+              backgroundColor: '#fff',
+              borderRadius: '0.5rem',
+              border: '1px solid var(--brand-border)',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                marginBottom: '0.5rem',
+                fontSize: '0.875rem',
+              }}
+            >
               <span>Storage used</span>
               <span>{storageQuota.percentage.toFixed(1)}%</span>
             </div>
-            <div style={{
-              width: '100%',
-              height: '8px',
-              backgroundColor: 'var(--brand-border)',
-              borderRadius: '4px',
-              overflow: 'hidden'
-            }}>
-              <div style={{
-                width: `${Math.min(storageQuota.percentage, 100)}%`,
-                height: '100%',
-                backgroundColor: storageQuota.percentage > 90 ? 'var(--brand-danger)' : 'var(--brand-info)',
-                transition: 'width 0.3s'
-              }} />
+            <div
+              style={{
+                width: '100%',
+                height: '8px',
+                backgroundColor: 'var(--brand-border)',
+                borderRadius: '4px',
+                overflow: 'hidden',
+              }}
+            >
+              <div
+                style={{
+                  width: `${Math.min(storageQuota.percentage, 100)}%`,
+                  height: '100%',
+                  backgroundColor:
+                    storageQuota.percentage > 90
+                      ? 'var(--brand-danger)'
+                      : 'var(--brand-info)',
+                  transition: 'width 0.3s',
+                }}
+              />
             </div>
           </div>
         )}
 
         {/* Files grid */}
         {files.length === 0 ? (
-          <div style={{
-            textAlign: 'center',
-            padding: '4rem 2rem',
-            color: 'var(--brand-text-muted)'
-          }}>
+          <div
+            style={{
+              textAlign: 'center',
+              padding: '4rem 2rem',
+              color: 'var(--brand-text-muted)',
+            }}
+          >
             <p style={{ fontSize: '1.125rem', marginBottom: '0.5rem' }}>
               This folder is empty
             </p>
@@ -289,12 +328,14 @@ export function FileManager() {
             </p>
           </div>
         ) : (
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-            gap: '1rem'
-          }}>
-            {files.map(file => (
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+              gap: '1rem',
+            }}
+          >
+            {files.map((file) => (
               <div
                 key={file.id}
                 style={{
@@ -303,7 +344,7 @@ export function FileManager() {
                   borderRadius: '0.5rem',
                   padding: '1rem',
                   cursor: 'pointer',
-                  transition: 'all 0.2s'
+                  transition: 'all 0.2s',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
@@ -315,38 +356,46 @@ export function FileManager() {
                 }}
               >
                 <div onClick={() => handleFileClick(file)}>
-                  <div style={{
-                    fontSize: '3rem',
-                    textAlign: 'center',
-                    marginBottom: '0.5rem'
-                  }}>
+                  <div
+                    style={{
+                      fontSize: '3rem',
+                      textAlign: 'center',
+                      marginBottom: '0.5rem',
+                    }}
+                  >
                     {getFileIcon(file)}
                   </div>
-                  <div style={{
-                    fontSize: '0.875rem',
-                    fontWeight: '500',
-                    marginBottom: '0.25rem',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    whiteSpace: 'nowrap'
-                  }}>
+                  <div
+                    style={{
+                      fontSize: '0.875rem',
+                      fontWeight: '500',
+                      marginBottom: '0.25rem',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
                     {file.name}
                   </div>
-                  <div style={{
-                    fontSize: '0.75rem',
-                    color: 'var(--brand-text-muted)'
-                  }}>
+                  <div
+                    style={{
+                      fontSize: '0.75rem',
+                      color: 'var(--brand-text-muted)',
+                    }}
+                  >
                     {!file.isFolder && formatBytes(file.size)}
                   </div>
                 </div>
 
-                <div style={{
-                  display: 'flex',
-                  gap: '0.5rem',
-                  marginTop: '0.75rem',
-                  paddingTop: '0.75rem',
-                  borderTop: '1px solid var(--brand-border)'
-                }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    gap: '0.5rem',
+                    marginTop: '0.75rem',
+                    paddingTop: '0.75rem',
+                    borderTop: '1px solid var(--brand-border)',
+                  }}
+                >
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
@@ -359,7 +408,7 @@ export function FileManager() {
                       backgroundColor: 'transparent',
                       border: '1px solid var(--brand-border-dark)',
                       borderRadius: '0.25rem',
-                      cursor: 'pointer'
+                      cursor: 'pointer',
                     }}
                   >
                     Share
@@ -377,7 +426,7 @@ export function FileManager() {
                       color: 'var(--brand-danger)',
                       border: '1px solid var(--brand-danger)',
                       borderRadius: '0.25rem',
-                      cursor: 'pointer'
+                      cursor: 'pointer',
                     }}
                   >
                     Delete

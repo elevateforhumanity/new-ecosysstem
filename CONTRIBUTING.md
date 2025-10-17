@@ -5,11 +5,13 @@ Thank you for your interest in improving this Gitpod and VS Code configuration t
 ## 🤝 How to Contribute
 
 ### Reporting Issues
+
 - Found a bug in the configuration?
 - Have a suggestion for improvement?
 - Need help with customization?
 
 Please open an issue on GitHub with:
+
 - Clear description of the problem or suggestion
 - Steps to reproduce (if reporting a bug)
 - Your environment details (browser, OS)
@@ -34,17 +36,21 @@ Please open an issue on GitHub with:
 ## 📋 Guidelines
 
 ### Configuration Files
+
 - `.gitpod.yml` should remain generic and customizable
 - VS Code settings should be non-opinionated defaults
 - Extensions should be widely useful, not niche
 
 ### Documentation
+
 - Keep README.md comprehensive but scannable
 - Update QUICK_REFERENCE.md for quick tips
 - Add comments in configuration files when helpful
 
 ### Testing
+
 Before submitting:
+
 1. Validate YAML/JSON syntax
 2. Test in a fresh Gitpod workspace
 3. Verify extensions install correctly
@@ -53,6 +59,7 @@ Before submitting:
 ## 🎯 Areas for Contribution
 
 We welcome improvements in:
+
 - Additional language-specific configurations
 - More comprehensive troubleshooting guides
 - Better default VS Code settings

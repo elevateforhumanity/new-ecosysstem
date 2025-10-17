@@ -48,7 +48,10 @@ export default function EmailEventsPanel() {
   const [filter, setFilter] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [resendingIds, setResendingIds] = useState<Set<string>>(new Set());
-  const [alertMessage, setAlertMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [alertMessage, setAlertMessage] = useState<{
+    type: 'success' | 'error';
+    text: string;
+  } | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
@@ -58,9 +61,13 @@ export default function EmailEventsPanel() {
     // Subscribe to real-time updates
     const subscription = supabase
       .channel('email_events')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'email_events' }, () => {
-        loadData();
-      })
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'email_events' },
+        () => {
+          loadData();
+        }
+      )
       .subscribe();
 
     return () => {
@@ -69,13 +76,17 @@ export default function EmailEventsPanel() {
   }, []);
 
   const checkAdminStatus = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     if (!user) {
       setIsAdmin(false);
       return;
     }
 
-    const { data, error } = await supabase.rpc('is_admin', { p_user_id: user.id });
+    const { data, error } = await supabase.rpc('is_admin', {
+      p_user_id: user.id,
+    });
     if (!error && data === true) {
       setIsAdmin(true);
     }
@@ -95,7 +106,9 @@ export default function EmailEventsPanel() {
 
     // Load stats
     const { data: statsData } = await supabase.rpc('get_email_stats', {
-      p_start_date: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      p_start_date: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
+        .toISOString()
+        .split('T')[0],
       p_end_date: new Date().toISOString().split('T')[0],
     });
 
@@ -105,33 +118,50 @@ export default function EmailEventsPanel() {
   };
 
   const handleResend = async (eventId: string) => {
-    setResendingIds(prev => new Set(prev).add(eventId));
+    setResendingIds((prev) => new Set(prev).add(eventId));
     setAlertMessage(null);
 
     try {
       // Get current user ID
-      const { data: { user } } = await supabase.auth.getUser();
-      
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
       if (!user) {
-        setAlertMessage({ type: 'error', text: 'You must be logged in to resend emails' });
+        setAlertMessage({
+          type: 'error',
+          text: 'You must be logged in to resend emails',
+        });
         return;
       }
 
       const result = await resendEmail(eventId, user.id);
-      
+
       if (result.success) {
-        setAlertMessage({ type: 'success', text: `Email resent successfully to ${result.recipient}` });
+        setAlertMessage({
+          type: 'success',
+          text: `Email resent successfully to ${result.recipient}`,
+        });
         // Reload data to show new event
         await loadData();
       } else if (result.skipped) {
-        setAlertMessage({ type: 'error', text: result.reason || 'Email cannot be resent' });
+        setAlertMessage({
+          type: 'error',
+          text: result.reason || 'Email cannot be resent',
+        });
       } else {
-        setAlertMessage({ type: 'error', text: result.error || result.message || 'Failed to resend email' });
+        setAlertMessage({
+          type: 'error',
+          text: result.error || result.message || 'Failed to resend email',
+        });
       }
     } catch (error: any) {
-      setAlertMessage({ type: 'error', text: error.message || 'An unexpected error occurred while resending' });
+      setAlertMessage({
+        type: 'error',
+        text: error.message || 'An unexpected error occurred while resending',
+      });
     } finally {
-      setResendingIds(prev => {
+      setResendingIds((prev) => {
         const newSet = new Set(prev);
         newSet.delete(eventId);
         return newSet;
@@ -181,11 +211,14 @@ export default function EmailEventsPanel() {
     }
   };
 
-
-
-  const filteredEvents = events.filter(event => {
+  const filteredEvents = events.filter((event) => {
     if (filter !== 'all' && event.status !== filter) return false;
-    if (searchTerm && !event.recipient.toLowerCase().includes(searchTerm.toLowerCase()) && !event.subject.toLowerCase().includes(searchTerm.toLowerCase())) return false;
+    if (
+      searchTerm &&
+      !event.recipient.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      !event.subject.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+      return false;
     return true;
   });
 
@@ -193,16 +226,24 @@ export default function EmailEventsPanel() {
     <div className="max-w-7xl mx-auto p-6">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Email Events Dashboard</h1>
-        <p className="text-brand-text-muted">Monitor email delivery, opens, and engagement</p>
+        <p className="text-brand-text-muted">
+          Monitor email delivery, opens, and engagement
+        </p>
       </div>
 
       {/* Alert Message */}
       {alertMessage && (
-        <div className={`mb-6 p-4 rounded-lg ${alertMessage.type === 'success' ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`}>
+        <div
+          className={`mb-6 p-4 rounded-lg ${alertMessage.type === 'success' ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`}
+        >
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <span className="text-lg mr-2">{alertMessage.type === 'success' ? '✅' : '❌'}</span>
-              <p className={`text-sm font-medium ${alertMessage.type === 'success' ? 'text-brand-success' : 'text-red-800'}`}>
+              <span className="text-lg mr-2">
+                {alertMessage.type === 'success' ? '✅' : '❌'}
+              </span>
+              <p
+                className={`text-sm font-medium ${alertMessage.type === 'success' ? 'text-brand-success' : 'text-red-800'}`}
+              >
                 {alertMessage.text}
               </p>
             </div>
@@ -249,10 +290,12 @@ export default function EmailEventsPanel() {
       <div className="bg-white rounded-lg shadow p-6 mb-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-brand-text mb-2">Filter by Status</label>
+            <label className="block text-sm font-medium text-brand-text mb-2">
+              Filter by Status
+            </label>
             <select
               value={filter}
-              onChange={e => setFilter(e.target.value)}
+              onChange={(e) => setFilter(e.target.value)}
               className="w-full px-4 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
             >
               <option value="all">All Statuses</option>
@@ -268,11 +311,13 @@ export default function EmailEventsPanel() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-brand-text mb-2">Search</label>
+            <label className="block text-sm font-medium text-brand-text mb-2">
+              Search
+            </label>
             <input
               type="text"
               value={searchTerm}
-              onChange={e => setSearchTerm(e.target.value)}
+              onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search by recipient or subject..."
               className="w-full px-4 py-2 border border-brand-border-dark rounded-lg focus:ring-2 focus:ring-brand-focus focus:border-transparent"
             />
@@ -322,31 +367,41 @@ export default function EmailEventsPanel() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {filteredEvents.map(event => (
+                {filteredEvents.map((event) => (
                   <tr key={event.id} className="hover:bg-brand-surface">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="font-medium text-brand-text">{event.recipient}</span>
+                          <span className="font-medium text-brand-text">
+                            {event.recipient}
+                          </span>
                           {event.blocked_by_dnc && (
-                            <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-brand-surface text-red-800" title="On Do Not Contact list">
+                            <span
+                              className="px-2 py-0.5 text-xs font-semibold rounded-full bg-brand-surface text-red-800"
+                              title="On Do Not Contact list"
+                            >
                               🚫 DNC
                             </span>
                           )}
                         </div>
                         {event.student_name && (
-                          <div className="text-sm text-brand-text-light">{event.student_name}</div>
+                          <div className="text-sm text-brand-text-light">
+                            {event.student_name}
+                          </div>
                         )}
                         {event.resend_count && event.resend_count > 0 && (
                           <div className="text-xs text-orange-600 mt-1">
                             Resent {event.resend_count}x
-                            {event.last_resend_at && ` (last: ${new Date(event.last_resend_at).toLocaleDateString()})`}
+                            {event.last_resend_at &&
+                              ` (last: ${new Date(event.last_resend_at).toLocaleDateString()})`}
                           </div>
                         )}
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="text-sm text-brand-text">{event.subject}</div>
+                      <div className="text-sm text-brand-text">
+                        {event.subject}
+                      </div>
                       {event.provider_message_id && (
                         <div className="text-xs text-brand-text-light mt-1">
                           ID: {event.provider_message_id.substring(0, 20)}...
@@ -375,17 +430,23 @@ export default function EmailEventsPanel() {
                           event.status
                         )}`}
                       >
-                        {getStatusIcon(event.status)} {event.status.toUpperCase()}
+                        {getStatusIcon(event.status)}{' '}
+                        {event.status.toUpperCase()}
                       </span>
                       {event.error_message && (
-                        <div className="text-xs text-red-600 mt-1">{event.error_message}</div>
+                        <div className="text-xs text-red-600 mt-1">
+                          {event.error_message}
+                        </div>
                       )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-brand-text-light">
-                      {event.sent_at ? new Date(event.sent_at).toLocaleString() : '-'}
+                      {event.sent_at
+                        ? new Date(event.sent_at).toLocaleString()
+                        : '-'}
                       {event.delivered_at && (
                         <div className="text-xs text-brand-success">
-                          Delivered: {new Date(event.delivered_at).toLocaleString()}
+                          Delivered:{' '}
+                          {new Date(event.delivered_at).toLocaleString()}
                         </div>
                       )}
                       {event.opened_at && (
@@ -395,18 +456,28 @@ export default function EmailEventsPanel() {
                       )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      {(event.status === 'failed' || event.status === 'bounced') && (
+                      {(event.status === 'failed' ||
+                        event.status === 'bounced') && (
                         <>
                           {!isAdmin ? (
-                            <span className="text-xs text-brand-text-light" title="Admin access required">
+                            <span
+                              className="text-xs text-brand-text-light"
+                              title="Admin access required"
+                            >
                               Admin only
                             </span>
                           ) : event.blocked_by_dnc ? (
-                            <span className="text-xs text-red-600" title="Cannot resend - on Do Not Contact list">
+                            <span
+                              className="text-xs text-red-600"
+                              title="Cannot resend - on Do Not Contact list"
+                            >
                               Blocked (DNC)
                             </span>
                           ) : event.resend_count && event.resend_count >= 3 ? (
-                            <span className="text-xs text-brand-text-light" title="Maximum resend attempts reached">
+                            <span
+                              className="text-xs text-brand-text-light"
+                              title="Maximum resend attempts reached"
+                            >
                               Max attempts
                             </span>
                           ) : (
@@ -414,9 +485,15 @@ export default function EmailEventsPanel() {
                               onClick={() => handleResend(event.id)}
                               disabled={resendingIds.has(event.id)}
                               className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md text-white bg-brand-info hover:bg-brand-info-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-focus disabled:opacity-50 disabled:cursor-not-allowed"
-                              title={event.resend_count ? `Resent ${event.resend_count} time(s)` : 'Resend this email'}
+                              title={
+                                event.resend_count
+                                  ? `Resent ${event.resend_count} time(s)`
+                                  : 'Resend this email'
+                              }
                             >
-                              {resendingIds.has(event.id) ? 'Resending...' : 'Resend'}
+                              {resendingIds.has(event.id)
+                                ? 'Resending...'
+                                : 'Resend'}
                             </button>
                           )}
                         </>

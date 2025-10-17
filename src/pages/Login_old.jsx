@@ -3,41 +3,42 @@
   Commercial License. No resale, sublicensing, or redistribution allowed.
   See LICENSE file for details.
 */
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
     rememberMe: false,
   });
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
-    const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    const value =
+      e.target.type === 'checkbox' ? e.target.checked : e.target.value;
     setFormData({ ...formData, [e.target.name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    
+    setError('');
+
     if (!formData.email || !formData.password) {
-      setError("Please enter both email and password");
+      setError('Please enter both email and password');
       return;
     }
-    
+
     try {
       const { supabase } = await import('../supabaseClient');
       const { data, error } = await supabase.auth.signInWithPassword({
         email: formData.email,
         password: formData.password,
       });
-      
+
       if (error) throw error;
-      
+
       // Redirect to dashboard on success
       window.location.href = '/lms/dashboard';
     } catch (err) {
@@ -51,37 +52,37 @@ export default function Login() {
   return (
     <div
       style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#f5f5f5",
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#f5f5f5',
         padding: 20,
       }}
     >
       <div
         style={{
-          width: "100%",
+          width: '100%',
           maxWidth: 440,
-          backgroundColor: "#fff",
+          backgroundColor: '#fff',
           borderRadius: 12,
           padding: 48,
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
         }}
       >
         {/* Logo/Brand */}
-        <div style={{ textAlign: "center", marginBottom: 32 }}>
+        <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <h1
             style={{
               fontSize: 28,
               fontWeight: 700,
-              color: "#333",
+              color: '#333',
               marginBottom: 8,
             }}
           >
             Elevate for Humanity
           </h1>
-          <p style={{ color: "var(--brand-text-muted)", fontSize: 16 }}>
+          <p style={{ color: 'var(--brand-text-muted)', fontSize: 16 }}>
             Sign in to your account
           </p>
         </div>
@@ -91,12 +92,12 @@ export default function Login() {
           <div
             style={{
               padding: 12,
-              backgroundColor: "#f8d7da",
-              color: "#721c24",
+              backgroundColor: '#f8d7da',
+              color: '#721c24',
               borderRadius: 6,
               marginBottom: 20,
               fontSize: 14,
-              border: "1px solid #f5c6cb",
+              border: '1px solid #f5c6cb',
             }}
           >
             {error}
@@ -109,11 +110,11 @@ export default function Login() {
             <label
               htmlFor="email"
               style={{
-                display: "block",
+                display: 'block',
                 marginBottom: 8,
                 fontWeight: 500,
                 fontSize: 14,
-                color: "#333",
+                color: '#333',
               }}
             >
               Email Address
@@ -127,16 +128,20 @@ export default function Login() {
               placeholder="you@example.com"
               required
               style={{
-                width: "100%",
-                padding: "12px 14px",
-                border: "1px solid var(--brand-border)",
+                width: '100%',
+                padding: '12px 14px',
+                border: '1px solid var(--brand-border)',
                 borderRadius: 6,
                 fontSize: 14,
-                outline: "none",
-                transition: "border-color 0.2s",
+                outline: 'none',
+                transition: 'border-color 0.2s',
               }}
-              onFocus={(e) => (e.target.style.borderColor = "var(--brand-info)")}
-              onBlur={(e) => (e.target.style.borderColor = "var(--brand-border)")}
+              onFocus={(e) =>
+                (e.target.style.borderColor = 'var(--brand-info)')
+              }
+              onBlur={(e) =>
+                (e.target.style.borderColor = 'var(--brand-border)')
+              }
             />
           </div>
 
@@ -144,11 +149,11 @@ export default function Login() {
             <label
               htmlFor="password"
               style={{
-                display: "block",
+                display: 'block',
                 marginBottom: 8,
                 fontWeight: 500,
                 fontSize: 14,
-                color: "#333",
+                color: '#333',
               }}
             >
               Password
@@ -162,34 +167,38 @@ export default function Login() {
               placeholder="••••••••"
               required
               style={{
-                width: "100%",
-                padding: "12px 14px",
-                border: "1px solid var(--brand-border)",
+                width: '100%',
+                padding: '12px 14px',
+                border: '1px solid var(--brand-border)',
                 borderRadius: 6,
                 fontSize: 14,
-                outline: "none",
-                transition: "border-color 0.2s",
+                outline: 'none',
+                transition: 'border-color 0.2s',
               }}
-              onFocus={(e) => (e.target.style.borderColor = "var(--brand-info)")}
-              onBlur={(e) => (e.target.style.borderColor = "var(--brand-border)")}
+              onFocus={(e) =>
+                (e.target.style.borderColor = 'var(--brand-info)')
+              }
+              onBlur={(e) =>
+                (e.target.style.borderColor = 'var(--brand-border)')
+              }
             />
           </div>
 
           {/* Remember Me & Forgot Password */}
           <div
             style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
               marginBottom: 24,
             }}
           >
             <label
               style={{
-                display: "flex",
-                alignItems: "center",
+                display: 'flex',
+                alignItems: 'center',
                 fontSize: 14,
-                cursor: "pointer",
+                cursor: 'pointer',
               }}
             >
               <input
@@ -201,7 +210,7 @@ export default function Login() {
                   marginRight: 8,
                   width: 16,
                   height: 16,
-                  cursor: "pointer",
+                  cursor: 'pointer',
                 }}
               />
               Remember me
@@ -210,8 +219,8 @@ export default function Login() {
               to="/forgot-password"
               style={{
                 fontSize: 14,
-                color: "var(--brand-info)",
-                textDecoration: "none",
+                color: 'var(--brand-info)',
+                textDecoration: 'none',
               }}
             >
               Forgot password?
@@ -222,19 +231,21 @@ export default function Login() {
           <button
             type="submit"
             style={{
-              width: "100%",
-              padding: "12px 24px",
-              backgroundColor: "var(--brand-info)",
-              color: "#fff",
-              border: "none",
+              width: '100%',
+              padding: '12px 24px',
+              backgroundColor: 'var(--brand-info)',
+              color: '#fff',
+              border: 'none',
               borderRadius: 6,
               fontSize: 16,
               fontWeight: 600,
-              cursor: "pointer",
-              transition: "background-color 0.2s",
+              cursor: 'pointer',
+              transition: 'background-color 0.2s',
             }}
-            onMouseEnter={(e) => (e.target.style.backgroundColor = "#0056b3")}
-            onMouseLeave={(e) => (e.target.style.backgroundColor = "var(--brand-info)")}
+            onMouseEnter={(e) => (e.target.style.backgroundColor = '#0056b3')}
+            onMouseLeave={(e) =>
+              (e.target.style.backgroundColor = 'var(--brand-info)')
+            }
           >
             Sign In
           </button>
@@ -243,23 +254,23 @@ export default function Login() {
         {/* Divider */}
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
-            margin: "24px 0",
+            display: 'flex',
+            alignItems: 'center',
+            margin: '24px 0',
           }}
         >
           <div
             style={{
               flex: 1,
               height: 1,
-              backgroundColor: "var(--brand-border)",
+              backgroundColor: 'var(--brand-border)',
             }}
           />
           <span
             style={{
-              padding: "0 16px",
+              padding: '0 16px',
               fontSize: 14,
-              color: "var(--brand-text-muted)",
+              color: 'var(--brand-text-muted)',
             }}
           >
             OR
@@ -268,33 +279,33 @@ export default function Login() {
             style={{
               flex: 1,
               height: 1,
-              backgroundColor: "var(--brand-border)",
+              backgroundColor: 'var(--brand-border)',
             }}
           />
         </div>
 
         {/* Social Login Buttons */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           <button
             type="button"
             style={{
-              width: "100%",
-              padding: "12px 24px",
-              backgroundColor: "#fff",
-              color: "#333",
-              border: "1px solid var(--brand-border)",
+              width: '100%',
+              padding: '12px 24px',
+              backgroundColor: '#fff',
+              color: '#333',
+              border: '1px solid var(--brand-border)',
               borderRadius: 6,
               fontSize: 14,
               fontWeight: 500,
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               gap: 8,
-              transition: "background-color 0.2s",
+              transition: 'background-color 0.2s',
             }}
-            onMouseEnter={(e) => (e.target.style.backgroundColor = "#f8f8f8")}
-            onMouseLeave={(e) => (e.target.style.backgroundColor = "#fff")}
+            onMouseEnter={(e) => (e.target.style.backgroundColor = '#f8f8f8')}
+            onMouseLeave={(e) => (e.target.style.backgroundColor = '#fff')}
           >
             <svg width="18" height="18" viewBox="0 0 18 18">
               <path
@@ -320,23 +331,23 @@ export default function Login() {
           <button
             type="button"
             style={{
-              width: "100%",
-              padding: "12px 24px",
-              backgroundColor: "#fff",
-              color: "#333",
-              border: "1px solid var(--brand-border)",
+              width: '100%',
+              padding: '12px 24px',
+              backgroundColor: '#fff',
+              color: '#333',
+              border: '1px solid var(--brand-border)',
               borderRadius: 6,
               fontSize: 14,
               fontWeight: 500,
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               gap: 8,
-              transition: "background-color 0.2s",
+              transition: 'background-color 0.2s',
             }}
-            onMouseEnter={(e) => (e.target.style.backgroundColor = "#f8f8f8")}
-            onMouseLeave={(e) => (e.target.style.backgroundColor = "#fff")}
+            onMouseEnter={(e) => (e.target.style.backgroundColor = '#f8f8f8')}
+            onMouseLeave={(e) => (e.target.style.backgroundColor = '#fff')}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2">
               <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
@@ -349,17 +360,17 @@ export default function Login() {
         <div
           style={{
             marginTop: 24,
-            textAlign: "center",
+            textAlign: 'center',
             fontSize: 14,
-            color: "var(--brand-text-muted)",
+            color: 'var(--brand-text-muted)',
           }}
         >
-          Don't have an account?{" "}
+          Don't have an account?{' '}
           <Link
             to="/signup"
             style={{
-              color: "var(--brand-info)",
-              textDecoration: "none",
+              color: 'var(--brand-info)',
+              textDecoration: 'none',
               fontWeight: 500,
             }}
           >
@@ -372,9 +383,9 @@ export default function Login() {
           style={{
             marginTop: 32,
             paddingTop: 24,
-            borderTop: "1px solid var(--brand-border)",
-            display: "flex",
-            justifyContent: "center",
+            borderTop: '1px solid var(--brand-border)',
+            display: 'flex',
+            justifyContent: 'center',
             gap: 24,
             fontSize: 13,
           }}
@@ -382,8 +393,8 @@ export default function Login() {
           <Link
             to="/privacy-policy"
             style={{
-              color: "var(--brand-text-muted)",
-              textDecoration: "none",
+              color: 'var(--brand-text-muted)',
+              textDecoration: 'none',
             }}
           >
             Privacy
@@ -391,8 +402,8 @@ export default function Login() {
           <Link
             to="/terms-of-service"
             style={{
-              color: "var(--brand-text-muted)",
-              textDecoration: "none",
+              color: 'var(--brand-text-muted)',
+              textDecoration: 'none',
             }}
           >
             Terms
@@ -400,8 +411,8 @@ export default function Login() {
           <Link
             to="/support"
             style={{
-              color: "var(--brand-text-muted)",
-              textDecoration: "none",
+              color: 'var(--brand-text-muted)',
+              textDecoration: 'none',
             }}
           >
             Help

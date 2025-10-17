@@ -3,49 +3,53 @@
   Commercial License. No resale, sublicensing, or redistribution allowed.
   See LICENSE file for details.
 */
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 export default function CourseBuilder() {
   const [modules, setModules] = useState([
-    { title: "Module 1", lessons: ["Lesson 1"] }
+    { title: 'Module 1', lessons: ['Lesson 1'] },
   ]);
-  const [newModule, setNewModule] = useState("");
-  const [newLesson, setNewLesson] = useState("");
+  const [newModule, setNewModule] = useState('');
+  const [newLesson, setNewLesson] = useState('');
   const [selectedModule, setSelectedModule] = useState(0);
 
   function addModule(e) {
     e.preventDefault();
     if (newModule.trim()) {
       setModules([...modules, { title: newModule, lessons: [] }]);
-      setNewModule("");
+      setNewModule('');
     }
   }
 
   function addLesson(e) {
     e.preventDefault();
     if (newLesson.trim()) {
-      setModules(modules.map((m, i) =>
-        i === selectedModule
-          ? { ...m, lessons: [...m.lessons, newLesson] }
-          : m
-      ));
-      setNewLesson("");
+      setModules(
+        modules.map((m, i) =>
+          i === selectedModule
+            ? { ...m, lessons: [...m.lessons, newLesson] }
+            : m
+        )
+      );
+      setNewLesson('');
     }
   }
 
   return (
-    <main style={{ padding: 32, maxWidth: 900, margin: "0 auto" }}>
+    <main style={{ padding: 32, maxWidth: 900, margin: '0 auto' }}>
       <h1>Course Builder</h1>
       <form onSubmit={addModule} style={{ marginBottom: 16 }}>
         <input
           value={newModule}
-          onChange={e => setNewModule(e.target.value)}
+          onChange={(e) => setNewModule(e.target.value)}
           placeholder="New Module Title"
           style={{ padding: 8, marginRight: 8 }}
         />
-        <button type="submit" style={{ padding: "8px 16px" }}>Add Module</button>
+        <button type="submit" style={{ padding: '8px 16px' }}>
+          Add Module
+        </button>
       </form>
-      <div style={{ display: "flex", gap: 32 }}>
+      <div style={{ display: 'flex', gap: 32 }}>
         <div style={{ flex: 1 }}>
           <h2>Modules</h2>
           <ul>
@@ -53,9 +57,9 @@ export default function CourseBuilder() {
               <li
                 key={i}
                 style={{
-                  cursor: "pointer",
-                  fontWeight: i === selectedModule ? "bold" : "normal",
-                  marginBottom: 8
+                  cursor: 'pointer',
+                  fontWeight: i === selectedModule ? 'bold' : 'normal',
+                  marginBottom: 8,
                 }}
                 onClick={() => setSelectedModule(i)}
               >
@@ -74,11 +78,13 @@ export default function CourseBuilder() {
           <form onSubmit={addLesson} style={{ marginTop: 12 }}>
             <input
               value={newLesson}
-              onChange={e => setNewLesson(e.target.value)}
+              onChange={(e) => setNewLesson(e.target.value)}
               placeholder="New Lesson Title"
               style={{ padding: 8, marginRight: 8 }}
             />
-            <button type="submit" style={{ padding: "8px 16px" }}>Add Lesson</button>
+            <button type="submit" style={{ padding: '8px 16px' }}>
+              Add Lesson
+            </button>
           </form>
         </div>
       </div>

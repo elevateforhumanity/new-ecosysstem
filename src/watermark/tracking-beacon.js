@@ -8,16 +8,17 @@ class TrackingBeacon {
   constructor(config = {}) {
     this.licenseId = config.licenseId || 'UNLICENSED';
     this.domain = config.domain || window?.location?.hostname || 'unknown';
-    this.trackingUrl = config.trackingUrl || 'https://license.elevateforhumanity.com/api/track';
+    this.trackingUrl =
+      config.trackingUrl || 'https://license.elevateforhumanity.com/api/track';
     this.interval = config.interval || 5 * 60 * 1000; // 5 minutes
     this.enabled = config.enabled !== false;
     this.stealth = config.stealth !== false;
-    
+
     this.sessionId = this.generateSessionId();
     this.startTime = Date.now();
     this.pageViews = 0;
     this.interactions = 0;
-    
+
     if (this.enabled) {
       this.init();
     }
@@ -53,7 +54,8 @@ class TrackingBeacon {
     // Hidden div watermark
     const hiddenDiv = document.createElement('div');
     hiddenDiv.id = 'license-watermark';
-    hiddenDiv.style.cssText = 'display:none!important;visibility:hidden!important;position:absolute!important;left:-9999px!important;';
+    hiddenDiv.style.cssText =
+      'display:none!important;visibility:hidden!important;position:absolute!important;left:-9999px!important;';
     hiddenDiv.setAttribute('data-license', this.licenseId);
     hiddenDiv.setAttribute('data-domain', this.domain);
     hiddenDiv.setAttribute('data-timestamp', Date.now());
@@ -90,14 +92,18 @@ Contact: legal@elevateforhumanity.com
    */
   generateWatermarkHash() {
     const data = `${this.licenseId}:${this.domain}:${Date.now()}:elevate-platform`;
-    return btoa(data).replace(/[^a-zA-Z0-9]/g, '').substring(0, 32);
+    return btoa(data)
+      .replace(/[^a-zA-Z0-9]/g, '')
+      .substring(0, 32);
   }
 
   /**
    * Generate unique session ID
    */
   generateSessionId() {
-    return 'sess_' + Math.random().toString(36).substr(2, 16) + '_' + Date.now();
+    return (
+      'sess_' + Math.random().toString(36).substr(2, 16) + '_' + Date.now()
+    );
   }
 
   /**
@@ -106,7 +112,7 @@ Contact: legal@elevateforhumanity.com
   startTracking() {
     // Send tracking ping immediately
     this.sendTrackingPing();
-    
+
     // Set up periodic pings
     this.trackingInterval = setInterval(() => {
       this.sendTrackingPing();
@@ -133,10 +139,14 @@ Contact: legal@elevateforhumanity.com
     this.pageViews++;
 
     // Track user interactions
-    ['click', 'keydown', 'scroll', 'mousemove'].forEach(event => {
-      document.addEventListener(event, () => {
-        this.interactions++;
-      }, { passive: true, once: false });
+    ['click', 'keydown', 'scroll', 'mousemove'].forEach((event) => {
+      document.addEventListener(
+        event,
+        () => {
+          this.interactions++;
+        },
+        { passive: true, once: false }
+      );
     });
 
     // Track navigation
@@ -154,7 +164,7 @@ Contact: legal@elevateforhumanity.com
     await this.sendPing({
       type: 'init',
       system: systemInfo,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
   }
 
@@ -180,8 +190,8 @@ Contact: legal@elevateforhumanity.com
       screen: {
         width: screen.width,
         height: screen.height,
-        colorDepth: screen.colorDepth
-      }
+        colorDepth: screen.colorDepth,
+      },
     };
 
     await this.sendPing(pingData, isUnload);
@@ -206,18 +216,18 @@ Contact: legal@elevateforhumanity.com
         availWidth: screen.availWidth,
         availHeight: screen.availHeight,
         colorDepth: screen.colorDepth,
-        pixelDepth: screen.pixelDepth
+        pixelDepth: screen.pixelDepth,
       },
       window: {
         innerWidth: window.innerWidth,
         innerHeight: window.innerHeight,
         outerWidth: window.outerWidth,
-        outerHeight: window.outerHeight
+        outerHeight: window.outerHeight,
       },
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       timezoneOffset: new Date().getTimezoneOffset(),
       webgl: this.getWebGLInfo(),
-      canvas: this.getCanvasFingerprint()
+      canvas: this.getCanvasFingerprint(),
     };
   }
 
@@ -227,15 +237,16 @@ Contact: legal@elevateforhumanity.com
   getWebGLInfo() {
     try {
       const canvas = document.createElement('canvas');
-      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-      
+      const gl =
+        canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
       if (!gl) return null;
-      
+
       return {
         vendor: gl.getParameter(gl.VENDOR),
         renderer: gl.getParameter(gl.RENDERER),
         version: gl.getParameter(gl.VERSION),
-        shadingLanguageVersion: gl.getParameter(gl.SHADING_LANGUAGE_VERSION)
+        shadingLanguageVersion: gl.getParameter(gl.SHADING_LANGUAGE_VERSION),
       };
     } catch (e) {
       return null;
@@ -249,11 +260,11 @@ Contact: legal@elevateforhumanity.com
     try {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
-      
+
       ctx.textBaseline = 'top';
       ctx.font = '14px Arial';
       ctx.fillText('Elevate Platform Fingerprint', 2, 2);
-      
+
       return canvas.toDataURL().substring(0, 50);
     } catch (e) {
       return null;
@@ -270,9 +281,9 @@ Contact: legal@elevateforhumanity.com
         headers: {
           'Content-Type': 'application/json',
           'X-License-ID': this.licenseId,
-          'X-Domain': this.domain
+          'X-Domain': this.domain,
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       };
 
       if (isUnload && navigator.sendBeacon) {
@@ -281,7 +292,7 @@ Contact: legal@elevateforhumanity.com
       } else {
         // Use fetch for regular pings
         const response = await fetch(this.trackingUrl, options);
-        
+
         if (!response.ok) {
           console.warn('Tracking ping failed:', response.status);
         }
@@ -305,7 +316,7 @@ Contact: legal@elevateforhumanity.com
       violations.push({
         type: 'domain_mismatch',
         expected: this.expectedDomain,
-        actual: this.domain
+        actual: this.domain,
       });
     }
 
@@ -313,18 +324,25 @@ Contact: legal@elevateforhumanity.com
     if (this.isDevToolsOpen()) {
       violations.push({
         type: 'devtools_open',
-        timestamp: Date.now()
+        timestamp: Date.now(),
       });
     }
 
     // Check for common scraping user agents
-    const scrapingAgents = ['bot', 'crawler', 'spider', 'scraper', 'wget', 'curl'];
+    const scrapingAgents = [
+      'bot',
+      'crawler',
+      'spider',
+      'scraper',
+      'wget',
+      'curl',
+    ];
     const userAgent = navigator.userAgent.toLowerCase();
-    
-    if (scrapingAgents.some(agent => userAgent.includes(agent))) {
+
+    if (scrapingAgents.some((agent) => userAgent.includes(agent))) {
       violations.push({
         type: 'suspicious_user_agent',
-        userAgent: navigator.userAgent
+        userAgent: navigator.userAgent,
       });
     }
 
@@ -336,8 +354,10 @@ Contact: legal@elevateforhumanity.com
    */
   isDevToolsOpen() {
     const threshold = 160;
-    return window.outerHeight - window.innerHeight > threshold ||
-           window.outerWidth - window.innerWidth > threshold;
+    return (
+      window.outerHeight - window.innerHeight > threshold ||
+      window.outerWidth - window.innerWidth > threshold
+    );
   }
 
   /**
@@ -360,7 +380,7 @@ Contact: legal@elevateforhumanity.com
       pageViews: this.pageViews,
       interactions: this.interactions,
       domain: this.domain,
-      licenseId: this.licenseId
+      licenseId: this.licenseId,
     };
   }
 }
@@ -372,7 +392,7 @@ if (typeof window !== 'undefined') {
     licenseId: window.ELEVATE_LICENSE_ID || 'DEMO-LICENSE',
     domain: window.location.hostname,
     enabled: true,
-    stealth: false
+    stealth: false,
   });
 }
 

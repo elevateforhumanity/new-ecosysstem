@@ -10,25 +10,30 @@ const fullSiteIndexPath = path.join(distPath, 'READY_FOR_TRANSFER_index.html');
 function deployFullSite() {
   try {
     console.log('🚀 Deploying full site content...');
-    
+
     // Replace the React shell index.html with the full site content
     if (fs.existsSync(fullSiteIndexPath)) {
       fs.copyFileSync(fullSiteIndexPath, indexPath);
       console.log('✅ Replaced index.html with full site content');
-      
+
       // Update canonical URLs to point to root
       let content = fs.readFileSync(indexPath, 'utf8');
-      
+
       // Fix all references to READY_FOR_TRANSFER_index.html
-      content = content.replace(/https:\/\/www\.elevateforhumanity\.org\/READY_FOR_TRANSFER_index\.html/g, 'https://www.elevateforhumanity.org/');
+      content = content.replace(
+        /https:\/\/www\.elevateforhumanity\.org\/READY_FOR_TRANSFER_index\.html/g,
+        'https://www.elevateforhumanity.org/'
+      );
       content = content.replace(/\/READY_FOR_TRANSFER_index\.html/g, '/');
-      
+
       fs.writeFileSync(indexPath, content);
       console.log('✅ Updated canonical URLs for index.html');
     } else {
-      console.warn('⚠️  READY_FOR_TRANSFER_index.html not found - keeping current index.html');
+      console.warn(
+        '⚠️  READY_FOR_TRANSFER_index.html not found - keeping current index.html'
+      );
     }
-    
+
     console.log('🎉 Full site deployment complete!');
   } catch (error) {
     console.error('❌ Error deploying full site:', error.message);

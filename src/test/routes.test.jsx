@@ -17,9 +17,7 @@ import VerifyEmail from '../pages/VerifyEmail';
 const renderWithRouter = (component, { route = '/' } = {}) => {
   return render(
     <HelmetProvider>
-      <MemoryRouter initialEntries={[route]}>
-        {component}
-      </MemoryRouter>
+      <MemoryRouter initialEntries={[route]}>{component}</MemoryRouter>
     </HelmetProvider>
   );
 };
@@ -38,7 +36,9 @@ describe('Route Tests', () => {
 
     it('renders Settings page', () => {
       renderWithRouter(<Settings />);
-      expect(screen.getByRole('heading', { name: /Settings/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('heading', { name: /Settings/i })
+      ).toBeInTheDocument();
     });
 
     it('renders Login page', () => {
@@ -67,7 +67,9 @@ describe('Route Tests', () => {
 
     it('renders ResetPassword page', () => {
       renderWithRouter(<ResetPassword />);
-      expect(screen.getByRole('heading', { name: /Reset Password/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('heading', { name: /Reset Password/i })
+      ).toBeInTheDocument();
     });
 
     it('renders VerifyEmail page', () => {

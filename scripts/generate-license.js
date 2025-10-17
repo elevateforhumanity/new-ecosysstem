@@ -3,11 +3,14 @@
 /**
  * License Generator CLI for Rise Foundation Ecosystem
  * Generates JWT-based license tokens for clients
- * 
+ *
  * Usage: node generate-license.js --licensee "Client Name" --domain "client.com" --tier "enterprise"
  */
 
-const { generateClientLicense, validateLicenseToken } = require('../middleware/license');
+const {
+  generateClientLicense,
+  validateLicenseToken,
+} = require('../middleware/license');
 const fs = require('fs');
 const path = require('path');
 
@@ -15,13 +18,13 @@ const path = require('path');
 function parseArgs() {
   const args = process.argv.slice(2);
   const options = {};
-  
+
   for (let i = 0; i < args.length; i += 2) {
     const key = args[i].replace('--', '');
     const value = args[i + 1];
     options[key] = value;
   }
-  
+
   return options;
 }
 
@@ -41,13 +44,13 @@ Domain:          ${licenseData.domain}
 License Tier:    ${licenseData.tier.toUpperCase()}
 Features:        ${licenseData.features.join(', ')}
 Issue Date:      ${new Date().toLocaleDateString()}
-Expires:         ${new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)).toLocaleDateString()}
+Expires:         ${new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toLocaleDateString()}
 
 LICENSE TOKEN:
 ${token}
 
 AUTHORIZED FEATURES:
-${licenseData.features.map(f => `  ✓ ${f.toUpperCase()}`).join('\n')}
+${licenseData.features.map((f) => `  ✓ ${f.toUpperCase()}`).join('\n')}
 
 TERMS AND CONDITIONS:
 • This license is valid only for the specified domain
@@ -72,7 +75,7 @@ Licensed Use Only - Unauthorized use prohibited
 // Main function
 function main() {
   const options = parseArgs();
-  
+
   // Validate required options
   if (!options.licensee || !options.domain) {
     console.error(`
@@ -101,15 +104,23 @@ Examples:
     domain: options.domain,
     tier: options.tier || 'basic',
     features: options.features ? options.features.split(',') : ['lms', 'basic'],
-    duration: parseInt(options.duration) || 365
+    duration: parseInt(options.duration) || 365,
   };
 
   // Feature sets by tier
   const tierFeatures = {
     basic: ['lms', 'basic'],
     sister: ['lms', 'basic', 'sister-sites'],
-    enterprise: ['lms', 'basic', 'sister-sites', 'analytics', 'ai-tutor', 'compliance', 'admin'],
-    development: ['all']
+    enterprise: [
+      'lms',
+      'basic',
+      'sister-sites',
+      'analytics',
+      'ai-tutor',
+      'compliance',
+      'admin',
+    ],
+    development: ['all'],
   };
 
   // Override features based on tier if not explicitly set
@@ -128,7 +139,7 @@ Examples:
   try {
     // Generate license token
     const token = generateClientLicense(licenseData);
-    
+
     // Validate the generated token
     const validation = validateLicenseToken(token);
     if (!validation.valid) {
@@ -143,7 +154,7 @@ Examples:
 
     // Generate certificate
     const certificate = generateLicenseCertificate(licenseData, token);
-    
+
     // Save to file if output specified
     if (options.output) {
       const outputPath = path.resolve(options.output);
@@ -153,13 +164,13 @@ Examples:
       // Save to default location
       const filename = `license-${licenseData.domain.replace(/[^a-zA-Z0-9]/g, '-')}-${Date.now()}.txt`;
       const outputPath = path.join(__dirname, '..', 'licenses', filename);
-      
+
       // Create licenses directory if it doesn't exist
       const licensesDir = path.dirname(outputPath);
       if (!fs.existsSync(licensesDir)) {
         fs.mkdirSync(licensesDir, { recursive: true });
       }
-      
+
       fs.writeFileSync(outputPath, certificate);
       console.log(`📄 License certificate saved to: ${outputPath}`);
     }
@@ -176,7 +187,12 @@ LICENSE_FEATURES=${licenseData.features.join(',')}
 # Make sure to keep this secure and never commit to public repositories
 `;
 
-    const envPath = path.join(__dirname, '..', 'licenses', `env-${licenseData.domain.replace(/[^a-zA-Z0-9]/g, '-')}.txt`);
+    const envPath = path.join(
+      __dirname,
+      '..',
+      'licenses',
+      `env-${licenseData.domain.replace(/[^a-zA-Z0-9]/g, '-')}.txt`
+    );
     fs.writeFileSync(envPath, envTemplate);
     console.log(`⚙️  Environment template saved to: ${envPath}`);
 
@@ -186,7 +202,6 @@ LICENSE_FEATURES=${licenseData.features.join(',')}
     console.log('2. Client should add LICENSE_TOKEN to their .env file');
     console.log('3. Client should implement license validation in their app');
     console.log('4. Monitor usage via the license server dashboard');
-
   } catch (error) {
     console.error('❌ Error generating license:', error.message);
     process.exit(1);

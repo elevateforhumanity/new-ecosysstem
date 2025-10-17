@@ -11,9 +11,9 @@
  *   npm i -D cheerio node-fetch@3 robots-parser fast-xml-parser
  */
 
-import fs from "fs";
-import path from "path";
-import * as cheerio from "cheerio";
+import fs from 'fs';
+import path from 'path';
+import * as cheerio from 'cheerio';
 
 // Use built-in fetch for Node 18+
 const fetch = globalThis.fetch;
@@ -23,15 +23,21 @@ class XMLBuilder {
   constructor() {}
   build(obj) {
     if (obj.urlset) {
-      const urls = obj.urlset.url.map(u => 
-        `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${u.lastmod}</lastmod>\n  </url>`
-      ).join('\n');
+      const urls = obj.urlset.url
+        .map(
+          (u) =>
+            `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${u.lastmod}</lastmod>\n  </url>`
+        )
+        .join('\n');
       return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>`;
     }
     if (obj.sitemapindex) {
-      const maps = obj.sitemapindex.sitemap.map(s => 
-        `  <sitemap>\n    <loc>${s.loc}</loc>\n    <lastmod>${s.lastmod}</lastmod>\n  </sitemap>`
-      ).join('\n');
+      const maps = obj.sitemapindex.sitemap
+        .map(
+          (s) =>
+            `  <sitemap>\n    <loc>${s.loc}</loc>\n    <lastmod>${s.lastmod}</lastmod>\n  </sitemap>`
+        )
+        .join('\n');
       return `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${maps}\n</sitemapindex>`;
     }
     return '';
@@ -41,33 +47,41 @@ class XMLBuilder {
 // Basic robots parser (no external dependency needed)
 const robotsParser = () => ({ isAllowed: () => true });
 
-const TENANTS_PATH = process.env.TENANTS_PATH || "tenants.json";
+const TENANTS_PATH = process.env.TENANTS_PATH || 'tenants.json';
 if (!fs.existsSync(TENANTS_PATH)) {
   console.error(`Missing ${TENANTS_PATH}. Create tenants.json (see example).`);
   process.exit(1);
 }
 
-const tenants = JSON.parse(fs.readFileSync(TENANTS_PATH, "utf8"));
+const tenants = JSON.parse(fs.readFileSync(TENANTS_PATH, 'utf8'));
 const NOW = new Date();
 const ISO = NOW.toISOString().slice(0, 10);
 
 const builder = new XMLBuilder();
 
 const classifySection = (pathname) => {
-  if (pathname === "/" || pathname.startsWith("/about") || pathname.startsWith("/contact")
-      || pathname.startsWith("/privacy") || pathname.startsWith("/sitemap"))
-    return "marketing";
-  if (pathname.startsWith("/programs/") || pathname === "/programs/") return "programs";
-  if (pathname.startsWith("/blog/") || pathname === "/blog/") return "blog";
-  if (pathname.startsWith("/employers/") || pathname === "/employers/") return "employers";
-  return "misc";
+  if (
+    pathname === '/' ||
+    pathname.startsWith('/about') ||
+    pathname.startsWith('/contact') ||
+    pathname.startsWith('/privacy') ||
+    pathname.startsWith('/sitemap')
+  )
+    return 'marketing';
+  if (pathname.startsWith('/programs/') || pathname === '/programs/')
+    return 'programs';
+  if (pathname.startsWith('/blog/') || pathname === '/blog/') return 'blog';
+  if (pathname.startsWith('/employers/') || pathname === '/employers/')
+    return 'employers';
+  return 'misc';
 };
 
 const normalize = (base, url) => {
   try {
     const x = new URL(url, base);
-    x.hash = "";
-    if (!x.pathname.match(/\.[a-z0-9]{2,5}$/i)) x.pathname = x.pathname.replace(/\/$/, "") + "/";
+    x.hash = '';
+    if (!x.pathname.match(/\.[a-z0-9]{2,5}$/i))
+      x.pathname = x.pathname.replace(/\/$/, '') + '/';
     return x.toString();
   } catch {
     return null;
@@ -75,9 +89,9 @@ const normalize = (base, url) => {
 };
 
 async function processTenant(t) {
-  const BASE = t.base.replace(/\/$/, "");
+  const BASE = t.base.replace(/\/$/, '');
   const OUTROOT = t.out;
-  const SM_DIR = path.join(OUTROOT, "sitemaps");
+  const SM_DIR = path.join(OUTROOT, 'sitemaps');
   const CHUNK = Number(t.chunk || 1000);
   const LATEST = Number(t.latest || 1000);
   fs.mkdirSync(SM_DIR, { recursive: true });
@@ -91,17 +105,21 @@ async function processTenant(t) {
   const robotsUrl = `${BASE}/robots.txt`;
   let robots = robotsParser();
   try {
-    const txt = await fetch(robotsUrl).then(r => r.text());
+    const txt = await fetch(robotsUrl).then((r) => r.text());
     robots = robotsParser(robotsUrl, txt);
   } catch {
     console.log(`   ⚠️  Could not fetch robots.txt from ${robotsUrl}`);
   }
 
   // --- Crawl (BFS) same-origin HTML pages ---
-  const q = [normalize(BASE, "/")];
+  const q = [normalize(BASE, '/')];
   const seen = new Map(); // url -> {status,lastmod}
   const sameHost = (u) => {
-    try { return new URL(u, BASE).host === new URL(BASE).host; } catch { return false; }
+    try {
+      return new URL(u, BASE).host === new URL(BASE).host;
+    } catch {
+      return false;
+    }
   };
 
   let crawled = 0;
@@ -110,27 +128,30 @@ async function processTenant(t) {
   while (q.length && crawled < maxPages) {
     const url = q.shift();
     if (!url || seen.has(url)) continue;
-    
-    if (!robots.isAllowed(url, "*")) { 
-      seen.set(url, { status: 999 }); 
-      continue; 
+
+    if (!robots.isAllowed(url, '*')) {
+      seen.set(url, { status: 999 });
+      continue;
     }
-    
+
     try {
-      const res = await fetch(url, { 
-        redirect: "follow",
-        headers: { 'User-Agent': 'EFH-Multi-Tenant-Engine/1.0' }
+      const res = await fetch(url, {
+        redirect: 'follow',
+        headers: { 'User-Agent': 'EFH-Multi-Tenant-Engine/1.0' },
       });
-      const ct = (res.headers.get("content-type") || "").toLowerCase();
-      seen.set(url, { status: res.status, lastmod: res.headers.get("last-modified") });
-      
-      if (res.status >= 400 || !ct.includes("text/html")) continue;
+      const ct = (res.headers.get('content-type') || '').toLowerCase();
+      seen.set(url, {
+        status: res.status,
+        lastmod: res.headers.get('last-modified'),
+      });
+
+      if (res.status >= 400 || !ct.includes('text/html')) continue;
 
       const html = await res.text();
       const $ = cheerio.load(html);
-      
-      $("a[href]").each((_, a) => {
-        const href = $(a).attr("href"); 
+
+      $('a[href]').each((_, a) => {
+        const href = $(a).attr('href');
         if (!href) return;
         try {
           const abs = new URL(href, url).toString();
@@ -139,10 +160,10 @@ async function processTenant(t) {
           if (n && !seen.has(n) && !q.includes(n)) q.push(n);
         } catch {}
       });
-      
+
       crawled++;
-    } catch (error) { 
-      seen.set(url, { status: 0 }); 
+    } catch (error) {
+      seen.set(url, { status: 0 });
     }
   }
 
@@ -156,26 +177,43 @@ async function processTenant(t) {
   console.log(`   ✅ ${all.length} valid pages for sitemaps`);
 
   // --- Section buckets ---
-  const buckets = { marketing: [], programs: [], blog: [], employers: [], misc: [] };
+  const buckets = {
+    marketing: [],
+    programs: [],
+    blog: [],
+    employers: [],
+    misc: [],
+  };
   for (const it of all) {
     const p = new URL(it.url).pathname;
     buckets[classifySection(p)].push(it);
   }
 
-  console.log(`   📂 Section distribution:`, Object.fromEntries(
-    Object.entries(buckets).map(([k, v]) => [k, v.length])
-  ));
+  console.log(
+    `   📂 Section distribution:`,
+    Object.fromEntries(Object.entries(buckets).map(([k, v]) => [k, v.length]))
+  );
 
   // --- Helpers ---
   const writeSM = (items, file) => {
-    const data = { urlset: { url: items.map(i => ({ loc: i.url, lastmod: i.last ? i.last.toISOString() : ISO })) } };
+    const data = {
+      urlset: {
+        url: items.map((i) => ({
+          loc: i.url,
+          lastmod: i.last ? i.last.toISOString() : ISO,
+        })),
+      },
+    };
     fs.writeFileSync(path.join(SM_DIR, file), builder.build(data));
   };
-  
+
   const master = [];
   const addMaster = (rel) => {
-    const relRoot = SM_DIR.replace(/^\.?\/*/, "").replace(/^sites\/[^/]+\//, ""); // expose under domain root
-    const loc = `${BASE}/${path.posix.join(relRoot, rel).replace(/\\/g, "/")}`;
+    const relRoot = SM_DIR.replace(/^\.?\/*/, '').replace(
+      /^sites\/[^/]+\//,
+      ''
+    ); // expose under domain root
+    const loc = `${BASE}/${path.posix.join(relRoot, rel).replace(/\\/g, '/')}`;
     master.push(loc);
   };
 
@@ -184,7 +222,7 @@ async function processTenant(t) {
     const m = new Map();
     for (const it of arr) {
       const d = it.last || NOW;
-      const key = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`;
+      const key = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}`;
       if (!m.has(key)) m.set(key, []);
       m.get(key).push(it);
     }
@@ -207,45 +245,58 @@ async function processTenant(t) {
   }
 
   // --- Latest updates feed ---
-  const latest = [...all].sort((a, b) => (b.last?.getTime() || 0) - (a.last?.getTime() || 0)).slice(0, LATEST);
-  writeSM(latest, "sitemap-latest.xml");
-  addMaster("sitemap-latest.xml");
+  const latest = [...all]
+    .sort((a, b) => (b.last?.getTime() || 0) - (a.last?.getTime() || 0))
+    .slice(0, LATEST);
+  writeSM(latest, 'sitemap-latest.xml');
+  addMaster('sitemap-latest.xml');
   sitemapCount++;
 
   console.log(`   🗺️  Generated ${sitemapCount} ultra-tiny sitemaps`);
 
   // --- Master index & robots ---
-  const idx = { sitemapindex: { sitemap: master.map(m => ({ loc: m, lastmod: ISO })) } };
-  fs.writeFileSync(path.join(OUTROOT, "sitemap_index.xml"), builder.build(idx));
-  fs.writeFileSync(path.join(OUTROOT, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${BASE}/sitemap_index.xml\n`);
+  const idx = {
+    sitemapindex: { sitemap: master.map((m) => ({ loc: m, lastmod: ISO })) },
+  };
+  fs.writeFileSync(path.join(OUTROOT, 'sitemap_index.xml'), builder.build(idx));
+  fs.writeFileSync(
+    path.join(OUTROOT, 'robots.txt'),
+    `User-agent: *\nAllow: /\nSitemap: ${BASE}/sitemap_index.xml\n`
+  );
 
   // --- Organization JSON-LD (basic, override later if needed) ---
   const orgSchema = {
-    "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    "name": "Elevate for Humanity Career & Training Institute",
-    "url": BASE,
-    "sameAs": [
-      "https://www.facebook.com/elevateforhumanity",
-      "https://www.linkedin.com/company/elevateforhumanity"
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOrganization',
+    name: 'Elevate for Humanity Career & Training Institute',
+    url: BASE,
+    sameAs: [
+      'https://www.facebook.com/elevateforhumanity',
+      'https://www.linkedin.com/company/elevateforhumanity',
     ],
-    "contactPoint": [{
-      "@type": "ContactPoint",
-      "telephone": "+1-317-555-1234",
-      "contactType": "customer service",
-      "availableLanguage": "English"
-    }],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Indianapolis",
-      "addressRegion": "IN",
-      "addressCountry": "US"
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        telephone: '+1-317-555-1234',
+        contactType: 'customer service',
+        availableLanguage: 'English',
+      },
+    ],
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Indianapolis',
+      addressRegion: 'IN',
+      addressCountry: 'US',
     },
-    "description": "Enterprise-grade career training and workforce development programs",
-    "tenant": t.slug,
-    "generated": new Date().toISOString()
+    description:
+      'Enterprise-grade career training and workforce development programs',
+    tenant: t.slug,
+    generated: new Date().toISOString(),
   };
-  fs.writeFileSync(path.join(OUTROOT, "schema.json"), JSON.stringify(orgSchema, null, 2));
+  fs.writeFileSync(
+    path.join(OUTROOT, 'schema.json'),
+    JSON.stringify(orgSchema, null, 2)
+  );
 
   // --- Netlify redirects (baseline legacy → new) ---
   const redirects = `/career-uplift-services/certify-and-thrive-program   /programs/cybersecurity/ 301!
@@ -264,19 +315,21 @@ async function processTenant(t) {
   X-XSS-Protection: 1; mode=block
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin`;
-  fs.writeFileSync(path.join(OUTROOT, "_redirects"), redirects);
+  fs.writeFileSync(path.join(OUTROOT, '_redirects'), redirects);
 
   // --- Pings (Google + Bing) ---
   console.log(`   📡 Pinging search engines...`);
   for (const ping of [
     `https://www.google.com/ping?sitemap=${encodeURIComponent(`${BASE}/sitemap_index.xml`)}`,
-    `https://www.bing.com/ping?sitemap=${encodeURIComponent(`${BASE}/sitemap_index.xml`)}`
+    `https://www.bing.com/ping?sitemap=${encodeURIComponent(`${BASE}/sitemap_index.xml`)}`,
   ]) {
-    try { 
-      const r = await fetch(ping); 
-      console.log(`   ✅ Ping ${ping.includes('google') ? 'Google' : 'Bing'}: ${r.status}`); 
-    } catch (e) { 
-      console.warn(`   ⚠️  Ping failed: ${e.message}`); 
+    try {
+      const r = await fetch(ping);
+      console.log(
+        `   ✅ Ping ${ping.includes('google') ? 'Google' : 'Bing'}: ${r.status}`
+      );
+    } catch (e) {
+      console.warn(`   ⚠️  Ping failed: ${e.message}`);
     }
   }
 
@@ -288,29 +341,37 @@ async function processTenant(t) {
         host: new URL(BASE).host,
         key: t.indexnowKey,
         keyLocation: `${BASE}/${t.indexnowKey}.txt`,
-        urlList: [ `${BASE}/sitemap_index.xml`, ...latest.slice(0, 10).map(x => x.url) ]
+        urlList: [
+          `${BASE}/sitemap_index.xml`,
+          ...latest.slice(0, 10).map((x) => x.url),
+        ],
       };
-      const r = await fetch("https://api.indexnow.org/indexnow", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+      const r = await fetch('https://api.indexnow.org/indexnow', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       });
       console.log(`   ✅ IndexNow: ${r.status}`);
-      
+
       // Create IndexNow key file
-      fs.writeFileSync(path.join(OUTROOT, `${t.indexnowKey}.txt`), t.indexnowKey);
-    } catch (e) { 
-      console.warn(`   ⚠️  IndexNow failed: ${e.message}`); 
+      fs.writeFileSync(
+        path.join(OUTROOT, `${t.indexnowKey}.txt`),
+        t.indexnowKey
+      );
+    } catch (e) {
+      console.warn(`   ⚠️  IndexNow failed: ${e.message}`);
     }
   }
 
-  return { 
-    slug: t.slug, 
-    out: OUTROOT, 
-    base: BASE, 
-    total: all.length, 
+  return {
+    slug: t.slug,
+    out: OUTROOT,
+    base: BASE,
+    total: all.length,
     files: master.length,
-    sections: Object.fromEntries(Object.entries(buckets).map(([k, v]) => [k, v.length]))
+    sections: Object.fromEntries(
+      Object.entries(buckets).map(([k, v]) => [k, v.length])
+    ),
   };
 }
 
@@ -325,30 +386,34 @@ for (const t of tenants) {
   fs.mkdirSync(t.out, { recursive: true });
   const res = await processTenant(t);
   results.push(res);
-  console.log(`✅ Tenant ${t.slug} complete: ${res.total} pages, ${res.files} sitemaps`);
+  console.log(
+    `✅ Tenant ${t.slug} complete: ${res.total} pages, ${res.files} sitemaps`
+  );
 }
 
 // Write manifest
-fs.writeFileSync("tenant-manifest.json", JSON.stringify(results, null, 2));
+fs.writeFileSync('tenant-manifest.json', JSON.stringify(results, null, 2));
 
-console.log("\n🎯 Multi-tenant build complete!");
-console.log("📊 Summary:");
-console.table(results.map(r => ({ 
-  slug: r.slug, 
-  pages: r.total, 
-  sitemaps: r.files, 
-  out: r.out,
-  marketing: r.sections.marketing || 0,
-  programs: r.sections.programs || 0,
-  blog: r.sections.blog || 0
-})));
+console.log('\n🎯 Multi-tenant build complete!');
+console.log('📊 Summary:');
+console.table(
+  results.map((r) => ({
+    slug: r.slug,
+    pages: r.total,
+    sitemaps: r.files,
+    out: r.out,
+    marketing: r.sections.marketing || 0,
+    programs: r.sections.programs || 0,
+    blog: r.sections.blog || 0,
+  }))
+);
 
-console.log("\n💰 Revenue Features Deployed:");
-console.log("   • Ultra-tiny sitemaps (1k chunks vs 50k industry standard)");
-console.log("   • Multi-tenant architecture ready for SaaS licensing");
-console.log("   • Enterprise JSON-LD schema per tenant");
-console.log("   • Automated redirects and SEO optimization");
-console.log("   • Search engine notifications (Google + Bing + IndexNow)");
-console.log("   • Clone-ready for workforce orgs, schools, nonprofits");
-console.log("\n🚀 Market Value: $5k-$50k per tenant license");
-console.log("✅ System ready for enterprise deployment!");
+console.log('\n💰 Revenue Features Deployed:');
+console.log('   • Ultra-tiny sitemaps (1k chunks vs 50k industry standard)');
+console.log('   • Multi-tenant architecture ready for SaaS licensing');
+console.log('   • Enterprise JSON-LD schema per tenant');
+console.log('   • Automated redirects and SEO optimization');
+console.log('   • Search engine notifications (Google + Bing + IndexNow)');
+console.log('   • Clone-ready for workforce orgs, schools, nonprofits');
+console.log('\n🚀 Market Value: $5k-$50k per tenant license');
+console.log('✅ System ready for enterprise deployment!');

@@ -3,7 +3,11 @@ import React, { useState, useRef } from 'react';
 /**
  * FileUpload Component - Drag and drop file upload
  */
-export function FileUpload({ onUpload, folderId = null, maxSize = 100 * 1024 * 1024 }) {
+export function FileUpload({
+  onUpload,
+  folderId = null,
+  maxSize = 100 * 1024 * 1024,
+}) {
   const [isDragging, setIsDragging] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -21,7 +25,7 @@ export function FileUpload({ onUpload, folderId = null, maxSize = 100 * 1024 * 1
   const handleDrop = async (e) => {
     e.preventDefault();
     setIsDragging(false);
-    
+
     const files = Array.from(e.dataTransfer.files);
     await uploadFiles(files);
   };
@@ -34,7 +38,9 @@ export function FileUpload({ onUpload, folderId = null, maxSize = 100 * 1024 * 1
   const uploadFiles = async (files) => {
     for (const file of files) {
       if (file.size > maxSize) {
-        alert(`File ${file.name} is too large. Maximum size is ${formatBytes(maxSize)}`);
+        alert(
+          `File ${file.name} is too large. Maximum size is ${formatBytes(maxSize)}`
+        );
         continue;
       }
 
@@ -53,12 +59,12 @@ export function FileUpload({ onUpload, folderId = null, maxSize = 100 * 1024 * 1
 
       // Simulate upload progress
       const progressInterval = setInterval(() => {
-        setProgress(prev => Math.min(prev + 10, 90));
+        setProgress((prev) => Math.min(prev + 10, 90));
       }, 200);
 
       const response = await fetch('/api/files/upload', {
         method: 'POST',
-        body: formData
+        body: formData,
       });
 
       clearInterval(progressInterval);
@@ -67,7 +73,7 @@ export function FileUpload({ onUpload, folderId = null, maxSize = 100 * 1024 * 1
       if (!response.ok) throw new Error('Upload failed');
 
       const uploadedFile = await response.json();
-      
+
       if (onUpload) {
         onUpload(uploadedFile);
       }
@@ -76,7 +82,6 @@ export function FileUpload({ onUpload, folderId = null, maxSize = 100 * 1024 * 1
         setUploading(false);
         setProgress(0);
       }, 1000);
-
     } catch (error) {
       console.error('Upload error:', error);
       alert('Failed to upload file');
@@ -90,7 +95,7 @@ export function FileUpload({ onUpload, folderId = null, maxSize = 100 * 1024 * 1
     const k = 1024;
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+    return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i];
   };
 
   return (
@@ -106,8 +111,10 @@ export function FileUpload({ onUpload, folderId = null, maxSize = 100 * 1024 * 1
           padding: '3rem 2rem',
           textAlign: 'center',
           cursor: 'pointer',
-          backgroundColor: isDragging ? 'var(--brand-surface)' : 'var(--brand-surface)',
-          transition: 'all 0.2s'
+          backgroundColor: isDragging
+            ? 'var(--brand-surface)'
+            : 'var(--brand-surface)',
+          transition: 'all 0.2s',
         }}
       >
         <input
@@ -120,33 +127,44 @@ export function FileUpload({ onUpload, folderId = null, maxSize = 100 * 1024 * 1
 
         {uploading ? (
           <div>
-            <div style={{
-              width: '48px',
-              height: '48px',
-              border: '4px solid var(--brand-border)',
-              borderTopColor: 'var(--brand-info)',
-              borderRadius: '50%',
-              animation: 'spin 1s linear infinite',
-              margin: '0 auto 1rem'
-            }} />
-            <p style={{ color: 'var(--brand-text-muted)', marginBottom: '0.5rem' }}>
+            <div
+              style={{
+                width: '48px',
+                height: '48px',
+                border: '4px solid var(--brand-border)',
+                borderTopColor: 'var(--brand-info)',
+                borderRadius: '50%',
+                animation: 'spin 1s linear infinite',
+                margin: '0 auto 1rem',
+              }}
+            />
+            <p
+              style={{
+                color: 'var(--brand-text-muted)',
+                marginBottom: '0.5rem',
+              }}
+            >
               Uploading... {progress}%
             </p>
-            <div style={{
-              width: '100%',
-              maxWidth: '300px',
-              height: '8px',
-              backgroundColor: 'var(--brand-border)',
-              borderRadius: '4px',
-              margin: '0 auto',
-              overflow: 'hidden'
-            }}>
-              <div style={{
-                width: `${progress}%`,
-                height: '100%',
-                backgroundColor: 'var(--brand-info)',
-                transition: 'width 0.3s'
-              }} />
+            <div
+              style={{
+                width: '100%',
+                maxWidth: '300px',
+                height: '8px',
+                backgroundColor: 'var(--brand-border)',
+                borderRadius: '4px',
+                margin: '0 auto',
+                overflow: 'hidden',
+              }}
+            >
+              <div
+                style={{
+                  width: `${progress}%`,
+                  height: '100%',
+                  backgroundColor: 'var(--brand-info)',
+                  transition: 'width 0.3s',
+                }}
+              />
             </div>
           </div>
         ) : (
@@ -156,7 +174,7 @@ export function FileUpload({ onUpload, folderId = null, maxSize = 100 * 1024 * 1
                 width: '48px',
                 height: '48px',
                 margin: '0 auto 1rem',
-                color: 'var(--brand-text-light)'
+                color: 'var(--brand-text-light)',
               }}
               fill="none"
               stroke="currentColor"
@@ -169,15 +187,21 @@ export function FileUpload({ onUpload, folderId = null, maxSize = 100 * 1024 * 1
                 d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
               />
             </svg>
-            <p style={{
-              fontSize: '1.125rem',
-              fontWeight: '500',
-              color: 'var(--brand-text)',
-              marginBottom: '0.5rem'
-            }}>
-              {isDragging ? 'Drop files here' : 'Click to upload or drag and drop'}
+            <p
+              style={{
+                fontSize: '1.125rem',
+                fontWeight: '500',
+                color: 'var(--brand-text)',
+                marginBottom: '0.5rem',
+              }}
+            >
+              {isDragging
+                ? 'Drop files here'
+                : 'Click to upload or drag and drop'}
             </p>
-            <p style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>
+            <p
+              style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}
+            >
               Maximum file size: {formatBytes(maxSize)}
             </p>
           </>

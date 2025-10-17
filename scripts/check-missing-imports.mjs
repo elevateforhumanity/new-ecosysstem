@@ -1,8 +1,8 @@
-import { readFileSync, readdirSync, statSync } from "node:fs";
-import path from "node:path";
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import path from 'node:path';
 
-const exts = [".js", ".jsx", ".ts", ".tsx"];
-const root = "src";
+const exts = ['.js', '.jsx', '.ts', '.tsx'];
+const root = 'src';
 const missing = [];
 
 function walk(dir) {
@@ -10,36 +10,34 @@ function walk(dir) {
     const full = path.join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full);
-    else if (exts.some(e => full.endsWith(e))) scanFile(full);
+    else if (exts.some((e) => full.endsWith(e))) scanFile(full);
   }
 }
 
 function scanFile(file) {
-  const src = readFileSync(file, "utf8");
-  const regex =
-    /import\s+(?:[^'"]+from\s+)?["'](\.?\.?\/[^"']+)["'];?/g;
+  const src = readFileSync(file, 'utf8');
+  const regex = /import\s+(?:[^'"]+from\s+)?["'](\.?\.?\/[^"']+)["'];?/g;
   let m;
   while ((m = regex.exec(src))) {
     let imp = m[1];
-    if (imp.startsWith("http") || imp.startsWith("@")) continue;
-    const resolvedCandidates = exts.map(e =>
+    if (imp.startsWith('http') || imp.startsWith('@')) continue;
+    const resolvedCandidates = exts.map((e) =>
       path.resolve(path.dirname(file), imp + e)
     );
-    const indexCandidates = exts.map(e =>
-      path.resolve(path.dirname(file), imp, "index" + e)
+    const indexCandidates = exts.map((e) =>
+      path.resolve(path.dirname(file), imp, 'index' + e)
     );
-    const exists =
-      [...resolvedCandidates, ...indexCandidates].some(f => {
-        try {
-          return statSync(f).isFile();
-        } catch {
-          return false;
-        }
-      });
+    const exists = [...resolvedCandidates, ...indexCandidates].some((f) => {
+      try {
+        return statSync(f).isFile();
+      } catch {
+        return false;
+      }
+    });
     if (!exists) {
       missing.push({
         file,
-        import: imp
+        import: imp,
       });
     }
   }
@@ -48,11 +46,11 @@ function scanFile(file) {
 walk(root);
 
 if (missing.length) {
-  console.log("Missing imports detected:");
+  console.log('Missing imports detected:');
   for (const m of missing) {
     console.log(`  ${m.file} -> ${m.import}`);
   }
   process.exitCode = 1;
 } else {
-  console.log("No missing relative imports.");
+  console.log('No missing relative imports.');
 }

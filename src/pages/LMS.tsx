@@ -1,12 +1,25 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
-import { BookOpen, Play, CheckCircle, Clock, Award, Download, User, Loader2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import {
+  BookOpen,
+  Play,
+  CheckCircle,
+  Clock,
+  Award,
+  Download,
+  User,
+  Loader2,
+} from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function LMS() {
   // Route params not currently used; simplifying to static view for now.
   const params: { module?: string } = {};
   // const [selectedCourse, setSelectedCourse] = useState(null); // reserved for future detail view
-  interface CourseLite { id: string; enrolled?: boolean; [k: string]: any }
+  interface CourseLite {
+    id: string;
+    enrolled?: boolean;
+    [k: string]: any;
+  }
   const [courses, setCourses] = useState<CourseLite[]>([]);
   const [loading, setLoading] = useState(true);
   const [courseDetails, setCourseDetails] = useState(new Map());
@@ -34,104 +47,180 @@ export default function LMS() {
   }, []);
 
   // Lazy load course details only when needed
-  const loadCourseDetails = useCallback(async (courseId) => {
-    if (courseDetails.has(courseId)) {
-      return courseDetails.get(courseId);
-    }
-
-    try {
-      const response = await fetch(`/api/lms/course/${courseId}`);
-      if (response.ok) {
-        const data = await response.json();
-        setCourseDetails(prev => new Map(prev).set(courseId, data));
-        return data;
+  const loadCourseDetails = useCallback(
+    async (courseId) => {
+      if (courseDetails.has(courseId)) {
+        return courseDetails.get(courseId);
       }
-    } catch (error) {
-      console.error('Failed to load course details:', error);
-    }
-    return null;
-  }, [courseDetails]);
+
+      try {
+        const response = await fetch(`/api/lms/course/${courseId}`);
+        if (response.ok) {
+          const data = await response.json();
+          setCourseDetails((prev) => new Map(prev).set(courseId, data));
+          return data;
+        }
+      } catch (error) {
+        console.error('Failed to load course details:', error);
+      }
+      return null;
+    },
+    [courseDetails]
+  );
 
   // Memoize filtered courses to prevent unnecessary re-renders
-  const enrolledCourses = useMemo(() => courses.filter(c => c.enrolled), [courses]);
-  const availableCourses = useMemo(() => courses.filter(c => !c.enrolled), [courses]);
+  const enrolledCourses = useMemo(
+    () => courses.filter((c) => c.enrolled),
+    [courses]
+  );
+  const availableCourses = useMemo(
+    () => courses.filter((c) => !c.enrolled),
+    [courses]
+  );
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin text-brand-info" />
-        <span className="ml-2 text-brand-text-muted">Loading your courses...</span>
+        <span className="ml-2 text-brand-text-muted">
+          Loading your courses...
+        </span>
       </div>
     );
   }
 
   const coursesData = [
     {
-      id: "ai-fundamentals",
-      title: "AI Fundamentals & Machine Learning",
-      category: "Technology",
+      id: 'ai-fundamentals',
+      title: 'AI Fundamentals & Machine Learning',
+      category: 'Technology',
       modules: 12,
-      duration: "48 hours",
+      duration: '48 hours',
       completion: 65,
       enrolled: true,
-      instructor: "Dr. Sarah Chen",
-      description: "Master the fundamentals of artificial intelligence and machine learning",
+      instructor: 'Dr. Sarah Chen',
+      description:
+        'Master the fundamentals of artificial intelligence and machine learning',
       modules_list: [
-        { id: 1, title: "Introduction to AI", duration: "2 hours", completed: true },
-        { id: 2, title: "Python for AI", duration: "4 hours", completed: true },
-        { id: 3, title: "Machine Learning Basics", duration: "4 hours", completed: true },
-        { id: 4, title: "Neural Networks", duration: "6 hours", completed: false, current: true },
-        { id: 5, title: "Deep Learning", duration: "8 hours", completed: false },
-        { id: 6, title: "Computer Vision", duration: "6 hours", completed: false }
+        {
+          id: 1,
+          title: 'Introduction to AI',
+          duration: '2 hours',
+          completed: true,
+        },
+        { id: 2, title: 'Python for AI', duration: '4 hours', completed: true },
+        {
+          id: 3,
+          title: 'Machine Learning Basics',
+          duration: '4 hours',
+          completed: true,
+        },
+        {
+          id: 4,
+          title: 'Neural Networks',
+          duration: '6 hours',
+          completed: false,
+          current: true,
+        },
+        {
+          id: 5,
+          title: 'Deep Learning',
+          duration: '8 hours',
+          completed: false,
+        },
+        {
+          id: 6,
+          title: 'Computer Vision',
+          duration: '6 hours',
+          completed: false,
+        },
       ],
-      nextModule: "Neural Networks Fundamentals"
+      nextModule: 'Neural Networks Fundamentals',
     },
     {
-      id: "data-science",
-      title: "Data Science & Analytics",
-      category: "Analytics",
+      id: 'data-science',
+      title: 'Data Science & Analytics',
+      category: 'Analytics',
       modules: 16,
-      duration: "64 hours",
+      duration: '64 hours',
       completion: 0,
       enrolled: false,
-      instructor: "Prof. Michael Rodriguez",
-      description: "Comprehensive data science training with real-world projects",
+      instructor: 'Prof. Michael Rodriguez',
+      description:
+        'Comprehensive data science training with real-world projects',
       modules_list: [
-        { id: 1, title: "Statistics for Data Science", duration: "4 hours", completed: false },
-        { id: 2, title: "Python & R Programming", duration: "6 hours", completed: false },
-        { id: 3, title: "Data Visualization", duration: "4 hours", completed: false }
-      ]
+        {
+          id: 1,
+          title: 'Statistics for Data Science',
+          duration: '4 hours',
+          completed: false,
+        },
+        {
+          id: 2,
+          title: 'Python & R Programming',
+          duration: '6 hours',
+          completed: false,
+        },
+        {
+          id: 3,
+          title: 'Data Visualization',
+          duration: '4 hours',
+          completed: false,
+        },
+      ],
     },
     {
-      id: "cybersecurity",
-      title: "Cybersecurity Specialist",
-      category: "Security",
+      id: 'cybersecurity',
+      title: 'Cybersecurity Specialist',
+      category: 'Security',
       modules: 20,
-      duration: "80 hours",
+      duration: '80 hours',
       completion: 25,
       enrolled: true,
-      instructor: "James Wilson, CISSP",
-      description: "Advanced cybersecurity training for enterprise environments",
+      instructor: 'James Wilson, CISSP',
+      description:
+        'Advanced cybersecurity training for enterprise environments',
       modules_list: [
-        { id: 1, title: "Security Fundamentals", duration: "3 hours", completed: true },
-        { id: 2, title: "Network Security", duration: "5 hours", completed: true },
-        { id: 3, title: "Ethical Hacking", duration: "6 hours", completed: false, current: true }
-      ]
-    }
+        {
+          id: 1,
+          title: 'Security Fundamentals',
+          duration: '3 hours',
+          completed: true,
+        },
+        {
+          id: 2,
+          title: 'Network Security',
+          duration: '5 hours',
+          completed: true,
+        },
+        {
+          id: 3,
+          title: 'Ethical Hacking',
+          duration: '6 hours',
+          completed: false,
+          current: true,
+        },
+      ],
+    },
   ];
 
   const achievements = [
-    { id: 1, title: "First Module Complete", earned: true, date: "2024-01-15" },
-    { id: 2, title: "Python Programming Badge", earned: true, date: "2024-01-22" },
-    { id: 3, title: "Machine Learning Foundation", earned: false },
-    { id: 4, title: "AI Project Completed", earned: false }
+    { id: 1, title: 'First Module Complete', earned: true, date: '2024-01-15' },
+    {
+      id: 2,
+      title: 'Python Programming Badge',
+      earned: true,
+      date: '2024-01-22',
+    },
+    { id: 3, title: 'Machine Learning Foundation', earned: false },
+    { id: 4, title: 'AI Project Completed', earned: false },
   ];
 
   const digitalBinder = {
     totalHours: 156,
     completedModules: 28,
     certificates: 3,
-    projects: 8
+    projects: 8,
   };
 
   return (
@@ -141,14 +230,22 @@ export default function LMS() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-brand-text">Learning Management System</h1>
-              <p className="text-brand-text-muted mt-1">Your personalized learning journey with federal compliance tracking</p>
+              <h1 className="text-3xl font-bold text-brand-text">
+                Learning Management System
+              </h1>
+              <p className="text-brand-text-muted mt-1">
+                Your personalized learning journey with federal compliance
+                tracking
+              </p>
             </div>
             <div className="flex items-center space-x-4">
               <div className="bg-brand-surface text-brand-info px-3 py-1 rounded-full text-sm">
                 Progress: 45%
               </div>
-              <Link href="/compliance" className="bg-brand-surface text-brand-warning px-3 py-1 rounded-full text-sm">
+              <Link
+                href="/compliance"
+                className="bg-brand-surface text-brand-warning px-3 py-1 rounded-full text-sm"
+              >
                 📊 Federal Tracking
               </Link>
             </div>
@@ -162,15 +259,24 @@ export default function LMS() {
           <div className="lg:col-span-2 space-y-6">
             {/* Continue Learning */}
             <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-xl font-bold text-brand-text mb-4">Continue Learning</h2>
+              <h2 className="text-xl font-bold text-brand-text mb-4">
+                Continue Learning
+              </h2>
               <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg p-6 text-white">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-lg font-medium">AI Fundamentals & Machine Learning</h3>
-                    <p className="text-blue-100">Next: Neural Networks Fundamentals</p>
+                    <h3 className="text-lg font-medium">
+                      AI Fundamentals & Machine Learning
+                    </h3>
+                    <p className="text-blue-100">
+                      Next: Neural Networks Fundamentals
+                    </p>
                     <div className="mt-3">
                       <div className="bg-white/20 rounded-full h-2">
-                        <div className="bg-white rounded-full h-2" style={{ width: "65%" }}></div>
+                        <div
+                          className="bg-white rounded-full h-2"
+                          style={{ width: '65%' }}
+                        ></div>
                       </div>
                       <p className="text-sm text-blue-100 mt-1">65% Complete</p>
                     </div>
@@ -185,14 +291,21 @@ export default function LMS() {
 
             {/* My Courses */}
             <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-xl font-bold text-brand-text mb-4">My Courses</h2>
+              <h2 className="text-xl font-bold text-brand-text mb-4">
+                My Courses
+              </h2>
               <div className="space-y-4">
                 {coursesData.map((course) => (
-                  <div key={course.id} className="border rounded-lg p-4 hover:bg-brand-surface transition-colors">
+                  <div
+                    key={course.id}
+                    className="border rounded-lg p-4 hover:bg-brand-surface transition-colors"
+                  >
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
                         <div className="flex items-center space-x-3">
-                          <h3 className="font-medium text-brand-text">{course.title}</h3>
+                          <h3 className="font-medium text-brand-text">
+                            {course.title}
+                          </h3>
                           <span className="bg-brand-surface-dark text-brand-text px-2 py-1 rounded text-sm">
                             {course.category}
                           </span>
@@ -202,7 +315,9 @@ export default function LMS() {
                             </span>
                           )}
                         </div>
-                        <p className="text-brand-text-muted text-sm mt-1">{course.description}</p>
+                        <p className="text-brand-text-muted text-sm mt-1">
+                          {course.description}
+                        </p>
                         <div className="flex items-center space-x-4 mt-2 text-sm text-brand-text-light">
                           <span className="flex items-center">
                             <BookOpen className="h-4 w-4 mr-1" />
@@ -220,25 +335,27 @@ export default function LMS() {
                         {course.enrolled && (
                           <div className="mt-3">
                             <div className="bg-brand-border rounded-full h-2">
-                              <div 
-                                className="bg-brand-info rounded-full h-2" 
+                              <div
+                                className="bg-brand-info rounded-full h-2"
                                 style={{ width: `${course.completion}%` }}
                               ></div>
                             </div>
-                            <p className="text-sm text-brand-text-muted mt-1">{course.completion}% Complete</p>
+                            <p className="text-sm text-brand-text-muted mt-1">
+                              {course.completion}% Complete
+                            </p>
                           </div>
                         )}
                       </div>
                       <div className="ml-4">
                         {course.enrolled ? (
-                          <Link 
+                          <Link
                             href={`/lms/${course.id}`}
                             className="bg-brand-info text-white px-4 py-2 rounded-lg hover:bg-brand-info-hover transition-colors"
                           >
                             Continue
                           </Link>
                         ) : (
-                          <Link 
+                          <Link
                             href={`/pay?program=${course.id}`}
                             className="bg-white text-brand-info border border-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors"
                           >
@@ -261,12 +378,23 @@ export default function LMS() {
 
               <div className="grid md:grid-cols-2 gap-4 mb-6">
                 <div className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                  <h4 className="font-medium text-brand-text">Google Data Analytics Certificate</h4>
-                  <p className="text-sm text-brand-text-muted mt-1">6 months • $1,200 with career coaching</p>
+                  <h4 className="font-medium text-brand-text">
+                    Google Data Analytics Certificate
+                  </h4>
+                  <p className="text-sm text-brand-text-muted mt-1">
+                    6 months • $1,200 with career coaching
+                  </p>
                   <div className="mt-3 flex justify-between items-center">
-                    <span className="text-xs bg-brand-surface text-brand-success px-2 py-1 rounded">Free Content + Support</span>
-                    <button 
-                      onClick={() => window.open('/programs.html?focus=google-data-analytics-cert', '_blank')}
+                    <span className="text-xs bg-brand-surface text-brand-success px-2 py-1 rounded">
+                      Free Content + Support
+                    </span>
+                    <button
+                      onClick={() =>
+                        window.open(
+                          '/programs.html?focus=google-data-analytics-cert',
+                          '_blank'
+                        )
+                      }
                       className="text-brand-info hover:text-brand-info text-sm font-medium"
                     >
                       Enroll Now →
@@ -275,12 +403,23 @@ export default function LMS() {
                 </div>
 
                 <div className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                  <h4 className="font-medium text-brand-text">Digital Marketing & E-commerce</h4>
-                  <p className="text-sm text-brand-text-muted mt-1">6 months • $1,000 with portfolio review</p>
+                  <h4 className="font-medium text-brand-text">
+                    Digital Marketing & E-commerce
+                  </h4>
+                  <p className="text-sm text-brand-text-muted mt-1">
+                    6 months • $1,000 with portfolio review
+                  </p>
                   <div className="mt-3 flex justify-between items-center">
-                    <span className="text-xs bg-brand-surface text-brand-success px-2 py-1 rounded">Free Content + Support</span>
-                    <button 
-                      onClick={() => window.open('/programs.html?focus=google-digital-marketing-cert', '_blank')}
+                    <span className="text-xs bg-brand-surface text-brand-success px-2 py-1 rounded">
+                      Free Content + Support
+                    </span>
+                    <button
+                      onClick={() =>
+                        window.open(
+                          '/programs.html?focus=google-digital-marketing-cert',
+                          '_blank'
+                        )
+                      }
                       className="text-brand-info hover:text-brand-info text-sm font-medium"
                     >
                       Enroll Now →
@@ -289,12 +428,23 @@ export default function LMS() {
                 </div>
 
                 <div className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                  <h4 className="font-medium text-brand-text">Google Ads Certification</h4>
-                  <p className="text-sm text-brand-text-muted mt-1">4-6 weeks • $599 with live mentoring</p>
+                  <h4 className="font-medium text-brand-text">
+                    Google Ads Certification
+                  </h4>
+                  <p className="text-sm text-brand-text-muted mt-1">
+                    4-6 weeks • $599 with live mentoring
+                  </p>
                   <div className="mt-3 flex justify-between items-center">
-                    <span className="text-xs bg-brand-surface text-brand-success px-2 py-1 rounded">Free Content + Support</span>
-                    <button 
-                      onClick={() => window.open('/programs.html?focus=google-ads-certification', '_blank')}
+                    <span className="text-xs bg-brand-surface text-brand-success px-2 py-1 rounded">
+                      Free Content + Support
+                    </span>
+                    <button
+                      onClick={() =>
+                        window.open(
+                          '/programs.html?focus=google-ads-certification',
+                          '_blank'
+                        )
+                      }
                       className="text-brand-info hover:text-brand-info text-sm font-medium"
                     >
                       Enroll Now →
@@ -303,12 +453,23 @@ export default function LMS() {
                 </div>
 
                 <div className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                  <h4 className="font-medium text-brand-text">Google Analytics Certification</h4>
-                  <p className="text-sm text-brand-text-muted mt-1">3-4 weeks • $499 with implementation</p>
+                  <h4 className="font-medium text-brand-text">
+                    Google Analytics Certification
+                  </h4>
+                  <p className="text-sm text-brand-text-muted mt-1">
+                    3-4 weeks • $499 with implementation
+                  </p>
                   <div className="mt-3 flex justify-between items-center">
-                    <span className="text-xs bg-brand-surface text-brand-success px-2 py-1 rounded">Free Content + Support</span>
-                    <button 
-                      onClick={() => window.open('/programs.html?focus=google-analytics-certification', '_blank')}
+                    <span className="text-xs bg-brand-surface text-brand-success px-2 py-1 rounded">
+                      Free Content + Support
+                    </span>
+                    <button
+                      onClick={() =>
+                        window.open(
+                          '/programs.html?focus=google-analytics-certification',
+                          '_blank'
+                        )
+                      }
                       className="text-brand-info hover:text-brand-info text-sm font-medium"
                     >
                       Enroll Now →
@@ -318,14 +479,18 @@ export default function LMS() {
               </div>
             </div>
 
-
             {/* Course Modules (if viewing specific course) */}
             {params?.module && (
               <div className="bg-white rounded-lg shadow p-6">
-                <h2 className="text-xl font-bold text-brand-text mb-4">Course Modules</h2>
+                <h2 className="text-xl font-bold text-brand-text mb-4">
+                  Course Modules
+                </h2>
                 <div className="space-y-3">
                   {coursesData[0].modules_list.map((module) => (
-                    <div key={module.id} className="flex items-center justify-between p-4 border rounded-lg">
+                    <div
+                      key={module.id}
+                      className="flex items-center justify-between p-4 border rounded-lg"
+                    >
                       <div className="flex items-center space-x-3">
                         {module.completed ? (
                           <CheckCircle className="h-5 w-5 text-green-500" />
@@ -335,23 +500,31 @@ export default function LMS() {
                           <div className="h-5 w-5 border-2 border-brand-border-dark rounded-full"></div>
                         )}
                         <div>
-                          <h4 className={`font-medium ${module.completed ? 'text-brand-text-muted' : 'text-brand-text'}`}>
+                          <h4
+                            className={`font-medium ${module.completed ? 'text-brand-text-muted' : 'text-brand-text'}`}
+                          >
                             {module.title}
                           </h4>
-                          <p className="text-sm text-brand-text-light">{module.duration}</p>
+                          <p className="text-sm text-brand-text-light">
+                            {module.duration}
+                          </p>
                         </div>
                       </div>
-                      <button 
+                      <button
                         className={`px-4 py-2 rounded-lg text-sm ${
-                          module.completed 
-                            ? 'bg-brand-surface-dark text-brand-text-muted' 
+                          module.completed
+                            ? 'bg-brand-surface-dark text-brand-text-muted'
                             : module.current
-                            ? 'bg-brand-info text-white hover:bg-brand-info-hover'
-                            : 'bg-brand-surface-dark text-gray-400 cursor-not-allowed'
+                              ? 'bg-brand-info text-white hover:bg-brand-info-hover'
+                              : 'bg-brand-surface-dark text-gray-400 cursor-not-allowed'
                         }`}
                         disabled={!module.completed && !module.current}
                       >
-                        {module.completed ? 'Review' : module.current ? 'Continue' : 'Locked'}
+                        {module.completed
+                          ? 'Review'
+                          : module.current
+                            ? 'Continue'
+                            : 'Locked'}
                       </button>
                     </div>
                   ))}
@@ -370,19 +543,33 @@ export default function LMS() {
               </h3>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-brand-text-muted">Total Learning Hours</span>
-                  <span className="font-medium">{digitalBinder.totalHours}</span>
+                  <span className="text-brand-text-muted">
+                    Total Learning Hours
+                  </span>
+                  <span className="font-medium">
+                    {digitalBinder.totalHours}
+                  </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-brand-text-muted">Completed Modules</span>
-                  <span className="font-medium">{digitalBinder.completedModules}</span>
+                  <span className="text-brand-text-muted">
+                    Completed Modules
+                  </span>
+                  <span className="font-medium">
+                    {digitalBinder.completedModules}
+                  </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-brand-text-muted">Certificates Earned</span>
-                  <span className="font-medium">{digitalBinder.certificates}</span>
+                  <span className="text-brand-text-muted">
+                    Certificates Earned
+                  </span>
+                  <span className="font-medium">
+                    {digitalBinder.certificates}
+                  </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-brand-text-muted">Projects Completed</span>
+                  <span className="text-brand-text-muted">
+                    Projects Completed
+                  </span>
                   <span className="font-medium">{digitalBinder.projects}</span>
                 </div>
               </div>
@@ -394,26 +581,44 @@ export default function LMS() {
 
             {/* Achievements */}
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-medium text-brand-text mb-4">Achievements</h3>
+              <h3 className="text-lg font-medium text-brand-text mb-4">
+                Achievements
+              </h3>
               <div className="space-y-3">
                 {achievements.map((achievement) => (
-                  <div key={achievement.id} className="flex items-center space-x-3">
-                    <div className={`p-2 rounded-full ${
-                      achievement.earned ? 'bg-yellow-100' : 'bg-brand-surface-dark'
-                    }`}>
-                      <Award className={`h-4 w-4 ${
-                        achievement.earned ? 'text-yellow-600' : 'text-gray-400'
-                      }`} />
+                  <div
+                    key={achievement.id}
+                    className="flex items-center space-x-3"
+                  >
+                    <div
+                      className={`p-2 rounded-full ${
+                        achievement.earned
+                          ? 'bg-yellow-100'
+                          : 'bg-brand-surface-dark'
+                      }`}
+                    >
+                      <Award
+                        className={`h-4 w-4 ${
+                          achievement.earned
+                            ? 'text-yellow-600'
+                            : 'text-gray-400'
+                        }`}
+                      />
                     </div>
                     <div className="flex-1">
-                      <p className={`text-sm font-medium ${
-                        achievement.earned ? 'text-brand-text' : 'text-brand-text-light'
-                      }`}>
+                      <p
+                        className={`text-sm font-medium ${
+                          achievement.earned
+                            ? 'text-brand-text'
+                            : 'text-brand-text-light'
+                        }`}
+                      >
                         {achievement.title}
                       </p>
                       {achievement.earned && achievement.date && (
                         <p className="text-xs text-brand-text-light">
-                          Earned {new Date(achievement.date).toLocaleDateString()}
+                          Earned{' '}
+                          {new Date(achievement.date).toLocaleDateString()}
                         </p>
                       )}
                     </div>
@@ -428,9 +633,10 @@ export default function LMS() {
                 📊 Federal Compliance Tracking
               </h3>
               <p className="text-orange-700 text-sm mb-4">
-                Your progress is automatically tracked for DOL/DWD reporting requirements.
+                Your progress is automatically tracked for DOL/DWD reporting
+                requirements.
               </p>
-              <Link 
+              <Link
                 href="/compliance"
                 className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors text-sm"
               >
@@ -440,15 +646,17 @@ export default function LMS() {
 
             {/* Quick Actions */}
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-medium text-brand-text mb-4">Quick Actions</h3>
+              <h3 className="text-lg font-medium text-brand-text mb-4">
+                Quick Actions
+              </h3>
               <div className="space-y-2">
-                <Link 
+                <Link
                   href="/programs"
                   className="w-full bg-brand-surface-dark text-brand-text py-2 px-4 rounded-lg hover:bg-brand-border transition-colors text-sm block text-center"
                 >
                   Browse All Programs
                 </Link>
-                <Link 
+                <Link
                   href="/connect"
                   className="w-full bg-brand-surface-dark text-brand-text py-2 px-4 rounded-lg hover:bg-brand-border transition-colors text-sm block text-center"
                 >

@@ -1,493 +1,722 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Live Demo - Elevate Platform</title>
-    <meta name="description" content="Try the Elevate for Humanity platform with our interactive demo. See enrollment workflows, video interviews, and Calendly integration in action.">
+    <meta
+      name="description"
+      content="Try the Elevate for Humanity platform with our interactive demo. See enrollment workflows, video interviews, and Calendly integration in action."
+    />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        to {
+          opacity: 1;
+          transform: translateX(0);
         }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
         }
-        .animate-slide-in {
-            animation: slideIn 0.6s ease-out forwards;
+        to {
+          opacity: 1;
         }
-        .animate-fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
         }
-        .animate-pulse-slow {
-            animation: pulse 2s ease-in-out infinite;
+        50% {
+          transform: scale(1.05);
         }
-        .demo-card {
-            transition: all 0.3s ease;
-        }
-        .demo-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        .step-indicator {
-            transition: all 0.3s ease;
-        }
-        .step-indicator.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            transform: scale(1.1);
-        }
-        .demo-screen {
-            display: none;
-        }
-        .demo-screen.active {
-            display: block;
-            animation: fadeIn 0.5s ease-out;
-        }
+      }
+      .animate-slide-in {
+        animation: slideIn 0.6s ease-out forwards;
+      }
+      .animate-fade-in {
+        animation: fadeIn 0.8s ease-out forwards;
+      }
+      .animate-pulse-slow {
+        animation: pulse 2s ease-in-out infinite;
+      }
+      .demo-card {
+        transition: all 0.3s ease;
+      }
+      .demo-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+      .step-indicator {
+        transition: all 0.3s ease;
+      }
+      .step-indicator.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        transform: scale(1.1);
+      }
+      .demo-screen {
+        display: none;
+      }
+      .demo-screen.active {
+        display: block;
+        animation: fadeIn 0.5s ease-out;
+      }
     </style>
-</head>
-<body class="bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900 min-h-screen text-white">
-    
+  </head>
+  <body
+    class="bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900 min-h-screen text-white"
+  >
     <!-- Header -->
     <header class="container mx-auto px-4 py-8">
-        <nav class="flex justify-between items-center">
-            <h1 class="text-3xl font-bold">Live Demo</h1>
-            <div class="space-x-4">
-                <a href="/pages/store.html" class="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 px-6 py-2 rounded-lg transition">Buy Now</a>
-                <a href="/" class="hover:text-purple-300 transition">Home</a>
-            </div>
-        </nav>
+      <nav class="flex justify-between items-center">
+        <h1 class="text-3xl font-bold">Live Demo</h1>
+        <div class="space-x-4">
+          <a
+            href="/pages/store.html"
+            class="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 px-6 py-2 rounded-lg transition"
+            >Buy Now</a
+          >
+          <a href="/" class="hover:text-purple-300 transition">Home</a>
+        </div>
+      </nav>
     </header>
 
     <!-- Hero -->
     <section class="container mx-auto px-4 py-12 text-center animate-fade-in">
-        <h2 class="text-5xl md:text-6xl font-bold mb-6">
-            Experience the Platform
-        </h2>
-        <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Interactive walkthrough of the complete enrollment and credentialing system.
-            Click through each step to see how it works.
-        </p>
+      <h2 class="text-5xl md:text-6xl font-bold mb-6">
+        Experience the Platform
+      </h2>
+      <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+        Interactive walkthrough of the complete enrollment and credentialing
+        system. Click through each step to see how it works.
+      </p>
     </section>
 
     <!-- Demo Navigation -->
     <section class="container mx-auto px-4 py-8">
-        <div class="flex justify-center items-center space-x-4 mb-12 flex-wrap gap-4">
-            <button onclick="showDemo(1)" class="step-indicator active px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 transition" id="step-1">
-                <div class="font-bold">Step 1</div>
-                <div class="text-sm">Application</div>
-            </button>
-            <div class="text-2xl text-gray-500">→</div>
-            <button onclick="showDemo(2)" class="step-indicator px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 transition" id="step-2">
-                <div class="font-bold">Step 2</div>
-                <div class="text-sm">Schedule Interview</div>
-            </button>
-            <div class="text-2xl text-gray-500">→</div>
-            <button onclick="showDemo(3)" class="step-indicator px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 transition" id="step-3">
-                <div class="font-bold">Step 3</div>
-                <div class="text-sm">Video Interview</div>
-            </button>
-            <div class="text-2xl text-gray-500">→</div>
-            <button onclick="showDemo(4)" class="step-indicator px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 transition" id="step-4">
-                <div class="font-bold">Step 4</div>
-                <div class="text-sm">Confirmation</div>
-            </button>
+      <div
+        class="flex justify-center items-center space-x-4 mb-12 flex-wrap gap-4"
+      >
+        <button
+          onclick="showDemo(1)"
+          class="step-indicator active px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 transition"
+          id="step-1"
+        >
+          <div class="font-bold">Step 1</div>
+          <div class="text-sm">Application</div>
+        </button>
+        <div class="text-2xl text-gray-500">→</div>
+        <button
+          onclick="showDemo(2)"
+          class="step-indicator px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 transition"
+          id="step-2"
+        >
+          <div class="font-bold">Step 2</div>
+          <div class="text-sm">Schedule Interview</div>
+        </button>
+        <div class="text-2xl text-gray-500">→</div>
+        <button
+          onclick="showDemo(3)"
+          class="step-indicator px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 transition"
+          id="step-3"
+        >
+          <div class="font-bold">Step 3</div>
+          <div class="text-sm">Video Interview</div>
+        </button>
+        <div class="text-2xl text-gray-500">→</div>
+        <button
+          onclick="showDemo(4)"
+          class="step-indicator px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 transition"
+          id="step-4"
+        >
+          <div class="font-bold">Step 4</div>
+          <div class="text-sm">Confirmation</div>
+        </button>
+      </div>
+
+      <!-- Demo Screens -->
+      <div class="max-w-5xl mx-auto">
+        <!-- Step 1: Application -->
+        <div id="demo-1" class="demo-screen active">
+          <div
+            class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20"
+          >
+            <h3 class="text-3xl font-bold mb-6">📝 Step 1: Application Form</h3>
+            <div class="bg-white rounded-xl p-6 text-gray-900">
+              <h4 class="text-2xl font-bold mb-4">
+                Elevate for Humanity - Enrollment Application
+              </h4>
+              <div class="space-y-4">
+                <div>
+                  <label class="block font-semibold mb-2">Full Name *</label>
+                  <input
+                    type="text"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2"
+                    placeholder="John Doe"
+                    value="John Doe"
+                  />
+                </div>
+                <div>
+                  <label class="block font-semibold mb-2"
+                    >Email Address *</label
+                  >
+                  <input
+                    type="email"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2"
+                    placeholder="john@example.com"
+                    value="john@example.com"
+                  />
+                </div>
+                <div>
+                  <label class="block font-semibold mb-2">Phone Number *</label>
+                  <input
+                    type="tel"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2"
+                    placeholder="(555) 123-4567"
+                    value="(555) 123-4567"
+                  />
+                </div>
+                <div>
+                  <label class="block font-semibold mb-2"
+                    >Program of Interest *</label
+                  >
+                  <select
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2"
+                  >
+                    <option>Healthcare Assistant</option>
+                    <option>IT Support Specialist</option>
+                    <option>Business Administration</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-semibold mb-2"
+                    >How did you hear about us?</label
+                  >
+                  <select
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2"
+                  >
+                    <option>Google Search</option>
+                    <option>Social Media</option>
+                    <option>Friend/Family</option>
+                    <option>Job Center</option>
+                  </select>
+                </div>
+                <div class="flex items-start space-x-2">
+                  <input type="checkbox" id="terms" class="mt-1" checked />
+                  <label for="terms" class="text-sm"
+                    >I agree to the terms and conditions and privacy
+                    policy</label
+                  >
+                </div>
+                <button
+                  onclick="showDemo(2)"
+                  class="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold py-3 rounded-lg hover:from-purple-600 hover:to-blue-600 transition animate-pulse-slow"
+                >
+                  Submit Application →
+                </button>
+              </div>
+            </div>
+            <div class="mt-6 text-gray-300">
+              <p class="text-sm">✓ FERPA compliant data collection</p>
+              <p class="text-sm">✓ Automatic eligibility verification</p>
+              <p class="text-sm">✓ Instant confirmation email</p>
+            </div>
+          </div>
         </div>
 
-        <!-- Demo Screens -->
-        <div class="max-w-5xl mx-auto">
-            
-            <!-- Step 1: Application -->
-            <div id="demo-1" class="demo-screen active">
-                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-                    <h3 class="text-3xl font-bold mb-6">📝 Step 1: Application Form</h3>
-                    <div class="bg-white rounded-xl p-6 text-gray-900">
-                        <h4 class="text-2xl font-bold mb-4">Elevate for Humanity - Enrollment Application</h4>
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block font-semibold mb-2">Full Name *</label>
-                                <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2" placeholder="John Doe" value="John Doe">
-                            </div>
-                            <div>
-                                <label class="block font-semibold mb-2">Email Address *</label>
-                                <input type="email" class="w-full border border-gray-300 rounded-lg px-4 py-2" placeholder="john@example.com" value="john@example.com">
-                            </div>
-                            <div>
-                                <label class="block font-semibold mb-2">Phone Number *</label>
-                                <input type="tel" class="w-full border border-gray-300 rounded-lg px-4 py-2" placeholder="(555) 123-4567" value="(555) 123-4567">
-                            </div>
-                            <div>
-                                <label class="block font-semibold mb-2">Program of Interest *</label>
-                                <select class="w-full border border-gray-300 rounded-lg px-4 py-2">
-                                    <option>Healthcare Assistant</option>
-                                    <option>IT Support Specialist</option>
-                                    <option>Business Administration</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block font-semibold mb-2">How did you hear about us?</label>
-                                <select class="w-full border border-gray-300 rounded-lg px-4 py-2">
-                                    <option>Google Search</option>
-                                    <option>Social Media</option>
-                                    <option>Friend/Family</option>
-                                    <option>Job Center</option>
-                                </select>
-                            </div>
-                            <div class="flex items-start space-x-2">
-                                <input type="checkbox" id="terms" class="mt-1" checked>
-                                <label for="terms" class="text-sm">I agree to the terms and conditions and privacy policy</label>
-                            </div>
-                            <button onclick="showDemo(2)" class="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold py-3 rounded-lg hover:from-purple-600 hover:to-blue-600 transition animate-pulse-slow">
-                                Submit Application →
-                            </button>
-                        </div>
-                    </div>
-                    <div class="mt-6 text-gray-300">
-                        <p class="text-sm">✓ FERPA compliant data collection</p>
-                        <p class="text-sm">✓ Automatic eligibility verification</p>
-                        <p class="text-sm">✓ Instant confirmation email</p>
-                    </div>
-                </div>
-            </div>
+        <!-- Step 2: Calendly Scheduling -->
+        <div id="demo-2" class="demo-screen">
+          <div
+            class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20"
+          >
+            <h3 class="text-3xl font-bold mb-6">
+              📅 Step 2: Schedule Your Interview
+            </h3>
+            <div class="bg-white rounded-xl p-6 text-gray-900">
+              <h4 class="text-2xl font-bold mb-4">
+                Pick a Time That Works for You
+              </h4>
+              <p class="text-gray-600 mb-6">
+                Select a 30-minute slot for your enrollment interview with our
+                team.
+              </p>
 
-            <!-- Step 2: Calendly Scheduling -->
-            <div id="demo-2" class="demo-screen">
-                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-                    <h3 class="text-3xl font-bold mb-6">📅 Step 2: Schedule Your Interview</h3>
-                    <div class="bg-white rounded-xl p-6 text-gray-900">
-                        <h4 class="text-2xl font-bold mb-4">Pick a Time That Works for You</h4>
-                        <p class="text-gray-600 mb-6">Select a 30-minute slot for your enrollment interview with our team.</p>
-                        
-                        <!-- Simulated Calendly Interface -->
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <h5 class="font-bold mb-4">Select a Date</h5>
-                                <div class="border border-gray-300 rounded-lg p-4">
-                                    <div class="text-center mb-4">
-                                        <div class="font-bold text-lg">October 2024</div>
-                                    </div>
-                                    <div class="grid grid-cols-7 gap-2 text-center text-sm">
-                                        <div class="font-semibold">Sun</div>
-                                        <div class="font-semibold">Mon</div>
-                                        <div class="font-semibold">Tue</div>
-                                        <div class="font-semibold">Wed</div>
-                                        <div class="font-semibold">Thu</div>
-                                        <div class="font-semibold">Fri</div>
-                                        <div class="font-semibold">Sat</div>
-                                        <div class="text-gray-400">29</div>
-                                        <div class="text-gray-400">30</div>
-                                        <div class="text-gray-400">1</div>
-                                        <div class="text-gray-400">2</div>
-                                        <div class="text-gray-400">3</div>
-                                        <div class="text-gray-400">4</div>
-                                        <div class="text-gray-400">5</div>
-                                        <div class="text-gray-400">6</div>
-                                        <div class="text-gray-400">7</div>
-                                        <div class="text-gray-400">8</div>
-                                        <div class="text-gray-400">9</div>
-                                        <div class="text-gray-400">10</div>
-                                        <div class="text-gray-400">11</div>
-                                        <div class="text-gray-400">12</div>
-                                        <div class="bg-purple-500 text-white rounded-full p-2 cursor-pointer">13</div>
-                                        <div class="hover:bg-gray-100 rounded-full p-2 cursor-pointer">14</div>
-                                        <div class="hover:bg-gray-100 rounded-full p-2 cursor-pointer">15</div>
-                                        <div class="hover:bg-gray-100 rounded-full p-2 cursor-pointer">16</div>
-                                        <div class="hover:bg-gray-100 rounded-full p-2 cursor-pointer">17</div>
-                                        <div class="hover:bg-gray-100 rounded-full p-2 cursor-pointer">18</div>
-                                        <div class="hover:bg-gray-100 rounded-full p-2 cursor-pointer">19</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <h5 class="font-bold mb-4">Available Times (Oct 13)</h5>
-                                <div class="space-y-2">
-                                    <button class="w-full border border-gray-300 rounded-lg px-4 py-2 hover:bg-purple-50 hover:border-purple-500 transition text-left">
-                                        9:00 AM - 9:30 AM
-                                    </button>
-                                    <button class="w-full border border-gray-300 rounded-lg px-4 py-2 hover:bg-purple-50 hover:border-purple-500 transition text-left">
-                                        10:00 AM - 10:30 AM
-                                    </button>
-                                    <button class="w-full bg-purple-500 text-white rounded-lg px-4 py-2 font-semibold">
-                                        11:00 AM - 11:30 AM ✓
-                                    </button>
-                                    <button class="w-full border border-gray-300 rounded-lg px-4 py-2 hover:bg-purple-50 hover:border-purple-500 transition text-left">
-                                        1:00 PM - 1:30 PM
-                                    </button>
-                                    <button class="w-full border border-gray-300 rounded-lg px-4 py-2 hover:bg-purple-50 hover:border-purple-500 transition text-left">
-                                        2:00 PM - 2:30 PM
-                                    </button>
-                                    <button class="w-full border border-gray-300 rounded-lg px-4 py-2 hover:bg-purple-50 hover:border-purple-500 transition text-left">
-                                        3:00 PM - 3:30 PM
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <button onclick="showDemo(3)" class="w-full mt-6 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold py-3 rounded-lg hover:from-purple-600 hover:to-blue-600 transition animate-pulse-slow">
-                            Confirm Appointment →
-                        </button>
+              <!-- Simulated Calendly Interface -->
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h5 class="font-bold mb-4">Select a Date</h5>
+                  <div class="border border-gray-300 rounded-lg p-4">
+                    <div class="text-center mb-4">
+                      <div class="font-bold text-lg">October 2024</div>
                     </div>
-                    <div class="mt-6 text-gray-300">
-                        <p class="text-sm">✓ Calendly inline widget integration</p>
-                        <p class="text-sm">✓ Automatic calendar invites</p>
-                        <p class="text-sm">✓ SMS/Email reminders</p>
+                    <div class="grid grid-cols-7 gap-2 text-center text-sm">
+                      <div class="font-semibold">Sun</div>
+                      <div class="font-semibold">Mon</div>
+                      <div class="font-semibold">Tue</div>
+                      <div class="font-semibold">Wed</div>
+                      <div class="font-semibold">Thu</div>
+                      <div class="font-semibold">Fri</div>
+                      <div class="font-semibold">Sat</div>
+                      <div class="text-gray-400">29</div>
+                      <div class="text-gray-400">30</div>
+                      <div class="text-gray-400">1</div>
+                      <div class="text-gray-400">2</div>
+                      <div class="text-gray-400">3</div>
+                      <div class="text-gray-400">4</div>
+                      <div class="text-gray-400">5</div>
+                      <div class="text-gray-400">6</div>
+                      <div class="text-gray-400">7</div>
+                      <div class="text-gray-400">8</div>
+                      <div class="text-gray-400">9</div>
+                      <div class="text-gray-400">10</div>
+                      <div class="text-gray-400">11</div>
+                      <div class="text-gray-400">12</div>
+                      <div
+                        class="bg-purple-500 text-white rounded-full p-2 cursor-pointer"
+                      >
+                        13
+                      </div>
+                      <div
+                        class="hover:bg-gray-100 rounded-full p-2 cursor-pointer"
+                      >
+                        14
+                      </div>
+                      <div
+                        class="hover:bg-gray-100 rounded-full p-2 cursor-pointer"
+                      >
+                        15
+                      </div>
+                      <div
+                        class="hover:bg-gray-100 rounded-full p-2 cursor-pointer"
+                      >
+                        16
+                      </div>
+                      <div
+                        class="hover:bg-gray-100 rounded-full p-2 cursor-pointer"
+                      >
+                        17
+                      </div>
+                      <div
+                        class="hover:bg-gray-100 rounded-full p-2 cursor-pointer"
+                      >
+                        18
+                      </div>
+                      <div
+                        class="hover:bg-gray-100 rounded-full p-2 cursor-pointer"
+                      >
+                        19
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
-
-            <!-- Step 3: Video Interview -->
-            <div id="demo-3" class="demo-screen">
-                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-                    <h3 class="text-3xl font-bold mb-6">🎥 Step 3: Video Interview</h3>
-                    <div class="bg-white rounded-xl p-6 text-gray-900">
-                        <h4 class="text-2xl font-bold mb-4">Record Your Video Interview</h4>
-                        <p class="text-gray-600 mb-6">Answer 4 questions. You can retake any answer before submitting.</p>
-                        
-                        <!-- Video Interview Interface -->
-                        <div class="border-2 border-gray-300 rounded-lg p-6 bg-gray-50">
-                            <div class="mb-4">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="font-bold">Question 1 of 4</span>
-                                    <span class="text-sm text-gray-600">Time remaining: 2:00</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2">
-                                    <div class="bg-purple-500 h-2 rounded-full" style="width: 25%"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="bg-purple-100 border-2 border-purple-300 rounded-lg p-4 mb-6">
-                                <p class="font-bold text-lg">Tell us about yourself and why you're interested in this program.</p>
-                            </div>
-                            
-                            <!-- Simulated Video Preview -->
-                            <div class="bg-black rounded-lg aspect-video flex items-center justify-center mb-6 relative">
-                                <div class="text-white text-center">
-                                    <div class="text-6xl mb-4">📹</div>
-                                    <p class="text-xl">Camera Preview</p>
-                                    <p class="text-sm text-gray-400 mt-2">Your video will appear here</p>
-                                </div>
-                                <div class="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold flex items-center">
-                                    <span class="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
-                                    REC
-                                </div>
-                            </div>
-                            
-                            <div class="flex gap-4">
-                                <button class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 rounded-lg transition">
-                                    ⏸️ Pause
-                                </button>
-                                <button class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 rounded-lg transition">
-                                    🔄 Retake
-                                </button>
-                                <button class="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg transition">
-                                    ✓ Next Question
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <button onclick="showDemo(4)" class="w-full mt-6 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold py-3 rounded-lg hover:from-purple-600 hover:to-blue-600 transition animate-pulse-slow">
-                            Submit All Answers →
-                        </button>
-                    </div>
-                    <div class="mt-6 text-gray-300">
-                        <p class="text-sm">✓ HireVue-style video recording</p>
-                        <p class="text-sm">✓ Unlimited retakes per question</p>
-                        <p class="text-sm">✓ Secure video upload to cloud storage</p>
-                    </div>
+                <div>
+                  <h5 class="font-bold mb-4">Available Times (Oct 13)</h5>
+                  <div class="space-y-2">
+                    <button
+                      class="w-full border border-gray-300 rounded-lg px-4 py-2 hover:bg-purple-50 hover:border-purple-500 transition text-left"
+                    >
+                      9:00 AM - 9:30 AM
+                    </button>
+                    <button
+                      class="w-full border border-gray-300 rounded-lg px-4 py-2 hover:bg-purple-50 hover:border-purple-500 transition text-left"
+                    >
+                      10:00 AM - 10:30 AM
+                    </button>
+                    <button
+                      class="w-full bg-purple-500 text-white rounded-lg px-4 py-2 font-semibold"
+                    >
+                      11:00 AM - 11:30 AM ✓
+                    </button>
+                    <button
+                      class="w-full border border-gray-300 rounded-lg px-4 py-2 hover:bg-purple-50 hover:border-purple-500 transition text-left"
+                    >
+                      1:00 PM - 1:30 PM
+                    </button>
+                    <button
+                      class="w-full border border-gray-300 rounded-lg px-4 py-2 hover:bg-purple-50 hover:border-purple-500 transition text-left"
+                    >
+                      2:00 PM - 2:30 PM
+                    </button>
+                    <button
+                      class="w-full border border-gray-300 rounded-lg px-4 py-2 hover:bg-purple-50 hover:border-purple-500 transition text-left"
+                    >
+                      3:00 PM - 3:30 PM
+                    </button>
+                  </div>
                 </div>
-            </div>
+              </div>
 
-            <!-- Step 4: Confirmation -->
-            <div id="demo-4" class="demo-screen">
-                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-                    <h3 class="text-3xl font-bold mb-6">✅ Step 4: Enrollment Complete!</h3>
-                    <div class="bg-white rounded-xl p-8 text-gray-900 text-center">
-                        <div class="text-6xl mb-6">🎉</div>
-                        <h4 class="text-3xl font-bold mb-4">Congratulations, John!</h4>
-                        <p class="text-xl text-gray-600 mb-8">Your enrollment application has been submitted successfully.</p>
-                        
-                        <div class="bg-green-50 border-2 border-green-300 rounded-lg p-6 mb-8">
-                            <h5 class="font-bold text-lg mb-4">What Happens Next?</h5>
-                            <div class="text-left space-y-3">
-                                <div class="flex items-start">
-                                    <span class="text-green-500 mr-3">✓</span>
-                                    <span>You'll receive a confirmation email within 5 minutes</span>
-                                </div>
-                                <div class="flex items-start">
-                                    <span class="text-green-500 mr-3">✓</span>
-                                    <span>Our team will review your application within 24-48 hours</span>
-                                </div>
-                                <div class="flex items-start">
-                                    <span class="text-green-500 mr-3">✓</span>
-                                    <span>You'll attend your scheduled interview on Oct 13 at 11:00 AM</span>
-                                </div>
-                                <div class="flex items-start">
-                                    <span class="text-green-500 mr-3">✓</span>
-                                    <span>We'll notify you of your acceptance status within 3 business days</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-blue-50 border-2 border-blue-300 rounded-lg p-6 mb-8">
-                            <h5 class="font-bold text-lg mb-2">Your Application ID</h5>
-                            <p class="text-3xl font-mono font-bold text-blue-600">EFH-2024-1013</p>
-                            <p class="text-sm text-gray-600 mt-2">Save this for your records</p>
-                        </div>
-                        
-                        <div class="flex gap-4">
-                            <button class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 rounded-lg transition">
-                                📧 Resend Confirmation
-                            </button>
-                            <button class="flex-1 bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 rounded-lg transition">
-                                📱 Add to Calendar
-                            </button>
-                        </div>
-                    </div>
-                    <div class="mt-6 text-gray-300">
-                        <p class="text-sm">✓ Automatic email notifications</p>
-                        <p class="text-sm">✓ Application tracking dashboard</p>
-                        <p class="text-sm">✓ Calendar integration</p>
-                    </div>
-                </div>
+              <button
+                onclick="showDemo(3)"
+                class="w-full mt-6 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold py-3 rounded-lg hover:from-purple-600 hover:to-blue-600 transition animate-pulse-slow"
+              >
+                Confirm Appointment →
+              </button>
             </div>
-
+            <div class="mt-6 text-gray-300">
+              <p class="text-sm">✓ Calendly inline widget integration</p>
+              <p class="text-sm">✓ Automatic calendar invites</p>
+              <p class="text-sm">✓ SMS/Email reminders</p>
+            </div>
+          </div>
         </div>
 
-        <!-- Navigation Buttons -->
-        <div class="flex justify-between mt-8 max-w-5xl mx-auto">
-            <button onclick="previousDemo()" id="prev-btn" class="bg-white/10 hover:bg-white/20 px-6 py-3 rounded-lg transition" disabled>
-                ← Previous Step
-            </button>
-            <button onclick="nextDemo()" id="next-btn" class="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 px-6 py-3 rounded-lg transition">
-                Next Step →
-            </button>
+        <!-- Step 3: Video Interview -->
+        <div id="demo-3" class="demo-screen">
+          <div
+            class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20"
+          >
+            <h3 class="text-3xl font-bold mb-6">🎥 Step 3: Video Interview</h3>
+            <div class="bg-white rounded-xl p-6 text-gray-900">
+              <h4 class="text-2xl font-bold mb-4">
+                Record Your Video Interview
+              </h4>
+              <p class="text-gray-600 mb-6">
+                Answer 4 questions. You can retake any answer before submitting.
+              </p>
+
+              <!-- Video Interview Interface -->
+              <div class="border-2 border-gray-300 rounded-lg p-6 bg-gray-50">
+                <div class="mb-4">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="font-bold">Question 1 of 4</span>
+                    <span class="text-sm text-gray-600"
+                      >Time remaining: 2:00</span
+                    >
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div
+                      class="bg-purple-500 h-2 rounded-full"
+                      style="width: 25%"
+                    ></div>
+                  </div>
+                </div>
+
+                <div
+                  class="bg-purple-100 border-2 border-purple-300 rounded-lg p-4 mb-6"
+                >
+                  <p class="font-bold text-lg">
+                    Tell us about yourself and why you're interested in this
+                    program.
+                  </p>
+                </div>
+
+                <!-- Simulated Video Preview -->
+                <div
+                  class="bg-black rounded-lg aspect-video flex items-center justify-center mb-6 relative"
+                >
+                  <div class="text-white text-center">
+                    <div class="text-6xl mb-4">📹</div>
+                    <p class="text-xl">Camera Preview</p>
+                    <p class="text-sm text-gray-400 mt-2">
+                      Your video will appear here
+                    </p>
+                  </div>
+                  <div
+                    class="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold flex items-center"
+                  >
+                    <span
+                      class="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"
+                    ></span>
+                    REC
+                  </div>
+                </div>
+
+                <div class="flex gap-4">
+                  <button
+                    class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 rounded-lg transition"
+                  >
+                    ⏸️ Pause
+                  </button>
+                  <button
+                    class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 rounded-lg transition"
+                  >
+                    🔄 Retake
+                  </button>
+                  <button
+                    class="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg transition"
+                  >
+                    ✓ Next Question
+                  </button>
+                </div>
+              </div>
+
+              <button
+                onclick="showDemo(4)"
+                class="w-full mt-6 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold py-3 rounded-lg hover:from-purple-600 hover:to-blue-600 transition animate-pulse-slow"
+              >
+                Submit All Answers →
+              </button>
+            </div>
+            <div class="mt-6 text-gray-300">
+              <p class="text-sm">✓ HireVue-style video recording</p>
+              <p class="text-sm">✓ Unlimited retakes per question</p>
+              <p class="text-sm">✓ Secure video upload to cloud storage</p>
+            </div>
+          </div>
         </div>
+
+        <!-- Step 4: Confirmation -->
+        <div id="demo-4" class="demo-screen">
+          <div
+            class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20"
+          >
+            <h3 class="text-3xl font-bold mb-6">
+              ✅ Step 4: Enrollment Complete!
+            </h3>
+            <div class="bg-white rounded-xl p-8 text-gray-900 text-center">
+              <div class="text-6xl mb-6">🎉</div>
+              <h4 class="text-3xl font-bold mb-4">Congratulations, John!</h4>
+              <p class="text-xl text-gray-600 mb-8">
+                Your enrollment application has been submitted successfully.
+              </p>
+
+              <div
+                class="bg-green-50 border-2 border-green-300 rounded-lg p-6 mb-8"
+              >
+                <h5 class="font-bold text-lg mb-4">What Happens Next?</h5>
+                <div class="text-left space-y-3">
+                  <div class="flex items-start">
+                    <span class="text-green-500 mr-3">✓</span>
+                    <span
+                      >You'll receive a confirmation email within 5
+                      minutes</span
+                    >
+                  </div>
+                  <div class="flex items-start">
+                    <span class="text-green-500 mr-3">✓</span>
+                    <span
+                      >Our team will review your application within 24-48
+                      hours</span
+                    >
+                  </div>
+                  <div class="flex items-start">
+                    <span class="text-green-500 mr-3">✓</span>
+                    <span
+                      >You'll attend your scheduled interview on Oct 13 at 11:00
+                      AM</span
+                    >
+                  </div>
+                  <div class="flex items-start">
+                    <span class="text-green-500 mr-3">✓</span>
+                    <span
+                      >We'll notify you of your acceptance status within 3
+                      business days</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="bg-blue-50 border-2 border-blue-300 rounded-lg p-6 mb-8"
+              >
+                <h5 class="font-bold text-lg mb-2">Your Application ID</h5>
+                <p class="text-3xl font-mono font-bold text-blue-600">
+                  EFH-2024-1013
+                </p>
+                <p class="text-sm text-gray-600 mt-2">
+                  Save this for your records
+                </p>
+              </div>
+
+              <div class="flex gap-4">
+                <button
+                  class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 rounded-lg transition"
+                >
+                  📧 Resend Confirmation
+                </button>
+                <button
+                  class="flex-1 bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 rounded-lg transition"
+                >
+                  📱 Add to Calendar
+                </button>
+              </div>
+            </div>
+            <div class="mt-6 text-gray-300">
+              <p class="text-sm">✓ Automatic email notifications</p>
+              <p class="text-sm">✓ Application tracking dashboard</p>
+              <p class="text-sm">✓ Calendar integration</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="flex justify-between mt-8 max-w-5xl mx-auto">
+        <button
+          onclick="previousDemo()"
+          id="prev-btn"
+          class="bg-white/10 hover:bg-white/20 px-6 py-3 rounded-lg transition"
+          disabled
+        >
+          ← Previous Step
+        </button>
+        <button
+          onclick="nextDemo()"
+          id="next-btn"
+          class="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 px-6 py-3 rounded-lg transition"
+        >
+          Next Step →
+        </button>
+      </div>
     </section>
 
     <!-- Features Showcase -->
     <section class="container mx-auto px-4 py-16">
-        <h2 class="text-4xl font-bold text-center mb-12">Platform Features</h2>
-        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <div class="demo-card bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
-                <div class="text-4xl mb-4">⚡</div>
-                <h3 class="text-xl font-bold mb-2">Lightning Fast</h3>
-                <p class="text-gray-300">Built with Vite + React. Loads in under 1 second. Optimized for performance.</p>
-            </div>
-            <div class="demo-card bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
-                <div class="text-4xl mb-4">📱</div>
-                <h3 class="text-xl font-bold mb-2">Mobile First</h3>
-                <p class="text-gray-300">Fully responsive design. Works perfectly on phones, tablets, and desktops.</p>
-            </div>
-            <div class="demo-card bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
-                <div class="text-4xl mb-4">🔒</div>
-                <h3 class="text-xl font-bold mb-2">Secure & Compliant</h3>
-                <p class="text-gray-300">FERPA compliant. Encrypted data. Security headers. Audit logs.</p>
-            </div>
-            <div class="demo-card bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
-                <div class="text-4xl mb-4">🎨</div>
-                <h3 class="text-xl font-bold mb-2">Fully Customizable</h3>
-                <p class="text-gray-300">Change colors, branding, content. Add your own features. No limits.</p>
-            </div>
-            <div class="demo-card bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
-                <div class="text-4xl mb-4">📊</div>
-                <h3 class="text-xl font-bold mb-2">Analytics Built-In</h3>
-                <p class="text-gray-300">Track enrollments, conversions, and student progress. Google Analytics integrated.</p>
-            </div>
-            <div class="demo-card bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
-                <div class="text-4xl mb-4">💳</div>
-                <h3 class="text-xl font-bold mb-2">Payment Ready</h3>
-                <p class="text-gray-300">Stripe integration included. Accept payments, subscriptions, and donations.</p>
-            </div>
+      <h2 class="text-4xl font-bold text-center mb-12">Platform Features</h2>
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div
+          class="demo-card bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20"
+        >
+          <div class="text-4xl mb-4">⚡</div>
+          <h3 class="text-xl font-bold mb-2">Lightning Fast</h3>
+          <p class="text-gray-300">
+            Built with Vite + React. Loads in under 1 second. Optimized for
+            performance.
+          </p>
         </div>
+        <div
+          class="demo-card bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20"
+        >
+          <div class="text-4xl mb-4">📱</div>
+          <h3 class="text-xl font-bold mb-2">Mobile First</h3>
+          <p class="text-gray-300">
+            Fully responsive design. Works perfectly on phones, tablets, and
+            desktops.
+          </p>
+        </div>
+        <div
+          class="demo-card bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20"
+        >
+          <div class="text-4xl mb-4">🔒</div>
+          <h3 class="text-xl font-bold mb-2">Secure & Compliant</h3>
+          <p class="text-gray-300">
+            FERPA compliant. Encrypted data. Security headers. Audit logs.
+          </p>
+        </div>
+        <div
+          class="demo-card bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20"
+        >
+          <div class="text-4xl mb-4">🎨</div>
+          <h3 class="text-xl font-bold mb-2">Fully Customizable</h3>
+          <p class="text-gray-300">
+            Change colors, branding, content. Add your own features. No limits.
+          </p>
+        </div>
+        <div
+          class="demo-card bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20"
+        >
+          <div class="text-4xl mb-4">📊</div>
+          <h3 class="text-xl font-bold mb-2">Analytics Built-In</h3>
+          <p class="text-gray-300">
+            Track enrollments, conversions, and student progress. Google
+            Analytics integrated.
+          </p>
+        </div>
+        <div
+          class="demo-card bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20"
+        >
+          <div class="text-4xl mb-4">💳</div>
+          <h3 class="text-xl font-bold mb-2">Payment Ready</h3>
+          <p class="text-gray-300">
+            Stripe integration included. Accept payments, subscriptions, and
+            donations.
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- CTA -->
     <section class="container mx-auto px-4 py-16 text-center">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6">Ready to Own This Platform?</h2>
-        <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Get the complete source code, commercial license, and lifetime updates.
-        </p>
-        <a href="/pages/store.html" class="inline-block bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-bold py-4 px-12 rounded-lg transition transform hover:scale-105 text-xl">
-            View Pricing & Buy Now
-        </a>
+      <h2 class="text-4xl md:text-5xl font-bold mb-6">
+        Ready to Own This Platform?
+      </h2>
+      <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+        Get the complete source code, commercial license, and lifetime updates.
+      </p>
+      <a
+        href="/pages/store.html"
+        class="inline-block bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-bold py-4 px-12 rounded-lg transition transform hover:scale-105 text-xl"
+      >
+        View Pricing & Buy Now
+      </a>
     </section>
 
     <!-- Footer -->
-    <footer class="container mx-auto px-4 py-8 border-t border-white/20 text-center text-gray-400">
-        <p>&copy; 2024 Elevate for Humanity. All rights reserved.</p>
+    <footer
+      class="container mx-auto px-4 py-8 border-t border-white/20 text-center text-gray-400"
+    >
+      <p>&copy; 2024 Elevate for Humanity. All rights reserved.</p>
     </footer>
 
     <script>
-        let currentStep = 1;
-        const totalSteps = 4;
+      let currentStep = 1;
+      const totalSteps = 4;
 
-        function showDemo(step) {
-            // Hide all demos
-            for (let i = 1; i <= totalSteps; i++) {
-                document.getElementById(`demo-${i}`).classList.remove('active');
-                document.getElementById(`step-${i}`).classList.remove('active');
-            }
-            
-            // Show selected demo
-            document.getElementById(`demo-${step}`).classList.add('active');
-            document.getElementById(`step-${step}`).classList.add('active');
-            currentStep = step;
-            
-            // Update navigation buttons
-            updateNavButtons();
+      function showDemo(step) {
+        // Hide all demos
+        for (let i = 1; i <= totalSteps; i++) {
+          document.getElementById(`demo-${i}`).classList.remove('active');
+          document.getElementById(`step-${i}`).classList.remove('active');
         }
 
-        function nextDemo() {
-            if (currentStep < totalSteps) {
-                showDemo(currentStep + 1);
-            }
+        // Show selected demo
+        document.getElementById(`demo-${step}`).classList.add('active');
+        document.getElementById(`step-${step}`).classList.add('active');
+        currentStep = step;
+
+        // Update navigation buttons
+        updateNavButtons();
+      }
+
+      function nextDemo() {
+        if (currentStep < totalSteps) {
+          showDemo(currentStep + 1);
         }
+      }
 
-        function previousDemo() {
-            if (currentStep > 1) {
-                showDemo(currentStep - 1);
-            }
+      function previousDemo() {
+        if (currentStep > 1) {
+          showDemo(currentStep - 1);
         }
+      }
 
-        function updateNavButtons() {
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-            
-            prevBtn.disabled = currentStep === 1;
-            prevBtn.style.opacity = currentStep === 1 ? '0.5' : '1';
-            prevBtn.style.cursor = currentStep === 1 ? 'not-allowed' : 'pointer';
-            
-            if (currentStep === totalSteps) {
-                nextBtn.textContent = 'Start Over';
-                nextBtn.onclick = () => showDemo(1);
-            } else {
-                nextBtn.textContent = 'Next Step →';
-                nextBtn.onclick = nextDemo;
-            }
+      function updateNavButtons() {
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        prevBtn.disabled = currentStep === 1;
+        prevBtn.style.opacity = currentStep === 1 ? '0.5' : '1';
+        prevBtn.style.cursor = currentStep === 1 ? 'not-allowed' : 'pointer';
+
+        if (currentStep === totalSteps) {
+          nextBtn.textContent = 'Start Over';
+          nextBtn.onclick = () => showDemo(1);
+        } else {
+          nextBtn.textContent = 'Next Step →';
+          nextBtn.onclick = nextDemo;
         }
+      }
 
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') nextDemo();
-            if (e.key === 'ArrowLeft') previousDemo();
-        });
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') nextDemo();
+        if (e.key === 'ArrowLeft') previousDemo();
+      });
 
-        // Google Analytics
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX'); // Replace with your GA4 ID
+      // Google Analytics
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX'); // Replace with your GA4 ID
     </script>
-</body>
+  </body>
 </html>

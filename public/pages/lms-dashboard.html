@@ -1,197 +1,207 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard - Elevate for Humanity</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: #f8fafc;
-            color: #333;
-        }
-        
-        .portal-header {
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        .portal-nav {
-            background: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-        
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f8fafc;
+        color: #333;
+      }
+
+      .portal-header {
+        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        color: white;
+        padding: 2rem 0;
+        text-align: center;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .portal-nav {
+        background: white;
+        padding: 1rem 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+      }
+
+      .nav-tabs {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .nav-tab {
+        padding: 0.75rem 1.5rem;
+        background: #f1f5f9;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: 600;
+        text-decoration: none;
+        color: #333;
+      }
+
+      .nav-tab.active {
+        background: #1e40af;
+        color: white;
+      }
+
+      .nav-tab:hover {
+        background: #3b82f6;
+        color: white;
+      }
+
+      .content {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        margin-bottom: 2rem;
+      }
+
+      .alert {
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+      }
+
+      .alert-success {
+        background: #d1fae5;
+        color: #065f46;
+        border: 1px solid #a7f3d0;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .stat-card {
+        background: #f8fafc;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 1.5rem;
+      }
+
+      .stat-card h3 {
+        color: #1e40af;
+        margin-bottom: 1rem;
+      }
+
+      .progress-bar {
+        background: #e5e7eb;
+        border-radius: 10px;
+        height: 20px;
+        margin: 1rem 0;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        background: linear-gradient(90deg, #059669, #10b981);
+        height: 100%;
+        transition: width 0.3s;
+        border-radius: 10px;
+      }
+
+      .activity-list {
+        list-style: none;
+      }
+
+      .activity-list li {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      .activity-list li:last-child {
+        border-bottom: none;
+      }
+
+      @media (max-width: 768px) {
         .nav-tabs {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
+          flex-direction: column;
         }
-        
-        .nav-tab {
-            padding: 0.75rem 1.5rem;
-            background: #f1f5f9;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-            text-decoration: none;
-            color: #333;
-        }
-        
-        .nav-tab.active {
-            background: #1e40af;
-            color: white;
-        }
-        
-        .nav-tab:hover {
-            background: #3b82f6;
-            color: white;
-        }
-        
-        .content {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            margin-bottom: 2rem;
-        }
-        
-        .alert {
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-        }
-        
-        .alert-success {
-            background: #d1fae5;
-            color: #065f46;
-            border: 1px solid #a7f3d0;
-        }
-        
+
         .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+          grid-template-columns: 1fr;
         }
-        
-        .stat-card {
-            background: #f8fafc;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 1.5rem;
-        }
-        
-        .stat-card h3 {
-            color: #1e40af;
-            margin-bottom: 1rem;
-        }
-        
-        .progress-bar {
-            background: #e5e7eb;
-            border-radius: 10px;
-            height: 20px;
-            margin: 1rem 0;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            background: linear-gradient(90deg, #059669, #10b981);
-            height: 100%;
-            transition: width 0.3s;
-            border-radius: 10px;
-        }
-        
-        .activity-list {
-            list-style: none;
-        }
-        
-        .activity-list li {
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        
-        .activity-list li:last-child {
-            border-bottom: none;
-        }
-        
-        @media (max-width: 768px) {
-            .nav-tabs {
-                flex-direction: column;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="portal-header">
-        <div class="container">
-            <h1>🎓 Student Portal</h1>
-            <p>Elevate for Humanity Career & Training Institute</p>
-        </div>
+      <div class="container">
+        <h1>🎓 Student Portal</h1>
+        <p>Elevate for Humanity Career & Training Institute</p>
+      </div>
     </div>
-    
+
     <div class="portal-nav">
-        <div class="container">
-            <div class="nav-tabs">
-                <a href="lms-enrollment.html" class="nav-tab">📝 Enrollment</a>
-                <a href="lms-dashboard.html" class="nav-tab active">📊 Dashboard</a>
-                <a href="lms-courses.html" class="nav-tab">📚 My Courses</a>
-                <a href="lms-certificates.html" class="nav-tab">🏆 Certificates</a>
-                <a href="lms-profile.html" class="nav-tab">👤 Profile</a>
-                <a href="lms-support.html" class="nav-tab">💬 Support</a>
-            </div>
+      <div class="container">
+        <div class="nav-tabs">
+          <a href="lms-enrollment.html" class="nav-tab">📝 Enrollment</a>
+          <a href="lms-dashboard.html" class="nav-tab active">📊 Dashboard</a>
+          <a href="lms-courses.html" class="nav-tab">📚 My Courses</a>
+          <a href="lms-certificates.html" class="nav-tab">🏆 Certificates</a>
+          <a href="lms-profile.html" class="nav-tab">👤 Profile</a>
+          <a href="lms-support.html" class="nav-tab">💬 Support</a>
         </div>
+      </div>
     </div>
-    
+
     <div class="container">
-        <div class="alert alert-success">
-            <strong>Welcome back, Student!</strong> You have 2 active courses and 1 completed certification.
+      <div class="alert alert-success">
+        <strong>Welcome back, Student!</strong> You have 2 active courses and 1
+        completed certification.
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3>Overall Progress</h3>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 68%"></div>
+          </div>
+          <p>68% Complete - 2 of 3 courses finished</p>
         </div>
-        
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3>Overall Progress</h3>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 68%;"></div>
-                </div>
-                <p>68% Complete - 2 of 3 courses finished</p>
-            </div>
-            
-            <div class="stat-card">
-                <h3>Quick Stats</h3>
-                <p><strong>Enrolled Courses:</strong> 3</p>
-                <p><strong>Completed:</strong> 1</p>
-                <p><strong>Certificates Earned:</strong> 1</p>
-                <p><strong>Next Deadline:</strong> March 15, 2024</p>
-            </div>
+
+        <div class="stat-card">
+          <h3>Quick Stats</h3>
+          <p><strong>Enrolled Courses:</strong> 3</p>
+          <p><strong>Completed:</strong> 1</p>
+          <p><strong>Certificates Earned:</strong> 1</p>
+          <p><strong>Next Deadline:</strong> March 15, 2024</p>
         </div>
-        
-        <div class="content">
-            <h3 style="margin-bottom: 1rem;">Recent Activity</h3>
-            <ul class="activity-list">
-                <li><strong>March 10:</strong> Completed CPR Skills Assessment</li>
-                <li><strong>March 8:</strong> Submitted Module 3 Assignment - Microsoft Excel</li>
-                <li><strong>March 5:</strong> Started OSHA 10 Hour Training</li>
-                <li><strong>March 1:</strong> Earned ServSafe Food Handler Certificate</li>
-            </ul>
-        </div>
+      </div>
+
+      <div class="content">
+        <h3 style="margin-bottom: 1rem">Recent Activity</h3>
+        <ul class="activity-list">
+          <li><strong>March 10:</strong> Completed CPR Skills Assessment</li>
+          <li>
+            <strong>March 8:</strong> Submitted Module 3 Assignment - Microsoft
+            Excel
+          </li>
+          <li><strong>March 5:</strong> Started OSHA 10 Hour Training</li>
+          <li>
+            <strong>March 1:</strong> Earned ServSafe Food Handler Certificate
+          </li>
+        </ul>
+      </div>
     </div>
-</body>
+  </body>
 </html>

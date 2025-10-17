@@ -4,30 +4,43 @@ const path = require('path');
 
 const server = http.createServer((req, res) => {
   console.log(`${req.method} ${req.url}`);
-  
+
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   let filePath = req.url === '/' ? '/index.html' : req.url;
-  
+
   // Remove query parameters
   if (filePath.includes('?')) {
     filePath = filePath.split('?')[0];
   }
-  
+
   const fullPath = path.join(__dirname, filePath);
   const ext = path.extname(filePath);
-  
+
   let contentType = 'text/html';
   switch (ext) {
-    case '.js': contentType = 'application/javascript'; break;
-    case '.css': contentType = 'text/css'; break;
-    case '.json': contentType = 'application/json'; break;
-    case '.png': contentType = 'image/png'; break;
-    case '.jpg': case '.jpeg': contentType = 'image/jpeg'; break;
-    case '.svg': contentType = 'image/svg+xml'; break;
+    case '.js':
+      contentType = 'application/javascript';
+      break;
+    case '.css':
+      contentType = 'text/css';
+      break;
+    case '.json':
+      contentType = 'application/json';
+      break;
+    case '.png':
+      contentType = 'image/png';
+      break;
+    case '.jpg':
+    case '.jpeg':
+      contentType = 'image/jpeg';
+      break;
+    case '.svg':
+      contentType = 'image/svg+xml';
+      break;
   }
 
   fs.readFile(fullPath, (err, data) => {

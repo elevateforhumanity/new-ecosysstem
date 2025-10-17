@@ -24,13 +24,15 @@ if (fs.existsSync(googleConfigPath)) {
 // Check 2: Package.json scripts
 console.log('\n2. Checking npm scripts...');
 try {
-  const packageJson = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
+  const packageJson = JSON.parse(
+    fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')
+  );
   if (packageJson.scripts && packageJson.scripts['google:apply']) {
     console.log('   ✅ google:apply script exists');
   } else {
     console.log('   ❌ google:apply script missing');
   }
-  
+
   if (packageJson.scripts && packageJson.scripts['sitemaps:generate']) {
     console.log('   ✅ sitemaps:generate script exists');
   } else {
@@ -44,20 +46,24 @@ try {
 console.log('\n3. Checking key HTML files for SEO meta tags...');
 const keyFiles = ['index.html', 'programs.html', 'hub.html'];
 
-keyFiles.forEach(file => {
+keyFiles.forEach((file) => {
   const filePath = path.join(ROOT, file);
   if (fs.existsSync(filePath)) {
     const content = fs.readFileSync(filePath, 'utf8');
-    
+
     // Check for Open Graph tags
-    const hasOG = content.includes('property="og:title"') && content.includes('property="og:description"');
-    
+    const hasOG =
+      content.includes('property="og:title"') &&
+      content.includes('property="og:description"');
+
     // Check for Twitter Cards
     const hasTwitter = content.includes('property="twitter:card"');
-    
+
     // Check for Google Analytics
-    const hasGA = content.includes('googletagmanager.com/gtag/js') || content.includes('gtag(');
-    
+    const hasGA =
+      content.includes('googletagmanager.com/gtag/js') ||
+      content.includes('gtag(');
+
     console.log(`   ${file}:`);
     console.log(`     ${hasOG ? '✅' : '❌'} Open Graph tags`);
     console.log(`     ${hasTwitter ? '✅' : '❌'} Twitter Card tags`);
@@ -74,10 +80,12 @@ if (fs.existsSync(verificationPath)) {
   const content = fs.readFileSync(verificationPath, 'utf8');
   if (content.includes('google-site-verification')) {
     console.log('   ✅ Google site verification file exists');
-    
+
     // Check if it still has placeholder
     if (content.includes('GOOGLE_VERIFICATION_CODE_HERE')) {
-      console.log('   ⚠️  Still contains placeholder - run npm run google:apply');
+      console.log(
+        '   ⚠️  Still contains placeholder - run npm run google:apply'
+      );
     } else {
       console.log('   ✅ Verification code appears to be set');
     }
@@ -96,11 +104,15 @@ const sitemapsDir = path.join(ROOT, 'sitemaps');
 if (fs.existsSync(sitemapIndexPath)) {
   console.log('   ✅ sitemap-index.xml exists');
 } else {
-  console.log('   ❌ sitemap-index.xml missing - run npm run sitemaps:generate');
+  console.log(
+    '   ❌ sitemap-index.xml missing - run npm run sitemaps:generate'
+  );
 }
 
 if (fs.existsSync(sitemapsDir)) {
-  const sitemapFiles = fs.readdirSync(sitemapsDir).filter(f => f.endsWith('.xml'));
+  const sitemapFiles = fs
+    .readdirSync(sitemapsDir)
+    .filter((f) => f.endsWith('.xml'));
   console.log(`   ✅ ${sitemapFiles.length} sitemap files in /sitemaps/`);
 } else {
   console.log('   ❌ /sitemaps/ directory missing');
@@ -131,7 +143,9 @@ if (fs.existsSync(envExamplePath)) {
 
 console.log('\n🎉 Verification complete!');
 console.log('\n📋 Next Steps:');
-console.log('1. Set your actual Google Analytics ID and Search Console verification code');
+console.log(
+  '1. Set your actual Google Analytics ID and Search Console verification code'
+);
 console.log('2. Run: npm run google:apply');
 console.log('3. Run: npm run sitemaps:generate');
 console.log('4. Submit sitemap-index.xml to Google Search Console');

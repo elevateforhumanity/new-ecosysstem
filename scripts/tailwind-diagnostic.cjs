@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 
 console.log('🔍 TAILWIND CSS AUTOPILOT DIAGNOSTIC\n');
-console.log('=' .repeat(60));
+console.log('='.repeat(60));
 
 // 1. Check Tailwind Config
 console.log('\n📋 1. TAILWIND CONFIGURATION');
@@ -18,19 +18,19 @@ console.log('-'.repeat(60));
 try {
   const tailwindConfig = fs.readFileSync('tailwind.config.js', 'utf8');
   console.log('✅ tailwind.config.js exists');
-  
+
   // Check content paths
   if (tailwindConfig.includes('./src/**/*.{js,jsx}')) {
     console.log('✅ Content paths include src/**/*.{js,jsx}');
   } else {
     console.log('❌ Content paths may be incorrect');
   }
-  
+
   // Check for plugins
   if (tailwindConfig.includes('tailwindcss-animate')) {
     console.log('✅ tailwindcss-animate plugin configured');
   }
-  
+
   // Check for custom theme
   if (tailwindConfig.includes('extend:')) {
     console.log('✅ Custom theme extensions found');
@@ -46,13 +46,13 @@ console.log('-'.repeat(60));
 try {
   const postcssConfig = fs.readFileSync('postcss.config.js', 'utf8');
   console.log('✅ postcss.config.js exists');
-  
+
   if (postcssConfig.includes('tailwindcss')) {
     console.log('✅ Tailwind CSS plugin configured');
   } else {
     console.log('❌ Tailwind CSS plugin missing');
   }
-  
+
   if (postcssConfig.includes('autoprefixer')) {
     console.log('✅ Autoprefixer plugin configured');
   }
@@ -67,22 +67,28 @@ console.log('-'.repeat(60));
 try {
   const indexCSS = fs.readFileSync('src/index.css', 'utf8');
   console.log('✅ src/index.css exists');
-  
-  const directives = ['@tailwind base', '@tailwind components', '@tailwind utilities'];
-  directives.forEach(directive => {
+
+  const directives = [
+    '@tailwind base',
+    '@tailwind components',
+    '@tailwind utilities',
+  ];
+  directives.forEach((directive) => {
     if (indexCSS.includes(directive)) {
       console.log(`✅ ${directive} directive found`);
     } else {
       console.log(`❌ ${directive} directive missing`);
     }
   });
-  
+
   // Check for duplicate directives
   const directiveCount = (indexCSS.match(/@tailwind/g) || []).length;
   if (directiveCount === 3) {
     console.log('✅ Correct number of @tailwind directives (3)');
   } else {
-    console.log(`⚠️  Found ${directiveCount} @tailwind directives (expected 3)`);
+    console.log(
+      `⚠️  Found ${directiveCount} @tailwind directives (expected 3)`
+    );
   }
 } catch (err) {
   console.log('❌ src/index.css not found');
@@ -96,14 +102,16 @@ const cssFiles = [
   'src/index.css',
   'src/styles/shadcn.css',
   'src/styles/global.css',
-  'src/styles/theme.css'
+  'src/styles/theme.css',
 ];
 
-cssFiles.forEach(file => {
+cssFiles.forEach((file) => {
   if (fs.existsSync(file)) {
     const content = fs.readFileSync(file, 'utf8');
     const hasTailwindDirectives = content.includes('@tailwind');
-    console.log(`${hasTailwindDirectives ? '⚠️ ' : '✅'} ${file} ${hasTailwindDirectives ? '(has @tailwind directives)' : '(no directives)'}`);
+    console.log(
+      `${hasTailwindDirectives ? '⚠️ ' : '✅'} ${file} ${hasTailwindDirectives ? '(has @tailwind directives)' : '(no directives)'}`
+    );
   }
 });
 
@@ -114,17 +122,17 @@ console.log('-'.repeat(60));
 try {
   const mainJsx = fs.readFileSync('src/main.jsx', 'utf8');
   console.log('✅ src/main.jsx exists');
-  
+
   if (mainJsx.includes("import './index.css'")) {
     console.log('✅ index.css is imported');
   } else {
     console.log('❌ index.css import missing');
   }
-  
+
   // Check for duplicate CSS imports
-  const cssImports = (mainJsx.match(/import.*\.css/g) || []);
+  const cssImports = mainJsx.match(/import.*\.css/g) || [];
   console.log(`📊 Found ${cssImports.length} CSS import(s):`);
-  cssImports.forEach(imp => console.log(`   - ${imp}`));
+  cssImports.forEach((imp) => console.log(`   - ${imp}`));
 } catch (err) {
   console.log('❌ src/main.jsx not found');
 }
@@ -136,14 +144,14 @@ console.log('-'.repeat(60));
 try {
   const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
   const deps = { ...pkg.dependencies, ...pkg.devDependencies };
-  
+
   const required = {
-    'tailwindcss': deps.tailwindcss,
-    'postcss': deps.postcss,
-    'autoprefixer': deps.autoprefixer,
-    'tailwindcss-animate': deps['tailwindcss-animate']
+    tailwindcss: deps.tailwindcss,
+    postcss: deps.postcss,
+    autoprefixer: deps.autoprefixer,
+    'tailwindcss-animate': deps['tailwindcss-animate'],
   };
-  
+
   Object.entries(required).forEach(([name, version]) => {
     if (version) {
       console.log(`✅ ${name}: ${version}`);
@@ -162,11 +170,11 @@ console.log('-'.repeat(60));
 try {
   const viteConfig = fs.readFileSync('vite.config.js', 'utf8');
   console.log('✅ vite.config.js exists');
-  
+
   if (viteConfig.includes('@vitejs/plugin-react')) {
     console.log('✅ React plugin configured');
   }
-  
+
   if (viteConfig.includes('build:')) {
     console.log('✅ Build configuration found');
   }
@@ -180,12 +188,12 @@ console.log('-'.repeat(60));
 
 if (fs.existsSync('dist')) {
   console.log('✅ dist/ directory exists');
-  
+
   // Find CSS files
   const cssFiles = [];
   const findCSS = (dir) => {
     const files = fs.readdirSync(dir);
-    files.forEach(file => {
+    files.forEach((file) => {
       const fullPath = path.join(dir, file);
       if (fs.statSync(fullPath).isDirectory()) {
         findCSS(fullPath);
@@ -194,23 +202,24 @@ if (fs.existsSync('dist')) {
       }
     });
   };
-  
+
   findCSS('dist');
-  
+
   if (cssFiles.length > 0) {
     console.log(`✅ Found ${cssFiles.length} CSS file(s) in dist/`);
-    
-    cssFiles.forEach(file => {
+
+    cssFiles.forEach((file) => {
       const content = fs.readFileSync(file, 'utf8');
       const size = (content.length / 1024).toFixed(2);
-      
+
       // Check if CSS is compiled
       const hasRawDirectives = content.includes('@tailwind');
-      const hasCompiledClasses = content.includes('.flex{') || content.includes('.grid{');
-      
+      const hasCompiledClasses =
+        content.includes('.flex{') || content.includes('.grid{');
+
       console.log(`\n   📄 ${file}`);
       console.log(`      Size: ${size} KB`);
-      
+
       if (hasRawDirectives) {
         console.log('      ❌ Contains uncompiled @tailwind directives');
       } else if (hasCompiledClasses) {
@@ -233,7 +242,7 @@ console.log('-'.repeat(60));
 try {
   const indexHTML = fs.readFileSync('index.html', 'utf8');
   console.log('✅ index.html exists');
-  
+
   if (indexHTML.includes('src/main.jsx')) {
     console.log('✅ References src/main.jsx');
   } else if (indexHTML.includes('src/main.tsx')) {
@@ -241,7 +250,7 @@ try {
   } else {
     console.log('❌ Main entry point reference not found');
   }
-  
+
   // Check for CDN Tailwind (should not be present)
   if (indexHTML.includes('cdn.tailwindcss.com')) {
     console.log('❌ CDN Tailwind detected (should be removed)');

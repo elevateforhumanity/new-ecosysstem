@@ -25,11 +25,19 @@ export default function DurableTemplates() {
 
         <div className="grid md:grid-cols-3 gap-8">
           {templates.map((template, index) => (
-            <div key={index} className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition">
+            <div
+              key={index}
+              className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition"
+            >
               <div className="text-6xl mb-4">{template.icon}</div>
               <h3 className="text-2xl font-bold mb-2">{template.name}</h3>
-              <p className="text-brand-text-muted mb-4">{template.courses} courses included</p>
-              <Link to="/courses" className="text-brand-info font-semibold hover:text-brand-info">
+              <p className="text-brand-text-muted mb-4">
+                {template.courses} courses included
+              </p>
+              <Link
+                to="/courses"
+                className="text-brand-info font-semibold hover:text-brand-info"
+              >
                 View Template →
               </Link>
             </div>

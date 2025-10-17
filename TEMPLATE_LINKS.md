@@ -7,20 +7,24 @@ All templates are available at: **https://elevateforhumanity.netlify.app/pages/*
 ## 🌟 Top Recommended Templates
 
 ### Landing Pages
+
 - [fullsail-style-landing](https://elevateforhumanity.netlify.app/pages/fullsail-style-landing.html) - Modern tech/trades career page (20K)
 - [acc-style-landing](https://elevateforhumanity.netlify.app/pages/acc-style-landing.html) - Academic/college style (28K)
 
 ### Professional/Business
+
 - [clean-professional](https://elevateforhumanity.netlify.app/pages/clean-professional.html) - Clean workforce development (12K)
 - [professional-site](https://elevateforhumanity.netlify.app/pages/professional-site.html) - Veteran-owned contractor (20K)
 - [live-professional](https://elevateforhumanity.netlify.app/pages/live-professional.html) - Professional business site (28K)
 
 ### Education/LMS
+
 - [lms-advanced](https://elevateforhumanity.netlify.app/pages/lms-advanced.html) - Full-featured LMS (36K)
 - [student-portal](https://elevateforhumanity.netlify.app/pages/student-portal.html) - Student dashboard (32K)
 - [lms-ecosystem-complete](https://elevateforhumanity.netlify.app/pages/lms-ecosystem-complete.html) - Complete ecosystem (24K)
 
 ### Dashboards
+
 - [employer-dashboard](https://elevateforhumanity.netlify.app/pages/employer-dashboard.html) - DOL/DWD compliance (44K)
 - [student-dashboard](https://elevateforhumanity.netlify.app/pages/student-dashboard.html) - Student tracking (16K)
 - [revenue-tracking-dashboard](https://elevateforhumanity.netlify.app/pages/revenue-tracking-dashboard.html) - Revenue analytics (24K)
@@ -30,10 +34,12 @@ All templates are available at: **https://elevateforhumanity.netlify.app/pages/*
 ## 📂 All Templates by Category
 
 ### 🌟 Landing Pages (2)
+
 - [acc-style-landing](https://elevateforhumanity.netlify.app/pages/acc-style-landing.html) - 28K
 - [fullsail-style-landing](https://elevateforhumanity.netlify.app/pages/fullsail-style-landing.html) - 20K
 
 ### 🏢 Professional/Business (5)
+
 - [clean-professional](https://elevateforhumanity.netlify.app/pages/clean-professional.html) - 12K
 - [index-professional](https://elevateforhumanity.netlify.app/pages/index-professional.html) - 16K
 - [live-professional](https://elevateforhumanity.netlify.app/pages/live-professional.html) - 28K
@@ -41,6 +47,7 @@ All templates are available at: **https://elevateforhumanity.netlify.app/pages/*
 - [index-authentic](https://elevateforhumanity.netlify.app/pages/index-authentic.html) - 20K
 
 ### 🎓 Education/LMS (7)
+
 - [lms-advanced](https://elevateforhumanity.netlify.app/pages/lms-advanced.html) - 36K
 - [lms-ecosystem-complete](https://elevateforhumanity.netlify.app/pages/lms-ecosystem-complete.html) - 24K
 - [lms](https://elevateforhumanity.netlify.app/pages/lms.html) - 24K
@@ -50,6 +57,7 @@ All templates are available at: **https://elevateforhumanity.netlify.app/pages/*
 - [student-portal](https://elevateforhumanity.netlify.app/pages/student-portal.html) - 32K
 
 ### 🛒 Store/Commerce (7)
+
 - [buy-license](https://elevateforhumanity.netlify.app/pages/buy-license.html) - 16K
 - [elevate-store](https://elevateforhumanity.netlify.app/pages/elevate-store.html) - 28K
 - [emergency-buy-now](https://elevateforhumanity.netlify.app/pages/emergency-buy-now.html) - 12K
@@ -59,6 +67,7 @@ All templates are available at: **https://elevateforhumanity.netlify.app/pages/*
 - [EMERGENCY_SALE_BUY_NOW](https://elevateforhumanity.netlify.app/pages/EMERGENCY_SALE_BUY_NOW.html) - 20K
 
 ### 📊 Dashboards (8)
+
 - [elevate_license_dashboard](https://elevateforhumanity.netlify.app/pages/elevate_license_dashboard.html) - 4.0K
 - [employer-dashboard](https://elevateforhumanity.netlify.app/pages/employer-dashboard.html) - 44K
 - [license-dashboard](https://elevateforhumanity.netlify.app/pages/license-dashboard.html) - 12K
@@ -69,6 +78,7 @@ All templates are available at: **https://elevateforhumanity.netlify.app/pages/*
 - [user-dashboard](https://elevateforhumanity.netlify.app/pages/user-dashboard.html) - 8.0K
 
 ### 🌐 Specialized Templates (58)
+
 - [READY_FOR_TRANSFER_index](https://elevateforhumanity.netlify.app/pages/READY_FOR_TRANSFER_index.html) - 28K
 - [account](https://elevateforhumanity.netlify.app/pages/account.html) - 24K
 - [auth-login](https://elevateforhumanity.netlify.app/pages/auth-login.html) - 8.0K
@@ -143,4 +153,4 @@ All templates are available at: **https://elevateforhumanity.netlify.app/pages/*
 
 ---
 
-*Generated: 2025-10-17*
+_Generated: 2025-10-17_

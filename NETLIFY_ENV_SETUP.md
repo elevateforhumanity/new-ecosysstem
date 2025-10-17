@@ -13,11 +13,13 @@
 Add these two variables:
 
 ### Variable 1: VITE_SUPABASE_URL
+
 - **Key**: `VITE_SUPABASE_URL`
 - **Value**: `https://cuxzzpsyufcewtmicszk.supabase.co`
 - **Scopes**: Select "All" or "Production"
 
 ### Variable 2: VITE_SUPABASE_ANON_KEY
+
 - **Key**: `VITE_SUPABASE_ANON_KEY`
 - **Value**: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1eHp6cHN5dWZjZXd0bWljc3prIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxNjEwNDcsImV4cCI6MjA3MzczNzA0N30.DyFtzoKha_tuhKiSIPoQlKonIpaoSYrlhzntCUvLUnA`
 - **Scopes**: Select "All" or "Production"
@@ -34,6 +36,7 @@ This will rebuild your site with the environment variables properly set.
 ## Verify
 
 Once deployed, check the build logs. You should see:
+
 ```
 ✅ All required environment variables are set
 ```

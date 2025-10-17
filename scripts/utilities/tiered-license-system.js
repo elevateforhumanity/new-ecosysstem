@@ -10,20 +10,20 @@ const LICENSE_TIERS = {
       'basic_lms',
       'payment_integration',
       'workbooks_access',
-      'email_support'
+      'email_support',
     ],
     restrictions: {
       whiteLabel: false,
       governmentCompliance: false,
       analytics: 'basic',
-      support: 'email_only'
+      support: 'email_only',
     },
     downloadLimits: {
       maxDownloads: 10,
-      concurrentUsers: 50
-    }
+      concurrentUsers: 50,
+    },
   },
-  
+
   business: {
     name: 'Business License',
     maxDeployments: 3,
@@ -34,20 +34,20 @@ const LICENSE_TIERS = {
       'government_compliance',
       'white_label',
       'analytics_dashboard',
-      'priority_support'
+      'priority_support',
     ],
     restrictions: {
       whiteLabel: true,
       governmentCompliance: true,
       analytics: 'advanced',
-      support: 'priority_email_chat'
+      support: 'priority_email_chat',
     },
     downloadLimits: {
       maxDownloads: 50,
-      concurrentUsers: 500
-    }
+      concurrentUsers: 500,
+    },
   },
-  
+
   enterprise: {
     name: 'Enterprise License',
     maxDeployments: -1, // Unlimited
@@ -62,31 +62,40 @@ const LICENSE_TIERS = {
       'contract_assistance',
       'white_glove_support',
       'revenue_sharing',
-      'unlimited_licenses'
+      'unlimited_licenses',
     ],
     restrictions: {
       whiteLabel: true,
       governmentCompliance: true,
       analytics: 'enterprise',
-      support: 'white_glove_24_7'
+      support: 'white_glove_24_7',
     },
     downloadLimits: {
       maxDownloads: -1, // Unlimited
-      concurrentUsers: -1 // Unlimited
-    }
-  }
+      concurrentUsers: -1, // Unlimited
+    },
+  },
 };
 
 // Enhanced License Generator with Tier Support
-function generateTieredLicense(email, packageId, licenseType, expiresInDays = 365) {
+function generateTieredLicense(
+  email,
+  packageId,
+  licenseType,
+  expiresInDays = 365
+) {
   const tier = LICENSE_TIERS[licenseType];
   if (!tier) {
     throw new Error(`Invalid license type: ${licenseType}`);
   }
 
   // Generate base license
-  const { licenseKey, expiresAt } = generateLicense(email, packageId, expiresInDays);
-  
+  const { licenseKey, expiresAt } = generateLicense(
+    email,
+    packageId,
+    expiresInDays
+  );
+
   // Create enhanced license object with tier information
   const enhancedLicense = {
     licenseKey,
@@ -99,7 +108,7 @@ function generateTieredLicense(email, packageId, licenseType, expiresInDays = 36
     maxDeployments: tier.maxDeployments,
     issuedAt: new Date(),
     customerEmail: email,
-    packageId: packageId
+    packageId: packageId,
   };
 
   return enhancedLicense;
@@ -108,7 +117,7 @@ function generateTieredLicense(email, packageId, licenseType, expiresInDays = 36
 // License Validation with Feature Checking
 function validateTieredLicense(licenseKey, requestedFeature = null) {
   const baseValidation = validateLicense(licenseKey);
-  
+
   if (!baseValidation.valid) {
     return baseValidation;
   }
@@ -116,7 +125,7 @@ function validateTieredLicense(licenseKey, requestedFeature = null) {
   // Extract tier information from product ID
   const tierType = extractTierFromProductId(baseValidation.productId);
   const tier = LICENSE_TIERS[tierType];
-  
+
   if (!tier) {
     return { valid: false, reason: 'Invalid license tier' };
   }
@@ -128,7 +137,7 @@ function validateTieredLicense(licenseKey, requestedFeature = null) {
     features: tier.features,
     restrictions: tier.restrictions,
     downloadLimits: tier.downloadLimits,
-    maxDeployments: tier.maxDeployments
+    maxDeployments: tier.maxDeployments,
   };
 
   // Check specific feature access if requested
@@ -147,12 +156,15 @@ function extractTierFromProductId(productId) {
   if (productId.includes('emergency_starter')) return 'starter';
   if (productId.includes('business_rescue')) return 'business';
   if (productId.includes('enterprise_emergency')) return 'enterprise';
-  
+
   // Default mappings
-  if (productId.includes('starter') || productId.includes('basic')) return 'starter';
-  if (productId.includes('business') || productId.includes('professional')) return 'business';
-  if (productId.includes('enterprise') || productId.includes('unlimited')) return 'enterprise';
-  
+  if (productId.includes('starter') || productId.includes('basic'))
+    return 'starter';
+  if (productId.includes('business') || productId.includes('professional'))
+    return 'business';
+  if (productId.includes('enterprise') || productId.includes('unlimited'))
+    return 'enterprise';
+
   return 'starter'; // Default fallback
 }
 
@@ -182,14 +194,17 @@ class LicenseUsageTracker {
     usage.downloadHistory.push({
       timestamp: new Date(),
       fileType,
-      userIP
+      userIP,
     });
 
     this.usageData.set(licenseKey, usage);
-    
-    return { 
-      allowed: true, 
-      remainingDownloads: limits.maxDownloads === -1 ? 'unlimited' : limits.maxDownloads - usage.downloads
+
+    return {
+      allowed: true,
+      remainingDownloads:
+        limits.maxDownloads === -1
+          ? 'unlimited'
+          : limits.maxDownloads - usage.downloads,
     };
   }
 
@@ -217,10 +232,13 @@ class LicenseUsageTracker {
     usage.lastDeployment = new Date();
 
     this.usageData.set(licenseKey, usage);
-    
-    return { 
-      allowed: true, 
-      remainingDeployments: maxDeployments === -1 ? 'unlimited' : maxDeployments - usage.deployments.length
+
+    return {
+      allowed: true,
+      remainingDeployments:
+        maxDeployments === -1
+          ? 'unlimited'
+          : maxDeployments - usage.deployments.length,
     };
   }
 
@@ -232,7 +250,7 @@ class LicenseUsageTracker {
         downloadHistory: [],
         createdAt: new Date(),
         lastDownload: null,
-        lastDeployment: null
+        lastDeployment: null,
       });
     }
     return this.usageData.get(licenseKey);
@@ -252,20 +270,29 @@ class LicenseUsageTracker {
       downloads: {
         used: usage.downloads,
         limit: limits.maxDownloads === -1 ? 'unlimited' : limits.maxDownloads,
-        remaining: limits.maxDownloads === -1 ? 'unlimited' : limits.maxDownloads - usage.downloads
+        remaining:
+          limits.maxDownloads === -1
+            ? 'unlimited'
+            : limits.maxDownloads - usage.downloads,
       },
       deployments: {
         used: usage.deployments.length,
-        limit: validation.maxDeployments === -1 ? 'unlimited' : validation.maxDeployments,
-        remaining: validation.maxDeployments === -1 ? 'unlimited' : validation.maxDeployments - usage.deployments.length,
-        domains: usage.deployments
+        limit:
+          validation.maxDeployments === -1
+            ? 'unlimited'
+            : validation.maxDeployments,
+        remaining:
+          validation.maxDeployments === -1
+            ? 'unlimited'
+            : validation.maxDeployments - usage.deployments.length,
+        domains: usage.deployments,
       },
       features: validation.features,
       restrictions: validation.restrictions,
       lastActivity: {
         lastDownload: usage.lastDownload,
-        lastDeployment: usage.lastDeployment
-      }
+        lastDeployment: usage.lastDeployment,
+      },
     };
   }
 }
@@ -276,12 +303,12 @@ const usageTracker = new LicenseUsageTracker();
 // Feature Access Control
 function checkFeatureAccess(licenseKey, feature) {
   const validation = validateTieredLicense(licenseKey, feature);
-  
+
   if (!validation.valid) {
-    return { 
-      access: false, 
+    return {
+      access: false,
       reason: validation.reason,
-      upgradeRequired: false
+      upgradeRequired: false,
     };
   }
 
@@ -291,14 +318,14 @@ function checkFeatureAccess(licenseKey, feature) {
       reason: validation.featureError,
       upgradeRequired: true,
       currentTier: validation.tierName,
-      requiredTier: getRequiredTierForFeature(feature)
+      requiredTier: getRequiredTierForFeature(feature),
     };
   }
 
   return {
     access: true,
     tier: validation.tierName,
-    features: validation.features
+    features: validation.features,
   };
 }
 
@@ -316,5 +343,5 @@ module.exports = {
   validateTieredLicense,
   checkFeatureAccess,
   usageTracker,
-  LICENSE_TIERS
+  LICENSE_TIERS,
 };

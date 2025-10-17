@@ -6,11 +6,12 @@ class FormulaEngine {
       MIN: (...args) => Math.min(...args),
       MAX: (...args) => Math.max(...args),
       COUNT: (...args) => args.length,
-      IF: (condition, trueVal, falseVal) => condition ? trueVal : falseVal,
-      ROUND: (num, decimals = 0) => Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals),
+      IF: (condition, trueVal, falseVal) => (condition ? trueVal : falseVal),
+      ROUND: (num, decimals = 0) =>
+        Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals),
       SQRT: (num) => Math.sqrt(num),
       POWER: (base, exp) => Math.pow(base, exp),
-      ABS: (num) => Math.abs(num)
+      ABS: (num) => Math.abs(num),
     };
   }
 

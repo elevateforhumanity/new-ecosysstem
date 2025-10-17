@@ -28,6 +28,7 @@ A complete **full-stack education platform** featuring:
 ## ⚡ Quick Start
 
 ### Option 1: Automated Setup (Recommended)
+
 ```bash
 # 1. Configure environment
 cp .env.example .env && nano .env
@@ -39,6 +40,7 @@ make bootstrap
 ```
 
 ### Option 2: Manual Setup
+
 ```bash
 # Install dependencies
 npm install
@@ -51,6 +53,7 @@ npm run dev
 ```
 
 ### Option 3: Deploy to Cloudflare
+
 ```bash
 # Deploy all workers and pages
 npm run deploy:cloudflare
@@ -61,6 +64,7 @@ npm run deploy:cloudflare
 ## 📦 What's Included
 
 ### Frontend (React + TypeScript + Vite)
+
 ```
 frontend/src/
 ├── pages/              # 9 page components
@@ -71,6 +75,7 @@ frontend/src/
 ```
 
 **Tech Stack:**
+
 - React 19.1.1
 - TypeScript 5.9.3
 - Vite 6.3.6
@@ -80,6 +85,7 @@ frontend/src/
 - React Hook Form + Zod
 
 ### Backend (Node.js + Express)
+
 ```
 backend/
 ├── server.js           # Express API
@@ -88,6 +94,7 @@ backend/
 ```
 
 **Features:**
+
 - JWT authentication
 - Rate limiting
 - CORS configuration
@@ -95,6 +102,7 @@ backend/
 - Security middleware (Helmet)
 
 ### Cloudflare Workers (11 AI Microservices)
+
 ```
 workers/
 ├── agent/              # AI Employee (autonomous operations)
@@ -111,6 +119,7 @@ workers/
 ```
 
 **All workers include:**
+
 - Rate limiting (KV storage)
 - Cost guards (daily limits)
 - Analytics logging
@@ -118,6 +127,7 @@ workers/
 - **$0/month cost** (free tier)
 
 ### Database (Supabase + PostgreSQL)
+
 ```
 supabase/migrations/
 ├── 001_initial_schema.sql
@@ -132,6 +142,7 @@ supabase/migrations/
 ```
 
 **Features:**
+
 - Row-Level Security (RLS)
 - Role-Based Access Control (RBAC)
 - Audit trail system
@@ -145,6 +156,7 @@ supabase/migrations/
 ## 🚀 Core Features
 
 ### 1. Learning Management System (LMS)
+
 - Student dashboard with course tracking
 - Instructor portal with content management
 - Course enrollment & progress tracking
@@ -154,6 +166,7 @@ supabase/migrations/
 - Real-time notifications
 
 ### 2. AI Employee System (Autonomous)
+
 - Email processing (Postmark/Gmail)
 - Lead management & CRM automation
 - Multi-step workflow planning
@@ -164,6 +177,7 @@ supabase/migrations/
 - Activity logging
 
 ### 3. AI Website Stylist
+
 - AI-powered page generation (6 types)
 - Brand asset creation (5 types)
 - Perfect brand consistency
@@ -173,6 +187,7 @@ supabase/migrations/
 - HTML export & image generation
 
 ### 4. Email Management System
+
 - Email events dashboard
 - Failed email resend (admin-only)
 - Do Not Contact list management
@@ -183,6 +198,7 @@ supabase/migrations/
 - GDPR & CAN-SPAM compliant
 
 ### 5. Google Classroom Integration
+
 - Automated course synchronization
 - Student enrollment management
 - Guardian notifications
@@ -192,6 +208,7 @@ supabase/migrations/
 - Error handling & retry logic
 
 ### 6. Affiliate System
+
 - 4-tier commission structure (10-20%)
 - Referral tracking with unique codes
 - Automated commission calculations
@@ -200,6 +217,7 @@ supabase/migrations/
 - Stripe Connect integration
 
 ### 7. Payment Processing (Stripe)
+
 - Checkout link generation
 - Payment intent tracking
 - Webhook handling
@@ -208,6 +226,7 @@ supabase/migrations/
 - Donation processing
 
 ### 8. File Management (R2 Storage)
+
 - R2 bucket integration
 - Intake document uploads (W-2, ID, etc.)
 - File metadata tracking
@@ -219,6 +238,7 @@ supabase/migrations/
 ## 💰 Cost Breakdown
 
 ### Current Infrastructure (Free Tier)
+
 - **Cloudflare Workers:** $0/month (11 workers)
 - **Cloudflare Pages:** $0/month
 - **Render Backend:** $0/month
@@ -226,6 +246,7 @@ supabase/migrations/
 - **Total:** **$0-$25/month**
 
 ### At Scale (10K users)
+
 - **Cloudflare Workers:** $5-$10/month
 - **Cloudflare Pages:** $20/month
 - **Render Backend:** $7/month
@@ -237,26 +258,31 @@ supabase/migrations/
 ## 📚 Documentation
 
 ### Quick Start Guides
+
 - [QUICK_START.md](QUICK_START.md) - Get started in 2 minutes
 - [README_DEPLOYMENT.md](README_DEPLOYMENT.md) - Deployment guide
 - [DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md) - Step-by-step checklist
 
 ### System Documentation
+
 - [COMPLETE_SYSTEM_SUMMARY.md](COMPLETE_SYSTEM_SUMMARY.md) - Complete overview
 - [VALUE_ASSESSMENT.md](VALUE_ASSESSMENT.md) - Value and features
 - [COMPLETE.md](COMPLETE.md) - Project summary
 
 ### AI Systems
+
 - [AI_EMPLOYEE_DEPLOYMENT.md](AI_EMPLOYEE_DEPLOYMENT.md) - AI Employee guide
 - [AI_WEBSITE_STYLIST.md](AI_WEBSITE_STYLIST.md) - Website Stylist guide
 - [ORCHESTRATOR_GUIDE.md](ORCHESTRATOR_GUIDE.md) - Orchestrator API
 
 ### Configuration
+
 - [SECRETS_REFERENCE.md](SECRETS_REFERENCE.md) - Environment variables
 - [CLOUDFLARE_CONFIGURATION_GUIDE.md](CLOUDFLARE_CONFIGURATION_GUIDE.md) - Cloudflare setup
 - [SUPABASE-SETUP.md](SUPABASE-SETUP.md) - Database setup
 
 ### Compliance & Security
+
 - [COMPLIANCE_CERTIFICATION.md](COMPLIANCE_CERTIFICATION.md) - Government compliance
 - [docs/SECURITY_IMPLEMENTATION.md](docs/SECURITY_IMPLEMENTATION.md) - Security guide
 - [docs/EMAIL_RESEND_RBAC_DNC.md](docs/EMAIL_RESEND_RBAC_DNC.md) - Email compliance
@@ -312,12 +338,14 @@ make help           # Show all commands
 ## 🌐 Deployment
 
 ### Cloudflare Pages (Frontend)
+
 - **Project:** elevateforhumanity
 - **Build:** `npm run build`
 - **Output:** `dist/`
 - **URL:** https://elevateforhumanity.pages.dev
 
 ### Cloudflare Workers (11 microservices)
+
 - **Orchestrator:** https://efh-autopilot-orchestrator.workers.dev
 - **Analyzer:** https://efh-autopilot-analyzer.workers.dev
 - **Stylist:** https://efh-stylist.workers.dev
@@ -327,11 +355,13 @@ make help           # Show all commands
 - **AI Form:** https://ai-form.workers.dev
 
 ### Render (Backend)
+
 - **Service:** efh-lms-backend
 - **Region:** Oregon
 - **Health Check:** `/health`
 
 ### Supabase (Database)
+
 - **PostgreSQL** with RLS
 - **Real-time** subscriptions
 - **Edge Functions**
@@ -355,24 +385,28 @@ make help           # Show all commands
 ## 🎯 Use Cases
 
 ### Educational Institutions
+
 - Workforce development programs
 - Vocational training
 - Certificate programs
 - Student management
 
 ### Government Contractors
+
 - WIOA compliance
 - DOE programs
 - State contracting
 - Federal apprenticeships
 
 ### Corporate Training
+
 - Employee onboarding
 - Skills development
 - Compliance training
 - Certificate tracking
 
 ### Non-Profit Organizations
+
 - Community programs
 - Job training
 - Career development
@@ -400,18 +434,22 @@ make help           # Show all commands
 ### Common Issues
 
 **"Authentication error"**
+
 - Create new Cloudflare API token with proper permissions
 - See [SECRETS_REFERENCE.md](SECRETS_REFERENCE.md)
 
 **"Worker not found"**
+
 - Run `make workers` to deploy all workers
 - Check `wrangler.toml` configuration
 
 **"Database connection failed"**
+
 - Verify Supabase credentials in `.env`
 - Check [SUPABASE-SETUP.md](SUPABASE-SETUP.md)
 
 **"Build failed"**
+
 - Run `npm install` to install dependencies
 - Check Node.js version (requires 20.11.1)
 
@@ -437,30 +475,35 @@ npm run health
 ## 📈 Roadmap
 
 ### Phase 1: Core Platform ✅
+
 - [x] LMS implementation
 - [x] User authentication
 - [x] Course management
 - [x] Certificate generation
 
 ### Phase 2: AI Integration ✅
+
 - [x] AI Employee system
 - [x] AI Website Stylist
 - [x] Cloudflare Workers AI
 - [x] Autonomous operations
 
 ### Phase 3: Integrations ✅
+
 - [x] Google Classroom sync
 - [x] Stripe payments
 - [x] Email management
 - [x] Affiliate system
 
 ### Phase 4: Compliance ✅
+
 - [x] GDPR compliance
 - [x] CAN-SPAM compliance
 - [x] Government certifications
 - [x] Audit trails
 
 ### Phase 5: Scale & Optimize (In Progress)
+
 - [ ] Performance optimization
 - [ ] Advanced analytics
 - [ ] Mobile app
@@ -483,6 +526,7 @@ See [LICENSE](LICENSE) for details.
 ## 🙏 Acknowledgments
 
 Built with:
+
 - React & TypeScript
 - Cloudflare Workers & Pages
 - Supabase & PostgreSQL
@@ -506,4 +550,5 @@ Built with:
 **Status:** ✅ Production Ready  
 **Estimated Value:** $450K-$650K  
 **Operating Cost:** $0-$25/month
+
 # Force rebuild Fri Oct 17 01:04:23 UTC 2025

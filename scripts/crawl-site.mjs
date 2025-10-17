@@ -13,8 +13,13 @@ const __dirname = path.dirname(__filename);
 
 // Configuration
 const config = {
-  baseUrl: process.argv.find(arg => arg.startsWith('--base='))?.split('=')[1] || 'http://localhost:8000',
-  maxPages: parseInt(process.argv.find(arg => arg.startsWith('--max='))?.split('=')[1]) || 1000,
+  baseUrl:
+    process.argv.find((arg) => arg.startsWith('--base='))?.split('=')[1] ||
+    'http://localhost:8000',
+  maxPages:
+    parseInt(
+      process.argv.find((arg) => arg.startsWith('--max='))?.split('=')[1]
+    ) || 1000,
   delay: 100, // ms between requests
   timeout: 10000, // request timeout
   userAgent: 'ElevateForHumanity-Crawler/1.0',
@@ -29,7 +34,7 @@ const config = {
     /#/,
     /\.pdf$/,
     /\.zip$/,
-    /\.tar\.gz$/
+    /\.tar\.gz$/,
   ],
   includePatterns: [
     /^\/$/,
@@ -42,8 +47,8 @@ const config = {
     /^\/privacy\//,
     /^\/terms\//,
     /^\/faq\//,
-    /^\/accessibility\//
-  ]
+    /^\/accessibility\//,
+  ],
 };
 
 class SiteCrawler {
@@ -62,14 +67,14 @@ class SiteCrawler {
     console.log(`🚀 Starting crawl of ${this.baseUrl}`);
     console.log(`📊 Max pages: ${this.options.maxPages}`);
     console.log(`⏱️  Delay: ${this.options.delay}ms`);
-    
+
     // Load robots.txt
     try {
       const robotsResponse = await fetch(`${this.baseUrl}/robots.txt`, {
         timeout: this.options.timeout,
-        headers: { 'User-Agent': this.options.userAgent }
+        headers: { 'User-Agent': this.options.userAgent },
       });
-      
+
       if (robotsResponse.ok) {
         const robotsText = await robotsResponse.text();
         this.robots = robotsParser(`${this.baseUrl}/robots.txt`, robotsText);
@@ -89,43 +94,49 @@ class SiteCrawler {
 
   shouldSkip(url) {
     const path = new URL(url, this.baseUrl).pathname;
-    
+
     // Check skip patterns
     for (const pattern of this.options.skipPatterns) {
       if (pattern.test(url) || pattern.test(path)) {
         return true;
       }
     }
-    
+
     // Check if it matches include patterns (if any)
     if (this.options.includePatterns.length > 0) {
-      const matches = this.options.includePatterns.some(pattern => 
-        pattern.test(path) || pattern.test(url)
+      const matches = this.options.includePatterns.some(
+        (pattern) => pattern.test(path) || pattern.test(url)
       );
       if (!matches) {
         return true;
       }
     }
-    
+
     return false;
   }
 
   normalizeUrl(url) {
     try {
       const parsed = new URL(url, this.baseUrl);
-      
+
       // Remove fragments
       parsed.hash = '';
-      
+
       // Remove common tracking parameters
-      const paramsToRemove = ['utm_source', 'utm_medium', 'utm_campaign', 'ref', 'source'];
-      paramsToRemove.forEach(param => parsed.searchParams.delete(param));
-      
+      const paramsToRemove = [
+        'utm_source',
+        'utm_medium',
+        'utm_campaign',
+        'ref',
+        'source',
+      ];
+      paramsToRemove.forEach((param) => parsed.searchParams.delete(param));
+
       // Ensure trailing slash for directories
       if (!parsed.pathname.includes('.') && !parsed.pathname.endsWith('/')) {
         parsed.pathname += '/';
       }
-      
+
       return parsed.toString();
     } catch (error) {
       return null;
@@ -138,16 +149,17 @@ class SiteCrawler {
     }
 
     this.visited.add(url);
-    
+
     try {
       console.log(`📄 Crawling: ${url}`);
-      
+
       const response = await fetch(url, {
         timeout: this.options.timeout,
         headers: {
           'User-Agent': this.options.userAgent,
-          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
-        }
+          Accept:
+            'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        },
       });
 
       const pageData = {
@@ -160,42 +172,46 @@ class SiteCrawler {
         h1: '',
         links: [],
         images: [],
-        lastModified: response.headers.get('last-modified') || new Date().toISOString(),
-        crawledAt: new Date().toISOString()
+        lastModified:
+          response.headers.get('last-modified') || new Date().toISOString(),
+        crawledAt: new Date().toISOString(),
       };
 
       if (response.ok && pageData.contentType.includes('text/html')) {
         const html = await response.text();
         pageData.size = html.length;
-        
+
         const $ = cheerio.load(html);
-        
+
         // Extract metadata
         pageData.title = $('title').text().trim();
-        pageData.description = $('meta[name="description"]').attr('content') || '';
+        pageData.description =
+          $('meta[name="description"]').attr('content') || '';
         pageData.h1 = $('h1').first().text().trim();
-        
+
         // Extract links
         $('a[href]').each((i, el) => {
           const href = $(el).attr('href');
           const normalizedUrl = this.normalizeUrl(href);
-          
+
           if (normalizedUrl && normalizedUrl.startsWith(this.baseUrl)) {
             pageData.links.push({
               url: normalizedUrl,
               text: $(el).text().trim(),
-              title: $(el).attr('title') || ''
+              title: $(el).attr('title') || '',
             });
-            
+
             // Add to queue if not visited and allowed
-            if (!this.visited.has(normalizedUrl) && 
-                !this.shouldSkip(normalizedUrl) && 
-                this.isAllowed(normalizedUrl)) {
+            if (
+              !this.visited.has(normalizedUrl) &&
+              !this.shouldSkip(normalizedUrl) &&
+              this.isAllowed(normalizedUrl)
+            ) {
               this.queue.add(normalizedUrl);
             }
           }
         });
-        
+
         // Extract images
         $('img[src]').each((i, el) => {
           const src = $(el).attr('src');
@@ -204,52 +220,51 @@ class SiteCrawler {
             pageData.images.push({
               src: new URL(src, url).toString(),
               alt,
-              title: $(el).attr('title') || ''
+              title: $(el).attr('title') || '',
             });
           }
         });
       }
 
       this.pages.push(pageData);
-      
+
       if (!response.ok) {
         this.errors.push({
           url,
           status: response.status,
-          error: `HTTP ${response.status}`
+          error: `HTTP ${response.status}`,
         });
       }
-
     } catch (error) {
       console.error(`❌ Error crawling ${url}:`, error.message);
       this.errors.push({
         url,
         status: 0,
-        error: error.message
+        error: error.message,
       });
     }
 
     // Delay between requests
     if (this.options.delay > 0) {
-      await new Promise(resolve => setTimeout(resolve, this.options.delay));
+      await new Promise((resolve) => setTimeout(resolve, this.options.delay));
     }
   }
 
   async crawl() {
     await this.init();
-    
+
     while (this.queue.size > 0 && this.visited.size < this.options.maxPages) {
       const url = this.queue.values().next().value;
       this.queue.delete(url);
       await this.crawlPage(url);
     }
-    
+
     const duration = Date.now() - this.startTime;
     console.log(`\n✅ Crawl complete!`);
     console.log(`📊 Pages crawled: ${this.pages.length}`);
     console.log(`❌ Errors: ${this.errors.length}`);
     console.log(`⏱️  Duration: ${(duration / 1000).toFixed(2)}s`);
-    
+
     return {
       pages: this.pages,
       errors: this.errors,
@@ -257,51 +272,55 @@ class SiteCrawler {
         totalPages: this.pages.length,
         totalErrors: this.errors.length,
         duration,
-        crawledAt: new Date().toISOString()
-      }
+        crawledAt: new Date().toISOString(),
+      },
     };
   }
 
   generateSitemaps() {
     console.log('\n🗺️  Generating sitemaps...');
-    
+
     // Filter successful pages only
-    const validPages = this.pages.filter(page => 
-      page.status === 200 && 
-      page.contentType.includes('text/html')
+    const validPages = this.pages.filter(
+      (page) => page.status === 200 && page.contentType.includes('text/html')
     );
-    
+
     // Sort by priority (homepage first, then programs, etc.)
     validPages.sort((a, b) => {
       const getPriority = (url) => {
         if (url.endsWith('/') && url.split('/').length === 4) return 1000; // homepage
         if (url.includes('/programs/')) return 900;
-        if (url.includes('/about/') || url.includes('/contact/') || url.includes('/employers/')) return 800;
+        if (
+          url.includes('/about/') ||
+          url.includes('/contact/') ||
+          url.includes('/employers/')
+        )
+          return 800;
         if (url.includes('/blog/')) return 700;
         return 500;
       };
       return getPriority(b.url) - getPriority(a.url);
     });
-    
+
     const CHUNK_SIZE = 50000;
     const sitemapFiles = [];
-    
+
     // Ensure sitemaps directory exists
     if (!fs.existsSync('sitemaps')) {
       fs.mkdirSync('sitemaps', { recursive: true });
     }
-    
+
     // Generate sitemap chunks
     for (let i = 0; i < validPages.length; i += CHUNK_SIZE) {
       const chunk = validPages.slice(i, i + CHUNK_SIZE);
       const chunkNumber = Math.floor(i / CHUNK_SIZE) + 1;
       const filename = `sitemap-${chunkNumber}.xml`;
-      
-      const urlEntries = chunk.map(page => {
+
+      const urlEntries = chunk.map((page) => {
         const lastmod = new Date(page.lastModified).toISOString().split('T')[0];
         let priority = '0.5';
         let changefreq = 'monthly';
-        
+
         // Set priority based on URL importance
         if (page.url === this.baseUrl + '/') {
           priority = '1.0';
@@ -309,94 +328,100 @@ class SiteCrawler {
         } else if (page.url.includes('/programs/')) {
           priority = '0.9';
           changefreq = 'weekly';
-        } else if (page.url.includes('/about/') || page.url.includes('/employers/') || page.url.includes('/contact/')) {
+        } else if (
+          page.url.includes('/about/') ||
+          page.url.includes('/employers/') ||
+          page.url.includes('/contact/')
+        ) {
           priority = '0.8';
           changefreq = 'monthly';
         } else if (page.url.includes('/blog/')) {
           priority = '0.7';
           changefreq = 'weekly';
         }
-        
+
         return {
           loc: page.url,
           lastmod,
           changefreq,
-          priority
+          priority,
         };
       });
-      
+
       const sitemapXml = {
         '?xml': { '@_version': '1.0', '@_encoding': 'UTF-8' },
         urlset: {
           '@_xmlns': 'http://www.sitemaps.org/schemas/sitemap/0.9',
-          url: urlEntries
-        }
+          url: urlEntries,
+        },
       };
-      
+
       const builder = new XMLBuilder({
         ignoreAttributes: false,
         format: true,
-        indentBy: '  '
+        indentBy: '  ',
       });
-      
+
       const xmlContent = builder.build(sitemapXml);
-      
+
       // Write sitemap file
       const filepath = path.join('sitemaps', filename);
       fs.writeFileSync(filepath, xmlContent);
       sitemapFiles.push(filename);
-      
+
       console.log(`📄 Generated ${filename} with ${chunk.length} URLs`);
     }
-    
+
     // Generate sitemap index
-    const sitemapIndexEntries = sitemapFiles.map(filename => ({
+    const sitemapIndexEntries = sitemapFiles.map((filename) => ({
       loc: `${this.baseUrl}/sitemaps/${filename}`,
-      lastmod: new Date().toISOString().split('T')[0]
+      lastmod: new Date().toISOString().split('T')[0],
     }));
-    
+
     const sitemapIndexXml = {
       '?xml': { '@_version': '1.0', '@_encoding': 'UTF-8' },
       sitemapindex: {
         '@_xmlns': 'http://www.sitemaps.org/schemas/sitemap/0.9',
-        sitemap: sitemapIndexEntries
-      }
+        sitemap: sitemapIndexEntries,
+      },
     };
-    
+
     const builder = new XMLBuilder({
       ignoreAttributes: false,
       format: true,
-      indentBy: '  '
+      indentBy: '  ',
     });
-    
+
     const indexXmlContent = builder.build(sitemapIndexXml);
     fs.writeFileSync('sitemap_index.xml', indexXmlContent);
-    
-    console.log(`📋 Generated sitemap_index.xml with ${sitemapFiles.length} sitemap files`);
-    
+
+    console.log(
+      `📋 Generated sitemap_index.xml with ${sitemapFiles.length} sitemap files`
+    );
+
     return {
       sitemapFiles,
-      totalUrls: validPages.length
+      totalUrls: validPages.length,
     };
   }
 
   async pingSearchEngines() {
     console.log('\n🔔 Pinging search engines...');
-    
+
     const sitemapUrl = `${this.baseUrl}/sitemap_index.xml`;
     const pingUrls = [
       `https://www.google.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`,
-      `https://www.bing.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`
+      `https://www.bing.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`,
     ];
-    
+
     for (const pingUrl of pingUrls) {
       try {
         const response = await fetch(pingUrl, {
           method: 'GET',
           timeout: 10000,
-          headers: { 'User-Agent': this.options.userAgent }
+          headers: { 'User-Agent': this.options.userAgent },
         });
-        
+
         const engine = pingUrl.includes('google') ? 'Google' : 'Bing';
         if (response.ok) {
           console.log(`✅ Pinged ${engine} successfully`);
@@ -412,20 +437,20 @@ class SiteCrawler {
 
   generateReports(crawlData) {
     console.log('\n📊 Generating reports...');
-    
+
     // Write all URLs to text file
     const allUrls = crawlData.pages
-      .filter(page => page.status === 200)
-      .map(page => page.url)
+      .filter((page) => page.status === 200)
+      .map((page) => page.url)
       .sort();
-    
+
     fs.writeFileSync('all-urls.txt', allUrls.join('\n'));
     console.log(`📄 Generated all-urls.txt with ${allUrls.length} URLs`);
-    
+
     // Write JSON report
     fs.writeFileSync('crawl-report.json', JSON.stringify(crawlData, null, 2));
     console.log(`📄 Generated crawl-report.json`);
-    
+
     // Generate HTML report
     const htmlReport = this.generateHtmlReport(crawlData);
     fs.writeFileSync('crawl-report.html', htmlReport);
@@ -434,16 +459,17 @@ class SiteCrawler {
 
   generateHtmlReport(crawlData) {
     const { pages, errors, stats } = crawlData;
-    
-    const successfulPages = pages.filter(p => p.status === 200);
-    const orphanPages = pages.filter(p => 
-      p.status === 200 && 
-      !pages.some(other => 
-        other.links.some(link => link.url === p.url)
-      ) && 
-      p.url !== this.baseUrl + '/'
+
+    const successfulPages = pages.filter((p) => p.status === 200);
+    const orphanPages = pages.filter(
+      (p) =>
+        p.status === 200 &&
+        !pages.some((other) =>
+          other.links.some((link) => link.url === p.url)
+        ) &&
+        p.url !== this.baseUrl + '/'
     );
-    
+
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -475,7 +501,9 @@ class SiteCrawler {
             </div>
         </div>
         
-        ${errors.length > 0 ? `
+        ${
+          errors.length > 0
+            ? `
         <div class="bg-white rounded-lg shadow mb-8">
             <div class="p-6 border-b">
                 <h2 class="text-2xl font-bold text-red-600">Errors</h2>
@@ -491,21 +519,29 @@ class SiteCrawler {
                             </tr>
                         </thead>
                         <tbody>
-                            ${errors.map(error => `
+                            ${errors
+                              .map(
+                                (error) => `
                             <tr class="border-b">
                                 <td class="py-2"><a href="${error.url}" class="text-blue-600 hover:underline">${error.url}</a></td>
                                 <td class="py-2">${error.status}</td>
                                 <td class="py-2">${error.error}</td>
                             </tr>
-                            `).join('')}
+                            `
+                              )
+                              .join('')}
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        ` : ''}
+        `
+            : ''
+        }
         
-        ${orphanPages.length > 0 ? `
+        ${
+          orphanPages.length > 0
+            ? `
         <div class="bg-white rounded-lg shadow mb-8">
             <div class="p-6 border-b">
                 <h2 class="text-2xl font-bold text-yellow-600">Orphan Pages</h2>
@@ -513,16 +549,22 @@ class SiteCrawler {
             </div>
             <div class="p-6">
                 <div class="space-y-2">
-                    ${orphanPages.map(page => `
+                    ${orphanPages
+                      .map(
+                        (page) => `
                     <div class="flex justify-between items-center py-2 border-b">
                         <a href="${page.url}" class="text-blue-600 hover:underline">${page.url}</a>
                         <span class="text-sm text-gray-500">${page.title}</span>
                     </div>
-                    `).join('')}
+                    `
+                      )
+                      .join('')}
                 </div>
             </div>
         </div>
-        ` : ''}
+        `
+            : ''
+        }
         
         <div class="bg-white rounded-lg shadow">
             <div class="p-6 border-b">
@@ -540,14 +582,18 @@ class SiteCrawler {
                             </tr>
                         </thead>
                         <tbody>
-                            ${pages.map(page => `
+                            ${pages
+                              .map(
+                                (page) => `
                             <tr class="border-b">
                                 <td class="py-2"><a href="${page.url}" class="text-blue-600 hover:underline">${page.url}</a></td>
                                 <td class="py-2">${page.title}</td>
                                 <td class="py-2"><span class="px-2 py-1 rounded text-sm ${page.status === 200 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">${page.status}</span></td>
                                 <td class="py-2">${(page.size / 1024).toFixed(1)}KB</td>
                             </tr>
-                            `).join('')}
+                            `
+                              )
+                              .join('')}
                         </tbody>
                     </table>
                 </div>
@@ -568,21 +614,20 @@ class SiteCrawler {
 async function main() {
   const baseUrl = config.baseUrl;
   const crawler = new SiteCrawler(baseUrl, config);
-  
+
   try {
     const crawlData = await crawler.crawl();
     const sitemapData = crawler.generateSitemaps();
     crawler.generateReports(crawlData);
-    
+
     // Ping search engines if this is a production URL
     if (baseUrl.includes('elevateforhumanity.org')) {
       await crawler.pingSearchEngines();
     }
-    
+
     console.log('\n🎉 All done!');
     console.log(`📋 Sitemap index: ${baseUrl}/sitemap_index.xml`);
     console.log(`📊 View report: crawl-report.html`);
-    
   } catch (error) {
     console.error('❌ Crawl failed:', error);
     process.exit(1);

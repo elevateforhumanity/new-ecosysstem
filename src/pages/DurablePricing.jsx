@@ -11,11 +11,11 @@ export default function DurablePricing() {
         'Access to free courses',
         'Community support',
         'Basic certificates',
-        'Limited AI tutor access'
+        'Limited AI tutor access',
       ],
       cta: 'Get Started',
       link: '/get-started',
-      highlighted: false
+      highlighted: false,
     },
     {
       name: 'Pro',
@@ -27,11 +27,11 @@ export default function DurablePricing() {
         'Premium certificates',
         'Unlimited AI tutor',
         'Career services',
-        'Priority support'
+        'Priority support',
       ],
       cta: 'Start Free Trial',
       link: '/get-started',
-      highlighted: true
+      highlighted: true,
     },
     {
       name: 'Enterprise',
@@ -43,12 +43,12 @@ export default function DurablePricing() {
         'Dedicated account manager',
         'API access',
         'Advanced analytics',
-        'White-label options'
+        'White-label options',
       ],
       cta: 'Contact Sales',
       link: '/contact',
-      highlighted: false
-    }
+      highlighted: false,
+    },
   ];
 
   return (
@@ -65,8 +65,8 @@ export default function DurablePricing() {
 
         <div className="grid md:grid-cols-3 gap-8">
           {plans.map((plan, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className={`bg-white p-8 rounded-xl shadow-lg ${plan.highlighted ? 'ring-4 ring-brand-focus transform scale-105' : ''}`}
             >
               {plan.highlighted && (
@@ -77,7 +77,9 @@ export default function DurablePricing() {
               <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
               <div className="mb-6">
                 <span className="text-5xl font-bold">{plan.price}</span>
-                <span className="text-brand-text-muted ml-2">/ {plan.period}</span>
+                <span className="text-brand-text-muted ml-2">
+                  / {plan.period}
+                </span>
               </div>
               <ul className="space-y-3 mb-8">
                 {plan.features.map((feature, i) => (
@@ -87,11 +89,11 @@ export default function DurablePricing() {
                   </li>
                 ))}
               </ul>
-              <Link 
+              <Link
                 to={plan.link}
                 className={`block text-center py-3 px-6 rounded-lg font-semibold transition ${
-                  plan.highlighted 
-                    ? 'bg-brand-info text-white hover:bg-brand-info-hover' 
+                  plan.highlighted
+                    ? 'bg-brand-info text-white hover:bg-brand-info-hover'
                     : 'bg-brand-surface-dark text-brand-text hover:bg-brand-border'
                 }`}
               >

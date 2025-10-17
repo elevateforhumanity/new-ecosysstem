@@ -30,7 +30,7 @@ export async function createCheckout(options: CheckoutOptions): Promise<void> {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(options),
     });
@@ -70,8 +70,10 @@ export async function createEnrollmentCheckout(params: {
         quantity: 1,
       },
     ],
-    successUrl: params.successUrl || `${window.location.origin}/enrollment/success`,
-    cancelUrl: params.cancelUrl || `${window.location.origin}/enrollment/cancel`,
+    successUrl:
+      params.successUrl || `${window.location.origin}/enrollment/success`,
+    cancelUrl:
+      params.cancelUrl || `${window.location.origin}/enrollment/cancel`,
     meta: {
       kind: 'enrollment',
       user_id: params.userId,
@@ -138,7 +140,8 @@ export async function createAffiliateCheckout(params: {
         quantity: 1,
       },
     ],
-    successUrl: params.successUrl || `${window.location.origin}/affiliate/success`,
+    successUrl:
+      params.successUrl || `${window.location.origin}/affiliate/success`,
     cancelUrl: params.cancelUrl || `${window.location.origin}/affiliate/cancel`,
     meta: {
       kind: 'affiliate_signup',
@@ -152,7 +155,10 @@ export async function createAffiliateCheckout(params: {
 /**
  * Format currency for display
  */
-export function formatCurrency(amount: number, currency: string = 'USD'): string {
+export function formatCurrency(
+  amount: number,
+  currency: string = 'USD'
+): string {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency,

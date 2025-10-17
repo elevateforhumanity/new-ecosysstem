@@ -1,6 +1,14 @@
-import { useState } from "react";
-import { CreditCard, DollarSign, FileText, CheckCircle, AlertCircle, Clock, Receipt } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { useState } from 'react';
+import {
+  CreditCard,
+  DollarSign,
+  FileText,
+  CheckCircle,
+  AlertCircle,
+  Clock,
+  Receipt,
+} from 'lucide-react';
+import { Link, useParams } from 'react-router-dom';
 
 export default function Pay() {
   const params = useParams();
@@ -8,130 +16,144 @@ export default function Pay() {
 
   const programs = [
     {
-      id: "ai-fundamentals",
-      title: "AI Fundamentals & Machine Learning",
+      id: 'ai-fundamentals',
+      title: 'AI Fundamentals & Machine Learning',
       price: 1997,
-      partnerAmount: 998.50,
-      businessAmount: 998.50,
+      partnerAmount: 998.5,
+      businessAmount: 998.5,
       installments: [
-        { amount: 499.25, due: "Upon enrollment" },
-        { amount: 499.25, due: "Week 4" },
-        { amount: 499.25, due: "Week 8" },
-        { amount: 499.25, due: "Week 12" }
+        { amount: 499.25, due: 'Upon enrollment' },
+        { amount: 499.25, due: 'Week 4' },
+        { amount: 499.25, due: 'Week 8' },
+        { amount: 499.25, due: 'Week 12' },
       ],
-      fundingOptions: ["WIOA Adult", "WIOA Dislocated Worker", "State Rapid Response"],
-      discountAvailable: true
+      fundingOptions: [
+        'WIOA Adult',
+        'WIOA Dislocated Worker',
+        'State Rapid Response',
+      ],
+      discountAvailable: true,
     },
     {
-      id: "data-science-bootcamp",
-      title: "Data Science & Analytics Bootcamp",
+      id: 'data-science-bootcamp',
+      title: 'Data Science & Analytics Bootcamp',
       price: 4950,
       partnerAmount: 2475,
       businessAmount: 2475,
       installments: [
-        { amount: 1237.50, due: "Upon enrollment" },
-        { amount: 1237.50, due: "Week 5" },
-        { amount: 1237.50, due: "Week 10" },
-        { amount: 1237.50, due: "Week 15" }
+        { amount: 1237.5, due: 'Upon enrollment' },
+        { amount: 1237.5, due: 'Week 5' },
+        { amount: 1237.5, due: 'Week 10' },
+        { amount: 1237.5, due: 'Week 15' },
       ],
-      fundingOptions: ["WIOA Adult", "WIOA Youth", "Wagner-Peyser"],
-      discountAvailable: false
+      fundingOptions: ['WIOA Adult', 'WIOA Youth', 'Wagner-Peyser'],
+      discountAvailable: false,
     },
     {
-      id: "cybersecurity-specialist",
-      title: "Cybersecurity Specialist Certification",
+      id: 'cybersecurity-specialist',
+      title: 'Cybersecurity Specialist Certification',
       price: 3495,
-      partnerAmount: 1747.50,
-      businessAmount: 1747.50,
+      partnerAmount: 1747.5,
+      businessAmount: 1747.5,
       installments: [
-        { amount: 873.75, due: "Upon enrollment" },
-        { amount: 873.75, due: "Week 6" },
-        { amount: 873.75, due: "Week 12" },
-        { amount: 873.75, due: "Week 18" }
+        { amount: 873.75, due: 'Upon enrollment' },
+        { amount: 873.75, due: 'Week 6' },
+        { amount: 873.75, due: 'Week 12' },
+        { amount: 873.75, due: 'Week 18' },
       ],
-      fundingOptions: ["WIOA Adult", "WIOA Dislocated Worker", "Trade Adjustment"],
-      discountAvailable: true
-    }
+      fundingOptions: [
+        'WIOA Adult',
+        'WIOA Dislocated Worker',
+        'Trade Adjustment',
+      ],
+      discountAvailable: true,
+    },
   ];
 
   const paymentHistory = [
     {
-      id: "pay_1234567890",
-      program: "AI Fundamentals & Machine Learning",
+      id: 'pay_1234567890',
+      program: 'AI Fundamentals & Machine Learning',
       amount: 499.25,
-      status: "completed",
-      date: "2024-01-15",
-      method: "Stripe",
-      type: "installment"
+      status: 'completed',
+      date: '2024-01-15',
+      method: 'Stripe',
+      type: 'installment',
     },
     {
-      id: "pay_1234567891",
-      program: "AI Fundamentals & Machine Learning",
+      id: 'pay_1234567891',
+      program: 'AI Fundamentals & Machine Learning',
       amount: 499.25,
-      status: "completed",
-      date: "2024-02-01",
-      method: "Stripe",
-      type: "installment"
+      status: 'completed',
+      date: '2024-02-01',
+      method: 'Stripe',
+      type: 'installment',
     },
     {
-      id: "pay_1234567892",
-      program: "AI Fundamentals & Machine Learning",
+      id: 'pay_1234567892',
+      program: 'AI Fundamentals & Machine Learning',
       amount: 499.25,
-      status: "pending",
-      date: "2024-02-15",
-      method: "Stripe",
-      type: "installment"
-    }
+      status: 'pending',
+      date: '2024-02-15',
+      method: 'Stripe',
+      type: 'installment',
+    },
   ];
 
   const fundingApplications = [
     {
-      id: "fund_001",
-      program: "AI Fundamentals & Machine Learning",
-      fundingSource: "WIOA Adult",
-      status: "approved",
+      id: 'fund_001',
+      program: 'AI Fundamentals & Machine Learning',
+      fundingSource: 'WIOA Adult',
+      status: 'approved',
       approvedAmount: 1997,
-      applicationDate: "2024-01-01",
-      approvalDate: "2024-01-10"
+      applicationDate: '2024-01-01',
+      approvalDate: '2024-01-10',
     },
     {
-      id: "fund_002",
-      program: "Data Science Bootcamp",
-      fundingSource: "WIOA Dislocated Worker",
-      status: "pending",
+      id: 'fund_002',
+      program: 'Data Science Bootcamp',
+      fundingSource: 'WIOA Dislocated Worker',
+      status: 'pending',
       requestedAmount: 4950,
-      applicationDate: "2024-02-01"
-    }
+      applicationDate: '2024-02-01',
+    },
   ];
 
   const coupons = [
     {
-      code: "WORKFORCE25",
-      type: "percent",
+      code: 'WORKFORCE25',
+      type: 'percent',
       value: 25,
-      description: "25% off any workforce program",
-      expires: "2024-12-31",
-      active: true
+      description: '25% off any workforce program',
+      expires: '2024-12-31',
+      active: true,
     },
     {
-      code: "EARLYBIRD500",
-      type: "amount",
+      code: 'EARLYBIRD500',
+      type: 'amount',
       value: 500,
-      description: "$500 off programs over $2000",
-      expires: "2024-03-31",
-      active: true
-    }
+      description: '$500 off programs over $2000',
+      expires: '2024-03-31',
+      active: true,
+    },
   ];
 
   const renderPaymentForm = () => (
     <div className="bg-white rounded-lg shadow p-6">
-      <h2 className="text-xl font-bold text-brand-text mb-6">Complete Your Enrollment Payment</h2>
-      
+      <h2 className="text-xl font-bold text-brand-text mb-6">
+        Complete Your Enrollment Payment
+      </h2>
+
       {/* Program Selection */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-brand-text mb-2">Select Program</label>
-        <select 
-          onChange={(e) => setSelectedProgram(programs.find(p => p.id === e.target.value))}
+        <label className="block text-sm font-medium text-brand-text mb-2">
+          Select Program
+        </label>
+        <select
+          onChange={(e) =>
+            setSelectedProgram(programs.find((p) => p.id === e.target.value))
+          }
           className="w-full border border-brand-border-dark rounded-lg px-3 py-2"
         >
           <option value="">Choose a program...</option>
@@ -147,11 +169,15 @@ export default function Pay() {
         <div className="space-y-6">
           {/* Program Details */}
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h3 className="font-medium text-blue-900 mb-2">{selectedProgram.title}</h3>
+            <h3 className="font-medium text-blue-900 mb-2">
+              {selectedProgram.title}
+            </h3>
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div>
                 <span className="text-brand-info">Total Cost:</span>
-                <span className="font-medium ml-2">${selectedProgram.price.toLocaleString()}</span>
+                <span className="font-medium ml-2">
+                  ${selectedProgram.price.toLocaleString()}
+                </span>
               </div>
               <div>
                 <span className="text-brand-info">Revenue Split:</span>
@@ -162,32 +188,51 @@ export default function Pay() {
 
           {/* Payment Options */}
           <div>
-            <h4 className="font-medium text-brand-text mb-3">Payment Options</h4>
+            <h4 className="font-medium text-brand-text mb-3">
+              Payment Options
+            </h4>
             <div className="space-y-3">
               <label className="flex items-start space-x-3 p-4 border border-brand-border rounded-lg cursor-pointer hover:bg-brand-surface">
-                <input type="radio" name="payment_option" value="full" className="mt-1" />
+                <input
+                  type="radio"
+                  name="payment_option"
+                  value="full"
+                  className="mt-1"
+                />
                 <div className="flex-1">
                   <div className="font-medium text-brand-text">Pay in Full</div>
                   <div className="text-sm text-brand-text-muted">
-                    ${selectedProgram.price.toLocaleString()} - Save 5% with full payment
+                    ${selectedProgram.price.toLocaleString()} - Save 5% with
+                    full payment
                   </div>
                   <div className="text-sm text-brand-success font-medium">
-                    Final Amount: ${(selectedProgram.price * 0.95).toLocaleString()}
+                    Final Amount: $
+                    {(selectedProgram.price * 0.95).toLocaleString()}
                   </div>
                 </div>
               </label>
 
               <label className="flex items-start space-x-3 p-4 border border-brand-border rounded-lg cursor-pointer hover:bg-brand-surface">
-                <input type="radio" name="payment_option" value="installments" className="mt-1" defaultChecked />
+                <input
+                  type="radio"
+                  name="payment_option"
+                  value="installments"
+                  className="mt-1"
+                  defaultChecked
+                />
                 <div className="flex-1">
-                  <div className="font-medium text-brand-text">4 Installments</div>
+                  <div className="font-medium text-brand-text">
+                    4 Installments
+                  </div>
                   <div className="text-sm text-brand-text-muted">
-                    ${(selectedProgram.price / 4).toLocaleString()} per installment
+                    ${(selectedProgram.price / 4).toLocaleString()} per
+                    installment
                   </div>
                   <div className="text-xs text-brand-text-light mt-1">
                     {selectedProgram.installments.map((installment, index) => (
                       <div key={index}>
-                        ${installment.amount.toLocaleString()} - {installment.due}
+                        ${installment.amount.toLocaleString()} -{' '}
+                        {installment.due}
                       </div>
                     ))}
                   </div>
@@ -195,11 +240,18 @@ export default function Pay() {
               </label>
 
               <label className="flex items-start space-x-3 p-4 border border-green-200 rounded-lg cursor-pointer hover:bg-green-50 bg-green-25">
-                <input type="radio" name="payment_option" value="bnpl" className="mt-1" />
+                <input
+                  type="radio"
+                  name="payment_option"
+                  value="bnpl"
+                  className="mt-1"
+                />
                 <div className="flex-1">
                   <div className="font-medium text-brand-text flex items-center">
                     Buy Now, Pay Later
-                    <span className="ml-2 bg-brand-surface text-brand-success text-xs px-2 py-1 rounded">Popular</span>
+                    <span className="ml-2 bg-brand-surface text-brand-success text-xs px-2 py-1 rounded">
+                      Popular
+                    </span>
                   </div>
                   <div className="text-sm text-brand-text-muted">
                     Flexible monthly payments with low interest rates
@@ -216,19 +268,25 @@ export default function Pay() {
 
           {/* Federal Funding */}
           <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-            <h4 className="font-medium text-green-900 mb-2">🏛️ Federal Funding Available</h4>
+            <h4 className="font-medium text-green-900 mb-2">
+              🏛️ Federal Funding Available
+            </h4>
             <p className="text-sm text-green-700 mb-3">
-              This program is eligible for federal Elevate Learn2Earn Workforce funding:
+              This program is eligible for federal Elevate Learn2Earn Workforce
+              funding:
             </p>
             <div className="flex flex-wrap gap-2">
               {selectedProgram.fundingOptions.map((option, index) => (
-                <span key={index} className="bg-brand-surface text-brand-success text-xs px-2 py-1 rounded">
+                <span
+                  key={index}
+                  className="bg-brand-surface text-brand-success text-xs px-2 py-1 rounded"
+                >
                   {option}
                 </span>
               ))}
             </div>
-            <Link 
-              href="/compliance/eligibility-verification" 
+            <Link
+              href="/compliance/eligibility-verification"
               className="text-brand-success hover:text-green-700 text-sm font-medium mt-2 inline-block"
             >
               Apply for Federal Funding →
@@ -237,10 +295,12 @@ export default function Pay() {
 
           {/* Coupon Code */}
           <div>
-            <label className="block text-sm font-medium text-brand-text mb-2">Coupon Code (Optional)</label>
+            <label className="block text-sm font-medium text-brand-text mb-2">
+              Coupon Code (Optional)
+            </label>
             <div className="flex space-x-2">
-              <input 
-                type="text" 
+              <input
+                type="text"
                 placeholder="Enter coupon code"
                 className="flex-1 border border-brand-border-dark rounded-lg px-3 py-2"
               />
@@ -259,37 +319,47 @@ export default function Pay() {
             <div className="border border-brand-border rounded-lg p-4">
               <div className="flex items-center mb-3">
                 <CreditCard className="h-5 w-5 text-gray-400 mr-2" />
-                <span className="text-sm text-brand-text-muted">Secure payment powered by Stripe</span>
+                <span className="text-sm text-brand-text-muted">
+                  Secure payment powered by Stripe
+                </span>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-brand-text mb-1">Card Number</label>
-                  <input 
-                    type="text" 
+                  <label className="block text-sm font-medium text-brand-text mb-1">
+                    Card Number
+                  </label>
+                  <input
+                    type="text"
                     placeholder="1234 5678 9012 3456"
                     className="w-full border border-brand-border-dark rounded px-3 py-2"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-brand-text mb-1">Expiry Date</label>
-                  <input 
-                    type="text" 
+                  <label className="block text-sm font-medium text-brand-text mb-1">
+                    Expiry Date
+                  </label>
+                  <input
+                    type="text"
                     placeholder="MM/YY"
                     className="w-full border border-brand-border-dark rounded px-3 py-2"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-brand-text mb-1">CVC</label>
-                  <input 
-                    type="text" 
+                  <label className="block text-sm font-medium text-brand-text mb-1">
+                    CVC
+                  </label>
+                  <input
+                    type="text"
                     placeholder="123"
                     className="w-full border border-brand-border-dark rounded px-3 py-2"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-brand-text mb-1">ZIP Code</label>
-                  <input 
-                    type="text" 
+                  <label className="block text-sm font-medium text-brand-text mb-1">
+                    ZIP Code
+                  </label>
+                  <input
+                    type="text"
                     placeholder="12345"
                     className="w-full border border-brand-border-dark rounded px-3 py-2"
                   />
@@ -300,17 +370,17 @@ export default function Pay() {
 
           {/* Submit */}
           <div className="space-y-3">
-            <button 
+            <button
               id="standardCheckout"
               className="w-full bg-brand-info text-white py-3 px-6 rounded-lg hover:bg-brand-info-hover transition-colors font-medium"
             >
               Complete Payment - ${(selectedProgram.price / 4).toLocaleString()}
             </button>
-            
-            <button 
+
+            <button
               id="bnplCheckout"
               className="hidden w-full bg-brand-success text-white py-3 px-6 rounded-lg hover:bg-brand-success-hover transition-colors font-medium"
-              onClick={() => window.location.href = '/bnpl-frontend.html'}
+              onClick={() => (window.location.href = '/bnpl-frontend.html')}
             >
               Choose Buy Now, Pay Later Plan
             </button>
@@ -372,23 +442,31 @@ export default function Pay() {
             {paymentHistory.map((payment) => (
               <tr key={payment.id}>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-brand-text">{payment.program}</div>
-                  <div className="text-sm text-brand-text-light">{payment.type}</div>
+                  <div className="text-sm font-medium text-brand-text">
+                    {payment.program}
+                  </div>
+                  <div className="text-sm text-brand-text-light">
+                    {payment.type}
+                  </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-brand-text">${payment.amount.toLocaleString()}</div>
+                  <div className="text-sm text-brand-text">
+                    ${payment.amount.toLocaleString()}
+                  </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-brand-text-light">
                   {new Date(payment.date).toLocaleDateString()}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                    payment.status === 'completed' 
-                      ? 'bg-brand-surface text-brand-success'
-                      : payment.status === 'pending'
-                      ? 'bg-yellow-100 text-yellow-800'
-                      : 'bg-brand-surface text-red-800'
-                  }`}>
+                  <span
+                    className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                      payment.status === 'completed'
+                        ? 'bg-brand-surface text-brand-success'
+                        : payment.status === 'pending'
+                          ? 'bg-yellow-100 text-yellow-800'
+                          : 'bg-brand-surface text-red-800'
+                    }`}
+                  >
                     {payment.status}
                   </span>
                 </td>
@@ -408,48 +486,68 @@ export default function Pay() {
   const renderFundingStatus = () => (
     <div className="bg-white rounded-lg shadow">
       <div className="p-6 border-b">
-        <h2 className="text-xl font-bold text-brand-text">Federal Funding Applications</h2>
+        <h2 className="text-xl font-bold text-brand-text">
+          Federal Funding Applications
+        </h2>
       </div>
       <div className="p-6">
         <div className="space-y-6">
           {fundingApplications.map((application) => (
-            <div key={application.id} className="border border-brand-border rounded-lg p-4">
+            <div
+              key={application.id}
+              className="border border-brand-border rounded-lg p-4"
+            >
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <h3 className="font-medium text-brand-text">{application.program}</h3>
-                  <p className="text-sm text-brand-text-muted">Funding Source: {application.fundingSource}</p>
+                  <h3 className="font-medium text-brand-text">
+                    {application.program}
+                  </h3>
+                  <p className="text-sm text-brand-text-muted">
+                    Funding Source: {application.fundingSource}
+                  </p>
                   <div className="mt-2 flex items-center space-x-4">
                     <span className="text-sm text-brand-text-light">
-                      Applied: {new Date(application.applicationDate).toLocaleDateString()}
+                      Applied:{' '}
+                      {new Date(
+                        application.applicationDate
+                      ).toLocaleDateString()}
                     </span>
                     {application.approvalDate && (
                       <span className="text-sm text-brand-text-light">
-                        Approved: {new Date(application.approvalDate).toLocaleDateString()}
+                        Approved:{' '}
+                        {new Date(
+                          application.approvalDate
+                        ).toLocaleDateString()}
                       </span>
                     )}
                   </div>
                 </div>
                 <div className="text-right">
-                  <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                    application.status === 'approved' 
-                      ? 'bg-brand-surface text-brand-success'
-                      : application.status === 'pending'
-                      ? 'bg-yellow-100 text-yellow-800'
-                      : 'bg-brand-surface text-red-800'
-                  }`}>
+                  <span
+                    className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                      application.status === 'approved'
+                        ? 'bg-brand-surface text-brand-success'
+                        : application.status === 'pending'
+                          ? 'bg-yellow-100 text-yellow-800'
+                          : 'bg-brand-surface text-red-800'
+                    }`}
+                  >
                     {application.status}
                   </span>
                   <div className="text-sm text-brand-text mt-1">
-                    ${(application.approvedAmount || application.requestedAmount).toLocaleString()}
+                    $
+                    {(
+                      application.approvedAmount || application.requestedAmount
+                    ).toLocaleString()}
                   </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
-        
+
         <div className="mt-6 text-center">
-          <Link 
+          <Link
             href="/compliance/eligibility-verification"
             className="bg-brand-success text-white px-6 py-3 rounded-lg hover:bg-brand-success-hover transition-colors"
           >
@@ -467,8 +565,13 @@ export default function Pay() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-brand-text">Payment Portal</h1>
-              <p className="text-brand-text-muted mt-1">Secure payments with 50/50 revenue sharing and federal funding support</p>
+              <h1 className="text-3xl font-bold text-brand-text">
+                Payment Portal
+              </h1>
+              <p className="text-brand-text-muted mt-1">
+                Secure payments with 50/50 revenue sharing and federal funding
+                support
+              </p>
             </div>
             <div className="flex items-center space-x-4">
               <div className="bg-brand-surface text-brand-info px-3 py-1 rounded-full text-sm">
@@ -485,15 +588,15 @@ export default function Pay() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Payment Form */}
-          <div className="lg:col-span-2">
-            {renderPaymentForm()}
-          </div>
+          <div className="lg:col-span-2">{renderPaymentForm()}</div>
 
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Revenue Split Info */}
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-medium text-brand-text mb-4">50/50 Revenue Model</h3>
+              <h3 className="text-lg font-medium text-brand-text mb-4">
+                50/50 Revenue Model
+              </h3>
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-brand-text-muted">Partner Share</span>
@@ -505,7 +608,8 @@ export default function Pay() {
                 </div>
                 <div className="pt-3 border-t">
                   <p className="text-sm text-brand-text-muted">
-                    Fair revenue distribution supporting sustainable Elevate Learn2Earn Workforce partnerships.
+                    Fair revenue distribution supporting sustainable Elevate
+                    Learn2Earn Workforce partnerships.
                   </p>
                 </div>
               </div>
@@ -513,12 +617,21 @@ export default function Pay() {
 
             {/* Available Coupons */}
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-medium text-brand-text mb-4">Available Discounts</h3>
+              <h3 className="text-lg font-medium text-brand-text mb-4">
+                Available Discounts
+              </h3>
               <div className="space-y-3">
                 {coupons.map((coupon) => (
-                  <div key={coupon.code} className="border border-brand-border rounded p-3">
-                    <div className="font-medium text-brand-text">{coupon.code}</div>
-                    <div className="text-sm text-brand-text-muted">{coupon.description}</div>
+                  <div
+                    key={coupon.code}
+                    className="border border-brand-border rounded p-3"
+                  >
+                    <div className="font-medium text-brand-text">
+                      {coupon.code}
+                    </div>
+                    <div className="text-sm text-brand-text-muted">
+                      {coupon.description}
+                    </div>
                     <div className="text-xs text-brand-text-light mt-1">
                       Expires: {new Date(coupon.expires).toLocaleDateString()}
                     </div>
@@ -533,9 +646,10 @@ export default function Pay() {
                 🏛️ Federal Funding Available
               </h3>
               <p className="text-green-700 text-sm mb-4">
-                Most programs qualify for federal Elevate Learn2Earn Workforce funding through WIOA and other programs.
+                Most programs qualify for federal Elevate Learn2Earn Workforce
+                funding through WIOA and other programs.
               </p>
-              <Link 
+              <Link
                 href="/compliance"
                 className="bg-brand-success text-white px-4 py-2 rounded-lg hover:bg-brand-success-hover transition-colors text-sm"
               >
@@ -545,7 +659,9 @@ export default function Pay() {
 
             {/* Support */}
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-medium text-brand-text mb-4">Payment Support</h3>
+              <h3 className="text-lg font-medium text-brand-text mb-4">
+                Payment Support
+              </h3>
               <div className="space-y-3 text-sm">
                 <div className="flex items-center text-brand-text-muted">
                   <CreditCard className="h-4 w-4 mr-2" />

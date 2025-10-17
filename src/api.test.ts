@@ -1,13 +1,13 @@
-import { describe, it, expect } from "vitest";
-import { ApiError } from "./api";
+import { describe, it, expect } from 'vitest';
+import { ApiError } from './api';
 
-describe("ApiError", () => {
-  it("stores status", () => {
-    const e = new ApiError(404, "Not found");
+describe('ApiError', () => {
+  it('stores status', () => {
+    const e = new ApiError(404, 'Not found');
     expect(e.status).toBe(404);
   });
 
-  it("throws on invalid status", () => {
-    expect(() => new ApiError(-1, "bad")).toThrow();
+  it('throws on invalid status', () => {
+    expect(() => new ApiError(-1, 'bad')).toThrow();
   });
 });

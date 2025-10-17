@@ -10,7 +10,7 @@
   --color-border-light: #e9ecef;
   --color-shadow: rgba(0, 0, 0, 0.1);
   --color-shadow-hover: rgba(0, 0, 0, 0.15);
-  
+
   /* Brand colors */
   --color-primary: var(--brand-info);
   --color-primary-hover: #0056b3;
@@ -18,7 +18,7 @@
   --color-danger: var(--brand-danger);
   --color-warning: var(--brand-warning);
   --color-info: var(--brand-info);
-  
+
   /* Component specific */
   --color-card-bg: #ffffff;
   --color-card-border: #dee2e6;
@@ -27,9 +27,10 @@
   --color-modal-overlay: rgba(0, 0, 0, 0.5);
   --color-navbar-bg: #f5f5f5;
   --color-sidebar-bg: #ffffff;
-  
+
   /* Transitions */
-  --transition-theme: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  --transition-theme:
+    background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 [data-theme='dark'],
@@ -45,7 +46,7 @@
   --color-border-light: #3a3a3a;
   --color-shadow: rgba(0, 0, 0, 0.3);
   --color-shadow-hover: rgba(0, 0, 0, 0.5);
-  
+
   /* Brand colors (slightly adjusted for dark mode) */
   --color-primary: #4dabf7;
   --color-primary-hover: #339af0;
@@ -53,7 +54,7 @@
   --color-danger: #ff6b6b;
   --color-warning: #ffd43b;
   --color-info: #22b8cf;
-  
+
   /* Component specific */
   --color-card-bg: #2d2d2d;
   --color-card-border: #495057;
@@ -96,7 +97,9 @@ textarea::placeholder {
 }
 
 /* Buttons */
-button:not([class*='btn-primary']):not([class*='btn-success']):not([class*='btn-danger']) {
+button:not([class*='btn-primary']):not([class*='btn-success']):not(
+    [class*='btn-danger']
+  ) {
   background-color: var(--color-bg-secondary);
   color: var(--color-text-primary);
   border-color: var(--color-border);

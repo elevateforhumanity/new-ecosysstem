@@ -20,9 +20,11 @@ class BlogSystem {
     return [
       {
         id: 'ai-careers-2025',
-        title: 'AI Careers in 2025: Complete Guide to High-Paying Opportunities',
+        title:
+          'AI Careers in 2025: Complete Guide to High-Paying Opportunities',
         slug: 'ai-careers-2025-complete-guide',
-        excerpt: 'Discover the hottest AI career paths, required skills, and salary expectations for 2025. From machine learning engineers to AI ethics specialists.',
+        excerpt:
+          'Discover the hottest AI career paths, required skills, and salary expectations for 2025. From machine learning engineers to AI ethics specialists.',
         content: this.getFullBlogContent('ai-careers-2025'),
         author: 'Dr. Sarah Chen',
         publishedAt: '2025-09-10',
@@ -33,13 +35,14 @@ class BlogSystem {
         readTime: 8,
         views: 2340,
         likes: 156,
-        shares: 89
+        shares: 89,
       },
       {
         id: 'federal-funding-guide',
         title: 'Federal Funding for Workforce Development: WIOA, WRG, and More',
         slug: 'federal-funding-workforce-development-guide',
-        excerpt: 'Complete guide to accessing federal funding for career training. Learn about WIOA, Workforce Ready Grants, and other funding opportunities.',
+        excerpt:
+          'Complete guide to accessing federal funding for career training. Learn about WIOA, Workforce Ready Grants, and other funding opportunities.',
         content: this.getFullBlogContent('federal-funding-guide'),
         author: 'Michael Rodriguez',
         publishedAt: '2025-09-08',
@@ -50,13 +53,14 @@ class BlogSystem {
         readTime: 12,
         views: 1890,
         likes: 203,
-        shares: 145
+        shares: 145,
       },
       {
         id: 'data-science-bootcamp-success',
         title: 'From Zero to Data Scientist: Success Stories from Our Bootcamp',
         slug: 'data-science-bootcamp-success-stories',
-        excerpt: 'Real stories from students who transformed their careers through our data science bootcamp. See their journeys and outcomes.',
+        excerpt:
+          'Real stories from students who transformed their careers through our data science bootcamp. See their journeys and outcomes.',
         content: this.getFullBlogContent('data-science-bootcamp-success'),
         author: 'Jennifer Park',
         publishedAt: '2025-09-05',
@@ -67,30 +71,37 @@ class BlogSystem {
         readTime: 6,
         views: 1456,
         likes: 98,
-        shares: 67
+        shares: 67,
       },
       {
         id: 'apprenticeship-programs-2025',
         title: 'Tech Apprenticeships: Earn While You Learn in 2025',
         slug: 'tech-apprenticeships-earn-while-learn-2025',
-        excerpt: 'Explore paid apprenticeship opportunities in tech. Learn how to get started and what to expect from modern apprenticeship programs.',
+        excerpt:
+          'Explore paid apprenticeship opportunities in tech. Learn how to get started and what to expect from modern apprenticeship programs.',
         content: this.getFullBlogContent('apprenticeship-programs-2025'),
         author: 'David Kim',
         publishedAt: '2025-09-03',
         updatedAt: '2025-09-08',
-        tags: ['apprenticeships', 'tech careers', 'paid training', 'workforce development'],
+        tags: [
+          'apprenticeships',
+          'tech careers',
+          'paid training',
+          'workforce development',
+        ],
         category: 'Training Programs',
         featured: false,
         readTime: 10,
         views: 1123,
         likes: 87,
-        shares: 54
+        shares: 54,
       },
       {
         id: 'healthcare-ai-careers',
         title: 'Healthcare AI: The Future of Medical Technology Careers',
         slug: 'healthcare-ai-future-medical-technology-careers',
-        excerpt: 'Discover emerging career opportunities at the intersection of healthcare and AI. From medical imaging to drug discovery.',
+        excerpt:
+          'Discover emerging career opportunities at the intersection of healthcare and AI. From medical imaging to drug discovery.',
         content: this.getFullBlogContent('healthcare-ai-careers'),
         author: 'Dr. Lisa Thompson',
         publishedAt: '2025-09-01',
@@ -101,8 +112,8 @@ class BlogSystem {
         readTime: 9,
         views: 987,
         likes: 76,
-        shares: 43
-      }
+        shares: 43,
+      },
     ];
   }
 
@@ -222,47 +233,55 @@ class BlogSystem {
         
         <h3>Required Background</h3>
         <p>While a healthcare background is helpful, it's not required. Our programs teach both the technical AI skills and healthcare domain knowledge needed for success.</p>
-      `
+      `,
     };
-    
+
     return contentMap[postId] || '<p>Content coming soon...</p>';
   }
 
   setupRoutes() {
     // Get all blog posts
     this.router.get('/api/blog/posts', this.getAllPosts.bind(this));
-    
+
     // Get featured posts
     this.router.get('/api/blog/featured', this.getFeaturedPosts.bind(this));
-    
+
     // Get single post
     this.router.get('/api/blog/posts/:slug', this.getPost.bind(this));
-    
+
     // Get posts by category
-    this.router.get('/api/blog/category/:category', this.getPostsByCategory.bind(this));
-    
+    this.router.get(
+      '/api/blog/category/:category',
+      this.getPostsByCategory.bind(this)
+    );
+
     // Get posts by tag
     this.router.get('/api/blog/tag/:tag', this.getPostsByTag.bind(this));
-    
+
     // Search posts
     this.router.get('/api/blog/search', this.searchPosts.bind(this));
-    
+
     // Get blog analytics
     this.router.get('/api/blog/analytics', this.getBlogAnalytics.bind(this));
-    
+
     // Like a post
     this.router.post('/api/blog/posts/:id/like', this.likePost.bind(this));
-    
+
     // Share a post
     this.router.post('/api/blog/posts/:id/share', this.sharePost.bind(this));
   }
 
   async getAllPosts(req, res) {
     try {
-      const { page = 1, limit = 10, sortBy = 'publishedAt', order = 'desc' } = req.query;
-      
+      const {
+        page = 1,
+        limit = 10,
+        sortBy = 'publishedAt',
+        order = 'desc',
+      } = req.query;
+
       let posts = [...this.blogPosts];
-      
+
       // Sort posts
       posts.sort((a, b) => {
         if (order === 'desc') {
@@ -270,12 +289,12 @@ class BlogSystem {
         }
         return new Date(a[sortBy]) - new Date(b[sortBy]);
       });
-      
+
       // Paginate
       const startIndex = (page - 1) * limit;
       const endIndex = startIndex + parseInt(limit);
       const paginatedPosts = posts.slice(startIndex, endIndex);
-      
+
       res.json({
         posts: paginatedPosts,
         pagination: {
@@ -283,8 +302,8 @@ class BlogSystem {
           totalPages: Math.ceil(posts.length / limit),
           totalPosts: posts.length,
           hasNext: endIndex < posts.length,
-          hasPrev: startIndex > 0
-        }
+          hasPrev: startIndex > 0,
+        },
       });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -293,7 +312,7 @@ class BlogSystem {
 
   async getFeaturedPosts(req, res) {
     try {
-      const featuredPosts = this.blogPosts.filter(post => post.featured);
+      const featuredPosts = this.blogPosts.filter((post) => post.featured);
       res.json({ posts: featuredPosts });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -303,15 +322,15 @@ class BlogSystem {
   async getPost(req, res) {
     try {
       const { slug } = req.params;
-      const post = this.blogPosts.find(p => p.slug === slug);
-      
+      const post = this.blogPosts.find((p) => p.slug === slug);
+
       if (!post) {
         return res.status(404).json({ error: 'Post not found' });
       }
-      
+
       // Increment view count
       post.views += 1;
-      
+
       res.json({ post });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -321,10 +340,10 @@ class BlogSystem {
   async getPostsByCategory(req, res) {
     try {
       const { category } = req.params;
-      const posts = this.blogPosts.filter(post => 
-        post.category.toLowerCase() === category.toLowerCase()
+      const posts = this.blogPosts.filter(
+        (post) => post.category.toLowerCase() === category.toLowerCase()
       );
-      
+
       res.json({ posts, category });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -334,10 +353,10 @@ class BlogSystem {
   async getPostsByTag(req, res) {
     try {
       const { tag } = req.params;
-      const posts = this.blogPosts.filter(post => 
-        post.tags.some(t => t.toLowerCase() === tag.toLowerCase())
+      const posts = this.blogPosts.filter((post) =>
+        post.tags.some((t) => t.toLowerCase() === tag.toLowerCase())
       );
-      
+
       res.json({ posts, tag });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -347,34 +366,35 @@ class BlogSystem {
   async searchPosts(req, res) {
     try {
       const { q, category, tag } = req.query;
-      
+
       let posts = [...this.blogPosts];
-      
+
       // Text search
       if (q) {
         const searchTerm = q.toLowerCase();
-        posts = posts.filter(post => 
-          post.title.toLowerCase().includes(searchTerm) ||
-          post.excerpt.toLowerCase().includes(searchTerm) ||
-          post.content.toLowerCase().includes(searchTerm) ||
-          post.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+        posts = posts.filter(
+          (post) =>
+            post.title.toLowerCase().includes(searchTerm) ||
+            post.excerpt.toLowerCase().includes(searchTerm) ||
+            post.content.toLowerCase().includes(searchTerm) ||
+            post.tags.some((tag) => tag.toLowerCase().includes(searchTerm))
         );
       }
-      
+
       // Filter by category
       if (category) {
-        posts = posts.filter(post => 
-          post.category.toLowerCase() === category.toLowerCase()
+        posts = posts.filter(
+          (post) => post.category.toLowerCase() === category.toLowerCase()
         );
       }
-      
+
       // Filter by tag
       if (tag) {
-        posts = posts.filter(post => 
-          post.tags.some(t => t.toLowerCase() === tag.toLowerCase())
+        posts = posts.filter((post) =>
+          post.tags.some((t) => t.toLowerCase() === tag.toLowerCase())
         );
       }
-      
+
       res.json({ posts, query: { q, category, tag } });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -389,21 +409,22 @@ class BlogSystem {
         totalLikes: this.blogPosts.reduce((sum, post) => sum + post.likes, 0),
         totalShares: this.blogPosts.reduce((sum, post) => sum + post.shares, 0),
         averageReadTime: Math.round(
-          this.blogPosts.reduce((sum, post) => sum + post.readTime, 0) / this.blogPosts.length
+          this.blogPosts.reduce((sum, post) => sum + post.readTime, 0) /
+            this.blogPosts.length
         ),
         topPosts: this.blogPosts
           .sort((a, b) => b.views - a.views)
           .slice(0, 5)
-          .map(post => ({
+          .map((post) => ({
             title: post.title,
             slug: post.slug,
             views: post.views,
-            likes: post.likes
+            likes: post.likes,
           })),
         categories: this.getCategories(),
-        tags: this.getTags()
+        tags: this.getTags(),
       };
-      
+
       res.json(analytics);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -413,18 +434,18 @@ class BlogSystem {
   async likePost(req, res) {
     try {
       const { id } = req.params;
-      const post = this.blogPosts.find(p => p.id === id);
-      
+      const post = this.blogPosts.find((p) => p.id === id);
+
       if (!post) {
         return res.status(404).json({ error: 'Post not found' });
       }
-      
+
       post.likes += 1;
-      
-      res.json({ 
-        success: true, 
+
+      res.json({
+        success: true,
         likes: post.likes,
-        message: 'Post liked successfully'
+        message: 'Post liked successfully',
       });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -435,30 +456,30 @@ class BlogSystem {
     try {
       const { id } = req.params;
       const { platform } = req.body;
-      
-      const post = this.blogPosts.find(p => p.id === id);
-      
+
+      const post = this.blogPosts.find((p) => p.id === id);
+
       if (!post) {
         return res.status(404).json({ error: 'Post not found' });
       }
-      
+
       post.shares += 1;
-      
+
       const shareUrl = `https://www.elevateforhumanity.org/blog/${post.slug}`;
       const shareText = `${post.title} - ${post.excerpt}`;
-      
+
       const shareUrls = {
         twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`,
         facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
         linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`,
-        email: `mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(shareText + ' ' + shareUrl)}`
+        email: `mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(shareText + ' ' + shareUrl)}`,
       };
-      
+
       res.json({
         success: true,
         shares: post.shares,
         shareUrl: shareUrls[platform] || shareUrl,
-        message: 'Share URL generated successfully'
+        message: 'Share URL generated successfully',
       });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -466,19 +487,21 @@ class BlogSystem {
   }
 
   getCategories() {
-    const categories = [...new Set(this.blogPosts.map(post => post.category))];
-    return categories.map(category => ({
+    const categories = [
+      ...new Set(this.blogPosts.map((post) => post.category)),
+    ];
+    return categories.map((category) => ({
       name: category,
-      count: this.blogPosts.filter(post => post.category === category).length
+      count: this.blogPosts.filter((post) => post.category === category).length,
     }));
   }
 
   getTags() {
-    const allTags = this.blogPosts.flatMap(post => post.tags);
+    const allTags = this.blogPosts.flatMap((post) => post.tags);
     const uniqueTags = [...new Set(allTags)];
-    return uniqueTags.map(tag => ({
+    return uniqueTags.map((tag) => ({
       name: tag,
-      count: allTags.filter(t => t === tag).length
+      count: allTags.filter((t) => t === tag).length,
     }));
   }
 

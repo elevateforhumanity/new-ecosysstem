@@ -23,7 +23,9 @@ export default function AIPageBuilder() {
   const [description, setDescription] = useState('');
   const [sections, setSections] = useState<string[]>([]);
   const [templates, setTemplates] = useState<Record<string, PageTemplate>>({});
-  const [generatedPage, setGeneratedPage] = useState<GeneratedPage | null>(null);
+  const [generatedPage, setGeneratedPage] = useState<GeneratedPage | null>(
+    null
+  );
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [pageName, setPageName] = useState('');
@@ -44,7 +46,9 @@ export default function AIPageBuilder() {
 
   async function loadTemplates() {
     try {
-      const response = await fetch('https://efh-ai-stylist.your-subdomain.workers.dev/templates');
+      const response = await fetch(
+        'https://efh-ai-stylist.your-subdomain.workers.dev/templates'
+      );
       const data = await response.json();
       if (data.success) {
         setTemplates(data.templates);
@@ -59,22 +63,27 @@ export default function AIPageBuilder() {
     setGeneratedPage(null);
 
     try {
-      const response = await fetch('https://efh-ai-stylist.your-subdomain.workers.dev/generate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          pageType,
-          description,
-          sections,
-        }),
-      });
+      const response = await fetch(
+        'https://efh-ai-stylist.your-subdomain.workers.dev/generate',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            pageType,
+            description,
+            sections,
+          }),
+        }
+      );
 
       const data = await response.json();
-      
+
       if (data.success) {
         setGeneratedPage(data.page);
         // Auto-generate name and slug
-        setPageName(`${pageType.charAt(0).toUpperCase() + pageType.slice(1)} Page`);
+        setPageName(
+          `${pageType.charAt(0).toUpperCase() + pageType.slice(1)} Page`
+        );
         setPageSlug(pageType);
       } else {
         alert('Failed to generate page: ' + data.error);
@@ -97,7 +106,7 @@ export default function AIPageBuilder() {
 
     try {
       const { data: user } = await supabase.auth.getUser();
-      
+
       const { data, error } = await supabase
         .from('generated_pages')
         .insert({
@@ -160,15 +169,21 @@ export default function AIPageBuilder() {
   return (
     <div className="max-w-7xl mx-auto p-6">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-red-600 mb-2">AI Website Stylist</h1>
-        <p className="text-brand-text-muted">Generate branded pages with AI - powered by Workers AI</p>
+        <h1 className="text-4xl font-bold text-red-600 mb-2">
+          AI Website Stylist
+        </h1>
+        <p className="text-brand-text-muted">
+          Generate branded pages with AI - powered by Workers AI
+        </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Configuration Panel */}
         <div className="space-y-6">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-semibold text-brand-text mb-4">Page Configuration</h2>
+            <h2 className="text-2xl font-semibold text-brand-text mb-4">
+              Page Configuration
+            </h2>
 
             {/* Page Type */}
             <div className="mb-4">
@@ -187,7 +202,9 @@ export default function AIPageBuilder() {
                 ))}
               </select>
               {currentTemplate && (
-                <p className="text-sm text-brand-text-light mt-1">{currentTemplate.description}</p>
+                <p className="text-sm text-brand-text-light mt-1">
+                  {currentTemplate.description}
+                </p>
               )}
             </div>
 
@@ -205,7 +222,9 @@ export default function AIPageBuilder() {
               />
               {currentTemplate && currentTemplate.examples.length > 0 && (
                 <div className="mt-2">
-                  <p className="text-xs text-brand-text-light mb-1">Examples:</p>
+                  <p className="text-xs text-brand-text-light mb-1">
+                    Examples:
+                  </p>
                   {currentTemplate.examples.map((example, i) => (
                     <button
                       key={i}
@@ -244,9 +263,25 @@ export default function AIPageBuilder() {
             >
               {loading ? (
                 <span className="flex items-center justify-center">
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
                   </svg>
                   Generating...
                 </span>
@@ -259,7 +294,9 @@ export default function AIPageBuilder() {
           {/* Save Panel */}
           {generatedPage && (
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold text-brand-text mb-4">Save Page</h2>
+              <h2 className="text-2xl font-semibold text-brand-text mb-4">
+                Save Page
+              </h2>
 
               <div className="mb-4">
                 <label className="block text-sm font-medium text-brand-text mb-2">
@@ -283,7 +320,11 @@ export default function AIPageBuilder() {
                   className="w-full border border-brand-border-dark rounded-lg px-4 py-2 focus:ring-2 focus:ring-brand-focus focus:border-transparent"
                   placeholder="e.g., home"
                   value={pageSlug}
-                  onChange={(e) => setPageSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-'))}
+                  onChange={(e) =>
+                    setPageSlug(
+                      e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-')
+                    )
+                  }
                 />
                 <p className="text-xs text-brand-text-light mt-1">
                   Will be accessible at: /pages/{pageSlug}
@@ -337,7 +378,8 @@ export default function AIPageBuilder() {
                 />
 
                 <div className="mt-4 text-xs text-brand-text-light">
-                  Generated at: {new Date(generatedPage.generatedAt).toLocaleString()}
+                  Generated at:{' '}
+                  {new Date(generatedPage.generatedAt).toLocaleString()}
                 </div>
               </div>
             </div>
@@ -356,9 +398,12 @@ export default function AIPageBuilder() {
                   d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                 />
               </svg>
-              <h3 className="text-lg font-medium text-brand-text mb-2">No Page Generated Yet</h3>
+              <h3 className="text-lg font-medium text-brand-text mb-2">
+                No Page Generated Yet
+              </h3>
               <p className="text-brand-text-light">
-                Configure your page settings and click "Generate Page with AI" to see the preview
+                Configure your page settings and click "Generate Page with AI"
+                to see the preview
               </p>
             </div>
           )}

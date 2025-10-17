@@ -4,98 +4,98 @@
  */
 
 class UnifiedNavigation {
-    constructor() {
-        this.sisterSites = {
-            'elevate_for_humanity': {
-                name: 'Elevate for Humanity',
-                url: '/',
-                description: 'Workforce Development & Training',
-                pages: [
-                    { name: 'Home', url: '/' },
-                    { name: 'Programs', url: '/programs/' },
-                    { name: 'Partner Marketplace', url: '/partner-marketplace.html' },
-                    { name: 'Student Portal', url: '/student-portal.html' },
-                    { name: 'Student Outcomes', url: '/student-outcomes.html' },
-                    { name: 'Funding Options', url: '/funding-options.html' },
-                    { name: 'Contact', url: '/contact/' }
-                ]
-            },
-            'rise_forward': {
-                name: 'Rise Forward',
-                url: '/rise-forward.html',
-                description: 'Community Nonprofit Organization',
-                pages: [
-                    { name: 'About', url: '/rise-forward.html' },
-                    { name: 'Community Programs', url: '/rise-forward.html#programs' },
-                    { name: 'Volunteer', url: '/rise-forward.html#volunteer' },
-                    { name: 'Donate', url: '/donate.html' },
-                    { name: 'Impact Stories', url: '/rise-forward.html#impact' }
-                ]
-            },
-            'kingdom_konnect': {
-                name: 'Kingdom Konnect',
-                url: '/kingdom-konnect.html',
-                description: 'Faith-Based Community Development',
-                pages: [
-                    { name: 'Ministry', url: '/kingdom-konnect.html' },
-                    { name: 'Faith Programs', url: '/kingdom-konnect.html#programs' },
-                    { name: 'Community Outreach', url: '/kingdom-konnect.html#outreach' },
-                    { name: 'Prayer Requests', url: '/kingdom-konnect.html#prayer' },
-                    { name: 'Events', url: '/kingdom-konnect.html#events' }
-                ]
-            },
-            'serene_comfort_care': {
-                name: 'Serene Comfort Care',
-                url: '/serene-comfort-care.html',
-                description: 'Healthcare & CNA Training',
-                pages: [
-                    { name: 'Services', url: '/serene-comfort-care.html' },
-                    { name: 'CNA Training', url: '/serene-comfort-care.html#training' },
-                    { name: 'Healthcare Jobs', url: '/serene-comfort-care.html#jobs' },
-                    { name: 'Patient Care', url: '/serene-comfort-care.html#care' },
-                    { name: 'Careers', url: '/serene-comfort-care.html#careers' }
-                ]
-            },
-            'urban_build_crew': {
-                name: 'Urban Build Crew',
-                url: '/urban-build-crew.html',
-                description: 'Construction & Trades Training',
-                pages: [
-                    { name: 'Construction', url: '/urban-build-crew.html' },
-                    { name: 'Trade Programs', url: '/urban-build-crew.html#trades' },
-                    { name: 'Apprenticeships', url: '/apprenticeships.html' },
-                    { name: 'Job Placement', url: '/urban-build-crew.html#jobs' },
-                    { name: 'Safety Training', url: '/urban-build-crew.html#safety' }
-                ]
-            }
-        };
-        
-        this.currentSite = this.detectCurrentSite();
-        this.initializeNavigation();
-    }
+  constructor() {
+    this.sisterSites = {
+      elevate_for_humanity: {
+        name: 'Elevate for Humanity',
+        url: '/',
+        description: 'Workforce Development & Training',
+        pages: [
+          { name: 'Home', url: '/' },
+          { name: 'Programs', url: '/programs/' },
+          { name: 'Partner Marketplace', url: '/partner-marketplace.html' },
+          { name: 'Student Portal', url: '/student-portal.html' },
+          { name: 'Student Outcomes', url: '/student-outcomes.html' },
+          { name: 'Funding Options', url: '/funding-options.html' },
+          { name: 'Contact', url: '/contact/' },
+        ],
+      },
+      rise_forward: {
+        name: 'Rise Forward',
+        url: '/rise-forward.html',
+        description: 'Community Nonprofit Organization',
+        pages: [
+          { name: 'About', url: '/rise-forward.html' },
+          { name: 'Community Programs', url: '/rise-forward.html#programs' },
+          { name: 'Volunteer', url: '/rise-forward.html#volunteer' },
+          { name: 'Donate', url: '/donate.html' },
+          { name: 'Impact Stories', url: '/rise-forward.html#impact' },
+        ],
+      },
+      kingdom_konnect: {
+        name: 'Kingdom Konnect',
+        url: '/kingdom-konnect.html',
+        description: 'Faith-Based Community Development',
+        pages: [
+          { name: 'Ministry', url: '/kingdom-konnect.html' },
+          { name: 'Faith Programs', url: '/kingdom-konnect.html#programs' },
+          { name: 'Community Outreach', url: '/kingdom-konnect.html#outreach' },
+          { name: 'Prayer Requests', url: '/kingdom-konnect.html#prayer' },
+          { name: 'Events', url: '/kingdom-konnect.html#events' },
+        ],
+      },
+      serene_comfort_care: {
+        name: 'Serene Comfort Care',
+        url: '/serene-comfort-care.html',
+        description: 'Healthcare & CNA Training',
+        pages: [
+          { name: 'Services', url: '/serene-comfort-care.html' },
+          { name: 'CNA Training', url: '/serene-comfort-care.html#training' },
+          { name: 'Healthcare Jobs', url: '/serene-comfort-care.html#jobs' },
+          { name: 'Patient Care', url: '/serene-comfort-care.html#care' },
+          { name: 'Careers', url: '/serene-comfort-care.html#careers' },
+        ],
+      },
+      urban_build_crew: {
+        name: 'Urban Build Crew',
+        url: '/urban-build-crew.html',
+        description: 'Construction & Trades Training',
+        pages: [
+          { name: 'Construction', url: '/urban-build-crew.html' },
+          { name: 'Trade Programs', url: '/urban-build-crew.html#trades' },
+          { name: 'Apprenticeships', url: '/apprenticeships.html' },
+          { name: 'Job Placement', url: '/urban-build-crew.html#jobs' },
+          { name: 'Safety Training', url: '/urban-build-crew.html#safety' },
+        ],
+      },
+    };
 
-    detectCurrentSite() {
-        const path = window.location.pathname;
-        if (path.includes('rise-forward')) return 'rise_forward';
-        if (path.includes('kingdom-konnect')) return 'kingdom_konnect';
-        if (path.includes('serene-comfort-care')) return 'serene_comfort_care';
-        if (path.includes('urban-build-crew')) return 'urban_build_crew';
-        return 'elevate_for_humanity';
-    }
+    this.currentSite = this.detectCurrentSite();
+    this.initializeNavigation();
+  }
 
-    initializeNavigation() {
-        // Temporarily disabled - user doesn't like "All Sites" approach
-        console.log('🚫 Unified navigation disabled by user preference');
-        return;
-        
-        this.injectNavigationCSS();
-        this.createUnifiedHeader();
-        this.createUnifiedFooter();
-        this.initializeBrainIntegration();
-    }
+  detectCurrentSite() {
+    const path = window.location.pathname;
+    if (path.includes('rise-forward')) return 'rise_forward';
+    if (path.includes('kingdom-konnect')) return 'kingdom_konnect';
+    if (path.includes('serene-comfort-care')) return 'serene_comfort_care';
+    if (path.includes('urban-build-crew')) return 'urban_build_crew';
+    return 'elevate_for_humanity';
+  }
 
-    injectNavigationCSS() {
-        const css = `
+  initializeNavigation() {
+    // Temporarily disabled - user doesn't like "All Sites" approach
+    console.log('🚫 Unified navigation disabled by user preference');
+    return;
+
+    this.injectNavigationCSS();
+    this.createUnifiedHeader();
+    this.createUnifiedFooter();
+    this.initializeBrainIntegration();
+  }
+
+  injectNavigationCSS() {
+    const css = `
             /* UNIFIED NAVIGATION STYLES */
             .unified-nav {
                 background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
@@ -257,18 +257,18 @@ class UnifiedNavigation {
             }
         `;
 
-        const style = document.createElement('style');
-        style.textContent = css;
-        document.head.appendChild(style);
-    }
+    const style = document.createElement('style');
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
 
-    createUnifiedHeader() {
-        const header = document.createElement('nav');
-        header.className = 'unified-nav';
-        
-        const currentSiteData = this.sisterSites[this.currentSite];
-        
-        header.innerHTML = `
+  createUnifiedHeader() {
+    const header = document.createElement('nav');
+    header.className = 'unified-nav';
+
+    const currentSiteData = this.sisterSites[this.currentSite];
+
+    header.innerHTML = `
             <div class="nav-container">
                 <a href="${currentSiteData.url}" class="nav-brand">
                     <span class="brand-icon">🌟</span>
@@ -288,17 +288,15 @@ class UnifiedNavigation {
             </div>
         `;
 
-        // Insert at the very beginning of body
-        document.body.insertBefore(header, document.body.firstChild);
-    }
+    // Insert at the very beginning of body
+    document.body.insertBefore(header, document.body.firstChild);
+  }
 
+  createUnifiedFooter() {
+    const footer = document.createElement('footer');
+    footer.className = 'unified-footer';
 
-
-    createUnifiedFooter() {
-        const footer = document.createElement('footer');
-        footer.className = 'unified-footer';
-        
-        footer.innerHTML = `
+    footer.innerHTML = `
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>🌟 Rise Foundation Ecosystem</h4>
@@ -350,14 +348,14 @@ class UnifiedNavigation {
             </div>
         `;
 
-        document.body.appendChild(footer);
-    }
+    document.body.appendChild(footer);
+  }
 
-    initializeBrainIntegration() {
-        // Create brain chat interface
-        const brainChat = document.createElement('div');
-        brainChat.id = 'brain-chat-interface';
-        brainChat.style.cssText = `
+  initializeBrainIntegration() {
+    // Create brain chat interface
+    const brainChat = document.createElement('div');
+    brainChat.id = 'brain-chat-interface';
+    brainChat.style.cssText = `
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -372,7 +370,7 @@ class UnifiedNavigation {
             z-index: 10000;
         `;
 
-        brainChat.innerHTML = `
+    brainChat.innerHTML = `
             <div style="
                 background: linear-gradient(135deg, #4c1d95, #22c55e);
                 color: white;
@@ -446,30 +444,30 @@ class UnifiedNavigation {
             </div>
         `;
 
-        document.body.appendChild(brainChat);
-    }
+    document.body.appendChild(brainChat);
+  }
 
-    openBrainChat() {
-        const chatInterface = document.getElementById('brain-chat-interface');
-        chatInterface.style.display = 'flex';
-        document.getElementById('brain-chat-input').focus();
-    }
+  openBrainChat() {
+    const chatInterface = document.getElementById('brain-chat-interface');
+    chatInterface.style.display = 'flex';
+    document.getElementById('brain-chat-input').focus();
+  }
 
-    closeBrainChat() {
-        const chatInterface = document.getElementById('brain-chat-interface');
-        chatInterface.style.display = 'none';
-    }
+  closeBrainChat() {
+    const chatInterface = document.getElementById('brain-chat-interface');
+    chatInterface.style.display = 'none';
+  }
 
-    sendBrainMessage() {
-        const input = document.getElementById('brain-chat-input');
-        const messages = document.getElementById('brain-chat-messages');
-        const message = input.value.trim();
-        
-        if (!message) return;
+  sendBrainMessage() {
+    const input = document.getElementById('brain-chat-input');
+    const messages = document.getElementById('brain-chat-messages');
+    const message = input.value.trim();
 
-        // Add user message
-        const userMsg = document.createElement('div');
-        userMsg.style.cssText = `
+    if (!message) return;
+
+    // Add user message
+    const userMsg = document.createElement('div');
+    userMsg.style.cssText = `
             background: #4c1d95;
             color: white;
             padding: 10px;
@@ -478,76 +476,76 @@ class UnifiedNavigation {
             align-self: flex-end;
             max-width: 80%;
         `;
-        userMsg.textContent = message;
-        messages.appendChild(userMsg);
+    userMsg.textContent = message;
+    messages.appendChild(userMsg);
 
-        // Clear input
-        input.value = '';
+    // Clear input
+    input.value = '';
 
-        // Simulate AI response
-        setTimeout(() => {
-            const aiResponse = this.generateAIResponse(message);
-            const aiMsg = document.createElement('div');
-            aiMsg.style.cssText = `
+    // Simulate AI response
+    setTimeout(() => {
+      const aiResponse = this.generateAIResponse(message);
+      const aiMsg = document.createElement('div');
+      aiMsg.style.cssText = `
                 background: #f1f5f9;
                 padding: 10px;
                 border-radius: 8px;
                 font-size: 0.9rem;
                 max-width: 80%;
             `;
-            aiMsg.innerHTML = aiResponse;
-            messages.appendChild(aiMsg);
-            messages.scrollTop = messages.scrollHeight;
-        }, 1000);
+      aiMsg.innerHTML = aiResponse;
+      messages.appendChild(aiMsg);
+      messages.scrollTop = messages.scrollHeight;
+    }, 1000);
 
-        messages.scrollTop = messages.scrollHeight;
-    }
+    messages.scrollTop = messages.scrollHeight;
+  }
 
-    generateAIResponse(message) {
-        const lowerMessage = message.toLowerCase();
-        
-        if (lowerMessage.includes('program') || lowerMessage.includes('course')) {
-            return `🎓 We offer programs across all our sites:<br><br>
+  generateAIResponse(message) {
+    const lowerMessage = message.toLowerCase();
+
+    if (lowerMessage.includes('program') || lowerMessage.includes('course')) {
+      return `🎓 We offer programs across all our sites:<br><br>
                 • <strong>Elevate for Humanity:</strong> Tech, healthcare, trades<br>
                 • <strong>Serene Comfort Care:</strong> CNA and healthcare training<br>
                 • <strong>Urban Build Crew:</strong> Construction and trades<br>
                 • <strong>Kingdom Konnect:</strong> Faith-based development<br><br>
                 <a href="/partner-marketplace.html" style="color: #4c1d95;">View all programs →</a>`;
-        }
-        
-        if (lowerMessage.includes('site') || lowerMessage.includes('navigate')) {
-            return `🌐 Our ecosystem includes:<br><br>
+    }
+
+    if (lowerMessage.includes('site') || lowerMessage.includes('navigate')) {
+      return `🌐 Our ecosystem includes:<br><br>
                 • <strong>Elevate for Humanity:</strong> Main workforce development<br>
                 • <strong>Rise Forward:</strong> Community nonprofit<br>
                 • <strong>Kingdom Konnect:</strong> Faith-based programs<br>
                 • <strong>Serene Comfort Care:</strong> Healthcare services<br>
                 • <strong>Urban Build Crew:</strong> Construction training<br><br>
                 Use the "All Sites" dropdown to navigate between them!`;
-        }
-        
-        if (lowerMessage.includes('enroll') || lowerMessage.includes('apply')) {
-            return `📝 Ready to enroll? Here's how:<br><br>
+    }
+
+    if (lowerMessage.includes('enroll') || lowerMessage.includes('apply')) {
+      return `📝 Ready to enroll? Here's how:<br><br>
                 1. Browse programs on any of our sites<br>
                 2. Check funding options (many are free!)<br>
                 3. Complete the application<br>
                 4. Get matched with employers<br><br>
                 <a href="/student-portal.html" style="color: #4c1d95;">Start your application →</a>`;
-        }
-        
-        return `🤖 I'm here to help! I can assist with information about our programs, sites, enrollment process, and more. Try asking about:
-            <br><br>• "What programs do you offer?"<br>• "How do I navigate between sites?"<br>• "How do I enroll?"<br>• "What funding is available?"`;
     }
+
+    return `🤖 I'm here to help! I can assist with information about our programs, sites, enrollment process, and more. Try asking about:
+            <br><br>• "What programs do you offer?"<br>• "How do I navigate between sites?"<br>• "How do I enroll?"<br>• "What funding is available?"`;
+  }
 }
 
 // Initialize unified navigation when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    window.unifiedNav = new UnifiedNavigation();
-    console.log('🌟 Unified Navigation System Loaded');
-    console.log('🔗 All sister sites connected');
-    console.log('🧠 AI Brain integration active');
+  window.unifiedNav = new UnifiedNavigation();
+  console.log('🌟 Unified Navigation System Loaded');
+  console.log('🔗 All sister sites connected');
+  console.log('🧠 AI Brain integration active');
 });
 
 // Export for module use
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = UnifiedNavigation;
+  module.exports = UnifiedNavigation;
 }

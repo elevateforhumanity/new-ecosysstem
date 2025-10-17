@@ -16,7 +16,6 @@
   See LICENSE file for details.
 */
 
-
 // Subscription API Routes
 // Defined subscription plans (replace pricing with live values as needed)
 const SUBSCRIPTION_PLANS = {
@@ -27,8 +26,8 @@ const SUBSCRIPTION_PLANS = {
     features: [
       'Access to core courses',
       'Basic progress tracking',
-      'Email support'
-    ]
+      'Email support',
+    ],
   },
   professional: {
     name: 'Professional',
@@ -38,8 +37,8 @@ const SUBSCRIPTION_PLANS = {
       'All Starter features',
       'Advanced analytics',
       'Certificate generation',
-      'Priority support'
-    ]
+      'Priority support',
+    ],
   },
   enterprise: {
     name: 'Enterprise',
@@ -49,9 +48,9 @@ const SUBSCRIPTION_PLANS = {
       'All Professional features',
       'Custom integrations',
       'Dedicated success manager',
-      'SLA & compliance reporting'
-    ]
-  }
+      'SLA & compliance reporting',
+    ],
+  },
 };
 
 // Subscription API Routes
@@ -69,9 +68,11 @@ router.get('/api/subscription/plans', (req, res) => {
     price_monthly: plan.price_monthly,
     price_yearly: plan.price_yearly,
     features: plan.features,
-    savings_yearly: Math.round(((plan.price_monthly * 12) - plan.price_yearly) / 100)
+    savings_yearly: Math.round(
+      (plan.price_monthly * 12 - plan.price_yearly) / 100
+    ),
   }));
-  
+
   res.json({ plans });
 });
 
@@ -79,14 +80,17 @@ router.get('/api/subscription/plans', (req, res) => {
 router.post('/api/subscription/checkout', async (req, res) => {
   try {
     const { email, planId, billingPeriod } = req.body;
-    
+
     if (!email || !planId) {
       return res.status(400).json({ error: 'Email and plan ID required' });
     }
 
-    const result = await subscriptionManager.createSubscription(email, planId, billingPeriod);
+    const result = await subscriptionManager.createSubscription(
+      email,
+      planId,
+      billingPeriod
+    );
     res.json(result);
-
   } catch (error) {
     console.error('Subscription checkout error:', error);
     res.status(500).json({ error: 'Failed to create subscription' });
@@ -103,7 +107,6 @@ router.get('/api/subscription/current', async (req, res) => {
 
     const subscription = await subscriptionManager.getUserSubscription(email);
     res.json({ subscription });
-
   } catch (error) {
     res.status(500).json({ error: 'Failed to get subscription' });
   }
@@ -114,14 +117,16 @@ router.get('/api/subscription/access/:courseSlug', async (req, res) => {
   try {
     const { email } = req.query;
     const { courseSlug } = req.params;
-    
+
     if (!email) {
       return res.status(400).json({ error: 'Email required' });
     }
 
-    const hasAccess = await subscriptionManager.canAccessCourse(email, courseSlug);
+    const hasAccess = await subscriptionManager.canAccessCourse(
+      email,
+      courseSlug
+    );
     res.json({ hasAccess });
-
   } catch (error) {
     res.status(500).json({ error: 'Failed to check access' });
   }

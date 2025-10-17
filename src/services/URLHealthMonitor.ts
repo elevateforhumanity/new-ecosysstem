@@ -58,7 +58,7 @@ export class URLHealthMonitor {
       critical: true,
       checkInterval: 60000, // 1 minute
       timeout: 5000,
-      expectedStatus: [200]
+      expectedStatus: [200],
     });
 
     this.addEndpoint({
@@ -69,7 +69,7 @@ export class URLHealthMonitor {
       critical: true,
       checkInterval: 300000, // 5 minutes
       timeout: 10000,
-      expectedStatus: [200]
+      expectedStatus: [200],
     });
 
     // External partner services
@@ -81,7 +81,7 @@ export class URLHealthMonitor {
       critical: false,
       checkInterval: 3600000, // 1 hour
       timeout: 15000,
-      expectedStatus: [200, 401] // 401 is ok, means API is up but needs auth
+      expectedStatus: [200, 401], // 401 is ok, means API is up but needs auth
     });
 
     this.addEndpoint({
@@ -92,7 +92,7 @@ export class URLHealthMonitor {
       critical: false,
       checkInterval: 3600000,
       timeout: 15000,
-      expectedStatus: [200, 401]
+      expectedStatus: [200, 401],
     });
 
     this.addEndpoint({
@@ -103,7 +103,7 @@ export class URLHealthMonitor {
       critical: false,
       checkInterval: 3600000,
       timeout: 10000,
-      expectedStatus: [200]
+      expectedStatus: [200],
     });
 
     // Preview/development server
@@ -115,7 +115,7 @@ export class URLHealthMonitor {
       critical: true,
       checkInterval: 30000, // 30 seconds
       timeout: 5000,
-      expectedStatus: [200]
+      expectedStatus: [200],
     });
 
     // Sister sites
@@ -127,7 +127,7 @@ export class URLHealthMonitor {
       critical: false,
       checkInterval: 3600000,
       timeout: 10000,
-      expectedStatus: [200]
+      expectedStatus: [200],
     });
 
     this.addEndpoint({
@@ -138,7 +138,7 @@ export class URLHealthMonitor {
       critical: false,
       checkInterval: 3600000,
       timeout: 10000,
-      expectedStatus: [200]
+      expectedStatus: [200],
     });
 
     this.addEndpoint({
@@ -149,7 +149,7 @@ export class URLHealthMonitor {
       critical: false,
       checkInterval: 3600000,
       timeout: 10000,
-      expectedStatus: [200]
+      expectedStatus: [200],
     });
   }
 
@@ -162,7 +162,7 @@ export class URLHealthMonitor {
    */
   async checkURL(url: string): Promise<URLCheck> {
     const startTime = Date.now();
-    
+
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000);
@@ -171,8 +171,8 @@ export class URLHealthMonitor {
         method: 'HEAD',
         signal: controller.signal,
         headers: {
-          'User-Agent': 'ElevateForHumanity-HealthCheck/1.0'
-        }
+          'User-Agent': 'ElevateForHumanity-HealthCheck/1.0',
+        },
       });
 
       clearTimeout(timeoutId);
@@ -183,7 +183,7 @@ export class URLHealthMonitor {
         status: response.ok ? 'healthy' : 'degraded',
         statusCode: response.status,
         responseTime,
-        lastChecked: new Date()
+        lastChecked: new Date(),
       };
 
       this.healthStatus.set(url, check);
@@ -194,7 +194,7 @@ export class URLHealthMonitor {
         status: 'down',
         responseTime: Date.now() - startTime,
         lastChecked: new Date(),
-        errorMessage: error.message
+        errorMessage: error.message,
       };
 
       this.healthStatus.set(url, check);
@@ -221,14 +221,14 @@ export class URLHealthMonitor {
         method: 'HEAD',
         signal: controller.signal,
         headers: {
-          'User-Agent': 'ElevateForHumanity-HealthCheck/1.0'
-        }
+          'User-Agent': 'ElevateForHumanity-HealthCheck/1.0',
+        },
       });
 
       clearTimeout(timeoutId);
       const responseTime = Date.now() - startTime;
 
-      const isExpectedStatus = endpoint.expectedStatus 
+      const isExpectedStatus = endpoint.expectedStatus
         ? endpoint.expectedStatus.includes(response.status)
         : response.ok;
 
@@ -237,7 +237,7 @@ export class URLHealthMonitor {
         status: isExpectedStatus ? 'healthy' : 'degraded',
         statusCode: response.status,
         responseTime,
-        lastChecked: new Date()
+        lastChecked: new Date(),
       };
 
       this.healthStatus.set(endpointId, check);
@@ -248,11 +248,11 @@ export class URLHealthMonitor {
         status: 'down',
         responseTime: Date.now() - startTime,
         lastChecked: new Date(),
-        errorMessage: error.message
+        errorMessage: error.message,
       };
 
       this.healthStatus.set(endpointId, check);
-      
+
       // Alert if critical service is down
       if (endpoint.critical) {
         this.alertCriticalServiceDown(endpoint, check);
@@ -291,7 +291,7 @@ export class URLHealthMonitor {
 
     // Check if we have recent health data
     const cachedCheck = this.healthStatus.get(endpointId);
-    if (cachedCheck && (Date.now() - cachedCheck.lastChecked.getTime() < 60000)) {
+    if (cachedCheck && Date.now() - cachedCheck.lastChecked.getTime() < 60000) {
       // Use cached data if less than 1 minute old
       return cachedCheck.status === 'healthy' ? endpoint.url : null;
     }
@@ -304,20 +304,28 @@ export class URLHealthMonitor {
   /**
    * Get URL with fallback
    */
-  async getURLWithFallback(primaryId: string, fallbackId: string): Promise<string | null> {
+  async getURLWithFallback(
+    primaryId: string,
+    fallbackId: string
+  ): Promise<string | null> {
     const primaryURL = await this.getSafeURL(primaryId);
     if (primaryURL) {
       return primaryURL;
     }
 
-    console.warn(`Primary endpoint ${primaryId} is down, using fallback ${fallbackId}`);
+    console.warn(
+      `Primary endpoint ${primaryId} is down, using fallback ${fallbackId}`
+    );
     return await this.getSafeURL(fallbackId);
   }
 
   /**
    * Alert when critical service is down
    */
-  private alertCriticalServiceDown(endpoint: ServiceEndpoint, check: URLCheck): void {
+  private alertCriticalServiceDown(
+    endpoint: ServiceEndpoint,
+    check: URLCheck
+  ): void {
     console.error(`🚨 CRITICAL SERVICE DOWN: ${endpoint.name}`);
     console.error(`URL: ${endpoint.url}`);
     console.error(`Status: ${check.statusCode || 'No response'}`);
@@ -329,7 +337,7 @@ export class URLHealthMonitor {
       service: endpoint.name,
       url: endpoint.url,
       status: check.status,
-      error: check.errorMessage
+      error: check.errorMessage,
     });
   }
 
@@ -388,24 +396,26 @@ export class URLHealthMonitor {
         healthy,
         degraded,
         down,
-        healthRate: (healthy / endpoints.length) * 100
+        healthRate: (healthy / endpoints.length) * 100,
       },
-      endpoints: endpoints.map(e => ({
+      endpoints: endpoints.map((e) => ({
         id: e.id,
         name: e.name,
         url: e.url,
         type: e.type,
         critical: e.critical,
-        status: this.healthStatus.get(e.id)
+        status: this.healthStatus.get(e.id),
       })),
-      lastUpdated: new Date()
+      lastUpdated: new Date(),
     };
   }
 
   /**
    * Validate URL before displaying to user
    */
-  async validateBeforeDisplay(url: string): Promise<{ valid: boolean; message?: string }> {
+  async validateBeforeDisplay(
+    url: string
+  ): Promise<{ valid: boolean; message?: string }> {
     const check = await this.checkURL(url);
 
     if (check.status === 'healthy') {
@@ -415,20 +425,20 @@ export class URLHealthMonitor {
     if (check.status === 'down') {
       return {
         valid: false,
-        message: `This service is currently unavailable. Please try again later or contact support.`
+        message: `This service is currently unavailable. Please try again later or contact support.`,
       };
     }
 
     if (check.status === 'degraded') {
       return {
         valid: true,
-        message: `This service may be experiencing issues. Response time: ${check.responseTime}ms`
+        message: `This service may be experiencing issues. Response time: ${check.responseTime}ms`,
       };
     }
 
     return {
       valid: false,
-      message: 'Unable to verify service availability.'
+      message: 'Unable to verify service availability.',
     };
   }
 
@@ -440,14 +450,21 @@ export class URLHealthMonitor {
 
     // Check all links in the document
     const links = document.querySelectorAll('a[href]');
-    
+
     for (const link of Array.from(links)) {
       const href = link.getAttribute('href');
-      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+      if (
+        !href ||
+        href.startsWith('#') ||
+        href.startsWith('mailto:') ||
+        href.startsWith('tel:')
+      ) {
         continue;
       }
 
-      const fullURL = href.startsWith('http') ? href : new URL(href, window.location.origin).href;
+      const fullURL = href.startsWith('http')
+        ? href
+        : new URL(href, window.location.origin).href;
       const check = await this.checkURL(fullURL);
 
       if (check.status === 'down') {
@@ -468,11 +485,11 @@ export class URLHealthMonitor {
       // Find all elements with this URL
       const elements = document.querySelectorAll(`a[href="${brokenURL}"]`);
 
-      elements.forEach(element => {
+      elements.forEach((element) => {
         // Add warning indicator
         element.classList.add('broken-link');
         element.setAttribute('title', 'This link may not be working');
-        
+
         // Optionally disable the link
         element.addEventListener('click', (e) => {
           e.preventDefault();

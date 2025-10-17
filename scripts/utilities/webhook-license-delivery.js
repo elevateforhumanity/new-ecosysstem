@@ -11,69 +11,67 @@ const emailTransporter = nodemailer.createTransporter({
   service: 'gmail', // or 'sendgrid', 'mailgun', etc.
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
+    pass: process.env.EMAIL_PASS,
+  },
 });
 
 // 📦 Product configuration with download links
 const PRODUCT_CATALOG = {
-  'price_1DemoTemplate': {
+  price_1DemoTemplate: {
     name: 'Landing Page Demo Template',
     price: 39,
     files: [
       'https://your-cdn.com/downloads/landing-template.zip',
-      'https://your-cdn.com/downloads/setup-guide.pdf'
+      'https://your-cdn.com/downloads/setup-guide.pdf',
     ],
     license_type: 'single_use',
-    description: 'Complete HTML template with sister-site navigation'
+    description: 'Complete HTML template with sister-site navigation',
   },
-  'price_1Workbooks': {
+  price_1Workbooks: {
     name: 'PDF Workbook Bundle',
     price: 29,
-    files: [
-      'https://your-cdn.com/downloads/workforce-workbooks.zip'
-    ],
+    files: ['https://your-cdn.com/downloads/workforce-workbooks.zip'],
     license_type: 'commercial',
-    description: '50+ professional training PDFs'
+    description: '50+ professional training PDFs',
   },
-  'price_1AICourseLicense': {
+  price_1AICourseLicense: {
     name: 'AI Course Creator License',
     price: 199,
     files: [
       'https://your-cdn.com/downloads/ai-course-creator.zip',
-      'https://your-cdn.com/downloads/api-documentation.pdf'
+      'https://your-cdn.com/downloads/api-documentation.pdf',
     ],
     license_type: 'annual',
-    description: 'AI-powered course generation system'
+    description: 'AI-powered course generation system',
   },
-  'price_1SiteClone': {
+  price_1SiteClone: {
     name: 'Elevate Site Clone',
     price: 399,
     files: [
       'https://your-cdn.com/downloads/elevate-clone-full.zip',
-      'https://your-cdn.com/downloads/deployment-guide.pdf'
+      'https://your-cdn.com/downloads/deployment-guide.pdf',
     ],
     license_type: 'commercial',
-    description: 'Complete source code with documentation'
+    description: 'Complete source code with documentation',
   },
-  'price_1WhiteLabel': {
+  price_1WhiteLabel: {
     name: 'White-Label Platform',
     price: 599,
     files: [
       'https://your-cdn.com/downloads/white-label-platform.zip',
       'https://your-cdn.com/downloads/branding-kit.zip',
-      'https://your-cdn.com/downloads/customization-guide.pdf'
+      'https://your-cdn.com/downloads/customization-guide.pdf',
     ],
     license_type: 'reseller',
-    description: 'Full platform with custom branding'
-  }
+    description: 'Full platform with custom branding',
+  },
 };
 
 // 🔐 License key generator
 function generateLicenseKey() {
   const segments = [];
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  
+
   for (let i = 0; i < 4; i++) {
     let segment = '';
     for (let j = 0; j < 4; j++) {
@@ -81,14 +79,14 @@ function generateLicenseKey() {
     }
     segments.push(segment);
   }
-  
+
   return `ELV-${segments.join('-')}`;
 }
 
 // 📅 Calculate license expiry
 function getLicenseExpiry(licenseType) {
   const now = new Date();
-  
+
   switch (licenseType) {
     case 'annual':
       return new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
@@ -110,19 +108,23 @@ exports.handler = async (event, context) => {
   let stripeEvent;
 
   try {
-    stripeEvent = stripe.webhooks.constructEvent(event.body, sig, endpointSecret);
+    stripeEvent = stripe.webhooks.constructEvent(
+      event.body,
+      sig,
+      endpointSecret
+    );
   } catch (err) {
     console.error('⚠️ Webhook signature verification failed:', err.message);
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: 'Invalid signature' })
+      body: JSON.stringify({ error: 'Invalid signature' }),
     };
   }
 
   // Handle successful payment
   if (stripeEvent.type === 'checkout.session.completed') {
     const session = stripeEvent.data.object;
-    
+
     try {
       await processSuccessfulPayment(session);
       console.log('✅ Payment processed successfully:', session.id);
@@ -130,14 +132,14 @@ exports.handler = async (event, context) => {
       console.error('❌ Payment processing failed:', error);
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Processing failed' })
+        body: JSON.stringify({ error: 'Processing failed' }),
       };
     }
   }
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ received: true })
+    body: JSON.stringify({ received: true }),
   };
 };
 
@@ -145,17 +147,17 @@ exports.handler = async (event, context) => {
 async function processSuccessfulPayment(session) {
   // Get line items from the session
   const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
-  
+
   const customerEmail = session.customer_details.email;
   const customerName = session.customer_details.name || 'Valued Customer';
-  
+
   // Process each purchased item
   const licenses = [];
-  
+
   for (const item of lineItems.data) {
     const priceId = item.price.id;
     const product = PRODUCT_CATALOG[priceId];
-    
+
     if (product) {
       const license = {
         key: generateLicenseKey(),
@@ -167,16 +169,16 @@ async function processSuccessfulPayment(session) {
         issuedAt: new Date(),
         customerEmail: customerEmail,
         customerName: customerName,
-        stripeSessionId: session.id
+        stripeSessionId: session.id,
       };
-      
+
       licenses.push(license);
-      
+
       // Store license in your database (optional)
       await storeLicense(license);
     }
   }
-  
+
   // Send delivery email
   if (licenses.length > 0) {
     await sendLicenseEmail(customerEmail, customerName, licenses, session);
@@ -187,7 +189,7 @@ async function processSuccessfulPayment(session) {
 async function storeLicense(license) {
   // Example: Store in Supabase, Firebase, or your database
   console.log('📝 Storing license:', license.key);
-  
+
   // Uncomment and implement with your database:
   /*
   const { data, error } = await supabase
@@ -208,7 +210,7 @@ async function storeLicense(license) {
 // 📧 Send license delivery email
 async function sendLicenseEmail(email, name, licenses, session) {
   const totalAmount = session.amount_total / 100; // Convert from cents
-  
+
   const emailHTML = `
 <!DOCTYPE html>
 <html>
@@ -233,7 +235,9 @@ async function sendLicenseEmail(email, name, licenses, session) {
     <h2>Hello ${name}!</h2>
     <p>Your payment of <strong>$${totalAmount}</strong> has been processed successfully. Here are your license details and download links:</p>
     
-    ${licenses.map(license => `
+    ${licenses
+      .map(
+        (license) => `
       <div class="license-box">
         <h3>📦 ${license.product}</h3>
         <p><strong>License Key:</strong></p>
@@ -243,12 +247,16 @@ async function sendLicenseEmail(email, name, licenses, session) {
         ${license.expiresAt ? `<p><strong>Expires:</strong> ${license.expiresAt.toDateString()}</p>` : '<p><strong>License:</strong> Lifetime</p>'}
         
         <p><strong>Download Files:</strong></p>
-        ${license.files.map(file => {
-          const fileName = file.split('/').pop();
-          return `<a href="${file}" class="download-btn">📥 Download ${fileName}</a>`;
-        }).join('')}
+        ${license.files
+          .map((file) => {
+            const fileName = file.split('/').pop();
+            return `<a href="${file}" class="download-btn">📥 Download ${fileName}</a>`;
+          })
+          .join('')}
       </div>
-    `).join('')}
+    `
+      )
+      .join('')}
     
     <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 1rem; border-radius: 5px; margin: 2rem 0;">
       <h4>🔐 Important License Information:</h4>
@@ -281,7 +289,7 @@ async function sendLicenseEmail(email, name, licenses, session) {
     from: process.env.EMAIL_USER,
     to: email,
     subject: `🎯 Your Elevate Platform License - Order #${session.id.slice(-8)}`,
-    html: emailHTML
+    html: emailHTML,
   };
 
   try {
@@ -296,29 +304,29 @@ async function sendLicenseEmail(email, name, licenses, session) {
 // 🔍 License validation endpoint (optional)
 exports.validateLicense = async (event, context) => {
   const { licenseKey, domain } = JSON.parse(event.body);
-  
+
   // Implement license validation logic
   // Check against your database, validate domain restrictions, etc.
-  
+
   return {
     statusCode: 200,
     body: JSON.stringify({
       valid: true,
       product: 'Elevate Platform',
-      expiresAt: null // or actual expiry date
-    })
+      expiresAt: null, // or actual expiry date
+    }),
   };
 };
 
 // 📊 Usage tracking endpoint (optional)
 exports.trackUsage = async (event, context) => {
   const { licenseKey, action, metadata } = JSON.parse(event.body);
-  
+
   // Track license usage for analytics
   console.log('📊 Usage tracked:', { licenseKey, action, metadata });
-  
+
   return {
     statusCode: 200,
-    body: JSON.stringify({ tracked: true })
+    body: JSON.stringify({ tracked: true }),
   };
 };

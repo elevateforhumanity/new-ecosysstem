@@ -42,7 +42,7 @@ app.get('/health', (req, res) => {
     status: 'healthy',
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
-    environment: process.env.NODE_ENV || 'development'
+    environment: process.env.NODE_ENV || 'development',
   });
 });
 
@@ -58,7 +58,12 @@ app.get('/api/emergency-sale', (req, res) => {
         originalPrice: 9999,
         salePrice: 2999,
         savings: 7000,
-        features: ['33+ Programs', 'Federal Partnerships', 'Revenue Sharing', 'Full Source Code']
+        features: [
+          '33+ Programs',
+          'Federal Partnerships',
+          'Revenue Sharing',
+          'Full Source Code',
+        ],
       },
       {
         id: 'source-code',
@@ -66,9 +71,9 @@ app.get('/api/emergency-sale', (req, res) => {
         originalPrice: 4999,
         salePrice: 999,
         savings: 4000,
-        features: ['Complete Codebase', 'All Programs', 'Documentation']
-      }
-    ]
+        features: ['Complete Codebase', 'All Programs', 'Documentation'],
+      },
+    ],
   });
 });
 
@@ -83,7 +88,7 @@ app.post('/api/checkout', async (req, res) => {
     // Return success URL for demo
     res.json({
       url: `/payment-success.html?product=${productId}&amount=${amount}`,
-      success: true
+      success: true,
     });
   } catch (error) {
     res.status(500).json({ error: 'Checkout failed' });
@@ -103,8 +108,17 @@ app.post('/api/track-view', async (req, res) => {
 });
 
 // Sister site routes
-const sisterSites = ['hub', 'programs', 'lms', 'connect', 'compliance', 'pay', 'partners', 'account'];
-sisterSites.forEach(site => {
+const sisterSites = [
+  'hub',
+  'programs',
+  'lms',
+  'connect',
+  'compliance',
+  'pay',
+  'partners',
+  'account',
+];
+sisterSites.forEach((site) => {
   app.get(`/${site}`, (req, res) => {
     const filePath = path.join(__dirname, `${site}.html`);
     if (fs.existsSync(filePath)) {

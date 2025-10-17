@@ -36,12 +36,17 @@ const InstructorDashboard = () => {
       setCourses(coursesData);
 
       // Calculate stats
-      const totalStudents = coursesData.reduce((sum: number, c: Course) => 
-        sum + (c._count?.enrollments || 0), 0
+      const totalStudents = coursesData.reduce(
+        (sum: number, c: Course) => sum + (c._count?.enrollments || 0),
+        0
       );
-      const activeCourses = coursesData.filter((c: Course) => c.published).length;
-      const totalRevenue = coursesData.reduce((sum: number, c: Course) => 
-        sum + (c.price * (c._count?.enrollments || 0)), 0
+      const activeCourses = coursesData.filter(
+        (c: Course) => c.published
+      ).length;
+      const totalRevenue = coursesData.reduce(
+        (sum: number, c: Course) =>
+          sum + c.price * (c._count?.enrollments || 0),
+        0
       );
 
       setStats({
@@ -79,19 +84,27 @@ const InstructorDashboard = () => {
       <div className="grid md:grid-cols-4 gap-6">
         <div className="card">
           <div className="text-gray-600 text-sm mb-1">Total Students</div>
-          <div className="text-3xl font-bold text-primary-600">{stats.totalStudents}</div>
+          <div className="text-3xl font-bold text-primary-600">
+            {stats.totalStudents}
+          </div>
         </div>
         <div className="card">
           <div className="text-gray-600 text-sm mb-1">Active Courses</div>
-          <div className="text-3xl font-bold text-blue-600">{stats.activeCourses}</div>
+          <div className="text-3xl font-bold text-blue-600">
+            {stats.activeCourses}
+          </div>
         </div>
         <div className="card">
           <div className="text-gray-600 text-sm mb-1">Total Revenue</div>
-          <div className="text-3xl font-bold text-green-600">${stats.totalRevenue.toFixed(2)}</div>
+          <div className="text-3xl font-bold text-green-600">
+            ${stats.totalRevenue.toFixed(2)}
+          </div>
         </div>
         <div className="card">
           <div className="text-gray-600 text-sm mb-1">Avg Rating</div>
-          <div className="text-3xl font-bold text-yellow-600">{stats.avgRating} ★</div>
+          <div className="text-3xl font-bold text-yellow-600">
+            {stats.avgRating} ★
+          </div>
         </div>
       </div>
 
@@ -102,7 +115,9 @@ const InstructorDashboard = () => {
           <div className="card text-center py-12">
             <div className="text-6xl mb-4">📚</div>
             <h3 className="text-xl font-semibold mb-2">No courses yet</h3>
-            <p className="text-gray-600 mb-6">Create your first course and start teaching!</p>
+            <p className="text-gray-600 mb-6">
+              Create your first course and start teaching!
+            </p>
             <Link to="/dashboard/instructor/create" className="btn-primary">
               Create Your First Course
             </Link>
@@ -110,20 +125,25 @@ const InstructorDashboard = () => {
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {courses.map((course) => (
-              <div key={course.id} className="card hover:shadow-lg transition-shadow">
+              <div
+                key={course.id}
+                className="card hover:shadow-lg transition-shadow"
+              >
                 {course.thumbnailUrl && (
-                  <img 
-                    src={course.thumbnailUrl} 
+                  <img
+                    src={course.thumbnailUrl}
                     alt={course.title}
                     className="w-full h-40 object-cover rounded-lg mb-4"
                   />
                 )}
                 <div className="flex items-center gap-2 mb-2">
-                  <span className={`px-2 py-1 rounded text-xs font-medium ${
-                    course.published 
-                      ? 'bg-green-100 text-green-800' 
-                      : 'bg-gray-100 text-gray-800'
-                  }`}>
+                  <span
+                    className={`px-2 py-1 rounded text-xs font-medium ${
+                      course.published
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-gray-100 text-gray-800'
+                    }`}
+                  >
                     {course.published ? 'Published' : 'Draft'}
                   </span>
                 </div>
@@ -133,13 +153,13 @@ const InstructorDashboard = () => {
                   <span>{course._count?.lessons || 0} lessons</span>
                 </div>
                 <div className="flex gap-2">
-                  <Link 
+                  <Link
                     to={`/dashboard/instructor/courses/${course.id}/edit`}
                     className="flex-1 btn-secondary text-center"
                   >
                     Edit
                   </Link>
-                  <Link 
+                  <Link
                     to={`/courses/${course.slug}`}
                     className="flex-1 btn-primary text-center"
                   >

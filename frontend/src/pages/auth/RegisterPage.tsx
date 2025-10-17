@@ -47,7 +47,10 @@ const RegisterPage = () => {
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Or{' '}
-            <Link to="/login" className="font-medium text-primary-600 hover:text-primary-500">
+            <Link
+              to="/login"
+              className="font-medium text-primary-600 hover:text-primary-500"
+            >
               sign in to existing account
             </Link>
           </p>
@@ -60,7 +63,10 @@ const RegisterPage = () => {
           )}
           <div className="rounded-md shadow-sm space-y-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Full Name
               </label>
               <input
@@ -75,7 +81,10 @@ const RegisterPage = () => {
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Email address
               </label>
               <input
@@ -91,7 +100,10 @@ const RegisterPage = () => {
               />
             </div>
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Password
               </label>
               <input
@@ -107,7 +119,10 @@ const RegisterPage = () => {
               />
             </div>
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Confirm Password
               </label>
               <input

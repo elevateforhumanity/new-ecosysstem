@@ -3,89 +3,108 @@
   Commercial License. No resale, sublicensing, or redistribution allowed.
   See LICENSE file for details.
 */
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import AppLayout from "../layouts/AppLayout";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import AppLayout from '../layouts/AppLayout';
 
 export default function Support() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const [contactForm, setContactForm] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const categories = ["All", "Getting Started", "Account", "Courses", "Technical", "Billing"];
+  const categories = [
+    'All',
+    'Getting Started',
+    'Account',
+    'Courses',
+    'Technical',
+    'Billing',
+  ];
 
   const faqs = [
     {
       id: 1,
-      category: "Getting Started",
-      question: "How do I create an account?",
-      answer: "Click the 'Sign Up' button in the top right corner and follow the registration process. You'll need to provide your email address and create a password.",
+      category: 'Getting Started',
+      question: 'How do I create an account?',
+      answer:
+        "Click the 'Sign Up' button in the top right corner and follow the registration process. You'll need to provide your email address and create a password.",
     },
     {
       id: 2,
-      category: "Getting Started",
-      question: "What courses are available?",
-      answer: "We offer a wide range of courses in technology, business, personal development, and more. Browse our course catalog to see all available options.",
+      category: 'Getting Started',
+      question: 'What courses are available?',
+      answer:
+        'We offer a wide range of courses in technology, business, personal development, and more. Browse our course catalog to see all available options.',
     },
     {
       id: 3,
-      category: "Account",
-      question: "How do I reset my password?",
-      answer: "Click 'Forgot Password' on the login page, enter your email address, and we'll send you instructions to reset your password.",
+      category: 'Account',
+      question: 'How do I reset my password?',
+      answer:
+        "Click 'Forgot Password' on the login page, enter your email address, and we'll send you instructions to reset your password.",
     },
     {
       id: 4,
-      category: "Account",
-      question: "Can I change my email address?",
-      answer: "Yes, go to Settings > Account Settings and update your email address. You'll need to verify the new email before the change takes effect.",
+      category: 'Account',
+      question: 'Can I change my email address?',
+      answer:
+        "Yes, go to Settings > Account Settings and update your email address. You'll need to verify the new email before the change takes effect.",
     },
     {
       id: 5,
-      category: "Courses",
-      question: "How do I enroll in a course?",
-      answer: "Navigate to the course page and click the 'Enroll Now' button. Some courses are free, while others require payment.",
+      category: 'Courses',
+      question: 'How do I enroll in a course?',
+      answer:
+        "Navigate to the course page and click the 'Enroll Now' button. Some courses are free, while others require payment.",
     },
     {
       id: 6,
-      category: "Courses",
-      question: "Can I download course materials?",
-      answer: "Yes, most courses include downloadable resources like PDFs, worksheets, and supplementary materials available in the course dashboard.",
+      category: 'Courses',
+      question: 'Can I download course materials?',
+      answer:
+        'Yes, most courses include downloadable resources like PDFs, worksheets, and supplementary materials available in the course dashboard.',
     },
     {
       id: 7,
-      category: "Technical",
-      question: "What browsers are supported?",
-      answer: "We support the latest versions of Chrome, Firefox, Safari, and Edge. For the best experience, keep your browser updated.",
+      category: 'Technical',
+      question: 'What browsers are supported?',
+      answer:
+        'We support the latest versions of Chrome, Firefox, Safari, and Edge. For the best experience, keep your browser updated.',
     },
     {
       id: 8,
-      category: "Technical",
-      question: "Why is my video not playing?",
-      answer: "Check your internet connection, clear your browser cache, or try a different browser. If issues persist, contact our support team.",
+      category: 'Technical',
+      question: 'Why is my video not playing?',
+      answer:
+        'Check your internet connection, clear your browser cache, or try a different browser. If issues persist, contact our support team.',
     },
     {
       id: 9,
-      category: "Billing",
-      question: "What payment methods do you accept?",
-      answer: "We accept major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for institutional accounts.",
+      category: 'Billing',
+      question: 'What payment methods do you accept?',
+      answer:
+        'We accept major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for institutional accounts.',
     },
     {
       id: 10,
-      category: "Billing",
-      question: "What is your refund policy?",
-      answer: "We offer a 30-day money-back guarantee for all paid courses. If you're not satisfied, contact us within 30 days of purchase for a full refund.",
+      category: 'Billing',
+      question: 'What is your refund policy?',
+      answer:
+        "We offer a 30-day money-back guarantee for all paid courses. If you're not satisfied, contact us within 30 days of purchase for a full refund.",
     },
   ];
 
   const filteredFaqs = faqs.filter((faq) => {
-    const matchesCategory = selectedCategory === "All" || faq.category === selectedCategory;
-    const matchesSearch = searchQuery === "" || 
+    const matchesCategory =
+      selectedCategory === 'All' || faq.category === selectedCategory;
+    const matchesSearch =
+      searchQuery === '' ||
       faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
       faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
@@ -96,7 +115,7 @@ export default function Support() {
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
-      setContactForm({ name: "", email: "", subject: "", message: "" });
+      setContactForm({ name: '', email: '', subject: '', message: '' });
     }, 3000);
   };
 
@@ -106,33 +125,43 @@ export default function Support() {
 
   return (
     <AppLayout>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: 32 }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 32 }}>
         {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: 48 }}>
+        <div style={{ textAlign: 'center', marginBottom: 48 }}>
           <h1 style={{ fontSize: 36, fontWeight: 700, marginBottom: 12 }}>
             How can we help you?
           </h1>
-          <p style={{ fontSize: 18, color: "var(--brand-text-muted)", marginBottom: 32 }}>
+          <p
+            style={{
+              fontSize: 18,
+              color: 'var(--brand-text-muted)',
+              marginBottom: 32,
+            }}
+          >
             Search our knowledge base or contact our support team
           </p>
 
           {/* Search Bar */}
-          <div style={{ maxWidth: 600, margin: "0 auto" }}>
+          <div style={{ maxWidth: 600, margin: '0 auto' }}>
             <input
               type="text"
               placeholder="Search for answers..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{
-                width: "100%",
-                padding: "16px 20px",
+                width: '100%',
+                padding: '16px 20px',
                 fontSize: 16,
-                border: "2px solid var(--brand-border)",
+                border: '2px solid var(--brand-border)',
                 borderRadius: 8,
-                outline: "none",
+                outline: 'none',
               }}
-              onFocus={(e) => (e.target.style.borderColor = "var(--brand-info)")}
-              onBlur={(e) => (e.target.style.borderColor = "var(--brand-border)")}
+              onFocus={(e) =>
+                (e.target.style.borderColor = 'var(--brand-info)')
+              }
+              onBlur={(e) =>
+                (e.target.style.borderColor = 'var(--brand-border)')
+              }
             />
           </div>
         </div>
@@ -140,8 +169,8 @@ export default function Support() {
         {/* Quick Links */}
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
             gap: 20,
             marginBottom: 48,
           }}
@@ -149,28 +178,28 @@ export default function Support() {
           <Link
             to="/student-handbook"
             style={{
-              backgroundColor: "#fff",
+              backgroundColor: '#fff',
               padding: 24,
               borderRadius: 8,
-              border: "1px solid var(--brand-border)",
-              textDecoration: "none",
-              color: "inherit",
-              transition: "transform 0.2s, box-shadow 0.2s",
+              border: '1px solid var(--brand-border)',
+              textDecoration: 'none',
+              color: 'inherit',
+              transition: 'transform 0.2s, box-shadow 0.2s',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-4px)";
-              e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "none";
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
             }}
           >
             <div style={{ fontSize: 32, marginBottom: 12 }}>📚</div>
             <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
               Student Handbook
             </h3>
-            <p style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
+            <p style={{ fontSize: 14, color: 'var(--brand-text-muted)' }}>
               Complete guide to using the platform
             </p>
           </Link>
@@ -178,55 +207,55 @@ export default function Support() {
           <Link
             to="/courses"
             style={{
-              backgroundColor: "#fff",
+              backgroundColor: '#fff',
               padding: 24,
               borderRadius: 8,
-              border: "1px solid var(--brand-border)",
-              textDecoration: "none",
-              color: "inherit",
-              transition: "transform 0.2s, box-shadow 0.2s",
+              border: '1px solid var(--brand-border)',
+              textDecoration: 'none',
+              color: 'inherit',
+              transition: 'transform 0.2s, box-shadow 0.2s',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-4px)";
-              e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "none";
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
             }}
           >
             <div style={{ fontSize: 32, marginBottom: 12 }}>🎓</div>
             <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
               Course Catalog
             </h3>
-            <p style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
+            <p style={{ fontSize: 14, color: 'var(--brand-text-muted)' }}>
               Browse all available courses
             </p>
           </Link>
 
           <div
             style={{
-              backgroundColor: "#fff",
+              backgroundColor: '#fff',
               padding: 24,
               borderRadius: 8,
-              border: "1px solid var(--brand-border)",
-              cursor: "pointer",
-              transition: "transform 0.2s, box-shadow 0.2s",
+              border: '1px solid var(--brand-border)',
+              cursor: 'pointer',
+              transition: 'transform 0.2s, box-shadow 0.2s',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-4px)";
-              e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "none";
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
             }}
           >
             <div style={{ fontSize: 32, marginBottom: 12 }}>💬</div>
             <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
               Live Chat
             </h3>
-            <p style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
+            <p style={{ fontSize: 14, color: 'var(--brand-text-muted)' }}>
               Chat with our support team
             </p>
           </div>
@@ -234,28 +263,28 @@ export default function Support() {
           <a
             href="mailto:support@elevateforhumanity.org"
             style={{
-              backgroundColor: "#fff",
+              backgroundColor: '#fff',
               padding: 24,
               borderRadius: 8,
-              border: "1px solid var(--brand-border)",
-              textDecoration: "none",
-              color: "inherit",
-              transition: "transform 0.2s, box-shadow 0.2s",
+              border: '1px solid var(--brand-border)',
+              textDecoration: 'none',
+              color: 'inherit',
+              transition: 'transform 0.2s, box-shadow 0.2s',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-4px)";
-              e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "none";
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
             }}
           >
             <div style={{ fontSize: 32, marginBottom: 12 }}>📧</div>
             <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
               Email Support
             </h3>
-            <p style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
+            <p style={{ fontSize: 14, color: 'var(--brand-text-muted)' }}>
               support@elevateforhumanity.org
             </p>
           </a>
@@ -270,10 +299,10 @@ export default function Support() {
           {/* Category Filter */}
           <div
             style={{
-              display: "flex",
+              display: 'flex',
               gap: 12,
               marginBottom: 24,
-              flexWrap: "wrap",
+              flexWrap: 'wrap',
             }}
           >
             {categories.map((category) => (
@@ -281,15 +310,18 @@ export default function Support() {
                 key={category}
                 onClick={() => setSelectedCategory(category)}
                 style={{
-                  padding: "8px 16px",
-                  backgroundColor: selectedCategory === category ? "var(--brand-info)" : "#fff",
-                  color: selectedCategory === category ? "#fff" : "#333",
-                  border: "1px solid var(--brand-border)",
+                  padding: '8px 16px',
+                  backgroundColor:
+                    selectedCategory === category
+                      ? 'var(--brand-info)'
+                      : '#fff',
+                  color: selectedCategory === category ? '#fff' : '#333',
+                  border: '1px solid var(--brand-border)',
                   borderRadius: 20,
                   fontSize: 14,
                   fontWeight: 500,
-                  cursor: "pointer",
-                  transition: "all 0.2s",
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
                 }}
               >
                 {category}
@@ -298,13 +330,13 @@ export default function Support() {
           </div>
 
           {/* FAQ List */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {filteredFaqs.map((faq) => (
               <details
                 key={faq.id}
                 style={{
-                  backgroundColor: "#fff",
-                  border: "1px solid var(--brand-border)",
+                  backgroundColor: '#fff',
+                  border: '1px solid var(--brand-border)',
                   borderRadius: 8,
                   padding: 20,
                 }}
@@ -313,23 +345,25 @@ export default function Support() {
                   style={{
                     fontSize: 16,
                     fontWeight: 600,
-                    cursor: "pointer",
-                    listStyle: "none",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
+                    cursor: 'pointer',
+                    listStyle: 'none',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
                   }}
                 >
                   {faq.question}
-                  <span style={{ fontSize: 20, color: "var(--brand-info)" }}>+</span>
+                  <span style={{ fontSize: 20, color: 'var(--brand-info)' }}>
+                    +
+                  </span>
                 </summary>
                 <div
                   style={{
                     marginTop: 16,
                     paddingTop: 16,
-                    borderTop: "1px solid #f0f0f0",
+                    borderTop: '1px solid #f0f0f0',
                     fontSize: 14,
-                    color: "var(--brand-text-muted)",
+                    color: 'var(--brand-text-muted)',
                     lineHeight: 1.6,
                   }}
                 >
@@ -342,13 +376,13 @@ export default function Support() {
           {filteredFaqs.length === 0 && (
             <div
               style={{
-                textAlign: "center",
+                textAlign: 'center',
                 padding: 48,
-                backgroundColor: "#f8f8f8",
+                backgroundColor: '#f8f8f8',
                 borderRadius: 8,
               }}
             >
-              <p style={{ fontSize: 16, color: "var(--brand-text-muted)" }}>
+              <p style={{ fontSize: 16, color: 'var(--brand-text-muted)' }}>
                 No results found. Try a different search term or category.
               </p>
             </div>
@@ -358,8 +392,8 @@ export default function Support() {
         {/* Contact Form */}
         <div
           style={{
-            backgroundColor: "#fff",
-            border: "1px solid var(--brand-border)",
+            backgroundColor: '#fff',
+            border: '1px solid var(--brand-border)',
             borderRadius: 8,
             padding: 32,
           }}
@@ -367,7 +401,13 @@ export default function Support() {
           <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>
             Still need help?
           </h2>
-          <p style={{ fontSize: 14, color: "var(--brand-text-muted)", marginBottom: 24 }}>
+          <p
+            style={{
+              fontSize: 14,
+              color: 'var(--brand-text-muted)',
+              marginBottom: 24,
+            }}
+          >
             Send us a message and we'll get back to you within 24 hours.
           </p>
 
@@ -375,11 +415,11 @@ export default function Support() {
             <div
               style={{
                 padding: 16,
-                backgroundColor: "#d4edda",
-                color: "#155724",
+                backgroundColor: '#d4edda',
+                color: '#155724',
                 borderRadius: 8,
                 marginBottom: 24,
-                border: "1px solid #c3e6cb",
+                border: '1px solid #c3e6cb',
               }}
             >
               ✅ Message sent successfully! We'll respond within 24 hours.
@@ -389,8 +429,8 @@ export default function Support() {
           <form onSubmit={handleContactSubmit}>
             <div
               style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
                 gap: 16,
                 marginBottom: 16,
               }}
@@ -398,7 +438,7 @@ export default function Support() {
               <div>
                 <label
                   style={{
-                    display: "block",
+                    display: 'block',
                     marginBottom: 8,
                     fontWeight: 500,
                     fontSize: 14,
@@ -413,9 +453,9 @@ export default function Support() {
                   onChange={handleContactChange}
                   required
                   style={{
-                    width: "100%",
-                    padding: "10px 12px",
-                    border: "1px solid var(--brand-border)",
+                    width: '100%',
+                    padding: '10px 12px',
+                    border: '1px solid var(--brand-border)',
                     borderRadius: 6,
                     fontSize: 14,
                   }}
@@ -425,7 +465,7 @@ export default function Support() {
               <div>
                 <label
                   style={{
-                    display: "block",
+                    display: 'block',
                     marginBottom: 8,
                     fontWeight: 500,
                     fontSize: 14,
@@ -440,9 +480,9 @@ export default function Support() {
                   onChange={handleContactChange}
                   required
                   style={{
-                    width: "100%",
-                    padding: "10px 12px",
-                    border: "1px solid var(--brand-border)",
+                    width: '100%',
+                    padding: '10px 12px',
+                    border: '1px solid var(--brand-border)',
                     borderRadius: 6,
                     fontSize: 14,
                   }}
@@ -453,7 +493,7 @@ export default function Support() {
             <div style={{ marginBottom: 16 }}>
               <label
                 style={{
-                  display: "block",
+                  display: 'block',
                   marginBottom: 8,
                   fontWeight: 500,
                   fontSize: 14,
@@ -468,9 +508,9 @@ export default function Support() {
                 onChange={handleContactChange}
                 required
                 style={{
-                  width: "100%",
-                  padding: "10px 12px",
-                  border: "1px solid var(--brand-border)",
+                  width: '100%',
+                  padding: '10px 12px',
+                  border: '1px solid var(--brand-border)',
                   borderRadius: 6,
                   fontSize: 14,
                 }}
@@ -480,7 +520,7 @@ export default function Support() {
             <div style={{ marginBottom: 20 }}>
               <label
                 style={{
-                  display: "block",
+                  display: 'block',
                   marginBottom: 8,
                   fontWeight: 500,
                   fontSize: 14,
@@ -495,13 +535,13 @@ export default function Support() {
                 required
                 rows={6}
                 style={{
-                  width: "100%",
-                  padding: "10px 12px",
-                  border: "1px solid var(--brand-border)",
+                  width: '100%',
+                  padding: '10px 12px',
+                  border: '1px solid var(--brand-border)',
                   borderRadius: 6,
                   fontSize: 14,
-                  fontFamily: "inherit",
-                  resize: "vertical",
+                  fontFamily: 'inherit',
+                  resize: 'vertical',
                 }}
               />
             </div>
@@ -509,14 +549,14 @@ export default function Support() {
             <button
               type="submit"
               style={{
-                padding: "12px 32px",
-                backgroundColor: "var(--brand-info)",
-                color: "#fff",
-                border: "none",
+                padding: '12px 32px',
+                backgroundColor: 'var(--brand-info)',
+                color: '#fff',
+                border: 'none',
                 borderRadius: 6,
                 fontSize: 16,
                 fontWeight: 600,
-                cursor: "pointer",
+                cursor: 'pointer',
               }}
             >
               Send Message
@@ -529,18 +569,24 @@ export default function Support() {
           style={{
             marginTop: 48,
             padding: 24,
-            backgroundColor: "#f8f8f8",
+            backgroundColor: '#f8f8f8',
             borderRadius: 8,
-            textAlign: "center",
+            textAlign: 'center',
           }}
         >
           <h3 style={{ fontSize: 20, fontWeight: 600, marginBottom: 12 }}>
             Support Hours
           </h3>
-          <p style={{ fontSize: 14, color: "var(--brand-text-muted)", marginBottom: 8 }}>
+          <p
+            style={{
+              fontSize: 14,
+              color: 'var(--brand-text-muted)',
+              marginBottom: 8,
+            }}
+          >
             Monday - Friday: 9:00 AM - 6:00 PM EST
           </p>
-          <p style={{ fontSize: 14, color: "var(--brand-text-muted)" }}>
+          <p style={{ fontSize: 14, color: 'var(--brand-text-muted)' }}>
             Saturday - Sunday: 10:00 AM - 4:00 PM EST
           </p>
         </div>

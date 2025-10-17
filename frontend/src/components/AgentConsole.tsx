@@ -31,15 +31,24 @@ interface AgentConsoleProps {
   userRoles?: string[];
 }
 
-export default function AgentConsole({ jwt, commands, userRoles = ['admin'] }: AgentConsoleProps) {
+export default function AgentConsole({
+  jwt,
+  commands,
+  userRoles = ['admin'],
+}: AgentConsoleProps) {
   const [mode, setMode] = useState<'natural' | 'structured'>('natural');
   const [prompt, setPrompt] = useState('');
   const [selected, setSelected] = useState<string>(commands[0]?.name || '');
-  const selectedCmd = useMemo(() => commands.find(c => c.name === selected), [commands, selected]);
+  const selectedCmd = useMemo(
+    () => commands.find((c) => c.name === selected),
+    [commands, selected]
+  );
   const [params, setParams] = useState<Record<string, any>>({});
   const [output, setOutput] = useState<AgentResponse | null>(null);
   const [loading, setLoading] = useState(false);
-  const [history, setHistory] = useState<Array<{ prompt: string; response: AgentResponse }>>([]);
+  const [history, setHistory] = useState<
+    Array<{ prompt: string; response: AgentResponse }>
+  >([]);
 
   useEffect(() => {
     setParams({});
@@ -56,7 +65,7 @@ export default function AgentConsole({ jwt, commands, userRoles = ['admin'] }: A
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${jwt}`,
+          Authorization: `Bearer ${jwt}`,
           'x-user-roles': userRoles.join(','),
         },
         body: JSON.stringify({ prompt }),
@@ -64,7 +73,7 @@ export default function AgentConsole({ jwt, commands, userRoles = ['admin'] }: A
 
       const data: AgentResponse = await res.json();
       setOutput(data);
-      setHistory(prev => [...prev, { prompt, response: data }]);
+      setHistory((prev) => [...prev, { prompt, response: data }]);
 
       if (data.success) {
         setPrompt('');
@@ -90,7 +99,7 @@ export default function AgentConsole({ jwt, commands, userRoles = ['admin'] }: A
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${jwt}`,
+          Authorization: `Bearer ${jwt}`,
           'x-user-roles': userRoles.join(','),
         },
         body: JSON.stringify({ prompt: structuredPrompt }),
@@ -98,7 +107,10 @@ export default function AgentConsole({ jwt, commands, userRoles = ['admin'] }: A
 
       const data: AgentResponse = await res.json();
       setOutput(data);
-      setHistory(prev => [...prev, { prompt: structuredPrompt, response: data }]);
+      setHistory((prev) => [
+        ...prev,
+        { prompt: structuredPrompt, response: data },
+      ]);
     } catch (error) {
       setOutput({
         success: false,
@@ -180,13 +192,15 @@ export default function AgentConsole({ jwt, commands, userRoles = ['admin'] }: A
           ) : (
             <div className="space-y-4">
               <label className="block">
-                <span className="text-sm text-neutral-400 font-medium">Command</span>
+                <span className="text-sm text-neutral-400 font-medium">
+                  Command
+                </span>
                 <select
                   value={selected}
                   onChange={(e) => setSelected(e.target.value)}
                   className="mt-2 w-full bg-neutral-900 p-3 rounded-lg border border-neutral-700 focus:border-emerald-500 focus:outline-none"
                 >
-                  {commands.map(c => (
+                  {commands.map((c) => (
                     <option key={c.name} value={c.name}>
                       {c.name} — {c.description}
                     </option>
@@ -196,37 +210,51 @@ export default function AgentConsole({ jwt, commands, userRoles = ['admin'] }: A
 
               {selectedCmd?.paramsSchema?.properties && (
                 <div className="grid gap-3">
-                  {Object.entries(selectedCmd.paramsSchema.properties).map(([key, schema]) => (
-                    <label key={key} className="block">
-                      <span className="text-sm text-neutral-400">
-                        {key}
-                        {selectedCmd.paramsSchema.required?.includes(key) && (
-                          <span className="text-red-400 ml-1">*</span>
+                  {Object.entries(selectedCmd.paramsSchema.properties).map(
+                    ([key, schema]) => (
+                      <label key={key} className="block">
+                        <span className="text-sm text-neutral-400">
+                          {key}
+                          {selectedCmd.paramsSchema.required?.includes(key) && (
+                            <span className="text-red-400 ml-1">*</span>
+                          )}
+                        </span>
+                        {schema.enum ? (
+                          <select
+                            className="mt-1 w-full bg-neutral-900 p-2 rounded-lg border border-neutral-700"
+                            onChange={(e) =>
+                              setParams((p) => ({
+                                ...p,
+                                [key]: e.target.value,
+                              }))
+                            }
+                          >
+                            <option value="">Select...</option>
+                            {schema.enum.map((opt) => (
+                              <option key={opt} value={opt}>
+                                {opt}
+                              </option>
+                            ))}
+                          </select>
+                        ) : (
+                          <input
+                            type={schema.type === 'number' ? 'number' : 'text'}
+                            className="mt-1 w-full bg-neutral-900 p-2 rounded-lg border border-neutral-700 focus:border-emerald-500 focus:outline-none"
+                            onChange={(e) =>
+                              setParams((p) => ({
+                                ...p,
+                                [key]:
+                                  schema.type === 'number'
+                                    ? Number(e.target.value)
+                                    : e.target.value,
+                              }))
+                            }
+                            placeholder={schema.type}
+                          />
                         )}
-                      </span>
-                      {schema.enum ? (
-                        <select
-                          className="mt-1 w-full bg-neutral-900 p-2 rounded-lg border border-neutral-700"
-                          onChange={(e) => setParams(p => ({ ...p, [key]: e.target.value }))}
-                        >
-                          <option value="">Select...</option>
-                          {schema.enum.map(opt => (
-                            <option key={opt} value={opt}>{opt}</option>
-                          ))}
-                        </select>
-                      ) : (
-                        <input
-                          type={schema.type === 'number' ? 'number' : 'text'}
-                          className="mt-1 w-full bg-neutral-900 p-2 rounded-lg border border-neutral-700 focus:border-emerald-500 focus:outline-none"
-                          onChange={(e) => setParams(p => ({
-                            ...p,
-                            [key]: schema.type === 'number' ? Number(e.target.value) : e.target.value
-                          }))}
-                          placeholder={schema.type}
-                        />
-                      )}
-                    </label>
-                  ))}
+                      </label>
+                    )
+                  )}
                 </div>
               )}
 
@@ -244,7 +272,9 @@ export default function AgentConsole({ jwt, commands, userRoles = ['admin'] }: A
         {/* Output Area */}
         {output && (
           <div className="border-t border-neutral-800 p-6">
-            <div className="text-sm font-medium text-neutral-400 mb-2">Output:</div>
+            <div className="text-sm font-medium text-neutral-400 mb-2">
+              Output:
+            </div>
             <div
               className={`p-4 rounded-xl font-mono text-sm ${
                 output.success
@@ -255,7 +285,9 @@ export default function AgentConsole({ jwt, commands, userRoles = ['admin'] }: A
               {output.success ? (
                 <>
                   <div className="font-semibold mb-2">✅ {output.action}</div>
-                  <div className="whitespace-pre-wrap">{output.result?.message}</div>
+                  <div className="whitespace-pre-wrap">
+                    {output.result?.message}
+                  </div>
                   {output.result?.data && (
                     <details className="mt-3">
                       <summary className="cursor-pointer text-neutral-400 hover:text-white">
@@ -285,14 +317,29 @@ export default function AgentConsole({ jwt, commands, userRoles = ['admin'] }: A
                 Command History ({history.length})
               </summary>
               <div className="mt-4 space-y-3 max-h-64 overflow-auto">
-                {history.slice().reverse().map((item, i) => (
-                  <div key={i} className="p-3 rounded-lg bg-neutral-900 text-xs">
-                    <div className="text-neutral-400 mb-1">→ {item.prompt}</div>
-                    <div className={item.response.success ? 'text-emerald-400' : 'text-red-400'}>
-                      {item.response.success ? '✅' : '❌'} {item.response.result?.message || item.response.error}
+                {history
+                  .slice()
+                  .reverse()
+                  .map((item, i) => (
+                    <div
+                      key={i}
+                      className="p-3 rounded-lg bg-neutral-900 text-xs"
+                    >
+                      <div className="text-neutral-400 mb-1">
+                        → {item.prompt}
+                      </div>
+                      <div
+                        className={
+                          item.response.success
+                            ? 'text-emerald-400'
+                            : 'text-red-400'
+                        }
+                      >
+                        {item.response.success ? '✅' : '❌'}{' '}
+                        {item.response.result?.message || item.response.error}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             </details>
           </div>

@@ -75,7 +75,7 @@ const CertificatePage = () => {
       <div className="max-w-4xl mx-auto px-4">
         {/* Actions */}
         <div className="flex justify-between items-center mb-8">
-          <button 
+          <button
             onClick={() => navigate('/dashboard')}
             className="text-primary-600 hover:text-primary-700 font-medium"
           >
@@ -99,7 +99,7 @@ const CertificatePage = () => {
             <h1 className="text-4xl font-bold text-gray-900">
               Certificate of Completion
             </h1>
-            
+
             {/* Divider */}
             <div className="w-32 h-1 bg-primary-600 mx-auto"></div>
 
@@ -109,7 +109,9 @@ const CertificatePage = () => {
               <p className="text-3xl font-bold text-gray-900">
                 {certificate.user.name}
               </p>
-              <p className="text-lg text-gray-600">has successfully completed</p>
+              <p className="text-lg text-gray-600">
+                has successfully completed
+              </p>
               <p className="text-2xl font-semibold text-primary-600">
                 {certificate.course.title}
               </p>
@@ -124,16 +126,21 @@ const CertificatePage = () => {
                 <div className="text-left">
                   <p className="text-sm text-gray-600">Date of Completion</p>
                   <p className="font-semibold">
-                    {new Date(certificate.issuedAt).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
+                    {new Date(certificate.issuedAt).toLocaleDateString(
+                      'en-US',
+                      {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      }
+                    )}
                   </p>
                 </div>
                 <div className="text-right">
                   <p className="text-sm text-gray-600">Certificate ID</p>
-                  <p className="font-mono text-xs">{certificate.certificateId}</p>
+                  <p className="font-mono text-xs">
+                    {certificate.certificateId}
+                  </p>
                 </div>
               </div>
             </div>

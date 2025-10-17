@@ -34,7 +34,10 @@ const LoginPage = () => {
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Or{' '}
-            <Link to="/register" className="font-medium text-primary-600 hover:text-primary-500">
+            <Link
+              to="/register"
+              className="font-medium text-primary-600 hover:text-primary-500"
+            >
               create a new account
             </Link>
           </p>
@@ -82,7 +85,10 @@ const LoginPage = () => {
 
           <div className="flex items-center justify-between">
             <div className="text-sm">
-              <Link to="/forgot-password" className="font-medium text-primary-600 hover:text-primary-500">
+              <Link
+                to="/forgot-password"
+                className="font-medium text-primary-600 hover:text-primary-500"
+              >
                 Forgot your password?
               </Link>
             </div>

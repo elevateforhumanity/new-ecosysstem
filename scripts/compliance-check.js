@@ -8,9 +8,15 @@
 console.log('🔍 Running compliance checks...\n');
 
 const checks = [
-  { name: 'Package.json exists', check: () => require('fs').existsSync('./package.json') },
+  {
+    name: 'Package.json exists',
+    check: () => require('fs').existsSync('./package.json'),
+  },
   { name: 'Build directory configured', check: () => true },
-  { name: 'Environment variables documented', check: () => require('fs').existsSync('./.env.example') },
+  {
+    name: 'Environment variables documented',
+    check: () => require('fs').existsSync('./.env.example'),
+  },
   { name: 'Security headers configured', check: () => true },
 ];
 

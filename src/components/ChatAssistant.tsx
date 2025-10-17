@@ -5,7 +5,17 @@
 */
 
 import { useState, useEffect, useRef } from 'react';
-import { MessageCircle, X, Send, Minimize2, Maximize2, HelpCircle, Book, Users, Calendar } from 'lucide-react';
+import {
+  MessageCircle,
+  X,
+  Send,
+  Minimize2,
+  Maximize2,
+  HelpCircle,
+  Book,
+  Users,
+  Calendar,
+} from 'lucide-react';
 
 interface Message {
   id: string;
@@ -19,7 +29,10 @@ interface ChatAssistantProps {
   userRole?: 'student' | 'instructor' | 'admin' | 'guest';
 }
 
-export default function ChatAssistant({ pageContext = 'general', userRole = 'guest' }: ChatAssistantProps) {
+export default function ChatAssistant({
+  pageContext = 'general',
+  userRole = 'guest',
+}: ChatAssistantProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -41,7 +54,7 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
         id: 'welcome',
         role: 'assistant',
         content: getWelcomeMessage(),
-        timestamp: new Date()
+        timestamp: new Date(),
       };
       setMessages([welcomeMessage]);
     }
@@ -49,11 +62,16 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
 
   const getWelcomeMessage = () => {
     const contextMessages: Record<string, string> = {
-      courses: "👋 Hi! I'm here to help you with courses. Ask me about enrolling, course content, or finding the right program for you!",
-      dashboard: "👋 Welcome! I can help you navigate your dashboard, track your progress, or answer questions about your learning journey.",
-      profile: "👋 Hi! Need help updating your profile, managing settings, or understanding your achievements? I'm here to assist!",
-      admin: "👋 Hello! I can help with administrative tasks, reporting, user management, and system configuration.",
-      general: "👋 Hi! I'm your AI assistant. I can help you navigate the platform, answer questions, and guide you to the right resources. How can I help you today?"
+      courses:
+        "👋 Hi! I'm here to help you with courses. Ask me about enrolling, course content, or finding the right program for you!",
+      dashboard:
+        '👋 Welcome! I can help you navigate your dashboard, track your progress, or answer questions about your learning journey.',
+      profile:
+        "👋 Hi! Need help updating your profile, managing settings, or understanding your achievements? I'm here to assist!",
+      admin:
+        '👋 Hello! I can help with administrative tasks, reporting, user management, and system configuration.',
+      general:
+        "👋 Hi! I'm your AI assistant. I can help you navigate the platform, answer questions, and guide you to the right resources. How can I help you today?",
     };
     return contextMessages[pageContext] || contextMessages.general;
   };
@@ -61,35 +79,35 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
   const getQuickActions = () => {
     const actions: Record<string, string[]> = {
       courses: [
-        "Show me available courses",
-        "How do I enroll?",
-        "What certifications can I earn?",
-        "Tell me about financial aid"
+        'Show me available courses',
+        'How do I enroll?',
+        'What certifications can I earn?',
+        'Tell me about financial aid',
       ],
       dashboard: [
         "What's my progress?",
-        "Show upcoming deadlines",
-        "How do I access my courses?",
-        "View my certificates"
+        'Show upcoming deadlines',
+        'How do I access my courses?',
+        'View my certificates',
       ],
       profile: [
-        "How do I update my info?",
-        "Change my password",
-        "View my achievements",
-        "Download my transcript"
+        'How do I update my info?',
+        'Change my password',
+        'View my achievements',
+        'Download my transcript',
       ],
       admin: [
-        "Generate a report",
-        "View user analytics",
-        "Manage enrollments",
-        "System settings"
+        'Generate a report',
+        'View user analytics',
+        'Manage enrollments',
+        'System settings',
       ],
       general: [
-        "How do I get started?",
-        "What programs do you offer?",
-        "How much does it cost?",
-        "Contact support"
-      ]
+        'How do I get started?',
+        'What programs do you offer?',
+        'How much does it cost?',
+        'Contact support',
+      ],
     };
     return actions[pageContext] || actions.general;
   };
@@ -102,10 +120,10 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
       id: Date.now().toString(),
       role: 'user',
       content: textToSend,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setLoading(true);
 
@@ -119,9 +137,9 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
           context: {
             page: pageContext,
             userRole,
-            timestamp: new Date().toISOString()
-          }
-        })
+            timestamp: new Date().toISOString(),
+          },
+        }),
       });
 
       if (!response.ok) throw new Error('Failed to get response');
@@ -133,18 +151,19 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
         id: (Date.now() + 1).toString(),
         role: 'assistant',
         content: data.response,
-        timestamp: new Date()
+        timestamp: new Date(),
       };
 
-      setMessages(prev => [...prev, assistantMessage]);
+      setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: "I'm having trouble connecting right now. Please try again in a moment, or contact support if the issue persists.",
-        timestamp: new Date()
+        content:
+          "I'm having trouble connecting right now. Please try again in a moment, or contact support if the issue persists.",
+        timestamp: new Date(),
       };
-      setMessages(prev => [...prev, errorMessage]);
+      setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setLoading(false);
     }
@@ -178,15 +197,17 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
           alignItems: 'center',
           justifyContent: 'center',
           transition: 'all 0.3s ease',
-          zIndex: 1000
+          zIndex: 1000,
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.transform = 'scale(1.1)';
-          e.currentTarget.style.boxShadow = '0 6px 16px rgba(59, 130, 246, 0.5)';
+          e.currentTarget.style.boxShadow =
+            '0 6px 16px rgba(59, 130, 246, 0.5)';
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.transform = 'scale(1)';
-          e.currentTarget.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.4)';
+          e.currentTarget.style.boxShadow =
+            '0 4px 12px rgba(59, 130, 246, 0.4)';
         }}
         aria-label="Open chat assistant"
       >
@@ -211,7 +232,7 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
         flexDirection: 'column',
         zIndex: 1000,
         transition: 'all 0.3s ease',
-        overflow: 'hidden'
+        overflow: 'hidden',
       }}
     >
       {/* Header */}
@@ -224,14 +245,18 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
           alignItems: 'center',
           justifyContent: 'space-between',
           borderTopLeftRadius: '16px',
-          borderTopRightRadius: '16px'
+          borderTopRightRadius: '16px',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <MessageCircle size={24} />
           <div>
-            <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '600' }}>AI Assistant</h3>
-            <p style={{ margin: 0, fontSize: '12px', opacity: 0.9 }}>Always here to help</p>
+            <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '600' }}>
+              AI Assistant
+            </h3>
+            <p style={{ margin: 0, fontSize: '12px', opacity: 0.9 }}>
+              Always here to help
+            </p>
           </div>
         </div>
         <div style={{ display: 'flex', gap: '8px' }}>
@@ -244,7 +269,7 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
               cursor: 'pointer',
               padding: '4px',
               display: 'flex',
-              alignItems: 'center'
+              alignItems: 'center',
             }}
             aria-label={isMinimized ? 'Maximize' : 'Minimize'}
           >
@@ -259,7 +284,7 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
               cursor: 'pointer',
               padding: '4px',
               display: 'flex',
-              alignItems: 'center'
+              alignItems: 'center',
             }}
             aria-label="Close chat"
           >
@@ -276,7 +301,7 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
               flex: 1,
               overflowY: 'auto',
               padding: '16px',
-              backgroundColor: 'var(--brand-surface)'
+              backgroundColor: 'var(--brand-surface)',
             }}
           >
             {messages.map((message) => (
@@ -285,7 +310,8 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
                 style={{
                   marginBottom: '16px',
                   display: 'flex',
-                  justifyContent: message.role === 'user' ? 'flex-end' : 'flex-start'
+                  justifyContent:
+                    message.role === 'user' ? 'flex-end' : 'flex-start',
                 }}
               >
                 <div
@@ -293,11 +319,13 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
                     maxWidth: '80%',
                     padding: '12px 16px',
                     borderRadius: '12px',
-                    backgroundColor: message.role === 'user' ? 'var(--brand-info)' : 'white',
-                    color: message.role === 'user' ? 'white' : 'var(--brand-text)',
+                    backgroundColor:
+                      message.role === 'user' ? 'var(--brand-info)' : 'white',
+                    color:
+                      message.role === 'user' ? 'white' : 'var(--brand-text)',
                     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
                     fontSize: '14px',
-                    lineHeight: '1.5'
+                    lineHeight: '1.5',
                   }}
                 >
                   {message.content}
@@ -305,19 +333,52 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
               </div>
             ))}
             {loading && (
-              <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '16px' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  marginBottom: '16px',
+                }}
+              >
                 <div
                   style={{
                     padding: '12px 16px',
                     borderRadius: '12px',
                     backgroundColor: 'white',
-                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
                   }}
                 >
                   <div style={{ display: 'flex', gap: '4px' }}>
-                    <div className="typing-dot" style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--brand-text-light)', animation: 'typing 1.4s infinite' }}></div>
-                    <div className="typing-dot" style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--brand-text-light)', animation: 'typing 1.4s infinite 0.2s' }}></div>
-                    <div className="typing-dot" style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--brand-text-light)', animation: 'typing 1.4s infinite 0.4s' }}></div>
+                    <div
+                      className="typing-dot"
+                      style={{
+                        width: '8px',
+                        height: '8px',
+                        borderRadius: '50%',
+                        backgroundColor: 'var(--brand-text-light)',
+                        animation: 'typing 1.4s infinite',
+                      }}
+                    ></div>
+                    <div
+                      className="typing-dot"
+                      style={{
+                        width: '8px',
+                        height: '8px',
+                        borderRadius: '50%',
+                        backgroundColor: 'var(--brand-text-light)',
+                        animation: 'typing 1.4s infinite 0.2s',
+                      }}
+                    ></div>
+                    <div
+                      className="typing-dot"
+                      style={{
+                        width: '8px',
+                        height: '8px',
+                        borderRadius: '50%',
+                        backgroundColor: 'var(--brand-text-light)',
+                        animation: 'typing 1.4s infinite 0.4s',
+                      }}
+                    ></div>
                   </div>
                 </div>
               </div>
@@ -327,8 +388,23 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
 
           {/* Quick Actions */}
           {messages.length === 1 && (
-            <div style={{ padding: '12px 16px', backgroundColor: 'white', borderTop: '1px solid var(--brand-border)' }}>
-              <p style={{ margin: '0 0 8px 0', fontSize: '12px', color: 'var(--brand-text-muted)', fontWeight: '500' }}>Quick actions:</p>
+            <div
+              style={{
+                padding: '12px 16px',
+                backgroundColor: 'white',
+                borderTop: '1px solid var(--brand-border)',
+              }}
+            >
+              <p
+                style={{
+                  margin: '0 0 8px 0',
+                  fontSize: '12px',
+                  color: 'var(--brand-text-muted)',
+                  fontWeight: '500',
+                }}
+              >
+                Quick actions:
+              </p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                 {getQuickActions().map((action, index) => (
                   <button
@@ -342,10 +418,11 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
                       borderRadius: '16px',
                       cursor: 'pointer',
                       transition: 'all 0.2s',
-                      color: 'var(--brand-text)'
+                      color: 'var(--brand-text)',
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'var(--brand-border)';
+                      e.currentTarget.style.backgroundColor =
+                        'var(--brand-border)';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.backgroundColor = '#f3f4f6';
@@ -359,7 +436,13 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
           )}
 
           {/* Input */}
-          <div style={{ padding: '16px', backgroundColor: 'white', borderTop: '1px solid var(--brand-border)' }}>
+          <div
+            style={{
+              padding: '16px',
+              backgroundColor: 'white',
+              borderTop: '1px solid var(--brand-border)',
+            }}
+          >
             <div style={{ display: 'flex', gap: '8px' }}>
               <input
                 type="text"
@@ -375,7 +458,7 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
                   borderRadius: '8px',
                   fontSize: '14px',
                   outline: 'none',
-                  transition: 'border-color 0.2s'
+                  transition: 'border-color 0.2s',
                 }}
                 onFocus={(e) => {
                   e.currentTarget.style.borderColor = 'var(--brand-info)';
@@ -389,15 +472,21 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
                 disabled={!input.trim() || loading}
                 style={{
                   padding: '12px 16px',
-                  backgroundColor: input.trim() && !loading ? 'var(--brand-info)' : 'var(--brand-border)',
-                  color: input.trim() && !loading ? 'white' : 'var(--brand-text-light)',
+                  backgroundColor:
+                    input.trim() && !loading
+                      ? 'var(--brand-info)'
+                      : 'var(--brand-border)',
+                  color:
+                    input.trim() && !loading
+                      ? 'white'
+                      : 'var(--brand-text-light)',
                   border: 'none',
                   borderRadius: '8px',
                   cursor: input.trim() && !loading ? 'pointer' : 'not-allowed',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  transition: 'all 0.2s'
+                  transition: 'all 0.2s',
                 }}
                 aria-label="Send message"
               >

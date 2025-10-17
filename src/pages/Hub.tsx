@@ -1,53 +1,89 @@
-import { Building, Users, GraduationCap, FileCheck, CreditCard } from "lucide-react";
-import { Link } from "react-router-dom";
+import {
+  Building,
+  Users,
+  GraduationCap,
+  FileCheck,
+  CreditCard,
+} from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Hub() {
   const sisterSites = [
     {
-      name: "Programs",
-      path: "/programs",
+      name: 'Programs',
+      path: '/programs',
       icon: Building,
-      description: "Explore Elevate Learn2Earn Workforce programs",
-      features: ["WIO Programs", "WEX Training", "WRG Certifications", "OJT Placements", "ETPL Courses"],
-      color: "bg-blue-500",
-      stats: "50+ Programs"
+      description: 'Explore Elevate Learn2Earn Workforce programs',
+      features: [
+        'WIO Programs',
+        'WEX Training',
+        'WRG Certifications',
+        'OJT Placements',
+        'ETPL Courses',
+      ],
+      color: 'bg-blue-500',
+      stats: '50+ Programs',
     },
     {
-      name: "LMS",
-      path: "/lms",
+      name: 'LMS',
+      path: '/lms',
       icon: GraduationCap,
-      description: "Access learning management system",
-      features: ["Course Content", "Progress Tracking", "Assessments", "Certifications", "Digital Binders"],
-      color: "bg-green-500",
-      stats: "1,000+ Hours"
+      description: 'Access learning management system',
+      features: [
+        'Course Content',
+        'Progress Tracking',
+        'Assessments',
+        'Certifications',
+        'Digital Binders',
+      ],
+      color: 'bg-green-500',
+      stats: '1,000+ Hours',
     },
     {
-      name: "Connect",
-      path: "/connect",
+      name: 'Connect',
+      path: '/connect',
       icon: Users,
-      description: "Community and networking platform",
-      features: ["Job Board", "Events", "Mentorship", "Alumni Network", "Forums"],
-      color: "bg-purple-500",
-      stats: "5,000+ Members"
+      description: 'Community and networking platform',
+      features: [
+        'Job Board',
+        'Events',
+        'Mentorship',
+        'Alumni Network',
+        'Forums',
+      ],
+      color: 'bg-purple-500',
+      stats: '5,000+ Members',
     },
     {
-      name: "Compliance",
-      path: "/compliance",
+      name: 'Compliance',
+      path: '/compliance',
       icon: FileCheck,
-      description: "Federal DOL/DWD compliance management",
-      features: ["IEP Management", "PIRL Reporting", "Eligibility Verification", "Audit Trails", "Cost Tracking"],
-      color: "bg-orange-500",
-      stats: "100% Compliant"
+      description: 'Federal DOL/DWD compliance management',
+      features: [
+        'IEP Management',
+        'PIRL Reporting',
+        'Eligibility Verification',
+        'Audit Trails',
+        'Cost Tracking',
+      ],
+      color: 'bg-orange-500',
+      stats: '100% Compliant',
     },
     {
-      name: "Pay",
-      path: "/pay",
+      name: 'Pay',
+      path: '/pay',
       icon: CreditCard,
-      description: "Payment processing and funding",
-      features: ["Program Payments", "50/50 Revenue Split", "Funding Management", "Stripe Integration", "Coupons"],
-      color: "bg-red-500",
-      stats: "$2M+ Processed"
-    }
+      description: 'Payment processing and funding',
+      features: [
+        'Program Payments',
+        '50/50 Revenue Split',
+        'Funding Management',
+        'Stripe Integration',
+        'Coupons',
+      ],
+      color: 'bg-red-500',
+      stats: '$2M+ Processed',
+    },
   ];
 
   return (
@@ -61,14 +97,21 @@ export default function Hub() {
               <span className="text-brand-info block">Ecosystem</span>
             </h1>
             <p className="text-xl text-brand-text-muted mb-8 max-w-3xl mx-auto">
-              Complete federal compliance platform enabling access to multi-million dollar 
-              Elevate Learn2Earn Workforce contracts across all 50 states and territories.
+              Complete federal compliance platform enabling access to
+              multi-million dollar Elevate Learn2Earn Workforce contracts across
+              all 50 states and territories.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="/compliance" className="bg-brand-info text-white px-8 py-3 rounded-lg hover:bg-brand-info-hover transition-colors">
+              <Link
+                href="/compliance"
+                className="bg-brand-info text-white px-8 py-3 rounded-lg hover:bg-brand-info-hover transition-colors"
+              >
                 Federal Compliance Portal
               </Link>
-              <Link href="/programs" className="bg-white text-brand-info border-2 border-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors">
+              <Link
+                href="/programs"
+                className="bg-white text-brand-info border-2 border-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors"
+              >
                 Explore Programs
               </Link>
             </div>
@@ -107,7 +150,8 @@ export default function Hub() {
             Multi-Site Ecosystem
           </h2>
           <p className="text-xl text-brand-text-muted">
-            Seamlessly integrated platforms working together for comprehensive Elevate Learn2Earn Workforce
+            Seamlessly integrated platforms working together for comprehensive
+            Elevate Learn2Earn Workforce
           </p>
         </div>
 
@@ -116,20 +160,29 @@ export default function Hub() {
             <Link key={site.name} href={site.path}>
               <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 p-6">
                 <div className="flex items-center mb-4">
-                  <div className={`${site.color} text-white p-3 rounded-lg mr-4`}>
+                  <div
+                    className={`${site.color} text-white p-3 rounded-lg mr-4`}
+                  >
                     <site.icon className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-brand-text">{site.name}</h3>
-                    <p className="text-brand-text-muted text-sm">{site.stats}</p>
+                    <h3 className="text-xl font-bold text-brand-text">
+                      {site.name}
+                    </h3>
+                    <p className="text-brand-text-muted text-sm">
+                      {site.stats}
+                    </p>
                   </div>
                 </div>
-                
+
                 <p className="text-brand-text-muted mb-4">{site.description}</p>
-                
+
                 <div className="space-y-2">
                   {site.features.map((feature, index) => (
-                    <div key={index} className="flex items-center text-sm text-brand-text-light">
+                    <div
+                      key={index}
+                      className="flex items-center text-sm text-brand-text-light"
+                    >
                       <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-2"></div>
                       {feature}
                     </div>
@@ -154,26 +207,32 @@ export default function Hub() {
                 🏛️ Federal DOL/DWD Compliance Ready
               </h3>
               <p className="text-brand-text mb-6">
-                Complete infrastructure for accessing multi-million dollar federal workforce 
-                development contracts with 100% DOL/DWD compliance including IEP management, 
-                PIRL reporting, eligibility verification, and comprehensive audit trails.
+                Complete infrastructure for accessing multi-million dollar
+                federal workforce development contracts with 100% DOL/DWD
+                compliance including IEP management, PIRL reporting, eligibility
+                verification, and comprehensive audit trails.
               </p>
-              <Link href="/compliance" className="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors inline-block">
+              <Link
+                href="/compliance"
+                className="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors inline-block"
+              >
                 Access Compliance Portal
               </Link>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h4 className="font-bold text-brand-text mb-4">Federal Requirements Met:</h4>
+              <h4 className="font-bold text-brand-text mb-4">
+                Federal Requirements Met:
+              </h4>
               <div className="space-y-2">
                 {[
-                  "Individual Employment Plans (IEP)",
-                  "PIRL Federal Reporting",
-                  "Eligibility Verification System",
-                  "Skills Assessment Tracking",
-                  "Employer Partnership Management",
-                  "Performance Outcome Tracking",
-                  "Comprehensive Audit Trails",
-                  "Federal Cost Tracking & Funding"
+                  'Individual Employment Plans (IEP)',
+                  'PIRL Federal Reporting',
+                  'Eligibility Verification System',
+                  'Skills Assessment Tracking',
+                  'Employer Partnership Management',
+                  'Performance Outcome Tracking',
+                  'Comprehensive Audit Trails',
+                  'Federal Cost Tracking & Funding',
                 ].map((item, index) => (
                   <div key={index} className="flex items-center">
                     <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
@@ -193,13 +252,20 @@ export default function Hub() {
             Ready to Transform Elevate Learn2Earn Workforce?
           </h3>
           <p className="text-xl text-gray-300 mb-8">
-            Access multi-million dollar federal contracts with our complete compliance platform
+            Access multi-million dollar federal contracts with our complete
+            compliance platform
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="/programs" className="bg-brand-info text-white px-8 py-3 rounded-lg hover:bg-brand-info-hover transition-colors">
+            <Link
+              href="/programs"
+              className="bg-brand-info text-white px-8 py-3 rounded-lg hover:bg-brand-info-hover transition-colors"
+            >
               Start with Programs
             </Link>
-            <Link href="/compliance" className="bg-white text-brand-text px-8 py-3 rounded-lg hover:bg-brand-surface-dark transition-colors">
+            <Link
+              href="/compliance"
+              className="bg-white text-brand-text px-8 py-3 rounded-lg hover:bg-brand-surface-dark transition-colors"
+            >
               Federal Compliance
             </Link>
           </div>

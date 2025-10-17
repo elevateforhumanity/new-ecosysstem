@@ -3,10 +3,14 @@ const fs = require('fs');
 
 const server = http.createServer((req, res) => {
   console.log('Request:', req.url);
-  
+
   res.setHeader('Access-Control-Allow-Origin', '*');
-  
-  if (req.url === '/' || req.url.startsWith('/?') || req.url === '/index.html') {
+
+  if (
+    req.url === '/' ||
+    req.url.startsWith('/?') ||
+    req.url === '/index.html'
+  ) {
     fs.readFile('index.html', (err, data) => {
       if (err) {
         res.writeHead(500);

@@ -20,7 +20,9 @@ if (!RENDER_API_KEY || !SERVICE_ID || !GITHUB_TOKEN) {
   if (!SERVICE_ID) console.error('   - RENDER_SERVICE_ID');
   if (!GITHUB_TOKEN) console.error('   - GITHUB_TOKEN');
   console.error('\n💡 Add these as GitHub Secrets:');
-  console.error('   Settings → Secrets and variables → Actions → New repository secret');
+  console.error(
+    '   Settings → Secrets and variables → Actions → New repository secret'
+  );
   process.exit(1);
 }
 
@@ -31,11 +33,11 @@ function rget(path) {
         hostname: RENDER_API,
         path,
         method: 'GET',
-        headers: { Authorization: `Bearer ${RENDER_API_KEY}` }
+        headers: { Authorization: `Bearer ${RENDER_API_KEY}` },
       },
-      res => {
+      (res) => {
         let data = '';
-        res.on('data', d => (data += d));
+        res.on('data', (d) => (data += d));
         res.on('end', () => {
           try {
             resolve(JSON.parse(data));
@@ -75,39 +77,63 @@ async function logsForService() {
 
 function guessFixesFrom(text) {
   const hints = [];
-  
-  if (/Missing required environment variables/i.test(text) || /SUPABASE_URL|JWT_SECRET/i.test(text)) {
-    hints.push('**Missing Environment Variables**: Add required env vars in Render → Settings → Environment (e.g., SUPABASE_URL, SUPABASE_SERVICE_KEY, JWT_SECRET, PORT).');
+
+  if (
+    /Missing required environment variables/i.test(text) ||
+    /SUPABASE_URL|JWT_SECRET/i.test(text)
+  ) {
+    hints.push(
+      '**Missing Environment Variables**: Add required env vars in Render → Settings → Environment (e.g., SUPABASE_URL, SUPABASE_SERVICE_KEY, JWT_SECRET, PORT).'
+    );
   }
-  
-  if (/Cannot find module .*dist\/index\.js/i.test(text) || /MODULE_NOT_FOUND.*dist/i.test(text)) {
-    hints.push('**Backend Build Failed**: Ensure build command runs successfully. For TypeScript: `tsc -p tsconfig.json`. For JavaScript: verify server.js exists.');
+
+  if (
+    /Cannot find module .*dist\/index\.js/i.test(text) ||
+    /MODULE_NOT_FOUND.*dist/i.test(text)
+  ) {
+    hints.push(
+      '**Backend Build Failed**: Ensure build command runs successfully. For TypeScript: `tsc -p tsconfig.json`. For JavaScript: verify server.js exists.'
+    );
   }
-  
-  if (/only one run of the codeql\/analyze or codeql\/upload-sarif/i.test(text)) {
-    hints.push('**CodeQL Duplicate SARIF**: Remove duplicate upload-sarif step. The analyze step already uploads. Set unique `category: "typescript-${{ github.job }}-${{ github.run_id }}"`.');
+
+  if (
+    /only one run of the codeql\/analyze or codeql\/upload-sarif/i.test(text)
+  ) {
+    hints.push(
+      '**CodeQL Duplicate SARIF**: Remove duplicate upload-sarif step. The analyze step already uploads. Set unique `category: "typescript-${{ github.job }}-${{ github.run_id }}"`.'
+    );
   }
-  
+
   if (/ENOENT|no such file or directory.*dist/i.test(text)) {
-    hints.push('**Missing Build Output**: Check build command produces expected files. Verify tsconfig.json `outDir` or vite.config output paths.');
+    hints.push(
+      '**Missing Build Output**: Check build command produces expected files. Verify tsconfig.json `outDir` or vite.config output paths.'
+    );
   }
-  
+
   if (/EACCES|permission denied/i.test(text)) {
-    hints.push('**Permission Error**: Avoid privileged ports (use PORT env var). Ensure proper file permissions in build step.');
+    hints.push(
+      '**Permission Error**: Avoid privileged ports (use PORT env var). Ensure proper file permissions in build step.'
+    );
   }
-  
+
   if (/npm ERR!|pnpm ERR!/i.test(text)) {
-    hints.push('**Package Manager Error**: Check package.json scripts and dependencies. Try `pnpm install --frozen-lockfile=false` or `npm ci`.');
+    hints.push(
+      '**Package Manager Error**: Check package.json scripts and dependencies. Try `pnpm install --frozen-lockfile=false` or `npm ci`.'
+    );
   }
-  
+
   if (/compression|express/i.test(text) && /cannot find module/i.test(text)) {
-    hints.push('**Missing Dependencies**: Run `pnpm add compression` or verify all dependencies are in package.json.');
+    hints.push(
+      '**Missing Dependencies**: Run `pnpm add compression` or verify all dependencies are in package.json.'
+    );
   }
 
   if (hints.length === 0) {
-    hints.push('**Check Render Logs**: Open Render Dashboard → Service → Logs for detailed error messages.');
+    hints.push(
+      '**Check Render Logs**: Open Render Dashboard → Service → Logs for detailed error messages.'
+    );
   }
-  
+
   return hints;
 }
 
@@ -120,7 +146,7 @@ async function createIssue(title, body) {
   const payload = {
     title,
     body,
-    labels: ['autopilot', 'render', 'deploy-failure']
+    labels: ['autopilot', 'render', 'deploy-failure'],
   };
 
   try {
@@ -128,7 +154,7 @@ async function createIssue(title, body) {
       -H "Accept: application/vnd.github+json" \
       -X POST https://api.github.com/repos/${GITHUB_REPOSITORY}/issues \
       -d '${JSON.stringify(payload).replace(/'/g, "'\\''")}'`;
-    
+
     execSync(cmd, { stdio: 'inherit' });
     console.log('✅ GitHub Issue created');
   } catch (e) {
@@ -157,7 +183,7 @@ async function createIssue(title, body) {
     try {
       const j = await rget(`/v1/services/${SERVICE_ID}/deploys/${id}`);
       status = j.deploy?.status || 'unknown';
-      
+
       const elapsed = Math.floor((Date.now() - start) / 1000);
       console.log(`[${elapsed}s] Status: ${status}`);
 
@@ -167,7 +193,11 @@ async function createIssue(title, body) {
         return;
       }
 
-      if (['build_failed', 'update_failed', 'deactivated', 'canceled'].includes(status)) {
+      if (
+        ['build_failed', 'update_failed', 'deactivated', 'canceled'].includes(
+          status
+        )
+      ) {
         console.log(`\n❌ Deploy FAILED: ${status}`);
 
         // Gather logs and error info
@@ -175,9 +205,9 @@ async function createIssue(title, body) {
         const errorMsg = j.deploy?.error || '';
         const commitMsg = j.deploy?.commit?.message || '';
         const combined = `${commitMsg}\n${errorMsg}\n${logs}`;
-        
+
         const hints = guessFixesFrom(combined);
-        
+
         const body = `## 🚨 Render Deployment Failed
 
 **Deploy ID**: \`${id}\`  
@@ -186,7 +216,7 @@ async function createIssue(title, body) {
 
 ### 🔧 Suggested Fixes
 
-${hints.map(h => `- ${h}`).join('\n')}
+${hints.map((h) => `- ${h}`).join('\n')}
 
 ### 📋 Deploy Information
 
@@ -228,10 +258,10 @@ ${logs}
       }
 
       // Wait before next poll
-      await new Promise(r => setTimeout(r, 15000)); // 15 seconds
+      await new Promise((r) => setTimeout(r, 15000)); // 15 seconds
     } catch (e) {
       console.error('❌ Error polling Render API:', e.message);
-      await new Promise(r => setTimeout(r, 30000)); // Wait longer on error
+      await new Promise((r) => setTimeout(r, 30000)); // Wait longer on error
     }
   }
 })();

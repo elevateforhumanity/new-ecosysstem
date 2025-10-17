@@ -43,8 +43,12 @@ const StudentDashboard = () => {
       setCertificates(certificatesData);
 
       // Calculate stats
-      const completed = enrollmentsData.filter((e: Enrollment) => e.progress === 100).length;
-      const inProgress = enrollmentsData.filter((e: Enrollment) => e.progress > 0 && e.progress < 100).length;
+      const completed = enrollmentsData.filter(
+        (e: Enrollment) => e.progress === 100
+      ).length;
+      const inProgress = enrollmentsData.filter(
+        (e: Enrollment) => e.progress > 0 && e.progress < 100
+      ).length;
 
       setStats({
         totalCourses: enrollmentsData.length,
@@ -79,19 +83,27 @@ const StudentDashboard = () => {
       <div className="grid md:grid-cols-4 gap-6">
         <div className="card">
           <div className="text-gray-600 text-sm mb-1">Total Courses</div>
-          <div className="text-3xl font-bold text-primary-600">{stats.totalCourses}</div>
+          <div className="text-3xl font-bold text-primary-600">
+            {stats.totalCourses}
+          </div>
         </div>
         <div className="card">
           <div className="text-gray-600 text-sm mb-1">In Progress</div>
-          <div className="text-3xl font-bold text-blue-600">{stats.inProgress}</div>
+          <div className="text-3xl font-bold text-blue-600">
+            {stats.inProgress}
+          </div>
         </div>
         <div className="card">
           <div className="text-gray-600 text-sm mb-1">Completed</div>
-          <div className="text-3xl font-bold text-green-600">{stats.completed}</div>
+          <div className="text-3xl font-bold text-green-600">
+            {stats.completed}
+          </div>
         </div>
         <div className="card">
           <div className="text-gray-600 text-sm mb-1">Learning Hours</div>
-          <div className="text-3xl font-bold text-purple-600">{stats.totalHours}</div>
+          <div className="text-3xl font-bold text-purple-600">
+            {stats.totalHours}
+          </div>
         </div>
       </div>
 
@@ -99,7 +111,10 @@ const StudentDashboard = () => {
       <div>
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold">My Courses</h2>
-          <Link to="/courses" className="text-primary-600 hover:text-primary-700 font-medium">
+          <Link
+            to="/courses"
+            className="text-primary-600 hover:text-primary-700 font-medium"
+          >
             Browse More →
           </Link>
         </div>
@@ -108,7 +123,9 @@ const StudentDashboard = () => {
           <div className="card text-center py-12">
             <div className="text-6xl mb-4">📚</div>
             <h3 className="text-xl font-semibold mb-2">No courses yet</h3>
-            <p className="text-gray-600 mb-6">Start your learning journey today!</p>
+            <p className="text-gray-600 mb-6">
+              Start your learning journey today!
+            </p>
             <Link to="/courses" className="btn-primary">
               Browse Courses
             </Link>
@@ -116,35 +133,44 @@ const StudentDashboard = () => {
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {enrollments.map((enrollment) => (
-              <div key={enrollment.id} className="card hover:shadow-lg transition-shadow">
+              <div
+                key={enrollment.id}
+                className="card hover:shadow-lg transition-shadow"
+              >
                 {enrollment.course.thumbnailUrl && (
-                  <img 
-                    src={enrollment.course.thumbnailUrl} 
+                  <img
+                    src={enrollment.course.thumbnailUrl}
                     alt={enrollment.course.title}
                     className="w-full h-40 object-cover rounded-lg mb-4"
                   />
                 )}
-                <h3 className="text-xl font-semibold mb-3">{enrollment.course.title}</h3>
-                
+                <h3 className="text-xl font-semibold mb-3">
+                  {enrollment.course.title}
+                </h3>
+
                 {/* Progress Bar */}
                 <div className="mb-4">
                   <div className="flex justify-between text-sm text-gray-600 mb-2">
                     <span>Progress</span>
-                    <span className="font-semibold">{enrollment.progress}%</span>
+                    <span className="font-semibold">
+                      {enrollment.progress}%
+                    </span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2.5">
-                    <div 
-                      className="bg-primary-600 h-2.5 rounded-full transition-all" 
+                    <div
+                      className="bg-primary-600 h-2.5 rounded-full transition-all"
                       style={{ width: `${enrollment.progress}%` }}
                     ></div>
                   </div>
                 </div>
 
-                <Link 
-                  to={`/learn/${enrollment.courseId}`} 
+                <Link
+                  to={`/learn/${enrollment.courseId}`}
                   className="btn-primary w-full text-center"
                 >
-                  {enrollment.progress === 100 ? 'Review Course' : 'Continue Learning'}
+                  {enrollment.progress === 100
+                    ? 'Review Course'
+                    : 'Continue Learning'}
                 </Link>
               </div>
             ))}

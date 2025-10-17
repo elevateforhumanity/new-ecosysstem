@@ -23,32 +23,33 @@ let tokens = {};
 app.get('/oauth/youtube', async (req, res) => {
   const clientId = process.env.YOUTUBE_CLIENT_ID;
   const redirectUri = `http://localhost:${PORT}/oauth/youtube/callback`;
-  
-  const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?` +
+
+  const authUrl =
+    `https://accounts.google.com/o/oauth2/v2/auth?` +
     `client_id=${clientId}&` +
     `redirect_uri=${encodeURIComponent(redirectUri)}&` +
     `response_type=code&` +
     `scope=${encodeURIComponent('https://www.googleapis.com/auth/youtube.force-ssl')}&` +
     `access_type=offline&` +
     `prompt=consent`;
-  
+
   res.redirect(authUrl);
 });
 
 app.get('/oauth/youtube/callback', async (req, res) => {
   const code = req.query.code;
-  
+
   try {
     const response = await axios.post('https://oauth2.googleapis.com/token', {
       code,
       client_id: process.env.YOUTUBE_CLIENT_ID,
       client_secret: process.env.YOUTUBE_CLIENT_SECRET,
       redirect_uri: `http://localhost:${PORT}/oauth/youtube/callback`,
-      grant_type: 'authorization_code'
+      grant_type: 'authorization_code',
     });
-    
+
     tokens.youtube = response.data;
-    
+
     res.send(`
       <h1>✅ YouTube OAuth Successful!</h1>
       <p>Add these to your .env file:</p>
@@ -58,12 +59,11 @@ YOUTUBE_REFRESH_TOKEN=${response.data.refresh_token}
       </pre>
       <p>You can close this window.</p>
     `);
-    
+
     console.log('\n✅ YouTube OAuth successful!');
     console.log('Add to .env:');
     console.log(`YOUTUBE_ACCESS_TOKEN=${response.data.access_token}`);
     console.log(`YOUTUBE_REFRESH_TOKEN=${response.data.refresh_token}`);
-    
   } catch (error) {
     res.send(`<h1>❌ Error</h1><pre>${error.message}</pre>`);
     console.error('YouTube OAuth error:', error.message);
@@ -77,35 +77,37 @@ YOUTUBE_REFRESH_TOKEN=${response.data.refresh_token}
 app.get('/oauth/linkedin', async (req, res) => {
   const clientId = process.env.LINKEDIN_CLIENT_ID;
   const redirectUri = `http://localhost:${PORT}/oauth/linkedin/callback`;
-  
-  const authUrl = `https://www.linkedin.com/oauth/v2/authorization?` +
+
+  const authUrl =
+    `https://www.linkedin.com/oauth/v2/authorization?` +
     `response_type=code&` +
     `client_id=${clientId}&` +
     `redirect_uri=${encodeURIComponent(redirectUri)}&` +
     `scope=${encodeURIComponent('w_member_social r_organization_social')}`;
-  
+
   res.redirect(authUrl);
 });
 
 app.get('/oauth/linkedin/callback', async (req, res) => {
   const code = req.query.code;
-  
+
   try {
-    const response = await axios.post('https://www.linkedin.com/oauth/v2/accessToken', 
+    const response = await axios.post(
+      'https://www.linkedin.com/oauth/v2/accessToken',
       new URLSearchParams({
         grant_type: 'authorization_code',
         code,
         client_id: process.env.LINKEDIN_CLIENT_ID,
         client_secret: process.env.LINKEDIN_CLIENT_SECRET,
-        redirect_uri: `http://localhost:${PORT}/oauth/linkedin/callback`
+        redirect_uri: `http://localhost:${PORT}/oauth/linkedin/callback`,
       }),
       {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       }
     );
-    
+
     tokens.linkedin = response.data;
-    
+
     res.send(`
       <h1>✅ LinkedIn OAuth Successful!</h1>
       <p>Add this to your .env file:</p>
@@ -115,12 +117,13 @@ LINKEDIN_ACCESS_TOKEN=${response.data.access_token}
       <p><strong>Note:</strong> LinkedIn tokens expire in ${response.data.expires_in} seconds (${Math.floor(response.data.expires_in / 86400)} days)</p>
       <p>You can close this window.</p>
     `);
-    
+
     console.log('\n✅ LinkedIn OAuth successful!');
     console.log('Add to .env:');
     console.log(`LINKEDIN_ACCESS_TOKEN=${response.data.access_token}`);
-    console.log(`Expires in: ${Math.floor(response.data.expires_in / 86400)} days`);
-    
+    console.log(
+      `Expires in: ${Math.floor(response.data.expires_in / 86400)} days`
+    );
   } catch (error) {
     res.send(`<h1>❌ Error</h1><pre>${error.message}</pre>`);
     console.error('LinkedIn OAuth error:', error.message);
@@ -148,19 +151,22 @@ app.get('/oauth/facebook', async (req, res) => {
 
 app.get('/oauth/facebook/exchange', async (req, res) => {
   const shortToken = req.query.token;
-  
+
   try {
-    const response = await axios.get('https://graph.facebook.com/v18.0/oauth/access_token', {
-      params: {
-        grant_type: 'fb_exchange_token',
-        client_id: process.env.FACEBOOK_APP_ID,
-        client_secret: process.env.FACEBOOK_APP_SECRET,
-        fb_exchange_token: shortToken
+    const response = await axios.get(
+      'https://graph.facebook.com/v18.0/oauth/access_token',
+      {
+        params: {
+          grant_type: 'fb_exchange_token',
+          client_id: process.env.FACEBOOK_APP_ID,
+          client_secret: process.env.FACEBOOK_APP_SECRET,
+          fb_exchange_token: shortToken,
+        },
       }
-    });
-    
+    );
+
     tokens.facebook = response.data;
-    
+
     res.send(`
       <h1>✅ Facebook Long-Lived Token Generated!</h1>
       <p>Add this to your .env file:</p>
@@ -170,11 +176,10 @@ FACEBOOK_PAGE_1_TOKEN=${response.data.access_token}
       <p><strong>Note:</strong> This token expires in ~60 days. Set a reminder to refresh it.</p>
       <p>You can close this window.</p>
     `);
-    
+
     console.log('\n✅ Facebook long-lived token generated!');
     console.log('Add to .env:');
     console.log(`FACEBOOK_PAGE_1_TOKEN=${response.data.access_token}`);
-    
   } catch (error) {
     res.send(`<h1>❌ Error</h1><pre>${error.message}</pre>`);
     console.error('Facebook token exchange error:', error.message);
@@ -209,27 +214,33 @@ app.get('/', (req, res) => {
         <div class="platform">
           <h2>📘 Facebook</h2>
           <p>Get long-lived page access token (expires in ~60 days)</p>
-          ${process.env.FACEBOOK_APP_ID ? 
-            '<div class="status success">✅ App ID configured</div>' : 
-            '<div class="status warning">⚠️ Set FACEBOOK_APP_ID in .env</div>'}
+          ${
+            process.env.FACEBOOK_APP_ID
+              ? '<div class="status success">✅ App ID configured</div>'
+              : '<div class="status warning">⚠️ Set FACEBOOK_APP_ID in .env</div>'
+          }
           <a href="/oauth/facebook">Setup Facebook Token</a>
         </div>
         
         <div class="platform">
           <h2>🎥 YouTube</h2>
           <p>Get OAuth tokens for YouTube Data API</p>
-          ${process.env.YOUTUBE_CLIENT_ID ? 
-            '<div class="status success">✅ Client ID configured</div>' : 
-            '<div class="status warning">⚠️ Set YOUTUBE_CLIENT_ID in .env</div>'}
+          ${
+            process.env.YOUTUBE_CLIENT_ID
+              ? '<div class="status success">✅ Client ID configured</div>'
+              : '<div class="status warning">⚠️ Set YOUTUBE_CLIENT_ID in .env</div>'
+          }
           <a href="/oauth/youtube">Setup YouTube OAuth</a>
         </div>
         
         <div class="platform">
           <h2>💼 LinkedIn</h2>
           <p>Get access token for LinkedIn Marketing API</p>
-          ${process.env.LINKEDIN_CLIENT_ID ? 
-            '<div class="status success">✅ Client ID configured</div>' : 
-            '<div class="status warning">⚠️ Set LINKEDIN_CLIENT_ID in .env</div>'}
+          ${
+            process.env.LINKEDIN_CLIENT_ID
+              ? '<div class="status success">✅ Client ID configured</div>'
+              : '<div class="status warning">⚠️ Set LINKEDIN_CLIENT_ID in .env</div>'
+          }
           <a href="/oauth/linkedin">Setup LinkedIn OAuth</a>
         </div>
         
@@ -276,7 +287,7 @@ app.listen(PORT, () => {
   console.log(`   3. Follow the OAuth flows for each platform`);
   console.log(`   4. Copy the generated tokens to .env`);
   console.log(`\n⏹️  Press Ctrl+C to stop\n`);
-  
+
   // Auto-open browser
   setTimeout(() => {
     open(`http://localhost:${PORT}`);

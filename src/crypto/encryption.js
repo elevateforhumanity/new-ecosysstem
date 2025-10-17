@@ -11,7 +11,7 @@ class MilitaryGradeCrypto {
   constructor() {
     this.algorithm = 'aes-256-gcm';
     this.keyLength = 32; // 256 bits
-    this.ivLength = 16;  // 128 bits
+    this.ivLength = 16; // 128 bits
     this.tagLength = 16; // 128 bits
     this.saltLength = 32; // 256 bits
   }
@@ -31,12 +31,12 @@ class MilitaryGradeCrypto {
       modulusLength: 4096,
       publicKeyEncoding: {
         type: 'spki',
-        format: 'pem'
+        format: 'pem',
       },
       privateKeyEncoding: {
         type: 'pkcs8',
-        format: 'pem'
-      }
+        format: 'pem',
+      },
     });
   }
 
@@ -46,16 +46,16 @@ class MilitaryGradeCrypto {
   encrypt(plaintext, key) {
     const iv = crypto.randomBytes(this.ivLength);
     const cipher = crypto.createCipher(this.algorithm, key, iv);
-    
+
     let encrypted = cipher.update(plaintext, 'utf8', 'hex');
     encrypted += cipher.final('hex');
-    
+
     const tag = cipher.getAuthTag();
-    
+
     return {
       encrypted,
       iv: iv.toString('hex'),
-      tag: tag.toString('hex')
+      tag: tag.toString('hex'),
     };
   }
 
@@ -64,13 +64,17 @@ class MilitaryGradeCrypto {
    */
   decrypt(encryptedData, key) {
     const { encrypted, iv, tag } = encryptedData;
-    
-    const decipher = crypto.createDecipher(this.algorithm, key, Buffer.from(iv, 'hex'));
+
+    const decipher = crypto.createDecipher(
+      this.algorithm,
+      key,
+      Buffer.from(iv, 'hex')
+    );
     decipher.setAuthTag(Buffer.from(tag, 'hex'));
-    
+
     let decrypted = decipher.update(encrypted, 'hex', 'utf8');
     decrypted += decipher.final('utf8');
-    
+
     return decrypted;
   }
 
@@ -78,22 +82,32 @@ class MilitaryGradeCrypto {
    * RSA-4096 encryption for key exchange
    */
   rsaEncrypt(data, publicKey) {
-    return crypto.publicEncrypt({
-      key: publicKey,
-      padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
-      oaepHash: 'sha256'
-    }, Buffer.from(data)).toString('base64');
+    return crypto
+      .publicEncrypt(
+        {
+          key: publicKey,
+          padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+          oaepHash: 'sha256',
+        },
+        Buffer.from(data)
+      )
+      .toString('base64');
   }
 
   /**
    * RSA-4096 decryption
    */
   rsaDecrypt(encryptedData, privateKey) {
-    return crypto.privateDecrypt({
-      key: privateKey,
-      padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
-      oaepHash: 'sha256'
-    }, Buffer.from(encryptedData, 'base64')).toString('utf8');
+    return crypto
+      .privateDecrypt(
+        {
+          key: privateKey,
+          padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+          oaepHash: 'sha256',
+        },
+        Buffer.from(encryptedData, 'base64')
+      )
+      .toString('utf8');
   }
 
   /**
@@ -105,9 +119,9 @@ class MilitaryGradeCrypto {
       const hash = await argon2.hash(password, {
         type: argon2.argon2id,
         memoryCost: 2 ** 16, // 64 MB
-        timeCost: 3,         // 3 iterations
-        parallelism: 1,      // 1 thread
-        salt: salt
+        timeCost: 3, // 3 iterations
+        parallelism: 1, // 1 thread
+        salt: salt,
       });
       return hash;
     } catch (error) {
@@ -150,20 +164,20 @@ class MilitaryGradeCrypto {
   generateLicenseToken(payload, secret) {
     const timestamp = Date.now();
     const nonce = crypto.randomBytes(16).toString('hex');
-    
+
     const tokenData = {
       ...payload,
       timestamp,
       nonce,
-      purpose: 'license'
+      purpose: 'license',
     };
-    
+
     const tokenString = JSON.stringify(tokenData);
     const signature = this.generateHMAC(tokenString, secret);
-    
+
     return {
       token: Buffer.from(tokenString).toString('base64'),
-      signature
+      signature,
     };
   }
 
@@ -174,19 +188,19 @@ class MilitaryGradeCrypto {
     try {
       const tokenString = Buffer.from(token, 'base64').toString('utf8');
       const isValid = this.verifyHMAC(tokenString, signature, secret);
-      
+
       if (!isValid) {
         return { valid: false, error: 'Invalid signature' };
       }
-      
+
       const payload = JSON.parse(tokenString);
-      
+
       // Check token age (24 hours max)
       const maxAge = 24 * 60 * 60 * 1000; // 24 hours
       if (Date.now() - payload.timestamp > maxAge) {
         return { valid: false, error: 'Token expired' };
       }
-      
+
       return { valid: true, payload };
     } catch (error) {
       return { valid: false, error: 'Token parsing failed' };
@@ -202,9 +216,9 @@ class MilitaryGradeCrypto {
       domain,
       timestamp: Date.now(),
       version: '1.0.0',
-      platform: 'elevate-for-humanity'
+      platform: 'elevate-for-humanity',
     };
-    
+
     const watermarkString = JSON.stringify(watermarkData);
     return Buffer.from(watermarkString).toString('base64');
   }
@@ -242,7 +256,7 @@ class MilitaryGradeCrypto {
     if (a.length !== b.length) {
       return false;
     }
-    
+
     return crypto.timingSafeEqual(
       Buffer.from(a, 'utf8'),
       Buffer.from(b, 'utf8')

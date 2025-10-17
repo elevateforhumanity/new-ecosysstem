@@ -55,7 +55,7 @@ export class ContentAutomation {
       type: 'api',
       updateFrequency: 24 * 60 * 60 * 1000, // Daily
       lastUpdate: new Date(),
-      parser: (data) => data
+      parser: (data) => data,
     });
 
     this.addDataFeed({
@@ -65,7 +65,7 @@ export class ContentAutomation {
       type: 'api',
       updateFrequency: 60 * 60 * 1000, // Hourly
       lastUpdate: new Date(),
-      parser: (data) => data
+      parser: (data) => data,
     });
 
     this.addDataFeed({
@@ -75,7 +75,7 @@ export class ContentAutomation {
       type: 'api',
       updateFrequency: 60 * 60 * 1000, // Hourly
       lastUpdate: new Date(),
-      parser: (data) => data
+      parser: (data) => data,
     });
 
     this.addDataFeed({
@@ -85,7 +85,7 @@ export class ContentAutomation {
       type: 'api',
       updateFrequency: 24 * 60 * 60 * 1000, // Daily
       lastUpdate: new Date(),
-      parser: (data) => data
+      parser: (data) => data,
     });
 
     this.addDataFeed({
@@ -95,7 +95,7 @@ export class ContentAutomation {
       type: 'json',
       updateFrequency: 24 * 60 * 60 * 1000, // Daily
       lastUpdate: new Date(),
-      parser: (data) => data
+      parser: (data) => data,
     });
 
     this.addDataFeed({
@@ -105,7 +105,7 @@ export class ContentAutomation {
       type: 'api',
       updateFrequency: 24 * 60 * 60 * 1000, // Daily
       lastUpdate: new Date(),
-      parser: (data) => data
+      parser: (data) => data,
     });
   }
 
@@ -116,43 +116,43 @@ export class ContentAutomation {
         selector: '[data-auto-update="wages"]',
         dataFeed: 'dol-wages',
         transform: (data) => this.formatWageData(data),
-        autoUpdate: true
+        autoUpdate: true,
       },
       {
         id: 'contract-opportunities',
         selector: '[data-auto-update="contracts"]',
         dataFeed: 'sam-gov-contracts',
         transform: (data) => this.formatContractData(data),
-        autoUpdate: true
+        autoUpdate: true,
       },
       {
         id: 'job-postings',
         selector: '[data-auto-update="jobs"]',
         dataFeed: 'indiana-dwd-jobs',
         transform: (data) => this.formatJobData(data),
-        autoUpdate: true
+        autoUpdate: true,
       },
       {
         id: 'etpl-programs',
         selector: '[data-auto-update="programs"]',
         dataFeed: 'etpl-programs',
         transform: (data) => this.formatProgramData(data),
-        autoUpdate: true
+        autoUpdate: true,
       },
       {
         id: 'partner-logos',
         selector: '[data-auto-update="partner-logos"]',
         dataFeed: 'credential-partners',
         transform: (data) => this.formatPartnerLogos(data),
-        autoUpdate: true
+        autoUpdate: true,
       },
       {
         id: 'grant-opportunities',
         selector: '[data-auto-update="grants"]',
         dataFeed: 'grant-opportunities',
         transform: (data) => this.formatGrantData(data),
-        autoUpdate: true
-      }
+        autoUpdate: true,
+      },
     ];
   }
 
@@ -164,7 +164,7 @@ export class ContentAutomation {
    * Fetch data from all feeds
    */
   async updateAllFeeds(): Promise<void> {
-    const promises = Array.from(this.dataFeeds.values()).map(feed => 
+    const promises = Array.from(this.dataFeeds.values()).map((feed) =>
       this.updateFeed(feed)
     );
     await Promise.all(promises);
@@ -176,12 +176,12 @@ export class ContentAutomation {
   private async updateFeed(feed: DataFeed): Promise<void> {
     try {
       console.log(`Updating feed: ${feed.name}`);
-      
+
       const response = await fetch(feed.url);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       let data;
       switch (feed.type) {
         case 'json':
@@ -214,14 +214,16 @@ export class ContentAutomation {
    * Apply content rules for updated feed
    */
   private async applyContentRules(feedId: string): Promise<void> {
-    const rules = this.contentRules.filter(r => r.dataFeed === feedId && r.autoUpdate);
+    const rules = this.contentRules.filter(
+      (r) => r.dataFeed === feedId && r.autoUpdate
+    );
     const data = this.cache.get(feedId);
 
     for (const rule of rules) {
       const elements = document.querySelectorAll(rule.selector);
       const content = rule.transform(data);
 
-      elements.forEach(element => {
+      elements.forEach((element) => {
         element.innerHTML = content;
       });
     }
@@ -232,17 +234,21 @@ export class ContentAutomation {
    */
   private formatWageData(data: any): string {
     if (!data || !data.wages) return '';
-    
+
     return `
       <div class="wage-data">
         <h3>Current Wage Information</h3>
         <div class="wage-grid">
-          ${data.wages.map((w: any) => `
+          ${data.wages
+            .map(
+              (w: any) => `
             <div class="wage-item">
               <span class="occupation">${w.occupation}</span>
               <span class="wage">${w.medianWage}</span>
             </div>
-          `).join('')}
+          `
+            )
+            .join('')}
         </div>
         <p class="update-time">Updated: ${new Date().toLocaleDateString()}</p>
       </div>
@@ -254,12 +260,15 @@ export class ContentAutomation {
    */
   private formatContractData(data: any): string {
     if (!data || !data.opportunities) return '';
-    
+
     return `
       <div class="contract-opportunities">
         <h3>Active Contract Opportunities</h3>
         <div class="contract-list">
-          ${data.opportunities.slice(0, 10).map((c: any) => `
+          ${data.opportunities
+            .slice(0, 10)
+            .map(
+              (c: any) => `
             <div class="contract-item">
               <h4>${c.title}</h4>
               <p>${c.description}</p>
@@ -269,7 +278,9 @@ export class ContentAutomation {
               </div>
               <a href="${c.url}" target="_blank">View Opportunity</a>
             </div>
-          `).join('')}
+          `
+            )
+            .join('')}
         </div>
       </div>
     `;
@@ -280,12 +291,15 @@ export class ContentAutomation {
    */
   private formatJobData(data: any): string {
     if (!data || !data.jobs) return '';
-    
+
     return `
       <div class="job-postings">
         <h3>Current Job Openings</h3>
         <div class="job-list">
-          ${data.jobs.slice(0, 20).map((j: any) => `
+          ${data.jobs
+            .slice(0, 20)
+            .map(
+              (j: any) => `
             <div class="job-item">
               <h4>${j.title}</h4>
               <p class="company">${j.company}</p>
@@ -293,7 +307,9 @@ export class ContentAutomation {
               <p class="salary">${j.salary}</p>
               <a href="${j.url}" target="_blank">Apply Now</a>
             </div>
-          `).join('')}
+          `
+            )
+            .join('')}
         </div>
       </div>
     `;
@@ -304,12 +320,14 @@ export class ContentAutomation {
    */
   private formatProgramData(data: any): string {
     if (!data || !data.programs) return '';
-    
+
     return `
       <div class="etpl-programs">
         <h3>ETPL Approved Programs</h3>
         <div class="program-list">
-          ${data.programs.map((p: any) => `
+          ${data.programs
+            .map(
+              (p: any) => `
             <div class="program-item">
               <h4>${p.name}</h4>
               <p>${p.description}</p>
@@ -319,7 +337,9 @@ export class ContentAutomation {
                 <span>Credential: ${p.credential}</span>
               </div>
             </div>
-          `).join('')}
+          `
+            )
+            .join('')}
         </div>
       </div>
     `;
@@ -330,30 +350,82 @@ export class ContentAutomation {
    */
   private formatPartnerLogos(data: any): string {
     const partners = data?.partners || [
-      { name: 'CompTIA', logo: '/images/partners/comptia-logo.png', url: 'https://www.comptia.org' },
-      { name: 'Microsoft', logo: '/images/partners/microsoft-logo.png', url: 'https://www.microsoft.com' },
-      { name: 'AWS', logo: '/images/partners/aws-logo.png', url: 'https://aws.amazon.com' },
-      { name: 'Cisco', logo: '/images/partners/cisco-logo.png', url: 'https://www.cisco.com' },
-      { name: 'AHIMA', logo: '/images/partners/ahima-logo.png', url: 'https://www.ahima.org' },
-      { name: 'HIMSS', logo: '/images/partners/himss-logo.png', url: 'https://www.himss.org' },
-      { name: 'Epic', logo: '/images/partners/epic-logo.png', url: 'https://www.epic.com' },
-      { name: 'Cerner', logo: '/images/partners/cerner-logo.png', url: 'https://www.cerner.com' },
-      { name: 'PMI', logo: '/images/partners/pmi-logo.png', url: 'https://www.pmi.org' },
-      { name: 'HRCI', logo: '/images/partners/hrci-logo.png', url: 'https://www.hrci.org' },
-      { name: 'ACT WorkKeys', logo: '/images/partners/workkeys-logo.png', url: 'https://www.act.org/workkeys' },
-      { name: 'Certiport', logo: '/images/partners/certiport-logo.png', url: 'https://certiport.pearsonvue.com' }
+      {
+        name: 'CompTIA',
+        logo: '/images/partners/comptia-logo.png',
+        url: 'https://www.comptia.org',
+      },
+      {
+        name: 'Microsoft',
+        logo: '/images/partners/microsoft-logo.png',
+        url: 'https://www.microsoft.com',
+      },
+      {
+        name: 'AWS',
+        logo: '/images/partners/aws-logo.png',
+        url: 'https://aws.amazon.com',
+      },
+      {
+        name: 'Cisco',
+        logo: '/images/partners/cisco-logo.png',
+        url: 'https://www.cisco.com',
+      },
+      {
+        name: 'AHIMA',
+        logo: '/images/partners/ahima-logo.png',
+        url: 'https://www.ahima.org',
+      },
+      {
+        name: 'HIMSS',
+        logo: '/images/partners/himss-logo.png',
+        url: 'https://www.himss.org',
+      },
+      {
+        name: 'Epic',
+        logo: '/images/partners/epic-logo.png',
+        url: 'https://www.epic.com',
+      },
+      {
+        name: 'Cerner',
+        logo: '/images/partners/cerner-logo.png',
+        url: 'https://www.cerner.com',
+      },
+      {
+        name: 'PMI',
+        logo: '/images/partners/pmi-logo.png',
+        url: 'https://www.pmi.org',
+      },
+      {
+        name: 'HRCI',
+        logo: '/images/partners/hrci-logo.png',
+        url: 'https://www.hrci.org',
+      },
+      {
+        name: 'ACT WorkKeys',
+        logo: '/images/partners/workkeys-logo.png',
+        url: 'https://www.act.org/workkeys',
+      },
+      {
+        name: 'Certiport',
+        logo: '/images/partners/certiport-logo.png',
+        url: 'https://certiport.pearsonvue.com',
+      },
     ];
-    
+
     return `
       <div class="partner-logos">
         <h3>Our Credentialing Partners</h3>
         <div class="logo-grid">
-          ${partners.map(p => `
+          ${partners
+            .map(
+              (p) => `
             <a href="${p.url}" target="_blank" rel="noopener noreferrer" class="partner-logo-item">
               <img src="${p.logo}" alt="${p.name} Logo" loading="lazy" />
               <span class="partner-name">${p.name}</span>
             </a>
-          `).join('')}
+          `
+            )
+            .join('')}
         </div>
         <p class="credibility-note">All partnerships verified and active as of ${new Date().toLocaleDateString()}</p>
       </div>
@@ -365,12 +437,15 @@ export class ContentAutomation {
    */
   private formatGrantData(data: any): string {
     if (!data || !data.grants) return '';
-    
+
     return `
       <div class="grant-opportunities">
         <h3>Available Grant Funding</h3>
         <div class="grant-list">
-          ${data.grants.slice(0, 10).map((g: any) => `
+          ${data.grants
+            .slice(0, 10)
+            .map(
+              (g: any) => `
             <div class="grant-item">
               <h4>${g.title}</h4>
               <p>${g.description}</p>
@@ -381,7 +456,9 @@ export class ContentAutomation {
               </div>
               <a href="${g.url}" target="_blank">View Grant</a>
             </div>
-          `).join('')}
+          `
+            )
+            .join('')}
         </div>
       </div>
     `;
@@ -403,12 +480,12 @@ export class ContentAutomation {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(rssString, 'text/xml');
     const items = xmlDoc.querySelectorAll('item');
-    
-    return Array.from(items).map(item => ({
+
+    return Array.from(items).map((item) => ({
       title: item.querySelector('title')?.textContent,
       description: item.querySelector('description')?.textContent,
       link: item.querySelector('link')?.textContent,
-      pubDate: item.querySelector('pubDate')?.textContent
+      pubDate: item.querySelector('pubDate')?.textContent,
     }));
   }
 
@@ -416,7 +493,7 @@ export class ContentAutomation {
    * Schedule automatic updates
    */
   scheduleAutomaticUpdates(): void {
-    this.dataFeeds.forEach(feed => {
+    this.dataFeeds.forEach((feed) => {
       setInterval(() => {
         this.updateFeed(feed);
       }, feed.updateFrequency);

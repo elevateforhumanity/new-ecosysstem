@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 // 🔍 Verify SEO files are properly preserved in deployment
-import fs from "node:fs";
-import path from "node:path";
+import fs from 'node:fs';
+import path from 'node:path';
 
-const DEPLOY_DIR = "deploy";
-const BASE_URL = "https://www.elevateforhumanity.org";
+const DEPLOY_DIR = 'deploy';
+const BASE_URL = 'https://www.elevateforhumanity.org';
 
-console.log("🔍 Verifying SEO files in deployment...");
+console.log('🔍 Verifying SEO files in deployment...');
 
 const seoChecks = {
   passed: 0,
   failed: 0,
   warnings: 0,
-  details: []
+  details: [],
 };
 
 function check(name, condition, message, isWarning = false) {
@@ -38,21 +38,27 @@ const robotsPath = path.join(DEPLOY_DIR, 'robots.txt');
 check(
   'robots.txt',
   fs.existsSync(robotsPath),
-  fs.existsSync(robotsPath) ? 'Present and accessible' : 'Missing - search engines cannot find crawl instructions'
+  fs.existsSync(robotsPath)
+    ? 'Present and accessible'
+    : 'Missing - search engines cannot find crawl instructions'
 );
 
 const sitemapPath = path.join(DEPLOY_DIR, 'sitemap.xml');
 check(
   'sitemap.xml',
   fs.existsSync(sitemapPath),
-  fs.existsSync(sitemapPath) ? 'Present and accessible' : 'Missing - search engines cannot discover pages'
+  fs.existsSync(sitemapPath)
+    ? 'Present and accessible'
+    : 'Missing - search engines cannot discover pages'
 );
 
 const sitemapsDir = path.join(DEPLOY_DIR, 'sitemaps');
 check(
   'sitemaps directory',
   fs.existsSync(sitemapsDir),
-  fs.existsSync(sitemapsDir) ? 'Present with split sitemaps' : 'Missing - sitemap organization lost'
+  fs.existsSync(sitemapsDir)
+    ? 'Present with split sitemaps'
+    : 'Missing - sitemap organization lost'
 );
 
 // 2. Verify sitemap content
@@ -61,14 +67,19 @@ if (fs.existsSync(sitemapPath)) {
     const sitemapContent = fs.readFileSync(sitemapPath, 'utf8');
     check(
       'Sitemap format',
-      sitemapContent.includes('<?xml') && sitemapContent.includes('sitemapindex'),
-      sitemapContent.includes('sitemapindex') ? 'Valid XML sitemap index format' : 'Invalid or corrupted sitemap format'
+      sitemapContent.includes('<?xml') &&
+        sitemapContent.includes('sitemapindex'),
+      sitemapContent.includes('sitemapindex')
+        ? 'Valid XML sitemap index format'
+        : 'Invalid or corrupted sitemap format'
     );
-    
+
     check(
       'Sitemap URLs',
       sitemapContent.includes(BASE_URL),
-      sitemapContent.includes(BASE_URL) ? 'Contains correct domain URLs' : 'Missing or incorrect domain URLs'
+      sitemapContent.includes(BASE_URL)
+        ? 'Contains correct domain URLs'
+        : 'Missing or incorrect domain URLs'
     );
   } catch (error) {
     check('Sitemap content', false, 'Could not read sitemap content');
@@ -81,14 +92,19 @@ if (fs.existsSync(robotsPath)) {
     const robotsContent = fs.readFileSync(robotsPath, 'utf8');
     check(
       'Robots.txt format',
-      robotsContent.includes('User-agent:') && robotsContent.includes('Sitemap:'),
-      robotsContent.includes('Sitemap:') ? 'Valid format with sitemap reference' : 'Missing sitemap reference or invalid format'
+      robotsContent.includes('User-agent:') &&
+        robotsContent.includes('Sitemap:'),
+      robotsContent.includes('Sitemap:')
+        ? 'Valid format with sitemap reference'
+        : 'Missing sitemap reference or invalid format'
     );
-    
+
     check(
       'Robots.txt sitemap URL',
       robotsContent.includes(`${BASE_URL}/sitemap.xml`),
-      robotsContent.includes(`${BASE_URL}/sitemap.xml`) ? 'Correct sitemap URL referenced' : 'Incorrect or missing sitemap URL'
+      robotsContent.includes(`${BASE_URL}/sitemap.xml`)
+        ? 'Correct sitemap URL referenced'
+        : 'Incorrect or missing sitemap URL'
     );
   } catch (error) {
     check('Robots.txt content', false, 'Could not read robots.txt content');
@@ -97,13 +113,20 @@ if (fs.existsSync(robotsPath)) {
 
 // 4. Check individual sitemap files
 if (fs.existsSync(sitemapsDir)) {
-  const expectedSitemaps = ['core.xml', 'programs.xml', 'policies.xml', 'services.xml'];
-  expectedSitemaps.forEach(sitemap => {
+  const expectedSitemaps = [
+    'core.xml',
+    'programs.xml',
+    'policies.xml',
+    'services.xml',
+  ];
+  expectedSitemaps.forEach((sitemap) => {
     const sitemapFile = path.join(sitemapsDir, sitemap);
     check(
       `${sitemap}`,
       fs.existsSync(sitemapFile),
-      fs.existsSync(sitemapFile) ? 'Present and accessible' : 'Missing from sitemaps directory',
+      fs.existsSync(sitemapFile)
+        ? 'Present and accessible'
+        : 'Missing from sitemaps directory',
       true // Warning, not critical
     );
   });
@@ -115,7 +138,7 @@ const pages = [
   { path: 'programs/index.html', name: 'Programs page' },
   { path: 'contracts/index.html', name: 'Contracts page' },
   { path: 'students/index.html', name: 'Students page' },
-  { path: 'contact/index.html', name: 'Contact page' }
+  { path: 'contact/index.html', name: 'Contact page' },
 ];
 
 pages.forEach(({ path: pagePath, name }) => {
@@ -123,30 +146,35 @@ pages.forEach(({ path: pagePath, name }) => {
   if (fs.existsSync(fullPath)) {
     try {
       const content = fs.readFileSync(fullPath, 'utf8');
-      
+
       // Check for canonical URL
       check(
         `${name} canonical`,
         content.includes('rel="canonical"'),
-        content.includes('rel="canonical"') ? 'Has canonical URL' : 'Missing canonical URL',
+        content.includes('rel="canonical"')
+          ? 'Has canonical URL'
+          : 'Missing canonical URL',
         true
       );
-      
+
       // Check for meta description
       check(
         `${name} meta description`,
         content.includes('name="description"'),
-        content.includes('name="description"') ? 'Has meta description' : 'Missing meta description',
+        content.includes('name="description"')
+          ? 'Has meta description'
+          : 'Missing meta description',
         true
       );
-      
+
       // Check for proper title
       check(
         `${name} title`,
         content.includes('<title>') && !content.includes('<title></title>'),
-        content.includes('<title>') && !content.includes('<title></title>') ? 'Has proper title tag' : 'Missing or empty title tag'
+        content.includes('<title>') && !content.includes('<title></title>')
+          ? 'Has proper title tag'
+          : 'Missing or empty title tag'
       );
-      
     } catch (error) {
       check(`${name} content`, false, 'Could not read page content', true);
     }
@@ -163,7 +191,9 @@ if (fs.existsSync(indexPath)) {
     check(
       'Structured data',
       indexContent.includes('application/ld+json'),
-      indexContent.includes('application/ld+json') ? 'JSON-LD structured data present' : 'Missing structured data',
+      indexContent.includes('application/ld+json')
+        ? 'JSON-LD structured data present'
+        : 'Missing structured data',
       true
     );
   } catch (error) {
@@ -178,11 +208,11 @@ const report = {
     passed: seoChecks.passed,
     failed: seoChecks.failed,
     warnings: seoChecks.warnings,
-    total: seoChecks.passed + seoChecks.failed + seoChecks.warnings
+    total: seoChecks.passed + seoChecks.failed + seoChecks.warnings,
   },
   status: seoChecks.failed === 0 ? 'PASS' : 'FAIL',
   details: seoChecks.details,
-  recommendations: []
+  recommendations: [],
 };
 
 // Add recommendations based on failures
@@ -190,7 +220,9 @@ if (seoChecks.failed > 0) {
   report.recommendations.push('Fix critical SEO issues before deployment');
 }
 if (seoChecks.warnings > 0) {
-  report.recommendations.push('Address SEO warnings to improve search visibility');
+  report.recommendations.push(
+    'Address SEO warnings to improve search visibility'
+  );
 }
 if (!fs.existsSync(robotsPath)) {
   report.recommendations.push('Ensure robots.txt is included in deployment');
@@ -214,7 +246,7 @@ console.log(`   📋 Status: ${report.status}`);
 
 if (report.recommendations.length > 0) {
   console.log('\n💡 Recommendations:');
-  report.recommendations.forEach(rec => console.log(`   • ${rec}`));
+  report.recommendations.forEach((rec) => console.log(`   • ${rec}`));
 }
 
 console.log(`\n📄 Full report saved to: seo-verification-report.json`);

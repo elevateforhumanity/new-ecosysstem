@@ -1,31 +1,51 @@
 #!/usr/bin/env node
 // 🎯 Multi-page static site optimization for incremental deployment
-import fs from "node:fs";
-import path from "node:path";
-import { execSync } from "node:child_process";
+import fs from 'node:fs';
+import path from 'node:path';
+import { execSync } from 'node:child_process';
 
-const ROOT = "deploy";
+const ROOT = 'deploy';
 
-console.log("🎯 Optimizing multi-page static site deployment...");
+console.log('🎯 Optimizing multi-page static site deployment...');
 
 // 1. Ensure all page directories have proper structure
 const pageDirectories = [
-  { dir: 'programs', title: 'Programs | Elevate for Humanity', description: 'Workforce development programs and certifications' },
-  { dir: 'contracts', title: 'Government Contracts | Elevate for Humanity', description: 'Government contracting and workforce services' },
-  { dir: 'students', title: 'Student Portal | Elevate for Humanity', description: 'Access your courses and track progress' },
-  { dir: 'contact', title: 'Contact Us | Elevate for Humanity', description: 'Get in touch with our team' },
-  { dir: 'about', title: 'About Us | Elevate for Humanity', description: 'Learn about our mission and services' }
+  {
+    dir: 'programs',
+    title: 'Programs | Elevate for Humanity',
+    description: 'Workforce development programs and certifications',
+  },
+  {
+    dir: 'contracts',
+    title: 'Government Contracts | Elevate for Humanity',
+    description: 'Government contracting and workforce services',
+  },
+  {
+    dir: 'students',
+    title: 'Student Portal | Elevate for Humanity',
+    description: 'Access your courses and track progress',
+  },
+  {
+    dir: 'contact',
+    title: 'Contact Us | Elevate for Humanity',
+    description: 'Get in touch with our team',
+  },
+  {
+    dir: 'about',
+    title: 'About Us | Elevate for Humanity',
+    description: 'Learn about our mission and services',
+  },
 ];
 
 pageDirectories.forEach(({ dir, title, description }) => {
   const dirPath = path.join(ROOT, dir);
   const indexPath = path.join(dirPath, 'index.html');
-  
+
   // Create directory if it doesn't exist
   if (!fs.existsSync(dirPath)) {
     fs.mkdirSync(dirPath, { recursive: true });
   }
-  
+
   // If index.html doesn't exist, create a basic one
   if (!fs.existsSync(indexPath)) {
     const basicHTML = `<!DOCTYPE html>
@@ -58,7 +78,7 @@ pageDirectories.forEach(({ dir, title, description }) => {
     </div>
 </body>
 </html>`;
-    
+
     fs.writeFileSync(indexPath, basicHTML);
     console.log(`   📄 Created ${dir}/index.html`);
   }
@@ -68,7 +88,7 @@ pageDirectories.forEach(({ dir, title, description }) => {
 function optimizeHTML(filePath) {
   try {
     let content = fs.readFileSync(filePath, 'utf8');
-    
+
     // Add preconnect for external resources
     if (!content.includes('preconnect')) {
       content = content.replace(
@@ -78,7 +98,7 @@ function optimizeHTML(filePath) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>`
       );
     }
-    
+
     // Add viewport meta if missing
     if (!content.includes('viewport')) {
       content = content.replace(
@@ -86,10 +106,14 @@ function optimizeHTML(filePath) {
         '<head>\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">'
       );
     }
-    
+
     // Minify inline CSS (basic)
-    content = content.replace(/\s+/g, ' ').replace(/;\s+/g, ';').replace(/{\s+/g, '{').replace(/\s+}/g, '}');
-    
+    content = content
+      .replace(/\s+/g, ' ')
+      .replace(/;\s+/g, ';')
+      .replace(/{\s+/g, '{')
+      .replace(/\s+}/g, '}');
+
     fs.writeFileSync(filePath, content);
     return true;
   } catch (error) {
@@ -103,7 +127,7 @@ const htmlFiles = [];
 function findHTMLFiles(dir) {
   try {
     const files = fs.readdirSync(dir, { withFileTypes: true });
-    files.forEach(file => {
+    files.forEach((file) => {
       const fullPath = path.join(dir, file.name);
       if (file.isDirectory()) {
         findHTMLFiles(fullPath);
@@ -119,7 +143,7 @@ function findHTMLFiles(dir) {
 findHTMLFiles(ROOT);
 
 let optimizedCount = 0;
-htmlFiles.forEach(file => {
+htmlFiles.forEach((file) => {
   if (optimizeHTML(file)) {
     optimizedCount++;
   }
@@ -172,7 +196,7 @@ fs.writeFileSync(path.join(ROOT, '.htaccess'), htaccess);
 const deploymentSummary = {
   type: 'multi-page-static',
   timestamp: new Date().toISOString(),
-  pages: pageDirectories.map(p => p.dir),
+  pages: pageDirectories.map((p) => p.dir),
   htmlFiles: htmlFiles.length,
   optimizedFiles: optimizedCount,
   features: [
@@ -181,8 +205,8 @@ const deploymentSummary = {
     'Optimized HTML with preconnect hints',
     'Apache .htaccess configuration',
     'Legacy redirect handling',
-    'Security headers configuration'
-  ]
+    'Security headers configuration',
+  ],
 };
 
 fs.writeFileSync(

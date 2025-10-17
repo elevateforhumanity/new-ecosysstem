@@ -24,6 +24,7 @@ This digital binder contains comprehensive information about our partnerships wi
 ### Federal Department of Education
 
 #### **Partnership Activities**
+
 - Educational program development
 - Curriculum design and alignment
 - Teacher professional development
@@ -32,12 +33,14 @@ This digital binder contains comprehensive information about our partnerships wi
 - Research and data analysis
 
 #### **Contract Types**
+
 - Professional services contracts
 - Technical assistance contracts
 - Research and evaluation contracts
 - Training and development contracts
 
 #### **Key Contacts**
+
 - **Website**: https://www.ed.gov
 - **Phone**: 1-800-USA-LEARN (1-800-872-5327)
 - **Email**: ed.gov@ed.gov
@@ -45,6 +48,7 @@ This digital binder contains comprehensive information about our partnerships wi
 ### State Department of Education
 
 #### **Indiana Department of Education**
+
 - Career and Technical Education (CTE) programs
 - Adult education partnerships
 - Dual credit programs
@@ -52,6 +56,7 @@ This digital binder contains comprehensive information about our partnerships wi
 - Curriculum standards alignment
 
 #### **Key Contacts**
+
 - **Website**: https://www.in.gov/doe/
 - **Phone**: (317) 232-6610
 - **Email**: webmaster@doe.in.gov
@@ -63,6 +68,7 @@ This digital binder contains comprehensive information about our partnerships wi
 ### Program Development
 
 #### **Curriculum Design**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  Curriculum Development Services 📚                     │
@@ -89,6 +95,7 @@ This digital binder contains comprehensive information about our partnerships wi
 ```
 
 #### **Instructional Materials**
+
 - Textbooks and workbooks
 - Digital learning resources
 - Multimedia content
@@ -99,6 +106,7 @@ This digital binder contains comprehensive information about our partnerships wi
 ### Teacher Professional Development
 
 #### **Training Programs**
+
 - Subject matter expertise
 - Instructional strategies
 - Technology integration
@@ -107,6 +115,7 @@ This digital binder contains comprehensive information about our partnerships wi
 - Classroom management
 
 #### **Certification Support**
+
 - Industry certifications for teachers
 - Continuing education credits
 - Professional learning communities
@@ -119,12 +128,14 @@ This digital binder contains comprehensive information about our partnerships wi
 ### Clinical Informatics Curriculum
 
 #### **Program Overview**
+
 - **Duration**: 6 months (full-time) or 12 months (part-time)
 - **Credit Hours**: 30 semester hours
 - **Delivery**: Hybrid (online + hands-on labs)
 - **Credentials**: RHIA, RHIT, or CCA certification
 
 #### **Course Sequence**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  Clinical Informatics Certificate Program 🏥💻         │
@@ -181,7 +192,9 @@ This digital binder contains comprehensive information about our partnerships wi
 ```
 
 #### **Learning Outcomes**
+
 Upon completion, students will be able to:
+
 1. Manage health information systems and data
 2. Ensure data quality, privacy, and security
 3. Utilize EHR systems effectively
@@ -194,12 +207,14 @@ Upon completion, students will be able to:
 ### Health Information Technology Curriculum
 
 #### **Program Overview**
+
 - **Duration**: 4 months (full-time) or 8 months (part-time)
 - **Credit Hours**: 24 semester hours
 - **Delivery**: Hybrid (online + hands-on labs)
 - **Credentials**: Epic or Cerner certification
 
 #### **Course Modules**
+
 1. Healthcare Systems & Terminology (3 credits)
 2. Health Information Management (3 credits)
 3. EHR Systems Training (6 credits)
@@ -214,6 +229,7 @@ Upon completion, students will be able to:
 ### Adult Basic Education (ABE)
 
 #### **Program Components**
+
 - Basic literacy skills
 - Numeracy and math skills
 - Digital literacy
@@ -221,6 +237,7 @@ Upon completion, students will be able to:
 - Life skills and soft skills
 
 #### **Levels**
+
 - **Beginning Literacy**: Reading levels 0-1.9
 - **Beginning Basic Education**: Reading levels 2.0-3.9
 - **Intermediate Basic Education**: Reading levels 4.0-5.9
@@ -230,6 +247,7 @@ Upon completion, students will be able to:
 ### GED Preparation
 
 #### **Program Overview**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  GED Preparation Program 🎓                             │
@@ -260,6 +278,7 @@ Upon completion, students will be able to:
 ### English as a Second Language (ESL)
 
 #### **Program Levels**
+
 - **Beginning Low**: Basic survival English
 - **Beginning High**: Basic communication
 - **Intermediate Low**: Everyday communication
@@ -267,6 +286,7 @@ Upon completion, students will be able to:
 - **Advanced**: Academic and professional English
 
 #### **Services**
+
 - Conversation practice
 - Grammar and writing
 - Pronunciation
@@ -281,6 +301,7 @@ Upon completion, students will be able to:
 ### CTE Programs
 
 #### **Healthcare Pathways**
+
 - Clinical Informatics
 - Health Information Technology
 - Medical Coding & Billing
@@ -289,6 +310,7 @@ Upon completion, students will be able to:
 - Dental Assistant
 
 #### **Information Technology Pathways**
+
 - IT Support Specialist
 - Network Administration
 - Cybersecurity
@@ -297,6 +319,7 @@ Upon completion, students will be able to:
 - Cloud Computing
 
 #### **Business & Finance Pathways**
+
 - Business Administration
 - Accounting
 - Human Resources
@@ -305,6 +328,7 @@ Upon completion, students will be able to:
 - Office Administration
 
 #### **Manufacturing & Logistics Pathways**
+
 - CNC Machining
 - Industrial Maintenance
 - Quality Control
@@ -315,12 +339,14 @@ Upon completion, students will be able to:
 ### Work-Based Learning
 
 #### **Components**
+
 - **Career Exploration**: Job shadowing, workplace tours
 - **Career Preparation**: Internships, apprenticeships
 - **Career Training**: On-the-job training, cooperative education
 - **Career Transition**: Job placement, career advancement
 
 #### **Employer Partnerships**
+
 - Industry advisory boards
 - Curriculum input and review
 - Equipment and technology donations
@@ -334,12 +360,14 @@ Upon completion, students will be able to:
 ### Family Educational Rights and Privacy Act
 
 #### **Student Rights**
+
 - Right to inspect and review education records
 - Right to request amendment of records
 - Right to consent to disclosure of records
 - Right to file complaints with DOE
 
 #### **Our Compliance**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  FERPA Compliance Framework 🔒                          │
@@ -371,6 +399,7 @@ Upon completion, students will be able to:
 ```
 
 #### **Permitted Disclosures (Without Consent)**
+
 - School officials with legitimate educational interest
 - Other schools (transfer)
 - Authorized representatives (audit/evaluation)
@@ -380,6 +409,7 @@ Upon completion, students will be able to:
 - Health and safety emergencies
 
 #### **Record Retention**
+
 - Active student records: Duration + 5 years
 - Transcripts: Permanent
 - Financial records: 7 years
@@ -392,6 +422,7 @@ Upon completion, students will be able to:
 ### Learning Management System (LMS)
 
 #### **Platform Features**
+
 - Course management
 - Content delivery
 - Assignment submission
@@ -402,6 +433,7 @@ Upon completion, students will be able to:
 - Analytics and reporting
 
 #### **Accessibility**
+
 - Screen reader compatible
 - Keyboard navigation
 - Closed captioning
@@ -411,6 +443,7 @@ Upon completion, students will be able to:
 ### Educational Software
 
 #### **Tools & Platforms**
+
 - **Video Conferencing**: Zoom, Microsoft Teams
 - **Content Creation**: Articulate, Camtasia
 - **Assessment**: ExamSoft, Respondus
@@ -420,6 +453,7 @@ Upon completion, students will be able to:
 ### Digital Literacy
 
 #### **Student Technology Training**
+
 - Computer basics
 - Internet and email
 - Microsoft Office Suite
@@ -435,6 +469,7 @@ Upon completion, students will be able to:
 ### Educational Outcomes
 
 #### **Student Success Metrics**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  Educational Performance Metrics 📊                     │
@@ -460,6 +495,7 @@ Upon completion, students will be able to:
 ### Quality Assurance
 
 #### **Continuous Improvement Process**
+
 1. **Assessment**: Evaluate program effectiveness
 2. **Analysis**: Identify areas for improvement
 3. **Action**: Implement changes
@@ -467,6 +503,7 @@ Upon completion, students will be able to:
 5. **Refinement**: Adjust as needed
 
 #### **Stakeholder Feedback**
+
 - Student course evaluations
 - Employer satisfaction surveys
 - Advisory board input
@@ -476,6 +513,7 @@ Upon completion, students will be able to:
 ### Accreditation
 
 #### **ACCET Accreditation**
+
 - **Status**: ✅ Accredited
 - **Accrediting Body**: Accrediting Council for Continuing Education & Training
 - **Scope**: All educational programs
@@ -483,6 +521,7 @@ Upon completion, students will be able to:
 - **Next Review**: [Date]
 
 #### **Standards Compliance**
+
 - Institutional standards
 - Educational standards
 - Student services standards
@@ -496,26 +535,31 @@ Upon completion, students will be able to:
 ### Federal Resources
 
 #### **U.S. Department of Education**
+
 - **Website**: https://www.ed.gov
 - **Phone**: 1-800-USA-LEARN (1-800-872-5327)
 - **Email**: ed.gov@ed.gov
 
 #### **Office of Career, Technical, and Adult Education (OCTAE)**
+
 - **Website**: https://www.ed.gov/about/offices/list/ovae/
 - **Phone**: (202) 245-7700
 
 #### **Federal Student Aid**
+
 - **Website**: https://studentaid.gov
 - **Phone**: 1-800-4-FED-AID (1-800-433-3243)
 
 ### State Resources
 
 #### **Indiana Department of Education**
+
 - **Website**: https://www.in.gov/doe/
 - **Phone**: (317) 232-6610
 - **Email**: webmaster@doe.in.gov
 
 #### **Indiana Commission for Higher Education**
+
 - **Website**: https://www.in.gov/che/
 - **Phone**: (317) 464-4400
 - **Email**: che@che.in.gov
@@ -523,9 +567,11 @@ Upon completion, students will be able to:
 ### Professional Organizations
 
 #### **American Association for Adult and Continuing Education (AAACE)**
+
 - **Website**: https://www.aaace.org
 
 #### **Association for Career and Technical Education (ACTE)**
+
 - **Website**: https://www.acteonline.org
 
 ---
@@ -540,4 +586,4 @@ Upon completion, students will be able to:
 
 ---
 
-*Providing quality education and training that prepares students for success in the workforce and in life.*
+_Providing quality education and training that prepares students for success in the workforce and in life._

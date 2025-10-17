@@ -3,28 +3,74 @@
   Commercial License. No resale, sublicensing, or redistribution allowed.
   See LICENSE file for details.
 */
-import React from "react";
+import React from 'react';
 
 export default function FundingImpact() {
   return (
-    <main style={{ padding: 32, maxWidth: 900, margin: "0 auto" }}>
+    <main style={{ padding: 32, maxWidth: 900, margin: '0 auto' }}>
       <h1>Funding Impact</h1>
-      <p>Track the impact of workforce funding programs including WIOA, WRG, and VR.</p>
-      
+      <p>
+        Track the impact of workforce funding programs including WIOA, WRG, and
+        VR.
+      </p>
+
       <div style={{ marginTop: 32 }}>
         <h2>Program Metrics</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16, marginTop: 16 }}>
-          <div style={{ padding: 16, border: "1px solid var(--brand-border)", borderRadius: 8 }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: 16,
+            marginTop: 16,
+          }}
+        >
+          <div
+            style={{
+              padding: 16,
+              border: '1px solid var(--brand-border)',
+              borderRadius: 8,
+            }}
+          >
             <h3>WIOA Participants</h3>
-            <p style={{ fontSize: 32, fontWeight: "bold", color: "#4f46e5" }}>247</p>
+            <p style={{ fontSize: 32, fontWeight: 'bold', color: '#4f46e5' }}>
+              247
+            </p>
           </div>
-          <div style={{ padding: 16, border: "1px solid var(--brand-border)", borderRadius: 8 }}>
+          <div
+            style={{
+              padding: 16,
+              border: '1px solid var(--brand-border)',
+              borderRadius: 8,
+            }}
+          >
             <h3>WRG Enrollments</h3>
-            <p style={{ fontSize: 32, fontWeight: "bold", color: "var(--brand-success)" }}>89</p>
+            <p
+              style={{
+                fontSize: 32,
+                fontWeight: 'bold',
+                color: 'var(--brand-success)',
+              }}
+            >
+              89
+            </p>
           </div>
-          <div style={{ padding: 16, border: "1px solid var(--brand-border)", borderRadius: 8 }}>
+          <div
+            style={{
+              padding: 16,
+              border: '1px solid var(--brand-border)',
+              borderRadius: 8,
+            }}
+          >
             <h3>VR Placements</h3>
-            <p style={{ fontSize: 32, fontWeight: "bold", color: "var(--brand-warning)" }}>34</p>
+            <p
+              style={{
+                fontSize: 32,
+                fontWeight: 'bold',
+                color: 'var(--brand-warning)',
+              }}
+            >
+              34
+            </p>
           </div>
         </div>
       </div>

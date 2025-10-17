@@ -10,9 +10,10 @@ function generateLicense(email, productId, expiresInDays = 365) {
 
   const payload = `${email}|${productId}|${issuedAt.toISOString()}|${expiresAt.toISOString()}`;
 
-  const hash = crypto.createHmac('sha256', LICENSE_SECRET)
-                     .update(payload)
-                     .digest('hex');
+  const hash = crypto
+    .createHmac('sha256', LICENSE_SECRET)
+    .update(payload)
+    .digest('hex');
 
   const licenseKey = Buffer.from(payload).toString('base64') + '.' + hash;
   return { licenseKey, expiresAt };
@@ -22,11 +23,13 @@ function validateLicense(licenseKey) {
   try {
     const [encodedPayload, signature] = licenseKey.split('.');
     const payload = Buffer.from(encodedPayload, 'base64').toString('utf-8');
-    const hashCheck = crypto.createHmac('sha256', LICENSE_SECRET)
-                            .update(payload)
-                            .digest('hex');
+    const hashCheck = crypto
+      .createHmac('sha256', LICENSE_SECRET)
+      .update(payload)
+      .digest('hex');
 
-    if (hashCheck !== signature) return { valid: false, reason: 'Invalid signature' };
+    if (hashCheck !== signature)
+      return { valid: false, reason: 'Invalid signature' };
 
     const [email, productId, issuedAt, expiresAt] = payload.split('|');
     const now = new Date();

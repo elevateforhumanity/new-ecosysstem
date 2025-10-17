@@ -38,15 +38,15 @@ class VideoStorageManager {
         method: 'PUT',
         body: videoFile,
         headers: {
-          'Content-Type': videoFile.type
-        }
+          'Content-Type': videoFile.type,
+        },
       });
 
       if (response.ok) {
         return {
           success: true,
           videoUrl: `${this.baseUrl}/${fileName}`,
-          fileName: fileName
+          fileName: fileName,
         };
       }
 

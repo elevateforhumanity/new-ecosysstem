@@ -11,6 +11,7 @@ All pages are tested, working, and ready to copy into your Durable site at **www
 **Start here to access all test pages:**
 
 ### Live Link:
+
 ```
 https://elevateforhumanity.netlify.app/lms-test-index.html
 ```
@@ -22,9 +23,11 @@ This page has links to all 7 LMS pages with copy buttons!
 ## 📄 Individual Page Links
 
 ### 1. About Page
+
 **URL:** `https://elevateforhumanity.netlify.app/test-about-page.html`
 
 **What's included:**
+
 - Mission, Vision & Approach
 - Impact stats (1,247+ students, 92% placement, etc.)
 - What We Do (6 services)
@@ -38,9 +41,11 @@ This page has links to all 7 LMS pages with copy buttons!
 ---
 
 ### 2. Enrollment Page
+
 **URL:** `https://elevateforhumanity.netlify.app/test-enrollment.html`
 
 **What's included:**
+
 - Program selection dropdown (16 programs)
 - Student information form
 - Contact details
@@ -53,9 +58,11 @@ This page has links to all 7 LMS pages with copy buttons!
 ---
 
 ### 3. Dashboard Page
+
 **URL:** `https://elevateforhumanity.netlify.app/test-dashboard.html`
 
 **What's included:**
+
 - Welcome message
 - Overall progress bar (68%)
 - Quick stats card
@@ -65,9 +72,11 @@ This page has links to all 7 LMS pages with copy buttons!
 ---
 
 ### 4. My Courses Page
+
 **URL:** `https://elevateforhumanity.netlify.app/test-courses.html`
 
 **What's included:**
+
 - 3 course cards with:
   - Progress bars
   - Completion status badges
@@ -78,9 +87,11 @@ This page has links to all 7 LMS pages with copy buttons!
 ---
 
 ### 5. Certificates Page
+
 **URL:** `https://elevateforhumanity.netlify.app/test-certificates.html`
 
 **What's included:**
+
 - Certificate display card
 - Issue and expiration dates
 - Certificate ID
@@ -91,9 +102,11 @@ This page has links to all 7 LMS pages with copy buttons!
 ---
 
 ### 6. Profile Page
+
 **URL:** `https://elevateforhumanity.netlify.app/test-profile.html`
 
 **What's included:**
+
 - Editable name field
 - Email field
 - Phone field
@@ -103,9 +116,11 @@ This page has links to all 7 LMS pages with copy buttons!
 ---
 
 ### 7. Support Page
+
 **URL:** `https://elevateforhumanity.netlify.app/test-support.html`
 
 **What's included:**
+
 - Contact information box
 - Support hours
 - Email and phone
@@ -118,21 +133,25 @@ This page has links to all 7 LMS pages with copy buttons!
 ## 🎨 Design Features
 
 ✅ **Professional Branding**
+
 - Matches your Elevate for Humanity colors (#4D4B37)
 - Clean, modern design
 - Consistent styling across all pages
 
 ✅ **Fully Responsive**
+
 - Works on mobile, tablet, and desktop
 - Adaptive grid layouts
 - Touch-friendly buttons
 
 ✅ **Easy to Use**
+
 - One-click copy button on each page
 - No external dependencies
 - Pure HTML/CSS - works anywhere
 
 ✅ **Durable-Ready**
+
 - Designed for Durable Custom HTML blocks
 - No conflicts with Durable's styling
 - Paste and publish immediately
@@ -142,46 +161,54 @@ This page has links to all 7 LMS pages with copy buttons!
 ## 📝 How to Use
 
 ### Step 1: Open the Master Index
+
 Go to: `https://elevateforhumanity.netlify.app/lms-test-index.html`
 
 ### Step 2: Click Any Page
+
 Click the "View & Copy" button for the page you want
 
 ### Step 3: Review the Page
+
 Make sure it looks good and has all the content you need
 
 ### Step 4: Copy the Code
+
 Click the "📋 Copy HTML Code" button at the top
+
 - You'll see "✅ Copied!" confirmation
 - The HTML is now in your clipboard
 
 ### Step 5: Go to Durable
+
 1. Log into your Durable dashboard
 2. Go to www.elevateforhumanity.org editor
 3. Create a new page or edit existing one
 
 ### Step 6: Add Custom HTML Block
+
 1. Click "Add Section" or "+"
 2. Select "Custom HTML" or "Embed Code"
 3. Paste the copied code (Ctrl+V or Cmd+V)
 
 ### Step 7: Publish!
+
 Click "Publish" and your page is live!
 
 ---
 
 ## 🔗 Quick Reference
 
-| Page | URL | Purpose |
-|------|-----|---------|
-| **Master Index** | `/lms-test-index.html` | Links to all pages |
-| About | `/test-about-page.html` | Company info |
-| Enrollment | `/test-enrollment.html` | Course signup |
-| Dashboard | `/test-dashboard.html` | Student overview |
-| My Courses | `/test-courses.html` | Course list |
-| Certificates | `/test-certificates.html` | Earned certs |
-| Profile | `/test-profile.html` | User settings |
-| Support | `/test-support.html` | Help desk |
+| Page             | URL                       | Purpose            |
+| ---------------- | ------------------------- | ------------------ |
+| **Master Index** | `/lms-test-index.html`    | Links to all pages |
+| About            | `/test-about-page.html`   | Company info       |
+| Enrollment       | `/test-enrollment.html`   | Course signup      |
+| Dashboard        | `/test-dashboard.html`    | Student overview   |
+| My Courses       | `/test-courses.html`      | Course list        |
+| Certificates     | `/test-certificates.html` | Earned certs       |
+| Profile          | `/test-profile.html`      | User settings      |
+| Support          | `/test-support.html`      | Help desk          |
 
 ---
 
@@ -198,11 +225,13 @@ Click "Publish" and your page is live!
 ## 🎯 What's Next?
 
 ### Immediate:
+
 1. ✅ Copy About page → Create "About" page in Durable
 2. ✅ Copy Enrollment → Create "Enroll" or "Apply" page
 3. ✅ Copy Dashboard → Create "Dashboard" or "My Account" page
 
 ### Soon:
+
 4. Copy remaining pages as needed
 5. Update navigation links between pages
 6. Add your actual content and images
@@ -231,6 +260,7 @@ You now have **7 complete, professional LMS pages** ready to use:
 7. ✅ Support - Help desk system
 
 **All pages:**
+
 - Match your branding
 - Have copy buttons
 - Are mobile-responsive
@@ -240,6 +270,7 @@ You now have **7 complete, professional LMS pages** ready to use:
 ---
 
 **🚀 Start with the Master Index:**
+
 ### [https://elevateforhumanity.netlify.app/lms-test-index.html](https://elevateforhumanity.netlify.app/lms-test-index.html)
 
 **Click, copy, paste, publish!** 🎉

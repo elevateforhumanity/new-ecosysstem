@@ -60,12 +60,11 @@ class SMSAlertHandler {
       const result = await this.client.messages.create({
         body: fullMessage,
         from: process.env.TWILIO_PHONE_NUMBER || '+15551234567',
-        to: `+1${this.phoneNumber}`
+        to: `+1${this.phoneNumber}`,
       });
 
       this.logAlert(`SMS SENT: ${fullMessage} (SID: ${result.sid})`);
       return { success: true, sid: result.sid, mode: 'live' };
-
     } catch (error) {
       console.error('📱 SMS Error:', error.message);
       this.logAlert(`SMS ERROR: ${error.message}`);
@@ -88,11 +87,17 @@ class SMSAlertHandler {
   }
 
   async onSale(platform, amount, product) {
-    await this.sendAlert(`💰 SALE: $${amount} for ${product} on ${platform}`, 'sale');
+    await this.sendAlert(
+      `💰 SALE: $${amount} for ${product} on ${platform}`,
+      'sale'
+    );
   }
 
   async onPaymentReceived(amount, method, product) {
-    await this.sendAlert(`💳 PAYMENT: $${amount} via ${method} for ${product}`, 'payment');
+    await this.sendAlert(
+      `💳 PAYMENT: $${amount} via ${method} for ${product}`,
+      'payment'
+    );
   }
 
   async onSystemAlert(message) {
@@ -117,7 +122,11 @@ class SMSAlertHandler {
             await this.onSale(platform, data.amount, data.product);
             break;
           case 'payment':
-            await this.onPaymentReceived(data.amount, data.method, data.product);
+            await this.onPaymentReceived(
+              data.amount,
+              data.method,
+              data.product
+            );
             break;
           default:
             await this.onSystemAlert(`Unknown event: ${event}`);
@@ -132,7 +141,10 @@ class SMSAlertHandler {
     // Manual test endpoint
     app.post('/api/sms/test', async (req, res) => {
       try {
-        const result = await this.sendAlert('🧪 Test alert from EFH system', 'test');
+        const result = await this.sendAlert(
+          '🧪 Test alert from EFH system',
+          'test'
+        );
         res.json(result);
       } catch (error) {
         res.status(500).json({ error: error.message });

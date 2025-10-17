@@ -7,7 +7,7 @@ const FullSailLanding = () => {
     email: '',
     phone: '',
     program: '',
-    employment: ''
+    employment: '',
   });
 
   const handleSubmit = (e) => {
@@ -20,7 +20,7 @@ const FullSailLanding = () => {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -28,50 +28,54 @@ const FullSailLanding = () => {
     {
       icon: '🛡️',
       title: 'Cybersecurity',
-      description: 'Protect organizations from cyber threats with CompTIA Security+ certification.',
+      description:
+        'Protect organizations from cyber threats with CompTIA Security+ certification.',
       features: [
         'CompTIA Security+ Certification',
         'Ethical Hacking Training',
         'Network Security',
         '12-16 weeks',
-        '$65,000+ average salary'
-      ]
+        '$65,000+ average salary',
+      ],
     },
     {
       icon: '☁️',
       title: 'Cloud Computing',
-      description: 'Master cloud platforms with Google Cloud and Microsoft Azure certifications.',
+      description:
+        'Master cloud platforms with Google Cloud and Microsoft Azure certifications.',
       features: [
         'Google Cloud Certification',
         'Microsoft Azure Training',
         'Cloud Architecture',
         '8-12 weeks',
-        '$75,000+ average salary'
-      ]
+        '$75,000+ average salary',
+      ],
     },
     {
       icon: '🏥',
       title: 'Healthcare (CNA)',
-      description: 'Start your healthcare career as a Certified Nursing Assistant.',
+      description:
+        'Start your healthcare career as a Certified Nursing Assistant.',
       features: [
         'State CNA Certification',
         'Clinical Training',
         'Patient Care Skills',
         '6-8 weeks',
-        '$35,000+ average salary'
-      ]
+        '$35,000+ average salary',
+      ],
     },
     {
       icon: '⚡',
       title: 'Electrical Trades',
-      description: 'Join the IBEW union with electrical apprenticeship preparation.',
+      description:
+        'Join the IBEW union with electrical apprenticeship preparation.',
       features: [
         'IBEW Apprenticeship Prep',
         'Electrical Fundamentals',
         'Safety Training',
         '12-16 weeks',
-        '$70,000+ average salary'
-      ]
+        '$70,000+ average salary',
+      ],
     },
     {
       icon: '🏗️',
@@ -82,28 +86,29 @@ const FullSailLanding = () => {
         'Construction Safety',
         'Blueprint Reading',
         '10-14 weeks',
-        '$55,000+ average salary'
-      ]
+        '$55,000+ average salary',
+      ],
     },
     {
       icon: '💅',
       title: 'Beauty & Wellness',
-      description: 'Launch your career in the beauty industry with professional certifications.',
+      description:
+        'Launch your career in the beauty industry with professional certifications.',
       features: [
         'Cosmetology License Prep',
         'Esthetics Training',
         'Nail Technology',
         '8-12 weeks',
-        '$40,000+ average salary'
-      ]
-    }
+        '$40,000+ average salary',
+      ],
+    },
   ];
 
   const stats = [
     { number: '89%', label: 'Job Placement Rate' },
     { number: '106+', label: 'Certifications Offered' },
     { number: '2,500+', label: 'Students Trained' },
-    { number: '$0', label: 'Cost for Qualified Residents' }
+    { number: '$0', label: 'Cost for Qualified Residents' },
   ];
 
   return (
@@ -125,25 +130,28 @@ const FullSailLanding = () => {
               <div className="bg-orange-500 text-white px-4 py-2 rounded-full text-xs font-bold uppercase inline-block w-fit mb-5">
                 89% Job Placement Rate
               </div>
-              
+
               <h1 className="text-4xl lg:text-5xl font-bold mb-5 leading-tight">
                 Start Your Career in Tech & Trades
               </h1>
-              
+
               <p className="text-xl mb-8 text-gray-200 leading-relaxed">
-                Get job-ready in months, not years with industry-recognized certifications and guaranteed employer connections.
+                Get job-ready in months, not years with industry-recognized
+                certifications and guaranteed employer connections.
               </p>
-              
+
               <ul className="space-y-3 mb-8">
                 {[
                   'Free training for qualified residents',
                   'Industry-recognized certifications',
                   'Job placement assistance included',
                   'Flexible scheduling options',
-                  'No experience required'
+                  'No experience required',
                 ].map((feature, index) => (
                   <li key={index} className="flex items-start text-lg">
-                    <span className="text-green-400 font-bold text-xl mr-3">✓</span>
+                    <span className="text-green-400 font-bold text-xl mr-3">
+                      ✓
+                    </span>
                     {feature}
                   </li>
                 ))}
@@ -163,7 +171,10 @@ const FullSailLanding = () => {
 
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
-                  <label htmlFor="firstName" className="block font-bold text-brand-text mb-1">
+                  <label
+                    htmlFor="firstName"
+                    className="block font-bold text-brand-text mb-1"
+                  >
                     First Name *
                   </label>
                   <input
@@ -178,7 +189,10 @@ const FullSailLanding = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="lastName" className="block font-bold text-brand-text mb-1">
+                  <label
+                    htmlFor="lastName"
+                    className="block font-bold text-brand-text mb-1"
+                  >
                     Last Name *
                   </label>
                   <input
@@ -193,7 +207,10 @@ const FullSailLanding = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block font-bold text-brand-text mb-1">
+                  <label
+                    htmlFor="email"
+                    className="block font-bold text-brand-text mb-1"
+                  >
                     Email Address *
                   </label>
                   <input
@@ -208,7 +225,10 @@ const FullSailLanding = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="phone" className="block font-bold text-brand-text mb-1">
+                  <label
+                    htmlFor="phone"
+                    className="block font-bold text-brand-text mb-1"
+                  >
                     Phone Number *
                   </label>
                   <input
@@ -223,7 +243,10 @@ const FullSailLanding = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="program" className="block font-bold text-brand-text mb-1">
+                  <label
+                    htmlFor="program"
+                    className="block font-bold text-brand-text mb-1"
+                  >
                     Program Interest *
                   </label>
                   <select
@@ -245,7 +268,10 @@ const FullSailLanding = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="employment" className="block font-bold text-brand-text mb-1">
+                  <label
+                    htmlFor="employment"
+                    className="block font-bold text-brand-text mb-1"
+                  >
                     Current Employment Status *
                   </label>
                   <select
@@ -272,8 +298,9 @@ const FullSailLanding = () => {
                 </button>
 
                 <p className="text-xs text-brand-text-muted leading-relaxed mt-4">
-                  By submitting this form, you consent to receive emails and texts from Elevate for Humanity. 
-                  You may opt out at any time. Message and data rates may apply.
+                  By submitting this form, you consent to receive emails and
+                  texts from Elevate for Humanity. You may opt out at any time.
+                  Message and data rates may apply.
                 </p>
               </form>
             </div>
@@ -287,7 +314,7 @@ const FullSailLanding = () => {
           <h2 className="text-4xl font-bold text-center text-brand-text mb-12">
             Choose Your Career Path
           </h2>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {programs.map((program, index) => (
               <div
@@ -303,8 +330,13 @@ const FullSailLanding = () => {
                 </p>
                 <ul className="text-left space-y-2 mb-6">
                   {program.features.map((feature, idx) => (
-                    <li key={idx} className="text-brand-text text-sm pl-5 relative">
-                      <span className="absolute left-0 text-orange-500 font-bold">•</span>
+                    <li
+                      key={idx}
+                      className="text-brand-text text-sm pl-5 relative"
+                    >
+                      <span className="absolute left-0 text-orange-500 font-bold">
+                        •
+                      </span>
                       {feature}
                     </li>
                   ))}
@@ -327,9 +359,7 @@ const FullSailLanding = () => {
                 <div className="text-5xl font-bold text-orange-500 mb-3">
                   {stat.number}
                 </div>
-                <div className="text-lg">
-                  {stat.label}
-                </div>
+                <div className="text-lg">{stat.label}</div>
               </div>
             ))}
           </div>

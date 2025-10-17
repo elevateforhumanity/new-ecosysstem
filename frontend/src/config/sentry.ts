@@ -6,18 +6,20 @@ import { BrowserTracing } from '@sentry/tracing';
  */
 export const initSentry = () => {
   if (!import.meta.env.VITE_SENTRY_DSN) {
-    console.warn('VITE_SENTRY_DSN not configured, skipping Sentry initialization');
+    console.warn(
+      'VITE_SENTRY_DSN not configured, skipping Sentry initialization'
+    );
     return;
   }
 
   Sentry.init({
     dsn: import.meta.env.VITE_SENTRY_DSN,
     environment: import.meta.env.MODE || 'development',
-    
+
     // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
     // We recommend adjusting this value in production
     tracesSampleRate: import.meta.env.PROD ? 0.1 : 1.0,
-    
+
     integrations: [
       new BrowserTracing({
         // Set `tracePropagationTargets` to control for which URLs distributed tracing should be enabled
@@ -38,16 +40,22 @@ export const initSentry = () => {
         blockAllMedia: true,
       }),
     ],
-    
+
     // Filter out sensitive data
     beforeSend(event, hint) {
       // Remove sensitive data from breadcrumbs
       if (event.breadcrumbs) {
-        event.breadcrumbs = event.breadcrumbs.map(breadcrumb => {
+        event.breadcrumbs = event.breadcrumbs.map((breadcrumb) => {
           if (breadcrumb.data) {
             // Remove sensitive keys
-            const sensitiveKeys = ['password', 'token', 'api_key', 'secret', 'authorization'];
-            sensitiveKeys.forEach(key => {
+            const sensitiveKeys = [
+              'password',
+              'token',
+              'api_key',
+              'secret',
+              'authorization',
+            ];
+            sensitiveKeys.forEach((key) => {
               if (breadcrumb.data && key in breadcrumb.data) {
                 breadcrumb.data[key] = '[REDACTED]';
               }
@@ -56,16 +64,16 @@ export const initSentry = () => {
           return breadcrumb;
         });
       }
-      
+
       // Remove sensitive request data
       if (event.request?.headers) {
         delete event.request.headers['authorization'];
         delete event.request.headers['cookie'];
       }
-      
+
       return event;
     },
-    
+
     // Ignore certain errors
     ignoreErrors: [
       // Browser extensions
@@ -95,7 +103,10 @@ export const initSentry = () => {
 /**
  * Helper function to capture exceptions manually
  */
-export const captureException = (error: Error, context?: Record<string, any>) => {
+export const captureException = (
+  error: Error,
+  context?: Record<string, any>
+) => {
   Sentry.captureException(error, {
     extra: context,
   });
@@ -104,14 +115,19 @@ export const captureException = (error: Error, context?: Record<string, any>) =>
 /**
  * Helper function to capture messages
  */
-export const captureMessage = (message: string, level: Sentry.SeverityLevel = 'info') => {
+export const captureMessage = (
+  message: string,
+  level: Sentry.SeverityLevel = 'info'
+) => {
   Sentry.captureMessage(message, level);
 };
 
 /**
  * Helper function to set user context
  */
-export const setUserContext = (user: { id: string; email?: string; username?: string } | null) => {
+export const setUserContext = (
+  user: { id: string; email?: string; username?: string } | null
+) => {
   if (user) {
     Sentry.setUser({
       id: user.id,

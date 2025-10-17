@@ -4,30 +4,30 @@ class UrgencyScarcityManager {
     this.inventory = {
       emergency_starter: { total: 50, sold: 0, reserved: 0 },
       business_rescue: { total: 25, sold: 0, reserved: 0 },
-      enterprise_emergency: { total: 10, sold: 0, reserved: 0 }
+      enterprise_emergency: { total: 10, sold: 0, reserved: 0 },
     };
-    
+
     this.reservations = new Map(); // Track temporary reservations
     this.saleMetrics = {
       startTime: new Date(),
       totalViews: 0,
       uniqueVisitors: new Set(),
       conversions: 0,
-      abandonedCarts: 0
+      abandonedCarts: 0,
     };
-    
+
     this.urgencyMessages = [
-      "🚨 Personal financial emergency - must sell immediately",
-      "⚠️ Bank foreclosure notice received - liquidating assets",
-      "💔 Medical bills forcing immediate sale",
-      "🏠 Risk of losing home - need cash now",
-      "⏰ 48 hours to raise funds or lose everything"
+      '🚨 Personal financial emergency - must sell immediately',
+      '⚠️ Bank foreclosure notice received - liquidating assets',
+      '💔 Medical bills forcing immediate sale',
+      '🏠 Risk of losing home - need cash now',
+      '⏰ 48 hours to raise funds or lose everything',
     ];
-    
+
     this.scarcityTriggers = {
       lowStock: 5,
       veryLowStock: 2,
-      lastChance: 1
+      lastChance: 1,
     };
   }
 
@@ -38,10 +38,10 @@ class UrgencyScarcityManager {
 
     const available = item.total - item.sold - item.reserved;
     const percentSold = Math.round((item.sold / item.total) * 100);
-    
+
     let urgencyLevel = 'normal';
     let message = '';
-    
+
     if (available <= this.scarcityTriggers.lastChance) {
       urgencyLevel = 'critical';
       message = `🔥 LAST ${available} REMAINING!`;
@@ -60,7 +60,7 @@ class UrgencyScarcityManager {
       percentSold,
       urgencyLevel,
       message,
-      isLowStock: available <= this.scarcityTriggers.lowStock
+      isLowStock: available <= this.scarcityTriggers.lowStock,
     };
   }
 
@@ -82,16 +82,16 @@ class UrgencyScarcityManager {
       packageId,
       sessionId,
       expiresAt: new Date(Date.now() + minutes * 60 * 1000),
-      createdAt: new Date()
+      createdAt: new Date(),
     };
 
     this.reservations.set(sessionId, reservation);
     item.reserved++;
 
-    return { 
-      success: true, 
+    return {
+      success: true,
       expiresAt: reservation.expiresAt,
-      remainingTime: minutes * 60
+      remainingTime: minutes * 60,
     };
   }
 
@@ -113,10 +113,10 @@ class UrgencyScarcityManager {
     this.reservations.delete(sessionId);
     this.saleMetrics.conversions++;
 
-    return { 
-      success: true, 
+    return {
+      success: true,
       packageId: reservation.packageId,
-      newInventoryStatus: this.getInventoryStatus(reservation.packageId)
+      newInventoryStatus: this.getInventoryStatus(reservation.packageId),
     };
   }
 
@@ -150,7 +150,9 @@ class UrgencyScarcityManager {
 
   // Get random urgency message
   getUrgencyMessage() {
-    return this.urgencyMessages[Math.floor(Math.random() * this.urgencyMessages.length)];
+    return this.urgencyMessages[
+      Math.floor(Math.random() * this.urgencyMessages.length)
+    ];
   }
 
   // Get time-based urgency
@@ -158,30 +160,30 @@ class UrgencyScarcityManager {
     const now = new Date();
     const saleStart = this.saleMetrics.startTime;
     const hoursElapsed = (now - saleStart) / (1000 * 60 * 60);
-    
+
     if (hoursElapsed < 6) {
       return {
         level: 'high',
         message: '🔥 Flash sale just started - best prices available now!',
-        timeLeft: '48 hours'
+        timeLeft: '48 hours',
       };
     } else if (hoursElapsed < 24) {
       return {
         level: 'medium',
         message: '⏰ Less than 24 hours left at these emergency prices!',
-        timeLeft: Math.round(48 - hoursElapsed) + ' hours'
+        timeLeft: Math.round(48 - hoursElapsed) + ' hours',
       };
     } else if (hoursElapsed < 42) {
       return {
         level: 'high',
         message: '🚨 Final hours - prices go back to normal soon!',
-        timeLeft: Math.round(48 - hoursElapsed) + ' hours'
+        timeLeft: Math.round(48 - hoursElapsed) + ' hours',
       };
     } else {
       return {
         level: 'critical',
         message: '⚠️ LAST CHANCE - Sale ends in minutes!',
-        timeLeft: 'Minutes remaining'
+        timeLeft: 'Minutes remaining',
       };
     }
   }
@@ -190,18 +192,19 @@ class UrgencyScarcityManager {
   trackVisitor(visitorId, action, packageId = null) {
     this.saleMetrics.totalViews++;
     this.saleMetrics.uniqueVisitors.add(visitorId);
-    
+
     // Return social proof data
     const uniqueVisitorCount = this.saleMetrics.uniqueVisitors.size;
-    const conversionRate = this.saleMetrics.conversions / this.saleMetrics.totalViews * 100;
-    
+    const conversionRate =
+      (this.saleMetrics.conversions / this.saleMetrics.totalViews) * 100;
+
     return {
       socialProof: {
         visitorsToday: uniqueVisitorCount,
         totalViews: this.saleMetrics.totalViews,
         conversionRate: Math.round(conversionRate * 10) / 10,
-        recentActivity: this.getRecentActivity()
-      }
+        recentActivity: this.getRecentActivity(),
+      },
     };
   }
 
@@ -214,21 +217,21 @@ class UrgencyScarcityManager {
       'Florida business owner bought Business Rescue',
       'Someone from Washington just reserved Enterprise Emergency',
       'Starter package purchased by Illinois customer',
-      'Business Rescue reserved by Arizona buyer'
+      'Business Rescue reserved by Arizona buyer',
     ];
-    
+
     return activities[Math.floor(Math.random() * activities.length)];
   }
 
   // Get comprehensive urgency data for frontend
   getUrgencyData(packageId, visitorId) {
     this.clearExpiredReservations();
-    
+
     const inventory = this.getInventoryStatus(packageId);
     const timeUrgency = this.getTimeUrgency();
     const socialProof = this.trackVisitor(visitorId, 'view', packageId);
     const urgencyMessage = this.getUrgencyMessage();
-    
+
     return {
       inventory,
       timeUrgency,
@@ -238,71 +241,90 @@ class UrgencyScarcityManager {
         showLowStock: inventory?.isLowStock || false,
         showTimer: true,
         showSocialProof: true,
-        showUrgencyMessage: true
+        showUrgencyMessage: true,
       },
-      recommendations: this.getRecommendations(packageId)
+      recommendations: this.getRecommendations(packageId),
     };
   }
 
   // Get upgrade recommendations based on scarcity
   getRecommendations(packageId) {
     const recommendations = [];
-    
+
     // If starter is low stock, recommend business
     if (packageId === 'emergency_starter') {
       const starterStatus = this.getInventoryStatus('emergency_starter');
       const businessStatus = this.getInventoryStatus('business_rescue');
-      
+
       if (starterStatus?.isLowStock && businessStatus?.available > 5) {
         recommendations.push({
           type: 'upgrade',
           message: '🚀 Starter running low - Business Rescue still available!',
           targetPackage: 'business_rescue',
-          savings: 'Only $500 more for 3x the features'
+          savings: 'Only $500 more for 3x the features',
         });
       }
     }
-    
+
     // If business is low stock, recommend enterprise
     if (packageId === 'business_rescue') {
       const businessStatus = this.getInventoryStatus('business_rescue');
       const enterpriseStatus = this.getInventoryStatus('enterprise_emergency');
-      
+
       if (businessStatus?.isLowStock && enterpriseStatus?.available > 2) {
         recommendations.push({
           type: 'upgrade',
-          message: '💎 Business Rescue selling out - Enterprise still available!',
+          message:
+            '💎 Business Rescue selling out - Enterprise still available!',
           targetPackage: 'enterprise_emergency',
-          savings: 'Unlimited licenses + revenue sharing'
+          savings: 'Unlimited licenses + revenue sharing',
         });
       }
     }
-    
+
     return recommendations;
   }
 
   // Get sales dashboard data
   getSalesDashboard() {
     this.clearExpiredReservations();
-    
-    const totalSold = Object.values(this.inventory).reduce((sum, item) => sum + item.sold, 0);
-    const totalRevenue = 
+
+    const totalSold = Object.values(this.inventory).reduce(
+      (sum, item) => sum + item.sold,
+      0
+    );
+    const totalRevenue =
       this.inventory.emergency_starter.sold * 299 +
       this.inventory.business_rescue.sold * 799 +
       this.inventory.enterprise_emergency.sold * 1999;
-    
+
     return {
       totalSold,
       totalRevenue,
-      conversionRate: (this.saleMetrics.conversions / this.saleMetrics.totalViews * 100).toFixed(2),
+      conversionRate: (
+        (this.saleMetrics.conversions / this.saleMetrics.totalViews) *
+        100
+      ).toFixed(2),
       uniqueVisitors: this.saleMetrics.uniqueVisitors.size,
-      abandonmentRate: (this.saleMetrics.abandonedCarts / (this.saleMetrics.abandonedCarts + this.saleMetrics.conversions) * 100).toFixed(2),
+      abandonmentRate: (
+        (this.saleMetrics.abandonedCarts /
+          (this.saleMetrics.abandonedCarts + this.saleMetrics.conversions)) *
+        100
+      ).toFixed(2),
       inventory: this.inventory,
       activeReservations: this.reservations.size,
       saleProgress: {
-        hoursElapsed: Math.round((new Date() - this.saleMetrics.startTime) / (1000 * 60 * 60)),
-        timeRemaining: Math.max(0, 48 - Math.round((new Date() - this.saleMetrics.startTime) / (1000 * 60 * 60)))
-      }
+        hoursElapsed: Math.round(
+          (new Date() - this.saleMetrics.startTime) / (1000 * 60 * 60)
+        ),
+        timeRemaining: Math.max(
+          0,
+          48 -
+            Math.round(
+              (new Date() - this.saleMetrics.startTime) / (1000 * 60 * 60)
+            )
+        ),
+      },
     };
   }
 }
@@ -312,5 +334,5 @@ const urgencyManager = new UrgencyScarcityManager();
 
 module.exports = {
   UrgencyScarcityManager,
-  urgencyManager
+  urgencyManager,
 };

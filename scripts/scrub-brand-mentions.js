@@ -3,9 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const fg = require('fast-glob');
 
-const TARGETS = [
-  /\bWork\s?One\b/gi,
-];
+const TARGETS = [/\bWork\s?One\b/gi];
 
 const REPLACEMENT = process.env.WORKONE_REPLACEMENT || 'local workforce center';
 

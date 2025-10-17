@@ -80,20 +80,25 @@ export default function AssetGenerator() {
     setGeneratedAsset(null);
 
     try {
-      const response = await fetch('https://efh-ai-stylist.your-subdomain.workers.dev/generate-asset', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          assetType,
-          content,
-        }),
-      });
+      const response = await fetch(
+        'https://efh-ai-stylist.your-subdomain.workers.dev/generate-asset',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            assetType,
+            content,
+          }),
+        }
+      );
 
       const data = await response.json();
-      
+
       if (data.success) {
         setGeneratedAsset(data.asset);
-        setAssetName(`${ASSET_TYPES[assetType].name} - ${new Date().toLocaleDateString()}`);
+        setAssetName(
+          `${ASSET_TYPES[assetType].name} - ${new Date().toLocaleDateString()}`
+        );
       } else {
         alert('Failed to generate asset: ' + data.error);
       }
@@ -115,7 +120,7 @@ export default function AssetGenerator() {
 
     try {
       const { data: user } = await supabase.auth.getUser();
-      
+
       const { data, error } = await supabase
         .from('generated_assets')
         .insert({
@@ -149,15 +154,21 @@ export default function AssetGenerator() {
   return (
     <div className="max-w-7xl mx-auto p-6">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-red-600 mb-2">Brand Asset Generator</h1>
-        <p className="text-brand-text-muted">Create social media posts, flyers, and marketing materials with AI</p>
+        <h1 className="text-4xl font-bold text-red-600 mb-2">
+          Brand Asset Generator
+        </h1>
+        <p className="text-brand-text-muted">
+          Create social media posts, flyers, and marketing materials with AI
+        </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Configuration Panel */}
         <div className="space-y-6">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-semibold text-brand-text mb-4">Asset Configuration</h2>
+            <h2 className="text-2xl font-semibold text-brand-text mb-4">
+              Asset Configuration
+            </h2>
 
             {/* Asset Type */}
             <div className="mb-4">
@@ -177,8 +188,12 @@ export default function AssetGenerator() {
                   >
                     <div className="flex items-start justify-between">
                       <div>
-                        <h3 className="font-semibold text-brand-text">{type.name}</h3>
-                        <p className="text-sm text-brand-text-muted">{type.description}</p>
+                        <h3 className="font-semibold text-brand-text">
+                          {type.name}
+                        </h3>
+                        <p className="text-sm text-brand-text-muted">
+                          {type.description}
+                        </p>
                       </div>
                       <span className="text-xs text-brand-text-light bg-brand-surface-dark px-2 py-1 rounded">
                         {type.dimensions}
@@ -203,7 +218,9 @@ export default function AssetGenerator() {
               />
               {currentAssetType.examples.length > 0 && (
                 <div className="mt-2">
-                  <p className="text-xs text-brand-text-light mb-1">Examples:</p>
+                  <p className="text-xs text-brand-text-light mb-1">
+                    Examples:
+                  </p>
                   {currentAssetType.examples.map((example, i) => (
                     <button
                       key={i}
@@ -225,9 +242,25 @@ export default function AssetGenerator() {
             >
               {loading ? (
                 <span className="flex items-center justify-center">
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
                   </svg>
                   Generating...
                 </span>
@@ -240,7 +273,9 @@ export default function AssetGenerator() {
           {/* Save Panel */}
           {generatedAsset && (
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold text-brand-text mb-4">Save Asset</h2>
+              <h2 className="text-2xl font-semibold text-brand-text mb-4">
+                Save Asset
+              </h2>
 
               <div className="mb-4">
                 <label className="block text-sm font-medium text-brand-text mb-2">
@@ -298,15 +333,21 @@ export default function AssetGenerator() {
                 {/* Copy Text */}
                 {generatedAsset.copyText && (
                   <div className="mt-4 p-4 bg-brand-surface rounded-lg">
-                    <h3 className="font-semibold text-brand-text mb-2">Copy Text:</h3>
-                    <p className="text-brand-text text-sm">{generatedAsset.copyText}</p>
+                    <h3 className="font-semibold text-brand-text mb-2">
+                      Copy Text:
+                    </h3>
+                    <p className="text-brand-text text-sm">
+                      {generatedAsset.copyText}
+                    </p>
                   </div>
                 )}
 
                 {/* Download Options */}
                 <div className="mt-4 flex gap-3">
                   <button
-                    onClick={() => downloadAsHTML(generatedAsset.html, assetName)}
+                    onClick={() =>
+                      downloadAsHTML(generatedAsset.html, assetName)
+                    }
                     className="flex-1 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors"
                   >
                     Download HTML
@@ -335,7 +376,9 @@ export default function AssetGenerator() {
                   d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                 />
               </svg>
-              <h3 className="text-lg font-medium text-brand-text mb-2">No Asset Generated Yet</h3>
+              <h3 className="text-lg font-medium text-brand-text mb-2">
+                No Asset Generated Yet
+              </h3>
               <p className="text-brand-text-light">
                 Select an asset type and describe what you want to create
               </p>

@@ -7,6 +7,7 @@ Based on your interest in **student-portal.html**, here are the best templates w
 ## 🏆 TOP RECOMMENDATIONS
 
 ### 1. **humanized-program-template.html** ⭐ BEST MATCH
+
 - **Hero Sections**: 12
 - **Images**: 8 (most visual)
 - **Features**:
@@ -20,6 +21,7 @@ Based on your interest in **student-portal.html**, here are the best templates w
 - **Preview**: [https://elevateforhumanity.netlify.app/pages/humanized-program-template.html](https://elevateforhumanity.netlify.app/pages/humanized-program-template.html)
 
 ### 2. **acc-style-landing.html** ⭐ BOLD DESIGN
+
 - **Hero Sections**: 23 (most hero elements)
 - **Images**: 1
 - **Features**:
@@ -32,6 +34,7 @@ Based on your interest in **student-portal.html**, here are the best templates w
 - **Preview**: [https://elevateforhumanity.netlify.app/pages/acc-style-landing.html](https://elevateforhumanity.netlify.app/pages/acc-style-landing.html)
 
 ### 3. **READY_FOR_TRANSFER_index.html**
+
 - **Hero Sections**: 3
 - **Images**: 7
 - **Features**:
@@ -47,6 +50,7 @@ Based on your interest in **student-portal.html**, here are the best templates w
 ## 📚 EDUCATION/LMS TEMPLATES
 
 ### 4. **student-portal.html** (Your Current Favorite)
+
 - **Hero Sections**: Minimal
 - **Images**: Few
 - **Features**:
@@ -58,6 +62,7 @@ Based on your interest in **student-portal.html**, here are the best templates w
 - **Preview**: [https://elevateforhumanity.netlify.app/pages/student-portal.html](https://elevateforhumanity.netlify.app/pages/student-portal.html)
 
 ### 5. **lms-advanced.html**
+
 - **Hero Sections**: Moderate
 - **Images**: Course thumbnails
 - **Features**:
@@ -73,6 +78,7 @@ Based on your interest in **student-portal.html**, here are the best templates w
 ## 🎯 LANDING PAGE TEMPLATES
 
 ### 6. **index-authentic.html**
+
 - **Hero Sections**: 16
 - **Images**: Moderate
 - **Features**:
@@ -84,6 +90,7 @@ Based on your interest in **student-portal.html**, here are the best templates w
 - **Preview**: [https://elevateforhumanity.netlify.app/pages/index-authentic.html](https://elevateforhumanity.netlify.app/pages/index-authentic.html)
 
 ### 7. **fullsail-style-landing.html** (Currently Applied to React App)
+
 - **Hero Sections**: 20
 - **Images**: Few
 - **Features**:
@@ -95,6 +102,7 @@ Based on your interest in **student-portal.html**, here are the best templates w
 - **Preview**: [https://elevateforhumanity.netlify.app/pages/fullsail-style-landing.html](https://elevateforhumanity.netlify.app/pages/fullsail-style-landing.html)
 
 ### 8. **clean-professional.html**
+
 - **Hero Sections**: 5
 - **Images**: Icons/graphics
 - **Features**:
@@ -110,6 +118,7 @@ Based on your interest in **student-portal.html**, here are the best templates w
 ## 🛍️ COMMERCE TEMPLATES
 
 ### 9. **elevate-store.html**
+
 - **Hero Sections**: Moderate
 - **Images**: Product images
 - **Features**:
@@ -127,14 +136,17 @@ Based on your interest in **student-portal.html**, here are the best templates w
 Based on your interest in **student-portal.html** (clean dashboard) but wanting **hero banners and images**, I recommend:
 
 ### **Option A: humanized-program-template.html**
+
 ✅ Best visual storytelling with hero + images  
 ✅ Student success stories with photos  
 ✅ Real-world job previews  
 ✅ Funding/stats badges  
-✅ Professional yet approachable  
+✅ Professional yet approachable
 
 ### **Option B: Hybrid Approach**
+
 Combine the best of both:
+
 - **Hero section** from humanized-program-template
 - **Dashboard functionality** from student-portal
 - **Modern styling** from fullsail-style-landing

@@ -36,11 +36,13 @@ We believe everyone deserves the opportunity to build a better future. Through s
 ### Leadership
 
 #### **Founder & Executive Director**
+
 **Elizabeth L. Greene**
 
 > "I founded this organization because I believe education and workforce development are the most powerful tools for breaking the cycle of poverty. Every person deserves a chance to succeed, regardless of their background or circumstances."
 
 **Background:**
+
 - 20+ years in workforce development
 - Former state workforce board director
 - Certified workforce development professional
@@ -49,24 +51,28 @@ We believe everyone deserves the opportunity to build a better future. Through s
 ### Foundation Values
 
 #### **Equity & Access**
+
 - Remove financial barriers to education
 - Serve underserved and marginalized communities
 - Provide culturally responsive services
 - Ensure accessibility for all
 
 #### **Empowerment**
+
 - Build skills and confidence
 - Create pathways to economic mobility
 - Support self-sufficiency
 - Foster leadership development
 
 #### **Excellence**
+
 - Evidence-based programs
 - Continuous improvement
 - Measurable outcomes
 - Accountability and transparency
 
 #### **Collaboration**
+
 - Partner with community organizations
 - Engage employers and industry
 - Coordinate with government agencies
@@ -79,6 +85,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 ### Individual Learner Grants
 
 #### **Program Overview**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  Individual Learner Grants 🎓                           │
@@ -103,36 +110,42 @@ We believe everyone deserves the opportunity to build a better future. Through s
 #### **Priority Populations**
 
 **Justice-Involved Individuals** 🔄
+
 - Formerly incarcerated
 - Currently on probation/parole
 - Reentry program participants
 - Expungement seekers
 
 **Low-Income Individuals** 💰
+
 - Income ≤ 200% of federal poverty level
 - SNAP/TANF recipients
 - Homeless or housing insecure
 - Single parents
 
 **Veterans & Military Families** 🎖️
+
 - Veterans (all eras)
 - Active duty transitioning
 - Military spouses
 - Gold Star families
 
 **Youth & Young Adults** 🌟
+
 - Ages 16-24
 - Out-of-school youth
 - Foster care alumni
 - At-risk youth
 
 **Persons with Disabilities** ♿
+
 - Physical disabilities
 - Cognitive disabilities
 - Mental health conditions
 - Chronic health conditions
 
 **Other Underserved Populations**
+
 - English language learners
 - Refugees and immigrants
 - Rural residents
@@ -141,6 +154,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 ### Organizational Grants
 
 #### **Program Overview**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  Organizational Grants 🏢                               │
@@ -161,6 +175,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 ```
 
 #### **Eligible Organizations**
+
 - 501(c)(3) nonprofit organizations
 - Community colleges
 - Workforce development boards
@@ -170,6 +185,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 - Reentry service providers
 
 #### **Funding Priorities**
+
 1. **Workforce Training Programs**
    - High-demand occupations
    - Industry-recognized credentials
@@ -202,6 +218,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 ### 1. Workforce Development 💼
 
 #### **Focus Areas**
+
 - Skills training for high-demand occupations
 - Industry-recognized credentials
 - On-the-job training and apprenticeships
@@ -209,6 +226,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 - Employer engagement
 
 #### **Target Outcomes**
+
 - Job placement in living-wage careers
 - Credential attainment
 - Wage gain
@@ -216,6 +234,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 - Economic self-sufficiency
 
 #### **Recent Grants**
+
 - **$50,000** to Community Training Center for healthcare training
 - **$35,000** to Tech Skills Academy for IT certification programs
 - **$25,000** to Manufacturing Alliance for apprenticeship expansion
@@ -223,6 +242,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 ### 2. Justice-Involved Individuals 🔄
 
 #### **Focus Areas**
+
 - Reentry employment programs
 - Skills training for returning citizens
 - Expungement assistance
@@ -230,6 +250,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 - Peer support and mentoring
 
 #### **Target Outcomes**
+
 - Successful reentry and reintegration
 - Employment within 90 days of release
 - Reduced recidivism
@@ -237,6 +258,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 - Community safety
 
 #### **Recent Grants**
+
 - **$75,000** to Second Chance Coalition for reentry services
 - **$40,000** to Fresh Start Program for job training
 - **$30,000** to Expungement Project for legal services
@@ -244,6 +266,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 ### 3. Youth Development 🌟
 
 #### **Focus Areas**
+
 - Out-of-school youth programs
 - Summer employment
 - Career exploration
@@ -251,6 +274,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 - Leadership development
 
 #### **Target Outcomes**
+
 - High school completion or GED
 - Post-secondary enrollment
 - Employment or apprenticeship
@@ -258,6 +282,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 - Positive youth development
 
 #### **Recent Grants**
+
 - **$45,000** to Youth Opportunity Center for summer jobs
 - **$35,000** to Mentorship Alliance for career mentoring
 - **$25,000** to Teen Leadership Academy
@@ -265,6 +290,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 ### 4. Health & Wellness 🏥
 
 #### **Focus Areas**
+
 - Healthcare workforce training
 - Mental health services
 - Substance abuse treatment
@@ -272,6 +298,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 - Wellness programs
 
 #### **Target Outcomes**
+
 - Access to healthcare careers
 - Improved mental health
 - Recovery and sobriety
@@ -279,6 +306,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 - Community wellness
 
 #### **Recent Grants**
+
 - **$60,000** to Community Health Center for CHW training
 - **$40,000** to Recovery Works for peer support
 - **$30,000** to Mental Health Alliance for counseling services
@@ -286,6 +314,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 ### 5. Entrepreneurship 🚀
 
 #### **Focus Areas**
+
 - Small business development
 - Microenterprise training
 - Access to capital
@@ -293,6 +322,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 - Social enterprise
 
 #### **Target Outcomes**
+
 - Business startup and sustainability
 - Job creation
 - Economic development
@@ -300,6 +330,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 - Community revitalization
 
 #### **Recent Grants**
+
 - **$50,000** to Small Business Incubator
 - **$35,000** to Women's Business Center
 - **$25,000** to Minority Entrepreneur Network
@@ -311,6 +342,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 ### Individual Learner Grants
 
 #### **Step 1: Check Eligibility**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  Am I Eligible? ✓                                       │
@@ -326,6 +358,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 ```
 
 #### **Step 2: Gather Documents**
+
 - Proof of identity (driver's license, state ID)
 - Proof of income (pay stubs, tax return, benefit letter)
 - Program acceptance letter or enrollment verification
@@ -333,18 +366,21 @@ We believe everyone deserves the opportunity to build a better future. Through s
 - Personal statement (why you need the grant)
 
 #### **Step 3: Complete Application**
+
 - Online application form (30 minutes)
 - Upload required documents
 - Submit personal statement
 - Provide references (optional)
 
 #### **Step 4: Review Process**
+
 - Applications reviewed monthly
 - Decision within 30 days
 - Notification by email and phone
 - Award letter sent if approved
 
 #### **Step 5: Receive Funding**
+
 - Funds paid directly to training provider
 - Or reimbursement for approved expenses
 - Progress reports required
@@ -353,6 +389,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 ### Organizational Grants
 
 #### **Step 1: Letter of Inquiry (LOI)**
+
 - Brief description of proposed project (2-3 pages)
 - Organization background
 - Target population and need
@@ -360,11 +397,13 @@ We believe everyone deserves the opportunity to build a better future. Through s
 - Expected outcomes
 
 #### **Step 2: Invitation to Submit Full Proposal**
+
 - Selected LOIs invited to submit full proposal
 - Notification within 30 days
 - Technical assistance available
 
 #### **Step 3: Full Proposal**
+
 - Detailed project description
 - Budget and budget narrative
 - Organizational capacity
@@ -373,12 +412,14 @@ We believe everyone deserves the opportunity to build a better future. Through s
 - Letters of support
 
 #### **Step 4: Review & Site Visit**
+
 - Proposal review by grant committee
 - Site visit (if applicable)
 - Interviews with key staff
 - Reference checks
 
 #### **Step 5: Award Decision**
+
 - Decision within 60 days of full proposal
 - Award letter and grant agreement
 - Kickoff meeting
@@ -409,30 +450,35 @@ We believe everyone deserves the opportunity to build a better future. Through s
 ### By Population Served
 
 **Justice-Involved Individuals:**
+
 - 342 individuals served
 - 78% employment rate
 - 15% recidivism rate (vs. 44% national average)
 - $18,500 average starting wage
 
 **Low-Income Individuals:**
+
 - 485 individuals served
 - 85% completion rate
 - 80% job placement rate
 - 42% wage increase on average
 
 **Veterans:**
+
 - 127 veterans served
 - 92% completion rate
 - 88% job placement rate
 - $52,000 average salary
 
 **Youth & Young Adults:**
+
 - 218 youth served
 - 81% high school completion/GED
 - 75% post-secondary enrollment or employment
 - 90% positive outcomes
 
 **Persons with Disabilities:**
+
 - 75 individuals served
 - 84% completion rate
 - 76% employment rate
@@ -448,7 +494,9 @@ We believe everyone deserves the opportunity to build a better future. Through s
 > Visit **[Selfish Inc Support](https://www.selfishincsupport.org)** to donate, volunteer, or learn more about our programs!
 
 #### **Monthly Sponsor** 💝
+
 **$25/month - Change a Life**
+
 - Support one learner's monthly expenses
 - Receive quarterly impact updates
 - Invitation to annual celebration
@@ -457,7 +505,9 @@ We believe everyone deserves the opportunity to build a better future. Through s
 [Become a Monthly Sponsor](https://www.selfishincsupport.org)
 
 #### **Program Supporter** 🎓
+
 **$500 - Fund a Full Program**
+
 - Cover tuition and fees for one learner
 - Receive personalized thank you
 - Meet your sponsored learner (optional)
@@ -466,7 +516,9 @@ We believe everyone deserves the opportunity to build a better future. Through s
 [Support a Program](https://www.selfishincsupport.org)
 
 #### **Community Champion** 🌟
+
 **$2,500 - Support a Cohort**
+
 - Fund training for 5 learners
 - Recognition on website and materials
 - Invitation to graduation ceremony
@@ -475,7 +527,9 @@ We believe everyone deserves the opportunity to build a better future. Through s
 [Become a Champion](https://www.selfishincsupport.org)
 
 #### **Impact Partner** 🚀
+
 **$10,000+ - Launch a New Program**
+
 - Establish new program or location
 - Naming opportunities available
 - Board engagement opportunities
@@ -486,22 +540,26 @@ We believe everyone deserves the opportunity to build a better future. Through s
 ### Corporate Giving
 
 #### **Employee Matching Gifts**
+
 - Double your impact
 - Many employers match donations
 - Check with your HR department
 
 #### **Workplace Giving Campaigns**
+
 - United Way designations
 - Payroll deduction programs
 - Corporate matching
 
 #### **In-Kind Donations**
+
 - Computers and technology
 - Office supplies
 - Professional services
 - Meeting space
 
 #### **Volunteer Opportunities**
+
 - Mock interviews
 - Resume reviews
 - Career mentoring
@@ -591,6 +649,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 ### Current Partners (156 Total)
 
 #### **Workforce Development Partners**
+
 - EmployIndy
 - WorkOne Centers (statewide)
 - Regional Workforce Boards (all 12 regions)
@@ -598,6 +657,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 - Salvation Army
 
 #### **Educational Institutions**
+
 - Ivy Tech Community College
 - Vincennes University
 - Purdue University
@@ -605,6 +665,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 - Local school districts
 
 #### **Reentry Service Providers**
+
 - Second Chance Coalition
 - Fresh Start Program
 - Reentry Alliance
@@ -612,6 +673,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 - Prisoner Reentry Initiative
 
 #### **Community-Based Organizations**
+
 - Urban League
 - NAACP
 - Hispanic Center
@@ -619,6 +681,7 @@ We believe everyone deserves the opportunity to build a better future. Through s
 - Disability Rights Indiana
 
 #### **Faith-Based Organizations**
+
 - Interfaith Coalition
 - Catholic Charities
 - Jewish Family Services
@@ -655,6 +718,6 @@ We believe everyone deserves the opportunity to build a better future. Through s
 
 ---
 
-*Together, we're creating pathways to prosperity and transforming lives through education and workforce development.*
+_Together, we're creating pathways to prosperity and transforming lives through education and workforce development._
 
 **Learn more at [www.selfishincsupport.org](https://www.selfishincsupport.org)**

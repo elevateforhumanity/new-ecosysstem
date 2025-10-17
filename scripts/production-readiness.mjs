@@ -15,7 +15,7 @@ const results = {
   critical: [],
   warnings: [],
   passed: [],
-  info: []
+  info: [],
 };
 
 // Utility functions
@@ -51,10 +51,10 @@ function runCommand(command, args = [], description) {
     const proc = spawn(command, args, { stdio: 'pipe' });
     let output = '';
     let errorOutput = '';
-    
-    proc.stdout.on('data', (data) => output += data.toString());
-    proc.stderr.on('data', (data) => errorOutput += data.toString());
-    
+
+    proc.stdout.on('data', (data) => (output += data.toString()));
+    proc.stderr.on('data', (data) => (errorOutput += data.toString()));
+
     proc.on('close', (code) => {
       if (code === 0) {
         results.passed.push(`✅ ${description}`);
@@ -67,7 +67,7 @@ function runCommand(command, args = [], description) {
         resolve({ success: false, output: errorOutput });
       }
     });
-    
+
     proc.on('error', (err) => {
       results.critical.push(`❌ ${description} - ${err.message}`);
       resolve({ success: false, output: err.message });
@@ -86,27 +86,26 @@ checkFile('./jest.config.cjs', 'Test configuration exists');
 console.log('\n⚙️  Checking configuration...');
 try {
   const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
-  
+
   // Check scripts
   const requiredScripts = ['start', 'test', 'lint'];
-  requiredScripts.forEach(script => {
+  requiredScripts.forEach((script) => {
     if (pkg.scripts[script]) {
       results.passed.push(`✅ Script '${script}' configured`);
     } else {
       results.warnings.push(`⚠️  Script '${script}' missing`);
     }
   });
-  
+
   // Check security dependencies
   const securityDeps = ['helmet', 'express-rate-limit', 'compression'];
-  securityDeps.forEach(dep => {
+  securityDeps.forEach((dep) => {
     if (pkg.dependencies[dep]) {
       results.passed.push(`✅ Security dependency '${dep}' installed`);
     } else {
       results.critical.push(`❌ Security dependency '${dep}' missing`);
     }
   });
-  
 } catch (err) {
   results.critical.push(`❌ Cannot parse package.json: ${err.message}`);
 }
@@ -143,7 +142,11 @@ const testResult = await runCommand('npm', ['test'], 'API test suite');
 
 // 6. Security Audit
 console.log('\n🔍 Security assessment...');
-const auditResult = await runCommand('node', ['scripts/simple-security-check.mjs'], 'Security configuration');
+const auditResult = await runCommand(
+  'node',
+  ['scripts/simple-security-check.mjs'],
+  'Security configuration'
+);
 
 // 7. Linting (non-critical)
 console.log('\n📝 Code quality check...');
@@ -154,7 +157,8 @@ console.log('\n' + '='.repeat(60));
 console.log('📊 PRODUCTION READINESS SUMMARY');
 console.log('='.repeat(60));
 
-const totalChecks = results.critical.length + results.warnings.length + results.passed.length;
+const totalChecks =
+  results.critical.length + results.warnings.length + results.passed.length;
 const criticalIssues = results.critical.length;
 const warningIssues = results.warnings.length;
 const passedChecks = results.passed.length;
@@ -162,22 +166,22 @@ const passedChecks = results.passed.length;
 // Display results
 if (results.passed.length > 0) {
   console.log('\n✅ PASSED CHECKS:');
-  results.passed.forEach(item => console.log(item));
+  results.passed.forEach((item) => console.log(item));
 }
 
 if (results.warnings.length > 0) {
   console.log('\n⚠️  WARNINGS:');
-  results.warnings.forEach(item => console.log(item));
+  results.warnings.forEach((item) => console.log(item));
 }
 
 if (results.critical.length > 0) {
   console.log('\n❌ CRITICAL ISSUES:');
-  results.critical.forEach(item => console.log(item));
+  results.critical.forEach((item) => console.log(item));
 }
 
 if (results.info.length > 0) {
   console.log('\nℹ️  INFO:');
-  results.info.forEach(item => console.log(item));
+  results.info.forEach((item) => console.log(item));
 }
 
 // Final Assessment
@@ -188,7 +192,9 @@ console.log(`🟡 Warnings: ${warningIssues}`);
 const productionReady = criticalIssues === 0 && warningIssues <= 3;
 const readinessScore = Math.round((passedChecks / totalChecks) * 100);
 
-console.log(`\n🎯 PRODUCTION READINESS: ${productionReady ? '✅ READY' : '❌ NOT READY'}`);
+console.log(
+  `\n🎯 PRODUCTION READINESS: ${productionReady ? '✅ READY' : '❌ NOT READY'}`
+);
 console.log(`📊 READINESS SCORE: ${readinessScore}%`);
 
 if (!productionReady) {

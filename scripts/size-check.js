@@ -24,38 +24,56 @@ if (!fs.existsSync(dist)) {
   process.exit(1);
 }
 
-const files = walk(dist).filter(f => /\.(js|css)$/.test(f.file));
-const total = files.reduce((a,b)=>a+b.size,0);
-const totalKB = Math.round(total/1024);
-const largest = files.slice().sort((a,b)=>b.size-a.size).slice(0,10);
+const files = walk(dist).filter((f) => /\.(js|css)$/.test(f.file));
+const total = files.reduce((a, b) => a + b.size, 0);
+const totalKB = Math.round(total / 1024);
+const largest = files
+  .slice()
+  .sort((a, b) => b.size - a.size)
+  .slice(0, 10);
 
 let fail = false;
-console.log(`[size-check] total bytes=${total} (~${totalKB}KB) budget=${budgetKB}KB singleFileMax=${singleKB}KB`);
+console.log(
+  `[size-check] total bytes=${total} (~${totalKB}KB) budget=${budgetKB}KB singleFileMax=${singleKB}KB`
+);
 console.log('[size-check] top largest assets:');
 for (const f of largest) {
-  const kb = Math.round(f.size/1024);
-  const rel = f.file.replace(process.cwd(),'').slice(1);
+  const kb = Math.round(f.size / 1024);
+  const rel = f.file.replace(process.cwd(), '').slice(1);
   const over = kb > singleKB ? '  << OVER SINGLE FILE LIMIT' : '';
   if (over) fail = true;
-  console.log('-', rel, kb,'KB'+over);
+  console.log('-', rel, kb, 'KB' + over);
 }
 
 if (totalKB > budgetKB) {
-  console.error(`[size-check] FAIL: bundle ${totalKB}KB exceeds total budget ${budgetKB}KB`);
+  console.error(
+    `[size-check] FAIL: bundle ${totalKB}KB exceeds total budget ${budgetKB}KB`
+  );
   fail = true;
 }
 
 // Write JSON artifact
 try {
-  if (!fs.existsSync(artifactDir)) fs.mkdirSync(artifactDir, { recursive: true });
-  fs.writeFileSync(artifactFile, JSON.stringify({
-    generatedAt: new Date().toISOString(),
-    totalBytes: total,
-    totalKB,
-    budgetKB,
-    singleKB,
-    largest: largest.map(f => ({ file: f.file.replace(process.cwd(),'').slice(1), bytes: f.size }))
-  }, null, 2));
+  if (!fs.existsSync(artifactDir))
+    fs.mkdirSync(artifactDir, { recursive: true });
+  fs.writeFileSync(
+    artifactFile,
+    JSON.stringify(
+      {
+        generatedAt: new Date().toISOString(),
+        totalBytes: total,
+        totalKB,
+        budgetKB,
+        singleKB,
+        largest: largest.map((f) => ({
+          file: f.file.replace(process.cwd(), '').slice(1),
+          bytes: f.size,
+        })),
+      },
+      null,
+      2
+    )
+  );
   console.log('[size-check] wrote artifact', artifactFile);
 } catch (e) {
   console.warn('[size-check] WARN could not write artifact:', e.message);

@@ -19,87 +19,91 @@ const emailTransporter = nodemailer.createTransporter({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
+    pass: process.env.EMAIL_PASS,
+  },
 });
 
 // 📦 Product catalog with download links and license types
 const PRODUCT_CATALOG = {
-  'price_1DemoTemplate': {
+  price_1DemoTemplate: {
     name: 'Landing Page Demo Template',
     price: 39,
     files: [
       'https://cdn.elevateforhumanity.com/downloads/landing-template.zip',
-      'https://cdn.elevateforhumanity.com/downloads/setup-guide.pdf'
+      'https://cdn.elevateforhumanity.com/downloads/setup-guide.pdf',
     ],
     license_type: 'single_use',
-    description: 'Complete HTML template with sister-site navigation'
+    description: 'Complete HTML template with sister-site navigation',
   },
-  'price_1Workbooks': {
+  price_1Workbooks: {
     name: 'PDF Workbook Bundle',
     price: 29,
     files: [
-      'https://cdn.elevateforhumanity.com/downloads/workforce-workbooks.zip'
+      'https://cdn.elevateforhumanity.com/downloads/workforce-workbooks.zip',
     ],
     license_type: 'commercial',
-    description: '50+ professional training PDFs'
+    description: '50+ professional training PDFs',
   },
-  'price_1AICourseLicense': {
+  price_1AICourseLicense: {
     name: 'AI Course Creator License',
     price: 199,
     files: [
       'https://cdn.elevateforhumanity.com/downloads/ai-course-creator.zip',
-      'https://cdn.elevateforhumanity.com/downloads/api-documentation.pdf'
+      'https://cdn.elevateforhumanity.com/downloads/api-documentation.pdf',
     ],
     license_type: 'annual',
-    description: 'AI-powered course generation system'
+    description: 'AI-powered course generation system',
   },
-  'price_1SiteClone': {
+  price_1SiteClone: {
     name: 'Elevate Site Clone',
     price: 399,
     files: [
       'https://cdn.elevateforhumanity.com/downloads/elevate-clone-full.zip',
-      'https://cdn.elevateforhumanity.com/downloads/deployment-guide.pdf'
+      'https://cdn.elevateforhumanity.com/downloads/deployment-guide.pdf',
     ],
     license_type: 'commercial',
-    description: 'Complete source code with documentation'
+    description: 'Complete source code with documentation',
   },
-  'price_1WhiteLabel': {
+  price_1WhiteLabel: {
     name: 'White-Label Platform',
     price: 599,
     files: [
       'https://cdn.elevateforhumanity.com/downloads/white-label-platform.zip',
-      'https://cdn.elevateforhumanity.com/downloads/branding-kit.zip'
+      'https://cdn.elevateforhumanity.com/downloads/branding-kit.zip',
     ],
     license_type: 'reseller',
-    description: 'Full platform with custom branding'
+    description: 'Full platform with custom branding',
   },
-  'price_1Enterprise': {
+  price_1Enterprise: {
     name: 'Enterprise License System',
     price: 1299,
     files: [
       'https://cdn.elevateforhumanity.com/downloads/enterprise-platform.zip',
       'https://cdn.elevateforhumanity.com/downloads/license-system.zip',
-      'https://cdn.elevateforhumanity.com/downloads/docker-config.zip'
+      'https://cdn.elevateforhumanity.com/downloads/docker-config.zip',
     ],
     license_type: 'enterprise',
-    description: 'Advanced features with enterprise license protection'
-  }
+    description: 'Advanced features with enterprise license protection',
+  },
 };
 
 // 🔐 Enhanced license key generator
 function generateLicenseKey(productId, customerEmail) {
   const timestamp = Date.now().toString(36);
-  const hash = crypto.createHash('md5').update(customerEmail + productId).digest('hex').substring(0, 8);
+  const hash = crypto
+    .createHash('md5')
+    .update(customerEmail + productId)
+    .digest('hex')
+    .substring(0, 8);
   const random = Math.random().toString(36).substring(2, 6).toUpperCase();
-  
+
   return `ELV-${timestamp}-${hash.toUpperCase()}-${random}`;
 }
 
 // 📅 Calculate license expiry based on type
 function getLicenseExpiry(licenseType) {
   const now = new Date();
-  
+
   switch (licenseType) {
     case 'annual':
       return new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
@@ -120,14 +124,14 @@ async function storeLicense(license) {
   try {
     const licensesDir = './licenses';
     await fs.mkdir(licensesDir, { recursive: true });
-    
+
     const licenseFile = path.join(licensesDir, `${license.key}.json`);
     await fs.writeFile(licenseFile, JSON.stringify(license, null, 2));
-    
+
     // Also append to master log
     const logEntry = `${new Date().toISOString()},${license.key},${license.customerEmail},${license.productName},${license.price}\n`;
     await fs.appendFile('./licenses/master-log.csv', logEntry);
-    
+
     console.log('📝 License stored:', license.key);
   } catch (error) {
     console.error('❌ License storage failed:', error);
@@ -140,10 +144,13 @@ async function trackAnalytics(event, data) {
     const analyticsEntry = {
       timestamp: new Date().toISOString(),
       event: event,
-      data: data
+      data: data,
     };
-    
-    await fs.appendFile('./analytics/events.jsonl', JSON.stringify(analyticsEntry) + '\n');
+
+    await fs.appendFile(
+      './analytics/events.jsonl',
+      JSON.stringify(analyticsEntry) + '\n'
+    );
     console.log('📊 Analytics tracked:', event);
   } catch (error) {
     console.error('❌ Analytics tracking failed:', error);
@@ -151,9 +158,14 @@ async function trackAnalytics(event, data) {
 }
 
 // 📧 Send license delivery email
-async function sendLicenseEmail(customerEmail, customerName, licenses, session) {
+async function sendLicenseEmail(
+  customerEmail,
+  customerName,
+  licenses,
+  session
+) {
   const totalAmount = session.amount_total / 100;
-  
+
   const emailHTML = `
 <!DOCTYPE html>
 <html>
@@ -179,7 +191,9 @@ async function sendLicenseEmail(customerEmail, customerName, licenses, session) 
     <h2>Hello ${customerName}!</h2>
     <p>Your payment of <strong>$${totalAmount}</strong> has been processed successfully. Here are your license details and download links:</p>
     
-    ${licenses.map(license => `
+    ${licenses
+      .map(
+        (license) => `
       <div class="license-box">
         <h3>📦 ${license.productName}</h3>
         <div class="license-key">${license.key}</div>
@@ -189,13 +203,17 @@ async function sendLicenseEmail(customerEmail, customerName, licenses, session) 
         
         <p><strong>Download Files:</strong></p>
         <div>
-          ${license.files.map(file => {
-            const fileName = file.split('/').pop();
-            return `<a href="${file}?license=${license.key}" class="download-btn">📥 ${fileName}</a>`;
-          }).join('')}
+          ${license.files
+            .map((file) => {
+              const fileName = file.split('/').pop();
+              return `<a href="${file}?license=${license.key}" class="download-btn">📥 ${fileName}</a>`;
+            })
+            .join('')}
         </div>
       </div>
-    `).join('')}
+    `
+      )
+      .join('')}
     
     <div class="important">
       <h4>🔐 Important License Information:</h4>
@@ -234,22 +252,21 @@ async function sendLicenseEmail(customerEmail, customerName, licenses, session) 
     attachments: [
       {
         filename: 'license-terms.pdf',
-        path: './assets/license-terms.pdf' // Add your license terms PDF
-      }
-    ]
+        path: './assets/license-terms.pdf', // Add your license terms PDF
+      },
+    ],
   };
 
   try {
     await emailTransporter.sendMail(mailOptions);
     console.log('✅ License email sent to:', customerEmail);
-    
+
     // Track email delivery
     await trackAnalytics('email_sent', {
       customerEmail,
       licenseCount: licenses.length,
-      totalAmount
+      totalAmount,
     });
-    
   } catch (error) {
     console.error('❌ Email sending failed:', error);
     throw error;
@@ -257,131 +274,141 @@ async function sendLicenseEmail(customerEmail, customerName, licenses, session) 
 }
 
 // 🎯 Main webhook handler
-app.post('/webhook', bodyParser.raw({ type: 'application/json' }), async (req, res) => {
-  const sig = req.headers['stripe-signature'];
-  let event;
+app.post(
+  '/webhook',
+  bodyParser.raw({ type: 'application/json' }),
+  async (req, res) => {
+    const sig = req.headers['stripe-signature'];
+    let event;
 
-  try {
-    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-  } catch (err) {
-    console.error('⚠️ Webhook signature verification failed:', err.message);
-    return res.status(400).send(`Webhook Error: ${err.message}`);
-  }
-
-  // Handle successful payment
-  if (event.type === 'checkout.session.completed') {
-    const session = event.data.object;
-    
     try {
-      console.log('💳 Processing payment for session:', session.id);
-      
-      // Get line items from the session
-      const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
-      
-      const customerEmail = session.customer_details.email;
-      const customerName = session.customer_details.name || 'Valued Customer';
-      
-      // Process each purchased item
-      const licenses = [];
-      
-      for (const item of lineItems.data) {
-        const priceId = item.price.id;
-        const product = PRODUCT_CATALOG[priceId];
-        
-        if (product) {
-          const licenseKey = generateLicenseKey(priceId, customerEmail);
-          
-          const license = {
-            key: licenseKey,
-            productId: priceId,
-            productName: product.name,
-            price: product.price,
-            files: product.files,
-            licenseType: product.license_type,
-            expiresAt: getLicenseExpiry(product.license_type),
-            issuedAt: new Date(),
-            customerEmail: customerEmail,
-            customerName: customerName,
-            stripeSessionId: session.id,
-            status: 'active'
-          };
-          
-          licenses.push(license);
-          
-          // Store license
-          await storeLicense(license);
-          
-          // Track purchase analytics
-          await trackAnalytics('license_issued', {
-            licenseKey,
-            productId: priceId,
-            productName: product.name,
+      event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+    } catch (err) {
+      console.error('⚠️ Webhook signature verification failed:', err.message);
+      return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    // Handle successful payment
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object;
+
+      try {
+        console.log('💳 Processing payment for session:', session.id);
+
+        // Get line items from the session
+        const lineItems = await stripe.checkout.sessions.listLineItems(
+          session.id
+        );
+
+        const customerEmail = session.customer_details.email;
+        const customerName = session.customer_details.name || 'Valued Customer';
+
+        // Process each purchased item
+        const licenses = [];
+
+        for (const item of lineItems.data) {
+          const priceId = item.price.id;
+          const product = PRODUCT_CATALOG[priceId];
+
+          if (product) {
+            const licenseKey = generateLicenseKey(priceId, customerEmail);
+
+            const license = {
+              key: licenseKey,
+              productId: priceId,
+              productName: product.name,
+              price: product.price,
+              files: product.files,
+              licenseType: product.license_type,
+              expiresAt: getLicenseExpiry(product.license_type),
+              issuedAt: new Date(),
+              customerEmail: customerEmail,
+              customerName: customerName,
+              stripeSessionId: session.id,
+              status: 'active',
+            };
+
+            licenses.push(license);
+
+            // Store license
+            await storeLicense(license);
+
+            // Track purchase analytics
+            await trackAnalytics('license_issued', {
+              licenseKey,
+              productId: priceId,
+              productName: product.name,
+              customerEmail,
+              price: product.price,
+            });
+          }
+        }
+
+        // Send delivery email
+        if (licenses.length > 0) {
+          await sendLicenseEmail(
             customerEmail,
-            price: product.price
+            customerName,
+            licenses,
+            session
+          );
+
+          // Track successful delivery
+          await trackAnalytics('delivery_completed', {
+            sessionId: session.id,
+            customerEmail,
+            licenseCount: licenses.length,
+            totalAmount: session.amount_total / 100,
           });
         }
-      }
-      
-      // Send delivery email
-      if (licenses.length > 0) {
-        await sendLicenseEmail(customerEmail, customerName, licenses, session);
-        
-        // Track successful delivery
-        await trackAnalytics('delivery_completed', {
-          sessionId: session.id,
-          customerEmail,
-          licenseCount: licenses.length,
-          totalAmount: session.amount_total / 100
-        });
-      }
-      
-      console.log('✅ Payment processed successfully:', session.id);
-      
-    } catch (error) {
-      console.error('❌ Payment processing failed:', error);
-      
-      // Track failed delivery for manual follow-up
-      await trackAnalytics('delivery_failed', {
-        sessionId: session.id,
-        error: error.message,
-        customerEmail: session.customer_details?.email
-      });
-      
-      return res.status(500).json({ error: 'Processing failed' });
-    }
-  }
 
-  res.status(200).json({ received: true });
-});
+        console.log('✅ Payment processed successfully:', session.id);
+      } catch (error) {
+        console.error('❌ Payment processing failed:', error);
+
+        // Track failed delivery for manual follow-up
+        await trackAnalytics('delivery_failed', {
+          sessionId: session.id,
+          error: error.message,
+          customerEmail: session.customer_details?.email,
+        });
+
+        return res.status(500).json({ error: 'Processing failed' });
+      }
+    }
+
+    res.status(200).json({ received: true });
+  }
+);
 
 // 🔍 License validation endpoint
 app.get('/validate/:licenseKey', async (req, res) => {
   try {
     const { licenseKey } = req.params;
     const licenseFile = `./licenses/${licenseKey}.json`;
-    
+
     const licenseData = await fs.readFile(licenseFile, 'utf8');
     const license = JSON.parse(licenseData);
-    
+
     // Check if license is still valid
-    const isValid = license.status === 'active' && 
-                   (!license.expiresAt || new Date(license.expiresAt) > new Date());
-    
+    const isValid =
+      license.status === 'active' &&
+      (!license.expiresAt || new Date(license.expiresAt) > new Date());
+
     // Track validation attempt
     await trackAnalytics('license_validated', {
       licenseKey,
       isValid,
-      productId: license.productId
+      productId: license.productId,
     });
-    
+
     res.json({
       valid: isValid,
       product: license.productName,
       licenseType: license.licenseType,
       expiresAt: license.expiresAt,
-      issuedAt: license.issuedAt
+      issuedAt: license.issuedAt,
     });
-    
   } catch (error) {
     res.status(404).json({ valid: false, error: 'License not found' });
   }
@@ -392,26 +419,27 @@ app.get('/analytics', async (req, res) => {
   try {
     const logData = await fs.readFile('./licenses/master-log.csv', 'utf8');
     const lines = logData.trim().split('\n');
-    
+
     const stats = {
       totalSales: lines.length,
       totalRevenue: 0,
       productBreakdown: {},
-      recentSales: []
+      recentSales: [],
     };
-    
-    lines.forEach(line => {
+
+    lines.forEach((line) => {
       const [timestamp, licenseKey, email, product, price] = line.split(',');
       const priceNum = parseFloat(price);
-      
+
       stats.totalRevenue += priceNum;
-      stats.productBreakdown[product] = (stats.productBreakdown[product] || 0) + 1;
-      
+      stats.productBreakdown[product] =
+        (stats.productBreakdown[product] || 0) + 1;
+
       if (stats.recentSales.length < 10) {
         stats.recentSales.push({ timestamp, product, price: priceNum, email });
       }
     });
-    
+
     res.json(stats);
   } catch (error) {
     res.status(500).json({ error: 'Analytics unavailable' });
@@ -420,10 +448,10 @@ app.get('/analytics', async (req, res) => {
 
 // 🏥 Health check endpoint
 app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'healthy', 
+  res.json({
+    status: 'healthy',
     timestamp: new Date().toISOString(),
-    uptime: process.uptime()
+    uptime: process.uptime(),
   });
 });
 
@@ -432,7 +460,9 @@ const PORT = process.env.PORT || 4242;
 app.listen(PORT, () => {
   console.log(`🚀 Enhanced Elevate Webhook server running on port ${PORT}`);
   console.log(`📊 Analytics: http://localhost:${PORT}/analytics`);
-  console.log(`🔍 License validation: http://localhost:${PORT}/validate/LICENSE-KEY`);
+  console.log(
+    `🔍 License validation: http://localhost:${PORT}/validate/LICENSE-KEY`
+  );
   console.log(`🏥 Health check: http://localhost:${PORT}/health`);
 });
 
@@ -441,12 +471,15 @@ async function initializeDirectories() {
   await fs.mkdir('./licenses', { recursive: true });
   await fs.mkdir('./analytics', { recursive: true });
   await fs.mkdir('./assets', { recursive: true });
-  
+
   // Create CSV header if doesn't exist
   try {
     await fs.access('./licenses/master-log.csv');
   } catch {
-    await fs.writeFile('./licenses/master-log.csv', 'timestamp,license_key,email,product,price\n');
+    await fs.writeFile(
+      './licenses/master-log.csv',
+      'timestamp,license_key,email,product,price\n'
+    );
   }
 }
 

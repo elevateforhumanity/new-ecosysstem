@@ -1,12 +1,26 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Award, Users, TrendingUp, CheckCircle } from 'lucide-react';
+import {
+  ArrowRight,
+  Award,
+  Users,
+  TrendingUp,
+  CheckCircle,
+} from 'lucide-react';
 
 const Hero = () => {
   const highlights = [
-    { icon: Award, text: 'DOL Registered Apprenticeships', color: 'text-purple-600' },
+    {
+      icon: Award,
+      text: 'DOL Registered Apprenticeships',
+      color: 'text-purple-600',
+    },
     { icon: Users, text: '1,000+ Students Trained', color: 'text-pink-600' },
-    { icon: TrendingUp, text: '95% Job Placement Rate', color: 'text-blue-600' },
+    {
+      icon: TrendingUp,
+      text: '95% Job Placement Rate',
+      color: 'text-blue-600',
+    },
   ];
 
   const stats = [
@@ -28,7 +42,7 @@ const Hero = () => {
           transition={{
             duration: 25,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: 'easeInOut',
           }}
           className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-purple-300/20 to-pink-300/20 rounded-full blur-3xl"
         />
@@ -41,7 +55,7 @@ const Hero = () => {
           transition={{
             duration: 20,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: 'easeInOut',
           }}
           className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-gradient-to-br from-blue-300/20 to-purple-300/20 rounded-full blur-3xl"
         />
@@ -54,7 +68,7 @@ const Hero = () => {
           transition={{
             duration: 30,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: 'easeInOut',
           }}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-pink-200/15 to-purple-200/15 rounded-full blur-3xl"
         />
@@ -88,9 +102,8 @@ const Hero = () => {
               transition={{ delay: 0.3, duration: 0.8 }}
               className="text-display"
             >
-              Launch Your{' '}
-              <span className="gradient-text">Tech Career</span>
-              {' '}in Healthcare IT
+              Launch Your <span className="gradient-text">Tech Career</span> in
+              Healthcare IT
             </motion.h1>
 
             {/* Subheadline */}
@@ -100,8 +113,9 @@ const Hero = () => {
               transition={{ delay: 0.4, duration: 0.8 }}
               className="text-body-lg text-gray-600 max-w-2xl"
             >
-              Free, paid apprenticeships in Clinical Informatics, Cybersecurity, 
-              and Cloud Computing. Earn while you learn with real-world experience.
+              Free, paid apprenticeships in Clinical Informatics, Cybersecurity,
+              and Cloud Computing. Earn while you learn with real-world
+              experience.
             </motion.p>
 
             {/* Highlights */}
@@ -118,7 +132,9 @@ const Hero = () => {
                   className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-md border-2 border-purple-200"
                 >
                   <item.icon className={`w-5 h-5 ${item.color}`} />
-                  <span className="font-semibold text-gray-800">{item.text}</span>
+                  <span className="font-semibold text-gray-800">
+                    {item.text}
+                  </span>
                 </motion.div>
               ))}
             </motion.div>
@@ -188,8 +204,12 @@ const Hero = () => {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center text-white p-8">
                     <GraduationCap className="w-24 h-24 mx-auto mb-4 opacity-90" />
-                    <h3 className="text-2xl font-bold mb-2">Real Students, Real Success</h3>
-                    <p className="text-lg opacity-90">Watch their transformation stories</p>
+                    <h3 className="text-2xl font-bold mb-2">
+                      Real Students, Real Success
+                    </h3>
+                    <p className="text-lg opacity-90">
+                      Watch their transformation stories
+                    </p>
                   </div>
                 </div>
               </div>
@@ -200,7 +220,7 @@ const Hero = () => {
                   'Earn $15-25/hour while training',
                   'No prior experience required',
                   'Industry-recognized certifications',
-                  'Direct pathway to full-time employment'
+                  'Direct pathway to full-time employment',
                 ].map((feature, index) => (
                   <motion.div
                     key={index}
@@ -225,7 +245,9 @@ const Hero = () => {
             >
               <div className="text-center">
                 <div className="text-3xl font-bold text-purple-600">95%</div>
-                <div className="text-sm text-gray-600 font-medium">Job Placement</div>
+                <div className="text-sm text-gray-600 font-medium">
+                  Job Placement
+                </div>
               </div>
             </motion.div>
 
@@ -237,7 +259,9 @@ const Hero = () => {
             >
               <div className="text-center">
                 <div className="text-3xl font-bold text-pink-600">$50K+</div>
-                <div className="text-sm text-gray-600 font-medium">Starting Salary</div>
+                <div className="text-sm text-gray-600 font-medium">
+                  Starting Salary
+                </div>
               </div>
             </motion.div>
           </motion.div>

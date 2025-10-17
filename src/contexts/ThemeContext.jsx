@@ -20,7 +20,7 @@ export const ThemeProvider = ({ children }) => {
     if (typeof window !== 'undefined') {
       const stored = localStorage.getItem('theme');
       if (stored) return stored;
-      
+
       // Check system preference
       if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         return 'dark';
@@ -41,7 +41,7 @@ export const ThemeProvider = ({ children }) => {
   };
 
   const toggleTheme = () => {
-    setThemeState(prev => prev === 'light' ? 'dark' : 'light');
+    setThemeState((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
 
   return (

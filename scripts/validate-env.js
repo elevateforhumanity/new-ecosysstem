@@ -17,7 +17,9 @@ if (!result.success) {
   for (const issue of result.error.issues) {
     console.error(`- ${issue.path.join('.')}: ${issue.message}`);
   }
-  console.error('\nSet the missing variables in your environment (.env.local or project settings).');
+  console.error(
+    '\nSet the missing variables in your environment (.env.local or project settings).'
+  );
   process.exit(1);
 }
 console.log('✅ Environment variables validated.');

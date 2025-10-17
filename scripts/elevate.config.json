@@ -13,9 +13,15 @@
   "programDirNames": ["programs", "apprenticeships"],
   "blogDirNames": ["blog", "posts", "content/blog"],
   "sisterSites": [
-    { "name": "Elevate Connects Directory", "url": "https://www.elevateconnectsdirectory.org" },
+    {
+      "name": "Elevate Connects Directory",
+      "url": "https://www.elevateconnectsdirectory.org"
+    },
     { "name": "Selfish Inc.", "url": "https://www.selfishinc.org" },
-    { "name": "Rise Forward Foundation", "url": "https://www.riseforwardfoundation.org" }
+    {
+      "name": "Rise Forward Foundation",
+      "url": "https://www.riseforwardfoundation.org"
+    }
   ],
   "org": {
     "name": "Elevate for Humanity Career & Technical Institute",

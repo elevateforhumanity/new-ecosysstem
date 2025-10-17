@@ -42,7 +42,9 @@ const CreateCoursePage = () => {
             type="text"
             required
             value={formData.title}
-            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, title: e.target.value })
+            }
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
             placeholder="e.g., Complete Web Development Bootcamp"
           />
@@ -56,7 +58,9 @@ const CreateCoursePage = () => {
             required
             rows={5}
             value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, description: e.target.value })
+            }
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
             placeholder="Describe what students will learn..."
           />
@@ -69,7 +73,9 @@ const CreateCoursePage = () => {
             </label>
             <select
               value={formData.category}
-              onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, category: e.target.value })
+              }
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               <option value="Programming">Programming</option>
@@ -86,7 +92,9 @@ const CreateCoursePage = () => {
             </label>
             <select
               value={formData.level}
-              onChange={(e) => setFormData({ ...formData, level: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, level: e.target.value })
+              }
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               <option value="beginner">Beginner</option>
@@ -106,7 +114,9 @@ const CreateCoursePage = () => {
             min="0"
             step="0.01"
             value={formData.price}
-            onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, price: e.target.value })
+            }
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
             placeholder="99.99"
           />

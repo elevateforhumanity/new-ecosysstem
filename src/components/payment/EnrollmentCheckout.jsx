@@ -19,13 +19,13 @@ export default function EnrollmentCheckout({ program, onSuccess, onCancel }) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
         body: JSON.stringify({
           programId: program.id,
           programName: program.title,
-          price: program.price || 0
-        })
+          price: program.price || 0,
+        }),
       });
 
       if (!response.ok) {
@@ -37,13 +37,12 @@ export default function EnrollmentCheckout({ program, onSuccess, onCancel }) {
       // Redirect to Stripe Checkout
       const stripe = await stripePromise;
       const { error: stripeError } = await stripe.redirectToCheckout({
-        sessionId
+        sessionId,
       });
 
       if (stripeError) {
         throw stripeError;
       }
-
     } catch (err) {
       console.error('Enrollment error:', err);
       setError(err.message || 'Failed to process enrollment');
@@ -60,10 +59,8 @@ export default function EnrollmentCheckout({ program, onSuccess, onCancel }) {
         <h3 className="text-2xl font-bold text-brand-text mb-2">
           {program.title}
         </h3>
-        <p className="text-brand-text-muted mb-4">
-          {program.description}
-        </p>
-        
+        <p className="text-brand-text-muted mb-4">{program.description}</p>
+
         {/* Program Details */}
         <div className="space-y-2 text-sm">
           {program.duration && (

@@ -1,18 +1,18 @@
 /**
  * Elevate for Humanity - Dynamic Page Embed Script
- * 
+ *
  * This script allows embedding dynamic pages from the Vite app into Durable landing pages.
- * 
+ *
  * Usage in Durable:
  * <div id="efh-embed" data-page="programs"></div>
  * <script src="https://elevateforhumanity.onrender.com/embed.js"></script>
  */
 
-(function() {
+(function () {
   'use strict';
 
   const BASE_URL = 'https://elevateforhumanity.onrender.com';
-  
+
   // Available pages that can be embedded
   const EMBEDDABLE_PAGES = [
     'programs',
@@ -25,7 +25,7 @@
     'connect',
     'student',
     'compliance',
-    'accessibility'
+    'accessibility',
   ];
 
   /**
@@ -33,7 +33,7 @@
    */
   function init() {
     const container = document.getElementById('efh-embed');
-    
+
     if (!container) {
       console.warn('EFH Embed: Container #efh-embed not found');
       return;
@@ -42,9 +42,11 @@
     const page = container.getAttribute('data-page') || 'programs';
     const height = container.getAttribute('data-height') || '800px';
     const width = container.getAttribute('data-width') || '100%';
-    
+
     if (!EMBEDDABLE_PAGES.includes(page)) {
-      console.error(`EFH Embed: Page "${page}" is not embeddable. Available: ${EMBEDDABLE_PAGES.join(', ')}`);
+      console.error(
+        `EFH Embed: Page "${page}" is not embeddable. Available: ${EMBEDDABLE_PAGES.join(', ')}`
+      );
       container.innerHTML = `<p style="color: red;">Error: Page "${page}" not available for embedding.</p>`;
       return;
     }
@@ -64,17 +66,19 @@
     iframe.style.display = 'block';
     iframe.setAttribute('loading', 'lazy');
     iframe.setAttribute('title', `Elevate for Humanity - ${page}`);
-    
+
     // Add loading indicator
-    container.innerHTML = '<div style="text-align: center; padding: 40px;">Loading...</div>';
-    
-    iframe.onload = function() {
+    container.innerHTML =
+      '<div style="text-align: center; padding: 40px;">Loading...</div>';
+
+    iframe.onload = function () {
       container.innerHTML = '';
       container.appendChild(iframe);
     };
-    
-    iframe.onerror = function() {
-      container.innerHTML = '<p style="color: red;">Failed to load content. Please try again later.</p>';
+
+    iframe.onerror = function () {
+      container.innerHTML =
+        '<p style="color: red;">Failed to load content. Please try again later.</p>';
     };
   }
 
@@ -83,26 +87,27 @@
    */
   function embedPageDirect(container, page, options) {
     fetch(`${BASE_URL}/${page}`)
-      .then(response => {
+      .then((response) => {
         if (!response.ok) throw new Error('Failed to fetch page');
         return response.text();
       })
-      .then(html => {
+      .then((html) => {
         // Create a sandboxed container
         const wrapper = document.createElement('div');
         wrapper.style.width = options.width;
         wrapper.style.minHeight = options.height;
         wrapper.innerHTML = html;
-        
+
         container.innerHTML = '';
         container.appendChild(wrapper);
-        
+
         // Load scripts and styles from the fetched content
         loadExternalResources(wrapper);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('EFH Embed Error:', error);
-        container.innerHTML = '<p style="color: red;">Failed to load content. Please try again later.</p>';
+        container.innerHTML =
+          '<p style="color: red;">Failed to load content. Please try again later.</p>';
       });
   }
 
@@ -112,18 +117,22 @@
   function loadExternalResources(wrapper) {
     // Load stylesheets
     const links = wrapper.querySelectorAll('link[rel="stylesheet"]');
-    links.forEach(link => {
+    links.forEach((link) => {
       const newLink = document.createElement('link');
       newLink.rel = 'stylesheet';
-      newLink.href = link.href.startsWith('http') ? link.href : BASE_URL + link.href;
+      newLink.href = link.href.startsWith('http')
+        ? link.href
+        : BASE_URL + link.href;
       document.head.appendChild(newLink);
     });
 
     // Load scripts
     const scripts = wrapper.querySelectorAll('script[src]');
-    scripts.forEach(script => {
+    scripts.forEach((script) => {
       const newScript = document.createElement('script');
-      newScript.src = script.src.startsWith('http') ? script.src : BASE_URL + script.src;
+      newScript.src = script.src.startsWith('http')
+        ? script.src
+        : BASE_URL + script.src;
       newScript.async = true;
       document.body.appendChild(newScript);
     });
@@ -140,7 +149,6 @@
   window.EFHEmbed = {
     init: init,
     version: '1.0.0',
-    availablePages: EMBEDDABLE_PAGES
+    availablePages: EMBEDDABLE_PAGES,
   };
-
 })();

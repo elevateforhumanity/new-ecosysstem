@@ -5,6 +5,7 @@
 ## Why This Matters
 
 Imagine you're building a house. Would you:
+
 - **Option A:** Let every worker pick their own shade of paint? (Chaos! 🎨💥)
 - **Option B:** Give everyone the same paint cans with clear labels? (Harmony! ✨)
 
@@ -23,23 +24,24 @@ We chose Option B. Here's how to use it.
 ```
 
 **Common patterns:**
+
 ```jsx
 // Backgrounds
-bg-brand-primary        // Main brand color
-bg-brand-surface        // Cards, panels
-bg-brand-success        // Success states
+bg - brand - primary; // Main brand color
+bg - brand - surface; // Cards, panels
+bg - brand - success; // Success states
 
 // Text
-text-brand-text         // Primary text
-text-brand-text-muted   // Secondary text
-text-brand-info         // Links, info
+text - brand - text; // Primary text
+text - brand - text - muted; // Secondary text
+text - brand - info; // Links, info
 
 // Borders
-border-brand-border     // Default borders
+border - brand - border; // Default borders
 
 // Hover states
-hover:bg-brand-primary-hover
-hover:text-brand-info
+hover: bg - brand - primary - hover;
+hover: text - brand - info;
 ```
 
 ### 2. CSS Variables (For CSS files)
@@ -71,41 +73,46 @@ hover:text-brand-info
 ## The Color Palette (Cheat Sheet)
 
 ### Main Colors
-| Token | Use For | Example |
-|-------|---------|---------|
-| `brand-primary` | Main brand color, primary buttons | "Apply Now" button |
-| `brand-secondary` | Secondary actions | "Learn More" button |
-| `brand-success` | Success messages, positive actions | "Enrolled!" badge |
-| `brand-info` | Links, informational content | "Read more" link |
-| `brand-warning` | Warnings, caution states | "Payment due" alert |
-| `brand-danger` | Errors, destructive actions | "Delete" button |
+
+| Token             | Use For                            | Example             |
+| ----------------- | ---------------------------------- | ------------------- |
+| `brand-primary`   | Main brand color, primary buttons  | "Apply Now" button  |
+| `brand-secondary` | Secondary actions                  | "Learn More" button |
+| `brand-success`   | Success messages, positive actions | "Enrolled!" badge   |
+| `brand-info`      | Links, informational content       | "Read more" link    |
+| `brand-warning`   | Warnings, caution states           | "Payment due" alert |
+| `brand-danger`    | Errors, destructive actions        | "Delete" button     |
 
 ### Text Colors
-| Token | Use For | Example |
-|-------|---------|---------|
-| `brand-text` | Main content text | Paragraphs, headings |
-| `brand-text-muted` | Secondary text | Descriptions, metadata |
-| `brand-text-light` | Tertiary text | Timestamps, footnotes |
+
+| Token              | Use For           | Example                |
+| ------------------ | ----------------- | ---------------------- |
+| `brand-text`       | Main content text | Paragraphs, headings   |
+| `brand-text-muted` | Secondary text    | Descriptions, metadata |
+| `brand-text-light` | Tertiary text     | Timestamps, footnotes  |
 
 ### Backgrounds
-| Token | Use For | Example |
-|-------|---------|---------|
-| `brand-bg` | Page background | Main body |
-| `brand-surface` | Cards, panels | Course cards |
-| `brand-surface-dark` | Hover states on surfaces | Card hover |
+
+| Token                | Use For                  | Example      |
+| -------------------- | ------------------------ | ------------ |
+| `brand-bg`           | Page background          | Main body    |
+| `brand-surface`      | Cards, panels            | Course cards |
+| `brand-surface-dark` | Hover states on surfaces | Card hover   |
 
 ### Interactive States
-| Token | Use For | Example |
-|-------|---------|---------|
-| `brand-hover` | Hover states | Button hover |
+
+| Token          | Use For               | Example      |
+| -------------- | --------------------- | ------------ |
+| `brand-hover`  | Hover states          | Button hover |
 | `brand-active` | Active/pressed states | Button click |
-| `brand-focus` | Focus rings | Input focus |
+| `brand-focus`  | Focus rings           | Input focus  |
 
 ### Borders
-| Token | Use For | Example |
-|-------|---------|---------|
-| `brand-border` | Default borders | Input borders |
-| `brand-border-dark` | Emphasized borders | Active tab |
+
+| Token               | Use For            | Example       |
+| ------------------- | ------------------ | ------------- |
+| `brand-border`      | Default borders    | Input borders |
+| `brand-border-dark` | Emphasized borders | Active tab    |
 
 ## Real Examples
 
@@ -114,7 +121,8 @@ hover:text-brand-info
 ```jsx
 function ApplyButton() {
   return (
-    <button className="
+    <button
+      className="
       bg-brand-primary 
       hover:bg-brand-primary-hover 
       active:bg-brand-primary-active
@@ -122,7 +130,8 @@ function ApplyButton() {
       px-6 py-3 
       rounded-lg
       font-semibold
-    ">
+    "
+    >
       Apply Now
     </button>
   );
@@ -134,20 +143,18 @@ function ApplyButton() {
 ```jsx
 function CourseCard({ title, description }) {
   return (
-    <div className="
+    <div
+      className="
       bg-brand-surface 
       border border-brand-border 
       rounded-lg 
       p-6
       hover:bg-brand-surface-dark
       transition-colors
-    ">
-      <h3 className="text-brand-text text-xl font-bold mb-2">
-        {title}
-      </h3>
-      <p className="text-brand-text-muted">
-        {description}
-      </p>
+    "
+    >
+      <h3 className="text-brand-text text-xl font-bold mb-2">{title}</h3>
+      <p className="text-brand-text-muted">{description}</p>
     </div>
   );
 }
@@ -162,9 +169,11 @@ function StatusBadge({ status }) {
     pending: 'bg-brand-surface text-brand-warning',
     inactive: 'bg-brand-surface text-brand-text-muted',
   };
-  
+
   return (
-    <span className={`px-3 py-1 rounded-full text-sm font-medium ${colors[status]}`}>
+    <span
+      className={`px-3 py-1 rounded-full text-sm font-medium ${colors[status]}`}
+    >
       {status}
     </span>
   );
@@ -177,9 +186,7 @@ function StatusBadge({ status }) {
 function TextInput({ label, ...props }) {
   return (
     <div>
-      <label className="block text-brand-text font-medium mb-2">
-        {label}
-      </label>
+      <label className="block text-brand-text font-medium mb-2">{label}</label>
       <input
         className="
           w-full
@@ -244,22 +251,28 @@ function TextInput({ label, ...props }) {
 ## Tools to Help You
 
 ### Check for violations
+
 ```bash
 npm run lint:brand
 ```
+
 This shows you all the places using hardcoded colors.
 
 ### Auto-fix common issues
+
 ```bash
 npm run fix:brand:dry    # Preview changes
 npm run fix:brand        # Apply changes
 ```
+
 This automatically converts many hardcoded colors to brand tokens.
 
 ### See what would change
+
 ```bash
 npm run fix:brand:dry
 ```
+
 Safe to run - won't modify any files.
 
 ## When You Need a New Color
@@ -275,11 +288,12 @@ Safe to run - won't modify any files.
 /* In brand.css */
 :root {
   /* Add new token with clear name */
-  --brand-highlight: #ffd700;  /* Special promotional highlight */
+  --brand-highlight: #ffd700; /* Special promotional highlight */
 }
 ```
 
 Then use it:
+
 ```jsx
 <div style={{ background: 'var(--brand-highlight)' }}>
 ```
@@ -289,11 +303,13 @@ Then use it:
 After using brand colors:
 
 1. **Build the app:**
+
    ```bash
    npm run build
    ```
 
 2. **Check for violations:**
+
    ```bash
    npm run lint:brand
    ```
@@ -306,11 +322,13 @@ After using brand colors:
 ## Getting Help
 
 **Questions?**
+
 - Read the full docs: `docs/BRAND_SYSTEM.md`
 - Check the brand tokens: `src/styles/brand.css`
 - Ask in team chat: "Which brand color should I use for X?"
 
 **Found a bug?**
+
 - Check if it's a known issue
 - Report with screenshots
 - Include the component code
@@ -329,13 +347,13 @@ Tailwind Classes:
   bg-brand-info             Blue (info)
   bg-brand-warning          Amber (warning)
   bg-brand-danger           Red (error)
-  
+
   text-brand-text           Black (main text)
   text-brand-text-muted     Gray (secondary)
   text-brand-text-light     Light gray (tertiary)
-  
+
   border-brand-border       Default borders
-  
+
 CSS Variables:
   var(--brand-primary)
   var(--brand-success)
@@ -363,4 +381,4 @@ Commands:
 
 **Welcome to the brand system! 🎨**
 
-*Making your code more maintainable, one color at a time.*
+_Making your code more maintainable, one color at a time._

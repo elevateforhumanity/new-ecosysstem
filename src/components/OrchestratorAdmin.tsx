@@ -21,7 +21,8 @@ interface DiagnoseReport {
   timestamp: string;
 }
 
-const ORCHESTRATOR_URL = 'https://efh-autopilot-orchestrator.your-subdomain.workers.dev';
+const ORCHESTRATOR_URL =
+  'https://efh-autopilot-orchestrator.your-subdomain.workers.dev';
 
 export default function OrchestratorAdmin() {
   const [autopilots, setAutopilots] = useState<Autopilot[]>([]);
@@ -61,16 +62,24 @@ export default function OrchestratorAdmin() {
   async function ensureInfra() {
     setLoading(true);
     try {
-      const response = await fetch(`${ORCHESTRATOR_URL}/autopilot/ensure-infra`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          want: {
-            kvNamespaces: ['REGISTRY', 'AI_EMPLOYEE_LOGS'],
-            r2Buckets: ['efh-assets', 'efh-images', 'efh-pages', 'efh-private']
-          }
-        })
-      });
+      const response = await fetch(
+        `${ORCHESTRATOR_URL}/autopilot/ensure-infra`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            want: {
+              kvNamespaces: ['REGISTRY', 'AI_EMPLOYEE_LOGS'],
+              r2Buckets: [
+                'efh-assets',
+                'efh-images',
+                'efh-pages',
+                'efh-private',
+              ],
+            },
+          }),
+        }
+      );
       const data = await response.json();
       alert(JSON.stringify(data, null, 2));
       runDiagnose();
@@ -91,8 +100,8 @@ export default function OrchestratorAdmin() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           task: selectedTask,
-          meta: { pageType: 'home', description: 'Test page' }
-        })
+          meta: { pageType: 'home', description: 'Test page' },
+        }),
       });
       const data = await response.json();
       setTaskResult(data);
@@ -105,21 +114,29 @@ export default function OrchestratorAdmin() {
   }
 
   const getStatusColor = (hasError: boolean) => {
-    return hasError ? 'bg-brand-surface text-red-800' : 'bg-brand-surface text-brand-success';
+    return hasError
+      ? 'bg-brand-surface text-red-800'
+      : 'bg-brand-surface text-brand-success';
   };
 
   return (
     <div className="max-w-7xl mx-auto p-6">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-red-600 mb-2">Autopilot Orchestrator</h1>
-        <p className="text-brand-text-muted">Master controller for all AI systems</p>
+        <h1 className="text-4xl font-bold text-red-600 mb-2">
+          Autopilot Orchestrator
+        </h1>
+        <p className="text-brand-text-muted">
+          Master controller for all AI systems
+        </p>
       </div>
 
       {/* Diagnostics */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-semibold text-brand-text">System Diagnostics</h2>
+            <h2 className="text-2xl font-semibold text-brand-text">
+              System Diagnostics
+            </h2>
             <button
               onClick={runDiagnose}
               disabled={loading}
@@ -133,8 +150,12 @@ export default function OrchestratorAdmin() {
             <div className="space-y-4">
               {/* Token Status */}
               <div>
-                <h3 className="font-semibold text-brand-text mb-2">API Token</h3>
-                <div className={`px-3 py-2 rounded ${getStatusColor(!!diagnose.token.error)}`}>
+                <h3 className="font-semibold text-brand-text mb-2">
+                  API Token
+                </h3>
+                <div
+                  className={`px-3 py-2 rounded ${getStatusColor(!!diagnose.token.error)}`}
+                >
                   {diagnose.token.error ? (
                     <span>❌ {JSON.stringify(diagnose.token.error)}</span>
                   ) : (
@@ -145,24 +166,48 @@ export default function OrchestratorAdmin() {
 
               {/* KV Namespaces */}
               <div>
-                <h3 className="font-semibold text-brand-text mb-2">KV Namespaces</h3>
-                <div className={`px-3 py-2 rounded ${getStatusColor(!!diagnose.resources.kv?.error)}`}>
+                <h3 className="font-semibold text-brand-text mb-2">
+                  KV Namespaces
+                </h3>
+                <div
+                  className={`px-3 py-2 rounded ${getStatusColor(!!diagnose.resources.kv?.error)}`}
+                >
                   {diagnose.resources.kv?.error ? (
-                    <span>❌ {JSON.stringify(diagnose.resources.kv.error)}</span>
+                    <span>
+                      ❌ {JSON.stringify(diagnose.resources.kv.error)}
+                    </span>
                   ) : (
-                    <span>✅ {Array.isArray(diagnose.resources.kv) ? diagnose.resources.kv.length : 0} namespaces</span>
+                    <span>
+                      ✅{' '}
+                      {Array.isArray(diagnose.resources.kv)
+                        ? diagnose.resources.kv.length
+                        : 0}{' '}
+                      namespaces
+                    </span>
                   )}
                 </div>
               </div>
 
               {/* R2 Buckets */}
               <div>
-                <h3 className="font-semibold text-brand-text mb-2">R2 Buckets</h3>
-                <div className={`px-3 py-2 rounded ${getStatusColor(!!diagnose.resources.r2?.error)}`}>
+                <h3 className="font-semibold text-brand-text mb-2">
+                  R2 Buckets
+                </h3>
+                <div
+                  className={`px-3 py-2 rounded ${getStatusColor(!!diagnose.resources.r2?.error)}`}
+                >
                   {diagnose.resources.r2?.error ? (
-                    <span>❌ {JSON.stringify(diagnose.resources.r2.error)}</span>
+                    <span>
+                      ❌ {JSON.stringify(diagnose.resources.r2.error)}
+                    </span>
                   ) : (
-                    <span>✅ {Array.isArray(diagnose.resources.r2) ? diagnose.resources.r2.length : 0} buckets</span>
+                    <span>
+                      ✅{' '}
+                      {Array.isArray(diagnose.resources.r2)
+                        ? diagnose.resources.r2.length
+                        : 0}{' '}
+                      buckets
+                    </span>
                   )}
                 </div>
               </div>
@@ -170,11 +215,21 @@ export default function OrchestratorAdmin() {
               {/* Workers */}
               <div>
                 <h3 className="font-semibold text-brand-text mb-2">Workers</h3>
-                <div className={`px-3 py-2 rounded ${getStatusColor(!!diagnose.resources.workers?.error)}`}>
+                <div
+                  className={`px-3 py-2 rounded ${getStatusColor(!!diagnose.resources.workers?.error)}`}
+                >
                   {diagnose.resources.workers?.error ? (
-                    <span>❌ {JSON.stringify(diagnose.resources.workers.error)}</span>
+                    <span>
+                      ❌ {JSON.stringify(diagnose.resources.workers.error)}
+                    </span>
                   ) : (
-                    <span>✅ {Array.isArray(diagnose.resources.workers) ? diagnose.resources.workers.length : 0} workers</span>
+                    <span>
+                      ✅{' '}
+                      {Array.isArray(diagnose.resources.workers)
+                        ? diagnose.resources.workers.length
+                        : 0}{' '}
+                      workers
+                    </span>
                   )}
                 </div>
               </div>
@@ -196,7 +251,9 @@ export default function OrchestratorAdmin() {
 
         {/* Task Runner */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-semibold text-brand-text mb-4">Run Task</h2>
+          <h2 className="text-2xl font-semibold text-brand-text mb-4">
+            Run Task
+          </h2>
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-brand-text mb-2">
@@ -228,7 +285,9 @@ export default function OrchestratorAdmin() {
 
           {taskResult && (
             <div className="bg-brand-surface rounded-lg p-4 overflow-auto max-h-64">
-              <pre className="text-xs">{JSON.stringify(taskResult, null, 2)}</pre>
+              <pre className="text-xs">
+                {JSON.stringify(taskResult, null, 2)}
+              </pre>
             </div>
           )}
         </div>
@@ -237,7 +296,9 @@ export default function OrchestratorAdmin() {
       {/* Registered Autopilots */}
       <div className="bg-white rounded-lg shadow-md p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-semibold text-brand-text">Registered Autopilots ({autopilots.length})</h2>
+          <h2 className="text-2xl font-semibold text-brand-text">
+            Registered Autopilots ({autopilots.length})
+          </h2>
           <button
             onClick={loadAutopilots}
             className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors"
@@ -248,17 +309,27 @@ export default function OrchestratorAdmin() {
 
         {autopilots.length === 0 ? (
           <div className="text-center text-brand-text-light py-8">
-            No autopilots registered yet. Run the registration script to add them.
+            No autopilots registered yet. Run the registration script to add
+            them.
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {autopilots.map((ap) => (
-              <div key={ap.name} className="border border-brand-border rounded-lg p-4">
-                <h3 className="font-semibold text-brand-text mb-2">{ap.name}</h3>
-                <p className="text-xs text-brand-text-muted mb-3 truncate">{ap.endpoint}</p>
-                
+              <div
+                key={ap.name}
+                className="border border-brand-border rounded-lg p-4"
+              >
+                <h3 className="font-semibold text-brand-text mb-2">
+                  {ap.name}
+                </h3>
+                <p className="text-xs text-brand-text-muted mb-3 truncate">
+                  {ap.endpoint}
+                </p>
+
                 <div className="mb-3">
-                  <h4 className="text-xs font-medium text-brand-text mb-1">Capabilities:</h4>
+                  <h4 className="text-xs font-medium text-brand-text mb-1">
+                    Capabilities:
+                  </h4>
                   <div className="flex flex-wrap gap-1">
                     {ap.capabilities.map((cap) => (
                       <span
@@ -271,9 +342,12 @@ export default function OrchestratorAdmin() {
                   </div>
                 </div>
 
-                {(ap.needs.kvNamespaces?.length || ap.needs.r2Buckets?.length) && (
+                {(ap.needs.kvNamespaces?.length ||
+                  ap.needs.r2Buckets?.length) && (
                   <div>
-                    <h4 className="text-xs font-medium text-brand-text mb-1">Needs:</h4>
+                    <h4 className="text-xs font-medium text-brand-text mb-1">
+                      Needs:
+                    </h4>
                     <div className="text-xs text-brand-text-muted">
                       {ap.needs.kvNamespaces?.length && (
                         <div>KV: {ap.needs.kvNamespaces.join(', ')}</div>

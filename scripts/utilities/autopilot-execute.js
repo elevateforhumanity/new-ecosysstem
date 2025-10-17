@@ -2,7 +2,9 @@ const https = require('https');
 const fs = require('fs');
 
 // Load autopilot configuration
-const config = JSON.parse(fs.readFileSync('autopilot-cloudflare-setup.json', 'utf8'));
+const config = JSON.parse(
+  fs.readFileSync('autopilot-cloudflare-setup.json', 'utf8')
+);
 
 console.log('🤖 Autopilot: Starting CloudFlare Pages configuration...');
 console.log('📋 Task:', config.description);
@@ -10,34 +12,33 @@ console.log('📋 Task:', config.description);
 // Execute autopilot tasks
 async function executeAutopilot() {
   console.log('\n🚀 Step 1: Creating CloudFlare Pages project...');
-  
+
   try {
     await createPagesProject();
     console.log('✅ Pages project creation initiated');
-    
+
     console.log('\n🌐 Step 2: Configuring custom domains...');
     await configureDomains();
     console.log('✅ Domain configuration initiated');
-    
+
     console.log('\n🔧 Step 3: Setting up DNS records...');
     await configureDNS();
     console.log('✅ DNS configuration initiated');
-    
+
     console.log('\n🎉 Autopilot Configuration Complete!');
     console.log('📱 Your sites will be live at:');
-    config.expected_outcome.check_urls.forEach(url => {
+    config.expected_outcome.check_urls.forEach((url) => {
       console.log(`   • ${url}`);
     });
-    
+
     console.log('\n⏱️  Timeline:');
     console.log('   • Pages site: 2-3 minutes');
     console.log('   • Custom domain: 15 minutes to 2 hours');
-    
+
     console.log('\n✅ Features deployed:');
-    config.expected_outcome.features.forEach(feature => {
+    config.expected_outcome.features.forEach((feature) => {
       console.log(`   • ${feature}`);
     });
-    
   } catch (error) {
     console.log('❌ Autopilot encountered an issue:', error.message);
     console.log('💡 Falling back to manual setup instructions...');
@@ -55,37 +56,45 @@ function createPagesProject() {
         config: {
           owner: 'elevateforhumanity',
           repo_name: 'new-ecosysstem',
-          production_branch: config.configuration.branch
-        }
+          production_branch: config.configuration.branch,
+        },
       },
       build_config: {
         build_command: config.configuration.build_command,
-        destination_dir: config.configuration.output_directory
-      }
+        destination_dir: config.configuration.output_directory,
+      },
     };
 
     const postData = JSON.stringify(projectData);
-    
+
     const options = {
       hostname: 'api.cloudflare.com',
       path: `/client/v4/accounts/${config.credentials.account_id}/pages/projects`,
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${config.credentials.cloudflare_api_token}`,
-        'Content-Type': 'application/json'
-      }
+        Authorization: `Bearer ${config.credentials.cloudflare_api_token}`,
+        'Content-Type': 'application/json',
+      },
     };
 
     const req = https.request(options, (res) => {
       let data = '';
-      res.on('data', (chunk) => data += chunk);
+      res.on('data', (chunk) => (data += chunk));
       res.on('end', () => {
         try {
           const response = JSON.parse(data);
-          if (response.success || (response.errors && response.errors[0].message.includes('already exists'))) {
+          if (
+            response.success ||
+            (response.errors &&
+              response.errors[0].message.includes('already exists'))
+          ) {
             resolve(response);
           } else {
-            reject(new Error(response.errors ? response.errors[0].message : 'Unknown error'));
+            reject(
+              new Error(
+                response.errors ? response.errors[0].message : 'Unknown error'
+              )
+            );
           }
         } catch (error) {
           reject(error);

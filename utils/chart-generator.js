@@ -3,8 +3,13 @@ class ChartGenerator {
     const { labels, values, title, color = '#3b82f6' } = data;
     return {
       type: 'bar',
-      data: { labels, datasets: [{ label: title || 'Data', data: values, backgroundColor: color }] },
-      options: { responsive: true }
+      data: {
+        labels,
+        datasets: [
+          { label: title || 'Data', data: values, backgroundColor: color },
+        ],
+      },
+      options: { responsive: true },
     };
   }
 
@@ -13,7 +18,7 @@ class ChartGenerator {
     return {
       type: 'line',
       data: { labels, datasets },
-      options: { responsive: true }
+      options: { responsive: true },
     };
   }
 
@@ -22,7 +27,7 @@ class ChartGenerator {
     return {
       type: 'pie',
       data: { labels, datasets: [{ data: values }] },
-      options: { responsive: true }
+      options: { responsive: true },
     };
   }
 

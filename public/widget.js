@@ -1,27 +1,27 @@
 /**
  * Elevate for Humanity - Widget System
- * 
+ *
  * Advanced embeddable widgets for Durable landing pages
  * Supports multiple widget types: programs list, CTA buttons, forms, etc.
- * 
+ *
  * Usage Examples:
- * 
+ *
  * 1. Programs Widget:
  * <div class="efh-widget" data-type="programs" data-limit="6"></div>
- * 
+ *
  * 2. CTA Button:
  * <div class="efh-widget" data-type="cta" data-page="get-started" data-text="Get Started Today"></div>
- * 
+ *
  * 3. Contact Form:
  * <div class="efh-widget" data-type="form" data-form="contact"></div>
- * 
+ *
  * 4. Full Page Embed:
  * <div class="efh-widget" data-type="page" data-page="hub" data-height="600px"></div>
- * 
+ *
  * <script src="https://elevateforhumanity.onrender.com/widget.js"></script>
  */
 
-(function() {
+(function () {
   'use strict';
 
   const CONFIG = {
@@ -32,22 +32,21 @@
       secondary: '#64748b',
       success: '#10b981',
       danger: '#ef4444',
-      fontFamily: 'system-ui, -apple-system, sans-serif'
-    }
+      fontFamily: 'system-ui, -apple-system, sans-serif',
+    },
   };
 
   /**
    * Widget Types
    */
   const WIDGETS = {
-    
     /**
      * Programs List Widget
      */
-    programs: function(container, options) {
+    programs: function (container, options) {
       const limit = options.limit || 6;
       const layout = options.layout || 'grid'; // grid or list
-      
+
       container.innerHTML = `
         <div class="efh-programs-widget" style="font-family: ${CONFIG.styles.fontFamily};">
           <div class="efh-loading" style="text-align: center; padding: 20px;">
@@ -59,18 +58,49 @@
       // Simulate API call (replace with actual API when available)
       setTimeout(() => {
         const programs = [
-          { id: 1, title: 'Healthcare Training', description: 'Comprehensive healthcare certification programs', duration: '12 weeks' },
-          { id: 2, title: 'Tech Apprenticeship', description: 'Software development and IT training', duration: '16 weeks' },
-          { id: 3, title: 'Business Management', description: 'Leadership and management skills', duration: '8 weeks' },
-          { id: 4, title: 'Skilled Trades', description: 'Hands-on training in construction and trades', duration: '20 weeks' },
-          { id: 5, title: 'Childcare Provider', description: 'Early childhood education certification', duration: '10 weeks' },
-          { id: 6, title: 'Esthetics & Beauty', description: 'Skincare and beauty treatment courses', duration: '14 weeks' }
+          {
+            id: 1,
+            title: 'Healthcare Training',
+            description: 'Comprehensive healthcare certification programs',
+            duration: '12 weeks',
+          },
+          {
+            id: 2,
+            title: 'Tech Apprenticeship',
+            description: 'Software development and IT training',
+            duration: '16 weeks',
+          },
+          {
+            id: 3,
+            title: 'Business Management',
+            description: 'Leadership and management skills',
+            duration: '8 weeks',
+          },
+          {
+            id: 4,
+            title: 'Skilled Trades',
+            description: 'Hands-on training in construction and trades',
+            duration: '20 weeks',
+          },
+          {
+            id: 5,
+            title: 'Childcare Provider',
+            description: 'Early childhood education certification',
+            duration: '10 weeks',
+          },
+          {
+            id: 6,
+            title: 'Esthetics & Beauty',
+            description: 'Skincare and beauty treatment courses',
+            duration: '14 weeks',
+          },
         ].slice(0, limit);
 
-        const html = layout === 'grid' 
-          ? renderProgramsGrid(programs)
-          : renderProgramsList(programs);
-        
+        const html =
+          layout === 'grid'
+            ? renderProgramsGrid(programs)
+            : renderProgramsList(programs);
+
         container.querySelector('.efh-programs-widget').innerHTML = html;
       }, 500);
     },
@@ -78,15 +108,15 @@
     /**
      * CTA Button Widget
      */
-    cta: function(container, options) {
+    cta: function (container, options) {
       const page = options.page || 'get-started';
       const text = options.text || 'Get Started';
       const style = options.style || 'primary'; // primary, secondary, outline
-      
+
       const buttonStyles = {
         primary: `background: ${CONFIG.styles.primary}; color: white; border: none;`,
         secondary: `background: ${CONFIG.styles.secondary}; color: white; border: none;`,
-        outline: `background: transparent; color: ${CONFIG.styles.primary}; border: 2px solid ${CONFIG.styles.primary};`
+        outline: `background: transparent; color: ${CONFIG.styles.primary}; border: 2px solid ${CONFIG.styles.primary};`,
       };
 
       container.innerHTML = `
@@ -116,11 +146,11 @@
     /**
      * Full Page Embed Widget
      */
-    page: function(container, options) {
+    page: function (container, options) {
       const page = options.page || 'programs';
       const height = options.height || '800px';
       const width = options.width || '100%';
-      
+
       container.innerHTML = `
         <iframe 
           src="${CONFIG.baseUrl}/${page}"
@@ -140,7 +170,7 @@
     /**
      * Stats Widget
      */
-    stats: function(container, options) {
+    stats: function (container, options) {
       container.innerHTML = `
         <div class="efh-stats-widget" style="
           display: grid;
@@ -167,15 +197,17 @@
     /**
      * Quick Links Widget
      */
-    links: function(container, options) {
+    links: function (container, options) {
       const links = options.links || [
         { text: 'Browse Programs', url: 'programs' },
         { text: 'Student Hub', url: 'hub' },
         { text: 'Get Started', url: 'get-started' },
-        { text: 'Contact Us', url: 'connect' }
+        { text: 'Contact Us', url: 'connect' },
       ];
 
-      const linksHtml = links.map(link => `
+      const linksHtml = links
+        .map(
+          (link) => `
         <a href="${CONFIG.baseUrl}/${link.url}" 
            target="_blank"
            rel="noopener noreferrer"
@@ -192,7 +224,9 @@
         >
           ${link.text} →
         </a>
-      `).join('');
+      `
+        )
+        .join('');
 
       container.innerHTML = `
         <div class="efh-links-widget" style="
@@ -204,14 +238,16 @@
           ${linksHtml}
         </div>
       `;
-    }
+    },
   };
 
   /**
    * Helper: Render programs in grid layout
    */
   function renderProgramsGrid(programs) {
-    const cards = programs.map(program => `
+    const cards = programs
+      .map(
+        (program) => `
       <div style="
         background: white;
         border: 1px solid #e5e7eb;
@@ -233,7 +269,9 @@
           ${program.duration}
         </div>
       </div>
-    `).join('');
+    `
+      )
+      .join('');
 
     return `
       <div style="
@@ -250,7 +288,9 @@
    * Helper: Render programs in list layout
    */
   function renderProgramsList(programs) {
-    const items = programs.map(program => `
+    const items = programs
+      .map(
+        (program) => `
       <div style="
         background: white;
         border: 1px solid #e5e7eb;
@@ -274,7 +314,9 @@
           ${program.duration}
         </div>
       </div>
-    `).join('');
+    `
+      )
+      .join('');
 
     return items;
   }
@@ -284,15 +326,17 @@
    */
   function initWidgets() {
     const widgets = document.querySelectorAll('.efh-widget');
-    
-    widgets.forEach(container => {
+
+    widgets.forEach((container) => {
       const type = container.getAttribute('data-type');
       const options = {};
-      
+
       // Parse all data attributes as options
-      Array.from(container.attributes).forEach(attr => {
+      Array.from(container.attributes).forEach((attr) => {
         if (attr.name.startsWith('data-') && attr.name !== 'data-type') {
-          const key = attr.name.replace('data-', '').replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+          const key = attr.name
+            .replace('data-', '')
+            .replace(/-([a-z])/g, (g) => g[1].toUpperCase());
           options[key] = attr.value;
         }
       });
@@ -338,7 +382,6 @@
     init: initWidgets,
     version: '1.0.0',
     config: CONFIG,
-    availableWidgets: Object.keys(WIDGETS)
+    availableWidgets: Object.keys(WIDGETS),
   };
-
 })();

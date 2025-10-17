@@ -26,7 +26,10 @@ export default function FileUpload({
 }: FileUploadProps) {
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [uploadedFile, setUploadedFile] = useState<{ key: string; size: number } | null>(null);
+  const [uploadedFile, setUploadedFile] = useState<{
+    key: string;
+    size: number;
+  } | null>(null);
 
   async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -61,7 +64,7 @@ export default function FileUpload({
       const response = await fetch('/files/upload', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: formData,
       });
@@ -75,9 +78,9 @@ export default function FileUpload({
       setUploadedFile(result);
       setProgress(100);
       onSuccess?.(result.key, result.size);
-
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Upload failed';
+      const errorMessage =
+        error instanceof Error ? error.message : 'Upload failed';
       console.error('Upload error:', error);
       onError?.(errorMessage);
       alert(`Upload failed: ${errorMessage}`);

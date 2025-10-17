@@ -11,10 +11,13 @@ function fixUrlsInFile(file) {
   try {
     const src = fs.readFileSync(file, 'utf8');
     let out = src;
-    
+
     // Replace all occurrences of the old domain
-    out = out.replace(new RegExp(OLD_DOMAIN.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), NEW_DOMAIN);
-    
+    out = out.replace(
+      new RegExp(OLD_DOMAIN.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'),
+      NEW_DOMAIN
+    );
+
     if (out !== src) {
       fs.writeFileSync(file, out);
       console.log(`✅ Fixed URLs in: ${path.relative(process.cwd(), file)}`);
@@ -31,7 +34,7 @@ function fixUrlsInFile(file) {
     'dist/**/*.css',
     '!dist/node_modules/**',
   ]);
-  
+
   console.log(`Fixing domain URLs in ${files.length} files...`);
   files.forEach(fixUrlsInFile);
   console.log('Domain URL cleanup complete!');

@@ -34,38 +34,38 @@ export class ComplianceAutomation {
       name: 'DOL Regulations',
       url: 'https://www.dol.gov/agencies/eta/api/regulations',
       type: 'api',
-      frequency: 'daily'
+      frequency: 'daily',
     },
     {
       name: 'WIOA Updates',
       url: 'https://www.doleta.gov/wioa/rss',
       type: 'rss',
-      frequency: 'daily'
+      frequency: 'daily',
     },
     {
       name: 'Indiana DWD Updates',
       url: 'https://www.in.gov/dwd/api/updates',
       type: 'api',
-      frequency: 'daily'
+      frequency: 'daily',
     },
     {
       name: 'WCAG Guidelines',
       url: 'https://www.w3.org/WAI/WCAG21/quickref/rss',
       type: 'rss',
-      frequency: 'weekly'
+      frequency: 'weekly',
     },
     {
       name: 'FERPA Regulations',
       url: 'https://studentprivacy.ed.gov/api/regulations',
       type: 'api',
-      frequency: 'weekly'
+      frequency: 'weekly',
     },
     {
       name: 'SAM.gov Requirements',
       url: 'https://sam.gov/api/prod/federalorganizations/v1/orgs',
       type: 'api',
-      frequency: 'daily'
-    }
+      frequency: 'daily',
+    },
   ];
 
   private complianceRules: ComplianceRule[] = [];
@@ -90,7 +90,7 @@ export class ComplianceAutomation {
         source: 'DOL/ETA',
         lastChecked: new Date(),
         status: 'compliant',
-        autoFix: true
+        autoFix: true,
       },
       {
         id: 'ferpa-privacy',
@@ -99,7 +99,7 @@ export class ComplianceAutomation {
         source: 'Department of Education',
         lastChecked: new Date(),
         status: 'compliant',
-        autoFix: true
+        autoFix: true,
       },
       {
         id: 'wcag-aa',
@@ -108,7 +108,7 @@ export class ComplianceAutomation {
         source: 'W3C',
         lastChecked: new Date(),
         status: 'compliant',
-        autoFix: true
+        autoFix: true,
       },
       {
         id: 'section-508',
@@ -117,7 +117,7 @@ export class ComplianceAutomation {
         source: 'GSA',
         lastChecked: new Date(),
         status: 'compliant',
-        autoFix: true
+        autoFix: true,
       },
       {
         id: 'etpl-requirements',
@@ -126,7 +126,7 @@ export class ComplianceAutomation {
         source: 'Indiana DWD',
         lastChecked: new Date(),
         status: 'compliant',
-        autoFix: false
+        autoFix: false,
       },
       {
         id: 'dol-apprenticeship',
@@ -135,7 +135,7 @@ export class ComplianceAutomation {
         source: 'DOL/OA',
         lastChecked: new Date(),
         status: 'compliant',
-        autoFix: false
+        autoFix: false,
       },
       {
         id: 'sam-gov-registration',
@@ -144,7 +144,7 @@ export class ComplianceAutomation {
         source: 'SAM.gov',
         lastChecked: new Date(),
         status: 'compliant',
-        autoFix: false
+        autoFix: false,
       },
       {
         id: 'gdpr-privacy',
@@ -153,7 +153,7 @@ export class ComplianceAutomation {
         source: 'EU',
         lastChecked: new Date(),
         status: 'compliant',
-        autoFix: true
+        autoFix: true,
       },
       {
         id: 'ccpa-privacy',
@@ -162,8 +162,8 @@ export class ComplianceAutomation {
         source: 'California',
         lastChecked: new Date(),
         status: 'compliant',
-        autoFix: true
-      }
+        autoFix: true,
+      },
     ];
   }
 
@@ -178,11 +178,11 @@ export class ComplianceAutomation {
         const status = await this.checkRule(rule);
         rule.status = status;
         rule.lastChecked = new Date();
-        
+
         if (status !== 'compliant' && rule.autoFix) {
           await this.autoFixRule(rule);
         }
-        
+
         results.push(rule);
       } catch (error) {
         console.error(`Error checking rule ${rule.id}:`, error);
@@ -197,10 +197,12 @@ export class ComplianceAutomation {
   /**
    * Check individual compliance rule
    */
-  private async checkRule(rule: ComplianceRule): Promise<'compliant' | 'warning' | 'non-compliant'> {
+  private async checkRule(
+    rule: ComplianceRule
+  ): Promise<'compliant' | 'warning' | 'non-compliant'> {
     // Simulate API call to check compliance
     // In production, this would call actual compliance APIs
-    
+
     switch (rule.id) {
       case 'wcag-aa':
         return await this.checkAccessibility();
@@ -218,7 +220,7 @@ export class ComplianceAutomation {
    */
   private async autoFixRule(rule: ComplianceRule): Promise<void> {
     console.log(`Auto-fixing rule: ${rule.name}`);
-    
+
     switch (rule.id) {
       case 'wcag-aa':
         await this.fixAccessibilityIssues();
@@ -236,24 +238,28 @@ export class ComplianceAutomation {
   /**
    * Check WCAG accessibility compliance
    */
-  private async checkAccessibility(): Promise<'compliant' | 'warning' | 'non-compliant'> {
+  private async checkAccessibility(): Promise<
+    'compliant' | 'warning' | 'non-compliant'
+  > {
     // Check for common accessibility issues
     const issues = [];
-    
+
     // Check for alt text on images
     const images = document.querySelectorAll('img:not([alt])');
     if (images.length > 0) issues.push('missing-alt-text');
-    
+
     // Check for proper heading hierarchy
     const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
     // Logic to verify heading order
-    
+
     // Check for color contrast
     // Would use actual contrast checking library
-    
+
     // Check for keyboard navigation
-    const focusableElements = document.querySelectorAll('a, button, input, select, textarea');
-    
+    const focusableElements = document.querySelectorAll(
+      'a, button, input, select, textarea'
+    );
+
     return issues.length === 0 ? 'compliant' : 'warning';
   }
 
@@ -267,7 +273,7 @@ export class ComplianceAutomation {
       img.setAttribute('alt', 'Image');
       img.setAttribute('role', 'img');
     });
-    
+
     // Add ARIA labels where missing
     const buttons = document.querySelectorAll('button:not([aria-label])');
     buttons.forEach((button) => {
@@ -281,17 +287,22 @@ export class ComplianceAutomation {
   /**
    * Check privacy compliance (FERPA, GDPR, CCPA)
    */
-  private async checkPrivacyCompliance(): Promise<'compliant' | 'warning' | 'non-compliant'> {
+  private async checkPrivacyCompliance(): Promise<
+    'compliant' | 'warning' | 'non-compliant'
+  > {
     // Check for privacy policy
-    const hasPrivacyPolicy = document.querySelector('[href*="privacy"]') !== null;
-    
+    const hasPrivacyPolicy =
+      document.querySelector('[href*="privacy"]') !== null;
+
     // Check for cookie consent
     const hasCookieConsent = localStorage.getItem('cookie-consent') !== null;
-    
+
     // Check for data encryption
     const isHTTPS = window.location.protocol === 'https:';
-    
-    return hasPrivacyPolicy && hasCookieConsent && isHTTPS ? 'compliant' : 'warning';
+
+    return hasPrivacyPolicy && hasCookieConsent && isHTTPS
+      ? 'compliant'
+      : 'warning';
   }
 
   /**
@@ -329,7 +340,7 @@ export class ComplianceAutomation {
         </div>
       </div>
     `;
-    
+
     if (!localStorage.getItem('cookie-consent')) {
       document.body.appendChild(banner);
     }
@@ -338,13 +349,15 @@ export class ComplianceAutomation {
   /**
    * Check SAM.gov registration status
    */
-  private async checkSAMRegistration(): Promise<'compliant' | 'warning' | 'non-compliant'> {
+  private async checkSAMRegistration(): Promise<
+    'compliant' | 'warning' | 'non-compliant'
+  > {
     try {
       // In production, call SAM.gov API
       // const response = await fetch('https://api.sam.gov/entity-information/v3/entities?ueiSAM=YOUR_UEI');
       // const data = await response.json();
       // return data.entityRegistration[0].registrationStatus === 'Active' ? 'compliant' : 'non-compliant';
-      
+
       return 'compliant'; // Simulated
     } catch (error) {
       return 'warning';
@@ -369,7 +382,7 @@ export class ComplianceAutomation {
    */
   private async fetchFromSource(source: ComplianceDataSource): Promise<void> {
     console.log(`Fetching updates from ${source.name}...`);
-    
+
     // In production, implement actual API calls
     // For now, simulate
     switch (source.type) {
@@ -390,9 +403,15 @@ export class ComplianceAutomation {
    */
   getDashboardData() {
     const total = this.complianceRules.length;
-    const compliant = this.complianceRules.filter(r => r.status === 'compliant').length;
-    const warnings = this.complianceRules.filter(r => r.status === 'warning').length;
-    const nonCompliant = this.complianceRules.filter(r => r.status === 'non-compliant').length;
+    const compliant = this.complianceRules.filter(
+      (r) => r.status === 'compliant'
+    ).length;
+    const warnings = this.complianceRules.filter(
+      (r) => r.status === 'warning'
+    ).length;
+    const nonCompliant = this.complianceRules.filter(
+      (r) => r.status === 'non-compliant'
+    ).length;
 
     return {
       total,
@@ -401,7 +420,7 @@ export class ComplianceAutomation {
       nonCompliant,
       complianceRate: (compliant / total) * 100,
       rules: this.complianceRules,
-      lastUpdated: new Date()
+      lastUpdated: new Date(),
     };
   }
 
@@ -410,14 +429,20 @@ export class ComplianceAutomation {
    */
   scheduleAutomaticChecks(): void {
     // Check compliance every hour
-    setInterval(() => {
-      this.checkCompliance();
-    }, 60 * 60 * 1000);
+    setInterval(
+      () => {
+        this.checkCompliance();
+      },
+      60 * 60 * 1000
+    );
 
     // Fetch updates daily
-    setInterval(() => {
-      this.fetchUpdates();
-    }, 24 * 60 * 60 * 1000);
+    setInterval(
+      () => {
+        this.fetchUpdates();
+      },
+      24 * 60 * 60 * 1000
+    );
 
     // Initial check
     this.checkCompliance();

@@ -7,7 +7,8 @@ const path = require('path');
 const fg = require('fast-glob');
 const cheerio = require('cheerio');
 
-const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'contact@elevateforhumanity.org';
+const CONTACT_EMAIL =
+  process.env.CONTACT_EMAIL || 'contact@elevateforhumanity.org';
 const APPLY_URL = process.env.APPLY_URL || 'public/apply.html';
 const CONTACT_URL = process.env.CONTACT_URL || 'connect.html#contact';
 
@@ -20,13 +21,17 @@ const NAV_LINKS = [
 ];
 
 function ensureNav($) {
-  if ($('#efh-nav-primary').length > 0 || $('nav[role="navigation"]').length > 0) return;
+  if (
+    $('#efh-nav-primary').length > 0 ||
+    $('nav[role="navigation"]').length > 0
+  )
+    return;
   const nav = `
   <nav id="efh-nav-primary" role="navigation" aria-label="Primary" style="position:sticky;top:0;z-index:50;background:#0f172a;color:white;border-bottom:1px solid #1f2937">
     <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:10px 16px;">
       <a href="index.html" style="font-weight:700;color:#fff;text-decoration:none">Elevate for Humanity</a>
       <div style="display:flex;gap:12px;margin-left:auto;flex-wrap:wrap">
-        ${NAV_LINKS.map(l => `<a href="${l.href}" style="color:#cbd5e1;text-decoration:none">${l.text}</a>`).join('')}
+        ${NAV_LINKS.map((l) => `<a href="${l.href}" style="color:#cbd5e1;text-decoration:none">${l.text}</a>`).join('')}
       </div>
     </div>
   </nav>`;
@@ -84,13 +89,22 @@ function processFile(file) {
     ensureInfoBox($);
 
     fs.writeFileSync(file, $.html());
-    console.log(`✅ Engagement injected: ${path.relative(process.cwd(), file)}`);
+    console.log(
+      `✅ Engagement injected: ${path.relative(process.cwd(), file)}`
+    );
   } catch (e) {
     console.error(`❌ Failed ${file}:`, e.message);
   }
 }
 
 (async function main() {
-  const entries = await fg(['**/*.html', '!**/node_modules/**', '!**/server/**', '!**/app/assets/**', '!**/*verification*.html', '!**/protected-site.html']);
+  const entries = await fg([
+    '**/*.html',
+    '!**/node_modules/**',
+    '!**/server/**',
+    '!**/app/assets/**',
+    '!**/*verification*.html',
+    '!**/protected-site.html',
+  ]);
   entries.forEach(processFile);
 })();

@@ -3,8 +3,8 @@
   Commercial License. No resale, sublicensing, or redistribution allowed.
   See LICENSE file for details.
 */
-import React, { useEffect, useState } from "react";
-import AppLayout from "../layouts/AppLayout";
+import React, { useEffect, useState } from 'react';
+import AppLayout from '../layouts/AppLayout';
 import {
   LineChart,
   Line,
@@ -16,7 +16,7 @@ import {
   CartesianGrid,
   ResponsiveContainer,
   Legend,
-} from "recharts";
+} from 'recharts';
 
 interface Autopilot {
   name: string;
@@ -79,39 +79,39 @@ export default function AutopilotAdmin() {
   const [darkMode, setDarkMode] = useState(false);
   const [autopilots, setAutopilots] = useState<Autopilot[]>([]);
   const [loading, setLoading] = useState(false);
-  const [log, setLog] = useState("");
-  const [task, setTask] = useState("generate_page");
-  const [meta, setMeta] = useState("{}");
+  const [log, setLog] = useState('');
+  const [task, setTask] = useState('generate_page');
+  const [meta, setMeta] = useState('{}');
   const [diagnostics, setDiagnostics] = useState<DiagnosticResult | null>(null);
-  
+
   // Log analyzer state
   const [from, setFrom] = useState(
     new Date(Date.now() - 86400000).toISOString().slice(0, 10)
   );
   const [to, setTo] = useState(new Date().toISOString().slice(0, 10));
-  const [cap, setCap] = useState("");
-  const [taskFilter, setTaskFilter] = useState("");
+  const [cap, setCap] = useState('');
+  const [taskFilter, setTaskFilter] = useState('');
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [summary, setSummary] = useState<any>(null);
-  const [note, setNote] = useState("");
-  
+  const [note, setNote] = useState('');
+
   // Trends state
   const [days, setDays] = useState(30);
   const [statsData, setStatsData] = useState<StatsData | null>(null);
-  
+
   // Registration state
-  const [regName, setRegName] = useState("");
-  const [regEndpoint, setRegEndpoint] = useState("");
-  const [regCaps, setRegCaps] = useState("");
+  const [regName, setRegName] = useState('');
+  const [regEndpoint, setRegEndpoint] = useState('');
+  const [regCaps, setRegCaps] = useState('');
 
   // Base URLs - Update these to your deployed workers
-  const ORCHESTRATOR_BASE = "https://efh-autopilot-orchestrator.workers.dev";
-  const ANALYZER_BASE = "https://efh-autopilot-analyzer.workers.dev";
+  const ORCHESTRATOR_BASE = 'https://efh-autopilot-orchestrator.workers.dev';
+  const ANALYZER_BASE = 'https://efh-autopilot-analyzer.workers.dev';
 
   // Toast notification
-  const toast = (msg: string, type: "success" | "error" | "info" = "info") => {
+  const toast = (msg: string, type: 'success' | 'error' | 'info' = 'info') => {
     setNote(msg);
-    setTimeout(() => setNote(""), 3000);
+    setTimeout(() => setNote(''), 3000);
   };
 
   // Orchestrator functions
@@ -121,78 +121,78 @@ export default function AutopilotAdmin() {
       const res = await fetch(`${ORCHESTRATOR_BASE}/autopilot/list`);
       const data = await res.json();
       setAutopilots(data.autopilots || []);
-      toast("Autopilots loaded", "success");
+      toast('Autopilots loaded', 'success');
     } catch (err) {
-      toast(`Error: ${err}`, "error");
+      toast(`Error: ${err}`, 'error');
       setLog(`❌ Error fetching autopilots: ${err}`);
     }
     setLoading(false);
   }
 
   async function runDiag() {
-    setLog("Running diagnostics...");
+    setLog('Running diagnostics...');
     try {
       const res = await fetch(`${ORCHESTRATOR_BASE}/autopilot/diagnose`);
       const data = await res.json();
       setDiagnostics(data);
       setLog(JSON.stringify(data, null, 2));
-      toast("Diagnostics complete", "success");
+      toast('Diagnostics complete', 'success');
     } catch (err) {
-      toast(`Error: ${err}`, "error");
+      toast(`Error: ${err}`, 'error');
       setLog(`❌ Error running diagnostics: ${err}`);
     }
   }
 
   async function healInfra() {
-    setLog("Healing infrastructure...");
+    setLog('Healing infrastructure...');
     try {
       const res = await fetch(`${ORCHESTRATOR_BASE}/autopilot/ensure-infra`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           want: {
-            kvNamespaces: ["REGISTRY", "AI_EMPLOYEE_LOGS", "LOGS", "SUMMARIES"],
-            r2Buckets: ["efh-assets", "efh-images", "efh-pages"],
+            kvNamespaces: ['REGISTRY', 'AI_EMPLOYEE_LOGS', 'LOGS', 'SUMMARIES'],
+            r2Buckets: ['efh-assets', 'efh-images', 'efh-pages'],
           },
         }),
       });
       const data = await res.json();
       setLog(JSON.stringify(data, null, 2));
-      toast("Infrastructure healed", "success");
+      toast('Infrastructure healed', 'success');
     } catch (err) {
-      toast(`Error: ${err}`, "error");
+      toast(`Error: ${err}`, 'error');
       setLog(`❌ Error healing infrastructure: ${err}`);
     }
   }
 
   async function runTask() {
-    setLog("Running task...");
+    setLog('Running task...');
     try {
-      const parsedMeta = JSON.parse(meta || "{}");
+      const parsedMeta = JSON.parse(meta || '{}');
       const res = await fetch(`${ORCHESTRATOR_BASE}/autopilot/plan`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ task, meta: parsedMeta }),
       });
       const data = await res.json();
       setLog(JSON.stringify(data, null, 2));
-      toast("Task executed", "success");
+      toast('Task executed', 'success');
     } catch (err) {
-      toast(`Error: ${err}`, "error");
+      toast(`Error: ${err}`, 'error');
       setLog(`❌ Error running task: ${err}`);
     }
   }
 
   async function registerAutopilot() {
     if (!regName || !regEndpoint || !regCaps) {
-      toast("Fill all fields", "error");
+      toast('Fill all fields', 'error');
       return;
     }
     try {
-      const capabilities = regCaps.split(",").map((s) => s.trim());
+      const capabilities = regCaps.split(',').map((s) => s.trim());
       const res = await fetch(`${ORCHESTRATOR_BASE}/autopilot/registry`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: regName,
           endpoint: regEndpoint,
@@ -201,13 +201,13 @@ export default function AutopilotAdmin() {
       });
       const data = await res.json();
       setLog(JSON.stringify(data, null, 2));
-      toast("Autopilot registered", "success");
-      setRegName("");
-      setRegEndpoint("");
-      setRegCaps("");
+      toast('Autopilot registered', 'success');
+      setRegName('');
+      setRegEndpoint('');
+      setRegCaps('');
       fetchList();
     } catch (err) {
-      toast(`Error: ${err}`, "error");
+      toast(`Error: ${err}`, 'error');
     }
   }
 
@@ -224,29 +224,29 @@ export default function AutopilotAdmin() {
       const r = await fetch(`${ANALYZER_BASE}/logs/list?${q}`);
       const j = await r.json();
       setLogs(j.logs || []);
-      toast("Logs loaded", "success");
+      toast('Logs loaded', 'success');
     } catch (err) {
-      toast(`Error: ${err}`, "error");
+      toast(`Error: ${err}`, 'error');
     }
     setLoading(false);
   }
 
   async function summarize() {
     setLoading(true);
-    setNote("Summarizing…");
+    setNote('Summarizing…');
     try {
       const r = await fetch(`${ANALYZER_BASE}/logs/summarize`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ from, to }),
       });
       const j = await r.json();
       setSummary(j);
-      toast("Summary generated", "success");
+      toast('Summary generated', 'success');
     } catch (err) {
-      toast(`Error: ${err}`, "error");
+      toast(`Error: ${err}`, 'error');
     }
-    setNote("");
+    setNote('');
     setLoading(false);
   }
 
@@ -255,9 +255,9 @@ export default function AutopilotAdmin() {
       const r = await fetch(`${ANALYZER_BASE}/logs/summary?date=${to}`);
       const j = await r.json();
       setSummary(j);
-      toast("Daily summary loaded", "success");
+      toast('Daily summary loaded', 'success');
     } catch (err) {
-      toast(`Error: ${err}`, "error");
+      toast(`Error: ${err}`, 'error');
     }
   }
 
@@ -267,9 +267,9 @@ export default function AutopilotAdmin() {
       const r = await fetch(`${ANALYZER_BASE}/logs/stats?days=${days}`);
       const j = await r.json();
       setStatsData(j);
-      toast("Stats loaded", "success");
+      toast('Stats loaded', 'success');
     } catch (err) {
-      toast(`Error: ${err}`, "error");
+      toast(`Error: ${err}`, 'error');
     }
     setLoading(false);
   }
@@ -277,7 +277,7 @@ export default function AutopilotAdmin() {
   // Copy to clipboard
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
-    toast("Copied to clipboard", "success");
+    toast('Copied to clipboard', 'success');
   };
 
   // Initial load
@@ -290,13 +290,15 @@ export default function AutopilotAdmin() {
     loadStats();
   }, [days]);
 
-  const bgClass = darkMode ? "bg-gray-900 text-white" : "bg-brand-surface text-brand-text";
+  const bgClass = darkMode
+    ? 'bg-gray-900 text-white'
+    : 'bg-brand-surface text-brand-text';
   const cardClass = darkMode
-    ? "bg-gray-800 border-gray-700"
-    : "bg-white border-brand-border";
+    ? 'bg-gray-800 border-gray-700'
+    : 'bg-white border-brand-border';
   const inputClass = darkMode
-    ? "bg-gray-700 border-gray-600 text-white"
-    : "bg-white border-brand-border-dark text-brand-text";
+    ? 'bg-gray-700 border-gray-600 text-white'
+    : 'bg-white border-brand-border-dark text-brand-text';
 
   return (
     <AppLayout>
@@ -310,7 +312,7 @@ export default function AutopilotAdmin() {
             onClick={() => setDarkMode(!darkMode)}
             className="px-4 py-2 rounded bg-gray-700 text-white hover:bg-gray-600"
           >
-            {darkMode ? "☀️ Light" : "🌙 Dark"}
+            {darkMode ? '☀️ Light' : '🌙 Dark'}
           </button>
         </div>
 
@@ -332,13 +334,19 @@ export default function AutopilotAdmin() {
             <h3 className="font-semibold mb-2">Registered Autopilots</h3>
             {loading && <p>Loading...</p>}
             {!loading && autopilots.length === 0 && (
-              <p className="text-brand-text-light">No autopilots registered yet.</p>
+              <p className="text-brand-text-light">
+                No autopilots registered yet.
+              </p>
             )}
             {!loading && autopilots.length > 0 && (
               <div className="overflow-x-auto">
                 <table className="w-full text-sm border-collapse">
                   <thead>
-                    <tr className={darkMode ? "bg-gray-700" : "bg-brand-surface-dark"}>
+                    <tr
+                      className={
+                        darkMode ? 'bg-gray-700' : 'bg-brand-surface-dark'
+                      }
+                    >
                       <th className="p-2 text-left">Name</th>
                       <th className="p-2 text-left">Capabilities</th>
                       <th className="p-2 text-left">Endpoint</th>
@@ -351,7 +359,7 @@ export default function AutopilotAdmin() {
                           {a.name}
                         </td>
                         <td className="p-2">
-                          {(a.capabilities || []).join(", ")}
+                          {(a.capabilities || []).join(', ')}
                         </td>
                         <td className="p-2 text-brand-info text-xs">
                           {a.endpoint}
@@ -557,7 +565,9 @@ export default function AutopilotAdmin() {
             >
               📋 Copy URL
             </button>
-            {loading && <span className="text-sm text-brand-text-light">Working…</span>}
+            {loading && (
+              <span className="text-sm text-brand-text-light">Working…</span>
+            )}
           </div>
 
           {/* Summary Display */}
@@ -567,15 +577,15 @@ export default function AutopilotAdmin() {
                 Summary: {summary.date}
               </h2>
               <p className="text-sm text-brand-text-muted mb-2">
-                OK: {summary.counts?.ok ?? summary.n_ok} · Fail:{" "}
+                OK: {summary.counts?.ok ?? summary.n_ok} · Fail:{' '}
                 {summary.counts?.fail ?? summary.n_fail}
               </p>
               <div
                 className="prose max-w-none"
                 dangerouslySetInnerHTML={{
-                  __html: (summary.summary_markdown || "").replace(
+                  __html: (summary.summary_markdown || '').replace(
                     /\n/g,
-                    "<br/>"
+                    '<br/>'
                   ),
                 }}
               />
@@ -602,7 +612,9 @@ export default function AutopilotAdmin() {
           {/* Logs Table */}
           <div className="overflow-x-auto border rounded">
             <table className="min-w-full text-sm">
-              <thead className={darkMode ? "bg-gray-700" : "bg-brand-surface-dark"}>
+              <thead
+                className={darkMode ? 'bg-gray-700' : 'bg-brand-surface-dark'}
+              >
                 <tr>
                   <th className="p-2 text-left">Time</th>
                   <th className="p-2 text-left">Autopilot</th>
@@ -615,18 +627,16 @@ export default function AutopilotAdmin() {
               <tbody>
                 {logs.map((l, i) => (
                   <tr key={i} className="border-t">
-                    <td className="p-2">
-                      {new Date(l.ts).toLocaleString()}
-                    </td>
+                    <td className="p-2">{new Date(l.ts).toLocaleString()}</td>
                     <td className="p-2">{l.autopilot}</td>
                     <td className="p-2">{l.task}</td>
                     <td className="p-2">{l.capability}</td>
                     <td
                       className={`p-2 ${
-                        l.ok ? "text-green-700" : "text-red-600"
+                        l.ok ? 'text-green-700' : 'text-red-600'
                       }`}
                     >
-                      {l.ok ? "yes" : "no"}
+                      {l.ok ? 'yes' : 'no'}
                     </td>
                     <td className="p-2">{l.level}</td>
                   </tr>
@@ -677,7 +687,11 @@ export default function AutopilotAdmin() {
                     <Tooltip />
                     <Legend />
                     <Bar dataKey="ok" stackId="a" fill="var(--brand-success)" />
-                    <Bar dataKey="fail" stackId="a" fill="var(--brand-danger)" />
+                    <Bar
+                      dataKey="fail"
+                      stackId="a"
+                      fill="var(--brand-danger)"
+                    />
                   </BarChart>
                 </ResponsiveContainer>
                 <p className="text-xs text-brand-text-light mt-1">
@@ -694,7 +708,7 @@ export default function AutopilotAdmin() {
                   <LineChart data={statsData.daily}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="day" hide />
-                    <YAxis domain={[0, "auto"]} />
+                    <YAxis domain={[0, 'auto']} />
                     <Tooltip />
                     <Line
                       type="monotone"
@@ -752,10 +766,12 @@ export default function AutopilotAdmin() {
         {/* Log Panel */}
         <div
           className={`p-4 rounded-lg font-mono text-sm whitespace-pre-wrap max-h-96 overflow-auto ${
-            darkMode ? "bg-black text-green-400" : "bg-brand-surface-dark text-brand-text"
+            darkMode
+              ? 'bg-black text-green-400'
+              : 'bg-brand-surface-dark text-brand-text'
           }`}
         >
-          {log || "Ready."}
+          {log || 'Ready.'}
         </div>
       </div>
     </AppLayout>

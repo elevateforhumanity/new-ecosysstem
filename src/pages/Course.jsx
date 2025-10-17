@@ -3,48 +3,73 @@
   Commercial License. No resale, sublicensing, or redistribution allowed.
   See LICENSE file for details.
 */
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import AppLayout from "../layouts/AppLayout";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import AppLayout from '../layouts/AppLayout';
 
 export default function Course() {
   const [activeLesson, setActiveLesson] = useState(1);
   const [completedLessons, setCompletedLessons] = useState([]);
   const [showNotes, setShowNotes] = useState(false);
-  const [notes, setNotes] = useState("");
+  const [notes, setNotes] = useState('');
 
   const course = {
     id: 1,
-    title: "Introduction to Web Development",
-    instructor: "Dr. Sarah Johnson",
+    title: 'Introduction to Web Development',
+    instructor: 'Dr. Sarah Johnson',
     progress: 45,
     modules: [
       {
         id: 1,
-        title: "Getting Started",
+        title: 'Getting Started',
         lessons: [
-          { id: 1, title: "Welcome to the Course", duration: "5:30", type: "video" },
-          { id: 2, title: "Setting Up Your Environment", duration: "12:45", type: "video" },
-          { id: 3, title: "Course Resources", duration: "3:20", type: "reading" },
+          {
+            id: 1,
+            title: 'Welcome to the Course',
+            duration: '5:30',
+            type: 'video',
+          },
+          {
+            id: 2,
+            title: 'Setting Up Your Environment',
+            duration: '12:45',
+            type: 'video',
+          },
+          {
+            id: 3,
+            title: 'Course Resources',
+            duration: '3:20',
+            type: 'reading',
+          },
         ],
       },
       {
         id: 2,
-        title: "HTML Fundamentals",
+        title: 'HTML Fundamentals',
         lessons: [
-          { id: 4, title: "HTML Basics", duration: "15:20", type: "video" },
-          { id: 5, title: "HTML Elements", duration: "18:30", type: "video" },
-          { id: 6, title: "HTML Quiz", duration: "10 questions", type: "quiz" },
+          { id: 4, title: 'HTML Basics', duration: '15:20', type: 'video' },
+          { id: 5, title: 'HTML Elements', duration: '18:30', type: 'video' },
+          { id: 6, title: 'HTML Quiz', duration: '10 questions', type: 'quiz' },
         ],
       },
       {
         id: 3,
-        title: "CSS Styling",
+        title: 'CSS Styling',
         lessons: [
-          { id: 7, title: "CSS Introduction", duration: "14:15", type: "video" },
-          { id: 8, title: "CSS Selectors", duration: "16:40", type: "video" },
-          { id: 9, title: "Flexbox Layout", duration: "20:10", type: "video" },
-          { id: 10, title: "CSS Project", duration: "Assignment", type: "assignment" },
+          {
+            id: 7,
+            title: 'CSS Introduction',
+            duration: '14:15',
+            type: 'video',
+          },
+          { id: 8, title: 'CSS Selectors', duration: '16:40', type: 'video' },
+          { id: 9, title: 'Flexbox Layout', duration: '20:10', type: 'video' },
+          {
+            id: 10,
+            title: 'CSS Project',
+            duration: 'Assignment',
+            type: 'assignment',
+          },
         ],
       },
     ],
@@ -64,41 +89,47 @@ export default function Course() {
 
   const getLessonIcon = (type) => {
     switch (type) {
-      case "video":
-        return "▶️";
-      case "reading":
-        return "📄";
-      case "quiz":
-        return "✍️";
-      case "assignment":
-        return "📝";
+      case 'video':
+        return '▶️';
+      case 'reading':
+        return '📄';
+      case 'quiz':
+        return '✍️';
+      case 'assignment':
+        return '📝';
       default:
-        return "📚";
+        return '📚';
     }
   };
 
   return (
     <AppLayout>
-      <div style={{ display: "flex", height: "calc(100vh - 60px)" }}>
+      <div style={{ display: 'flex', height: 'calc(100vh - 60px)' }}>
         {/* Sidebar - Course Content */}
         <div
           style={{
             width: 320,
-            borderRight: "1px solid var(--brand-border)",
-            overflowY: "auto",
-            backgroundColor: "#f8f8f8",
+            borderRight: '1px solid var(--brand-border)',
+            overflowY: 'auto',
+            backgroundColor: '#f8f8f8',
           }}
         >
           {/* Course Header */}
-          <div style={{ padding: 20, borderBottom: "1px solid var(--brand-border)", backgroundColor: "#fff" }}>
+          <div
+            style={{
+              padding: 20,
+              borderBottom: '1px solid var(--brand-border)',
+              backgroundColor: '#fff',
+            }}
+          >
             <Link
               to="/courses"
               style={{
                 fontSize: 14,
-                color: "var(--brand-info)",
-                textDecoration: "none",
+                color: 'var(--brand-info)',
+                textDecoration: 'none',
                 marginBottom: 12,
-                display: "block",
+                display: 'block',
               }}
             >
               ← Back to Courses
@@ -106,28 +137,46 @@ export default function Course() {
             <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
               {course.title}
             </h2>
-            <p style={{ fontSize: 13, color: "var(--brand-text-muted)", marginBottom: 12 }}>
+            <p
+              style={{
+                fontSize: 13,
+                color: 'var(--brand-text-muted)',
+                marginBottom: 12,
+              }}
+            >
               {course.instructor}
             </p>
             <div>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-                <span style={{ fontSize: 12, color: "var(--brand-text-muted)" }}>Course Progress</span>
-                <span style={{ fontSize: 12, fontWeight: 600 }}>{course.progress}%</span>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  marginBottom: 6,
+                }}
+              >
+                <span
+                  style={{ fontSize: 12, color: 'var(--brand-text-muted)' }}
+                >
+                  Course Progress
+                </span>
+                <span style={{ fontSize: 12, fontWeight: 600 }}>
+                  {course.progress}%
+                </span>
               </div>
               <div
                 style={{
-                  width: "100%",
+                  width: '100%',
                   height: 6,
-                  backgroundColor: "var(--brand-border)",
+                  backgroundColor: 'var(--brand-border)',
                   borderRadius: 3,
-                  overflow: "hidden",
+                  overflow: 'hidden',
                 }}
               >
                 <div
                   style={{
                     width: `${course.progress}%`,
-                    height: "100%",
-                    backgroundColor: "var(--brand-success)",
+                    height: '100%',
+                    backgroundColor: 'var(--brand-success)',
                   }}
                 />
               </div>
@@ -140,9 +189,9 @@ export default function Course() {
               <div key={module.id} style={{ marginBottom: 8 }}>
                 <div
                   style={{
-                    padding: "12px 20px",
-                    backgroundColor: "#fff",
-                    borderBottom: "1px solid var(--brand-border)",
+                    padding: '12px 20px',
+                    backgroundColor: '#fff',
+                    borderBottom: '1px solid var(--brand-border)',
                     fontWeight: 600,
                     fontSize: 14,
                   }}
@@ -154,23 +203,24 @@ export default function Course() {
                     key={lesson.id}
                     onClick={() => setActiveLesson(lesson.id)}
                     style={{
-                      padding: "12px 20px",
-                      backgroundColor: activeLesson === lesson.id ? "#e3f2fd" : "#fff",
-                      borderBottom: "1px solid #f0f0f0",
-                      cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
+                      padding: '12px 20px',
+                      backgroundColor:
+                        activeLesson === lesson.id ? '#e3f2fd' : '#fff',
+                      borderBottom: '1px solid #f0f0f0',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
                       gap: 12,
-                      transition: "background-color 0.2s",
+                      transition: 'background-color 0.2s',
                     }}
                     onMouseEnter={(e) => {
                       if (activeLesson !== lesson.id) {
-                        e.currentTarget.style.backgroundColor = "#f8f8f8";
+                        e.currentTarget.style.backgroundColor = '#f8f8f8';
                       }
                     }}
                     onMouseLeave={(e) => {
                       if (activeLesson !== lesson.id) {
-                        e.currentTarget.style.backgroundColor = "#fff";
+                        e.currentTarget.style.backgroundColor = '#fff';
                       }
                     }}
                   >
@@ -179,9 +229,11 @@ export default function Course() {
                       checked={completedLessons.includes(lesson.id)}
                       onChange={() => toggleComplete(lesson.id)}
                       onClick={(e) => e.stopPropagation()}
-                      style={{ cursor: "pointer" }}
+                      style={{ cursor: 'pointer' }}
                     />
-                    <span style={{ fontSize: 16 }}>{getLessonIcon(lesson.type)}</span>
+                    <span style={{ fontSize: 16 }}>
+                      {getLessonIcon(lesson.type)}
+                    </span>
                     <div style={{ flex: 1 }}>
                       <div
                         style={{
@@ -192,7 +244,9 @@ export default function Course() {
                       >
                         {lesson.title}
                       </div>
-                      <div style={{ fontSize: 11, color: "#999" }}>{lesson.duration}</div>
+                      <div style={{ fontSize: 11, color: '#999' }}>
+                        {lesson.duration}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -202,38 +256,38 @@ export default function Course() {
         </div>
 
         {/* Main Content Area */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
           {/* Video/Content Player */}
           <div
             style={{
-              backgroundColor: "#000",
-              aspectRatio: "16/9",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              position: "relative",
+              backgroundColor: '#000',
+              aspectRatio: '16/9',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative',
             }}
           >
-            {currentLesson?.type === "video" ? (
-              <div style={{ textAlign: "center", color: "#fff" }}>
+            {currentLesson?.type === 'video' ? (
+              <div style={{ textAlign: 'center', color: '#fff' }}>
                 <div style={{ fontSize: 64, marginBottom: 16 }}>▶️</div>
                 <div style={{ fontSize: 18 }}>Video Player</div>
                 <div style={{ fontSize: 14, opacity: 0.7, marginTop: 8 }}>
                   {currentLesson.title}
                 </div>
               </div>
-            ) : currentLesson?.type === "reading" ? (
-              <div style={{ textAlign: "center", color: "#fff" }}>
+            ) : currentLesson?.type === 'reading' ? (
+              <div style={{ textAlign: 'center', color: '#fff' }}>
                 <div style={{ fontSize: 64, marginBottom: 16 }}>📄</div>
                 <div style={{ fontSize: 18 }}>Reading Material</div>
               </div>
-            ) : currentLesson?.type === "quiz" ? (
-              <div style={{ textAlign: "center", color: "#fff" }}>
+            ) : currentLesson?.type === 'quiz' ? (
+              <div style={{ textAlign: 'center', color: '#fff' }}>
                 <div style={{ fontSize: 64, marginBottom: 16 }}>✍️</div>
                 <div style={{ fontSize: 18 }}>Quiz</div>
               </div>
             ) : (
-              <div style={{ textAlign: "center", color: "#fff" }}>
+              <div style={{ textAlign: 'center', color: '#fff' }}>
                 <div style={{ fontSize: 64, marginBottom: 16 }}>📝</div>
                 <div style={{ fontSize: 18 }}>Assignment</div>
               </div>
@@ -241,36 +295,46 @@ export default function Course() {
           </div>
 
           {/* Lesson Info & Tabs */}
-          <div style={{ flex: 1, overflowY: "auto", backgroundColor: "#fff" }}>
+          <div style={{ flex: 1, overflowY: 'auto', backgroundColor: '#fff' }}>
             <div style={{ padding: 24 }}>
               {/* Lesson Title */}
               <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>
                 {currentLesson?.title}
               </h1>
-              <p style={{ fontSize: 14, color: "var(--brand-text-muted)", marginBottom: 24 }}>
+              <p
+                style={{
+                  fontSize: 14,
+                  color: 'var(--brand-text-muted)',
+                  marginBottom: 24,
+                }}
+              >
                 Duration: {currentLesson?.duration}
               </p>
 
               {/* Tabs */}
               <div
                 style={{
-                  display: "flex",
+                  display: 'flex',
                   gap: 24,
-                  borderBottom: "2px solid var(--brand-border)",
+                  borderBottom: '2px solid var(--brand-border)',
                   marginBottom: 24,
                 }}
               >
                 <button
                   onClick={() => setShowNotes(false)}
                   style={{
-                    padding: "12px 0",
-                    backgroundColor: "transparent",
-                    color: !showNotes ? "var(--brand-info)" : "var(--brand-text-muted)",
-                    border: "none",
-                    borderBottom: !showNotes ? "2px solid var(--brand-info)" : "2px solid transparent",
+                    padding: '12px 0',
+                    backgroundColor: 'transparent',
+                    color: !showNotes
+                      ? 'var(--brand-info)'
+                      : 'var(--brand-text-muted)',
+                    border: 'none',
+                    borderBottom: !showNotes
+                      ? '2px solid var(--brand-info)'
+                      : '2px solid transparent',
                     fontSize: 14,
                     fontWeight: 600,
-                    cursor: "pointer",
+                    cursor: 'pointer',
                     marginBottom: -2,
                   }}
                 >
@@ -279,14 +343,18 @@ export default function Course() {
                 <button
                   onClick={() => setShowNotes(true)}
                   style={{
-                    padding: "12px 0",
-                    backgroundColor: "transparent",
-                    color: showNotes ? "var(--brand-info)" : "var(--brand-text-muted)",
-                    border: "none",
-                    borderBottom: showNotes ? "2px solid var(--brand-info)" : "2px solid transparent",
+                    padding: '12px 0',
+                    backgroundColor: 'transparent',
+                    color: showNotes
+                      ? 'var(--brand-info)'
+                      : 'var(--brand-text-muted)',
+                    border: 'none',
+                    borderBottom: showNotes
+                      ? '2px solid var(--brand-info)'
+                      : '2px solid transparent',
                     fontSize: 14,
                     fontWeight: 600,
-                    cursor: "pointer",
+                    cursor: 'pointer',
                     marginBottom: -2,
                   }}
                 >
@@ -297,39 +365,66 @@ export default function Course() {
               {/* Tab Content */}
               {!showNotes ? (
                 <div>
-                  <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}>
+                  <h3
+                    style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}
+                  >
                     Lesson Overview
                   </h3>
-                  <p style={{ fontSize: 14, color: "var(--brand-text-muted)", lineHeight: 1.7, marginBottom: 20 }}>
-                    This lesson covers the fundamentals of {currentLesson?.title.toLowerCase()}. 
-                    You'll learn key concepts, best practices, and practical applications that you 
-                    can immediately apply to your projects.
+                  <p
+                    style={{
+                      fontSize: 14,
+                      color: 'var(--brand-text-muted)',
+                      lineHeight: 1.7,
+                      marginBottom: 20,
+                    }}
+                  >
+                    This lesson covers the fundamentals of{' '}
+                    {currentLesson?.title.toLowerCase()}. You'll learn key
+                    concepts, best practices, and practical applications that
+                    you can immediately apply to your projects.
                   </p>
 
-                  <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}>
+                  <h3
+                    style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}
+                  >
                     Learning Objectives
                   </h3>
-                  <ul style={{ fontSize: 14, color: "var(--brand-text-muted)", lineHeight: 1.7, marginBottom: 20 }}>
+                  <ul
+                    style={{
+                      fontSize: 14,
+                      color: 'var(--brand-text-muted)',
+                      lineHeight: 1.7,
+                      marginBottom: 20,
+                    }}
+                  >
                     <li>Understand core concepts and terminology</li>
                     <li>Apply techniques to real-world scenarios</li>
                     <li>Build practical skills through hands-on practice</li>
                     <li>Prepare for the next lesson in the series</li>
                   </ul>
 
-                  <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}>
+                  <h3
+                    style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}
+                  >
                     Resources
                   </h3>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 12,
+                    }}
+                  >
                     <a
                       href="#"
                       style={{
                         padding: 12,
-                        backgroundColor: "#f8f8f8",
+                        backgroundColor: '#f8f8f8',
                         borderRadius: 6,
-                        textDecoration: "none",
-                        color: "#333",
-                        display: "flex",
-                        alignItems: "center",
+                        textDecoration: 'none',
+                        color: '#333',
+                        display: 'flex',
+                        alignItems: 'center',
                         gap: 12,
                       }}
                     >
@@ -340,12 +435,12 @@ export default function Course() {
                       href="#"
                       style={{
                         padding: 12,
-                        backgroundColor: "#f8f8f8",
+                        backgroundColor: '#f8f8f8',
                         borderRadius: 6,
-                        textDecoration: "none",
-                        color: "#333",
-                        display: "flex",
-                        alignItems: "center",
+                        textDecoration: 'none',
+                        color: '#333',
+                        display: 'flex',
+                        alignItems: 'center',
                         gap: 12,
                       }}
                     >
@@ -356,12 +451,12 @@ export default function Course() {
                       href="#"
                       style={{
                         padding: 12,
-                        backgroundColor: "#f8f8f8",
+                        backgroundColor: '#f8f8f8',
                         borderRadius: 6,
-                        textDecoration: "none",
-                        color: "#333",
-                        display: "flex",
-                        alignItems: "center",
+                        textDecoration: 'none',
+                        color: '#333',
+                        display: 'flex',
+                        alignItems: 'center',
                         gap: 12,
                       }}
                     >
@@ -372,38 +467,47 @@ export default function Course() {
                 </div>
               ) : (
                 <div>
-                  <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}>
+                  <h3
+                    style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}
+                  >
                     My Notes
                   </h3>
-                  <p style={{ fontSize: 14, color: "var(--brand-text-muted)", marginBottom: 16 }}>
-                    Take notes while watching the lesson. Your notes are automatically saved.
+                  <p
+                    style={{
+                      fontSize: 14,
+                      color: 'var(--brand-text-muted)',
+                      marginBottom: 16,
+                    }}
+                  >
+                    Take notes while watching the lesson. Your notes are
+                    automatically saved.
                   </p>
                   <textarea
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                     placeholder="Start typing your notes here..."
                     style={{
-                      width: "100%",
+                      width: '100%',
                       minHeight: 300,
                       padding: 12,
-                      border: "1px solid var(--brand-border)",
+                      border: '1px solid var(--brand-border)',
                       borderRadius: 6,
                       fontSize: 14,
-                      fontFamily: "inherit",
-                      resize: "vertical",
+                      fontFamily: 'inherit',
+                      resize: 'vertical',
                     }}
                   />
                   <button
                     style={{
                       marginTop: 12,
-                      padding: "8px 20px",
-                      backgroundColor: "var(--brand-info)",
-                      color: "#fff",
-                      border: "none",
+                      padding: '8px 20px',
+                      backgroundColor: 'var(--brand-info)',
+                      color: '#fff',
+                      border: 'none',
                       borderRadius: 6,
                       fontSize: 14,
                       fontWeight: 500,
-                      cursor: "pointer",
+                      cursor: 'pointer',
                     }}
                   >
                     Save Notes
@@ -417,56 +521,62 @@ export default function Course() {
           <div
             style={{
               padding: 20,
-              borderTop: "1px solid var(--brand-border)",
-              backgroundColor: "#fff",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
+              borderTop: '1px solid var(--brand-border)',
+              backgroundColor: '#fff',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
             }}
           >
             <button
               disabled={activeLesson === 1}
               style={{
-                padding: "10px 24px",
-                backgroundColor: activeLesson === 1 ? "#f0f0f0" : "#fff",
-                color: activeLesson === 1 ? "#999" : "var(--brand-info)",
-                border: "1px solid var(--brand-border)",
+                padding: '10px 24px',
+                backgroundColor: activeLesson === 1 ? '#f0f0f0' : '#fff',
+                color: activeLesson === 1 ? '#999' : 'var(--brand-info)',
+                border: '1px solid var(--brand-border)',
                 borderRadius: 6,
                 fontSize: 14,
                 fontWeight: 500,
-                cursor: activeLesson === 1 ? "not-allowed" : "pointer",
+                cursor: activeLesson === 1 ? 'not-allowed' : 'pointer',
               }}
-              onClick={() => activeLesson > 1 && setActiveLesson(activeLesson - 1)}
+              onClick={() =>
+                activeLesson > 1 && setActiveLesson(activeLesson - 1)
+              }
             >
               ← Previous Lesson
             </button>
 
             <button
               style={{
-                padding: "10px 24px",
-                backgroundColor: completedLessons.includes(activeLesson) ? "var(--brand-success)" : "var(--brand-info)",
-                color: "#fff",
-                border: "none",
+                padding: '10px 24px',
+                backgroundColor: completedLessons.includes(activeLesson)
+                  ? 'var(--brand-success)'
+                  : 'var(--brand-info)',
+                color: '#fff',
+                border: 'none',
                 borderRadius: 6,
                 fontSize: 14,
                 fontWeight: 500,
-                cursor: "pointer",
+                cursor: 'pointer',
               }}
               onClick={() => toggleComplete(activeLesson)}
             >
-              {completedLessons.includes(activeLesson) ? "✓ Completed" : "Mark as Complete"}
+              {completedLessons.includes(activeLesson)
+                ? '✓ Completed'
+                : 'Mark as Complete'}
             </button>
 
             <button
               style={{
-                padding: "10px 24px",
-                backgroundColor: "var(--brand-info)",
-                color: "#fff",
-                border: "none",
+                padding: '10px 24px',
+                backgroundColor: 'var(--brand-info)',
+                color: '#fff',
+                border: 'none',
                 borderRadius: 6,
                 fontSize: 14,
                 fontWeight: 500,
-                cursor: "pointer",
+                cursor: 'pointer',
               }}
               onClick={() => setActiveLesson(activeLesson + 1)}
             >

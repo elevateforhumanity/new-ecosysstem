@@ -1,9 +1,9 @@
 export default function TrustStrip() {
   const logos = [
-    "/logos/dwd.svg",
-    "/logos/dol.svg",
-    "/logos/workone.svg",
-    "/logos/supabase.svg",
+    { src: "/logos/dwd.svg", alt: "Indiana DWD" },
+    { src: "/logos/dol.svg", alt: "U.S. Department of Labor" },
+    { src: "/logos/workone.svg", alt: "WorkOne" },
+    { src: "/logos/supabase.svg", alt: "Supabase" },
   ];
 
   return (
@@ -27,9 +27,16 @@ export default function TrustStrip() {
             <div className="text-slate-600">FREE to students</div>
           </div>
         </div>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-6 opacity-80">
-          {logos.map((src) => (
-            <img key={src} src={src} alt="" className="h-8 object-contain" />
+
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-8 opacity-80">
+          {logos.map((l) => (
+            <img
+              key={l.src}
+              src={l.src}
+              alt={l.alt}
+              className="h-8 object-contain"
+              loading="lazy"
+            />
           ))}
         </div>
       </div>

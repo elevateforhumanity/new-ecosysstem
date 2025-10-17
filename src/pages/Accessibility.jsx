@@ -22,38 +22,38 @@ export default function Accessibility() {
   return (
     <main id="main-content" style={{ padding: '2rem', maxWidth: '1000px', margin: '0 auto' }}>
       <header style={{ marginBottom: '3rem', textAlign: 'center' }}>
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#1e40af' }}>
+        <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--brand-info)' }}>
           Accessibility Statement
         </h1>
-        <p style={{ fontSize: '1.2rem', color: '#6b7280' }}>
+        <p style={{ fontSize: '1.2rem', color: 'var(--brand-text-muted)' }}>
           Elevate for Humanity is committed to ensuring digital accessibility for all users
         </p>
       </header>
 
       <section style={{ marginBottom: '3rem' }}>
-        <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem', color: '#1f2937' }}>
+        <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem', color: 'var(--brand-text)' }}>
           Our Commitment
         </h2>
-        <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: '#374151', marginBottom: '1rem' }}>
+        <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: 'var(--brand-text)', marginBottom: '1rem' }}>
           Elevate for Humanity is committed to ensuring digital accessibility for all users, including 
           those with disabilities. We believe that everyone should have equal access to information, 
           education, and opportunities regardless of their abilities.
         </p>
-        <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: '#374151' }}>
+        <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: 'var(--brand-text)' }}>
           We continuously work to improve the accessibility of our digital platforms and services, 
           following established guidelines and best practices to create an inclusive experience for all users.
         </p>
       </section>
 
       <section style={{ marginBottom: '3rem' }}>
-        <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem', color: '#1f2937' }}>
+        <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem', color: 'var(--brand-text)' }}>
           Standards & Guidelines
         </h2>
-        <div style={{ backgroundColor: '#eff6ff', padding: '1.5rem', borderRadius: '8px', marginBottom: '1rem' }}>
-          <h3 style={{ fontSize: '1.3rem', marginBottom: '0.5rem', color: '#1e40af' }}>
+        <div style={{ backgroundColor: 'var(--brand-surface)', padding: '1.5rem', borderRadius: '8px', marginBottom: '1rem' }}>
+          <h3 style={{ fontSize: '1.3rem', marginBottom: '0.5rem', color: 'var(--brand-info)' }}>
             WCAG 2.1 AA Compliance
           </h3>
-          <p style={{ color: '#374151', marginBottom: '1rem' }}>
+          <p style={{ color: 'var(--brand-text)', marginBottom: '1rem' }}>
             Our website follows the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards. 
             These guidelines explain how to make web content more accessible to people with disabilities.
           </p>
@@ -63,7 +63,7 @@ export default function Accessibility() {
           <h3 style={{ fontSize: '1.3rem', marginBottom: '0.5rem', color: '#166534' }}>
             Section 508 Compliance
           </h3>
-          <p style={{ color: '#374151' }}>
+          <p style={{ color: 'var(--brand-text)' }}>
             We also adhere to Section 508 of the Rehabilitation Act, ensuring our digital content 
             is accessible to federal employees and members of the public with disabilities.
           </p>
@@ -71,60 +71,60 @@ export default function Accessibility() {
       </section>
 
       <section style={{ marginBottom: '3rem' }}>
-        <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem', color: '#1f2937' }}>
+        <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem', color: 'var(--brand-text)' }}>
           Accessibility Features
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
-          <div style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '6px' }}>
-            <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: '#1f2937' }}>
+          <div style={{ padding: '1rem', border: '1px solid var(--brand-border)', borderRadius: '6px' }}>
+            <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--brand-text)' }}>
               🎯 Keyboard Navigation
             </h4>
-            <p style={{ fontSize: '0.9rem', color: '#6b7280' }}>
+            <p style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)' }}>
               Full keyboard navigation support for users who cannot use a mouse
             </p>
           </div>
           
-          <div style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '6px' }}>
-            <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: '#1f2937' }}>
+          <div style={{ padding: '1rem', border: '1px solid var(--brand-border)', borderRadius: '6px' }}>
+            <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--brand-text)' }}>
               📖 Screen Reader Support
             </h4>
-            <p style={{ fontSize: '0.9rem', color: '#6b7280' }}>
+            <p style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)' }}>
               Compatible with popular screen readers like JAWS, NVDA, and VoiceOver
             </p>
           </div>
           
-          <div style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '6px' }}>
-            <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: '#1f2937' }}>
+          <div style={{ padding: '1rem', border: '1px solid var(--brand-border)', borderRadius: '6px' }}>
+            <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--brand-text)' }}>
               🎨 High Contrast
             </h4>
-            <p style={{ fontSize: '0.9rem', color: '#6b7280' }}>
+            <p style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)' }}>
               High contrast color schemes for users with visual impairments
             </p>
           </div>
           
-          <div style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '6px' }}>
-            <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: '#1f2937' }}>
+          <div style={{ padding: '1rem', border: '1px solid var(--brand-border)', borderRadius: '6px' }}>
+            <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--brand-text)' }}>
               📝 Alternative Text
             </h4>
-            <p style={{ fontSize: '0.9rem', color: '#6b7280' }}>
+            <p style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)' }}>
               Descriptive alt text for all images and visual content
             </p>
           </div>
           
-          <div style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '6px' }}>
-            <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: '#1f2937' }}>
+          <div style={{ padding: '1rem', border: '1px solid var(--brand-border)', borderRadius: '6px' }}>
+            <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--brand-text)' }}>
               📺 Captions & Transcripts
             </h4>
-            <p style={{ fontSize: '0.9rem', color: '#6b7280' }}>
+            <p style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)' }}>
               Closed captions and transcripts for all video and audio content
             </p>
           </div>
           
-          <div style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '6px' }}>
-            <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: '#1f2937' }}>
+          <div style={{ padding: '1rem', border: '1px solid var(--brand-border)', borderRadius: '6px' }}>
+            <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--brand-text)' }}>
               🔍 Scalable Text
             </h4>
-            <p style={{ fontSize: '0.9rem', color: '#6b7280' }}>
+            <p style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)' }}>
               Text can be resized up to 200% without loss of functionality
             </p>
           </div>
@@ -132,13 +132,13 @@ export default function Accessibility() {
       </section>
 
       <section style={{ marginBottom: '3rem' }}>
-        <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem', color: '#1f2937' }}>
+        <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem', color: 'var(--brand-text)' }}>
           Assistive Technology Support
         </h2>
-        <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: '#374151', marginBottom: '1rem' }}>
+        <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: 'var(--brand-text)', marginBottom: '1rem' }}>
           Our website is designed to work with a variety of assistive technologies, including:
         </p>
-        <ul style={{ fontSize: '1rem', color: '#374151', paddingLeft: '2rem' }}>
+        <ul style={{ fontSize: '1rem', color: 'var(--brand-text)', paddingLeft: '2rem' }}>
           <li style={{ marginBottom: '0.5rem' }}>Screen readers (JAWS, NVDA, VoiceOver, TalkBack)</li>
           <li style={{ marginBottom: '0.5rem' }}>Voice recognition software (Dragon NaturallySpeaking)</li>
           <li style={{ marginBottom: '0.5rem' }}>Switch navigation devices</li>
@@ -148,7 +148,7 @@ export default function Accessibility() {
       </section>
 
       <section style={{ marginBottom: '3rem' }}>
-        <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem', color: '#1f2937' }}>
+        <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem', color: 'var(--brand-text)' }}>
           Ongoing Efforts
         </h2>
         <div style={{ backgroundColor: '#fef3c7', padding: '1.5rem', borderRadius: '8px' }}>
@@ -170,47 +170,47 @@ export default function Accessibility() {
         borderRadius: '8px',
         textAlign: 'center'
       }}>
-        <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: '#1f2937' }}>
+        <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--brand-text)' }}>
           Need Help or Have Feedback?
         </h2>
-        <p style={{ color: '#6b7280', marginBottom: '1.5rem' }}>
+        <p style={{ color: 'var(--brand-text-muted)', marginBottom: '1.5rem' }}>
           If you encounter any accessibility barriers or have suggestions for improvement, 
           please don't hesitate to contact us.
         </p>
         <div style={{ marginBottom: '1rem' }}>
-          <strong style={{ color: '#1f2937' }}>Email:</strong>{' '}
-          <a href="mailto:accessibility@elevateforhumanity.org" style={{ color: '#1e40af' }}>
+          <strong style={{ color: 'var(--brand-text)' }}>Email:</strong>{' '}
+          <a href="mailto:accessibility@elevateforhumanity.org" style={{ color: 'var(--brand-info)' }}>
             accessibility@elevateforhumanity.org
           </a>
         </div>
         <div style={{ marginBottom: '1rem' }}>
-          <strong style={{ color: '#1f2937' }}>Phone:</strong>{' '}
-          <span style={{ color: '#374151' }}>(555) 123-4567</span>
+          <strong style={{ color: 'var(--brand-text)' }}>Phone:</strong>{' '}
+          <span style={{ color: 'var(--brand-text)' }}>(555) 123-4567</span>
         </div>
-        <div style={{ fontSize: '0.9rem', color: '#6b7280', marginTop: '1.5rem' }}>
+        <div style={{ fontSize: '0.9rem', color: 'var(--brand-text-muted)', marginTop: '1.5rem' }}>
           We aim to respond to accessibility feedback within 2 business days.
         </div>
       </section>
 
-      <footer style={{ marginTop: '3rem', textAlign: 'center', color: '#6b7280', fontSize: '0.9rem' }}>
-        <div style={{ borderTop: '1px solid #e5e7eb', paddingTop: '1rem' }}>
-          <a href="/privacy-policy" style={{ color: '#1e40af', textDecoration: 'none', margin: '0 0.5rem' }}>
+      <footer style={{ marginTop: '3rem', textAlign: 'center', color: 'var(--brand-text-muted)', fontSize: '0.9rem' }}>
+        <div style={{ borderTop: '1px solid var(--brand-border)', paddingTop: '1rem' }}>
+          <a href="/privacy-policy" style={{ color: 'var(--brand-info)', textDecoration: 'none', margin: '0 0.5rem' }}>
             Privacy Policy
           </a>
           |
-          <a href="/refund-policy" style={{ color: '#1e40af', textDecoration: 'none', margin: '0 0.5rem' }}>
+          <a href="/refund-policy" style={{ color: 'var(--brand-info)', textDecoration: 'none', margin: '0 0.5rem' }}>
             Refund Policy
           </a>
           |
-          <a href="/terms-of-service" style={{ color: '#1e40af', textDecoration: 'none', margin: '0 0.5rem' }}>
+          <a href="/terms-of-service" style={{ color: 'var(--brand-info)', textDecoration: 'none', margin: '0 0.5rem' }}>
             Terms of Service
           </a>
           |
-          <a href="/compliance" style={{ color: '#1e40af', textDecoration: 'none', margin: '0 0.5rem' }}>
+          <a href="/compliance" style={{ color: 'var(--brand-info)', textDecoration: 'none', margin: '0 0.5rem' }}>
             Compliance
           </a>
           |
-          <a href="/sitemap" style={{ color: '#1e40af', textDecoration: 'none', margin: '0 0.5rem' }}>
+          <a href="/sitemap" style={{ color: 'var(--brand-info)', textDecoration: 'none', margin: '0 0.5rem' }}>
             Sitemap
           </a>
         </div>

@@ -101,12 +101,12 @@ export function FileUpload({ onUpload, folderId = null, maxSize = 100 * 1024 * 1
         onDrop={handleDrop}
         onClick={() => fileInputRef.current?.click()}
         style={{
-          border: `2px dashed ${isDragging ? '#3b82f6' : '#d1d5db'}`,
+          border: `2px dashed ${isDragging ? 'var(--brand-info)' : 'var(--brand-border-dark)'}`,
           borderRadius: '0.5rem',
           padding: '3rem 2rem',
           textAlign: 'center',
           cursor: 'pointer',
-          backgroundColor: isDragging ? '#eff6ff' : '#f9fafb',
+          backgroundColor: isDragging ? 'var(--brand-surface)' : 'var(--brand-surface)',
           transition: 'all 0.2s'
         }}
       >
@@ -123,20 +123,20 @@ export function FileUpload({ onUpload, folderId = null, maxSize = 100 * 1024 * 1
             <div style={{
               width: '48px',
               height: '48px',
-              border: '4px solid #e5e7eb',
-              borderTopColor: '#3b82f6',
+              border: '4px solid var(--brand-border)',
+              borderTopColor: 'var(--brand-info)',
               borderRadius: '50%',
               animation: 'spin 1s linear infinite',
               margin: '0 auto 1rem'
             }} />
-            <p style={{ color: '#6b7280', marginBottom: '0.5rem' }}>
+            <p style={{ color: 'var(--brand-text-muted)', marginBottom: '0.5rem' }}>
               Uploading... {progress}%
             </p>
             <div style={{
               width: '100%',
               maxWidth: '300px',
               height: '8px',
-              backgroundColor: '#e5e7eb',
+              backgroundColor: 'var(--brand-border)',
               borderRadius: '4px',
               margin: '0 auto',
               overflow: 'hidden'
@@ -144,7 +144,7 @@ export function FileUpload({ onUpload, folderId = null, maxSize = 100 * 1024 * 1
               <div style={{
                 width: `${progress}%`,
                 height: '100%',
-                backgroundColor: '#3b82f6',
+                backgroundColor: 'var(--brand-info)',
                 transition: 'width 0.3s'
               }} />
             </div>
@@ -156,7 +156,7 @@ export function FileUpload({ onUpload, folderId = null, maxSize = 100 * 1024 * 1
                 width: '48px',
                 height: '48px',
                 margin: '0 auto 1rem',
-                color: '#9ca3af'
+                color: 'var(--brand-text-light)'
               }}
               fill="none"
               stroke="currentColor"
@@ -172,12 +172,12 @@ export function FileUpload({ onUpload, folderId = null, maxSize = 100 * 1024 * 1
             <p style={{
               fontSize: '1.125rem',
               fontWeight: '500',
-              color: '#374151',
+              color: 'var(--brand-text)',
               marginBottom: '0.5rem'
             }}>
               {isDragging ? 'Drop files here' : 'Click to upload or drag and drop'}
             </p>
-            <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+            <p style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>
               Maximum file size: {formatBytes(maxSize)}
             </p>
           </>

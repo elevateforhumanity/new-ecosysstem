@@ -46,7 +46,7 @@ export default function Ecosystem() {
         <div style={{
           flex: "1 1 250px",
           minWidth: 250,
-          background: "#f9fafb",
+          background: "var(--brand-surface)",
           borderRadius: 12,
           padding: 24,
           boxShadow: "0 2px 8px rgba(0,0,0,0.04)"
@@ -64,7 +64,7 @@ export default function Ecosystem() {
         <div style={{
           flex: "1 1 250px",
           minWidth: 250,
-          background: "#f9fafb",
+          background: "var(--brand-surface)",
           borderRadius: 12,
           padding: 24,
           boxShadow: "0 2px 8px rgba(0,0,0,0.04)"
@@ -82,7 +82,7 @@ export default function Ecosystem() {
         <div style={{
           flex: "1 1 250px",
           minWidth: 250,
-          background: "#f9fafb",
+          background: "var(--brand-surface)",
           borderRadius: 12,
           padding: 24,
           boxShadow: "0 2px 8px rgba(0,0,0,0.04)"
@@ -100,7 +100,7 @@ export default function Ecosystem() {
         <div style={{
           flex: "1 1 250px",
           minWidth: 250,
-          background: "#f9fafb",
+          background: "var(--brand-surface)",
           borderRadius: 12,
           padding: 24,
           boxShadow: "0 2px 8px rgba(0,0,0,0.04)"

@@ -272,7 +272,7 @@ export default function UnenrollPolicyPanel() {
           onClick={loadCandidates}
           style={{
             padding: '0.75rem 1.5rem',
-            background: '#6c757d',
+            background: 'var(--brand-secondary)',
             color: 'white',
             border: 'none',
             borderRadius: '4px',

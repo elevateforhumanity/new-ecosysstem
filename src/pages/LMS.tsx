@@ -145,10 +145,10 @@ export default function LMS() {
               <p className="text-gray-600 mt-1">Your personalized learning journey with federal compliance tracking</p>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+              <div className="bg-brand-surface text-brand-info px-3 py-1 rounded-full text-sm">
                 Progress: 45%
               </div>
-              <Link href="/compliance" className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm">
+              <Link href="/compliance" className="bg-brand-surface text-brand-warning px-3 py-1 rounded-full text-sm">
                 📊 Federal Tracking
               </Link>
             </div>
@@ -197,7 +197,7 @@ export default function LMS() {
                             {course.category}
                           </span>
                           {course.enrolled && (
-                            <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">
+                            <span className="bg-brand-surface text-brand-success px-2 py-1 rounded text-sm">
                               Enrolled
                             </span>
                           )}
@@ -221,7 +221,7 @@ export default function LMS() {
                           <div className="mt-3">
                             <div className="bg-gray-200 rounded-full h-2">
                               <div 
-                                className="bg-blue-600 rounded-full h-2" 
+                                className="bg-brand-info rounded-full h-2" 
                                 style={{ width: `${course.completion}%` }}
                               ></div>
                             </div>
@@ -233,7 +233,7 @@ export default function LMS() {
                         {course.enrolled ? (
                           <Link 
                             href={`/lms/${course.id}`}
-                            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                            className="bg-brand-info text-white px-4 py-2 rounded-lg hover:bg-brand-info-hover transition-colors"
                           >
                             Continue
                           </Link>
@@ -264,7 +264,7 @@ export default function LMS() {
                   <h4 className="font-medium text-gray-900">Google Data Analytics Certificate</h4>
                   <p className="text-sm text-gray-600 mt-1">6 months • $1,200 with career coaching</p>
                   <div className="mt-3 flex justify-between items-center">
-                    <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Free Content + Support</span>
+                    <span className="text-xs bg-brand-surface text-brand-success px-2 py-1 rounded">Free Content + Support</span>
                     <button 
                       onClick={() => window.open('/programs.html?focus=google-data-analytics-cert', '_blank')}
                       className="text-blue-600 hover:text-blue-700 text-sm font-medium"
@@ -278,7 +278,7 @@ export default function LMS() {
                   <h4 className="font-medium text-gray-900">Digital Marketing & E-commerce</h4>
                   <p className="text-sm text-gray-600 mt-1">6 months • $1,000 with portfolio review</p>
                   <div className="mt-3 flex justify-between items-center">
-                    <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Free Content + Support</span>
+                    <span className="text-xs bg-brand-surface text-brand-success px-2 py-1 rounded">Free Content + Support</span>
                     <button 
                       onClick={() => window.open('/programs.html?focus=google-digital-marketing-cert', '_blank')}
                       className="text-blue-600 hover:text-blue-700 text-sm font-medium"
@@ -292,7 +292,7 @@ export default function LMS() {
                   <h4 className="font-medium text-gray-900">Google Ads Certification</h4>
                   <p className="text-sm text-gray-600 mt-1">4-6 weeks • $599 with live mentoring</p>
                   <div className="mt-3 flex justify-between items-center">
-                    <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Free Content + Support</span>
+                    <span className="text-xs bg-brand-surface text-brand-success px-2 py-1 rounded">Free Content + Support</span>
                     <button 
                       onClick={() => window.open('/programs.html?focus=google-ads-certification', '_blank')}
                       className="text-blue-600 hover:text-blue-700 text-sm font-medium"
@@ -306,7 +306,7 @@ export default function LMS() {
                   <h4 className="font-medium text-gray-900">Google Analytics Certification</h4>
                   <p className="text-sm text-gray-600 mt-1">3-4 weeks • $499 with implementation</p>
                   <div className="mt-3 flex justify-between items-center">
-                    <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Free Content + Support</span>
+                    <span className="text-xs bg-brand-surface text-brand-success px-2 py-1 rounded">Free Content + Support</span>
                     <button 
                       onClick={() => window.open('/programs.html?focus=google-analytics-certification', '_blank')}
                       className="text-blue-600 hover:text-blue-700 text-sm font-medium"
@@ -346,7 +346,7 @@ export default function LMS() {
                           module.completed 
                             ? 'bg-gray-100 text-gray-600' 
                             : module.current
-                            ? 'bg-blue-600 text-white hover:bg-blue-700'
+                            ? 'bg-brand-info text-white hover:bg-brand-info-hover'
                             : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                         }`}
                         disabled={!module.completed && !module.current}
@@ -386,7 +386,7 @@ export default function LMS() {
                   <span className="font-medium">{digitalBinder.projects}</span>
                 </div>
               </div>
-              <button className="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+              <button className="w-full mt-4 bg-brand-info text-white py-2 rounded-lg hover:bg-brand-info-hover transition-colors">
                 <Download className="h-4 w-4 mr-2 inline" />
                 Download Transcript
               </button>

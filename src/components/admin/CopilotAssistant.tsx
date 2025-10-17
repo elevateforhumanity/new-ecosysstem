@@ -142,17 +142,17 @@ export function CopilotAssistant() {
           <div
             key={index}
             className={`p-4 rounded-lg border-l-4 ${
-              msg.type === 'success' ? 'bg-green-50 border-green-400 text-green-800' :
+              msg.type === 'success' ? 'bg-green-50 border-green-400 text-brand-success' :
               msg.type === 'warning' ? 'bg-yellow-50 border-yellow-400 text-yellow-800' :
               msg.type === 'error' ? 'bg-red-50 border-red-400 text-red-800' :
-              'bg-blue-50 border-blue-400 text-blue-800'
+              'bg-blue-50 border-blue-400 text-brand-info'
             }`}
           >
             <p className="font-medium">{msg.message}</p>
             {msg.action && (
               <button
                 onClick={msg.action}
-                className="mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                className="mt-2 bg-brand-info text-white px-4 py-2 rounded hover:bg-brand-info-hover"
               >
                 Process All Records
               </button>
@@ -178,7 +178,7 @@ Sarah Johnson, IT Support, 2025-01-22, sarah@email.com"
         <button
           onClick={() => parseStudentData(pastedData)}
           disabled={!pastedData.trim() || isProcessing}
-          className="mt-3 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+          className="mt-3 bg-brand-info text-white px-6 py-2 rounded-lg hover:bg-brand-info-hover disabled:opacity-50"
         >
           {isProcessing ? '🔄 Processing...' : '🤖 Analyze Data'}
         </button>
@@ -205,7 +205,7 @@ Sarah Johnson, IT Support, 2025-01-22, sarah@email.com"
                     <td className="px-4 py-2 text-sm text-gray-600">{record.program}</td>
                     <td className="px-4 py-2 text-sm text-gray-600">{record.startDate}</td>
                     <td className="px-4 py-2">
-                      <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                      <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-brand-surface text-brand-success">
                         {record.status}
                       </span>
                     </td>

@@ -127,7 +127,7 @@ export default function Course() {
                   style={{
                     width: `${course.progress}%`,
                     height: "100%",
-                    backgroundColor: "#28a745",
+                    backgroundColor: "var(--brand-success)",
                   }}
                 />
               </div>
@@ -444,7 +444,7 @@ export default function Course() {
             <button
               style={{
                 padding: "10px 24px",
-                backgroundColor: completedLessons.includes(activeLesson) ? "#28a745" : "#007bff",
+                backgroundColor: completedLessons.includes(activeLesson) ? "var(--brand-success)" : "#007bff",
                 color: "#fff",
                 border: "none",
                 borderRadius: 6,

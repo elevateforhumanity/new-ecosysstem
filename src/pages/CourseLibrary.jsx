@@ -33,7 +33,7 @@ export default function CourseLibrary() {
   }, []);
 
   return (
-    <main style={{ padding: 32, background: "#f8fafc", minHeight: "100vh" }}>
+    <main style={{ padding: 32, background: "var(--brand-surface)", minHeight: "100vh" }}>
       <Helmet>
         <title>Course Library | Elevate for Humanity</title>
         <meta name="description" content="Explore our dynamic, DOL-compliant course library. Download reports, view course covers, and access the best government-ready LMS." />

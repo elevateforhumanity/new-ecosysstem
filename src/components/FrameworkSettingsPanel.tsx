@@ -29,7 +29,7 @@ export function FrameworkSettingsPanel() {
 
   const renderOverview = () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
-      <div style={{ padding: 20, border: '1px solid #e2e8f0', borderRadius: 12, background: '#f8fafc' }}>
+      <div style={{ padding: 20, border: '1px solid #e2e8f0', borderRadius: 12, background: 'var(--brand-surface)' }}>
         <h3 style={{ margin: '0 0 16px 0', color: '#1e293b' }}>🏗️ Framework Stack</h3>
         <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
           <li>⚛️ React {config.frontend.version}</li>
@@ -41,13 +41,13 @@ export function FrameworkSettingsPanel() {
       </div>
 
       <div style={{ padding: 20, border: '1px solid #e2e8f0', borderRadius: 12, background: validation.isValid ? '#f0fdf4' : '#fef2f2' }}>
-        <h3 style={{ margin: '0 0 16px 0', color: validation.isValid ? '#166534' : '#dc2626' }}>
+        <h3 style={{ margin: '0 0 16px 0', color: validation.isValid ? '#166534' : 'var(--brand-danger)' }}>
           {validation.isValid ? '✅ Configuration Valid' : '❌ Configuration Issues'}
         </h3>
         {validation.errors.length > 0 && (
           <div style={{ marginBottom: 12 }}>
-            <strong style={{ color: '#dc2626' }}>Errors:</strong>
-            <ul style={{ margin: '4px 0', paddingLeft: 20, color: '#dc2626' }}>
+            <strong style={{ color: 'var(--brand-danger)' }}>Errors:</strong>
+            <ul style={{ margin: '4px 0', paddingLeft: 20, color: 'var(--brand-danger)' }}>
               {validation.errors.map((error, i) => (
                 <li key={i} style={{ fontSize: '0.875rem' }}>{error}</li>
               ))}
@@ -56,8 +56,8 @@ export function FrameworkSettingsPanel() {
         )}
         {validation.warnings.length > 0 && (
           <div>
-            <strong style={{ color: '#f59e0b' }}>Warnings:</strong>
-            <ul style={{ margin: '4px 0', paddingLeft: 20, color: '#f59e0b' }}>
+            <strong style={{ color: 'var(--brand-warning)' }}>Warnings:</strong>
+            <ul style={{ margin: '4px 0', paddingLeft: 20, color: 'var(--brand-warning)' }}>
               {validation.warnings.map((warning, i) => (
                 <li key={i} style={{ fontSize: '0.875rem' }}>{warning}</li>
               ))}
@@ -66,7 +66,7 @@ export function FrameworkSettingsPanel() {
         )}
       </div>
 
-      <div style={{ padding: 20, border: '1px solid #e2e8f0', borderRadius: 12, background: '#f8fafc' }}>
+      <div style={{ padding: 20, border: '1px solid #e2e8f0', borderRadius: 12, background: 'var(--brand-surface)' }}>
         <h3 style={{ margin: '0 0 16px 0', color: '#1e293b' }}>🌐 Ecosystem</h3>
         <p style={{ margin: '0 0 12px 0', fontSize: '0.875rem', color: '#64748b' }}>
           Multi-site: {config.ecosystem.multiSite ? 'Enabled' : 'Disabled'}
@@ -92,7 +92,7 @@ export function FrameworkSettingsPanel() {
       <div>
         <h3 style={{ marginTop: 0, textTransform: 'capitalize' }}>{sectionKey} Configuration</h3>
         <pre style={{
-          background: '#f8fafc',
+          background: 'var(--brand-surface)',
           border: '1px solid #e2e8f0',
           borderRadius: 8,
           padding: 16,
@@ -129,7 +129,7 @@ export function FrameworkSettingsPanel() {
             style={{
               padding: '8px 16px',
               border: 'none',
-              background: activeSection === section.id ? '#3b82f6' : 'transparent',
+              background: activeSection === section.id ? 'var(--brand-info)' : 'transparent',
               color: activeSection === section.id ? 'white' : '#64748b',
               cursor: 'pointer',
               borderRadius: '6px',
@@ -150,7 +150,7 @@ export function FrameworkSettingsPanel() {
       <div style={{ 
         marginTop: 32, 
         padding: 16, 
-        background: '#f8fafc', 
+        background: 'var(--brand-surface)', 
         border: '1px solid #e2e8f0', 
         borderRadius: 8 
       }}>

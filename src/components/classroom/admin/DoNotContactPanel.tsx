@@ -92,10 +92,10 @@ export default function DoNotContactPanel() {
 
   const getReasonColor = (reason: string) => {
     const colors: Record<string, string> = {
-      user_request: 'bg-blue-100 text-blue-800',
-      hard_bounce: 'bg-red-100 text-red-800',
-      spam_complaint: 'bg-orange-100 text-orange-800',
-      admin_block: 'bg-purple-100 text-purple-800',
+      user_request: 'bg-brand-surface text-brand-info',
+      hard_bounce: 'bg-brand-surface text-red-800',
+      spam_complaint: 'bg-brand-surface text-brand-warning',
+      admin_block: 'bg-brand-surface text-brand-secondary',
       legal_requirement: 'bg-gray-100 text-gray-800',
     };
     return colors[reason] || 'bg-gray-100 text-gray-800';
@@ -119,7 +119,7 @@ export default function DoNotContactPanel() {
           </div>
           <button
             onClick={() => setShowAddForm(!showAddForm)}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-4 py-2 bg-brand-info text-white rounded-lg hover:bg-brand-info-hover focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             {showAddForm ? 'Cancel' : 'Add Entry'}
           </button>
@@ -132,13 +132,13 @@ export default function DoNotContactPanel() {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <span className="text-lg mr-2">{alertMessage.type === 'success' ? '✅' : '❌'}</span>
-              <p className={`text-sm font-medium ${alertMessage.type === 'success' ? 'text-green-800' : 'text-red-800'}`}>
+              <p className={`text-sm font-medium ${alertMessage.type === 'success' ? 'text-brand-success' : 'text-red-800'}`}>
                 {alertMessage.text}
               </p>
             </div>
             <button
               onClick={() => setAlertMessage(null)}
-              className={`text-sm font-medium ${alertMessage.type === 'success' ? 'text-green-600 hover:text-green-800' : 'text-red-600 hover:text-red-800'}`}
+              className={`text-sm font-medium ${alertMessage.type === 'success' ? 'text-green-600 hover:text-brand-success' : 'text-red-600 hover:text-red-800'}`}
             >
               Dismiss
             </button>
@@ -203,7 +203,7 @@ export default function DoNotContactPanel() {
             <div className="flex gap-3">
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="px-4 py-2 bg-brand-info text-white rounded-lg hover:bg-brand-info-hover focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 Add to List
               </button>

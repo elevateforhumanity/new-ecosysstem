@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS Test Pages - Elevate for Humanity</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #4D4B37 0%, #6B6847 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .card h2 {
+            font-size: 1.5rem;
+            color: #4D4B37;
+            margin-bottom: 0.5rem;
+        }
+        .card p {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .btn {
+            display: inline-block;
+            background: #4D4B37;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: #3a3629;
+            transform: scale(1.05);
+        }
+        .instructions {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .instructions h3 {
+            color: #4D4B37;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .instructions ol {
+            margin-left: 1.5rem;
+            line-height: 1.8;
+            color: #374151;
+        }
+        .instructions ol li {
+            margin-bottom: 0.5rem;
+        }
+        .status-badge {
+            display: inline-block;
+            background: #059669;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 LMS Test Pages</h1>
+            <p>Elevate for Humanity - Student Portal System</p>
+            <p style="font-size: 1rem; margin-top: 1rem;">Click each page to test and copy the HTML code</p>
+        </div>
+
+        <div class="instructions">
+            <h3>📋 How to Use These Pages</h3>
+            <ol>
+                <li><strong>Click any page link below</strong> to open the test page</li>
+                <li><strong>Review the page</strong> to make sure it looks good</li>
+                <li><strong>Click the "Copy HTML Code" button</strong> at the top of each page</li>
+                <li><strong>Go to your Durable site</strong> (www.elevateforhumanity.org)</li>
+                <li><strong>Create a new page</strong> or edit an existing one</li>
+                <li><strong>Add a "Custom HTML" block</strong></li>
+                <li><strong>Paste the copied code</strong> into the Custom HTML section</li>
+                <li><strong>Publish!</strong> Your page is now live</li>
+            </ol>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <h2>About Page <span class="status-badge">✓ Ready</span></h2>
+                <p>Complete about page with mission, vision, stats, values, partnerships, and contact info.</p>
+                <a href="test-about-page.html" class="btn" target="_blank">View & Copy</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📝</div>
+                <h2>Enrollment <span class="status-badge">✓ Ready</span></h2>
+                <p>Course enrollment form with program selection, student info, and funding options.</p>
+                <a href="test-enrollment.html" class="btn" target="_blank">View & Copy</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h2>Dashboard <span class="status-badge">✓ Ready</span></h2>
+                <p>Student dashboard with progress tracking, stats, and recent activity feed.</p>
+                <a href="test-dashboard.html" class="btn" target="_blank">View & Copy</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📚</div>
+                <h2>My Courses <span class="status-badge">✓ Ready</span></h2>
+                <p>Course list with progress bars, completion status, and continue buttons.</p>
+                <a href="test-courses.html" class="btn" target="_blank">View & Copy</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🏆</div>
+                <h2>Certificates <span class="status-badge">✓ Ready</span></h2>
+                <p>Display earned certificates with download and share options.</p>
+                <a href="test-certificates.html" class="btn" target="_blank">View & Copy</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">👤</div>
+                <h2>Profile <span class="status-badge">✓ Ready</span></h2>
+                <p>Student profile management with editable personal information.</p>
+                <a href="test-profile.html" class="btn" target="_blank">View & Copy</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">💬</div>
+                <h2>Support <span class="status-badge">✓ Ready</span></h2>
+                <p>Support ticket system with contact info and message form.</p>
+                <a href="test-support.html" class="btn" target="_blank">View & Copy</a>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>✨ Features</h3>
+            <ul style="margin-left: 1.5rem; line-height: 1.8; color: #374151;">
+                <li>✅ Matches your professional Elevate for Humanity branding</li>
+                <li>✅ Uses your site's color scheme (#4D4B37 olive/brown)</li>
+                <li>✅ Fully responsive - works on mobile, tablet, and desktop</li>
+                <li>✅ Clean, modern design with cards and gradients</li>
+                <li>✅ One-click copy button on each page</li>
+                <li>✅ Ready to paste into Durable Custom HTML blocks</li>
+                <li>✅ No external dependencies - pure HTML/CSS</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; color: white; margin-top: 3rem;">
+            <p style="font-size: 1.125rem; margin-bottom: 0.5rem;">Need help? Contact us:</p>
+            <p>📧 info@elevateforhumanity.org | 📞 (317) 314-3757</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -29,7 +29,7 @@ export default function DurableTemplates() {
               <div className="text-6xl mb-4">{template.icon}</div>
               <h3 className="text-2xl font-bold mb-2">{template.name}</h3>
               <p className="text-gray-600 mb-4">{template.courses} courses included</p>
-              <Link to="/courses" className="text-indigo-600 font-semibold hover:text-indigo-700">
+              <Link to="/courses" className="text-brand-info font-semibold hover:text-brand-info">
                 View Template →
               </Link>
             </div>

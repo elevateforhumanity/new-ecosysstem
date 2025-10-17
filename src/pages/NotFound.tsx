@@ -16,7 +16,7 @@ export default function NotFound() {
         <div className="space-y-4">
           <Link 
             href="/"
-            className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center"
+            className="w-full bg-brand-info text-white py-3 px-6 rounded-lg hover:bg-brand-info-hover transition-colors flex items-center justify-center"
           >
             <Home className="h-4 w-4 mr-2" />
             Return to Hub

@@ -175,7 +175,7 @@ export default function ClassroomAdminPanel() {
         <div
           className={`mb-6 p-4 rounded-lg ${
             message.type === 'success'
-              ? 'bg-green-50 text-green-800 border border-green-200'
+              ? 'bg-green-50 text-brand-success border border-green-200'
               : 'bg-red-50 text-red-800 border border-red-200'
           }`}
         >
@@ -278,7 +278,7 @@ export default function ClassroomAdminPanel() {
               <button
                 type="submit"
                 disabled={loading}
-                className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="flex-1 bg-brand-info text-white py-3 rounded-lg font-semibold hover:bg-brand-info-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {loading ? 'Queueing...' : 'Queue Task'}
               </button>

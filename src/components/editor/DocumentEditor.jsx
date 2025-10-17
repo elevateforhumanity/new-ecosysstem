@@ -144,13 +144,13 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
   };
 
   return (
-    <div style={{ display: 'flex', height: '100vh', backgroundColor: '#f9fafb' }}>
+    <div style={{ display: 'flex', height: '100vh', backgroundColor: 'var(--brand-surface)' }}>
       {/* Main editor area */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         {/* Toolbar */}
         <div style={{
           backgroundColor: '#fff',
-          borderBottom: '1px solid #e5e7eb',
+          borderBottom: '1px solid var(--brand-border)',
           padding: '0.75rem 1.5rem',
           display: 'flex',
           justifyContent: 'space-between',
@@ -160,9 +160,9 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
             <h2 style={{ margin: 0, fontSize: '1.125rem' }}>Untitled Document</h2>
             
             {isSaving ? (
-              <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>Saving...</span>
+              <span style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>Saving...</span>
             ) : lastSaved ? (
-              <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+              <span style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>
                 Saved {lastSaved.toLocaleTimeString()}
               </span>
             ) : null}
@@ -178,7 +178,7 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
                     width: '32px',
                     height: '32px',
                     borderRadius: '50%',
-                    backgroundColor: '#3b82f6',
+                    backgroundColor: 'var(--brand-info)',
                     color: '#fff',
                     display: 'flex',
                     alignItems: 'center',
@@ -196,8 +196,8 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
                   width: '32px',
                   height: '32px',
                   borderRadius: '50%',
-                  backgroundColor: '#e5e7eb',
-                  color: '#374151',
+                  backgroundColor: 'var(--brand-border)',
+                  color: 'var(--brand-text)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -215,7 +215,7 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
                   style={{
                     padding: '0.5rem 1rem',
                     backgroundColor: '#fff',
-                    border: '1px solid #d1d5db',
+                    border: '1px solid var(--brand-border-dark)',
                     borderRadius: '0.375rem',
                     cursor: 'pointer',
                     fontSize: '0.875rem'
@@ -228,7 +228,7 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
                   onClick={() => saveDocument()}
                   style={{
                     padding: '0.5rem 1rem',
-                    backgroundColor: '#3b82f6',
+                    backgroundColor: 'var(--brand-info)',
                     color: '#fff',
                     border: 'none',
                     borderRadius: '0.375rem',
@@ -246,7 +246,7 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
                 style={{
                   padding: '0.5rem',
                   backgroundColor: '#fff',
-                  border: '1px solid #d1d5db',
+                  border: '1px solid var(--brand-border-dark)',
                   borderRadius: '0.375rem',
                   cursor: 'pointer'
                 }}
@@ -289,14 +289,14 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
         <div style={{
           width: '300px',
           backgroundColor: '#fff',
-          borderLeft: '1px solid #e5e7eb',
+          borderLeft: '1px solid var(--brand-border)',
           padding: '1rem',
           overflowY: 'auto'
         }}>
           <h3 style={{ marginBottom: '1rem' }}>Comments</h3>
           
           {comments.length === 0 ? (
-            <p style={{ color: '#6b7280', fontSize: '0.875rem' }}>
+            <p style={{ color: 'var(--brand-text-muted)', fontSize: '0.875rem' }}>
               No comments yet
             </p>
           ) : (
@@ -305,7 +305,7 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
                 key={i}
                 style={{
                   padding: '0.75rem',
-                  backgroundColor: '#f9fafb',
+                  backgroundColor: 'var(--brand-surface)',
                   borderRadius: '0.375rem',
                   marginBottom: '0.75rem'
                 }}
@@ -320,7 +320,7 @@ export function DocumentEditor({ documentId, userId, userName, canEdit = true })
                 <div style={{ fontSize: '0.875rem', marginBottom: '0.25rem' }}>
                   {comment.text}
                 </div>
-                <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--brand-text-muted)' }}>
                   {new Date(comment.createdAt).toLocaleString()}
                 </div>
               </div>

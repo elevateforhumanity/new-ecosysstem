@@ -209,7 +209,7 @@ export default function AIPageBuilder() {
                   {currentTemplate.examples.map((example, i) => (
                     <button
                       key={i}
-                      className="text-xs text-blue-600 hover:text-blue-800 block mb-1"
+                      className="text-xs text-blue-600 hover:text-brand-info block mb-1"
                       onClick={() => setDescription(example)}
                     >
                       • {example}
@@ -228,7 +228,7 @@ export default function AIPageBuilder() {
                 {currentTemplate?.defaultSections.map((section) => (
                   <span
                     key={section}
-                    className="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm"
+                    className="px-3 py-1 bg-brand-surface text-brand-warning rounded-full text-sm"
                   >
                     {section}
                   </span>
@@ -240,7 +240,7 @@ export default function AIPageBuilder() {
             <button
               onClick={generatePage}
               disabled={loading || !description}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+              className="w-full bg-brand-info hover:bg-brand-info-hover text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <span className="flex items-center justify-center">
@@ -294,13 +294,13 @@ export default function AIPageBuilder() {
                 <button
                   onClick={savePage}
                   disabled={saving}
-                  className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors disabled:bg-gray-400"
+                  className="flex-1 bg-brand-success hover:bg-brand-success-hover text-white font-semibold py-2 px-4 rounded-lg transition-colors disabled:bg-gray-400"
                 >
                   {saving ? 'Saving...' : 'Save as Draft'}
                 </button>
                 <button
                   onClick={publishPage}
-                  className="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+                  className="flex-1 bg-brand-danger hover:bg-brand-danger-hover text-white font-semibold py-2 px-4 rounded-lg transition-colors"
                 >
                   Publish Live
                 </button>
@@ -323,7 +323,7 @@ export default function AIPageBuilder() {
                   {generatedPage.sections.map((section) => (
                     <span
                       key={section}
-                      className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs"
+                      className="px-2 py-1 bg-brand-surface text-brand-info rounded text-xs"
                     >
                       {section}
                     </span>

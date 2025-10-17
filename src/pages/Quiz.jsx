@@ -78,7 +78,7 @@ export default function Quiz() {
                 <button
                   onClick={() => setSubmitted(true)}
                   disabled={questions.some(q => selected[q.id] === undefined)}
-                  style={{ background: "#2563eb", color: "#fff", border: "none", padding: "8px 14px", borderRadius: 4 }}
+                  style={{ background: "var(--brand-info)", color: "#fff", border: "none", padding: "8px 14px", borderRadius: 4 }}
                 >Submit</button>
               )}
             </div>
@@ -96,7 +96,7 @@ export default function Quiz() {
                     <strong>{q.q}</strong>
                     <div style={{ fontSize: 14 }}>
                       Your answer:{" "}
-                      <span style={{ color: chosen === correct ? "#15803d" : "#b91c1c" }}>
+                      <span style={{ color: chosen === correct ? "var(--brand-success-hover)" : "var(--brand-danger-hover)" }}>
                         {q.choices[chosen] ?? "—"}
                       </span>{" "}
                       | Correct: {q.choices[correct]}
@@ -119,8 +119,8 @@ function choiceStyle(chosen) {
     textAlign: "left",
     padding: "10px 14px",
     borderRadius: 6,
-    border: chosen ? "2px solid #2563eb" : "1px solid #cbd5e1",
-    background: chosen ? "#eff6ff" : "#fff",
+    border: chosen ? "2px solid var(--brand-info)" : "1px solid #cbd5e1",
+    background: chosen ? "var(--brand-surface)" : "#fff",
     cursor: "pointer"
   };
 }

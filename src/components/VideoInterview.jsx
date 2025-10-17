@@ -142,7 +142,7 @@ export default function VideoInterview() {
       <div className="max-w-3xl mx-auto p-6 text-center">
         <div className="bg-green-50 border-2 border-green-500 rounded-lg p-8">
           <div className="text-6xl mb-4">✅</div>
-          <h2 className="text-3xl font-bold text-green-800 mb-4">
+          <h2 className="text-3xl font-bold text-brand-success mb-4">
             Interview Complete!
           </h2>
           <p className="text-lg text-gray-700 mb-6">
@@ -176,7 +176,7 @@ export default function VideoInterview() {
         </div>
         <div className="w-full bg-gray-200 rounded-full h-2">
           <div 
-            className="bg-blue-600 h-2 rounded-full transition-all"
+            className="bg-brand-info h-2 rounded-full transition-all"
             style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
           />
         </div>
@@ -188,7 +188,7 @@ export default function VideoInterview() {
           {questions[currentQuestion].text}
         </h2>
         <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
-          <p className="text-sm text-blue-800">
+          <p className="text-sm text-brand-info">
             💡 <strong>Tip:</strong> {questions[currentQuestion].tips}
           </p>
         </div>
@@ -209,7 +209,7 @@ export default function VideoInterview() {
         
         {/* Timer Overlay */}
         {recording && (
-          <div className="absolute top-4 right-4 bg-red-600 text-white px-4 py-2 rounded-full font-bold">
+          <div className="absolute top-4 right-4 bg-brand-danger text-white px-4 py-2 rounded-full font-bold">
             🔴 {formatTime(timeLeft)}
           </div>
         )}
@@ -217,7 +217,7 @@ export default function VideoInterview() {
         {/* Recording Indicator */}
         {recording && (
           <div className="absolute top-4 left-4 flex items-center space-x-2">
-            <div className="w-3 h-3 bg-red-600 rounded-full animate-pulse" />
+            <div className="w-3 h-3 bg-brand-danger rounded-full animate-pulse" />
             <span className="text-white font-medium">Recording...</span>
           </div>
         )}
@@ -228,7 +228,7 @@ export default function VideoInterview() {
         {!recording && !videoBlob && (
           <button 
             onClick={startRecording}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors flex items-center space-x-2"
+            className="bg-brand-info hover:bg-brand-info-hover text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors flex items-center space-x-2"
           >
             <span>🎥</span>
             <span>Start Recording</span>
@@ -238,7 +238,7 @@ export default function VideoInterview() {
         {recording && (
           <button 
             onClick={stopRecording}
-            className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors flex items-center space-x-2"
+            className="bg-brand-danger hover:bg-brand-danger-hover text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors flex items-center space-x-2"
           >
             <span>⏹️</span>
             <span>Stop Recording</span>
@@ -255,7 +255,7 @@ export default function VideoInterview() {
             </button>
             <button 
               onClick={nextQuestion}
-              className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors flex items-center space-x-2"
+              className="bg-brand-success hover:bg-brand-success-hover text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors flex items-center space-x-2"
             >
               <span>✅</span>
               <span>{currentQuestion < questions.length - 1 ? 'Next Question' : 'Complete Interview'}</span>

@@ -232,9 +232,9 @@ export default function GradingInterface() {
   const getStateColor = (state: string) => {
     switch (state) {
       case 'TURNED_IN':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-brand-surface text-brand-info';
       case 'RETURNED':
-        return 'bg-green-100 text-green-800';
+        return 'bg-brand-surface text-brand-success';
       default:
         return 'bg-gray-100 text-gray-800';
     }
@@ -251,7 +251,7 @@ export default function GradingInterface() {
         <div
           className={`mb-6 p-4 rounded-lg ${
             message.type === 'success'
-              ? 'bg-green-50 text-green-800 border border-green-200'
+              ? 'bg-green-50 text-brand-success border border-green-200'
               : 'bg-red-50 text-red-800 border border-red-200'
           }`}
         >
@@ -320,7 +320,7 @@ export default function GradingInterface() {
             </div>
             <button
               onClick={handleBulkGrade}
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-6 py-2 bg-brand-info text-white rounded-lg hover:bg-brand-info-hover transition-colors"
             >
               Grade All Ungraded
             </button>
@@ -367,7 +367,7 @@ export default function GradingInterface() {
                         {submission.state}
                       </span>
                       {submission.late && (
-                        <span className="ml-2 px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">
+                        <span className="ml-2 px-2 py-1 text-xs font-semibold rounded-full bg-brand-surface text-red-800">
                           LATE
                         </span>
                       )}
@@ -399,7 +399,7 @@ export default function GradingInterface() {
                       <div className="flex gap-2">
                         <button
                           onClick={() => handleGradeSubmit(submission)}
-                          className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                          className="px-3 py-1 bg-brand-info text-white rounded hover:bg-brand-info-hover transition-colors"
                         >
                           Submit Grade
                         </button>

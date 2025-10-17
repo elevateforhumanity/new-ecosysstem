@@ -110,7 +110,7 @@ export default function Certificates() {
               border: "1px solid #e0e0e0",
             }}
           >
-            <div style={{ fontSize: 32, fontWeight: 700, color: "#28a745", marginBottom: 8 }}>
+            <div style={{ fontSize: 32, fontWeight: 700, color: "var(--brand-success)", marginBottom: 8 }}>
               {inProgressCount}
             </div>
             <div style={{ fontSize: 14, color: "#666" }}>In Progress</div>
@@ -124,7 +124,7 @@ export default function Certificates() {
               border: "1px solid #e0e0e0",
             }}
           >
-            <div style={{ fontSize: 32, fontWeight: 700, color: "#ffc107", marginBottom: 8 }}>
+            <div style={{ fontSize: 32, fontWeight: 700, color: "var(--brand-warning)", marginBottom: 8 }}>
               {certificates.reduce((acc, cert) => acc + (cert.skills?.length || 0), 0)}
             </div>
             <div style={{ fontSize: 14, color: "#666" }}>Skills Acquired</div>
@@ -419,7 +419,7 @@ export default function Certificates() {
                     style={{
                       display: "inline-block",
                       padding: "8px 20px",
-                      backgroundColor: "#28a745",
+                      backgroundColor: "var(--brand-success)",
                       color: "#fff",
                       border: "none",
                       borderRadius: 6,

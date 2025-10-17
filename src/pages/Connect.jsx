@@ -53,7 +53,7 @@ export default function Connect() {
       <AppLayout title="Thank You">
         <div style={{ maxWidth: '800px', margin: '0 auto', padding: '4rem 2rem', textAlign: 'center' }}>
           <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>✅</div>
-          <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#1e40af' }}>
+          <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--brand-info)' }}>
             Thank You for Reaching Out!
           </h1>
           <p style={{ fontSize: '1.25rem', color: '#64748b', marginBottom: '2rem' }}>
@@ -74,7 +74,7 @@ export default function Connect() {
             }}
             style={{
               padding: '0.75rem 2rem',
-              backgroundColor: '#1e40af',
+              backgroundColor: 'var(--brand-info)',
               color: 'white',
               border: 'none',
               borderRadius: '6px',
@@ -95,7 +95,7 @@ export default function Connect() {
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem' }}>
         {/* Header */}
         <header style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#1e40af' }}>
+          <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--brand-info)' }}>
             Get in Touch
           </h1>
           <p style={{ fontSize: '1.25rem', color: '#64748b', maxWidth: '700px', margin: '0 auto' }}>
@@ -107,10 +107,10 @@ export default function Connect() {
           {/* Contact Form */}
           <div style={{ gridColumn: 'span 2' }}>
             <form onSubmit={handleSubmit} style={{ background: 'white', padding: '2rem', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <h2 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', color: '#1f2937' }}>Send Us a Message</h2>
+              <h2 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', color: 'var(--brand-text)' }}>Send Us a Message</h2>
               
               <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: '#1f2937' }}>
+                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: 'var(--brand-text)' }}>
                   Inquiry Type *
                 </label>
                 <select
@@ -138,7 +138,7 @@ export default function Connect() {
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: '#1f2937' }}>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: 'var(--brand-text)' }}>
                     Full Name *
                   </label>
                   <input
@@ -158,7 +158,7 @@ export default function Connect() {
                 </div>
                 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: '#1f2937' }}>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: 'var(--brand-text)' }}>
                     Email Address *
                   </label>
                   <input
@@ -180,7 +180,7 @@ export default function Connect() {
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: '#1f2937' }}>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: 'var(--brand-text)' }}>
                     Phone Number
                   </label>
                   <input
@@ -199,7 +199,7 @@ export default function Connect() {
                 </div>
                 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: '#1f2937' }}>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: 'var(--brand-text)' }}>
                     Organization
                   </label>
                   <input
@@ -219,7 +219,7 @@ export default function Connect() {
               </div>
 
               <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: '#1f2937' }}>
+                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: 'var(--brand-text)' }}>
                   Subject *
                 </label>
                 <input
@@ -239,7 +239,7 @@ export default function Connect() {
               </div>
 
               <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: '#1f2937' }}>
+                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: 'var(--brand-text)' }}>
                   Message *
                 </label>
                 <textarea
@@ -266,7 +266,7 @@ export default function Connect() {
                 style={{
                   width: '100%',
                   padding: '1rem',
-                  backgroundColor: loading ? '#94a3b8' : '#1e40af',
+                  backgroundColor: loading ? '#94a3b8' : 'var(--brand-info)',
                   color: 'white',
                   border: 'none',
                   borderRadius: '6px',
@@ -283,25 +283,25 @@ export default function Connect() {
 
           {/* Contact Information */}
           <div>
-            <div style={{ background: '#eff6ff', padding: '2rem', borderRadius: '8px', marginBottom: '2rem' }}>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '1.5rem', color: '#1e40af' }}>Contact Information</h3>
+            <div style={{ background: 'var(--brand-surface)', padding: '2rem', borderRadius: '8px', marginBottom: '2rem' }}>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '1.5rem', color: 'var(--brand-info)' }}>Contact Information</h3>
               
               <div style={{ marginBottom: '1.5rem' }}>
-                <div style={{ fontWeight: '600', color: '#1f2937', marginBottom: '0.5rem' }}>📧 Email</div>
-                <a href="mailto:info@elevateforhumanity.org" style={{ color: '#1e40af', textDecoration: 'none' }}>
+                <div style={{ fontWeight: '600', color: 'var(--brand-text)', marginBottom: '0.5rem' }}>📧 Email</div>
+                <a href="mailto:info@elevateforhumanity.org" style={{ color: 'var(--brand-info)', textDecoration: 'none' }}>
                   info@elevateforhumanity.org
                 </a>
               </div>
 
               <div style={{ marginBottom: '1.5rem' }}>
-                <div style={{ fontWeight: '600', color: '#1f2937', marginBottom: '0.5rem' }}>📞 Phone</div>
-                <a href="tel:+15551234567" style={{ color: '#1e40af', textDecoration: 'none' }}>
+                <div style={{ fontWeight: '600', color: 'var(--brand-text)', marginBottom: '0.5rem' }}>📞 Phone</div>
+                <a href="tel:+15551234567" style={{ color: 'var(--brand-info)', textDecoration: 'none' }}>
                   (555) 123-4567
                 </a>
               </div>
 
               <div style={{ marginBottom: '1.5rem' }}>
-                <div style={{ fontWeight: '600', color: '#1f2937', marginBottom: '0.5rem' }}>🏢 Office Hours</div>
+                <div style={{ fontWeight: '600', color: 'var(--brand-text)', marginBottom: '0.5rem' }}>🏢 Office Hours</div>
                 <div style={{ color: '#64748b' }}>
                   Monday - Friday<br />
                   9:00 AM - 5:00 PM EST
@@ -310,19 +310,19 @@ export default function Connect() {
             </div>
 
             <div style={{ background: 'white', padding: '2rem', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', color: '#1f2937' }}>Quick Links</h3>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', color: 'var(--brand-text)' }}>Quick Links</h3>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 <li style={{ marginBottom: '0.75rem' }}>
-                  <a href="/programs" style={{ color: '#1e40af', textDecoration: 'none' }}>→ View Programs</a>
+                  <a href="/programs" style={{ color: 'var(--brand-info)', textDecoration: 'none' }}>→ View Programs</a>
                 </li>
                 <li style={{ marginBottom: '0.75rem' }}>
-                  <a href="/student" style={{ color: '#1e40af', textDecoration: 'none' }}>→ Student Portal</a>
+                  <a href="/student" style={{ color: 'var(--brand-info)', textDecoration: 'none' }}>→ Student Portal</a>
                 </li>
                 <li style={{ marginBottom: '0.75rem' }}>
-                  <a href="/government" style={{ color: '#1e40af', textDecoration: 'none' }}>→ Government Services</a>
+                  <a href="/government" style={{ color: 'var(--brand-info)', textDecoration: 'none' }}>→ Government Services</a>
                 </li>
                 <li style={{ marginBottom: '0.75rem' }}>
-                  <a href="/philanthropy" style={{ color: '#1e40af', textDecoration: 'none' }}>→ Philanthropy</a>
+                  <a href="/philanthropy" style={{ color: 'var(--brand-info)', textDecoration: 'none' }}>→ Philanthropy</a>
                 </li>
               </ul>
             </div>

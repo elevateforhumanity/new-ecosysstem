@@ -90,7 +90,7 @@ export default function ProfessionalHome() {
       <main id="main-content">
         {/* HERO SECTION */}
         <section style={{ 
-          background: 'linear-gradient(135deg, #1e3a8a 0%, #581c87 50%, #1e40af 100%)', 
+          background: 'linear-gradient(135deg, #1e3a8a 0%, #581c87 50%, var(--brand-info) 100%)', 
           color: 'white', 
           padding: '5rem 2rem',
           textAlign: 'center'
@@ -118,7 +118,7 @@ export default function ProfessionalHome() {
                 to="/programs" 
                 style={{
                   background: 'white',
-                  color: '#1e40af',
+                  color: 'var(--brand-info)',
                   padding: '1rem 2rem',
                   borderRadius: '0.5rem',
                   fontWeight: '600',
@@ -149,7 +149,7 @@ export default function ProfessionalHome() {
               <Link 
                 to="/get-started" 
                 style={{
-                  background: '#10b981',
+                  background: 'var(--brand-success)',
                   color: 'white',
                   padding: '1rem 2rem',
                   borderRadius: '0.5rem',
@@ -181,12 +181,12 @@ export default function ProfessionalHome() {
               </p>
               <Link 
                 to="/about" 
-                className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                className="inline-block bg-brand-info text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-info-hover transition-colors"
               >
                 Learn About Our Mission
               </Link>
             </div>
-            <div className="bg-blue-100 rounded-lg p-8 h-64 flex items-center justify-center">
+            <div className="bg-brand-surface rounded-lg p-8 h-64 flex items-center justify-center">
               <p className="text-gray-500 text-center">
                 [Hero Image: Community members learning together in training lab]
               </p>
@@ -215,7 +215,7 @@ export default function ProfessionalHome() {
                   <p className="text-gray-600 mb-4">{program.description}</p>
                   <Link 
                     to={program.link}
-                    className="text-blue-600 font-semibold hover:text-blue-800 inline-flex items-center"
+                    className="text-blue-600 font-semibold hover:text-brand-info inline-flex items-center"
                   >
                     Learn More →
                   </Link>
@@ -247,7 +247,7 @@ export default function ProfessionalHome() {
             <div className="mt-8">
               <Link 
                 to="/partners" 
-                className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                className="inline-block bg-brand-info text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-info-hover transition-colors"
               >
                 Become a Partner
               </Link>
@@ -349,7 +349,7 @@ export default function ProfessionalHome() {
               </Link>
               <Link 
                 to="/partners" 
-                className="bg-blue-500 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-600 transition-colors shadow-lg"
+                className="bg-blue-500 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-brand-info transition-colors shadow-lg"
               >
                 Corporate Partnerships
               </Link>

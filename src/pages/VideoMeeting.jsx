@@ -80,13 +80,13 @@ export function VideoMeeting() {
           <div style={{
             width: '48px',
             height: '48px',
-            border: '4px solid #e5e7eb',
-            borderTopColor: '#3b82f6',
+            border: '4px solid var(--brand-border)',
+            borderTopColor: 'var(--brand-info)',
             borderRadius: '50%',
             animation: 'spin 1s linear infinite',
             margin: '0 auto 1rem'
           }} />
-          <p style={{ color: '#6b7280' }}>Loading meeting...</p>
+          <p style={{ color: 'var(--brand-text-muted)' }}>Loading meeting...</p>
         </div>
         <style>{`
           @keyframes spin {
@@ -108,7 +108,7 @@ export function VideoMeeting() {
         boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
       }}>
         <h1 style={{ marginBottom: '1rem' }}>Join a Meeting</h1>
-        <p style={{ color: '#6b7280', marginBottom: '2rem' }}>
+        <p style={{ color: 'var(--brand-text-muted)', marginBottom: '2rem' }}>
           Enter a meeting code to join
         </p>
         
@@ -118,7 +118,7 @@ export function VideoMeeting() {
           style={{
             width: '100%',
             padding: '0.75rem',
-            border: '1px solid #d1d5db',
+            border: '1px solid var(--brand-border-dark)',
             borderRadius: '0.375rem',
             fontSize: '1rem',
             marginBottom: '1rem'
@@ -138,7 +138,7 @@ export function VideoMeeting() {
           style={{
             width: '100%',
             padding: '0.75rem',
-            backgroundColor: '#3b82f6',
+            backgroundColor: 'var(--brand-info)',
             color: '#fff',
             border: 'none',
             borderRadius: '0.375rem',
@@ -166,7 +166,7 @@ export function VideoMeeting() {
         <h1 style={{ marginBottom: '0.5rem' }}>
           {meeting?.title || 'Join Meeting'}
         </h1>
-        <p style={{ color: '#6b7280', marginBottom: '2rem' }}>
+        <p style={{ color: 'var(--brand-text-muted)', marginBottom: '2rem' }}>
           Meeting code: <strong>{meetingCode}</strong>
         </p>
 
@@ -194,7 +194,7 @@ export function VideoMeeting() {
             display: 'block',
             marginBottom: '0.5rem',
             fontWeight: '500',
-            color: '#374151'
+            color: 'var(--brand-text)'
           }}>
             Your Name
           </label>
@@ -206,7 +206,7 @@ export function VideoMeeting() {
             style={{
               width: '100%',
               padding: '0.75rem',
-              border: '1px solid #d1d5db',
+              border: '1px solid var(--brand-border-dark)',
               borderRadius: '0.375rem',
               fontSize: '1rem'
             }}
@@ -246,7 +246,7 @@ export function VideoMeeting() {
           style={{
             width: '100%',
             padding: '0.75rem',
-            backgroundColor: '#3b82f6',
+            backgroundColor: 'var(--brand-info)',
             color: '#fff',
             border: 'none',
             borderRadius: '0.375rem',
@@ -264,7 +264,7 @@ export function VideoMeeting() {
             width: '100%',
             padding: '0.75rem',
             backgroundColor: 'transparent',
-            color: '#6b7280',
+            color: 'var(--brand-text-muted)',
             border: 'none',
             borderRadius: '0.375rem',
             fontSize: '0.875rem',

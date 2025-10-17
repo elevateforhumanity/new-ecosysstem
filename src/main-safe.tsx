@@ -11,7 +11,7 @@ function BootError({ err }: { err: unknown }) {
       <p style={{marginTop:'1rem',color:'#666'}}>Check import path casing, lazy imports, env usage, router setup.</p>
       <button 
         onClick={() => window.location.reload()} 
-        style={{marginTop:'1rem',padding:'0.5rem 1rem',background:'#2563eb',color:'white',border:'none',borderRadius:6,cursor:'pointer'}}
+        style={{marginTop:'1rem',padding:'0.5rem 1rem',background:'var(--brand-info)',color:'white',border:'none',borderRadius:6,cursor:'pointer'}}
       >
         Refresh Page
       </button>

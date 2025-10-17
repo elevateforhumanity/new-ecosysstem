@@ -215,7 +215,7 @@ export function MeetingRoom({ meetingCode, userName, isModerator = false, onLeav
           {isRecording && (
             <span style={{
               padding: '0.25rem 0.75rem',
-              backgroundColor: '#ef4444',
+              backgroundColor: 'var(--brand-danger)',
               borderRadius: '0.25rem',
               fontSize: '0.875rem',
               display: 'flex',
@@ -268,7 +268,7 @@ export function MeetingRoom({ meetingCode, userName, isModerator = false, onLeav
               onClick={handleStartRecording}
               style={{
                 padding: '0.5rem 1rem',
-                backgroundColor: '#ef4444',
+                backgroundColor: 'var(--brand-danger)',
                 color: '#fff',
                 border: 'none',
                 borderRadius: '0.25rem',
@@ -283,7 +283,7 @@ export function MeetingRoom({ meetingCode, userName, isModerator = false, onLeav
               onClick={handleStopRecording}
               style={{
                 padding: '0.5rem 1rem',
-                backgroundColor: '#6b7280',
+                backgroundColor: 'var(--brand-text-muted)',
                 color: '#fff',
                 border: 'none',
                 borderRadius: '0.25rem',

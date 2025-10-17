@@ -19,7 +19,7 @@ export default function DurableAI() {
             <div className="text-5xl mb-4">🤖</div>
             <h3 className="text-2xl font-bold mb-4">AI Tutor</h3>
             <p className="text-gray-600 mb-4">Get instant help from our AI tutor, available 24/7 to answer questions and provide guidance</p>
-            <Link to="/ai-tutor" className="text-indigo-600 font-semibold hover:text-indigo-700">
+            <Link to="/ai-tutor" className="text-brand-info font-semibold hover:text-brand-info">
               Try AI Tutor →
             </Link>
           </div>
@@ -27,7 +27,7 @@ export default function DurableAI() {
             <div className="text-5xl mb-4">🎯</div>
             <h3 className="text-2xl font-bold mb-4">Adaptive Learning</h3>
             <p className="text-gray-600 mb-4">AI adjusts content difficulty and pace based on your performance and learning style</p>
-            <Link to="/courses" className="text-indigo-600 font-semibold hover:text-indigo-700">
+            <Link to="/courses" className="text-brand-info font-semibold hover:text-brand-info">
               Start Learning →
             </Link>
           </div>
@@ -35,7 +35,7 @@ export default function DurableAI() {
             <div className="text-5xl mb-4">📊</div>
             <h3 className="text-2xl font-bold mb-4">Smart Analytics</h3>
             <p className="text-gray-600 mb-4">Track your progress with AI-powered insights and personalized recommendations</p>
-            <Link to="/dashboard" className="text-indigo-600 font-semibold hover:text-indigo-700">
+            <Link to="/dashboard" className="text-brand-info font-semibold hover:text-brand-info">
               View Dashboard →
             </Link>
           </div>
@@ -43,7 +43,7 @@ export default function DurableAI() {
             <div className="text-5xl mb-4">✨</div>
             <h3 className="text-2xl font-bold mb-4">Content Generation</h3>
             <p className="text-gray-600 mb-4">AI creates custom practice problems and study materials tailored to your needs</p>
-            <Link to="/lms" className="text-indigo-600 font-semibold hover:text-indigo-700">
+            <Link to="/lms" className="text-brand-info font-semibold hover:text-brand-info">
               Access LMS →
             </Link>
           </div>
@@ -54,7 +54,7 @@ export default function DurableAI() {
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             Join thousands of learners who are achieving their goals faster with AI-powered education
           </p>
-          <Link to="/get-started" className="bg-indigo-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-indigo-700 transition inline-block">
+          <Link to="/get-started" className="bg-brand-info text-white px-8 py-4 rounded-lg font-semibold hover:bg-brand-info-hover transition inline-block">
             Get Started Free
           </Link>
         </div>

@@ -142,17 +142,17 @@ export default function EmailEventsPanel() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'delivered':
-        return 'bg-green-100 text-green-800';
+        return 'bg-brand-surface text-brand-success';
       case 'opened':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-brand-surface text-brand-info';
       case 'clicked':
-        return 'bg-purple-100 text-purple-800';
+        return 'bg-brand-surface text-brand-secondary';
       case 'bounced':
-        return 'bg-red-100 text-red-800';
+        return 'bg-brand-surface text-red-800';
       case 'complained':
-        return 'bg-orange-100 text-orange-800';
+        return 'bg-brand-surface text-brand-warning';
       case 'failed':
-        return 'bg-red-100 text-red-800';
+        return 'bg-brand-surface text-red-800';
       case 'sent':
         return 'bg-yellow-100 text-yellow-800';
       default:
@@ -202,13 +202,13 @@ export default function EmailEventsPanel() {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <span className="text-lg mr-2">{alertMessage.type === 'success' ? '✅' : '❌'}</span>
-              <p className={`text-sm font-medium ${alertMessage.type === 'success' ? 'text-green-800' : 'text-red-800'}`}>
+              <p className={`text-sm font-medium ${alertMessage.type === 'success' ? 'text-brand-success' : 'text-red-800'}`}>
                 {alertMessage.text}
               </p>
             </div>
             <button
               onClick={() => setAlertMessage(null)}
-              className={`text-sm font-medium ${alertMessage.type === 'success' ? 'text-green-600 hover:text-green-800' : 'text-red-600 hover:text-red-800'}`}
+              className={`text-sm font-medium ${alertMessage.type === 'success' ? 'text-green-600 hover:text-brand-success' : 'text-red-600 hover:text-red-800'}`}
             >
               Dismiss
             </button>
@@ -329,7 +329,7 @@ export default function EmailEventsPanel() {
                         <div className="flex items-center gap-2">
                           <span className="font-medium text-gray-900">{event.recipient}</span>
                           {event.blocked_by_dnc && (
-                            <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-red-100 text-red-800" title="On Do Not Contact list">
+                            <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-brand-surface text-red-800" title="On Do Not Contact list">
                               🚫 DNC
                             </span>
                           )}
@@ -413,7 +413,7 @@ export default function EmailEventsPanel() {
                             <button
                               onClick={() => handleResend(event.id)}
                               disabled={resendingIds.has(event.id)}
-                              className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                              className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md text-white bg-brand-info hover:bg-brand-info-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
                               title={event.resend_count ? `Resent ${event.resend_count} time(s)` : 'Resend this email'}
                             >
                               {resendingIds.has(event.id) ? 'Resending...' : 'Resend'}

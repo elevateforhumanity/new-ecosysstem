@@ -189,14 +189,14 @@ export default function Programs() {
       </section>
 
       {/* Featured Programs */}
-      <section className="py-20 px-4 bg-slate-50">
+      <section className="py-20 px-4 bg-brand-surface">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12 animate-fade-in-up">
             <div className="flex items-center justify-center gap-3 mb-4">
               <TrendingUp className="h-8 w-8 text-blue-600" />
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900">Featured Programs</h2>
             </div>
-            <p className="text-xl text-slate-600">Our most popular career training programs</p>
+            <p className="text-xl text-brand-text-muted">Our most popular career training programs</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -212,7 +212,7 @@ export default function Programs() {
                   </div>
                   <div className="flex items-center justify-between mb-2">
                     <Badge variant="secondary">{program.category}</Badge>
-                    <Badge className="bg-green-100 text-green-800 border-0">
+                    <Badge className="bg-brand-surface text-brand-success border-0">
                       {program.placement} Placement
                     </Badge>
                   </div>
@@ -225,15 +225,15 @@ export default function Programs() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
-                    <div className="flex items-center gap-2 text-sm text-slate-600">
+                    <div className="flex items-center gap-2 text-sm text-brand-text-muted">
                       <Clock className="h-4 w-4" />
                       <span>Duration: <strong>{program.duration}</strong></span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-slate-600">
+                    <div className="flex items-center gap-2 text-sm text-brand-text-muted">
                       <Award className="h-4 w-4" />
                       <span>Earn: <strong>{program.credentials}</strong></span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-slate-600">
+                    <div className="flex items-center gap-2 text-sm text-brand-text-muted">
                       <Users className="h-4 w-4" />
                       <span><strong>{program.students}</strong> students enrolled</span>
                     </div>
@@ -259,7 +259,7 @@ export default function Programs() {
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               All Training Programs
             </h2>
-            <p className="text-xl text-slate-600">
+            <p className="text-xl text-brand-text-muted">
               Choose the career path that's right for you
             </p>
           </div>
@@ -287,7 +287,7 @@ export default function Programs() {
                       </div>
                       <div className="flex items-center justify-between mb-2">
                         <Badge variant="outline">{program.level}</Badge>
-                        <Badge className="bg-green-100 text-green-800 border-0 text-xs">
+                        <Badge className="bg-brand-surface text-brand-success border-0 text-xs">
                           {program.placement}
                         </Badge>
                       </div>
@@ -299,7 +299,7 @@ export default function Programs() {
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <div className="space-y-2 text-sm text-slate-600">
+                      <div className="space-y-2 text-sm text-brand-text-muted">
                         <div className="flex items-center gap-2">
                           <Clock className="h-4 w-4" />
                           <span>{program.duration}</span>

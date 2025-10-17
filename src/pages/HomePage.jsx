@@ -63,7 +63,7 @@ export default function HomePage() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Link to="/programs" className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
+              <Link to="/programs" className="px-8 py-4 bg-green-500 hover:bg-brand-success text-white rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
                 Explore Programs
               </Link>
               <Link to="/connect" className="px-8 py-4 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-full text-lg font-bold border-2 border-white transition-all">
@@ -97,25 +97,25 @@ export default function HomePage() {
         </section>
 
         {/* Productivity Suite */}
-        <section className="py-20 px-4 bg-slate-50">
+        <section className="py-20 px-4 bg-brand-surface">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">FREE Productivity Suite</h2>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto">Professional tools for work, school, and life. No subscription. No limits.</p>
+              <p className="text-xl text-brand-text-muted max-w-3xl mx-auto">Professional tools for work, school, and life. No subscription. No limits.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {productivityApps.map((app, idx) => (
-                <Link key={idx} to={app.path} className="group bg-white p-8 rounded-xl border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-200">
+                <Link key={idx} to={app.path} className="group bg-white p-8 rounded-xl border border-brand-border hover:border-blue-300 hover:shadow-lg transition-all duration-200">
                   <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">{app.icon}</div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">{app.name}</h3>
-                  <p className="text-slate-600 text-sm">{app.description}</p>
+                  <p className="text-brand-text-muted text-sm">{app.description}</p>
                 </Link>
               ))}
             </div>
 
             <div className="text-center mt-12">
-              <div className="inline-block bg-green-100 text-green-800 px-8 py-4 rounded-xl font-semibold text-lg">
+              <div className="inline-block bg-brand-surface text-brand-success px-8 py-4 rounded-xl font-semibold text-lg">
                 ✅ All tools are 100% FREE • No credit card required • Unlimited use
               </div>
             </div>
@@ -127,22 +127,22 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">FREE Job Training Programs</h2>
-              <p className="text-xl text-slate-600 max-w-4xl mx-auto">Get certified in high-demand careers. Funded by WIOA, DOL, and state grants. You pay nothing.</p>
+              <p className="text-xl text-brand-text-muted max-w-4xl mx-auto">Get certified in high-demand careers. Funded by WIOA, DOL, and state grants. You pay nothing.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {trainingPrograms.map((program, idx) => (
-                <div key={idx} className="relative bg-gradient-to-br from-white to-slate-50 p-8 rounded-2xl border-2 border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-200">
-                  <div className="absolute top-4 right-4 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-bold">
+                <div key={idx} className="relative bg-gradient-to-br from-white to-slate-50 p-8 rounded-2xl border-2 border-brand-border hover:border-blue-300 hover:shadow-xl transition-all duration-200">
+                  <div className="absolute top-4 right-4 bg-brand-surface text-brand-success px-4 py-2 rounded-full text-sm font-bold">
                     {program.placement} Placement
                   </div>
                   <div className="text-6xl mb-4">{program.icon}</div>
                   <h3 className="text-2xl font-semibold text-gray-900 mb-3">{program.name}</h3>
                   <div className="space-y-2 mb-4">
-                    <div className="text-sm text-slate-600">⏱️ Duration: <strong className="text-gray-900">{program.duration}</strong></div>
-                    <div className="text-sm text-slate-600">🎓 Earn: <strong className="text-gray-900">{program.credentials}</strong></div>
+                    <div className="text-sm text-brand-text-muted">⏱️ Duration: <strong className="text-gray-900">{program.duration}</strong></div>
+                    <div className="text-sm text-brand-text-muted">🎓 Earn: <strong className="text-gray-900">{program.credentials}</strong></div>
                   </div>
-                  <Link to="/programs" className="block text-center py-3 bg-blue-700 hover:bg-blue-800 text-white rounded-lg font-semibold mt-4 transition-colors">
+                  <Link to="/programs" className="block text-center py-3 bg-brand-info-hover hover:bg-blue-800 text-white rounded-lg font-semibold mt-4 transition-colors">
                     Learn More & Enroll
                   </Link>
                 </div>
@@ -160,29 +160,29 @@ export default function HomePage() {
         </section>
 
         {/* How It Works */}
-        <section className="py-20 px-4 bg-slate-50">
+        <section className="py-20 px-4 bg-brand-surface">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-16 text-center">How It Works</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="w-20 h-20 bg-blue-700 text-white rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">1</div>
+                <div className="w-20 h-20 bg-brand-info-hover text-white rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">1</div>
                 <h3 className="text-2xl font-semibold text-gray-900 mb-3">Choose Your Path</h3>
-                <p className="text-slate-600">Browse programs and select the career that interests you</p>
+                <p className="text-brand-text-muted">Browse programs and select the career that interests you</p>
               </div>
               <div className="text-center">
-                <div className="w-20 h-20 bg-purple-600 text-white rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">2</div>
+                <div className="w-20 h-20 bg-brand-secondary text-white rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">2</div>
                 <h3 className="text-2xl font-semibold text-gray-900 mb-3">Get Funded</h3>
-                <p className="text-slate-600">We help you access grants and funding - you pay nothing</p>
+                <p className="text-brand-text-muted">We help you access grants and funding - you pay nothing</p>
               </div>
               <div className="text-center">
                 <div className="w-20 h-20 bg-green-500 text-white rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">3</div>
                 <h3 className="text-2xl font-semibold text-gray-900 mb-3">Get Trained</h3>
-                <p className="text-slate-600">Complete hands-on training and earn industry certifications</p>
+                <p className="text-brand-text-muted">Complete hands-on training and earn industry certifications</p>
               </div>
               <div className="text-center">
                 <div className="w-20 h-20 bg-red-500 text-white rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">4</div>
                 <h3 className="text-2xl font-semibold text-gray-900 mb-3">Get Hired</h3>
-                <p className="text-slate-600">Job placement assistance connects you with employers</p>
+                <p className="text-brand-text-muted">Job placement assistance connects you with employers</p>
               </div>
             </div>
           </div>

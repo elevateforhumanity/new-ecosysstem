@@ -65,7 +65,7 @@ export default function Hub() {
               Elevate Learn2Earn Workforce contracts across all 50 states and territories.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="/compliance" className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+              <Link href="/compliance" className="bg-brand-info text-white px-8 py-3 rounded-lg hover:bg-brand-info-hover transition-colors">
                 Federal Compliance Portal
               </Link>
               <Link href="/programs" className="bg-white text-blue-600 border-2 border-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors">
@@ -77,7 +77,7 @@ export default function Hub() {
       </div>
 
       {/* Stats Section */}
-      <div className="bg-blue-600 text-white py-12">
+      <div className="bg-brand-info text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
@@ -196,7 +196,7 @@ export default function Hub() {
             Access multi-million dollar federal contracts with our complete compliance platform
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="/programs" className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+            <Link href="/programs" className="bg-brand-info text-white px-8 py-3 rounded-lg hover:bg-brand-info-hover transition-colors">
               Start with Programs
             </Link>
             <Link href="/compliance" className="bg-white text-gray-900 px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors">

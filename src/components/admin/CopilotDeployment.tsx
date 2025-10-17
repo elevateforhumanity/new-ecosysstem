@@ -305,19 +305,19 @@ export function CopilotDeployment() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'text-green-600 bg-green-100';
-      case 'deploying': return 'text-blue-600 bg-blue-100';
+      case 'active': return 'text-green-600 bg-brand-surface';
+      case 'deploying': return 'text-blue-600 bg-brand-surface';
       case 'inactive': return 'text-gray-600 bg-gray-100';
-      case 'error': return 'text-red-600 bg-red-100';
+      case 'error': return 'text-red-600 bg-brand-surface';
       default: return 'text-gray-600 bg-gray-100';
     }
   };
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'beginner': return 'text-green-600 bg-green-100';
+      case 'beginner': return 'text-green-600 bg-brand-surface';
       case 'intermediate': return 'text-yellow-600 bg-yellow-100';
-      case 'advanced': return 'text-red-600 bg-red-100';
+      case 'advanced': return 'text-red-600 bg-brand-surface';
       default: return 'text-gray-600 bg-gray-100';
     }
   };
@@ -332,7 +332,7 @@ export function CopilotDeployment() {
         <button
           onClick={deployAllFeatures}
           disabled={deploymentStatus === 'deploying'}
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50 font-medium"
+          className="bg-brand-info text-white px-6 py-3 rounded-lg hover:bg-brand-info-hover disabled:opacity-50 font-medium"
         >
           {deploymentStatus === 'deploying' ? '🔄 Deploying...' : '🚀 Deploy All Features'}
         </button>
@@ -417,7 +417,7 @@ export function CopilotDeployment() {
               
               <button
                 onClick={() => setSelectedGuide(guide)}
-                className="w-full bg-blue-100 text-blue-700 py-2 rounded hover:bg-blue-200 font-medium"
+                className="w-full bg-brand-surface text-blue-700 py-2 rounded hover:bg-blue-200 font-medium"
               >
                 📖 View Guide
               </button>
@@ -454,13 +454,13 @@ export function CopilotDeployment() {
                   
                   <div className="bg-blue-50 border border-blue-200 rounded p-3 mb-3">
                     <div className="font-medium text-blue-900 mb-1">🎯 Action:</div>
-                    <div className="text-blue-800">{step.action}</div>
+                    <div className="text-brand-info">{step.action}</div>
                   </div>
                   
                   {step.tips.length > 0 && (
                     <div className="bg-green-50 border border-green-200 rounded p-3">
                       <div className="font-medium text-green-900 mb-1">💡 Tips:</div>
-                      <ul className="text-green-800 text-sm space-y-1">
+                      <ul className="text-brand-success text-sm space-y-1">
                         {step.tips.map((tip, tipIndex) => (
                           <li key={tipIndex}>{tip}</li>
                         ))}
@@ -478,7 +478,7 @@ export function CopilotDeployment() {
       {deploymentStatus === 'deployed' && (
         <div className="bg-green-50 border border-green-200 rounded-lg p-6">
           <h3 className="text-lg font-semibold text-green-900 mb-2">🎉 Copilot Successfully Deployed!</h3>
-          <p className="text-green-800 mb-4">
+          <p className="text-brand-success mb-4">
             All AI-powered features are now active and ready to assist your staff with:
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-green-700">

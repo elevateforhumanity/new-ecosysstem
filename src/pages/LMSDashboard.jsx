@@ -39,7 +39,7 @@ export default function LMSDashboard() {
     { icon: FileText, label: "Assignments", href: "/lms/assignments", color: "text-green-600" },
     { icon: Award, label: "Certificates", href: "/certificates", color: "text-yellow-600" },
     { icon: Calendar, label: "Schedule", href: "/calendar", color: "text-red-600" },
-    { icon: Users, label: "Study Groups", href: "/community", color: "text-indigo-600" },
+    { icon: Users, label: "Study Groups", href: "/community", color: "text-brand-info" },
     { icon: BarChart, label: "Progress", href: "/lms/progress", color: "text-pink-600" },
     { icon: Settings, label: "Settings", href: "/settings", color: "text-gray-600" }
   ];
@@ -191,7 +191,7 @@ export default function LMSDashboard() {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 bg-brand-surface rounded-full flex items-center justify-center">
                     <Award className="w-6 h-6 text-blue-600" />
                   </div>
                   <div>

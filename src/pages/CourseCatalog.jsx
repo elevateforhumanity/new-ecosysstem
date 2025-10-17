@@ -107,7 +107,7 @@ export default function CourseCatalog() {
   const featuredCourses = demoCourses.filter(c => c.featured);
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-brand-surface">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16 px-4">
         <div className="max-w-7xl mx-auto">
@@ -165,7 +165,7 @@ export default function CourseCatalog() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="flex items-center justify-between text-sm text-slate-600">
+                    <div className="flex items-center justify-between text-sm text-brand-text-muted">
                       <div className="flex items-center gap-1">
                         <Clock className="h-4 w-4" />
                         <span>{course.duration}</span>
@@ -175,7 +175,7 @@ export default function CourseCatalog() {
                         <span>{course.students} students</span>
                       </div>
                     </div>
-                    <div className="mt-3 text-sm text-slate-600">
+                    <div className="mt-3 text-sm text-brand-text-muted">
                       Instructor: <span className="font-semibold">{course.instructor}</span>
                     </div>
                   </CardContent>
@@ -237,7 +237,7 @@ export default function CourseCatalog() {
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <div className="space-y-2 text-sm text-slate-600">
+                      <div className="space-y-2 text-sm text-brand-text-muted">
                         <div className="flex items-center gap-2">
                           <Clock className="h-4 w-4" />
                           <span>{course.duration}</span>
@@ -264,8 +264,8 @@ export default function CourseCatalog() {
               {filteredCourses.length === 0 && (
                 <div className="text-center py-16">
                   <BookOpen className="h-16 w-16 text-slate-300 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-slate-600 mb-2">No courses found</h3>
-                  <p className="text-slate-500">Try adjusting your search or filters</p>
+                  <h3 className="text-xl font-semibold text-brand-text-muted mb-2">No courses found</h3>
+                  <p className="text-brand-text-light">Try adjusting your search or filters</p>
                 </div>
               )}
             </TabsContent>

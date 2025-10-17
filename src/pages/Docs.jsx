@@ -31,14 +31,14 @@ export function Docs() {
   };
 
   return (
-    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#f9fafb' }}>
+    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--brand-surface)' }}>
       {/* Header */}
-      <div style={{ backgroundColor: '#fff', borderBottom: '1px solid #e5e7eb', padding: '1rem 2rem' }}>
+      <div style={{ backgroundColor: '#fff', borderBottom: '1px solid var(--brand-border)', padding: '1rem 2rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <h1 style={{ fontSize: '1.5rem', fontWeight: '600' }}>📝 Documents</h1>
             {currentDoc && (
-              <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} style={{ fontSize: '1.25rem', padding: '0.5rem', border: '1px solid #d1d5db', borderRadius: '0.375rem', width: '300px' }} />
+              <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} style={{ fontSize: '1.25rem', padding: '0.5rem', border: '1px solid var(--brand-border-dark)', borderRadius: '0.375rem', width: '300px' }} />
             )}
           </div>
           <div style={{ display: 'flex', gap: '1rem' }}>
@@ -52,7 +52,7 @@ export function Docs() {
                 </button>
               </>
             )}
-            <button onClick={createNewDoc} style={{ padding: '0.5rem 1.5rem', backgroundColor: '#3b82f6', color: '#fff', border: 'none', borderRadius: '0.375rem', cursor: 'pointer', fontWeight: '600' }}>
+            <button onClick={createNewDoc} style={{ padding: '0.5rem 1.5rem', backgroundColor: 'var(--brand-info)', color: '#fff', border: 'none', borderRadius: '0.375rem', cursor: 'pointer', fontWeight: '600' }}>
               + New Document
             </button>
           </div>
@@ -69,10 +69,10 @@ export function Docs() {
                 <div key={doc.id} onClick={() => openDoc(doc)} style={{ backgroundColor: '#fff', padding: '1.5rem', borderRadius: '0.5rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', cursor: 'pointer', transition: 'transform 0.2s' }}>
                   <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📄</div>
                   <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '0.5rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{doc.title}</h3>
-                  <div style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.25rem' }}>Modified {doc.lastModified}</div>
-                  <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>Owner: {doc.owner}</div>
+                  <div style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)', marginBottom: '0.25rem' }}>Modified {doc.lastModified}</div>
+                  <div style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>Owner: {doc.owner}</div>
                   {doc.shared > 0 && (
-                    <div style={{ fontSize: '0.875rem', color: '#3b82f6', marginTop: '0.5rem' }}>
+                    <div style={{ fontSize: '0.875rem', color: 'var(--brand-info)', marginTop: '0.5rem' }}>
                       👥 Shared with {doc.shared} people
                     </div>
                   )}
@@ -87,7 +87,7 @@ export function Docs() {
       {currentDoc && (
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
           {/* Toolbar */}
-          <div style={{ backgroundColor: '#fff', borderBottom: '1px solid #e5e7eb', padding: '0.5rem 2rem', display: 'flex', gap: '0.5rem' }}>
+          <div style={{ backgroundColor: '#fff', borderBottom: '1px solid var(--brand-border)', padding: '0.5rem 2rem', display: 'flex', gap: '0.5rem' }}>
             <button style={{ padding: '0.5rem 1rem', backgroundColor: '#f3f4f6', border: 'none', borderRadius: '0.375rem', cursor: 'pointer', fontWeight: '600' }}>
               B
             </button>
@@ -97,19 +97,19 @@ export function Docs() {
             <button style={{ padding: '0.5rem 1rem', backgroundColor: '#f3f4f6', border: 'none', borderRadius: '0.375rem', cursor: 'pointer', textDecoration: 'underline' }}>
               U
             </button>
-            <div style={{ width: '1px', backgroundColor: '#e5e7eb', margin: '0 0.5rem' }}></div>
-            <select style={{ padding: '0.5rem', border: '1px solid #d1d5db', borderRadius: '0.375rem', cursor: 'pointer' }}>
+            <div style={{ width: '1px', backgroundColor: 'var(--brand-border)', margin: '0 0.5rem' }}></div>
+            <select style={{ padding: '0.5rem', border: '1px solid var(--brand-border-dark)', borderRadius: '0.375rem', cursor: 'pointer' }}>
               <option>Normal text</option>
               <option>Heading 1</option>
               <option>Heading 2</option>
               <option>Heading 3</option>
             </select>
-            <select style={{ padding: '0.5rem', border: '1px solid #d1d5db', borderRadius: '0.375rem', cursor: 'pointer' }}>
+            <select style={{ padding: '0.5rem', border: '1px solid var(--brand-border-dark)', borderRadius: '0.375rem', cursor: 'pointer' }}>
               <option>Arial</option>
               <option>Times New Roman</option>
               <option>Courier</option>
             </select>
-            <select style={{ padding: '0.5rem', border: '1px solid #d1d5db', borderRadius: '0.375rem', cursor: 'pointer' }}>
+            <select style={{ padding: '0.5rem', border: '1px solid var(--brand-border-dark)', borderRadius: '0.375rem', cursor: 'pointer' }}>
               <option>12</option>
               <option>14</option>
               <option>16</option>
@@ -118,7 +118,7 @@ export function Docs() {
           </div>
 
           {/* Editor */}
-          <div style={{ flex: 1, padding: '2rem', overflowY: 'auto', backgroundColor: '#f9fafb' }}>
+          <div style={{ flex: 1, padding: '2rem', overflowY: 'auto', backgroundColor: 'var(--brand-surface)' }}>
             <div style={{ maxWidth: '800px', margin: '0 auto', backgroundColor: '#fff', padding: '3rem', minHeight: '100%', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
               <textarea value={content} onChange={(e) => setContent(e.target.value)} placeholder="Start typing..." style={{ width: '100%', minHeight: '600px', border: 'none', outline: 'none', fontSize: '1rem', lineHeight: '1.6', resize: 'none', fontFamily: 'inherit' }} />
             </div>

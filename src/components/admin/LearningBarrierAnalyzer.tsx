@@ -189,10 +189,10 @@ export function LearningBarrierAnalyzer() {
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
-      case 'critical': return 'text-red-600 bg-red-100 border-red-200';
-      case 'high': return 'text-orange-600 bg-orange-100 border-orange-200';
+      case 'critical': return 'text-red-600 bg-brand-surface border-red-200';
+      case 'high': return 'text-orange-600 bg-brand-surface border-orange-200';
       case 'medium': return 'text-yellow-600 bg-yellow-100 border-yellow-200';
-      case 'low': return 'text-green-600 bg-green-100 border-green-200';
+      case 'low': return 'text-green-600 bg-brand-surface border-green-200';
       default: return 'text-gray-600 bg-gray-100 border-gray-200';
     }
   };
@@ -228,7 +228,7 @@ export function LearningBarrierAnalyzer() {
           <button
             onClick={runBarrierAnalysis}
             disabled={isAnalyzing}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+            className="bg-brand-info text-white px-4 py-2 rounded-lg hover:bg-brand-info-hover disabled:opacity-50"
           >
             {isAnalyzing ? '🔄 Analyzing...' : '🔍 Run Analysis'}
           </button>
@@ -238,7 +238,7 @@ export function LearningBarrierAnalyzer() {
       {isAnalyzing && (
         <div className="text-center py-8 bg-blue-50 rounded-lg mb-6">
           <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mb-4"></div>
-          <p className="text-blue-800 font-medium">🤖 AI is analyzing learning patterns and identifying barriers...</p>
+          <p className="text-brand-info font-medium">🤖 AI is analyzing learning patterns and identifying barriers...</p>
           <p className="text-blue-600 text-sm mt-2">This may take a few moments while I process all student data</p>
         </div>
       )}
@@ -274,11 +274,11 @@ export function LearningBarrierAnalyzer() {
                 <div className="flex items-center mb-2">
                   <span className="text-lg mr-2">{getRemediationIcon(barrier.autoRemediation.type)}</span>
                   <h5 className="font-medium text-green-900">Auto-Generated Solution</h5>
-                  <span className="ml-auto text-xs bg-green-200 text-green-800 px-2 py-1 rounded">
+                  <span className="ml-auto text-xs bg-green-200 text-brand-success px-2 py-1 rounded">
                     {barrier.autoRemediation.effectiveness}% effective
                   </span>
                 </div>
-                <h6 className="font-medium text-green-800 mb-1">{barrier.autoRemediation.title}</h6>
+                <h6 className="font-medium text-brand-success mb-1">{barrier.autoRemediation.title}</h6>
                 <p className="text-sm text-green-700 mb-3">{barrier.autoRemediation.description}</p>
                 
                 <div className="text-xs text-green-600 mb-3">
@@ -286,10 +286,10 @@ export function LearningBarrierAnalyzer() {
                 </div>
 
                 <div className="mb-3">
-                  <div className="text-xs font-medium text-green-800 mb-1">📚 Auto-Generated Resources:</div>
+                  <div className="text-xs font-medium text-brand-success mb-1">📚 Auto-Generated Resources:</div>
                   <div className="flex flex-wrap gap-1">
                     {barrier.autoRemediation.resources.map((resource, index) => (
-                      <span key={index} className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
+                      <span key={index} className="text-xs bg-brand-surface text-green-700 px-2 py-1 rounded">
                         {resource}
                       </span>
                     ))}
@@ -297,10 +297,10 @@ export function LearningBarrierAnalyzer() {
                 </div>
 
                 <div className="flex space-x-2">
-                  <button className="text-xs bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">
+                  <button className="text-xs bg-brand-success text-white px-3 py-1 rounded hover:bg-brand-success-hover">
                     🚀 Deploy Now
                   </button>
-                  <button className="text-xs bg-green-100 text-green-700 px-3 py-1 rounded hover:bg-green-200">
+                  <button className="text-xs bg-brand-surface text-green-700 px-3 py-1 rounded hover:bg-green-200">
                     📝 Customize
                   </button>
                 </div>
@@ -335,7 +335,7 @@ export function LearningBarrierAnalyzer() {
                   <td className="px-6 py-4">
                     <div className="flex flex-wrap gap-1">
                       {student.strugglingAreas.map((area, index) => (
-                        <span key={index} className="text-xs bg-red-100 text-red-700 px-2 py-1 rounded">
+                        <span key={index} className="text-xs bg-brand-surface text-red-700 px-2 py-1 rounded">
                           {area}
                         </span>
                       ))}
@@ -358,7 +358,7 @@ export function LearningBarrierAnalyzer() {
                   <td className="px-6 py-4">
                     <div className="space-y-1">
                       {student.recommendedActions.slice(0, 2).map((action, index) => (
-                        <div key={index} className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
+                        <div key={index} className="text-xs bg-brand-surface text-blue-700 px-2 py-1 rounded">
                           🤖 {action}
                         </div>
                       ))}
@@ -376,15 +376,15 @@ export function LearningBarrierAnalyzer() {
         <h4 className="font-semibold text-blue-900 mb-2">🔄 Real-time Monitoring Active</h4>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
           <div>
-            <div className="font-medium text-blue-800">Learning Analytics</div>
+            <div className="font-medium text-brand-info">Learning Analytics</div>
             <div className="text-blue-600">Continuously analyzing student performance patterns</div>
           </div>
           <div>
-            <div className="font-medium text-blue-800">Barrier Detection</div>
+            <div className="font-medium text-brand-info">Barrier Detection</div>
             <div className="text-blue-600">AI identifies struggles before they become critical</div>
           </div>
           <div>
-            <div className="font-medium text-blue-800">Auto-Remediation</div>
+            <div className="font-medium text-brand-info">Auto-Remediation</div>
             <div className="text-blue-600">Automatically creates and deploys targeted training</div>
           </div>
         </div>

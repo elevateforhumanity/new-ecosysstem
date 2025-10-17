@@ -77,7 +77,7 @@ export function GetStarted() {
   ];
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#f9fafb' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--brand-surface)' }}>
       {/* Hero Section */}
       <div style={{
         background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
@@ -129,7 +129,7 @@ export function GetStarted() {
               <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
                 {role.title}
               </h3>
-              <p style={{ color: '#6b7280', marginBottom: '1.5rem' }}>
+              <p style={{ color: 'var(--brand-text-muted)', marginBottom: '1.5rem' }}>
                 {role.description}
               </p>
 
@@ -137,7 +137,7 @@ export function GetStarted() {
                 <h4 style={{ fontSize: '1rem', marginBottom: '0.75rem', fontWeight: '600' }}>
                   Quick Start Steps:
                 </h4>
-                <ol style={{ paddingLeft: '1.5rem', color: '#374151' }}>
+                <ol style={{ paddingLeft: '1.5rem', color: 'var(--brand-text)' }}>
                   {role.quickStart.map((step, i) => (
                     <li key={i} style={{ marginBottom: '0.5rem' }}>{step}</li>
                   ))}
@@ -154,7 +154,7 @@ export function GetStarted() {
                       key={i}
                       to={resource.url}
                       style={{
-                        color: '#3b82f6',
+                        color: 'var(--brand-info)',
                         textDecoration: 'none',
                         fontSize: '0.875rem',
                         display: 'flex',
@@ -174,7 +174,7 @@ export function GetStarted() {
                   width: '100%',
                   marginTop: '1.5rem',
                   padding: '0.75rem',
-                  backgroundColor: '#3b82f6',
+                  backgroundColor: 'var(--brand-info)',
                   color: '#fff',
                   border: 'none',
                   borderRadius: '0.5rem',
@@ -206,7 +206,7 @@ export function GetStarted() {
               <div style={{
                 width: '80px',
                 height: '80px',
-                backgroundColor: '#eff6ff',
+                backgroundColor: 'var(--brand-surface)',
                 borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',
@@ -219,13 +219,13 @@ export function GetStarted() {
               <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>
                 Learning Center
               </h3>
-              <p style={{ color: '#6b7280', marginBottom: '1rem' }}>
+              <p style={{ color: 'var(--brand-text-muted)', marginBottom: '1rem' }}>
                 50+ self-paced courses and 200+ video tutorials
               </p>
               <Link
                 to="/training/learning-center"
                 style={{
-                  color: '#3b82f6',
+                  color: 'var(--brand-info)',
                   textDecoration: 'none',
                   fontWeight: '600'
                 }}
@@ -251,13 +251,13 @@ export function GetStarted() {
               <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>
                 Certifications
               </h3>
-              <p style={{ color: '#6b7280', marginBottom: '1rem' }}>
+              <p style={{ color: 'var(--brand-text-muted)', marginBottom: '1rem' }}>
                 Become a certified Elevate educator or administrator
               </p>
               <Link
                 to="/training/certifications"
                 style={{
-                  color: '#3b82f6',
+                  color: 'var(--brand-info)',
                   textDecoration: 'none',
                   fontWeight: '600'
                 }}
@@ -283,13 +283,13 @@ export function GetStarted() {
               <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>
                 Product Demos
               </h3>
-              <p style={{ color: '#6b7280', marginBottom: '1rem' }}>
+              <p style={{ color: 'var(--brand-text-muted)', marginBottom: '1rem' }}>
                 Live demos every week, on-demand videos anytime
               </p>
               <Link
                 to="/demos"
                 style={{
-                  color: '#3b82f6',
+                  color: 'var(--brand-info)',
                   textDecoration: 'none',
                   fontWeight: '600'
                 }}
@@ -315,13 +315,13 @@ export function GetStarted() {
               <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>
                 App Hub
               </h3>
-              <p style={{ color: '#6b7280', marginBottom: '1rem' }}>
+              <p style={{ color: 'var(--brand-text-muted)', marginBottom: '1rem' }}>
                 100+ integrations and add-ons to extend functionality
               </p>
               <Link
                 to="/app-hub"
                 style={{
-                  color: '#3b82f6',
+                  color: 'var(--brand-info)',
                   textDecoration: 'none',
                   fontWeight: '600'
                 }}
@@ -354,22 +354,22 @@ export function GetStarted() {
               <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>
                 💬 Communities
               </h3>
-              <p style={{ color: '#6b7280', marginBottom: '1rem' }}>
+              <p style={{ color: 'var(--brand-text-muted)', marginBottom: '1rem' }}>
                 Join 50,000+ educators sharing best practices and resources
               </p>
               <ul style={{ listStyle: 'none', padding: 0 }}>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <Link to="/community/teachers" style={{ color: '#3b82f6', textDecoration: 'none' }}>
+                  <Link to="/community/teachers" style={{ color: 'var(--brand-info)', textDecoration: 'none' }}>
                     → Teacher Community
                   </Link>
                 </li>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <Link to="/community/admins" style={{ color: '#3b82f6', textDecoration: 'none' }}>
+                  <Link to="/community/admins" style={{ color: 'var(--brand-info)', textDecoration: 'none' }}>
                     → Administrator Forum
                   </Link>
                 </li>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <Link to="/community/developers" style={{ color: '#3b82f6', textDecoration: 'none' }}>
+                  <Link to="/community/developers" style={{ color: 'var(--brand-info)', textDecoration: 'none' }}>
                     → Developer Community
                   </Link>
                 </li>
@@ -385,22 +385,22 @@ export function GetStarted() {
               <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>
                 🤝 Find a Partner
               </h3>
-              <p style={{ color: '#6b7280', marginBottom: '1rem' }}>
+              <p style={{ color: 'var(--brand-text-muted)', marginBottom: '1rem' }}>
                 Connect with authorized partners for implementation and support
               </p>
               <ul style={{ listStyle: 'none', padding: 0 }}>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <Link to="/partners/sales" style={{ color: '#3b82f6', textDecoration: 'none' }}>
+                  <Link to="/partners/sales" style={{ color: 'var(--brand-info)', textDecoration: 'none' }}>
                     → Sales Partners
                   </Link>
                 </li>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <Link to="/partners/training" style={{ color: '#3b82f6', textDecoration: 'none' }}>
+                  <Link to="/partners/training" style={{ color: 'var(--brand-info)', textDecoration: 'none' }}>
                     → Training Partners
                   </Link>
                 </li>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <Link to="/partners/technology" style={{ color: '#3b82f6', textDecoration: 'none' }}>
+                  <Link to="/partners/technology" style={{ color: 'var(--brand-info)', textDecoration: 'none' }}>
                     → Technology Partners
                   </Link>
                 </li>
@@ -416,22 +416,22 @@ export function GetStarted() {
               <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>
                 📞 Get Support
               </h3>
-              <p style={{ color: '#6b7280', marginBottom: '1rem' }}>
+              <p style={{ color: 'var(--brand-text-muted)', marginBottom: '1rem' }}>
                 We're here to help you succeed
               </p>
               <ul style={{ listStyle: 'none', padding: 0 }}>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <Link to="/support" style={{ color: '#3b82f6', textDecoration: 'none' }}>
+                  <Link to="/support" style={{ color: 'var(--brand-info)', textDecoration: 'none' }}>
                     → Help Center
                   </Link>
                 </li>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <Link to="/support/contact" style={{ color: '#3b82f6', textDecoration: 'none' }}>
+                  <Link to="/support/contact" style={{ color: 'var(--brand-info)', textDecoration: 'none' }}>
                     → Contact Support
                   </Link>
                 </li>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <a href="tel:1-800-ELEVATE" style={{ color: '#3b82f6', textDecoration: 'none' }}>
+                  <a href="tel:1-800-ELEVATE" style={{ color: 'var(--brand-info)', textDecoration: 'none' }}>
                     → Call 1-800-ELEVATE
                   </a>
                 </li>
@@ -454,22 +454,22 @@ export function GetStarted() {
             gap: '2rem'
           }}>
             <div style={{
-              border: '2px solid #e5e7eb',
+              border: '2px solid var(--brand-border)',
               borderRadius: '0.75rem',
               padding: '2rem',
               transition: 'border-color 0.2s'
             }}
-            onMouseEnter={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
-            onMouseLeave={(e) => e.currentTarget.style.borderColor = '#e5e7eb'}
+            onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--brand-info)'}
+            onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--brand-border)'}
             >
               <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🏫</div>
               <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
                 K-12 Schools
               </h3>
-              <p style={{ color: '#6b7280', marginBottom: '1rem' }}>
+              <p style={{ color: 'var(--brand-text-muted)', marginBottom: '1rem' }}>
                 Complete solution for elementary, middle, and high schools
               </p>
-              <ul style={{ color: '#374151', marginBottom: '1.5rem' }}>
+              <ul style={{ color: 'var(--brand-text)', marginBottom: '1.5rem' }}>
                 <li>Parent portal included</li>
                 <li>Age-appropriate content</li>
                 <li>COPPA compliant</li>
@@ -480,7 +480,7 @@ export function GetStarted() {
                 style={{
                   display: 'inline-block',
                   padding: '0.75rem 1.5rem',
-                  backgroundColor: '#3b82f6',
+                  backgroundColor: 'var(--brand-info)',
                   color: '#fff',
                   textDecoration: 'none',
                   borderRadius: '0.5rem',
@@ -492,22 +492,22 @@ export function GetStarted() {
             </div>
 
             <div style={{
-              border: '2px solid #e5e7eb',
+              border: '2px solid var(--brand-border)',
               borderRadius: '0.75rem',
               padding: '2rem',
               transition: 'border-color 0.2s'
             }}
-            onMouseEnter={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
-            onMouseLeave={(e) => e.currentTarget.style.borderColor = '#e5e7eb'}
+            onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--brand-info)'}
+            onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--brand-border)'}
             >
               <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎓</div>
               <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
                 Higher Education
               </h3>
-              <p style={{ color: '#6b7280', marginBottom: '1rem' }}>
+              <p style={{ color: 'var(--brand-text-muted)', marginBottom: '1rem' }}>
                 Comprehensive platform for colleges and universities
               </p>
-              <ul style={{ color: '#374151', marginBottom: '1.5rem' }}>
+              <ul style={{ color: 'var(--brand-text)', marginBottom: '1.5rem' }}>
                 <li>Research tools (NotebookLM)</li>
                 <li>Career services integration</li>
                 <li>Multi-campus support</li>
@@ -518,7 +518,7 @@ export function GetStarted() {
                 style={{
                   display: 'inline-block',
                   padding: '0.75rem 1.5rem',
-                  backgroundColor: '#3b82f6',
+                  backgroundColor: 'var(--brand-info)',
                   color: '#fff',
                   textDecoration: 'none',
                   borderRadius: '0.5rem',
@@ -530,22 +530,22 @@ export function GetStarted() {
             </div>
 
             <div style={{
-              border: '2px solid #e5e7eb',
+              border: '2px solid var(--brand-border)',
               borderRadius: '0.75rem',
               padding: '2rem',
               transition: 'border-color 0.2s'
             }}
-            onMouseEnter={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
-            onMouseLeave={(e) => e.currentTarget.style.borderColor = '#e5e7eb'}
+            onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--brand-info)'}
+            onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--brand-border)'}
             >
               <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🌐</div>
               <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
                 Distance Learning
               </h3>
-              <p style={{ color: '#6b7280', marginBottom: '1rem' }}>
+              <p style={{ color: 'var(--brand-text-muted)', marginBottom: '1rem' }}>
                 Built for online and hybrid education
               </p>
-              <ul style={{ color: '#374151', marginBottom: '1.5rem' }}>
+              <ul style={{ color: 'var(--brand-text)', marginBottom: '1.5rem' }}>
                 <li>Fully online platform</li>
                 <li>HD video conferencing</li>
                 <li>Mobile-first design</li>
@@ -556,7 +556,7 @@ export function GetStarted() {
                 style={{
                   display: 'inline-block',
                   padding: '0.75rem 1.5rem',
-                  backgroundColor: '#3b82f6',
+                  backgroundColor: 'var(--brand-info)',
                   color: '#fff',
                   textDecoration: 'none',
                   borderRadius: '0.5rem',

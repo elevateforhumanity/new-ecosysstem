@@ -91,7 +91,7 @@ export default function DurablePricing() {
                 to={plan.link}
                 className={`block text-center py-3 px-6 rounded-lg font-semibold transition ${
                   plan.highlighted 
-                    ? 'bg-indigo-600 text-white hover:bg-indigo-700' 
+                    ? 'bg-brand-info text-white hover:bg-brand-info-hover' 
                     : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                 }`}
               >

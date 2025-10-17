@@ -199,7 +199,7 @@ export default function Pay() {
                 <div className="flex-1">
                   <div className="font-medium text-gray-900 flex items-center">
                     Buy Now, Pay Later
-                    <span className="ml-2 bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Popular</span>
+                    <span className="ml-2 bg-brand-surface text-brand-success text-xs px-2 py-1 rounded">Popular</span>
                   </div>
                   <div className="text-sm text-gray-600">
                     Flexible monthly payments with low interest rates
@@ -222,7 +222,7 @@ export default function Pay() {
             </p>
             <div className="flex flex-wrap gap-2">
               {selectedProgram.fundingOptions.map((option, index) => (
-                <span key={index} className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">
+                <span key={index} className="bg-brand-surface text-brand-success text-xs px-2 py-1 rounded">
                   {option}
                 </span>
               ))}
@@ -244,7 +244,7 @@ export default function Pay() {
                 placeholder="Enter coupon code"
                 className="flex-1 border border-gray-300 rounded-lg px-3 py-2"
               />
-              <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+              <button className="bg-brand-info text-white px-4 py-2 rounded-lg hover:bg-brand-info-hover transition-colors">
                 Apply
               </button>
             </div>
@@ -302,14 +302,14 @@ export default function Pay() {
           <div className="space-y-3">
             <button 
               id="standardCheckout"
-              className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+              className="w-full bg-brand-info text-white py-3 px-6 rounded-lg hover:bg-brand-info-hover transition-colors font-medium"
             >
               Complete Payment - ${(selectedProgram.price / 4).toLocaleString()}
             </button>
             
             <button 
               id="bnplCheckout"
-              className="hidden w-full bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition-colors font-medium"
+              className="hidden w-full bg-brand-success text-white py-3 px-6 rounded-lg hover:bg-brand-success-hover transition-colors font-medium"
               onClick={() => window.location.href = '/bnpl-frontend.html'}
             >
               Choose Buy Now, Pay Later Plan
@@ -384,10 +384,10 @@ export default function Pay() {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
                     payment.status === 'completed' 
-                      ? 'bg-green-100 text-green-800'
+                      ? 'bg-brand-surface text-brand-success'
                       : payment.status === 'pending'
                       ? 'bg-yellow-100 text-yellow-800'
-                      : 'bg-red-100 text-red-800'
+                      : 'bg-brand-surface text-red-800'
                   }`}>
                     {payment.status}
                   </span>
@@ -432,10 +432,10 @@ export default function Pay() {
                 <div className="text-right">
                   <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
                     application.status === 'approved' 
-                      ? 'bg-green-100 text-green-800'
+                      ? 'bg-brand-surface text-brand-success'
                       : application.status === 'pending'
                       ? 'bg-yellow-100 text-yellow-800'
-                      : 'bg-red-100 text-red-800'
+                      : 'bg-brand-surface text-red-800'
                   }`}>
                     {application.status}
                   </span>
@@ -451,7 +451,7 @@ export default function Pay() {
         <div className="mt-6 text-center">
           <Link 
             href="/compliance/eligibility-verification"
-            className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
+            className="bg-brand-success text-white px-6 py-3 rounded-lg hover:bg-brand-success-hover transition-colors"
           >
             Apply for New Funding
           </Link>
@@ -471,10 +471,10 @@ export default function Pay() {
               <p className="text-gray-600 mt-1">Secure payments with 50/50 revenue sharing and federal funding support</p>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+              <div className="bg-brand-surface text-brand-info px-3 py-1 rounded-full text-sm">
                 🔒 Stripe Secured
               </div>
-              <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
+              <div className="bg-brand-surface text-brand-success px-3 py-1 rounded-full text-sm">
                 💰 Federal Funding
               </div>
             </div>
@@ -537,7 +537,7 @@ export default function Pay() {
               </p>
               <Link 
                 href="/compliance"
-                className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors text-sm"
+                className="bg-brand-success text-white px-4 py-2 rounded-lg hover:bg-brand-success-hover transition-colors text-sm"
               >
                 Check Eligibility
               </Link>

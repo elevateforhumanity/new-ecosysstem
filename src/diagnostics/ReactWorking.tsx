@@ -28,7 +28,7 @@ export default function ReactWorking() {
         </p>
       </div>
 
-      <div style={{marginTop:'1rem',padding:'1rem',background:'#fff3cd',border:'1px solid #ffc107',borderRadius:8}}>
+      <div style={{marginTop:'1rem',padding:'1rem',background:'#fff3cd',border:'1px solid var(--brand-warning)',borderRadius:8}}>
         <h4 style={{marginTop:0}}>🔧 To see the full app:</h4>
         <p>Remove <code>?diag=1</code> from the URL or visit the homepage without the parameter.</p>
       </div>

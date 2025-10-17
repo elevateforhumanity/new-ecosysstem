@@ -118,7 +118,7 @@ export default function Partners() {
               textAlign: "center",
             }}
           >
-            <div style={{ fontSize: 32, fontWeight: 700, color: "#28a745", marginBottom: 8 }}>
+            <div style={{ fontSize: 32, fontWeight: 700, color: "var(--brand-success)", marginBottom: 8 }}>
               120+
             </div>
             <div style={{ fontSize: 14, color: "#666" }}>Countries Reached</div>
@@ -133,7 +133,7 @@ export default function Partners() {
               textAlign: "center",
             }}
           >
-            <div style={{ fontSize: 32, fontWeight: 700, color: "#ffc107", marginBottom: 8 }}>
+            <div style={{ fontSize: 32, fontWeight: 700, color: "var(--brand-warning)", marginBottom: 8 }}>
               2M+
             </div>
             <div style={{ fontSize: 14, color: "#666" }}>Lives Impacted</div>
@@ -148,7 +148,7 @@ export default function Partners() {
               textAlign: "center",
             }}
           >
-            <div style={{ fontSize: 32, fontWeight: 700, color: "#dc3545", marginBottom: 8 }}>
+            <div style={{ fontSize: 32, fontWeight: 700, color: "var(--brand-danger)", marginBottom: 8 }}>
               500+
             </div>
             <div style={{ fontSize: 14, color: "#666" }}>Active Projects</div>

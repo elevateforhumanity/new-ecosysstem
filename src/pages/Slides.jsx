@@ -121,7 +121,7 @@ export function Slides() {
       fontWeight: element.fontWeight || 'normal',
       textAlign: element.textAlign || 'left',
       color: element.color || '#000000',
-      border: isSelected ? '2px solid #3b82f6' : 'none',
+      border: isSelected ? '2px solid var(--brand-info)' : 'none',
       cursor: 'pointer',
       padding: '0.5rem',
       outline: 'none'
@@ -225,7 +225,7 @@ export function Slides() {
             onClick={() => setIsPresentMode(false)}
             style={{
               padding: '0.5rem 1rem',
-              backgroundColor: '#ef4444',
+              backgroundColor: 'var(--brand-danger)',
               color: '#fff',
               border: 'none',
               borderRadius: '0.375rem',
@@ -240,12 +240,12 @@ export function Slides() {
   }
 
   return (
-    <div style={{ display: 'flex', height: '100vh', backgroundColor: '#f9fafb' }}>
+    <div style={{ display: 'flex', height: '100vh', backgroundColor: 'var(--brand-surface)' }}>
       {/* Sidebar - Slide thumbnails */}
       <div style={{
         width: '200px',
         backgroundColor: '#fff',
-        borderRight: '1px solid #e5e7eb',
+        borderRight: '1px solid var(--brand-border)',
         overflowY: 'auto',
         padding: '1rem'
       }}>
@@ -259,11 +259,11 @@ export function Slides() {
             onClick={() => setCurrentSlide(index)}
             style={{
               marginBottom: '0.75rem',
-              border: currentSlide === index ? '2px solid #3b82f6' : '1px solid #e5e7eb',
+              border: currentSlide === index ? '2px solid var(--brand-info)' : '1px solid var(--brand-border)',
               borderRadius: '0.375rem',
               padding: '0.5rem',
               cursor: 'pointer',
-              backgroundColor: currentSlide === index ? '#eff6ff' : '#fff',
+              backgroundColor: currentSlide === index ? 'var(--brand-surface)' : '#fff',
               position: 'relative'
             }}
           >
@@ -276,7 +276,7 @@ export function Slides() {
               alignItems: 'center',
               justifyContent: 'center',
               fontSize: '0.75rem',
-              color: '#6b7280'
+              color: 'var(--brand-text-muted)'
             }}>
               Slide {index + 1}
             </div>
@@ -290,7 +290,7 @@ export function Slides() {
                 top: '0.25rem',
                 right: '0.25rem',
                 padding: '0.25rem',
-                backgroundColor: '#ef4444',
+                backgroundColor: 'var(--brand-danger)',
                 color: '#fff',
                 border: 'none',
                 borderRadius: '0.25rem',
@@ -308,7 +308,7 @@ export function Slides() {
           style={{
             width: '100%',
             padding: '0.75rem',
-            backgroundColor: '#3b82f6',
+            backgroundColor: 'var(--brand-info)',
             color: '#fff',
             border: 'none',
             borderRadius: '0.375rem',
@@ -326,7 +326,7 @@ export function Slides() {
         {/* Toolbar */}
         <div style={{
           backgroundColor: '#fff',
-          borderBottom: '1px solid #e5e7eb',
+          borderBottom: '1px solid var(--brand-border)',
           padding: '0.75rem 1rem',
           display: 'flex',
           gap: '1rem',
@@ -349,7 +349,7 @@ export function Slides() {
           <button style={{
             padding: '0.5rem 1rem',
             backgroundColor: '#fff',
-            border: '1px solid #d1d5db',
+            border: '1px solid var(--brand-border-dark)',
             borderRadius: '0.375rem',
             cursor: 'pointer'
           }}>
@@ -360,7 +360,7 @@ export function Slides() {
             onClick={() => setIsPresentMode(true)}
             style={{
               padding: '0.5rem 1rem',
-              backgroundColor: '#3b82f6',
+              backgroundColor: 'var(--brand-info)',
               color: '#fff',
               border: 'none',
               borderRadius: '0.375rem',

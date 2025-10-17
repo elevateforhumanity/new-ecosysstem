@@ -37,7 +37,7 @@ export default function CommunityHub() {
             <div className="rounded-md shadow">
               <a
                 href="/community"
-                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 md:py-4 md:text-lg md:px-10"
+                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-brand-secondary hover:bg-brand-secondary-hover md:py-4 md:text-lg md:px-10"
               >
                 Join Forum
               </a>

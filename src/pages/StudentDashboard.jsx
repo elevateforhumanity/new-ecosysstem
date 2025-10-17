@@ -51,7 +51,7 @@ export default function StudentDashboard() {
 
   return (
     <AppLayout title="Dashboard">
-      <div className="min-h-screen bg-slate-50">
+      <div className="min-h-screen bg-brand-surface">
         <div className="max-w-7xl mx-auto p-6 space-y-6">
           {/* Welcome Header */}
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white">
@@ -123,7 +123,7 @@ export default function StudentDashboard() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {quickActions.map((action, idx) => (
                   <Link key={idx} to={action.href}>
-                    <Button variant="outline" className="w-full h-24 flex flex-col items-center justify-center gap-2 hover:bg-slate-50">
+                    <Button variant="outline" className="w-full h-24 flex flex-col items-center justify-center gap-2 hover:bg-brand-surface">
                       <action.icon className={`h-6 w-6 ${action.color}`} />
                       <span className="text-sm font-medium">{action.label}</span>
                     </Button>
@@ -143,7 +143,7 @@ export default function StudentDashboard() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {courses.map((course) => (
-                    <div key={course.id} className="border rounded-lg p-4 hover:bg-slate-50 transition-colors">
+                    <div key={course.id} className="border rounded-lg p-4 hover:bg-brand-surface transition-colors">
                       <div className="flex justify-between items-start mb-3">
                         <div>
                           <h3 className="font-semibold text-lg mb-1">{course.title}</h3>

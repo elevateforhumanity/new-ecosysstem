@@ -97,11 +97,11 @@ export function Sheets() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', backgroundColor: '#f9fafb' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', backgroundColor: 'var(--brand-surface)' }}>
       {/* Toolbar */}
       <div style={{
         backgroundColor: '#fff',
-        borderBottom: '1px solid #e5e7eb',
+        borderBottom: '1px solid var(--brand-border)',
         padding: '0.75rem 1rem',
         display: 'flex',
         gap: '1rem',
@@ -124,7 +124,7 @@ export function Sheets() {
         <button style={{
           padding: '0.5rem 1rem',
           backgroundColor: '#fff',
-          border: '1px solid #d1d5db',
+          border: '1px solid var(--brand-border-dark)',
           borderRadius: '0.375rem',
           cursor: 'pointer'
         }}>
@@ -133,7 +133,7 @@ export function Sheets() {
 
         <button style={{
           padding: '0.5rem 1rem',
-          backgroundColor: '#3b82f6',
+          backgroundColor: 'var(--brand-info)',
           color: '#fff',
           border: 'none',
           borderRadius: '0.375rem',
@@ -146,7 +146,7 @@ export function Sheets() {
       {/* Formula bar */}
       <div style={{
         backgroundColor: '#fff',
-        borderBottom: '1px solid #e5e7eb',
+        borderBottom: '1px solid var(--brand-border)',
         padding: '0.5rem 1rem',
         display: 'flex',
         gap: '1rem',
@@ -174,7 +174,7 @@ export function Sheets() {
           style={{
             flex: 1,
             padding: '0.5rem',
-            border: '1px solid #d1d5db',
+            border: '1px solid var(--brand-border-dark)',
             borderRadius: '0.375rem',
             fontSize: '0.875rem'
           }}
@@ -193,7 +193,7 @@ export function Sheets() {
               <th style={{
                 width: '40px',
                 backgroundColor: '#f3f4f6',
-                border: '1px solid #e5e7eb',
+                border: '1px solid var(--brand-border)',
                 position: 'sticky',
                 top: 0,
                 left: 0,
@@ -205,7 +205,7 @@ export function Sheets() {
                   style={{
                     width: '100px',
                     backgroundColor: '#f3f4f6',
-                    border: '1px solid #e5e7eb',
+                    border: '1px solid var(--brand-border)',
                     padding: '0.5rem',
                     fontSize: '0.875rem',
                     fontWeight: '600',
@@ -225,7 +225,7 @@ export function Sheets() {
                 <td style={{
                   width: '40px',
                   backgroundColor: '#f3f4f6',
-                  border: '1px solid #e5e7eb',
+                  border: '1px solid var(--brand-border)',
                   padding: '0.5rem',
                   textAlign: 'center',
                   fontSize: '0.875rem',
@@ -242,11 +242,11 @@ export function Sheets() {
                     onClick={() => handleCellClick(row, col)}
                     onDoubleClick={() => handleCellDoubleClick(row, col)}
                     style={{
-                      border: '1px solid #e5e7eb',
+                      border: '1px solid var(--brand-border)',
                       padding: '0.5rem',
                       cursor: 'cell',
                       backgroundColor: isCellSelected(row, col) ? '#dbeafe' : '#fff',
-                      outline: isCellSelected(row, col) ? '2px solid #3b82f6' : 'none',
+                      outline: isCellSelected(row, col) ? '2px solid var(--brand-info)' : 'none',
                       position: 'relative'
                     }}
                   >
@@ -282,7 +282,7 @@ export function Sheets() {
       {/* Sheet tabs */}
       <div style={{
         backgroundColor: '#fff',
-        borderTop: '1px solid #e5e7eb',
+        borderTop: '1px solid var(--brand-border)',
         padding: '0.5rem 1rem',
         display: 'flex',
         gap: '0.5rem'

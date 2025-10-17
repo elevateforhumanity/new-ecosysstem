@@ -75,6 +75,8 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:brand": "node scripts/reviewer.js src",
     "lint:brand:all": "node scripts/reviewer.js",
+    "fix:brand": "node scripts/fix-brand-colors.js src",
+    "fix:brand:dry": "node scripts/fix-brand-colors.js src --dry-run",
     "clean": "rimraf dist coverage .cache"
   }
 }

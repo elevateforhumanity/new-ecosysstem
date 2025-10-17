@@ -125,7 +125,7 @@ export default function About() {
         </section>
 
         {/* Mission, Vision, Values */}
-        <section className="py-20 px-4 bg-slate-50">
+        <section className="py-20 px-4 bg-brand-surface">
           <div className="max-w-7xl mx-auto">
             <div className="grid md:grid-cols-3 gap-8">
               {values.map((value, idx) => (
@@ -178,13 +178,13 @@ export default function About() {
         </section>
 
         {/* What We Do */}
-        <section className="py-20 px-4 bg-slate-50">
+        <section className="py-20 px-4 bg-brand-surface">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 animate-fade-in-up">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                 What We Do
               </h2>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+              <p className="text-xl text-brand-text-muted max-w-3xl mx-auto">
                 Comprehensive services designed to empower individuals and strengthen communities
               </p>
             </div>
@@ -219,7 +219,7 @@ export default function About() {
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                 Certifications & Compliance
               </h2>
-              <p className="text-xl text-slate-600">
+              <p className="text-xl text-brand-text-muted">
                 Fully certified and compliant with all regulatory requirements
               </p>
             </div>

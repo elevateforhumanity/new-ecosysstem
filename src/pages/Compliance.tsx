@@ -177,7 +177,7 @@ export default function Compliance() {
               <area.icon className="h-8 w-8 text-blue-600" />
               <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
                 area.status === 'compliant' 
-                  ? 'bg-green-100 text-green-800'
+                  ? 'bg-brand-surface text-brand-success'
                   : 'bg-yellow-100 text-yellow-800'
               }`}>
                 {area.status}
@@ -196,7 +196,7 @@ export default function Compliance() {
               </div>
               <div className="bg-gray-200 rounded-full h-2">
                 <div 
-                  className="bg-blue-600 rounded-full h-2" 
+                  className="bg-brand-info rounded-full h-2" 
                   style={{ width: `${area.completion}%` }}
                 ></div>
               </div>
@@ -216,7 +216,7 @@ export default function Compliance() {
               <div key={activity.id} className="flex items-start space-x-3">
                 <div className={`p-2 rounded-full ${
                   activity.status === 'completed' 
-                    ? 'bg-green-100' 
+                    ? 'bg-brand-surface' 
                     : 'bg-yellow-100'
                 }`}>
                   <CheckCircle className={`h-4 w-4 ${
@@ -260,7 +260,7 @@ export default function Compliance() {
             </div>
             <span className={`px-3 py-1 text-sm font-semibold rounded-full ${
               section.status === 'compliant' 
-                ? 'bg-green-100 text-green-800'
+                ? 'bg-brand-surface text-brand-success'
                 : 'bg-yellow-100 text-yellow-800'
             }`}>
               {section.status}
@@ -348,7 +348,7 @@ export default function Compliance() {
             )}
 
             <div className="flex space-x-4">
-              <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+              <button className="bg-brand-info text-white px-6 py-2 rounded-lg hover:bg-brand-info-hover transition-colors">
                 Generate Report
               </button>
               <button className="bg-white text-blue-600 border border-blue-600 px-6 py-2 rounded-lg hover:bg-blue-50 transition-colors">
@@ -387,10 +387,10 @@ export default function Compliance() {
               <p className="text-gray-600 mt-1">Complete DOL/DWD compliance management for Elevate Learn2Earn Workforce programs</p>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+              <div className="bg-brand-surface text-brand-success px-3 py-1 rounded-full text-sm font-medium">
                 ✅ 100% Compliant
               </div>
-              <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+              <div className="bg-brand-surface text-brand-info px-3 py-1 rounded-full text-sm">
                 🏛️ Federal Ready
               </div>
             </div>
@@ -408,7 +408,7 @@ export default function Compliance() {
                 onClick={() => setActiveSection(section.id)}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-colors ${
                   activeSection === section.id
-                    ? "bg-blue-600 text-white"
+                    ? "bg-brand-info text-white"
                     : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                 }`}
               >

@@ -316,7 +316,7 @@ export default function AutopilotAdmin() {
 
         {/* Toast notification */}
         {note && (
-          <div className="fixed top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded shadow-lg z-50">
+          <div className="fixed top-4 right-4 bg-brand-info text-white px-4 py-2 rounded shadow-lg z-50">
             {note}
           </div>
         )}
@@ -374,7 +374,7 @@ export default function AutopilotAdmin() {
           <div className="grid md:grid-cols-4 gap-4 mb-4">
             <button
               onClick={runDiag}
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+              className="bg-brand-info text-white px-4 py-2 rounded hover:bg-brand-info-hover"
             >
               🔍 Diagnostics
             </button>
@@ -392,7 +392,7 @@ export default function AutopilotAdmin() {
             </button>
             <button
               onClick={() => copyToClipboard(ORCHESTRATOR_BASE)}
-              className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+              className="bg-brand-secondary text-white px-4 py-2 rounded hover:bg-brand-secondary-hover"
             >
               📋 Copy URL
             </button>
@@ -423,7 +423,7 @@ export default function AutopilotAdmin() {
             </div>
             <button
               onClick={registerAutopilot}
-              className="bg-green-600 text-white px-4 py-2 mt-3 rounded hover:bg-green-700"
+              className="bg-brand-success text-white px-4 py-2 mt-3 rounded hover:bg-brand-success-hover"
             >
               ➕ Register
             </button>
@@ -476,7 +476,7 @@ export default function AutopilotAdmin() {
             </div>
             <button
               onClick={runTask}
-              className="bg-green-600 text-white px-4 py-2 mt-3 rounded hover:bg-green-700"
+              className="bg-brand-success text-white px-4 py-2 mt-3 rounded hover:bg-brand-success-hover"
             >
               🚀 Run Task
             </button>
@@ -541,7 +541,7 @@ export default function AutopilotAdmin() {
           <div className="flex items-center gap-2 mb-4">
             <button
               onClick={summarize}
-              className="bg-blue-600 text-white px-3 py-2 rounded"
+              className="bg-brand-info text-white px-3 py-2 rounded"
             >
               AI Summarize
             </button>
@@ -553,7 +553,7 @@ export default function AutopilotAdmin() {
             </button>
             <button
               onClick={() => copyToClipboard(ANALYZER_BASE)}
-              className="bg-purple-600 text-white px-3 py-2 rounded"
+              className="bg-brand-secondary text-white px-3 py-2 rounded"
             >
               📋 Copy URL
             </button>
@@ -676,8 +676,8 @@ export default function AutopilotAdmin() {
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="ok" stackId="a" fill="#10b981" />
-                    <Bar dataKey="fail" stackId="a" fill="#ef4444" />
+                    <Bar dataKey="ok" stackId="a" fill="var(--brand-success)" />
+                    <Bar dataKey="fail" stackId="a" fill="var(--brand-danger)" />
                   </BarChart>
                 </ResponsiveContainer>
                 <p className="text-xs text-gray-500 mt-1">
@@ -699,7 +699,7 @@ export default function AutopilotAdmin() {
                     <Line
                       type="monotone"
                       dataKey="fail_rate"
-                      stroke="#ef4444"
+                      stroke="var(--brand-danger)"
                       dot={false}
                     />
                   </LineChart>
@@ -720,7 +720,7 @@ export default function AutopilotAdmin() {
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="total" fill="#3b82f6" />
+                    <Bar dataKey="total" fill="var(--brand-info)" />
                     <Bar dataKey="fail_rate" fill="#f97316" />
                   </BarChart>
                 </ResponsiveContainer>
@@ -740,8 +740,8 @@ export default function AutopilotAdmin() {
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="total" fill="#8b5cf6" />
-                    <Bar dataKey="fail_rate" fill="#ef4444" />
+                    <Bar dataKey="total" fill="var(--brand-secondary)" />
+                    <Bar dataKey="fail_rate" fill="var(--brand-danger)" />
                   </BarChart>
                 </ResponsiveContainer>
               </div>

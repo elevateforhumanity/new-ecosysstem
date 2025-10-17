@@ -13,7 +13,7 @@ export default function MainLanding() {
       title: "Philanthropy Portal",
       description: "Complete foundation management with grant tracking, donor engagement, and impact measurement",
       icon: "📊",
-      color: "#10b981",
+      color: "var(--brand-success)",
       sector: "Foundations",
       page: "/philanthropy"
     },
@@ -21,7 +21,7 @@ export default function MainLanding() {
       title: "Government Training Platform",
       description: "DOL-approved Elevate Learn2Earn Workforce with WIA compliance, apprenticeships, and job placement tracking",
       icon: "🏛️",
-      color: "#3b82f6",
+      color: "var(--brand-info)",
       sector: "Government",
       page: "/government"
     },
@@ -29,7 +29,7 @@ export default function MainLanding() {
       title: "LMS Learning Management",
       description: "Enterprise-grade training delivery with certifications, assessments, and progress analytics",
       icon: "🎓",
-      color: "#8b5cf6",
+      color: "var(--brand-secondary)",
       sector: "Education",
       page: "/lms"
     },
@@ -37,7 +37,7 @@ export default function MainLanding() {
       title: "Programs & Training Hub",
       description: "Comprehensive program management with apprenticeships, skills tracking, and career pathways",
       icon: "🚀",
-      color: "#ef4444",
+      color: "var(--brand-danger)",
       sector: "Workforce",
       page: "/programs"
     },
@@ -45,7 +45,7 @@ export default function MainLanding() {
       title: "Ecosystem Integration",
       description: "Connect all stakeholders with unified dashboards, reporting, and community impact measurement",
       icon: "🌍",
-      color: "#f59e0b",
+      color: "var(--brand-warning)",
       sector: "Community",
       page: "/ecosystem"
     },
@@ -447,7 +447,7 @@ export default function MainLanding() {
               <button style={{
                 padding: '2rem 5rem',
                 fontSize: '1.6rem',
-                background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                background: 'linear-gradient(135deg, var(--brand-success) 0%, var(--brand-success) 100%)',
                 color: 'white',
                 border: '4px solid rgba(255,255,255,0.4)',
                 borderRadius: '60px',
@@ -462,12 +462,12 @@ export default function MainLanding() {
               onMouseOver={(e) => {
                 e.target.style.transform = 'translateY(-6px) scale(1.05)';
                 e.target.style.boxShadow = '0 15px 50px rgba(16, 185, 129, 0.7)';
-                e.target.style.background = 'linear-gradient(135deg, #059669 0%, #047857 100%)';
+                e.target.style.background = 'linear-gradient(135deg, var(--brand-success) 0%, #047857 100%)';
               }}
               onMouseOut={(e) => {
                 e.target.style.transform = 'translateY(0) scale(1)';
                 e.target.style.boxShadow = '0 10px 40px rgba(16, 185, 129, 0.5)';
-                e.target.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+                e.target.style.background = 'linear-gradient(135deg, var(--brand-success) 0%, var(--brand-success) 100%)';
               }}
               >
                 🎓 ENROLL NOW - FREE TRAINING
@@ -490,7 +490,7 @@ export default function MainLanding() {
               onMouseOver={(e) => {
                 e.target.style.transform = 'translateY(-6px) scale(1.05)';
                 e.target.style.boxShadow = '0 15px 50px rgba(255, 107, 107, 0.7)';
-                e.target.style.background = 'linear-gradient(135deg, #ee5a24 0%, #dc2626 100%)';
+                e.target.style.background = 'linear-gradient(135deg, #ee5a24 0%, var(--brand-danger) 100%)';
               }}
               onMouseOut={(e) => {
                 e.target.style.transform = 'translateY(0) scale(1)';
@@ -508,7 +508,7 @@ export default function MainLanding() {
                   display: 'inline-block',
                   padding: '2rem 5rem',
                   fontSize: '1.6rem',
-                  background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+                  background: 'linear-gradient(135deg, var(--brand-info) 0%, var(--brand-info) 100%)',
                   color: 'white',
                   border: '4px solid rgba(255,255,255,0.4)',
                   borderRadius: '60px',
@@ -521,12 +521,12 @@ export default function MainLanding() {
                 onMouseOver={(e) => {
                   e.target.style.transform = 'translateY(-6px) scale(1.05)';
                   e.target.style.boxShadow = '0 15px 50px rgba(59, 130, 246, 0.7)';
-                  e.target.style.background = 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)';
+                  e.target.style.background = 'linear-gradient(135deg, var(--brand-info) 0%, var(--brand-info-hover) 100%)';
                 }}
                 onMouseOut={(e) => {
                   e.target.style.transform = 'translateY(0) scale(1)';
                   e.target.style.boxShadow = '0 10px 40px rgba(59, 130, 246, 0.5)';
-                  e.target.style.background = 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)';
+                  e.target.style.background = 'linear-gradient(135deg, var(--brand-info) 0%, var(--brand-info) 100%)';
                 }}
               >
                 🏛️ GOVERNMENT DEMO
@@ -554,7 +554,7 @@ export default function MainLanding() {
         </section>
 
         {/* Dynamic Features Showcase */}
-        <section style={{ padding: '5rem 2rem', backgroundColor: '#f8fafc' }}>
+        <section style={{ padding: '5rem 2rem', backgroundColor: 'var(--brand-surface)' }}>
           <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
             <h2 style={{ 
               fontSize: '3rem', 
@@ -641,7 +641,7 @@ export default function MainLanding() {
                       
                       <button style={{
                         padding: '1rem 2.5rem',
-                        background: 'linear-gradient(135deg, #ffd700 0%, #f59e0b 100%)',
+                        background: 'linear-gradient(135deg, #ffd700 0%, var(--brand-warning) 100%)',
                         color: '#1a202c',
                         border: '2px solid rgba(255,255,255,0.3)',
                         borderRadius: '30px',
@@ -762,7 +762,7 @@ export default function MainLanding() {
             }}>
               {/* Philanthropy Portal */}
               <div style={{
-                background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                background: 'linear-gradient(135deg, var(--brand-success) 0%, var(--brand-success) 100%)',
                 padding: '2.5rem',
                 borderRadius: '20px',
                 boxShadow: '0 15px 40px rgba(16, 185, 129, 0.3)',
@@ -788,7 +788,7 @@ export default function MainLanding() {
 
               {/* Government Training */}
               <div style={{
-                background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+                background: 'linear-gradient(135deg, var(--brand-info) 0%, var(--brand-info) 100%)',
                 padding: '2.5rem',
                 borderRadius: '20px',
                 boxShadow: '0 15px 40px rgba(59, 130, 246, 0.3)',
@@ -814,7 +814,7 @@ export default function MainLanding() {
 
               {/* LMS Platform */}
               <div style={{
-                background: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
+                background: 'linear-gradient(135deg, var(--brand-secondary) 0%, var(--brand-secondary) 100%)',
                 padding: '2.5rem',
                 borderRadius: '20px',
                 boxShadow: '0 15px 40px rgba(139, 92, 246, 0.3)',
@@ -840,7 +840,7 @@ export default function MainLanding() {
 
               {/* Programs Hub */}
               <div style={{
-                background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+                background: 'linear-gradient(135deg, var(--brand-danger) 0%, var(--brand-danger) 100%)',
                 padding: '2.5rem',
                 borderRadius: '20px',
                 boxShadow: '0 15px 40px rgba(239, 68, 68, 0.3)',
@@ -927,7 +927,7 @@ export default function MainLanding() {
         {/* Enterprise Testimonials Section */}
         <section style={{ 
           padding: '5rem 2rem', 
-          background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
+          background: 'linear-gradient(135deg, var(--brand-surface) 0%, #e2e8f0 100%)',
           position: 'relative'
         }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -962,14 +962,14 @@ export default function MainLanding() {
                 padding: '3rem',
                 borderRadius: '20px',
                 boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
-                border: '2px solid #3b82f6',
+                border: '2px solid var(--brand-info)',
                 position: 'relative'
               }}>
                 <div style={{ 
                   position: 'absolute',
                   top: '-15px',
                   left: '30px',
-                  backgroundColor: '#3b82f6',
+                  backgroundColor: 'var(--brand-info)',
                   color: 'white',
                   padding: '0.5rem 1.5rem',
                   borderRadius: '20px',
@@ -987,7 +987,7 @@ export default function MainLanding() {
                     width: '60px', 
                     height: '60px', 
                     borderRadius: '50%', 
-                    backgroundColor: '#3b82f6',
+                    backgroundColor: 'var(--brand-info)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -1000,7 +1000,7 @@ export default function MainLanding() {
                   <div>
                     <div style={{ fontWeight: 'bold', color: '#2d3748' }}>Dr. Sarah Chen</div>
                     <div style={{ color: '#718096' }}>CTO, Regional Medical Center</div>
-                    <div style={{ color: '#3b82f6', fontSize: '0.9rem', fontWeight: '600' }}>$2.8B Healthcare Network</div>
+                    <div style={{ color: 'var(--brand-info)', fontSize: '0.9rem', fontWeight: '600' }}>$2.8B Healthcare Network</div>
                   </div>
                 </div>
               </div>
@@ -1011,14 +1011,14 @@ export default function MainLanding() {
                 padding: '3rem',
                 borderRadius: '20px',
                 boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
-                border: '2px solid #8b5cf6',
+                border: '2px solid var(--brand-secondary)',
                 position: 'relative'
               }}>
                 <div style={{ 
                   position: 'absolute',
                   top: '-15px',
                   left: '30px',
-                  backgroundColor: '#8b5cf6',
+                  backgroundColor: 'var(--brand-secondary)',
                   color: 'white',
                   padding: '0.5rem 1.5rem',
                   borderRadius: '20px',
@@ -1036,7 +1036,7 @@ export default function MainLanding() {
                     width: '60px', 
                     height: '60px', 
                     borderRadius: '50%', 
-                    backgroundColor: '#8b5cf6',
+                    backgroundColor: 'var(--brand-secondary)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -1049,7 +1049,7 @@ export default function MainLanding() {
                   <div>
                     <div style={{ fontWeight: 'bold', color: '#2d3748' }}>Maria Johnson</div>
                     <div style={{ color: '#718096' }}>Executive Director, Skills Alliance</div>
-                    <div style={{ color: '#8b5cf6', fontSize: '0.9rem', fontWeight: '600' }}>$450M State Program</div>
+                    <div style={{ color: 'var(--brand-secondary)', fontSize: '0.9rem', fontWeight: '600' }}>$450M State Program</div>
                   </div>
                 </div>
               </div>
@@ -1060,14 +1060,14 @@ export default function MainLanding() {
                 padding: '3rem',
                 borderRadius: '20px',
                 boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
-                border: '2px solid #10b981',
+                border: '2px solid var(--brand-success)',
                 position: 'relative'
               }}>
                 <div style={{ 
                   position: 'absolute',
                   top: '-15px',
                   left: '30px',
-                  backgroundColor: '#10b981',
+                  backgroundColor: 'var(--brand-success)',
                   color: 'white',
                   padding: '0.5rem 1.5rem',
                   borderRadius: '20px',
@@ -1085,7 +1085,7 @@ export default function MainLanding() {
                     width: '60px', 
                     height: '60px', 
                     borderRadius: '50%', 
-                    backgroundColor: '#10b981',
+                    backgroundColor: 'var(--brand-success)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -1098,7 +1098,7 @@ export default function MainLanding() {
                   <div>
                     <div style={{ fontWeight: 'bold', color: '#2d3748' }}>Robert Thompson</div>
                     <div style={{ color: '#718096' }}>VP Operations, Community Foundation</div>
-                    <div style={{ color: '#10b981', fontSize: '0.9rem', fontWeight: '600' }}>$3.2B Foundation Assets</div>
+                    <div style={{ color: 'var(--brand-success)', fontSize: '0.9rem', fontWeight: '600' }}>$3.2B Foundation Assets</div>
                   </div>
                 </div>
               </div>
@@ -1164,11 +1164,11 @@ export default function MainLanding() {
               padding: '1rem',
               backgroundColor: '#f0fff4',
               borderRadius: '15px',
-              border: '2px solid #10b981',
+              border: '2px solid var(--brand-success)',
               maxWidth: '600px',
               margin: '0 auto 3rem'
             }}>
-              <span style={{ color: '#10b981', fontWeight: 'bold', fontSize: '1.1rem' }}>
+              <span style={{ color: 'var(--brand-success)', fontWeight: 'bold', fontSize: '1.1rem' }}>
                 🏆 Trusted by 500+ Enterprise Organizations • $2.4B+ Managed
               </span>
             </div>
@@ -1262,7 +1262,7 @@ export default function MainLanding() {
                     top: '-15px',
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    backgroundColor: plan.popular ? '#8b5cf6' : '#3b82f6',
+                    backgroundColor: plan.popular ? 'var(--brand-secondary)' : 'var(--brand-info)',
                     color: 'white',
                     padding: '0.5rem 1.5rem',
                     borderRadius: '25px',
@@ -1295,7 +1295,7 @@ export default function MainLanding() {
                     <span style={{ 
                       fontSize: plan.monthly === 'Custom' ? '2.5rem' : '4rem', 
                       fontWeight: 'bold',
-                      color: plan.popular ? '#8b5cf6' : '#2d3748'
+                      color: plan.popular ? 'var(--brand-secondary)' : '#2d3748'
                     }}>
                       {plan.monthly === 'Custom' ? 'Custom' : `$${billingCycle === 'monthly' ? plan.monthly : Math.floor(plan.yearly / 12)}`}
                     </span>

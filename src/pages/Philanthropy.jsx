@@ -59,10 +59,10 @@ export default function Philanthropy() {
   return (
     <main id="main-content" style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
       <header style={{ marginBottom: '3rem', textAlign: 'center' }}>
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#7c3aed' }}>
+        <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--brand-secondary)' }}>
           Elevate for Humanity Foundation
         </h1>
-        <p style={{ fontSize: '1.2rem', color: '#6b7280', maxWidth: '800px', margin: '0 auto' }}>
+        <p style={{ fontSize: '1.2rem', color: 'var(--brand-text-muted)', maxWidth: '800px', margin: '0 auto' }}>
           {philanthropyData?.mission || 'Empowering communities through education, Elevate Learn2Earn Workforce, and social impact initiatives.'}
         </p>
       </header>
@@ -70,7 +70,7 @@ export default function Philanthropy() {
       {/* Tab Navigation */}
       <div style={{ 
         display: 'flex', 
-        borderBottom: '2px solid #e5e7eb', 
+        borderBottom: '2px solid var(--brand-border)', 
         marginBottom: '2rem',
         justifyContent: 'center',
         flexWrap: 'wrap'
@@ -86,8 +86,8 @@ export default function Philanthropy() {
               cursor: 'pointer',
               fontSize: '1rem',
               fontWeight: activeTab === tab.id ? 'bold' : 'normal',
-              color: activeTab === tab.id ? '#7c3aed' : '#6b7280',
-              borderBottom: activeTab === tab.id ? '3px solid #7c3aed' : '3px solid transparent'
+              color: activeTab === tab.id ? 'var(--brand-secondary)' : 'var(--brand-text-muted)',
+              borderBottom: activeTab === tab.id ? '3px solid var(--brand-secondary)' : '3px solid transparent'
             }}
           >
             {tab.label}
@@ -100,24 +100,24 @@ export default function Philanthropy() {
         <div>
           {/* Founder Section */}
           <section style={{ marginBottom: '3rem', textAlign: 'center' }}>
-            <h2 style={{ fontSize: '2rem', marginBottom: '1rem', color: '#1f2937' }}>
+            <h2 style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--brand-text)' }}>
               Founded by Elizabeth L. Greene
             </h2>
-            <p style={{ fontSize: '1.1rem', color: '#6b7280', maxWidth: '700px', margin: '0 auto' }}>
+            <p style={{ fontSize: '1.1rem', color: 'var(--brand-text-muted)', maxWidth: '700px', margin: '0 auto' }}>
               {philanthropyData?.founder?.bio || 'A visionary leader committed to creating pathways to prosperity through education and Elevate Learn2Earn Workforce.'}
             </p>
           </section>
 
           {/* Priority Areas */}
           <section style={{ marginBottom: '3rem' }}>
-            <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: '#1f2937', textAlign: 'center' }}>
+            <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--brand-text)', textAlign: 'center' }}>
               Our Priority Areas
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
               {philanthropyData?.priorities?.map((priority, index) => (
                 <div key={index} style={{
                   padding: '1.5rem',
-                  border: '1px solid #e5e7eb',
+                  border: '1px solid var(--brand-border)',
                   borderRadius: '8px',
                   backgroundColor: '#fafafa',
                   textAlign: 'center'
@@ -125,10 +125,10 @@ export default function Philanthropy() {
                   <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>
                     {priority.icon}
                   </div>
-                  <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', color: '#1f2937' }}>
+                  <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', color: 'var(--brand-text)' }}>
                     {priority.title}
                   </h3>
-                  <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>
+                  <p style={{ color: 'var(--brand-text-muted)', fontSize: '0.9rem' }}>
                     {priority.description}
                   </p>
                 </div>
@@ -143,16 +143,16 @@ export default function Philanthropy() {
             borderRadius: '8px',
             marginBottom: '2rem'
           }}>
-            <h3 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', color: '#1f2937', textAlign: 'center' }}>
+            <h3 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', color: 'var(--brand-text)', textAlign: 'center' }}>
               Impact at a Glance
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem' }}>
               {philanthropyData?.quickStats?.map((stat, index) => (
                 <div key={index} style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#7c3aed' }}>
+                  <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--brand-secondary)' }}>
                     {stat.value}
                   </div>
-                  <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+                  <div style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>
                     {stat.label}
                   </div>
                 </div>
@@ -166,34 +166,34 @@ export default function Philanthropy() {
       {activeTab === 'grants' && (
         <div>
           <section style={{ marginBottom: '3rem' }}>
-            <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: '#1f2937' }}>
+            <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--brand-text)' }}>
               Grant Opportunities
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
               {philanthropyData?.grantTypes?.map((grant, index) => (
                 <div key={index} style={{
                   padding: '2rem',
-                  border: '1px solid #e5e7eb',
+                  border: '1px solid var(--brand-border)',
                   borderRadius: '8px',
                   backgroundColor: '#ffffff'
                 }}>
-                  <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: '#7c3aed' }}>
+                  <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--brand-secondary)' }}>
                     {grant.title}
                   </h3>
                   <div style={{ marginBottom: '1rem' }}>
-                    <strong style={{ color: '#1f2937' }}>Funding Range:</strong>
-                    <span style={{ color: '#059669', fontSize: '1.1rem', marginLeft: '0.5rem' }}>
+                    <strong style={{ color: 'var(--brand-text)' }}>Funding Range:</strong>
+                    <span style={{ color: 'var(--brand-success)', fontSize: '1.1rem', marginLeft: '0.5rem' }}>
                       {grant.fundingRange}
                     </span>
                   </div>
-                  <p style={{ color: '#6b7280', marginBottom: '1rem' }}>
+                  <p style={{ color: 'var(--brand-text-muted)', marginBottom: '1rem' }}>
                     {grant.description}
                   </p>
                   <div style={{ marginBottom: '1rem' }}>
-                    <strong style={{ color: '#1f2937' }}>Eligible Recipients:</strong>
+                    <strong style={{ color: 'var(--brand-text)' }}>Eligible Recipients:</strong>
                     <ul style={{ marginTop: '0.5rem', paddingLeft: '1rem' }}>
                       {grant.eligibleRecipients.map((recipient, idx) => (
-                        <li key={idx} style={{ color: '#6b7280', fontSize: '0.9rem' }}>
+                        <li key={idx} style={{ color: 'var(--brand-text-muted)', fontSize: '0.9rem' }}>
                           {recipient}
                         </li>
                       ))}
@@ -201,7 +201,7 @@ export default function Philanthropy() {
                   </div>
                   <button style={{
                     padding: '0.75rem 1.5rem',
-                    backgroundColor: '#7c3aed',
+                    backgroundColor: 'var(--brand-secondary)',
                     color: 'white',
                     border: 'none',
                     borderRadius: '6px',
@@ -221,7 +221,7 @@ export default function Philanthropy() {
       {activeTab === 'impact' && (
         <div>
           <section style={{ marginBottom: '3rem' }}>
-            <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: '#1f2937' }}>
+            <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--brand-text)' }}>
               Our Impact
             </h2>
             
@@ -230,15 +230,15 @@ export default function Philanthropy() {
               {impactData?.metrics?.map((metric, index) => (
                 <div key={index} style={{
                   padding: '1.5rem',
-                  backgroundColor: '#eff6ff',
+                  backgroundColor: 'var(--brand-surface)',
                   borderRadius: '8px',
                   textAlign: 'center',
                   border: '1px solid #bfdbfe'
                 }}>
-                  <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#1e40af', marginBottom: '0.5rem' }}>
+                  <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--brand-info)', marginBottom: '0.5rem' }}>
                     {metric.value}
                   </div>
-                  <div style={{ fontSize: '0.875rem', color: '#1f2937', fontWeight: '500' }}>
+                  <div style={{ fontSize: '0.875rem', color: 'var(--brand-text)', fontWeight: '500' }}>
                     {metric.label}
                   </div>
                 </div>
@@ -246,27 +246,27 @@ export default function Philanthropy() {
             </div>
 
             {/* Success Stories */}
-            <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: '#1f2937' }}>
+            <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--brand-text)' }}>
               Success Stories
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
               {impactData?.stories?.map((story, index) => (
                 <div key={index} style={{
                   padding: '1.5rem',
-                  border: '1px solid #e5e7eb',
+                  border: '1px solid var(--brand-border)',
                   borderRadius: '8px',
                   backgroundColor: '#fafafa'
                 }}>
-                  <h4 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', color: '#1f2937' }}>
+                  <h4 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', color: 'var(--brand-text)' }}>
                     {story.title}
                   </h4>
-                  <p style={{ color: '#6b7280', fontSize: '0.9rem', fontStyle: 'italic', marginBottom: '1rem' }}>
+                  <p style={{ color: 'var(--brand-text-muted)', fontSize: '0.9rem', fontStyle: 'italic', marginBottom: '1rem' }}>
                     "{story.quote}"
                   </p>
-                  <div style={{ fontSize: '0.875rem', color: '#374151' }}>
+                  <div style={{ fontSize: '0.875rem', color: 'var(--brand-text)' }}>
                     <strong>{story.participant}</strong> - {story.program}
                   </div>
-                  <div style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '0.5rem' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--brand-text-muted)', marginTop: '0.5rem' }}>
                     Outcome: {story.outcome}
                   </div>
                 </div>
@@ -280,7 +280,7 @@ export default function Philanthropy() {
       {activeTab === 'giving' && (
         <div>
           <section style={{ marginBottom: '3rem' }}>
-            <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: '#1f2937' }}>
+            <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--brand-text)' }}>
               Ways to Give
             </h2>
             
@@ -289,7 +289,7 @@ export default function Philanthropy() {
               {givingData?.options?.map((option, index) => (
                 <div key={index} style={{
                   padding: '2rem',
-                  border: '2px solid #e5e7eb',
+                  border: '2px solid var(--brand-border)',
                   borderRadius: '8px',
                   backgroundColor: '#ffffff',
                   textAlign: 'center'
@@ -297,23 +297,23 @@ export default function Philanthropy() {
                   <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>
                     {option.icon}
                   </div>
-                  <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: '#7c3aed' }}>
+                  <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--brand-secondary)' }}>
                     {option.title}
                   </h3>
-                  <p style={{ color: '#6b7280', marginBottom: '1.5rem' }}>
+                  <p style={{ color: 'var(--brand-text-muted)', marginBottom: '1.5rem' }}>
                     {option.description}
                   </p>
                   <div style={{ marginBottom: '1.5rem' }}>
-                    <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#059669' }}>
+                    <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--brand-success)' }}>
                       {option.amount}
                     </div>
-                    <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+                    <div style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>
                       {option.impact}
                     </div>
                   </div>
                   <button style={{
                     padding: '0.75rem 2rem',
-                    backgroundColor: '#7c3aed',
+                    backgroundColor: 'var(--brand-secondary)',
                     color: 'white',
                     border: 'none',
                     borderRadius: '6px',
@@ -328,12 +328,12 @@ export default function Philanthropy() {
 
             {/* Recognition Levels */}
             <div style={{ 
-              backgroundColor: '#f9fafb', 
+              backgroundColor: 'var(--brand-surface)', 
               padding: '2rem', 
               borderRadius: '8px',
               marginBottom: '2rem'
             }}>
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: '#1f2937', textAlign: 'center' }}>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--brand-text)', textAlign: 'center' }}>
                 Donor Recognition
               </h3>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
@@ -343,18 +343,18 @@ export default function Philanthropy() {
                     backgroundColor: 'white',
                     borderRadius: '6px',
                     textAlign: 'center',
-                    border: '1px solid #e5e7eb'
+                    border: '1px solid var(--brand-border)'
                   }}>
                     <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
                       {level.icon}
                     </div>
-                    <h4 style={{ fontSize: '1rem', marginBottom: '0.25rem', color: '#1f2937' }}>
+                    <h4 style={{ fontSize: '1rem', marginBottom: '0.25rem', color: 'var(--brand-text)' }}>
                       {level.title}
                     </h4>
-                    <div style={{ fontSize: '0.875rem', color: '#059669', fontWeight: 'bold' }}>
+                    <div style={{ fontSize: '0.875rem', color: 'var(--brand-success)', fontWeight: 'bold' }}>
                       {level.amount}
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '0.5rem' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--brand-text-muted)', marginTop: '0.5rem' }}>
                       {level.benefits}
                     </div>
                   </div>

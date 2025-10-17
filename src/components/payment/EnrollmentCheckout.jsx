@@ -134,7 +134,7 @@ export default function EnrollmentCheckout({ program, onSuccess, onCancel }) {
         <button
           onClick={handleEnroll}
           disabled={loading}
-          className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-brand-info text-white rounded-lg font-semibold hover:bg-brand-info-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {loading ? (
             <>

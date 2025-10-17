@@ -62,7 +62,7 @@ export default function ProgramsDurable() {
               </div>
               <Link 
                 to="/courses"
-                className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition"
+                className="inline-block bg-brand-info text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-info-hover transition"
               >
                 View Program
               </Link>

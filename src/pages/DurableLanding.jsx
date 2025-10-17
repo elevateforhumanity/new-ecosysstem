@@ -13,10 +13,10 @@ export default function DurableLanding() {
             Master the essential skills that employers value most and build a lasting career
           </p>
           <div className="flex gap-4 justify-center">
-            <Link to="/courses" className="bg-indigo-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-indigo-700 transition">
+            <Link to="/courses" className="bg-brand-info text-white px-8 py-4 rounded-lg font-semibold hover:bg-brand-info-hover transition">
               Explore Programs
             </Link>
-            <Link to="/get-started" className="bg-white text-indigo-600 px-8 py-4 rounded-lg font-semibold border-2 border-indigo-600 hover:bg-indigo-50 transition">
+            <Link to="/get-started" className="bg-white text-brand-info px-8 py-4 rounded-lg font-semibold border-2 border-indigo-600 hover:bg-brand-surface transition">
               Get Started Free
             </Link>
           </div>

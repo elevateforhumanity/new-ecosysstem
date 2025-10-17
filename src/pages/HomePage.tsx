@@ -54,9 +54,9 @@ export default function HomePage() {
                 <p className="text-gray-600 mb-4">Learn to protect digital assets and networks from cyber threats.</p>
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-sm text-gray-500">12-16 weeks</span>
-                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">$65K+ avg</span>
+                  <span className="bg-brand-surface text-brand-success px-3 py-1 rounded-full text-sm">$65K+ avg</span>
                 </div>
-                <Link to="/programs/cybersecurity" className="block w-full bg-blue-600 text-white text-center py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                <Link to="/programs/cybersecurity" className="block w-full bg-brand-info text-white text-center py-3 rounded-lg hover:bg-brand-info-hover transition-colors">
                   Learn More
                 </Link>
               </div>
@@ -74,9 +74,9 @@ export default function HomePage() {
                 <p className="text-gray-600 mb-4">Master AWS, Azure, and Google Cloud platforms.</p>
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-sm text-gray-500">10-14 weeks</span>
-                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">$70K+ avg</span>
+                  <span className="bg-brand-surface text-brand-success px-3 py-1 rounded-full text-sm">$70K+ avg</span>
                 </div>
-                <Link to="/programs/cloud-computing" className="block w-full bg-blue-600 text-white text-center py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                <Link to="/programs/cloud-computing" className="block w-full bg-brand-info text-white text-center py-3 rounded-lg hover:bg-brand-info-hover transition-colors">
                   Learn More
                 </Link>
               </div>
@@ -94,9 +94,9 @@ export default function HomePage() {
                 <p className="text-gray-600 mb-4">CNA and Home Health Aide certification programs.</p>
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-sm text-gray-500">6-8 weeks</span>
-                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">$35K+ avg</span>
+                  <span className="bg-brand-surface text-brand-success px-3 py-1 rounded-full text-sm">$35K+ avg</span>
                 </div>
-                <Link to="/programs/healthcare" className="block w-full bg-blue-600 text-white text-center py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                <Link to="/programs/healthcare" className="block w-full bg-brand-info text-white text-center py-3 rounded-lg hover:bg-brand-info-hover transition-colors">
                   Learn More
                 </Link>
               </div>
@@ -104,7 +104,7 @@ export default function HomePage() {
           </div>
 
           <div className="text-center mt-12">
-            <Link to="/programs" className="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-700 transition-colors">
+            <Link to="/programs" className="inline-block bg-brand-info text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-brand-info-hover transition-colors">
               View All Programs
             </Link>
           </div>

@@ -47,13 +47,13 @@ export function ExcelChartGenerator() {
         type: 'pie',
         title: 'Student Enrollment by Program',
         data: [
-          { label: 'Medical Assistant', value: 342, percentage: 27.4, color: '#3b82f6' },
-          { label: 'IT Support', value: 287, percentage: 23.0, color: '#10b981' },
-          { label: 'HVAC Technician', value: 298, percentage: 23.9, color: '#f59e0b' },
-          { label: 'Business Admin', value: 189, percentage: 15.2, color: '#ef4444' },
-          { label: 'Network Infrastructure', value: 131, percentage: 10.5, color: '#8b5cf6' }
+          { label: 'Medical Assistant', value: 342, percentage: 27.4, color: 'var(--brand-info)' },
+          { label: 'IT Support', value: 287, percentage: 23.0, color: 'var(--brand-success)' },
+          { label: 'HVAC Technician', value: 298, percentage: 23.9, color: 'var(--brand-warning)' },
+          { label: 'Business Admin', value: 189, percentage: 15.2, color: 'var(--brand-danger)' },
+          { label: 'Network Infrastructure', value: 131, percentage: 10.5, color: 'var(--brand-secondary)' }
         ],
-        colors: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'],
+        colors: ['var(--brand-info)', 'var(--brand-success)', 'var(--brand-warning)', 'var(--brand-danger)', 'var(--brand-secondary)'],
         showLabels: true,
         showPercentages: true,
         showLegend: true
@@ -62,13 +62,13 @@ export function ExcelChartGenerator() {
         type: 'pie',
         title: 'Participant Demographics',
         data: [
-          { label: 'Low Income', value: 456, percentage: 36.6, color: '#3b82f6' },
-          { label: 'Dislocated Workers', value: 298, percentage: 23.9, color: '#10b981' },
-          { label: 'Veterans', value: 187, percentage: 15.0, color: '#f59e0b' },
-          { label: 'Individuals', value: 183, percentage: 14.7, color: '#ef4444' },
-          { label: 'Youth (14-24)', value: 123, percentage: 9.8, color: '#8b5cf6' }
+          { label: 'Low Income', value: 456, percentage: 36.6, color: 'var(--brand-info)' },
+          { label: 'Dislocated Workers', value: 298, percentage: 23.9, color: 'var(--brand-success)' },
+          { label: 'Veterans', value: 187, percentage: 15.0, color: 'var(--brand-warning)' },
+          { label: 'Individuals', value: 183, percentage: 14.7, color: 'var(--brand-danger)' },
+          { label: 'Youth (14-24)', value: 123, percentage: 9.8, color: 'var(--brand-secondary)' }
         ],
-        colors: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'],
+        colors: ['var(--brand-info)', 'var(--brand-success)', 'var(--brand-warning)', 'var(--brand-danger)', 'var(--brand-secondary)'],
         showLabels: true,
         showPercentages: true,
         showLegend: true
@@ -77,12 +77,12 @@ export function ExcelChartGenerator() {
         type: 'doughnut',
         title: 'Employment Outcomes',
         data: [
-          { label: 'Employed', value: 78.5, percentage: 78.5, color: '#10b981' },
-          { label: 'Continuing Education', value: 12.3, percentage: 12.3, color: '#3b82f6' },
-          { label: 'Seeking Employment', value: 6.8, percentage: 6.8, color: '#f59e0b' },
-          { label: 'Other', value: 2.4, percentage: 2.4, color: '#6b7280' }
+          { label: 'Employed', value: 78.5, percentage: 78.5, color: 'var(--brand-success)' },
+          { label: 'Continuing Education', value: 12.3, percentage: 12.3, color: 'var(--brand-info)' },
+          { label: 'Seeking Employment', value: 6.8, percentage: 6.8, color: 'var(--brand-warning)' },
+          { label: 'Other', value: 2.4, percentage: 2.4, color: 'var(--brand-text-muted)' }
         ],
-        colors: ['#10b981', '#3b82f6', '#f59e0b', '#6b7280'],
+        colors: ['var(--brand-success)', 'var(--brand-info)', 'var(--brand-warning)', 'var(--brand-text-muted)'],
         showLabels: true,
         showPercentages: true,
         showLegend: true
@@ -91,11 +91,11 @@ export function ExcelChartGenerator() {
         type: 'pie',
         title: 'Completion Status by Program',
         data: [
-          { label: 'Completed', value: 1099, percentage: 88.1, color: '#10b981' },
-          { label: 'In Progress', value: 134, percentage: 10.7, color: '#3b82f6' },
-          { label: 'Dropped', value: 14, percentage: 1.2, color: '#ef4444' }
+          { label: 'Completed', value: 1099, percentage: 88.1, color: 'var(--brand-success)' },
+          { label: 'In Progress', value: 134, percentage: 10.7, color: 'var(--brand-info)' },
+          { label: 'Dropped', value: 14, percentage: 1.2, color: 'var(--brand-danger)' }
         ],
-        colors: ['#10b981', '#3b82f6', '#ef4444'],
+        colors: ['var(--brand-success)', 'var(--brand-info)', 'var(--brand-danger)'],
         showLabels: true,
         showPercentages: true,
         showLegend: true
@@ -104,11 +104,11 @@ export function ExcelChartGenerator() {
         type: 'pie',
         title: 'Credential Attainment',
         data: [
-          { label: 'Industry Certification', value: 67.8, percentage: 67.8, color: '#10b981' },
-          { label: 'Diploma/Certificate', value: 23.4, percentage: 23.4, color: '#3b82f6' },
-          { label: 'License', value: 8.8, percentage: 8.8, color: '#f59e0b' }
+          { label: 'Industry Certification', value: 67.8, percentage: 67.8, color: 'var(--brand-success)' },
+          { label: 'Diploma/Certificate', value: 23.4, percentage: 23.4, color: 'var(--brand-info)' },
+          { label: 'License', value: 8.8, percentage: 8.8, color: 'var(--brand-warning)' }
         ],
-        colors: ['#10b981', '#3b82f6', '#f59e0b'],
+        colors: ['var(--brand-success)', 'var(--brand-info)', 'var(--brand-warning)'],
         showLabels: true,
         showPercentages: true,
         showLegend: true
@@ -117,11 +117,11 @@ export function ExcelChartGenerator() {
         type: 'doughnut',
         title: 'Risk Level Distribution',
         data: [
-          { label: 'Low Risk', value: 60, percentage: 60, color: '#10b981' },
-          { label: 'Medium Risk', value: 27, percentage: 27, color: '#f59e0b' },
-          { label: 'High Risk', value: 13, percentage: 13, color: '#ef4444' }
+          { label: 'Low Risk', value: 60, percentage: 60, color: 'var(--brand-success)' },
+          { label: 'Medium Risk', value: 27, percentage: 27, color: 'var(--brand-warning)' },
+          { label: 'High Risk', value: 13, percentage: 13, color: 'var(--brand-danger)' }
         ],
-        colors: ['#10b981', '#f59e0b', '#ef4444'],
+        colors: ['var(--brand-success)', 'var(--brand-warning)', 'var(--brand-danger)'],
         showLabels: true,
         showPercentages: true,
         showLegend: true
@@ -297,7 +297,7 @@ export function ExcelChartGenerator() {
         <button
           onClick={generateExcelWithCharts}
           disabled={isGenerating || selectedCharts.length === 0}
-          className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 disabled:opacity-50 font-medium"
+          className="bg-brand-success text-white px-6 py-3 rounded-lg hover:bg-brand-success-hover disabled:opacity-50 font-medium"
         >
           {isGenerating ? '🔄 Generating Excel...' : '📊 Generate Excel with Charts'}
         </button>
@@ -390,7 +390,7 @@ export function ExcelChartGenerator() {
           <div className="flex space-x-2">
             <button
               onClick={() => setSelectedCharts(availableCharts.map(c => c.title))}
-              className="text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded hover:bg-blue-200"
+              className="text-sm bg-brand-surface text-blue-700 px-3 py-1 rounded hover:bg-blue-200"
             >
               Select All
             </button>

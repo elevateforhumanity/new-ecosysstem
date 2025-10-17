@@ -87,7 +87,7 @@ export default function SearchResults() {
         <h1 style={{ fontSize: 32, marginBottom: 8 }}>
           Search Results
         </h1>
-        <p style={{ fontSize: 16, color: '#6c757d' }}>
+        <p style={{ fontSize: 16, color: 'var(--brand-secondary)' }}>
           {isLoading ? (
             'Searching...'
           ) : (
@@ -196,7 +196,7 @@ export default function SearchResults() {
               <LoadingSpinner size="large" />
             </div>
           ) : results.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: 60, color: '#6c757d' }}>
+            <div style={{ textAlign: 'center', padding: 60, color: 'var(--brand-secondary)' }}>
               <div style={{ fontSize: 48, marginBottom: 16 }}>🔍</div>
               <h3 style={{ fontSize: 20, marginBottom: 8 }}>No results found</h3>
               <p>Try adjusting your search or filters</p>
@@ -233,7 +233,7 @@ export default function SearchResults() {
                         {result.title}
                       </h3>
                       {result.description && (
-                        <p style={{ fontSize: 14, color: '#6c757d', marginBottom: 8, lineHeight: 1.5 }}>
+                        <p style={{ fontSize: 14, color: 'var(--brand-secondary)', marginBottom: 8, lineHeight: 1.5 }}>
                           {result.description}
                         </p>
                       )}

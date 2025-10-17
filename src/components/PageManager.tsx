@@ -171,13 +171,13 @@ export default function PageManager() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'published':
-        return 'bg-green-100 text-green-800';
+        return 'bg-brand-surface text-brand-success';
       case 'draft':
         return 'bg-yellow-100 text-yellow-800';
       case 'archived':
         return 'bg-gray-100 text-gray-800';
       default:
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-brand-surface text-brand-info';
     }
   };
 
@@ -256,7 +256,7 @@ export default function PageManager() {
                   {selectedPage.status === 'draft' && (
                     <button
                       onClick={() => updatePageStatus(selectedPage.id, 'published')}
-                      className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors"
+                      className="bg-brand-success hover:bg-brand-success-hover text-white px-4 py-2 rounded-lg transition-colors"
                     >
                       Publish
                     </button>
@@ -271,7 +271,7 @@ export default function PageManager() {
                   )}
                   <button
                     onClick={() => setEditMode(!editMode)}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+                    className="bg-brand-info hover:bg-brand-info-hover text-white px-4 py-2 rounded-lg transition-colors"
                   >
                     {editMode ? 'Cancel Edit' : 'Edit HTML'}
                   </button>
@@ -283,7 +283,7 @@ export default function PageManager() {
                   </button>
                   <button
                     onClick={() => deletePage(selectedPage.id)}
-                    className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors"
+                    className="bg-brand-danger hover:bg-brand-danger-hover text-white px-4 py-2 rounded-lg transition-colors"
                   >
                     Delete
                   </button>
@@ -309,7 +309,7 @@ export default function PageManager() {
                   <div className="mt-4 flex gap-3">
                     <button
                       onClick={saveEdits}
-                      className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition-colors"
+                      className="bg-brand-success hover:bg-brand-success-hover text-white px-6 py-2 rounded-lg transition-colors"
                     >
                       Save Changes
                     </button>
@@ -358,7 +358,7 @@ export default function PageManager() {
                         </div>
                         <button
                           onClick={() => rollbackToVersion(version)}
-                          className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                          className="text-blue-600 hover:text-brand-info text-sm font-medium"
                         >
                           Rollback
                         </button>

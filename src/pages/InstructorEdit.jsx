@@ -499,7 +499,7 @@ export default function InstructorEdit() {
                           onClick={() => addLesson(module.id)}
                           style={{
                             padding: "6px 12px",
-                            backgroundColor: "#28a745",
+                            backgroundColor: "var(--brand-success)",
                             color: "#fff",
                             border: "none",
                             borderRadius: 4,
@@ -513,7 +513,7 @@ export default function InstructorEdit() {
                           onClick={() => deleteModule(module.id)}
                           style={{
                             padding: "6px 12px",
-                            backgroundColor: "#dc3545",
+                            backgroundColor: "var(--brand-danger)",
                             color: "#fff",
                             border: "none",
                             borderRadius: 4,
@@ -581,7 +581,7 @@ export default function InstructorEdit() {
                             onClick={() => deleteLesson(module.id, lesson.id)}
                             style={{
                               padding: "6px 12px",
-                              backgroundColor: "#dc3545",
+                              backgroundColor: "var(--brand-danger)",
                               color: "#fff",
                               border: "none",
                               borderRadius: 4,
@@ -750,7 +750,7 @@ export default function InstructorEdit() {
                   style={{
                     padding: 16,
                     backgroundColor: "#fff3cd",
-                    border: "1px solid #ffc107",
+                    border: "1px solid var(--brand-warning)",
                     borderRadius: 6,
                   }}
                 >
@@ -763,7 +763,7 @@ export default function InstructorEdit() {
                   <button
                     style={{
                       padding: "8px 16px",
-                      backgroundColor: "#dc3545",
+                      backgroundColor: "var(--brand-danger)",
                       color: "#fff",
                       border: "none",
                       borderRadius: 6,

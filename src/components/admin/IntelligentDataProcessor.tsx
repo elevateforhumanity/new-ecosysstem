@@ -296,7 +296,7 @@ export function IntelligentDataProcessor() {
           <h3 className="font-semibold text-blue-900 mb-2">🤖 Copilot Status:</h3>
           <div className="space-y-1">
             {copilotMessages.map((message, index) => (
-              <div key={index} className="text-sm text-blue-800">
+              <div key={index} className="text-sm text-brand-info">
                 {message}
               </div>
             ))}
@@ -329,7 +329,7 @@ Sarah Johnson IT Support         2025-01-22    sarah@email.com"
           <button
             onClick={() => intelligentParse(rawInput)}
             disabled={!rawInput.trim() || isProcessing}
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50 font-medium"
+            className="bg-brand-info text-white px-6 py-3 rounded-lg hover:bg-brand-info-hover disabled:opacity-50 font-medium"
           >
             {isProcessing ? '🔄 Processing...' : '🤖 Process & Create Everything'}
           </button>
@@ -350,19 +350,19 @@ Sarah Johnson IT Support         2025-01-22    sarah@email.com"
             <h3 className="font-semibold text-green-900 mb-2">✅ Processing Complete!</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
               <div>
-                <div className="font-medium text-green-800">Students Processed</div>
+                <div className="font-medium text-brand-success">Students Processed</div>
                 <div className="text-2xl font-bold text-green-600">{processedData.students.length}</div>
               </div>
               <div>
-                <div className="font-medium text-green-800">Programs Detected</div>
+                <div className="font-medium text-brand-success">Programs Detected</div>
                 <div className="text-2xl font-bold text-green-600">{processedData.programs.length}</div>
               </div>
               <div>
-                <div className="font-medium text-green-800">Flow Charts Created</div>
+                <div className="font-medium text-brand-success">Flow Charts Created</div>
                 <div className="text-2xl font-bold text-green-600">{processedData.flowCharts.length}</div>
               </div>
               <div>
-                <div className="font-medium text-green-800">At-Risk Students</div>
+                <div className="font-medium text-brand-success">At-Risk Students</div>
                 <div className="text-2xl font-bold text-red-600">{processedData.analytics.atRiskCount}</div>
               </div>
             </div>
@@ -370,12 +370,12 @@ Sarah Johnson IT Support         2025-01-22    sarah@email.com"
 
           {/* Quick Actions */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <button className="p-4 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 text-left">
+            <button className="p-4 bg-blue-50 border border-blue-200 rounded-lg hover:bg-brand-surface text-left">
               <div className="font-medium text-blue-900">📊 View Flow Charts</div>
               <div className="text-sm text-blue-700 mt-1">See auto-generated visualizations</div>
             </button>
             
-            <button className="p-4 bg-green-50 border border-green-200 rounded-lg hover:bg-green-100 text-left">
+            <button className="p-4 bg-green-50 border border-green-200 rounded-lg hover:bg-brand-surface text-left">
               <div className="font-medium text-green-900">📈 Analytics Dashboard</div>
               <div className="text-sm text-green-700 mt-1">Real-time retention tracking</div>
             </button>

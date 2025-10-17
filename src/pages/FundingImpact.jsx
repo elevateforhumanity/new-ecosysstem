@@ -20,11 +20,11 @@ export default function FundingImpact() {
           </div>
           <div style={{ padding: 16, border: "1px solid #ddd", borderRadius: 8 }}>
             <h3>WRG Enrollments</h3>
-            <p style={{ fontSize: 32, fontWeight: "bold", color: "#10b981" }}>89</p>
+            <p style={{ fontSize: 32, fontWeight: "bold", color: "var(--brand-success)" }}>89</p>
           </div>
           <div style={{ padding: 16, border: "1px solid #ddd", borderRadius: 8 }}>
             <h3>VR Placements</h3>
-            <p style={{ fontSize: 32, fontWeight: "bold", color: "#f59e0b" }}>34</p>
+            <p style={{ fontSize: 32, fontWeight: "bold", color: "var(--brand-warning)" }}>34</p>
           </div>
         </div>
       </div>

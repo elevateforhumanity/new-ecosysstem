@@ -626,7 +626,7 @@ export default function InstructorNew() {
               onClick={handleCreate}
               style={{
                 padding: "12px 32px",
-                backgroundColor: "#28a745",
+                backgroundColor: "var(--brand-success)",
                 color: "#fff",
                 border: "none",
                 borderRadius: 6,

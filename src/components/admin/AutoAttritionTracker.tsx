@@ -246,9 +246,9 @@ export function AutoAttritionTracker() {
 
   const getRiskColor = (riskLevel: string) => {
     switch (riskLevel) {
-      case 'high': return 'text-red-600 bg-red-100';
+      case 'high': return 'text-red-600 bg-brand-surface';
       case 'medium': return 'text-yellow-600 bg-yellow-100';
-      case 'low': return 'text-green-600 bg-green-100';
+      case 'low': return 'text-green-600 bg-brand-surface';
       default: return 'text-gray-600 bg-gray-100';
     }
   };
@@ -264,8 +264,8 @@ export function AutoAttritionTracker() {
 
   const getInterventionStatusColor = (status: string) => {
     switch (status) {
-      case 'completed': return 'text-green-600 bg-green-100';
-      case 'in_progress': return 'text-blue-600 bg-blue-100';
+      case 'completed': return 'text-green-600 bg-brand-surface';
+      case 'in_progress': return 'text-blue-600 bg-brand-surface';
       case 'scheduled': return 'text-yellow-600 bg-yellow-100';
       case 'none': return 'text-gray-600 bg-gray-100';
       default: return 'text-gray-600 bg-gray-100';
@@ -326,8 +326,8 @@ export function AutoAttritionTracker() {
           </div>
           <div className="mt-2">
             <span className={`text-xs px-2 py-1 rounded-full ${
-              metrics.overall.trend === 'improving' ? 'bg-green-100 text-green-800' :
-              metrics.overall.trend === 'declining' ? 'bg-red-100 text-red-800' :
+              metrics.overall.trend === 'improving' ? 'bg-brand-surface text-brand-success' :
+              metrics.overall.trend === 'declining' ? 'bg-brand-surface text-red-800' :
               'bg-gray-100 text-gray-800'
             }`}>
               {metrics.overall.trend}
@@ -402,7 +402,7 @@ export function AutoAttritionTracker() {
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    <button className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded hover:bg-blue-200">
+                    <button className="text-xs bg-brand-surface text-blue-700 px-2 py-1 rounded hover:bg-blue-200">
                       📊 View Details
                     </button>
                   </td>
@@ -435,7 +435,7 @@ export function AutoAttritionTracker() {
                 <div className="text-sm font-medium text-gray-700 mb-2">Risk Factors:</div>
                 <div className="flex flex-wrap gap-1">
                   {student.riskFactors.map((factor, index) => (
-                    <span key={index} className="text-xs bg-red-100 text-red-700 px-2 py-1 rounded">
+                    <span key={index} className="text-xs bg-brand-surface text-red-700 px-2 py-1 rounded">
                       {factor}
                     </span>
                   ))}
@@ -463,10 +463,10 @@ export function AutoAttritionTracker() {
               </div>
 
               <div className="flex space-x-2">
-                <button className="text-xs bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">
+                <button className="text-xs bg-brand-success text-white px-3 py-1 rounded hover:bg-brand-success-hover">
                   📞 Contact Student
                 </button>
-                <button className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded hover:bg-blue-200">
+                <button className="text-xs bg-brand-surface text-blue-700 px-3 py-1 rounded hover:bg-blue-200">
                   📝 Add Note
                 </button>
               </div>
@@ -490,7 +490,7 @@ export function AutoAttritionTracker() {
                 <strong>Affected Students:</strong> {factor.affectedStudents}
               </div>
               <div className="bg-green-50 border border-green-200 rounded p-3">
-                <div className="text-sm font-medium text-green-800 mb-1">🤖 Auto-Intervention:</div>
+                <div className="text-sm font-medium text-brand-success mb-1">🤖 Auto-Intervention:</div>
                 <div className="text-sm text-green-700">{factor.autoIntervention}</div>
               </div>
             </div>

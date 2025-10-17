@@ -105,7 +105,7 @@ export default function OrchestratorAdmin() {
   }
 
   const getStatusColor = (hasError: boolean) => {
-    return hasError ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800';
+    return hasError ? 'bg-brand-surface text-red-800' : 'bg-brand-surface text-brand-success';
   };
 
   return (
@@ -123,7 +123,7 @@ export default function OrchestratorAdmin() {
             <button
               onClick={runDiagnose}
               disabled={loading}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors disabled:bg-gray-400"
+              className="bg-brand-info hover:bg-brand-info-hover text-white px-4 py-2 rounded-lg transition-colors disabled:bg-gray-400"
             >
               {loading ? 'Checking...' : 'Refresh'}
             </button>
@@ -182,7 +182,7 @@ export default function OrchestratorAdmin() {
               <button
                 onClick={ensureInfra}
                 disabled={loading}
-                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors disabled:bg-gray-400"
+                className="w-full bg-brand-success hover:bg-brand-success-hover text-white font-semibold py-2 px-4 rounded-lg transition-colors disabled:bg-gray-400"
               >
                 {loading ? 'Fixing...' : '🔧 Fix Infrastructure'}
               </button>
@@ -221,7 +221,7 @@ export default function OrchestratorAdmin() {
           <button
             onClick={runTask}
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors disabled:bg-gray-400 mb-4"
+            className="w-full bg-brand-info hover:bg-brand-info-hover text-white font-semibold py-2 px-4 rounded-lg transition-colors disabled:bg-gray-400 mb-4"
           >
             {loading ? 'Running...' : 'Run Task'}
           </button>
@@ -263,7 +263,7 @@ export default function OrchestratorAdmin() {
                     {ap.capabilities.map((cap) => (
                       <span
                         key={cap}
-                        className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs"
+                        className="px-2 py-1 bg-brand-surface text-brand-info rounded text-xs"
                       >
                         {cap}
                       </span>

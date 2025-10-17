@@ -169,7 +169,7 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
           width: '60px',
           height: '60px',
           borderRadius: '50%',
-          backgroundColor: '#3b82f6',
+          backgroundColor: 'var(--brand-info)',
           color: 'white',
           border: 'none',
           boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)',
@@ -217,7 +217,7 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
       {/* Header */}
       <div
         style={{
-          backgroundColor: '#3b82f6',
+          backgroundColor: 'var(--brand-info)',
           color: 'white',
           padding: '16px',
           display: 'flex',
@@ -276,7 +276,7 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
               flex: 1,
               overflowY: 'auto',
               padding: '16px',
-              backgroundColor: '#f9fafb'
+              backgroundColor: 'var(--brand-surface)'
             }}
           >
             {messages.map((message) => (
@@ -293,8 +293,8 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
                     maxWidth: '80%',
                     padding: '12px 16px',
                     borderRadius: '12px',
-                    backgroundColor: message.role === 'user' ? '#3b82f6' : 'white',
-                    color: message.role === 'user' ? 'white' : '#1f2937',
+                    backgroundColor: message.role === 'user' ? 'var(--brand-info)' : 'white',
+                    color: message.role === 'user' ? 'white' : 'var(--brand-text)',
                     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
                     fontSize: '14px',
                     lineHeight: '1.5'
@@ -315,9 +315,9 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
                   }}
                 >
                   <div style={{ display: 'flex', gap: '4px' }}>
-                    <div className="typing-dot" style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#9ca3af', animation: 'typing 1.4s infinite' }}></div>
-                    <div className="typing-dot" style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#9ca3af', animation: 'typing 1.4s infinite 0.2s' }}></div>
-                    <div className="typing-dot" style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#9ca3af', animation: 'typing 1.4s infinite 0.4s' }}></div>
+                    <div className="typing-dot" style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--brand-text-light)', animation: 'typing 1.4s infinite' }}></div>
+                    <div className="typing-dot" style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--brand-text-light)', animation: 'typing 1.4s infinite 0.2s' }}></div>
+                    <div className="typing-dot" style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--brand-text-light)', animation: 'typing 1.4s infinite 0.4s' }}></div>
                   </div>
                 </div>
               </div>
@@ -327,8 +327,8 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
 
           {/* Quick Actions */}
           {messages.length === 1 && (
-            <div style={{ padding: '12px 16px', backgroundColor: 'white', borderTop: '1px solid #e5e7eb' }}>
-              <p style={{ margin: '0 0 8px 0', fontSize: '12px', color: '#6b7280', fontWeight: '500' }}>Quick actions:</p>
+            <div style={{ padding: '12px 16px', backgroundColor: 'white', borderTop: '1px solid var(--brand-border)' }}>
+              <p style={{ margin: '0 0 8px 0', fontSize: '12px', color: 'var(--brand-text-muted)', fontWeight: '500' }}>Quick actions:</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                 {getQuickActions().map((action, index) => (
                   <button
@@ -338,14 +338,14 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
                       padding: '6px 12px',
                       fontSize: '12px',
                       backgroundColor: '#f3f4f6',
-                      border: '1px solid #e5e7eb',
+                      border: '1px solid var(--brand-border)',
                       borderRadius: '16px',
                       cursor: 'pointer',
                       transition: 'all 0.2s',
-                      color: '#374151'
+                      color: 'var(--brand-text)'
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = '#e5e7eb';
+                      e.currentTarget.style.backgroundColor = 'var(--brand-border)';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.backgroundColor = '#f3f4f6';
@@ -359,7 +359,7 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
           )}
 
           {/* Input */}
-          <div style={{ padding: '16px', backgroundColor: 'white', borderTop: '1px solid #e5e7eb' }}>
+          <div style={{ padding: '16px', backgroundColor: 'white', borderTop: '1px solid var(--brand-border)' }}>
             <div style={{ display: 'flex', gap: '8px' }}>
               <input
                 type="text"
@@ -371,17 +371,17 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
                 style={{
                   flex: 1,
                   padding: '12px',
-                  border: '1px solid #e5e7eb',
+                  border: '1px solid var(--brand-border)',
                   borderRadius: '8px',
                   fontSize: '14px',
                   outline: 'none',
                   transition: 'border-color 0.2s'
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = '#3b82f6';
+                  e.currentTarget.style.borderColor = 'var(--brand-info)';
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = '#e5e7eb';
+                  e.currentTarget.style.borderColor = 'var(--brand-border)';
                 }}
               />
               <button
@@ -389,8 +389,8 @@ export default function ChatAssistant({ pageContext = 'general', userRole = 'gue
                 disabled={!input.trim() || loading}
                 style={{
                   padding: '12px 16px',
-                  backgroundColor: input.trim() && !loading ? '#3b82f6' : '#e5e7eb',
-                  color: input.trim() && !loading ? 'white' : '#9ca3af',
+                  backgroundColor: input.trim() && !loading ? 'var(--brand-info)' : 'var(--brand-border)',
+                  color: input.trim() && !loading ? 'white' : 'var(--brand-text-light)',
                   border: 'none',
                   borderRadius: '8px',
                   cursor: input.trim() && !loading ? 'pointer' : 'not-allowed',

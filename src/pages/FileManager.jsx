@@ -144,11 +144,11 @@ export function FileManager() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#f9fafb' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--brand-surface)' }}>
       {/* Header */}
       <div style={{
         backgroundColor: '#fff',
-        borderBottom: '1px solid #e5e7eb',
+        borderBottom: '1px solid var(--brand-border)',
         padding: '1rem 2rem'
       }}>
         <div style={{
@@ -164,7 +164,7 @@ export function FileManager() {
 
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
             {storageQuota && (
-              <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+              <div style={{ fontSize: '0.875rem', color: 'var(--brand-text-muted)' }}>
                 {formatBytes(storageQuota.used)} of {storageQuota.total === -1 ? 'Unlimited' : formatBytes(storageQuota.total)} used
               </div>
             )}
@@ -173,7 +173,7 @@ export function FileManager() {
               onClick={() => setShowUpload(!showUpload)}
               style={{
                 padding: '0.5rem 1rem',
-                backgroundColor: '#3b82f6',
+                backgroundColor: 'var(--brand-info)',
                 color: '#fff',
                 border: 'none',
                 borderRadius: '0.375rem',
@@ -189,8 +189,8 @@ export function FileManager() {
               style={{
                 padding: '0.5rem 1rem',
                 backgroundColor: '#fff',
-                color: '#374151',
-                border: '1px solid #d1d5db',
+                color: 'var(--brand-text)',
+                border: '1px solid var(--brand-border-dark)',
                 borderRadius: '0.375rem',
                 cursor: 'pointer'
               }}
@@ -217,14 +217,14 @@ export function FileManager() {
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: index === breadcrumbs.length - 1 ? '#374151' : '#3b82f6',
+                  color: index === breadcrumbs.length - 1 ? 'var(--brand-text)' : 'var(--brand-info)',
                   cursor: 'pointer',
                   fontWeight: index === breadcrumbs.length - 1 ? '600' : '400'
                 }}
               >
                 {crumb.name}
               </button>
-              {index < breadcrumbs.length - 1 && <span style={{ color: '#9ca3af' }}>/</span>}
+              {index < breadcrumbs.length - 1 && <span style={{ color: 'var(--brand-text-light)' }}>/</span>}
             </React.Fragment>
           ))}
         </div>
@@ -246,7 +246,7 @@ export function FileManager() {
             padding: '1rem',
             backgroundColor: '#fff',
             borderRadius: '0.5rem',
-            border: '1px solid #e5e7eb'
+            border: '1px solid var(--brand-border)'
           }}>
             <div style={{
               display: 'flex',
@@ -260,14 +260,14 @@ export function FileManager() {
             <div style={{
               width: '100%',
               height: '8px',
-              backgroundColor: '#e5e7eb',
+              backgroundColor: 'var(--brand-border)',
               borderRadius: '4px',
               overflow: 'hidden'
             }}>
               <div style={{
                 width: `${Math.min(storageQuota.percentage, 100)}%`,
                 height: '100%',
-                backgroundColor: storageQuota.percentage > 90 ? '#ef4444' : '#3b82f6',
+                backgroundColor: storageQuota.percentage > 90 ? 'var(--brand-danger)' : 'var(--brand-info)',
                 transition: 'width 0.3s'
               }} />
             </div>
@@ -279,7 +279,7 @@ export function FileManager() {
           <div style={{
             textAlign: 'center',
             padding: '4rem 2rem',
-            color: '#6b7280'
+            color: 'var(--brand-text-muted)'
           }}>
             <p style={{ fontSize: '1.125rem', marginBottom: '0.5rem' }}>
               This folder is empty
@@ -299,7 +299,7 @@ export function FileManager() {
                 key={file.id}
                 style={{
                   backgroundColor: '#fff',
-                  border: '1px solid #e5e7eb',
+                  border: '1px solid var(--brand-border)',
                   borderRadius: '0.5rem',
                   padding: '1rem',
                   cursor: 'pointer',
@@ -334,7 +334,7 @@ export function FileManager() {
                   </div>
                   <div style={{
                     fontSize: '0.75rem',
-                    color: '#6b7280'
+                    color: 'var(--brand-text-muted)'
                   }}>
                     {!file.isFolder && formatBytes(file.size)}
                   </div>
@@ -345,7 +345,7 @@ export function FileManager() {
                   gap: '0.5rem',
                   marginTop: '0.75rem',
                   paddingTop: '0.75rem',
-                  borderTop: '1px solid #e5e7eb'
+                  borderTop: '1px solid var(--brand-border)'
                 }}>
                   <button
                     onClick={(e) => {
@@ -357,7 +357,7 @@ export function FileManager() {
                       padding: '0.25rem',
                       fontSize: '0.75rem',
                       backgroundColor: 'transparent',
-                      border: '1px solid #d1d5db',
+                      border: '1px solid var(--brand-border-dark)',
                       borderRadius: '0.25rem',
                       cursor: 'pointer'
                     }}
@@ -374,8 +374,8 @@ export function FileManager() {
                       padding: '0.25rem',
                       fontSize: '0.75rem',
                       backgroundColor: 'transparent',
-                      color: '#ef4444',
-                      border: '1px solid #ef4444',
+                      color: 'var(--brand-danger)',
+                      border: '1px solid var(--brand-danger)',
                       borderRadius: '0.25rem',
                       cursor: 'pointer'
                     }}

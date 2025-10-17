@@ -99,7 +99,7 @@ export default function CourseCreationForm() {
           <div
             className={`mb-6 p-4 rounded-lg ${
               message.type === 'success'
-                ? 'bg-green-50 text-green-800 border border-green-200'
+                ? 'bg-green-50 text-brand-success border border-green-200'
                 : 'bg-red-50 text-red-800 border border-red-200'
             }`}
           >
@@ -220,7 +220,7 @@ export default function CourseCreationForm() {
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="flex-1 bg-brand-info text-white py-3 px-6 rounded-lg font-semibold hover:bg-brand-info-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -257,7 +257,7 @@ export default function CourseCreationForm() {
         {/* Help Section */}
         <div className="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
           <h3 className="font-semibold text-blue-900 mb-2">💡 Tips</h3>
-          <ul className="text-sm text-blue-800 space-y-1">
+          <ul className="text-sm text-brand-info space-y-1">
             <li>• Course creation is processed by the autopilot system within 5-10 minutes</li>
             <li>• You'll receive the Course ID once it's created (check task status)</li>
             <li>• Start with "Provisioned" state to review before publishing</li>

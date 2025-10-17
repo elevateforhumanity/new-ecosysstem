@@ -97,7 +97,7 @@ export default function Programs() {
       <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '2rem' }}>
         {/* Header */}
         <header style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#1e40af' }}>
+          <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--brand-info)' }}>
             Stackable Credential Programs
           </h1>
           <p style={{ fontSize: '1.25rem', color: '#64748b', maxWidth: '800px', margin: '0 auto' }}>
@@ -119,8 +119,8 @@ export default function Programs() {
               onClick={() => setFilter(cat.value)}
               style={{
                 padding: '0.75rem 1.5rem',
-                backgroundColor: filter === cat.value ? '#1e40af' : 'white',
-                color: filter === cat.value ? 'white' : '#1f2937',
+                backgroundColor: filter === cat.value ? 'var(--brand-info)' : 'white',
+                color: filter === cat.value ? 'white' : 'var(--brand-text)',
                 border: '1px solid #e2e8f0',
                 borderRadius: '6px',
                 cursor: 'pointer',
@@ -146,8 +146,8 @@ export default function Programs() {
         </div>
 
         {/* Funding Information */}
-        <section style={{ background: '#eff6ff', padding: '3rem', borderRadius: '8px', marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: '#1e40af', textAlign: 'center' }}>
+        <section style={{ background: 'var(--brand-surface)', padding: '3rem', borderRadius: '8px', marginBottom: '3rem' }}>
+          <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--brand-info)', textAlign: 'center' }}>
             Funding Options Available
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', maxWidth: '1000px', margin: '0 auto' }}>
@@ -162,7 +162,7 @@ export default function Programs() {
 
         {/* CTA Section */}
         <section style={{ textAlign: 'center', background: 'white', padding: '3rem', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-          <h2 style={{ fontSize: '2rem', marginBottom: '1rem', color: '#1f2937' }}>Ready to Start Your Journey?</h2>
+          <h2 style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--brand-text)' }}>Ready to Start Your Journey?</h2>
           <p style={{ fontSize: '1.125rem', color: '#64748b', marginBottom: '2rem', maxWidth: '600px', margin: '0 auto 2rem' }}>
             Enroll today and take the first step toward a rewarding career with industry-recognized credentials
           </p>
@@ -171,7 +171,7 @@ export default function Programs() {
               to="/student"
               style={{
                 padding: '1rem 2rem',
-                backgroundColor: '#1e40af',
+                backgroundColor: 'var(--brand-info)',
                 color: 'white',
                 textDecoration: 'none',
                 borderRadius: '6px',
@@ -186,12 +186,12 @@ export default function Programs() {
               style={{
                 padding: '1rem 2rem',
                 backgroundColor: 'white',
-                color: '#1e40af',
+                color: 'var(--brand-info)',
                 textDecoration: 'none',
                 borderRadius: '6px',
                 fontWeight: '600',
                 fontSize: '1.125rem',
-                border: '2px solid #1e40af'
+                border: '2px solid var(--brand-info)'
               }}
             >
               Contact Admissions
@@ -224,19 +224,19 @@ function ProgramCard({ program }) {
     }}
     >
       <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>{program.icon}</div>
-      <h3 style={{ fontSize: '1.5rem', marginBottom: '0.75rem', color: '#1f2937' }}>{program.name}</h3>
+      <h3 style={{ fontSize: '1.5rem', marginBottom: '0.75rem', color: 'var(--brand-text)' }}>{program.name}</h3>
       <p style={{ color: '#64748b', marginBottom: '1rem', lineHeight: '1.6', flexGrow: 1 }}>
         {program.description}
       </p>
       
       <div style={{ marginBottom: '1rem' }}>
-        <div style={{ fontSize: '0.875rem', fontWeight: '600', color: '#1f2937', marginBottom: '0.5rem' }}>
+        <div style={{ fontSize: '0.875rem', fontWeight: '600', color: 'var(--brand-text)', marginBottom: '0.5rem' }}>
           ⏱️ Duration: {program.duration}
         </div>
       </div>
 
       <div style={{ marginBottom: '1rem' }}>
-        <div style={{ fontSize: '0.875rem', fontWeight: '600', color: '#1f2937', marginBottom: '0.5rem' }}>
+        <div style={{ fontSize: '0.875rem', fontWeight: '600', color: 'var(--brand-text)', marginBottom: '0.5rem' }}>
           Credentials Earned:
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
@@ -256,7 +256,7 @@ function ProgramCard({ program }) {
       </div>
 
       <div style={{ marginBottom: '1.5rem' }}>
-        <div style={{ fontSize: '0.875rem', fontWeight: '600', color: '#1f2937', marginBottom: '0.5rem' }}>
+        <div style={{ fontSize: '0.875rem', fontWeight: '600', color: 'var(--brand-text)', marginBottom: '0.5rem' }}>
           Funding Available:
         </div>
         <div style={{ fontSize: '0.875rem', color: '#64748b' }}>
@@ -270,7 +270,7 @@ function ProgramCard({ program }) {
           display: 'block',
           textAlign: 'center',
           padding: '0.75rem',
-          backgroundColor: '#1e40af',
+          backgroundColor: 'var(--brand-info)',
           color: 'white',
           textDecoration: 'none',
           borderRadius: '6px',
@@ -289,7 +289,7 @@ function FundingBadge({ name, description }) {
       <div style={{ 
         fontWeight: '700', 
         fontSize: '1.25rem', 
-        color: '#1e40af',
+        color: 'var(--brand-info)',
         marginBottom: '0.25rem'
       }}>
         {name}

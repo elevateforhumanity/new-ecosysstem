@@ -320,10 +320,10 @@ export class ComplianceAutomation {
     const banner = document.createElement('div');
     banner.className = 'cookie-consent';
     banner.innerHTML = `
-      <div style="position: fixed; bottom: 0; left: 0; right: 0; background: #1f2937; color: white; padding: 1rem; z-index: 9999;">
+      <div style="position: fixed; bottom: 0; left: 0; right: 0; background: var(--brand-text); color: white; padding: 1rem; z-index: 9999;">
         <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
           <p>We use cookies to improve your experience and comply with FERPA, GDPR, and CCPA regulations.</p>
-          <button onclick="this.parentElement.parentElement.remove(); localStorage.setItem('cookie-consent', 'true');" style="background: #3b82f6; color: white; padding: 0.5rem 1rem; border: none; border-radius: 0.375rem; cursor: pointer;">
+          <button onclick="this.parentElement.parentElement.remove(); localStorage.setItem('cookie-consent', 'true');" style="background: var(--brand-info); color: white; padding: 0.5rem 1rem; border: none; border-radius: 0.375rem; cursor: pointer;">
             Accept
           </button>
         </div>

@@ -131,7 +131,7 @@ export default function Programs() {
               <h1 className="text-3xl font-bold text-gray-900">Elevate Learn2Earn Workforce Programs</h1>
               <p className="text-gray-600 mt-2">Federal DOL/DWD compliant training programs with guaranteed job placement support</p>
             </div>
-            <div className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">
+            <div className="bg-brand-surface text-brand-success px-4 py-2 rounded-full text-sm font-medium">
               💰 Federal Funding Available
             </div>
           </div>
@@ -148,7 +148,7 @@ export default function Programs() {
                 onClick={() => setSelectedCategory(category.id)}
                 className={`whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   selectedCategory === category.id
-                    ? "bg-blue-600 text-white"
+                    ? "bg-brand-info text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
@@ -175,11 +175,11 @@ export default function Programs() {
               {/* Program Details */}
               <div className="p-6">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded">
+                  <span className="bg-brand-surface text-brand-info text-xs font-medium px-2 py-1 rounded">
                     {program.category.toUpperCase()}
                   </span>
                   {program.federalFunding && (
-                    <span className="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded">
+                    <span className="bg-brand-surface text-brand-success text-xs font-medium px-2 py-1 rounded">
                       Federal Funding
                     </span>
                   )}
@@ -239,7 +239,7 @@ export default function Programs() {
                 <div className="space-y-2">
                   <Link 
                     href={`/programs/${program.id}`}
-                    className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors text-center block"
+                    className="w-full bg-brand-info text-white py-2 px-4 rounded-lg hover:bg-brand-info-hover transition-colors text-center block"
                   >
                     View Program Details
                   </Link>

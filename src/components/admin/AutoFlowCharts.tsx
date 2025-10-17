@@ -31,7 +31,7 @@ export function AutoFlowCharts() {
           { stage: 'Enrolled', count: 95, percentage: 63 },
           { stage: 'Started Classes', count: 88, percentage: 59 }
         ],
-        chartConfig: { color: '#3b82f6' }
+        chartConfig: { color: 'var(--brand-info)' }
       },
       {
         type: 'retention',
@@ -41,7 +41,7 @@ export function AutoFlowCharts() {
           { program: 'IT Support', enrolled: 28, retained: 24, rate: 86 },
           { program: 'HVAC Tech', enrolled: 25, retained: 23, rate: 92 }
         ],
-        chartConfig: { color: '#059669' }
+        chartConfig: { color: 'var(--brand-success)' }
       },
       {
         type: 'completion',
@@ -52,7 +52,7 @@ export function AutoFlowCharts() {
           { month: 'Mar', completed: 22, total: 25, rate: 88 },
           { month: 'Apr', completed: 16, total: 18, rate: 89 }
         ],
-        chartConfig: { color: '#dc2626' }
+        chartConfig: { color: 'var(--brand-danger)' }
       },
       {
         type: 'attrition',
@@ -62,7 +62,7 @@ export function AutoFlowCharts() {
           { risk: 'Medium Risk', count: 20, percentage: 27 },
           { risk: 'High Risk', count: 10, percentage: 13 }
         ],
-        chartConfig: { color: '#f59e0b' }
+        chartConfig: { color: 'var(--brand-warning)' }
       }
     ];
 
@@ -135,7 +135,7 @@ export function AutoFlowCharts() {
         {data.map((month, index) => (
           <div key={index} className="text-center">
             <div className="mb-2">
-              <div className="w-16 h-16 mx-auto bg-red-100 rounded-full flex items-center justify-center">
+              <div className="w-16 h-16 mx-auto bg-brand-surface rounded-full flex items-center justify-center">
                 <span className="text-2xl font-bold text-red-600">{month.rate}%</span>
               </div>
             </div>
@@ -187,7 +187,7 @@ export function AutoFlowCharts() {
         <button
           onClick={generateAutoFlowCharts}
           disabled={isGenerating}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+          className="bg-brand-info text-white px-4 py-2 rounded-lg hover:bg-brand-info-hover disabled:opacity-50"
         >
           {isGenerating ? '🔄 Generating...' : '🔄 Refresh Charts'}
         </button>

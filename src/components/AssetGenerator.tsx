@@ -207,7 +207,7 @@ export default function AssetGenerator() {
                   {currentAssetType.examples.map((example, i) => (
                     <button
                       key={i}
-                      className="text-xs text-blue-600 hover:text-blue-800 block mb-1"
+                      className="text-xs text-blue-600 hover:text-brand-info block mb-1"
                       onClick={() => setContent(example)}
                     >
                       • {example}
@@ -221,7 +221,7 @@ export default function AssetGenerator() {
             <button
               onClick={generateAsset}
               disabled={loading || !content}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+              className="w-full bg-brand-info hover:bg-brand-info-hover text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <span className="flex items-center justify-center">
@@ -258,7 +258,7 @@ export default function AssetGenerator() {
               <button
                 onClick={saveAsset}
                 disabled={saving}
-                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors disabled:bg-gray-400"
+                className="w-full bg-brand-success hover:bg-brand-success-hover text-white font-semibold py-2 px-4 rounded-lg transition-colors disabled:bg-gray-400"
               >
                 {saving ? 'Saving...' : 'Save Asset'}
               </button>
@@ -277,7 +277,7 @@ export default function AssetGenerator() {
 
               <div className="p-6">
                 <div className="mb-4">
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                  <span className="px-3 py-1 bg-brand-surface text-brand-info rounded-full text-sm">
                     {generatedAsset.dimensions}
                   </span>
                 </div>

@@ -28,7 +28,7 @@ export default function ProfessionalSite() {
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 activeTab === 'enrollment' 
                   ? 'bg-blue-800 text-white' 
-                  : 'bg-gray-100 text-gray-700 hover:bg-blue-600 hover:text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-brand-info hover:text-white'
               }`}
             >
               📝 Enrollment
@@ -38,7 +38,7 @@ export default function ProfessionalSite() {
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 activeTab === 'dashboard' 
                   ? 'bg-blue-800 text-white' 
-                  : 'bg-gray-100 text-gray-700 hover:bg-blue-600 hover:text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-brand-info hover:text-white'
               }`}
             >
               📊 Dashboard
@@ -48,7 +48,7 @@ export default function ProfessionalSite() {
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 activeTab === 'courses' 
                   ? 'bg-blue-800 text-white' 
-                  : 'bg-gray-100 text-gray-700 hover:bg-blue-600 hover:text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-brand-info hover:text-white'
               }`}
             >
               📚 My Courses
@@ -58,7 +58,7 @@ export default function ProfessionalSite() {
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 activeTab === 'certificates' 
                   ? 'bg-blue-800 text-white' 
-                  : 'bg-gray-100 text-gray-700 hover:bg-blue-600 hover:text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-brand-info hover:text-white'
               }`}
             >
               🏆 Certificates
@@ -68,7 +68,7 @@ export default function ProfessionalSite() {
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 activeTab === 'profile' 
                   ? 'bg-blue-800 text-white' 
-                  : 'bg-gray-100 text-gray-700 hover:bg-blue-600 hover:text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-brand-info hover:text-white'
               }`}
             >
               👤 Profile
@@ -78,7 +78,7 @@ export default function ProfessionalSite() {
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 activeTab === 'support' 
                   ? 'bg-blue-800 text-white' 
-                  : 'bg-gray-100 text-gray-700 hover:bg-blue-600 hover:text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-brand-info hover:text-white'
               }`}
             >
               💬 Support
@@ -165,13 +165,13 @@ export default function ProfessionalSite() {
         {/* Dashboard Tab */}
         {activeTab === 'dashboard' && (
           <div>
-            <div className="bg-green-50 border border-green-200 text-green-800 p-4 rounded-lg mb-8">
+            <div className="bg-green-50 border border-green-200 text-brand-success p-4 rounded-lg mb-8">
               <strong>Welcome back, Student!</strong> You have 2 active courses and 1 completed certification.
             </div>
             
             <div className="grid md:grid-cols-2 gap-8 mb-8">
               <div className="bg-gray-50 border border-gray-200 rounded-xl p-6">
-                <h3 className="text-xl font-semibold text-blue-800 mb-4">Overall Progress</h3>
+                <h3 className="text-xl font-semibold text-brand-info mb-4">Overall Progress</h3>
                 <div className="bg-gray-200 rounded-full h-5 mb-3 overflow-hidden">
                   <div className="bg-gradient-to-r from-green-600 to-green-500 h-full rounded-full" style={{width: '68%'}}></div>
                 </div>
@@ -179,7 +179,7 @@ export default function ProfessionalSite() {
               </div>
               
               <div className="bg-gray-50 border border-gray-200 rounded-xl p-6">
-                <h3 className="text-xl font-semibold text-blue-800 mb-4">Quick Stats</h3>
+                <h3 className="text-xl font-semibold text-brand-info mb-4">Quick Stats</h3>
                 <p className="text-gray-700"><strong>Enrolled Courses:</strong> 3</p>
                 <p className="text-gray-700"><strong>Completed:</strong> 1</p>
                 <p className="text-gray-700"><strong>Certificates Earned:</strong> 1</p>
@@ -206,22 +206,22 @@ export default function ProfessionalSite() {
             
             <div className="bg-gray-50 border border-gray-200 rounded-xl p-6">
               <div className="flex justify-between items-start mb-4">
-                <h3 className="text-xl font-semibold text-blue-800">CPR & OSHA Safety Technician</h3>
-                <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">Completed</span>
+                <h3 className="text-xl font-semibold text-brand-info">CPR & OSHA Safety Technician</h3>
+                <span className="bg-brand-surface text-brand-success px-3 py-1 rounded-full text-sm font-semibold">Completed</span>
               </div>
               <div className="bg-gray-200 rounded-full h-5 mb-3 overflow-hidden">
                 <div className="bg-gradient-to-r from-green-600 to-green-500 h-full rounded-full" style={{width: '100%'}}></div>
               </div>
               <p className="text-gray-700 mb-2"><strong>Completion Date:</strong> February 28, 2024</p>
               <p className="text-gray-700 mb-4"><strong>Grade:</strong> 94% (Pass)</p>
-              <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-semibold transition">
+              <button className="bg-brand-success hover:bg-brand-success-hover text-white px-6 py-2 rounded-lg font-semibold transition">
                 View Certificate
               </button>
             </div>
             
             <div className="bg-gray-50 border border-gray-200 rounded-xl p-6">
               <div className="flex justify-between items-start mb-4">
-                <h3 className="text-xl font-semibold text-blue-800">Microsoft Office Specialist</h3>
+                <h3 className="text-xl font-semibold text-brand-info">Microsoft Office Specialist</h3>
                 <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold">In Progress</span>
               </div>
               <div className="bg-gray-200 rounded-full h-5 mb-3 overflow-hidden">
@@ -237,7 +237,7 @@ export default function ProfessionalSite() {
             
             <div className="bg-gray-50 border border-gray-200 rounded-xl p-6">
               <div className="flex justify-between items-start mb-4">
-                <h3 className="text-xl font-semibold text-blue-800">OSHA 10 Hour Certification</h3>
+                <h3 className="text-xl font-semibold text-brand-info">OSHA 10 Hour Certification</h3>
                 <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold">In Progress</span>
               </div>
               <div className="bg-gray-200 rounded-full h-5 mb-3 overflow-hidden">
@@ -264,10 +264,10 @@ export default function ProfessionalSite() {
               <p className="text-gray-700 mb-2"><strong>Expires:</strong> February 28, 2026</p>
               <p className="text-gray-700 mb-6"><strong>Certificate ID:</strong> EFH-CPR-2024-001247</p>
               <div className="flex gap-4 justify-center">
-                <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition">
+                <button className="bg-brand-success hover:bg-brand-success-hover text-white px-6 py-3 rounded-lg font-semibold transition">
                   Download PDF
                 </button>
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition">
+                <button className="bg-brand-info hover:bg-brand-info-hover text-white px-6 py-3 rounded-lg font-semibold transition">
                   Share Certificate
                 </button>
               </div>
@@ -305,7 +305,7 @@ export default function ProfessionalSite() {
             <h2 className="text-3xl font-bold mb-6">💬 Support</h2>
             <div className="space-y-6">
               <div className="bg-blue-50 border border-blue-200 p-6 rounded-lg">
-                <h3 className="text-xl font-semibold text-blue-800 mb-2">Need Help?</h3>
+                <h3 className="text-xl font-semibold text-brand-info mb-2">Need Help?</h3>
                 <p className="text-gray-700 mb-4">Our support team is here to assist you Monday-Friday, 9 AM - 5 PM EST</p>
                 <p className="text-gray-700"><strong>Email:</strong> support@elevateforhumanity.org</p>
                 <p className="text-gray-700"><strong>Phone:</strong> (555) 123-4567</p>

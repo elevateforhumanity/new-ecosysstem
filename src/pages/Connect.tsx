@@ -210,7 +210,7 @@ export default function Connect() {
                 <p className="text-sm text-green-600 font-medium">{job.salary}</p>
                 <div className="flex flex-wrap gap-1 mt-2">
                   {job.skills.slice(0, 3).map((skill, index) => (
-                    <span key={index} className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+                    <span key={index} className="bg-brand-surface text-brand-info text-xs px-2 py-1 rounded">
                       {skill}
                     </span>
                   ))}
@@ -244,7 +244,7 @@ export default function Connect() {
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-2">
                       <h3 className="text-lg font-medium text-gray-900">{event.title}</h3>
-                      <span className="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded">
+                      <span className="bg-brand-surface text-brand-info text-sm px-2 py-1 rounded">
                         {event.type}
                       </span>
                     </div>
@@ -264,7 +264,7 @@ export default function Connect() {
                       </div>
                     </div>
                   </div>
-                  <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                  <button className="bg-brand-info text-white px-4 py-2 rounded-lg hover:bg-brand-info-hover transition-colors">
                     Register
                   </button>
                 </div>
@@ -294,7 +294,7 @@ export default function Connect() {
                     <div className="flex items-center space-x-3 mb-2">
                       <h3 className="text-lg font-medium text-gray-900">{job.title}</h3>
                       {job.matched && (
-                        <span className="bg-green-100 text-green-800 text-sm px-2 py-1 rounded">
+                        <span className="bg-brand-surface text-brand-success text-sm px-2 py-1 rounded">
                           Great Match
                         </span>
                       )}
@@ -309,7 +309,7 @@ export default function Connect() {
                     </div>
                     <div className="flex flex-wrap gap-2 mb-3">
                       {job.skills.map((skill, index) => (
-                        <span key={index} className="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded">
+                        <span key={index} className="bg-brand-surface text-brand-info text-sm px-2 py-1 rounded">
                           {skill}
                         </span>
                       ))}
@@ -320,7 +320,7 @@ export default function Connect() {
                     <button className="bg-white text-blue-600 border border-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors">
                       Learn More
                     </button>
-                    <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    <button className="bg-brand-info text-white px-4 py-2 rounded-lg hover:bg-brand-info-hover transition-colors">
                       Apply Now
                     </button>
                   </div>
@@ -365,7 +365,7 @@ export default function Connect() {
                   <p className="text-sm text-gray-600 mb-2">Expertise:</p>
                   <div className="flex flex-wrap gap-1">
                     {mentor.expertise.map((skill, index) => (
-                      <span key={index} className="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">
+                      <span key={index} className="bg-brand-surface text-brand-secondary text-xs px-2 py-1 rounded">
                         {skill}
                       </span>
                     ))}
@@ -375,7 +375,7 @@ export default function Connect() {
                 <button 
                   className={`w-full py-2 px-4 rounded-lg transition-colors ${
                     mentor.available 
-                      ? 'bg-purple-600 text-white hover:bg-purple-700' 
+                      ? 'bg-brand-secondary text-white hover:bg-brand-secondary-hover' 
                       : 'bg-gray-100 text-gray-500 cursor-not-allowed'
                   }`}
                   disabled={!mentor.available}
@@ -408,7 +408,7 @@ export default function Connect() {
               <p className="text-gray-600 mt-1">Network with peers, find opportunities, and advance your career</p>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
+              <div className="bg-brand-surface text-brand-success px-3 py-1 rounded-full text-sm">
                 ✅ {communityStats.activeToday} Active Today
               </div>
             </div>

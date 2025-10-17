@@ -80,6 +80,12 @@
     "brand:guard": "node tools/brand-guard.cjs",
     "polish:check": "npm run lint:brand && npm run brand:guard",
     "polish:fix": "npm run fix:brand",
+    "tokens:guard": "node tools/brand-guard.cjs",
+    "sitemap:gen": "node tools/sitemap-gen.cjs",
+    "robots:gen": "node tools/robots-gen.cjs",
+    "autopilot:fix": "npm run format && npm run fix:brand && npm run sitemap:gen && npm run robots:gen && npm run tokens:guard && echo '✅ Auto-fixes complete'",
+    "autopilot:check": "npm run lint && npm run typecheck && npm run tokens:guard && npm run build && echo '✅ All checks passed'",
+    "autopilot:prepush": "npm run lint && npm run typecheck && npm run tokens:guard && echo '✅ Pre-push checks passed'",
     "clean": "rimraf dist coverage .cache"
   }
 }

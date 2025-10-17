@@ -1,23 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap>
-    <loc>https://elevateforhumanity.pages.dev/sitemaps/sitemap-main.xml</loc>
-    <lastmod>2025-10-16</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://elevateforhumanity.pages.dev/sitemaps/sitemap-programs.xml</loc>
-    <lastmod>2025-10-16</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://elevateforhumanity.pages.dev/sitemaps/sitemap-government.xml</loc>
-    <lastmod>2025-10-16</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://elevateforhumanity.pages.dev/sitemaps/sitemap-philanthropy.xml</loc>
-    <lastmod>2025-10-16</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://elevateforhumanity.pages.dev/sitemaps/sitemap-blog.xml</loc>
-    <lastmod>2025-10-16</lastmod>
-  </sitemap>
-</sitemapindex>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://elevateforhumanity.pages.dev/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://elevateforhumanity.pages.dev/programs</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://elevateforhumanity.pages.dev/lms</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://elevateforhumanity.pages.dev/apply</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://elevateforhumanity.pages.dev/connect</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://elevateforhumanity.pages.dev/partners</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://elevateforhumanity.pages.dev/pay</loc><changefreq>weekly</changefreq></url>
+</urlset>

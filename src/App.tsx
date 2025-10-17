@@ -4,6 +4,12 @@ import Hero from "./components/Hero";
 import TrustStrip from "./components/TrustStrip";
 import ProgramsGrid from "./components/ProgramsGrid";
 import Testimonials from "./components/Testimonials";
+import ProgramsIndex from "./pages/ProgramsIndex";
+import ProgramPage from "./pages/ProgramPage";
+import Dashboard from "./pages/lms/Dashboard";
+import CoursesIndex from "./pages/lms/CoursesIndex";
+import CoursePage from "./pages/lms/CoursePage";
+import LessonPage from "./pages/lms/LessonPage";
 
 function HomePage() {
   return (
@@ -53,8 +59,12 @@ export default function App() {
       <SiteLayout>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/programs" element={<SimplePage title="Programs" />} />
-          <Route path="/lms" element={<SimplePage title="LMS" />} />
+          <Route path="/programs" element={<ProgramsIndex />} />
+          <Route path="/programs/:slug" element={<ProgramPage />} />
+          <Route path="/lms" element={<Dashboard />} />
+          <Route path="/lms/courses" element={<CoursesIndex />} />
+          <Route path="/lms/course/:courseId" element={<CoursePage />} />
+          <Route path="/lms/lesson/:lessonId" element={<LessonPage />} />
           <Route path="/partners" element={<SimplePage title="Partners" />} />
           <Route path="/apply" element={<SimplePage title="Apply Now" />} />
           <Route path="*" element={<SimplePage title="Not Found" />} />

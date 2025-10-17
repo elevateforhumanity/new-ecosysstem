@@ -22,6 +22,8 @@ import "./styles/responsive.css";
 const HomePage = lazy(() => import("./pages/HomePage"));
 const FullSailLanding = lazy(() => import("./pages/FullSailLanding"));
 const ProfessionalHome = lazy(() => import("./pages/ProfessionalHome"));
+const StudentPortalLMS = lazy(() => import("./pages/StudentPortalLMS"));
+const TestPage = lazy(() => import("./pages/TestPage"));
 const Government = lazy(() => import("./pages/Government"));
 const Philanthropy = lazy(() => import("./pages/Philanthropy"));
 const Compliance = lazy(() => import("./pages/Compliance"));
@@ -171,8 +173,10 @@ export default function App() {
               <Suspense fallback={<div style={{ padding: 40 }}>Loading...</div>}>
                 <NavBar />
                 <Routes>
-                <Route path="/" element={<FullSailLanding />} />
+                <Route path="/" element={<StudentPortalLMS />} />
+                <Route path="/test" element={<TestPage />} />
                 <Route path="/home" element={<HomePage />} />
+                <Route path="/fullsail" element={<FullSailLanding />} />
                 <Route path="/professional" element={<ProfessionalHome />} />
                 <Route path="/government" element={<Government />} />
                 <Route path="/philanthropy" element={<Philanthropy />} />

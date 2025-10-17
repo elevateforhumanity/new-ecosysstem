@@ -10,20 +10,34 @@
 :root {
   /* === EFH Primary Brand Colors === */
   --brand-primary: #4D4B37;      /* Olive/Brown - Main brand color */
+  --brand-primary-hover: #3a3629;    /* Darker olive - Hover state */
+  --brand-primary-active: #2d2a1f;   /* Even darker - Active/pressed state */
+  
   --brand-secondary: #6B6847;    /* Lighter Olive - Secondary actions */
+  --brand-secondary-hover: #5a5738;  /* Darker secondary */
+  
   --brand-accent: #f59e0b;       /* Amber - Highlights & badges */
   --brand-muted: #6b7280;        /* Gray - Meta text & disabled states */
   
   /* === Background Colors === */
   --brand-bg: #ffffff;           /* White - Main background */
+  --brand-bg-surface: #f8fafc;   /* Off-white - Cards & panels */
+  --brand-bg-hover: #f1f5f9;     /* Hover state for surfaces */
   --brand-surface: #f8fafc;      /* Off-white - Cards & panels */
   --brand-surface-dark: #f1f5f9; /* Slightly darker surface */
   
   /* === Semantic Colors === */
   --brand-success: #059669;      /* Green - Success states */
+  --brand-success-hover: #047857;    /* Darker green */
+  
   --brand-info: #1e40af;         /* Blue - Info & links */
+  --brand-info-hover: #1e3a8a;       /* Darker blue */
+  
   --brand-warning: #f59e0b;      /* Amber - Warnings */
+  --brand-warning-hover: #d97706;    /* Darker amber */
+  
   --brand-danger: #ef4444;       /* Red - Errors & destructive actions */
+  --brand-danger-hover: #dc2626;     /* Darker red */
   
   /* === Text Colors === */
   --brand-text: #000000;         /* Black - Primary text */
@@ -33,11 +47,12 @@
   /* === Interactive States === */
   --brand-hover: #3a3629;        /* Darker olive - Hover state */
   --brand-active: #2d2a1f;       /* Even darker - Active/pressed state */
-  --brand-focus: #4D4B37;        /* Primary - Focus ring */
+  --brand-focus: rgba(77, 75, 55, 0.2);  /* Primary - Focus ring with transparency */
   
   /* === Borders === */
   --brand-border: #e5e7eb;       /* Light gray - Default borders */
   --brand-border-dark: #d1d5db;  /* Medium gray - Emphasized borders */
+  --brand-border-light: #f3f4f6; /* Very light gray */
   
   /* === Gradients === */
   --brand-gradient-primary: linear-gradient(135deg, #4D4B37 0%, #6B6847 100%);

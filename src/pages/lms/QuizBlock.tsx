@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { supa } from "../../services/supa";
+import { useEffect, useState } from 'react';
+import { supa } from '../../services/supa';
 
 export default function QuizBlock({ lessonId }: { lessonId: string }) {
   const [q, setQ] = useState<any[]>([]);
@@ -8,21 +8,21 @@ export default function QuizBlock({ lessonId }: { lessonId: string }) {
 
   useEffect(() => {
     supa
-      .from("quiz_questions")
-      .select("id, prompt, options")
-      .eq("lesson_id", lessonId)
+      .from('quiz_questions')
+      .select('id, prompt, options')
+      .eq('lesson_id', lessonId)
       .then(({ data }) => setQ(data || []));
   }, [lessonId]);
 
   async function submit() {
     const user = (await supa.auth.getUser()).data.user;
-    if (!user) return alert("Sign in required");
+    if (!user) return alert('Sign in required');
     const payload = Object.entries(a).map(([question_id, answer]) => ({
       question_id,
       user_id: user.id,
       answer,
     }));
-    const { error } = await supa.from("quiz_responses").insert(payload);
+    const { error } = await supa.from('quiz_responses').insert(payload);
     if (error) return alert(error.message);
     setSubmitted(true);
   }
@@ -53,7 +53,7 @@ export default function QuizBlock({ lessonId }: { lessonId: string }) {
         </div>
       ))}
       <button onClick={submit} className="btn mt-4" disabled={submitted}>
-        {submitted ? "Submitted" : "Submit"}
+        {submitted ? 'Submitted' : 'Submit'}
       </button>
     </div>
   );

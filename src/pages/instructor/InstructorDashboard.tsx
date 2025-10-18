@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { supa } from "../../services/supa";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { supa } from '../../services/supa';
 
 export default function InstructorDashboard() {
   const [courses, setCourses] = useState<any[]>([]);
@@ -13,9 +13,9 @@ export default function InstructorDashboard() {
   async function loadData() {
     // Load instructor's courses
     const { data: coursesData } = await supa
-      .from("courses")
-      .select("*, lessons(count)")
-      .order("title");
+      .from('courses')
+      .select('*, lessons(count)')
+      .order('title');
 
     setCourses(coursesData || []);
 
@@ -74,7 +74,10 @@ export default function InstructorDashboard() {
           <h2 className="text-xl font-semibold">Your Courses</h2>
           <div className="mt-4 space-y-3">
             {courses.map((course) => (
-              <div key={course.id} className="card p-5 flex items-center justify-between">
+              <div
+                key={course.id}
+                className="card p-5 flex items-center justify-between"
+              >
                 <div>
                   <div className="text-xs text-slate-500">{course.code}</div>
                   <div className="font-semibold">{course.title}</div>

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
-import { getCurrentUser, type User } from "../../services/auth";
+import { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import { getCurrentUser, type User } from '../../services/auth';
 
 type Props = {
   children: React.ReactNode;

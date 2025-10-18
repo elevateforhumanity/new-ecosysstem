@@ -1,0 +1,19 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":semanticCommits",
+    ":separateMajorReleases",
+    "group:definitelyTypedMonorepo",
+    "group:linters"
+  ],
+  "rangeStrategy": "bump",
+  "packageRules": [
+    { "matchManagers": ["github-actions"], "automerge": true },
+    { "matchDepTypes": ["devDependencies"], "groupName": "dev tools" },
+    {
+      "matchPackagePatterns": ["^vite$", "^react", "^react-router"],
+      "stabilityDays": 5
+    }
+  ]
+}

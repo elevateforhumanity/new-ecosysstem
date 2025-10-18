@@ -12,11 +12,13 @@ export default function DurableLanding() {
             Build the foundational skills that employers value most
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-3 gap-8 mt-12">
           <div className="bg-white p-8 rounded-lg shadow-lg">
             <h3 className="text-2xl font-bold mb-4">Communication</h3>
-            <p className="text-gray-600">Master professional communication skills</p>
+            <p className="text-gray-600">
+              Master professional communication skills
+            </p>
           </div>
           <div className="bg-white p-8 rounded-lg shadow-lg">
             <h3 className="text-2xl font-bold mb-4">Problem Solving</h3>

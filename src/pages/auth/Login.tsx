@@ -1,23 +1,23 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { signIn, signInWithMagicLink } from "../../services/auth";
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { signIn, signInWithMagicLink } from '../../services/auth';
 
 export default function Login() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [magicLinkSent, setMagicLinkSent] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setError("");
+    setError('');
     setLoading(true);
 
     try {
       await signIn(email, password);
-      navigate("/lms");
+      navigate('/lms');
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -27,11 +27,11 @@ export default function Login() {
 
   async function handleMagicLink() {
     if (!email) {
-      setError("Please enter your email");
+      setError('Please enter your email');
       return;
     }
 
-    setError("");
+    setError('');
     setLoading(true);
 
     try {
@@ -100,9 +100,7 @@ export default function Login() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">
-                Password
-              </label>
+              <label className="block text-sm font-medium mb-1">Password</label>
               <input
                 type="password"
                 value={password}
@@ -113,12 +111,8 @@ export default function Login() {
               />
             </div>
 
-            <button
-              type="submit"
-              className="btn w-full"
-              disabled={loading}
-            >
-              {loading ? "Signing you in..." : "Sign In →"}
+            <button type="submit" className="btn w-full" disabled={loading}>
+              {loading ? 'Signing you in...' : 'Sign In →'}
             </button>
           </form>
 
@@ -136,7 +130,7 @@ export default function Login() {
             <Link to="/auth/forgot-password" className="hover:text-brand-600">
               Forgot password?
             </Link>
-            {" · "}
+            {' · '}
             <Link to="/auth/signup" className="hover:text-brand-600">
               Create account
             </Link>

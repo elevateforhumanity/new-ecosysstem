@@ -11,6 +11,7 @@ Complete authentication system, instructor dashboard, and certificate generation
 ### 1. Authentication System 🔐
 
 **Auth Service** (`src/services/auth.ts`)
+
 - Sign up with email/password
 - Sign in with email/password
 - Magic link authentication (passwordless)
@@ -19,11 +20,13 @@ Complete authentication system, instructor dashboard, and certificate generation
 - Auth state change listener
 
 **Auth Pages:**
+
 - `/auth/login` - Login with password or magic link
 - `/auth/signup` - Create new account
 - `/auth/forgot-password` - Reset password
 
 **Protected Routes:**
+
 - `<ProtectedRoute>` component for authenticated-only pages
 - Role-based access control (student, instructor, admin)
 - Automatic redirect to login if not authenticated
@@ -31,6 +34,7 @@ Complete authentication system, instructor dashboard, and certificate generation
 ### 2. Instructor Tools 👨‍🏫
 
 **Instructor Dashboard** (`/instructor`)
+
 - View all courses
 - Course statistics (courses, lessons, students)
 - Create new courses
@@ -38,12 +42,14 @@ Complete authentication system, instructor dashboard, and certificate generation
 - Manage lessons
 
 **Course Editor** (`/instructor/course/:id/edit`)
+
 - Create/edit course details
 - Set course code, title, summary
 - Link to program
 - Form validation
 
 **Lesson Manager** (`/instructor/course/:id/lessons`)
+
 - View all lessons for a course
 - Add new lessons
 - Set lesson title, video URL, HTML content
@@ -54,6 +60,7 @@ Complete authentication system, instructor dashboard, and certificate generation
 ### 3. Certificate System 🎓
 
 **Certificate Service** (`src/services/certificates.ts`)
+
 - Check course completion (100% on all lessons)
 - Auto-generate certificates on completion
 - Unique certificate numbers (EFH-timestamp-random)
@@ -61,11 +68,13 @@ Complete authentication system, instructor dashboard, and certificate generation
 - Verify certificate authenticity
 
 **Certificate Pages:**
+
 - `/certificates` - My certificates list
 - `/certificate/:id` - View/print certificate
 - `/verify` - Verify certificate by number
 
 **Certificate Features:**
+
 - Professional certificate design
 - Print-friendly layout
 - QR code ready (future enhancement)
@@ -79,12 +88,14 @@ Complete authentication system, instructor dashboard, and certificate generation
 ### New Tables:
 
 **profiles**
+
 - Extends `auth.users` with role
 - Fields: id, email, role (student/instructor/admin)
 - Auto-created on user signup via trigger
 - RLS: Public read, users can update own
 
 **certificates**
+
 - Certificate records
 - Fields: user_id, course_id, certificate_number, issued_at
 - Unique constraint: one certificate per user per course
@@ -93,11 +104,13 @@ Complete authentication system, instructor dashboard, and certificate generation
 ### Functions:
 
 **handle_new_user()**
+
 - Trigger function
 - Auto-creates profile when user signs up
 - Sets default role to 'student'
 
 **check_course_completion()**
+
 - Checks if user completed all lessons (100% progress)
 - Returns boolean
 - Used before issuing certificates
@@ -136,25 +149,28 @@ supabase/
 ## Routes Added
 
 ### Auth Routes (Public)
-| Route | Component | Description |
-|-------|-----------|-------------|
-| `/auth/login` | Login | Email/password or magic link |
-| `/auth/signup` | Signup | Create account |
-| `/auth/forgot-password` | ForgotPassword | Reset password |
+
+| Route                   | Component      | Description                  |
+| ----------------------- | -------------- | ---------------------------- |
+| `/auth/login`           | Login          | Email/password or magic link |
+| `/auth/signup`          | Signup         | Create account               |
+| `/auth/forgot-password` | ForgotPassword | Reset password               |
 
 ### Instructor Routes (Protected - Instructor Role)
-| Route | Component | Description |
-|-------|-----------|-------------|
-| `/instructor` | InstructorDashboard | Instructor home |
-| `/instructor/course/:id/edit` | CourseEditor | Create/edit course |
-| `/instructor/course/:id/lessons` | LessonManager | Manage lessons |
+
+| Route                            | Component           | Description        |
+| -------------------------------- | ------------------- | ------------------ |
+| `/instructor`                    | InstructorDashboard | Instructor home    |
+| `/instructor/course/:id/edit`    | CourseEditor        | Create/edit course |
+| `/instructor/course/:id/lessons` | LessonManager       | Manage lessons     |
 
 ### Certificate Routes
-| Route | Component | Description |
-|-------|-----------|-------------|
-| `/certificates` | MyCertificates | User's certificates (protected) |
-| `/certificate/:id` | CertificatePage | View certificate (public) |
-| `/verify` | VerifyCertificate | Verify certificate (public) |
+
+| Route              | Component         | Description                     |
+| ------------------ | ----------------- | ------------------------------- |
+| `/certificates`    | MyCertificates    | User's certificates (protected) |
+| `/certificate/:id` | CertificatePage   | View certificate (public)       |
+| `/verify`          | VerifyCertificate | Verify certificate (public)     |
 
 ---
 
@@ -163,11 +179,13 @@ supabase/
 ### 1. Run Part 2 Migration
 
 Open Supabase SQL Editor and run:
+
 ```bash
 supabase/migrations/002_auth_instructor_certificates.sql
 ```
 
 This will:
+
 - Create `profiles` and `certificates` tables
 - Set up RLS policies
 - Create trigger for auto-profile creation
@@ -183,17 +201,20 @@ This will:
 ### 3. Create Instructor Account
 
 **Option A: Via Supabase Dashboard**
+
 1. Go to Authentication → Users
 2. Click "Add user"
 3. Enter email and password
 4. After creation, go to SQL Editor:
+
 ```sql
-UPDATE profiles 
-SET role = 'instructor' 
+UPDATE profiles
+SET role = 'instructor'
 WHERE email = 'instructor@example.com';
 ```
 
 **Option B: Via Signup Page**
+
 1. Visit `/auth/signup`
 2. Create account
 3. Update role in database as above
@@ -209,12 +230,14 @@ WHERE email = 'instructor@example.com';
 
 1. Complete all lessons in a course (view each lesson)
 2. Run in Supabase SQL Editor:
+
 ```sql
 SELECT check_course_completion(
   'user-uuid-here',
   'course-uuid-here'
 );
 ```
+
 3. If true, certificate can be generated
 4. Visit `/certificates` to see earned certificates
 
@@ -239,6 +262,7 @@ dist/assets/index-CGm6skDC.js    407.39 kB │ gzip: 108.83 kB
 ## Security Features
 
 ### Authentication
+
 - ✅ Secure password hashing (Supabase Auth)
 - ✅ Email verification on signup
 - ✅ Magic link authentication (passwordless)
@@ -247,6 +271,7 @@ dist/assets/index-CGm6skDC.js    407.39 kB │ gzip: 108.83 kB
 - ✅ Protected routes with role checking
 
 ### Authorization
+
 - ✅ Role-based access control (student, instructor, admin)
 - ✅ Row Level Security (RLS) on all tables
 - ✅ Users can only see their own data
@@ -254,6 +279,7 @@ dist/assets/index-CGm6skDC.js    407.39 kB │ gzip: 108.83 kB
 - ✅ Public read for catalog and certificates
 
 ### Certificates
+
 - ✅ Unique certificate numbers
 - ✅ Tamper-proof (stored in database)
 - ✅ Public verification system
@@ -265,6 +291,7 @@ dist/assets/index-CGm6skDC.js    407.39 kB │ gzip: 108.83 kB
 ## User Flows
 
 ### Student Flow
+
 1. Sign up at `/auth/signup`
 2. Verify email (check inbox)
 3. Login at `/auth/login`
@@ -277,6 +304,7 @@ dist/assets/index-CGm6skDC.js    407.39 kB │ gzip: 108.83 kB
 10. Print certificate at `/certificate/:id`
 
 ### Instructor Flow
+
 1. Admin creates instructor account
 2. Admin updates role to 'instructor'
 3. Login at `/auth/login`
@@ -287,6 +315,7 @@ dist/assets/index-CGm6skDC.js    407.39 kB │ gzip: 108.83 kB
 8. View course statistics
 
 ### Certificate Verification Flow
+
 1. Employer visits `/verify`
 2. Enters certificate number
 3. System checks database
@@ -298,6 +327,7 @@ dist/assets/index-CGm6skDC.js    407.39 kB │ gzip: 108.83 kB
 ## Future Enhancements
 
 ### Phase 3 (Suggested)
+
 - [ ] Student progress dashboard with charts
 - [ ] Course ratings and reviews
 - [ ] Discussion forums per lesson
@@ -346,23 +376,27 @@ verifyCertificate(certificateNumber: string): Promise<Certificate | null>
 ## Troubleshooting
 
 ### "Not authenticated" errors
+
 - Check if user is logged in
 - Verify Supabase auth is configured
 - Check browser console for auth errors
 - Try logging out and back in
 
 ### "Access denied" for instructor routes
+
 - Verify user role in profiles table
 - Run: `SELECT * FROM profiles WHERE id = 'user-uuid'`
 - Update role if needed: `UPDATE profiles SET role = 'instructor' WHERE id = 'user-uuid'`
 
 ### Certificate not generating
+
 - Check course completion: `SELECT check_course_completion('user-id', 'course-id')`
 - Verify all lessons have 100% progress
 - Check lesson_progress table
 - Ensure user viewed all lessons
 
 ### Magic link not working
+
 - Check email provider settings in Supabase
 - Verify email templates are configured
 - Check spam folder
@@ -373,6 +407,7 @@ verifyCertificate(certificateNumber: string): Promise<Certificate | null>
 ## Testing Checklist
 
 ### Auth
+
 - [ ] Sign up with new account
 - [ ] Verify email received
 - [ ] Login with password
@@ -382,6 +417,7 @@ verifyCertificate(certificateNumber: string): Promise<Certificate | null>
 - [ ] Protected routes redirect to login
 
 ### Instructor
+
 - [ ] Access instructor dashboard
 - [ ] Create new course
 - [ ] Edit existing course
@@ -391,6 +427,7 @@ verifyCertificate(certificateNumber: string): Promise<Certificate | null>
 - [ ] View course statistics
 
 ### Certificates
+
 - [ ] Complete all lessons in a course
 - [ ] Certificate auto-generated
 - [ ] View certificate list
@@ -400,6 +437,6 @@ verifyCertificate(certificateNumber: string): Promise<Certificate | null>
 
 ---
 
-*Generated: October 17, 2025*  
-*By: Ona AI Assistant*  
-*Status: Production-Ready*
+_Generated: October 17, 2025_  
+_By: Ona AI Assistant_  
+_Status: Production-Ready_

@@ -7,25 +7,25 @@ type Testimonial = {
 
 const TESTIMONIALS: Testimonial[] = [
   {
-    name: "Sharon P.",
-    role: "CNA Graduate",
+    name: 'Sharon P.',
+    role: 'CNA Graduate',
     quote:
-      "Elevate covered my tuition, helped with childcare, and connected me to a full-time job in 6 weeks.",
-    avatar: "/people/sharon.jpg",
+      'Elevate covered my tuition, helped with childcare, and connected me to a full-time job in 6 weeks.',
+    avatar: '/people/sharon.jpg',
   },
   {
-    name: "Marcus R.",
-    role: "Welding Apprentice",
+    name: 'Marcus R.',
+    role: 'Welding Apprentice',
     quote:
       "The lab time and OSHA-10 got me hired fast. I'm earning while I learn with a clear path to journeyman.",
-    avatar: "/people/marcus.jpg",
+    avatar: '/people/marcus.jpg',
   },
   {
-    name: "Alicia D.",
-    role: "Nail Technology",
+    name: 'Alicia D.',
+    role: 'Nail Technology',
     quote:
-      "State-board prep and salon coaching gave me clients before I graduated. The support is real.",
-    avatar: "/people/alicia.jpg",
+      'State-board prep and salon coaching gave me clients before I graduated. The support is real.',
+    avatar: '/people/alicia.jpg',
   },
 ];
 
@@ -34,7 +34,9 @@ export default function Testimonials() {
     <section className="section bg-slate-50">
       <div className="container">
         <div className="text-center">
-          <h2 className="text-2xl font-semibold">Real Stories. Real Results.</h2>
+          <h2 className="text-2xl font-semibold">
+            Real Stories. Real Results.
+          </h2>
           <p className="mt-2 text-slate-600">
             92% job placement • 1,247 trained • $2.85M in funding distributed
           </p>

@@ -1,9 +1,9 @@
 export default function TrustStrip() {
   const logos = [
-    { src: "/logos/dwd.svg", alt: "Indiana DWD" },
-    { src: "/logos/dol.svg", alt: "U.S. Department of Labor" },
-    { src: "/logos/workone.svg", alt: "WorkOne" },
-    { src: "/logos/supabase.svg", alt: "Supabase" },
+    { src: '/logos/dwd.svg', alt: 'Indiana DWD' },
+    { src: '/logos/dol.svg', alt: 'U.S. Department of Labor' },
+    { src: '/logos/workone.svg', alt: 'WorkOne' },
+    { src: '/logos/supabase.svg', alt: 'Supabase' },
   ];
 
   return (

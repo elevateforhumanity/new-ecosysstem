@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { getProgramBySlug, type Program } from "../services/programs";
-import { listCoursesByProgram, type Course } from "../services/courses";
+import { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { getProgramBySlug, type Program } from '../services/programs';
+import { listCoursesByProgram, type Course } from '../services/courses';
 
 export default function ProgramPage() {
   const { slug } = useParams();
@@ -29,7 +29,9 @@ export default function ProgramPage() {
         <div className="container max-w-2xl mx-auto">
           <div className="card p-8 text-center">
             <div className="text-4xl mb-4">😕</div>
-            <h2 className="text-2xl font-bold text-red-600">Program Not Found</h2>
+            <h2 className="text-2xl font-bold text-red-600">
+              Program Not Found
+            </h2>
             <p className="mt-2 text-slate-600">{error}</p>
             <div className="mt-6 flex gap-3 justify-center">
               <Link to="/programs" className="btn">
@@ -85,7 +87,7 @@ export default function ProgramPage() {
           </div>
           <div className="card overflow-hidden">
             <img
-              src={program.cover_url ?? "/programs/placeholder.jpg"}
+              src={program.cover_url ?? '/programs/placeholder.jpg'}
               alt={program.title}
               className="w-full h-[320px] object-cover"
             />
@@ -98,7 +100,8 @@ export default function ProgramPage() {
           <div className="text-center max-w-2xl mx-auto mb-8">
             <h2 className="text-3xl font-bold">What You'll Learn</h2>
             <p className="mt-2 text-slate-600">
-              This program includes {courses.length} course{courses.length !== 1 ? 's' : ''} designed to get you job-ready
+              This program includes {courses.length} course
+              {courses.length !== 1 ? 's' : ''} designed to get you job-ready
             </p>
           </div>
           <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -108,10 +111,14 @@ export default function ProgramPage() {
                 to={`/lms/course/${c.id}`}
                 className="card p-6 hover:shadow-lg transition-all hover:-translate-y-1"
               >
-                <div className="text-xs font-semibold text-brand-600 uppercase tracking-wide">{c.code}</div>
+                <div className="text-xs font-semibold text-brand-600 uppercase tracking-wide">
+                  {c.code}
+                </div>
                 <div className="mt-2 text-xl font-bold">{c.title}</div>
                 {c.summary && (
-                  <p className="mt-3 text-sm text-slate-600 leading-relaxed">{c.summary}</p>
+                  <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+                    {c.summary}
+                  </p>
                 )}
                 <div className="mt-4 text-brand-600 text-sm font-medium">
                   Start Learning →
@@ -121,8 +128,12 @@ export default function ProgramPage() {
             {courses.length === 0 && (
               <div className="col-span-full text-center py-12">
                 <div className="text-4xl mb-4">📚</div>
-                <p className="text-slate-600">Courses are being added to this program.</p>
-                <p className="mt-2 text-sm text-slate-500">Check back soon or contact us for more information.</p>
+                <p className="text-slate-600">
+                  Courses are being added to this program.
+                </p>
+                <p className="mt-2 text-sm text-slate-500">
+                  Check back soon or contact us for more information.
+                </p>
               </div>
             )}
           </div>

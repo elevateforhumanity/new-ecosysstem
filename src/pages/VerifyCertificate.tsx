@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { verifyCertificate } from "../services/certificates";
+import { useState } from 'react';
+import { verifyCertificate } from '../services/certificates';
 
 export default function VerifyCertificate() {
-  const [certNumber, setCertNumber] = useState("");
+  const [certNumber, setCertNumber] = useState('');
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
@@ -20,9 +20,7 @@ export default function VerifyCertificate() {
   return (
     <section className="section">
       <div className="container max-w-2xl">
-        <h1 className="text-3xl font-bold text-center">
-          Verify Certificate
-        </h1>
+        <h1 className="text-3xl font-bold text-center">Verify Certificate</h1>
         <p className="mt-2 text-center text-slate-600">
           Enter a certificate number to verify authenticity
         </p>
@@ -41,7 +39,7 @@ export default function VerifyCertificate() {
               required
             />
             <button type="submit" className="btn" disabled={loading}>
-              {loading ? "Verifying..." : "Verify"}
+              {loading ? 'Verifying...' : 'Verify'}
             </button>
           </div>
         </form>
@@ -58,19 +56,19 @@ export default function VerifyCertificate() {
                     </h3>
                     <div className="mt-3 space-y-2 text-sm">
                       <div>
-                        <span className="font-medium">Course:</span>{" "}
+                        <span className="font-medium">Course:</span>{' '}
                         {result.courses?.title}
                       </div>
                       <div>
-                        <span className="font-medium">Student:</span>{" "}
+                        <span className="font-medium">Student:</span>{' '}
                         {result.profiles?.email}
                       </div>
                       <div>
-                        <span className="font-medium">Issued:</span>{" "}
+                        <span className="font-medium">Issued:</span>{' '}
                         {new Date(result.issued_at).toLocaleDateString()}
                       </div>
                       <div>
-                        <span className="font-medium">Certificate #:</span>{" "}
+                        <span className="font-medium">Certificate #:</span>{' '}
                         <span className="font-mono">
                           {result.certificate_number}
                         </span>

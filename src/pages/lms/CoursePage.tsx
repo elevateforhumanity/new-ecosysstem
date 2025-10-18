@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import {
   getCourse,
   listLessons,
   type Course,
   type Lesson,
-} from "../../services/courses";
+} from '../../services/courses';
 
 export default function CoursePage() {
   const { courseId } = useParams();
@@ -61,10 +61,7 @@ export default function CoursePage() {
             <li>Code: {course.code}</li>
             <li>Lessons: {lessons.length}</li>
           </ul>
-          <a
-            href={`/programs/${course.program_id ?? ""}`}
-            className="btn mt-4"
-          >
+          <a href={`/programs/${course.program_id ?? ''}`} className="btn mt-4">
             Program Path
           </a>
         </aside>

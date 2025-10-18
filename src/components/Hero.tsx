@@ -8,16 +8,17 @@ export default function Hero() {
               <span>🎓</span>
               <span>100% FREE Training • Marion County</span>
             </div>
-            
+
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-6">
-              Ignite Your Future: <span className="text-brand-600">Fund Training Today</span>
+              Ignite Your Future:{' '}
+              <span className="text-brand-600">Fund Training Today</span>
             </h1>
-            
+
             <p className="text-xl text-slate-600 leading-relaxed mb-8">
-              Empower Dreams: Support Skills Development and Transform Lives at Elevate for Humanity. 
-              Invest in Growth, Today! Marion County.
+              Empower Dreams: Support Skills Development and Transform Lives at
+              Elevate for Humanity. Invest in Growth, Today! Marion County.
             </p>
-            
+
             <div className="flex flex-wrap gap-4 mb-10">
               <a href="/programs" className="btn">
                 Explore Programs
@@ -26,7 +27,7 @@ export default function Hero() {
                 Apply Now
               </a>
             </div>
-            
+
             <div className="grid grid-cols-2 gap-6 pt-8 border-t border-slate-200">
               <div>
                 <div className="text-3xl font-bold text-brand-600">1,247</div>

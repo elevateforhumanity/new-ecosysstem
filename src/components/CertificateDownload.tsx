@@ -23,12 +23,12 @@ export default function CertificateDownload({
          <text x='1080' y='820' font-size='18' font-family='Inter' fill='#0f172a'>Registrar</text>
        </svg>`,
       ],
-      { type: "image/svg+xml" }
+      { type: 'image/svg+xml' }
     );
     const url = URL.createObjectURL(svg);
-    const a = document.createElement("a");
+    const a = document.createElement('a');
     a.href = url;
-    a.download = `certificate-${student.replace(/\s+/g, "-")}.svg`;
+    a.download = `certificate-${student.replace(/\s+/g, '-')}.svg`;
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -53,9 +53,7 @@ export default function CertificateDownload({
           <div className="text-3xl font-bold text-brand-600">
             Certificate of Completion
           </div>
-          <div className="mt-8 text-lg text-slate-600">
-            This certifies that
-          </div>
+          <div className="mt-8 text-lg text-slate-600">This certifies that</div>
           <div className="mt-4 text-4xl font-bold text-brand-700">
             {student}
           </div>

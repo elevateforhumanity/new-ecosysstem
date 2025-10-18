@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { listCourses, type Course } from "../../services/courses";
+import { useEffect, useState } from 'react';
+import { listCourses, type Course } from '../../services/courses';
 
 export default function Dashboard() {
   const [courses, setCourses] = useState<Course[]>([]);

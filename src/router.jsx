@@ -74,7 +74,6 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Profile from "./pages/Profile";
 import Programs from "./pages/Programs";
 import Quiz from "./pages/Quiz";
-import Quiz.test from "./pages/Quiz.test";
 import RefundPolicy from "./pages/RefundPolicy";
 import ResetPassword from "./pages/ResetPassword";
 import SearchResults from "./pages/SearchResults";

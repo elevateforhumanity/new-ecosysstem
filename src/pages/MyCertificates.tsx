@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { getCurrentUser } from "../services/auth";
-import { getUserCertificates } from "../services/certificates";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getCurrentUser } from '../services/auth';
+import { getUserCertificates } from '../services/certificates';
 
 export default function MyCertificates() {
   const [certificates, setCertificates] = useState<any[]>([]);
@@ -48,11 +48,11 @@ export default function MyCertificates() {
                     {cert.courses?.title}
                   </h3>
                   <div className="mt-2 text-sm text-slate-600">
-                    Issued:{" "}
-                    {new Date(cert.issued_at).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
+                    Issued:{' '}
+                    {new Date(cert.issued_at).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
                     })}
                   </div>
                   <div className="mt-1 text-xs text-slate-500 font-mono">

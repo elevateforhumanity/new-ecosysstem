@@ -1,30 +1,30 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth, signOut } from "../../services/auth";
-import { supa } from "../../services/supa";
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth, signOut } from '../../services/auth';
+import { supa } from '../../services/supa';
 
 export default function Account() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
-  const [name, setName] = useState(user?.full_name ?? "");
+  const [name, setName] = useState(user?.full_name ?? '');
   const [saving, setSaving] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
-    setName(user?.full_name ?? "");
+    setName(user?.full_name ?? '');
   }, [user]);
 
   async function save() {
     if (!user) return;
     setSaving(true);
-    setMessage("");
+    setMessage('');
 
     try {
       const { error } = await supa
-        .from("profiles")
+        .from('profiles')
         .upsert({ id: user.id, full_name: name });
       if (error) throw error;
-      setMessage("Profile updated successfully!");
+      setMessage('Profile updated successfully!');
     } catch (err: any) {
       setMessage(err.message);
     } finally {
@@ -34,7 +34,7 @@ export default function Account() {
 
   async function handleSignOut() {
     await signOut();
-    navigate("/");
+    navigate('/');
   }
 
   if (loading) {
@@ -48,7 +48,7 @@ export default function Account() {
   }
 
   if (!user) {
-    navigate("/auth/login");
+    navigate('/auth/login');
     return null;
   }
 
@@ -85,12 +85,8 @@ export default function Account() {
           )}
 
           <div className="flex gap-3">
-            <button
-              className="btn"
-              onClick={save}
-              disabled={saving}
-            >
-              {saving ? "Saving..." : "Save Changes"}
+            <button className="btn" onClick={save} disabled={saving}>
+              {saving ? 'Saving...' : 'Save Changes'}
             </button>
             <button className="btn-outline" onClick={handleSignOut}>
               Sign Out
@@ -98,7 +94,7 @@ export default function Account() {
           </div>
         </div>
 
-        {user.role === "instructor" && (
+        {user.role === 'instructor' && (
           <div className="mt-6 card p-6">
             <h2 className="text-xl font-semibold">Instructor Tools</h2>
             <p className="mt-2 text-slate-600">

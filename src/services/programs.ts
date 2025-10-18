@@ -1,4 +1,4 @@
-import { supa } from "./supa";
+import { supa } from './supa';
 
 export type Program = {
   id: string;
@@ -13,18 +13,18 @@ export type Program = {
 
 export async function listPrograms() {
   const { data, error } = await supa
-    .from("programs")
-    .select("id, slug, title, track, blurb, hours, cover_url")
-    .order("title");
+    .from('programs')
+    .select('id, slug, title, track, blurb, hours, cover_url')
+    .order('title');
   if (error) throw error;
   return data as Program[];
 }
 
 export async function getProgramBySlug(slug: string) {
   const { data, error } = await supa
-    .from("programs")
-    .select("id, slug, title, track, blurb, hours, cover_url")
-    .eq("slug", slug)
+    .from('programs')
+    .select('id, slug, title, track, blurb, hours, cover_url')
+    .eq('slug', slug)
     .single();
   if (error) throw error;
   return data as Program;

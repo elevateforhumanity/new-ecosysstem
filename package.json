@@ -46,6 +46,7 @@
     "zustand": "^5.0.8"
   },
   "devDependencies": {
+    "@eslint/js": "^9.38.0",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.19",
     "@testing-library/jest-dom": "^6.9.1",
@@ -61,6 +62,7 @@
     "eslint": "^9.37.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.0",
+    "globals": "^16.4.0",
     "happy-dom": "^20.0.0",
     "husky": "^8.0.0",
     "jest": "^29.7.0",
@@ -68,8 +70,13 @@
     "lint-staged": "^16.2.4",
     "prettier": "^3.6.2",
     "rimraf": "5.0.10",
+    "sort-package-json": "^3.4.0",
+    "stylelint": "^16.25.0",
+    "stylelint-config-standard": "^39.0.1",
+    "stylelint-config-tailwindcss": "^1.0.0",
     "terser": "^5.44.0",
     "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.1",
     "vite-plugin-ssr": "^0.4.142",
     "vitest": "^3.2.4",
     "wrangler": "^4.43.0"
@@ -87,7 +94,7 @@
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
-    "format": "prettier --write .",
+    "format": "prettier . --write",
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
@@ -105,6 +112,10 @@
     "autopilot:check": "npm run lint && npm run typecheck && npm run tokens:guard && npm run build && echo '✅ All checks passed'",
     "autopilot:prepush": "npm run lint && npm run typecheck && npm run tokens:guard && echo '✅ Pre-push checks passed'",
     "clean": "rimraf dist coverage .cache",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "css:lint": "stylelint \"**/*.{css,pcss,scss}\"",
+    "css:fix": "stylelint \"**/*.{css,pcss,scss}\" --fix",
+    "doctor": "npm run format && npm run lint:fix && npm run css:fix && npm run build --if-present"
   }
 }

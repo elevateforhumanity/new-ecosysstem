@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { resetPassword } from "../../services/auth";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { resetPassword } from '../../services/auth';
 
 export default function ForgotPassword() {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setError("");
+    setError('');
     setLoading(true);
 
     try {
@@ -73,7 +73,7 @@ export default function ForgotPassword() {
             </div>
 
             <button type="submit" className="btn w-full" disabled={loading}>
-              {loading ? "Sending..." : "Send Reset Link"}
+              {loading ? 'Sending...' : 'Send Reset Link'}
             </button>
           </form>
 

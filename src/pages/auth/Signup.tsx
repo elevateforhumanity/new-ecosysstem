@@ -1,19 +1,19 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { signUp } from "../../services/auth";
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { signUp } from '../../services/auth';
 
 export default function Signup() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setError("");
+    setError('');
 
     if (password !== confirmPassword) {
       setError("Passwords don't match");
@@ -21,7 +21,7 @@ export default function Signup() {
     }
 
     if (password.length < 6) {
-      setError("Password must be at least 6 characters");
+      setError('Password must be at least 6 characters');
       return;
     }
 
@@ -63,7 +63,9 @@ export default function Signup() {
     <section className="section">
       <div className="container max-w-md mx-auto">
         <div className="card p-6">
-          <h1 className="text-2xl font-bold text-center">Join Elevate for Humanity</h1>
+          <h1 className="text-2xl font-bold text-center">
+            Join Elevate for Humanity
+          </h1>
           <p className="mt-2 text-center text-slate-600">
             Create your free account and start learning today
           </p>
@@ -76,7 +78,9 @@ export default function Signup() {
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Email Address</label>
+              <label className="block text-sm font-medium mb-1">
+                Email Address
+              </label>
               <input
                 type="email"
                 value={email}
@@ -85,13 +89,13 @@ export default function Signup() {
                 placeholder="you@example.com"
                 required
               />
-              <p className="mt-1 text-xs text-slate-500">We'll send you a confirmation email</p>
+              <p className="mt-1 text-xs text-slate-500">
+                We'll send you a confirmation email
+              </p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">
-                Password
-              </label>
+              <label className="block text-sm font-medium mb-1">Password</label>
               <input
                 type="password"
                 value={password}
@@ -119,13 +123,16 @@ export default function Signup() {
             </div>
 
             <button type="submit" className="btn w-full" disabled={loading}>
-              {loading ? "Creating account..." : "Create Account"}
+              {loading ? 'Creating account...' : 'Create Account'}
             </button>
           </form>
 
           <div className="mt-4 text-center text-sm text-slate-600">
-            Already have an account?{" "}
-            <Link to="/auth/login" className="text-brand-600 hover:text-brand-700">
+            Already have an account?{' '}
+            <Link
+              to="/auth/login"
+              className="text-brand-600 hover:text-brand-700"
+            >
               Sign in
             </Link>
           </div>

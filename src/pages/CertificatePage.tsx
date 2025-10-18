@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getCertificate } from "../services/certificates";
-import CertificateDownload from "../components/CertificateDownload";
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { getCertificate } from '../services/certificates';
+import CertificateDownload from '../components/CertificateDownload';
 
 export default function CertificatePage() {
   const { certificateId } = useParams();
@@ -44,10 +44,10 @@ export default function CertificatePage() {
     );
   }
 
-  const issueDate = new Date(cert.issued_at).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  const issueDate = new Date(cert.issued_at).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   });
 
   return (
@@ -62,8 +62,10 @@ export default function CertificatePage() {
         {/* SVG Download Option */}
         <div className="mb-6 print:hidden">
           <CertificateDownload
-            student={cert.profiles?.full_name || cert.profiles?.email || "Student"}
-            program={cert.courses?.title || "Course"}
+            student={
+              cert.profiles?.full_name || cert.profiles?.email || 'Student'
+            }
+            program={cert.courses?.title || 'Course'}
             date={issueDate}
           />
         </div>
@@ -88,7 +90,7 @@ export default function CertificatePage() {
             </div>
 
             <div className="text-4xl font-bold text-slate-900 mb-6">
-              {cert.profiles?.email || "Student"}
+              {cert.profiles?.email || 'Student'}
             </div>
 
             <div className="text-lg text-slate-700 mb-6">
@@ -126,7 +128,7 @@ export default function CertificatePage() {
         {/* Verification */}
         <div className="mt-6 text-center text-sm text-slate-600 print:hidden">
           <p>
-            Verify this certificate at:{" "}
+            Verify this certificate at:{' '}
             <span className="font-mono">
               {window.location.origin}/verify/{cert.certificate_number}
             </span>

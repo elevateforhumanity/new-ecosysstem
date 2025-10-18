@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { supa } from "./supa";
+import { useEffect, useState } from 'react';
+import { supa } from './supa';
 
 export type Profile = {
   id: string;
   email: string | null;
   full_name: string | null;
-  role: "student" | "instructor" | "admin";
+  role: 'student' | 'instructor' | 'admin';
 };
 
 // React hook for auth state
@@ -20,27 +20,25 @@ export function useAuth() {
       } = await supa.auth.getUser();
       if (user) {
         const { data } = await supa
-          .from("profiles")
-          .select("id, email, full_name, role")
-          .eq("id", user.id)
+          .from('profiles')
+          .select('id, email, full_name, role')
+          .eq('id', user.id)
           .single();
         setUser(data as Profile);
       } else setUser(null);
       setLoading(false);
     })();
 
-    const { data: sub } = supa.auth.onAuthStateChange(
-      async (_evt, session) => {
-        if (session?.user) {
-          const { data } = await supa
-            .from("profiles")
-            .select("id, email, full_name, role")
-            .eq("id", session.user.id)
-            .single();
-          setUser(data as Profile);
-        } else setUser(null);
-      }
-    );
+    const { data: sub } = supa.auth.onAuthStateChange(async (_evt, session) => {
+      if (session?.user) {
+        const { data } = await supa
+          .from('profiles')
+          .select('id, email, full_name, role')
+          .eq('id', session.user.id)
+          .single();
+        setUser(data as Profile);
+      } else setUser(null);
+    });
     return () => {
       sub.subscription.unsubscribe();
     };
@@ -114,15 +112,15 @@ export async function getCurrentUser(): Promise<User | null> {
 
   // Get user role from profiles table
   const { data: profile } = await supa
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
+    .from('profiles')
+    .select('role')
+    .eq('id', user.id)
     .single();
 
   return {
     id: user.id,
     email: user.email!,
-    role: profile?.role || "student",
+    role: profile?.role || 'student',
   };
 }
 

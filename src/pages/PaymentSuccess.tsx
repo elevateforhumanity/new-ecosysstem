@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
-import { CheckCircle, ArrowRight } from "lucide-react";
+import { useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { CheckCircle, ArrowRight } from 'lucide-react';
 
 export default function PaymentSuccess() {
   const [searchParams] = useSearchParams();
-  const sessionId = searchParams.get("session_id");
+  const sessionId = searchParams.get('session_id');
   const [loading, setLoading] = useState(true);
   const [enrollmentData, setEnrollmentData] = useState<any>(null);
 
@@ -14,8 +14,9 @@ export default function PaymentSuccess() {
       // TODO: Call backend to verify session and create enrollment
       setTimeout(() => {
         setEnrollmentData({
-          programName: "Your Program",
-          enrollmentId: "ENR-" + Math.random().toString(36).substr(2, 9).toUpperCase(),
+          programName: 'Your Program',
+          enrollmentId:
+            'ENR-' + Math.random().toString(36).substr(2, 9).toUpperCase(),
         });
         setLoading(false);
       }, 1500);
@@ -49,18 +50,24 @@ export default function PaymentSuccess() {
             Welcome to Elevate for Humanity!
           </h1>
           <p className="mt-3 text-lg text-slate-600">
-            Your enrollment is confirmed. Let's get started on your new career path!
+            Your enrollment is confirmed. Let's get started on your new career
+            path!
           </p>
 
           {enrollmentData && (
             <div className="mt-6 p-4 bg-slate-50 rounded-lg text-left">
               <div className="text-sm text-slate-500">Enrollment ID</div>
-              <div className="font-mono font-semibold">{enrollmentData.enrollmentId}</div>
+              <div className="font-mono font-semibold">
+                {enrollmentData.enrollmentId}
+              </div>
             </div>
           )}
 
           <div className="mt-8 space-y-3">
-            <Link to="/lms" className="btn w-full text-lg flex items-center justify-center gap-2">
+            <Link
+              to="/lms"
+              className="btn w-full text-lg flex items-center justify-center gap-2"
+            >
               Go to Your Dashboard
               <ArrowRight className="w-5 h-5" />
             </Link>
@@ -92,8 +99,11 @@ export default function PaymentSuccess() {
           </div>
 
           <p className="mt-6 text-sm text-slate-500">
-            Need help? Contact us at{" "}
-            <a href="mailto:support@elevateforhumanity.org" className="text-brand-600 hover:underline">
+            Need help? Contact us at{' '}
+            <a
+              href="mailto:support@elevateforhumanity.org"
+              className="text-brand-600 hover:underline"
+            >
               support@elevateforhumanity.org
             </a>
           </p>

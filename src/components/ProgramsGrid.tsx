@@ -1,7 +1,7 @@
 type Program = {
   slug: string;
   title: string;
-  track: "Healthcare" | "Construction" | "Beauty" | "Business" | "Tech";
+  track: 'Healthcare' | 'Construction' | 'Beauty' | 'Business' | 'Tech';
   blurb: string;
   hours: string;
   certs?: string[];
@@ -10,58 +10,64 @@ type Program = {
 
 const PROGRAMS: Program[] = [
   {
-    slug: "cna-hha",
-    title: "CNA / HHA",
-    track: "Healthcare",
-    blurb: "Become a Certified Nursing Assistant or Home Health Aide. Get real clinical experience and start helping people right away.",
-    hours: "4–8 weeks",
-    certs: ["CNA", "HHA", "CPR/AED"],
-    image: "/programs/cna.jpg",
+    slug: 'cna-hha',
+    title: 'CNA / HHA',
+    track: 'Healthcare',
+    blurb:
+      'Become a Certified Nursing Assistant or Home Health Aide. Get real clinical experience and start helping people right away.',
+    hours: '4–8 weeks',
+    certs: ['CNA', 'HHA', 'CPR/AED'],
+    image: '/programs/cna.jpg',
   },
   {
-    slug: "welding-aws",
-    title: "Welding (AWS SENSE)",
-    track: "Construction",
-    blurb: "Learn professional welding in our hands-on lab. Earn your AWS SENSE certification and start a high-paying career.",
-    hours: "6–10 weeks",
-    certs: ["AWS SENSE"],
-    image: "/programs/welding.jpg",
+    slug: 'welding-aws',
+    title: 'Welding (AWS SENSE)',
+    track: 'Construction',
+    blurb:
+      'Learn professional welding in our hands-on lab. Earn your AWS SENSE certification and start a high-paying career.',
+    hours: '6–10 weeks',
+    certs: ['AWS SENSE'],
+    image: '/programs/welding.jpg',
   },
   {
-    slug: "nail-tech",
-    title: "Nail Technology",
-    track: "Beauty",
-    blurb: "Master nail art, sanitation, and salon skills. Get ready for your state board exam and start your own business or work in top salons.",
-    hours: "8–12 weeks",
-    certs: ["State Board Prep"],
-    image: "/programs/nails.jpg",
+    slug: 'nail-tech',
+    title: 'Nail Technology',
+    track: 'Beauty',
+    blurb:
+      'Master nail art, sanitation, and salon skills. Get ready for your state board exam and start your own business or work in top salons.',
+    hours: '8–12 weeks',
+    certs: ['State Board Prep'],
+    image: '/programs/nails.jpg',
   },
   {
-    slug: "cdl",
-    title: "CDL (A/B) Prep",
-    track: "Business",
-    blurb: "Get your Commercial Driver's License and access high-demand trucking jobs. Includes permit prep and simulator training.",
-    hours: "3–6 weeks",
-    certs: ["CDL A/B Prep"],
-    image: "/programs/cdl.jpg",
+    slug: 'cdl',
+    title: 'CDL (A/B) Prep',
+    track: 'Business',
+    blurb:
+      "Get your Commercial Driver's License and access high-demand trucking jobs. Includes permit prep and simulator training.",
+    hours: '3–6 weeks',
+    certs: ['CDL A/B Prep'],
+    image: '/programs/cdl.jpg',
   },
   {
-    slug: "office-tech",
-    title: "Office Tech & AI",
-    track: "Tech",
-    blurb: "Learn modern office software, AI tools, and digital workflows. Perfect for administrative and remote work careers.",
-    hours: "4–6 weeks",
-    certs: ["Certiport (optional)"],
-    image: "/programs/office.jpg",
+    slug: 'office-tech',
+    title: 'Office Tech & AI',
+    track: 'Tech',
+    blurb:
+      'Learn modern office software, AI tools, and digital workflows. Perfect for administrative and remote work careers.',
+    hours: '4–6 weeks',
+    certs: ['Certiport (optional)'],
+    image: '/programs/office.jpg',
   },
   {
-    slug: "osha10",
-    title: "OSHA-10 + CPR",
-    track: "Construction",
-    blurb: "Get essential safety certifications for construction work. Learn life-saving CPR/AED skills and workplace safety basics.",
-    hours: "1–2 weeks",
-    certs: ["OSHA-10", "CPR/AED"],
-    image: "/programs/osha.jpg",
+    slug: 'osha10',
+    title: 'OSHA-10 + CPR',
+    track: 'Construction',
+    blurb:
+      'Get essential safety certifications for construction work. Learn life-saving CPR/AED skills and workplace safety basics.',
+    hours: '1–2 weeks',
+    certs: ['OSHA-10', 'CPR/AED'],
+    image: '/programs/osha.jpg',
   },
 ];
 
@@ -74,8 +80,9 @@ export default function ProgramsGrid() {
             Empower Your Future Today
           </h2>
           <p className="text-lg text-slate-600 leading-relaxed">
-            Join our transformative programs and unlock career opportunities that align with industry demands. 
-            Flexible, grant-funded options mean more possibilities for growth.
+            Join our transformative programs and unlock career opportunities
+            that align with industry demands. Flexible, grant-funded options
+            mean more possibilities for growth.
           </p>
         </div>
 

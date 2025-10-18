@@ -7,11 +7,13 @@ Applied the one-shot stabilization script to fix build flakiness and add polishe
 ### 1. Build Stability
 
 **Locked Versions:**
+
 - Node: `20.11.1` (strict range: `>=20.11.1 <21`)
 - pnpm: `9.7.0`
 - Added `.nvmrc` for consistent Node version
 
 **CI Scripts Added:**
+
 ```json
 {
   "preinstall": "corepack enable || true",
@@ -25,6 +27,7 @@ Applied the one-shot stabilization script to fix build flakiness and add polishe
 ### 2. Netlify Configuration
 
 **Updated `netlify.toml`:**
+
 - Simplified build command: `pnpm run build`
 - Node version: `20.11.1`
 - Memory limit: `4096MB`
@@ -38,6 +41,7 @@ Applied the one-shot stabilization script to fix build flakiness and add polishe
 ### 3. Single App Entry Point
 
 **Removed Duplicates:**
+
 - ❌ `src/App.jsx`
 - ❌ `src/App-simple.jsx`
 - ❌ `src/App-ultra-light.jsx`
@@ -45,12 +49,14 @@ Applied the one-shot stabilization script to fix build flakiness and add polishe
 - ❌ `src/App.jsx.bak.1759530592843`
 
 **Kept:**
+
 - ✅ `src/App.tsx` (clean, minimal routes)
 - ✅ `src/main.jsx` (imports `App.tsx`)
 
 ### 4. Tailwind Configuration
 
 **Brand Tokens:**
+
 ```js
 colors: {
   brand: {
@@ -72,25 +78,26 @@ colors: {
 ```
 
 **Content Globs:**
+
 ```js
-content: [
-  "./index.html",
-  "./src/**/*.{ts,tsx,js,jsx}"
-]
+content: ['./index.html', './src/**/*.{ts,tsx,js,jsx}'];
 ```
 
 **Container:**
+
 - Center: `true`
 - Padding: `1rem`
 - Screens: `lg: 1120px`, `2xl: 1280px`
 
 **Utilities:**
+
 - `boxShadow.soft`: `0 6px 30px -10px rgba(0,0,0,0.12)`
 - `borderRadius.xl2`: `1rem`
 
 ### 5. Global CSS
 
 **Component Utilities:**
+
 ```css
 .btn {
   /* Primary button: brand-600 bg, white text, hover:brand-700 */
@@ -110,6 +117,7 @@ content: [
 ```
 
 **CSS Variables:**
+
 ```css
 :root {
   --bg: #ffffff;
@@ -123,6 +131,7 @@ content: [
 ### 6. New Components
 
 **`src/layouts/SiteLayout.tsx`:**
+
 - Responsive header with navigation
 - Brand logo link
 - Navigation: Programs, LMS, Partners, Apply
@@ -131,6 +140,7 @@ content: [
 - Full-height flex layout
 
 **`src/components/Hero.tsx`:**
+
 - Two-column grid layout (responsive)
 - Badge: "Marion County • 100% FREE Programs"
 - Headline with brand accent
@@ -144,6 +154,7 @@ content: [
 - Hero image with srcSet for 1x, 2x, 3x
 
 **`src/App.tsx` (Simplified):**
+
 - Clean BrowserRouter setup
 - SiteLayout wrapper
 - Routes:
@@ -157,6 +168,7 @@ content: [
 ### 7. Git Hooks
 
 **Husky Pre-commit:**
+
 ```bash
 pnpm typecheck || exit 1  # Block commit on TS errors
 pnpm lint || true          # Run lint (non-blocking)
@@ -164,6 +176,7 @@ pnpm format || true        # Auto-format (non-blocking)
 ```
 
 **lint-staged:**
+
 ```json
 {
   "*.{ts,tsx,js,jsx,css,md}": ["prettier --write"]
@@ -204,6 +217,7 @@ dist/assets/index-DDBpeeAD.js    291.58 kB │ gzip: 87.66 kB
 [https://8080--0199eea7-0646-7472-a3cd-771971b6801c.us-east-1-01.gitpod.dev](https://8080--0199eea7-0646-7472-a3cd-771971b6801c.us-east-1-01.gitpod.dev)
 
 **Local Development:**
+
 ```bash
 pnpm dev  # Port 5173 with HMR
 ```
@@ -236,12 +250,14 @@ git push origin main
 ### 3. Clear Netlify Cache (if needed)
 
 If Netlify shows weirdness:
+
 - Go to **Deploys** tab
 - Click **Trigger deploy** → **Clear cache and deploy site**
 
 ### 4. Add Hero Images
 
 Create optimized hero images:
+
 ```
 public/hero/efh-hero.jpg      # Base image (≥1600px wide)
 public/hero/efh-hero@1x.jpg   # 1x resolution
@@ -256,22 +272,27 @@ Use `srcSet` for crisp images on all devices.
 ## What This Fixes
 
 ### ✅ Build Stability
+
 - **Before:** Random build failures, version mismatches
 - **After:** Locked Node/pnpm, frozen lockfile, deterministic builds
 
 ### ✅ SPA Routing
+
 - **Before:** Routes blank/loop on refresh
 - **After:** Netlify SPA redirect (`/* → /index.html`)
 
 ### ✅ App Entry Point
+
 - **Before:** Multiple App.jsx/App.tsx causing ambiguity
 - **After:** Single App.tsx, clean imports
 
 ### ✅ Styling Consistency
+
 - **Before:** Inconsistent spacing, colors, shadows
 - **After:** Brand tokens, reusable utilities, polished components
 
 ### ✅ Developer Experience
+
 - **Before:** Manual formatting, no pre-commit checks
 - **After:** Husky hooks, lint-staged, automatic formatting
 
@@ -301,5 +322,5 @@ Use `srcSet` for crisp images on all devices.
 
 ---
 
-*Generated: October 17, 2025*  
-*By: Ona AI Assistant*
+_Generated: October 17, 2025_  
+_By: Ona AI Assistant_

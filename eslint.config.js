@@ -1,77 +1,33 @@
-// Flat ESLint config shim used only so ESLint stops picking up legacy experimental file.
-// We mirror the classic .eslintrc.cjs settings and explicitly ignore heavy utility scripts.
+// Flat config (ESLint 9)
 import js from '@eslint/js';
-import reactPlugin from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
-import tsPlugin from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
+import ts from 'typescript-eslint';
+import react from 'eslint-plugin-react';
+import hooks from 'eslint-plugin-react-hooks';
+import globals from 'globals';
 
 export default [
-  // Ignore large script/tool directories & build output to keep lint signal focused
-  {
-    ignores: [
-      'dist/**',
-      'build/**',
-      'coverage/**',
-      'node_modules/**',
-      'tools/**',
-      '**/.vercel/**',
-      '**/.next/**',
-      '.migration_temp_*/**',
-    ],
-  },
+  { languageOptions: { globals: { ...globals.browser, ...globals.node } } },
   js.configs.recommended,
+  ...ts.configs.recommended,
   {
-    files: ['**/*.{js,jsx,ts,tsx}'],
-    plugins: {
-      react: reactPlugin,
-      'react-hooks': reactHooks,
-      '@typescript-eslint': tsPlugin,
-    },
-    languageOptions: {
-      ecmaVersion: 2023,
-      sourceType: 'module',
-      parser: tsParser,
-      parserOptions: { ecmaFeatures: { jsx: true } },
-      globals: {
-        // Common browser globals
-        window: 'readonly',
-        document: 'readonly',
-        navigator: 'readonly',
-        location: 'readonly',
-        localStorage: 'readonly',
-        caches: 'readonly',
-        alert: 'readonly',
-        PerformanceObserver: 'readonly',
-        // Timers / async
-        setTimeout: 'readonly',
-        clearTimeout: 'readonly',
-        setInterval: 'readonly',
-        clearInterval: 'readonly',
-        // Node / universal
-        console: 'readonly',
-        module: 'writable',
-        require: 'readonly',
-        __dirname: 'readonly',
-        process: 'readonly',
-        fetch: 'readonly',
-        AbortController: 'readonly',
-        Buffer: 'readonly',
-        global: 'readonly',
-      },
-    },
-    settings: { react: { version: 'detect' } },
+    plugins: { react, hooks },
     rules: {
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
-      'react/no-unescaped-entities': 'off',
-      'no-unused-vars': 'off', // handled by TS rule below to avoid duplicate reports
-      '@typescript-eslint/no-unused-vars': [
+      'react/prop-types': 'off',
+      'react/no-unknown-property': ['error', { ignore: ['class'] }],
+      'react/jsx-max-props-per-line': ['warn', { maximum: 3 }],
+      'react/jsx-no-useless-fragment': 'warn',
+      'react/self-closing-comp': 'warn',
+      'react/jsx-curly-brace-presence': [
         'warn',
-        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+        { props: 'never', children: 'never' },
       ],
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-var-requires': 'off',
+      'react/jsx-newline': ['warn', { prevent: true }],
+      'react/jsx-no-duplicate-props': 'error',
+      'react/jsx-no-target-blank': 'warn',
+      'react/jsx-boolean-value': ['warn', 'never'],
     },
+    settings: { react: { version: 'detect' } },
   },
 ];

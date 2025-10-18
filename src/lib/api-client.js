@@ -3,7 +3,8 @@
  * Handles communication between Cloudflare Pages frontend and Render backend
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://elevateforhumanity.onrender.com';
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || 'https://elevateforhumanity.onrender.com';
 
 class ApiClient {
   constructor() {
@@ -12,7 +13,7 @@ class ApiClient {
 
   async request(endpoint, options = {}) {
     const url = `${this.baseUrl}${endpoint}`;
-    
+
     const config = {
       ...options,
       headers: {
@@ -23,7 +24,7 @@ class ApiClient {
 
     try {
       const response = await fetch(url, config);
-      
+
       if (!response.ok) {
         throw new Error(`API Error: ${response.status} ${response.statusText}`);
       }

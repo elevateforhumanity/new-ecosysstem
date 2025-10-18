@@ -12,7 +12,7 @@ export default function DurableAI() {
             Personalized education powered by artificial intelligence
           </p>
         </div>
-        
+
         <div className="bg-white p-8 rounded-lg shadow-xl">
           <h2 className="text-3xl font-bold mb-6">Features</h2>
           <ul className="space-y-4 text-lg">

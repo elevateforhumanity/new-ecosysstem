@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { listPrograms, type Program } from "../services/programs";
+import { useEffect, useState } from 'react';
+import { listPrograms, type Program } from '../services/programs';
 
 export default function ProgramsIndex() {
   const [items, setItems] = useState<Program[]>([]);
@@ -39,7 +39,7 @@ export default function ProgramsIndex() {
             >
               <div className="aspect-[16/9] overflow-hidden">
                 <img
-                  src={p.cover_url ?? "/programs/placeholder.jpg"}
+                  src={p.cover_url ?? '/programs/placeholder.jpg'}
                   alt={p.title}
                   className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                 />

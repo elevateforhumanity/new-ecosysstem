@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { supa } from "../../services/supa";
+import { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { supa } from '../../services/supa';
 
 export default function LessonManager() {
   const { courseId } = useParams();
@@ -8,9 +8,9 @@ export default function LessonManager() {
   const [lessons, setLessons] = useState<any[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({
-    title: "",
-    video_url: "",
-    html: "",
+    title: '',
+    video_url: '',
+    html: '',
   });
 
   useEffect(() => {
@@ -19,18 +19,18 @@ export default function LessonManager() {
 
   async function loadData() {
     const { data: courseData } = await supa
-      .from("courses")
-      .select("*")
-      .eq("id", courseId)
+      .from('courses')
+      .select('*')
+      .eq('id', courseId)
       .single();
 
     setCourse(courseData);
 
     const { data: lessonsData } = await supa
-      .from("lessons")
-      .select("*")
-      .eq("course_id", courseId)
-      .order("idx");
+      .from('lessons')
+      .select('*')
+      .eq('course_id', courseId)
+      .order('idx');
 
     setLessons(lessonsData || []);
   }
@@ -40,7 +40,7 @@ export default function LessonManager() {
 
     const nextIdx = lessons.length + 1;
 
-    const { error } = await supa.from("lessons").insert([
+    const { error } = await supa.from('lessons').insert([
       {
         course_id: courseId,
         idx: nextIdx,
@@ -53,15 +53,15 @@ export default function LessonManager() {
       return;
     }
 
-    setForm({ title: "", video_url: "", html: "" });
+    setForm({ title: '', video_url: '', html: '' });
     setShowForm(false);
     loadData();
   }
 
   async function deleteLesson(lessonId: string) {
-    if (!confirm("Delete this lesson?")) return;
+    if (!confirm('Delete this lesson?')) return;
 
-    const { error } = await supa.from("lessons").delete().eq("id", lessonId);
+    const { error } = await supa.from('lessons').delete().eq('id', lessonId);
 
     if (error) {
       alert(error.message);
@@ -71,21 +71,29 @@ export default function LessonManager() {
     loadData();
   }
 
-  if (!course) return <div className="section"><div className="container">Loading...</div></div>;
+  if (!course)
+    return (
+      <div className="section">
+        <div className="container">Loading...</div>
+      </div>
+    );
 
   return (
     <section className="section">
       <div className="container max-w-4xl">
         <div className="flex items-center justify-between">
           <div>
-            <Link to="/instructor" className="text-sm text-brand-600 hover:text-brand-700">
+            <Link
+              to="/instructor"
+              className="text-sm text-brand-600 hover:text-brand-700"
+            >
               ← Back to Dashboard
             </Link>
             <h1 className="mt-2 text-3xl font-bold">{course.title}</h1>
             <p className="mt-1 text-slate-600">Manage lessons</p>
           </div>
           <button onClick={() => setShowForm(!showForm)} className="btn">
-            {showForm ? "Cancel" : "+ Add Lesson"}
+            {showForm ? 'Cancel' : '+ Add Lesson'}
           </button>
         </div>
 
@@ -111,7 +119,9 @@ export default function LessonManager() {
               <input
                 type="url"
                 value={form.video_url}
-                onChange={(e) => setForm({ ...form, video_url: e.target.value })}
+                onChange={(e) =>
+                  setForm({ ...form, video_url: e.target.value })
+                }
                 className="w-full px-3 py-2 border rounded-lg"
                 placeholder="https://www.youtube.com/embed/..."
               />
@@ -138,9 +148,14 @@ export default function LessonManager() {
 
         <div className="mt-8 space-y-3">
           {lessons.map((lesson) => (
-            <div key={lesson.id} className="card p-5 flex items-center justify-between">
+            <div
+              key={lesson.id}
+              className="card p-5 flex items-center justify-between"
+            >
               <div>
-                <div className="text-xs text-slate-500">Lesson {lesson.idx}</div>
+                <div className="text-xs text-slate-500">
+                  Lesson {lesson.idx}
+                </div>
                 <div className="font-semibold">{lesson.title}</div>
                 {lesson.video_url && (
                   <div className="mt-1 text-xs text-slate-500">📹 Video</div>

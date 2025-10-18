@@ -1,22 +1,26 @@
 # Stripe Payment Integration Setup
 
 ## Overview
+
 Stripe payment integration is configured for program enrollments. Most programs are FREE, but paid options are supported.
 
 ## Frontend Setup ✅
 
 ### 1. Stripe Package Installed
+
 ```bash
 pnpm add @stripe/stripe-js stripe
 ```
 
 ### 2. Components Created
+
 - ✅ `src/components/payment/EnrollmentCheckout.jsx` - Checkout UI
 - ✅ `src/pages/PaymentSuccess.tsx` - Success page
 - ✅ `src/pages/PaymentCancelled.tsx` - Cancellation page
 - ✅ `src/services/stripe.ts` - Stripe service functions
 
 ### 3. Routes Added
+
 - `/payment/success` - After successful payment
 - `/payment/cancelled` - After cancelled payment
 
@@ -27,9 +31,11 @@ You need to create backend API endpoints to handle Stripe securely:
 ### Required Endpoints:
 
 #### 1. Create Checkout Session
+
 **Endpoint:** `POST /api/create-checkout-session`
 
 **Request Body:**
+
 ```json
 {
   "programId": "uuid",
@@ -41,6 +47,7 @@ You need to create backend API endpoints to handle Stripe securely:
 ```
 
 **Response:**
+
 ```json
 {
   "sessionId": "cs_test_..."
@@ -48,6 +55,7 @@ You need to create backend API endpoints to handle Stripe securely:
 ```
 
 **Example Implementation (Node.js/Express):**
+
 ```javascript
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
@@ -86,46 +94,53 @@ app.post('/api/create-checkout-session', async (req, res) => {
 ```
 
 #### 2. Webhook Handler (Important!)
+
 **Endpoint:** `POST /api/stripe-webhook`
 
 Handle Stripe events to create enrollments after successful payment:
 
 ```javascript
-app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (req, res) => {
-  const sig = req.headers['stripe-signature'];
-  let event;
+app.post(
+  '/api/stripe-webhook',
+  express.raw({ type: 'application/json' }),
+  async (req, res) => {
+    const sig = req.headers['stripe-signature'];
+    let event;
 
-  try {
-    event = stripe.webhooks.constructEvent(
-      req.body,
-      sig,
-      process.env.STRIPE_WEBHOOK_SECRET
-    );
-  } catch (err) {
-    return res.status(400).send(`Webhook Error: ${err.message}`);
+    try {
+      event = stripe.webhooks.constructEvent(
+        req.body,
+        sig,
+        process.env.STRIPE_WEBHOOK_SECRET
+      );
+    } catch (err) {
+      return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    // Handle the event
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object;
+
+      // Create enrollment in database
+      await createEnrollment({
+        userId: session.client_reference_id,
+        programId: session.metadata.programId,
+        paymentStatus: 'paid',
+        stripeSessionId: session.id,
+      });
+    }
+
+    res.json({ received: true });
   }
-
-  // Handle the event
-  if (event.type === 'checkout.session.completed') {
-    const session = event.data.object;
-    
-    // Create enrollment in database
-    await createEnrollment({
-      userId: session.client_reference_id,
-      programId: session.metadata.programId,
-      paymentStatus: 'paid',
-      stripeSessionId: session.id,
-    });
-  }
-
-  res.json({received: true});
-});
+);
 ```
 
 #### 3. Free Enrollment
+
 **Endpoint:** `POST /api/enroll-free`
 
 **Request Body:**
+
 ```json
 {
   "programId": "uuid",
@@ -134,6 +149,7 @@ app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), async (
 ```
 
 **Response:**
+
 ```json
 {
   "enrollmentId": "uuid",
@@ -164,6 +180,7 @@ STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret_here
 ## Testing
 
 ### Test Cards (Stripe Test Mode):
+
 - **Success:** `4242 4242 4242 4242`
 - **Decline:** `4000 0000 0000 0002`
 - **3D Secure:** `4000 0025 0000 3155`

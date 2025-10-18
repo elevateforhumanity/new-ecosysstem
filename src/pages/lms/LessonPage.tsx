@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import {
   getLesson,
   listLessons,
   upsertProgress,
   type Lesson,
-} from "../../services/courses";
-import QuizBlock from "./QuizBlock";
+} from '../../services/courses';
+import QuizBlock from './QuizBlock';
 
 export default function LessonPage() {
   const { lessonId } = useParams();
@@ -89,7 +89,7 @@ export default function LessonPage() {
             {siblings.map((s) => (
               <li
                 key={s.id}
-                className={s.id === lesson.id ? "font-semibold" : ""}
+                className={s.id === lesson.id ? 'font-semibold' : ''}
               >
                 <Link to={`/lms/lesson/${s.id}`}>{s.title}</Link>
               </li>

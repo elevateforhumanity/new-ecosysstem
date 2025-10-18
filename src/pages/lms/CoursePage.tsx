@@ -21,7 +21,16 @@ export default function CoursePage() {
   if (!course)
     return (
       <div className="section">
-        <div className="container">Loading…</div>
+        <div className="container max-w-2xl mx-auto">
+          <div className="card p-8 text-center">
+            <div className="animate-pulse">
+              <div className="h-8 bg-slate-200 rounded w-3/4 mx-auto mb-4"></div>
+              <div className="h-4 bg-slate-200 rounded w-1/2 mx-auto mb-2"></div>
+              <div className="h-4 bg-slate-200 rounded w-2/3 mx-auto"></div>
+            </div>
+            <p className="mt-4 text-slate-600">Loading course...</p>
+          </div>
+        </div>
       </div>
     );
 

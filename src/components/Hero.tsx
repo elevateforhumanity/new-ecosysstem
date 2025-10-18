@@ -3,26 +3,41 @@ export default function Hero() {
     <section className="section pt-12 md:pt-20">
       <div className="container grid md:grid-cols-2 gap-10 items-center">
         <div>
-          <span className="inline-block rounded-full bg-brand-100 text-brand-700 px-3 py-1 text-xs font-semibold">
-            Marion County • 100% FREE Programs
+          <span className="inline-block rounded-full bg-brand-100 text-brand-700 px-4 py-1.5 text-sm font-semibold">
+            🎓 100% FREE Training • No Cost to You
           </span>
-          <h1 className="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight">
-            Empowering People. <span className="text-brand-600">Elevating Communities.</span>
+          <h1 className="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+            Start Your New Career in <span className="text-brand-600">Weeks, Not Years</span>
           </h1>
-          <p className="mt-4 text-slate-600">
-            ETPL provider & DOL apprenticeship sponsor connecting education, employment, and entrepreneurship
-            through workforce innovation and philanthropy.
+          <p className="mt-4 text-lg text-slate-700 leading-relaxed">
+            Get job-ready training in healthcare, construction, beauty, and more. 
+            We help you earn industry certifications and connect directly with employers—all at no cost to you.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href="/programs" className="btn">Explore Programs</a>
-            <a href="/partners" className="btn-outline">Partner With Us</a>
+            <a href="/programs" className="btn text-lg px-6 py-3">
+              See Our Programs →
+            </a>
+            <a href="/apply" className="btn-outline text-lg px-6 py-3">
+              Apply Now (It's Free!)
+            </a>
           </div>
-          <ul className="mt-6 grid grid-cols-2 gap-4 text-sm text-slate-600">
-            <li>✅ 1,247 students trained</li>
-            <li>✅ 92% job placement</li>
-            <li>✅ $2.85M funding distributed</li>
-            <li>✅ 100% FREE to students</li>
-          </ul>
+          <div className="mt-8 p-4 bg-slate-50 rounded-lg border border-slate-200">
+            <p className="text-sm font-semibold text-slate-700 mb-2">What You Get:</p>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-600">
+              <li className="flex items-center gap-2">
+                <span className="text-green-600">✓</span> Free training & certifications
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="text-green-600">✓</span> Job placement support
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="text-green-600">✓</span> Hands-on experience
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="text-green-600">✓</span> Career coaching included
+              </li>
+            </ul>
+          </div>
         </div>
         <div className="relative">
           <div className="card p-2">

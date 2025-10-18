@@ -13,7 +13,7 @@ const PROGRAMS: Program[] = [
     slug: "cna-hha",
     title: "CNA / HHA",
     track: "Healthcare",
-    blurb: "State-aligned training with clinicals and direct employer placement.",
+    blurb: "Become a Certified Nursing Assistant or Home Health Aide. Get real clinical experience and start helping people right away.",
     hours: "4–8 weeks",
     certs: ["CNA", "HHA", "CPR/AED"],
     image: "/programs/cna.jpg",
@@ -22,7 +22,7 @@ const PROGRAMS: Program[] = [
     slug: "welding-aws",
     title: "Welding (AWS SENSE)",
     track: "Construction",
-    blurb: "Hands-on welding lab and industry-recognized AWS SENSE credentials.",
+    blurb: "Learn professional welding in our hands-on lab. Earn your AWS SENSE certification and start a high-paying career.",
     hours: "6–10 weeks",
     certs: ["AWS SENSE"],
     image: "/programs/welding.jpg",
@@ -31,7 +31,7 @@ const PROGRAMS: Program[] = [
     slug: "nail-tech",
     title: "Nail Technology",
     track: "Beauty",
-    blurb: "State board preparation with salon-ready portfolio and sanitation.",
+    blurb: "Master nail art, sanitation, and salon skills. Get ready for your state board exam and start your own business or work in top salons.",
     hours: "8–12 weeks",
     certs: ["State Board Prep"],
     image: "/programs/nails.jpg",
@@ -40,7 +40,7 @@ const PROGRAMS: Program[] = [
     slug: "cdl",
     title: "CDL (A/B) Prep",
     track: "Business",
-    blurb: "Permit prep, simulator practice, and employer-ready onboarding.",
+    blurb: "Get your Commercial Driver's License and access high-demand trucking jobs. Includes permit prep and simulator training.",
     hours: "3–6 weeks",
     certs: ["CDL A/B Prep"],
     image: "/programs/cdl.jpg",
@@ -49,7 +49,7 @@ const PROGRAMS: Program[] = [
     slug: "office-tech",
     title: "Office Tech & AI",
     track: "Tech",
-    blurb: "Docs, Sheets, CRM, and AI workflows for modern office careers.",
+    blurb: "Learn modern office software, AI tools, and digital workflows. Perfect for administrative and remote work careers.",
     hours: "4–6 weeks",
     certs: ["Certiport (optional)"],
     image: "/programs/office.jpg",
@@ -58,7 +58,7 @@ const PROGRAMS: Program[] = [
     slug: "osha10",
     title: "OSHA-10 + CPR",
     track: "Construction",
-    blurb: "Worksite safety fundamentals plus life-saving CPR/AED certification.",
+    blurb: "Get essential safety certifications for construction work. Learn life-saving CPR/AED skills and workplace safety basics.",
     hours: "1–2 weeks",
     certs: ["OSHA-10", "CPR/AED"],
     image: "/programs/osha.jpg",
@@ -69,16 +69,14 @@ export default function ProgramsGrid() {
   return (
     <section className="section">
       <div className="container">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <h2 className="text-2xl font-semibold">Featured Programs</h2>
-            <p className="mt-2 text-slate-600">
-              ETPL-eligible • WRG/WEX/JRI stackable • Employer pathways
-            </p>
-          </div>
-          <a href="/apply" className="btn hidden md:inline-flex">
-            Apply Now
-          </a>
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <h2 className="text-3xl md:text-4xl font-bold">Choose Your Path</h2>
+          <p className="mt-3 text-lg text-slate-600">
+            All programs are 100% free and include certifications, hands-on training, and job placement help.
+          </p>
+          <p className="mt-2 text-sm text-slate-500">
+            ✓ Industry certifications (AWS, CNA, CDL, OSHA) • ✓ Employer connections • ✓ No hidden costs
+          </p>
         </div>
 
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

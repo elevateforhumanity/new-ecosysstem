@@ -28,7 +28,18 @@ export default function LessonPage() {
   if (!lesson)
     return (
       <div className="section">
-        <div className="container">Loading…</div>
+        <div className="container max-w-2xl mx-auto">
+          <div className="card p-8 text-center">
+            <div className="animate-pulse">
+              <div className="h-8 bg-slate-200 rounded w-3/4 mx-auto mb-4"></div>
+              <div className="h-64 bg-slate-200 rounded mx-auto mb-4"></div>
+              <div className="h-4 bg-slate-200 rounded w-full mb-2"></div>
+              <div className="h-4 bg-slate-200 rounded w-5/6 mb-2"></div>
+              <div className="h-4 bg-slate-200 rounded w-4/6"></div>
+            </div>
+            <p className="mt-4 text-slate-600">Loading lesson content...</p>
+          </div>
+        </div>
       </div>
     );
 

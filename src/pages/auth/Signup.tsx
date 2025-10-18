@@ -63,9 +63,9 @@ export default function Signup() {
     <section className="section">
       <div className="container max-w-md mx-auto">
         <div className="card p-6">
-          <h1 className="text-2xl font-bold text-center">Create Account</h1>
+          <h1 className="text-2xl font-bold text-center">Join Elevate for Humanity</h1>
           <p className="mt-2 text-center text-slate-600">
-            Start your learning journey
+            Create your free account and start learning today
           </p>
 
           {error && (
@@ -76,14 +76,16 @@ export default function Signup() {
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Email</label>
+              <label className="block text-sm font-medium mb-1">Email Address</label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-brand-300"
+                placeholder="you@example.com"
                 required
               />
+              <p className="mt-1 text-xs text-slate-500">We'll send you a confirmation email</p>
             </div>
 
             <div>

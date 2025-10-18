@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getCertificate } from "../services/certificates";
+import CertificateDownload from "../components/CertificateDownload";
 
 export default function CertificatePage() {
   const { certificateId } = useParams();
@@ -52,10 +53,19 @@ export default function CertificatePage() {
   return (
     <div className="min-h-screen bg-slate-50 py-12">
       <div className="container max-w-4xl">
-        <div className="mb-6 flex justify-end print:hidden">
-          <button onClick={handlePrint} className="btn">
+        <div className="mb-6 flex gap-3 justify-end print:hidden">
+          <button onClick={handlePrint} className="btn-outline">
             🖨️ Print Certificate
           </button>
+        </div>
+
+        {/* SVG Download Option */}
+        <div className="mb-6 print:hidden">
+          <CertificateDownload
+            student={cert.profiles?.full_name || cert.profiles?.email || "Student"}
+            program={cert.courses?.title || "Course"}
+            date={issueDate}
+          />
         </div>
 
         {/* Certificate */}

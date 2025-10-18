@@ -1,5 +1,55 @@
+import { useEffect, useState } from "react";
 import { supa } from "./supa";
 
+export type Profile = {
+  id: string;
+  email: string | null;
+  full_name: string | null;
+  role: "student" | "instructor" | "admin";
+};
+
+// React hook for auth state
+export function useAuth() {
+  const [user, setUser] = useState<Profile | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      const {
+        data: { user },
+      } = await supa.auth.getUser();
+      if (user) {
+        const { data } = await supa
+          .from("profiles")
+          .select("id, email, full_name, role")
+          .eq("id", user.id)
+          .single();
+        setUser(data as Profile);
+      } else setUser(null);
+      setLoading(false);
+    })();
+
+    const { data: sub } = supa.auth.onAuthStateChange(
+      async (_evt, session) => {
+        if (session?.user) {
+          const { data } = await supa
+            .from("profiles")
+            .select("id, email, full_name, role")
+            .eq("id", session.user.id)
+            .single();
+          setUser(data as Profile);
+        } else setUser(null);
+      }
+    );
+    return () => {
+      sub.subscription.unsubscribe();
+    };
+  }, []);
+
+  return { user, loading };
+}
+
+// Legacy type for backward compatibility
 export type User = {
   id: string;
   email: string;

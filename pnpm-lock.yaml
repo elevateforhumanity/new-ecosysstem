@@ -17,6 +17,9 @@ importers:
       '@sentry/tracing':
         specifier: ^7.99.0
         version: 7.120.4
+      '@stripe/stripe-js':
+        specifier: ^8.1.0
+        version: 8.1.0
       '@supabase/supabase-js':
         specifier: 2.57.4
         version: 2.57.4
@@ -80,6 +83,9 @@ importers:
       socket.io-client:
         specifier: ^4.8.1
         version: 4.8.1
+      stripe:
+        specifier: ^19.1.0
+        version: 19.1.0(@types/node@24.7.2)
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1
@@ -1392,6 +1398,10 @@ packages:
 
   '@standard-schema/utils@0.3.0':
     resolution: {integrity: sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==}
+
+  '@stripe/stripe-js@8.1.0':
+    resolution: {integrity: sha512-bhhi0iSHDFRa2pPVv3WOHC6x/iGEu5AZqIiAvXsT8VOucsEre9gzgsK0jFzbzfGW2eeubF+mCdTTYwNAQCMJKg==}
+    engines: {node: '>=12.16'}
 
   '@supabase/auth-js@2.71.1':
     resolution: {integrity: sha512-mMIQHBRc+SKpZFRB2qtupuzulaUhFYupNyxqDj5Jp/LyPvcWvjaJzZzObv6URtL/O6lPxkanASnotGtNpS3H2Q==}
@@ -3940,6 +3950,15 @@ packages:
   strip-literal@3.1.0:
     resolution: {integrity: sha512-8r3mkIM/2+PpjHoOtiAW8Rg3jJLHaV7xPwG+YRGrv6FP0wwk/toTpATxWYOW0BKdWwl82VT2tFYi5DlROa0Mxg==}
 
+  stripe@19.1.0:
+    resolution: {integrity: sha512-FjgIiE98dMMTNssfdjMvFdD4eZyEzdWAOwPYqzhPRNZeg9ggFWlPXmX1iJKD5pPIwZBaPlC3SayQQkwsPo6/YQ==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      '@types/node': '>=16'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+
   sucrase@3.35.0:
     resolution: {integrity: sha512-8EbVDiu9iN/nESwxeSxDKe0dunta1GOlHufmSSXxMD2z2/tMZpDMpvXQGsc+ajGo8y2uYUmixaSRUc/QPoQ0GA==}
     engines: {node: '>=16 || 14 >=14.17'}
@@ -5481,6 +5500,8 @@ snapshots:
   '@speed-highlight/core@1.2.7': {}
 
   '@standard-schema/utils@0.3.0': {}
+
+  '@stripe/stripe-js@8.1.0': {}
 
   '@supabase/auth-js@2.71.1':
     dependencies:
@@ -8618,6 +8639,12 @@ snapshots:
   strip-literal@3.1.0:
     dependencies:
       js-tokens: 9.0.1
+
+  stripe@19.1.0(@types/node@24.7.2):
+    dependencies:
+      qs: 6.14.0
+    optionalDependencies:
+      '@types/node': 24.7.2
 
   sucrase@3.35.0:
     dependencies:

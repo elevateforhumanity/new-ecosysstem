@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "react";
 import { Link, NavLink } from "react-router-dom";
+import ChatAssistant from "../components/ChatAssistant";
 
 export default function SiteLayout({ children }: PropsWithChildren) {
   return (
@@ -24,6 +25,9 @@ export default function SiteLayout({ children }: PropsWithChildren) {
         </div>
       </header>
       <main className="flex-1">{children}</main>
+      
+      {/* Chat Assistant */}
+      <ChatAssistant />
       <footer className="mt-16 border-t">
         <div className="container py-10 text-sm text-slate-600">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">

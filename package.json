@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.38.0",
+    "@sentry/browser": "^10.20.0",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.19",
     "@testing-library/jest-dom": "^6.9.1",
@@ -59,6 +60,7 @@
     "@typescript-eslint/parser": "^8.46.1",
     "@vitest/coverage-v8": "^3.2.4",
     "@vitest/ui": "^3.2.4",
+    "dotenv": "^17.2.3",
     "eslint": "^9.37.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.0",
@@ -69,7 +71,9 @@
     "js-yaml": "^4.1.0",
     "lint-staged": "^16.2.4",
     "prettier": "^3.6.2",
+    "recharts": "^3.3.0",
     "rimraf": "5.0.10",
+    "sitemap": "^8.0.0",
     "sort-package-json": "^3.4.0",
     "stylelint": "^16.25.0",
     "stylelint-config-standard": "^39.0.1",
@@ -79,6 +83,7 @@
     "typescript-eslint": "^8.46.1",
     "vite-plugin-ssr": "^0.4.142",
     "vitest": "^3.2.4",
+    "web-vitals": "^5.1.0",
     "wrangler": "^4.43.0"
   },
   "scripts": {

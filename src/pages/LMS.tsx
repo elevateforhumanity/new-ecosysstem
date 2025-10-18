@@ -243,7 +243,7 @@ export default function LMS() {
                 Progress: 45%
               </div>
               <Link
-                href="/compliance"
+                to="/compliance"
                 className="bg-brand-surface text-brand-warning px-3 py-1 rounded-full text-sm"
               >
                 📊 Federal Tracking
@@ -349,14 +349,14 @@ export default function LMS() {
                       <div className="ml-4">
                         {course.enrolled ? (
                           <Link
-                            href={`/lms/${course.id}`}
+                            to={`/lms/${course.id}`}
                             className="bg-brand-info text-white px-4 py-2 rounded-lg hover:bg-brand-info-hover transition-colors"
                           >
                             Continue
                           </Link>
                         ) : (
                           <Link
-                            href={`/pay?program=${course.id}`}
+                            to={`/pay?program=${course.id}`}
                             className="bg-white text-brand-info border border-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors"
                           >
                             Enroll
@@ -637,7 +637,7 @@ export default function LMS() {
                 requirements.
               </p>
               <Link
-                href="/compliance"
+                to="/compliance"
                 className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors text-sm"
               >
                 View Compliance Records
@@ -651,13 +651,13 @@ export default function LMS() {
               </h3>
               <div className="space-y-2">
                 <Link
-                  href="/programs"
+                  to="/programs"
                   className="w-full bg-brand-surface-dark text-brand-text py-2 px-4 rounded-lg hover:bg-brand-border transition-colors text-sm block text-center"
                 >
                   Browse All Programs
                 </Link>
                 <Link
-                  href="/connect"
+                  to="/connect"
                   className="w-full bg-brand-surface-dark text-brand-text py-2 px-4 rounded-lg hover:bg-brand-border transition-colors text-sm block text-center"
                 >
                   Connect with Peers

@@ -514,13 +514,13 @@ export default function Compliance() {
             </p>
             <div className="flex justify-center space-x-4">
               <Link
-                href="/programs"
+                to="/programs"
                 className="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 transition-colors"
               >
                 Explore Programs
               </Link>
               <Link
-                href="/pay"
+                to="/pay"
                 className="bg-white text-orange-600 border border-orange-600 px-6 py-2 rounded-lg hover:bg-orange-50 transition-colors"
               >
                 Federal Funding

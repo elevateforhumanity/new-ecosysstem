@@ -286,7 +286,7 @@ export default function Pay() {
               ))}
             </div>
             <Link
-              href="/compliance/eligibility-verification"
+              to="/compliance/eligibility-verification"
               className="text-brand-success hover:text-green-700 text-sm font-medium mt-2 inline-block"
             >
               Apply for Federal Funding →
@@ -548,7 +548,7 @@ export default function Pay() {
 
         <div className="mt-6 text-center">
           <Link
-            href="/compliance/eligibility-verification"
+            to="/compliance/eligibility-verification"
             className="bg-brand-success text-white px-6 py-3 rounded-lg hover:bg-brand-success-hover transition-colors"
           >
             Apply for New Funding
@@ -650,7 +650,7 @@ export default function Pay() {
                 funding through WIOA and other programs.
               </p>
               <Link
-                href="/compliance"
+                to="/compliance"
                 className="bg-brand-success text-white px-4 py-2 rounded-lg hover:bg-brand-success-hover transition-colors text-sm"
               >
                 Check Eligibility

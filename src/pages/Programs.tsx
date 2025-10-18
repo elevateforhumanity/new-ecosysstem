@@ -340,13 +340,13 @@ export default function Programs() {
                 {/* Actions */}
                 <div className="space-y-2">
                   <Link
-                    href={`/programs/${program.id}`}
+                    to={`/programs/${program.id}`}
                     className="w-full bg-brand-info text-white py-2 px-4 rounded-lg hover:bg-brand-info-hover transition-colors text-center block"
                   >
                     View Program Details
                   </Link>
                   <Link
-                    href={`/pay?program=${program.id}`}
+                    to={`/pay?program=${program.id}`}
                     className="w-full bg-white text-brand-info border border-blue-600 py-2 px-4 rounded-lg hover:bg-blue-50 transition-colors text-center block"
                   >
                     Enroll Now
@@ -377,7 +377,7 @@ export default function Programs() {
             </div>
             <div className="ml-auto">
               <Link
-                href="/compliance"
+                to="/compliance"
                 className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors"
               >
                 View Compliance Portal

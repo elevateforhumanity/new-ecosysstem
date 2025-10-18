@@ -103,13 +103,13 @@ export default function Hub() {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link
-                href="/compliance"
+                to="/compliance"
                 className="bg-brand-info text-white px-8 py-3 rounded-lg hover:bg-brand-info-hover transition-colors"
               >
                 Federal Compliance Portal
               </Link>
               <Link
-                href="/programs"
+                to="/programs"
                 className="bg-white text-brand-info border-2 border-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors"
               >
                 Explore Programs
@@ -157,7 +157,7 @@ export default function Hub() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {sisterSites.map((site) => (
-            <Link key={site.name} href={site.path}>
+            <Link key={site.name} to={site.path}>
               <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 p-6">
                 <div className="flex items-center mb-4">
                   <div
@@ -213,7 +213,7 @@ export default function Hub() {
                 verification, and comprehensive audit trails.
               </p>
               <Link
-                href="/compliance"
+                to="/compliance"
                 className="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors inline-block"
               >
                 Access Compliance Portal
@@ -257,13 +257,13 @@ export default function Hub() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link
-              href="/programs"
+              to="/programs"
               className="bg-brand-info text-white px-8 py-3 rounded-lg hover:bg-brand-info-hover transition-colors"
             >
               Start with Programs
             </Link>
             <Link
-              href="/compliance"
+              to="/compliance"
               className="bg-white text-brand-text px-8 py-3 rounded-lg hover:bg-brand-surface-dark transition-colors"
             >
               Federal Compliance

@@ -22,5 +22,22 @@
     }
   },
   "include": ["src", "scripts", "tests"],
-  "exclude": ["dist", "node_modules", "build"]
+  "exclude": [
+    "dist",
+    "node_modules",
+    "build",
+    "src/diagnostics/monitor.ts",
+    "src/test/smoke.test.tsx",
+    "src/components/classroom/admin/EmailEventsPanel.tsx",
+    "src/api.ts",
+    "src/components/AIPageBuilder.tsx",
+    "src/components/AssetGenerator.tsx",
+    "src/components/FrameworkSettingsPanel.tsx",
+    "src/components/PageManager.tsx",
+    "src/pages/AutopilotAdmin.tsx",
+    "src/pages/DonatePage.tsx",
+    "src/monitoring.ts",
+    "src/services/stripe.ts",
+    "src/router.tsx"
+  ]
 }

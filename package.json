@@ -112,7 +112,7 @@
     "autopilot:check": "npm run lint && npm run typecheck && npm run tokens:guard && npm run build && echo '✅ All checks passed'",
     "autopilot:prepush": "npm run lint && npm run typecheck && npm run tokens:guard && echo '✅ Pre-push checks passed'",
     "clean": "rimraf dist coverage .cache",
-    "prepare": "husky install",
+    "prepare": "husky install || true",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "css:lint": "stylelint \"**/*.{css,pcss,scss}\"",
     "css:fix": "stylelint \"**/*.{css,pcss,scss}\" --fix",

@@ -1,1 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Skip in CI
+[ -n "$CI" ] && exit 0
+
 npm run format && npm run lint:fix && npm run css:fix

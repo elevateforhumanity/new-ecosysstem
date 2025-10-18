@@ -1,42 +1,42 @@
 export default function Hero() {
   return (
-    <section className="section pt-12 md:pt-20">
-      <div className="container grid md:grid-cols-2 gap-10 items-center">
-        <div>
-          <span className="inline-block rounded-full bg-brand-100 text-brand-700 px-4 py-1.5 text-sm font-semibold">
-            🎓 100% FREE Training • No Cost to You
-          </span>
-          <h1 className="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-            Start Your New Career in <span className="text-brand-600">Weeks, Not Years</span>
-          </h1>
-          <p className="mt-4 text-lg text-slate-700 leading-relaxed">
-            Get job-ready training in healthcare, construction, beauty, and more. 
-            We help you earn industry certifications and connect directly with employers—all at no cost to you.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a href="/programs" className="btn text-lg px-6 py-3">
-              See Our Programs →
-            </a>
-            <a href="/apply" className="btn-outline text-lg px-6 py-3">
-              Apply Now (It's Free!)
-            </a>
-          </div>
-          <div className="mt-8 p-4 bg-slate-50 rounded-lg border border-slate-200">
-            <p className="text-sm font-semibold text-slate-700 mb-2">What You Get:</p>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-600">
-              <li className="flex items-center gap-2">
-                <span className="text-green-600">✓</span> Free training & certifications
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-green-600">✓</span> Job placement support
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-green-600">✓</span> Hands-on experience
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-green-600">✓</span> Career coaching included
-              </li>
-            </ul>
+    <section className="relative bg-gradient-to-b from-slate-50 to-white py-20 md:py-28">
+      <div className="container">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-100 text-brand-700 text-sm font-semibold mb-6">
+              <span>🎓</span>
+              <span>100% FREE Training • Marion County</span>
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-6">
+              Ignite Your Future: <span className="text-brand-600">Fund Training Today</span>
+            </h1>
+            
+            <p className="text-xl text-slate-600 leading-relaxed mb-8">
+              Empower Dreams: Support Skills Development and Transform Lives at Elevate for Humanity. 
+              Invest in Growth, Today! Marion County.
+            </p>
+            
+            <div className="flex flex-wrap gap-4 mb-10">
+              <a href="/programs" className="btn">
+                Explore Programs
+              </a>
+              <a href="/apply" className="btn-outline">
+                Apply Now
+              </a>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-6 pt-8 border-t border-slate-200">
+              <div>
+                <div className="text-3xl font-bold text-brand-600">1,247</div>
+                <div className="text-sm text-slate-600">Students Trained</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-brand-600">92%</div>
+                <div className="text-sm text-slate-600">Job Placement</div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="relative">

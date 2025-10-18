@@ -67,15 +67,15 @@ const PROGRAMS: Program[] = [
 
 export default function ProgramsGrid() {
   return (
-    <section className="section">
+    <section className="section bg-slate-50">
       <div className="container">
-        <div className="text-center max-w-3xl mx-auto mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold">Choose Your Path</h2>
-          <p className="mt-3 text-lg text-slate-600">
-            All programs are 100% free and include certifications, hands-on training, and job placement help.
-          </p>
-          <p className="mt-2 text-sm text-slate-500">
-            ✓ Industry certifications (AWS, CNA, CDL, OSHA) • ✓ Employer connections • ✓ No hidden costs
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+            Empower Your Future Today
+          </h2>
+          <p className="text-lg text-slate-600 leading-relaxed">
+            Join our transformative programs and unlock career opportunities that align with industry demands. 
+            Flexible, grant-funded options mean more possibilities for growth.
           </p>
         </div>
 
